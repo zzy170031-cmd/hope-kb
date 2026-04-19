@@ -31,3 +31,4 @@ The app consumes a validated read-only snapshot of this repo.
 - `seed/v0.1/source_register.json`
 - `seed/v0.1/import_map.json`
 - `scripts/validate-seed-bundle.ps1`
+- `scripts/build-kb-snapshot.py`

@@ -24,6 +24,8 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
   - 定义 v0.1 的目标表结构
 - `scripts/validate-seed-bundle.ps1`
   - 校验 seed 文件、计数、machine_id 与 bundle hash
+- `scripts/build-kb-snapshot.py`
+  - 按 manifest、import_map 和 migration 生成 SQLite snapshot
 
 ## 3. 导入器下一步应该做什么
 
@@ -39,6 +41,32 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
    - record_counts 对齐
    - foreign key 合法
    - hash 与 manifest 一致
+
+## 3.1 当前可直接使用的构建命令
+
+当前仓库已经补入最小可用的 snapshot builder，可以直接运行：
+
+```powershell
+python E:\codex\hope-kb\scripts\build-kb-snapshot.py --repo-root E:\codex\hope-kb
+```
+
+默认输出：
+
+- `E:\codex\hope-kb\snapshots\hope-kb-v0.1.sqlite3`
+
+builder 的约束：
+
+- 只消费 `seed/v0.1`
+- 按 `manifest.json` 和 `import_map.json` 生成
+- 自动写入 `snapshot_meta`
+- JSON 中的数组/对象按中文 UTF-8 文本序列化后入库
+- 不反写 seed 文件
+
+运行前提补充：
+
+- 需要本机存在**真实可用**的 Python 运行时
+- 如果当前环境里的 `python` / `python3` 只是 Windows Store alias，占位不可执行，则需要先准备可用解释器
+- builder 已经是仓库正式脚本，但是否能在当前机器直接跑通，取决于本机 Python 运行时是否已安装
 
 ## 4. v0.1 的约束
 
@@ -58,3 +86,5 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
 - seed 校验脚本
 
 也就是说，当前缺的已经不是“知识库内容定义”，而是后续由产品仓库消费这套 bundle 的装载实现。
+
+而在本仓库内部，v0.1 已经从“只有内容种子包”推进到“内容种子包 + 校验链 + snapshot 构建脚本”。

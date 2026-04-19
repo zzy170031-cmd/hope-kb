@@ -43,7 +43,7 @@
 - 7 条 `director_rules`
 - 7 条 `director_reference_sets`
 - 7 条 `director_scene_affinity`
-- 21 条 `director_cut_samples`
+- 35 条 `director_cut_samples`
 - 4 条 `committee_templates`
 - 12 条 `committee_handoff_rules`
 - 7 条 `committee_style_merge_rules`
@@ -60,7 +60,7 @@
 - 12 条 `classic_case_examples`
 - 8 条 `failure_patterns`
 
-这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 3 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet。
+这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库也补进了可直接生成 SQLite snapshot 的构建脚本。
 
 ---
 
@@ -237,6 +237,10 @@
 - `detailed_scene_affinity`
 - `preferred_scene_types`
 - `non_fit_scene_types`
+- `primary_role_bias`
+- `secondary_role_bias`
+- `preferred_handoff_targets`
+- `anti_dispatch_warning`
 - `dispatch_hint`
 
 适配维度包括：
@@ -265,6 +269,12 @@
   - 悬疑 `5`
   - 心理 `5`
   - 转场 `5`
+
+这些字段现在不只是说明“谁适合什么”，还已经开始具备运行时价值：
+
+- 可作为自动分派时的主角色倾向
+- 可作为 handoff 时的优先接力对象
+- 可作为 rule-based assignment 的反派工警告
 
 这部分已经能直接支撑 rule-based assignment 的第一版，而且已经开始具备“适合什么 / 不适合什么 / 为什么这样派”的调度解释能力。
 
