@@ -29,11 +29,17 @@ CREATE TABLE IF NOT EXISTS director_profile (
   rhythm_kernel TEXT NOT NULL,
   transition_kernel TEXT NOT NULL,
   hard_lock_kernel TEXT NOT NULL,
-  风格一句话 TEXT NOT NULL,
-  视觉关键词 TEXT NOT NULL,
-  叙事关键词 TEXT NOT NULL,
-  适用场景 TEXT NOT NULL,
-  禁用项 TEXT NOT NULL,
+  visual_style_tokens TEXT NOT NULL,
+  composition_traits TEXT NOT NULL,
+  character_shape_bias TEXT NOT NULL,
+  panel_rhythm_bias TEXT NOT NULL,
+  color_lighting_mood TEXT NOT NULL,
+  emotion_expression_style TEXT NOT NULL,
+  negative_prompt_defaults TEXT NOT NULL,
+  hard_lock_safe_fields TEXT NOT NULL,
+  handoff_compatibility TEXT NOT NULL,
+  signature_camera_works TEXT NOT NULL,
+  signature_transitions TEXT NOT NULL,
   source_type TEXT NOT NULL,
   source_notes TEXT NOT NULL,
   confidence_level TEXT NOT NULL,
@@ -62,20 +68,23 @@ ON director_rule(director_machine_id);
 CREATE TABLE IF NOT EXISTS director_cut_sample (
   machine_id TEXT PRIMARY KEY,
   director_machine_id TEXT NOT NULL,
+  scene_type TEXT NOT NULL,
+  committee_role_fit TEXT NOT NULL,
   cut标题 TEXT NOT NULL,
   场景 TEXT NOT NULL,
   镜头 TEXT NOT NULL,
   光线 TEXT NOT NULL,
   动作 TEXT NOT NULL,
   情绪 TEXT NOT NULL,
-  layout_prompt TEXT,
-  render_prompt TEXT,
-  why_it_matches_director TEXT,
-  提示词片段 TEXT NOT NULL,
-  source_type TEXT,
-  source_notes TEXT,
-  confidence_level TEXT,
-  last_reviewed_at TEXT,
+  layout_prompt TEXT NOT NULL,
+  render_prompt TEXT NOT NULL,
+  hard_lock_focus TEXT NOT NULL,
+  continuity_focus TEXT NOT NULL,
+  why_it_matches_director TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL,
   FOREIGN KEY (director_machine_id) REFERENCES director_profile(machine_id)
 );
 
@@ -102,7 +111,15 @@ CREATE TABLE IF NOT EXISTS director_scene_affinity (
   machine_id TEXT PRIMARY KEY,
   director_machine_id TEXT NOT NULL,
   scene_affinity TEXT NOT NULL,
+  detailed_scene_affinity TEXT NOT NULL,
+  preferred_scene_types TEXT NOT NULL,
+  non_fit_scene_types TEXT NOT NULL,
   selection_note TEXT NOT NULL,
+  dispatch_hint TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL,
   FOREIGN KEY (director_machine_id) REFERENCES director_profile(machine_id)
 );
 
@@ -113,16 +130,15 @@ CREATE TABLE IF NOT EXISTS committee_template (
   machine_id TEXT PRIMARY KEY,
   模板名 TEXT NOT NULL,
   chief_director_id TEXT,
-  default_roles TEXT,
+  default_roles TEXT NOT NULL,
   适用阶段 TEXT NOT NULL,
-  使用场景 TEXT,
-  参与角色 TEXT NOT NULL,
+  使用场景 TEXT NOT NULL,
   决策规则 TEXT NOT NULL,
   输出格式 TEXT NOT NULL,
-  source_type TEXT,
-  source_notes TEXT,
-  confidence_level TEXT,
-  last_reviewed_at TEXT
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS committee_handoff_rule (
@@ -132,6 +148,10 @@ CREATE TABLE IF NOT EXISTS committee_handoff_rule (
   transition_type TEXT NOT NULL,
   buffer_guidance TEXT NOT NULL,
   continuity_notes TEXT NOT NULL,
+  before_cut_pattern TEXT NOT NULL,
+  after_cut_pattern TEXT NOT NULL,
+  buffer_cut_pattern TEXT NOT NULL,
+  applicable_director_pairs TEXT NOT NULL,
   source_type TEXT NOT NULL,
   source_notes TEXT NOT NULL,
   confidence_level TEXT NOT NULL,
@@ -143,28 +163,31 @@ CREATE TABLE IF NOT EXISTS committee_style_merge_rule (
   role_code TEXT NOT NULL,
   precedence_order INTEGER NOT NULL,
   overridable_fields TEXT NOT NULL,
-  non_overridable_fields TEXT NOT NULL
+  non_overridable_fields TEXT NOT NULL,
+  merge_note TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS visual_language_term (
   machine_id TEXT PRIMARY KEY,
   术语 TEXT NOT NULL,
   分类 TEXT NOT NULL,
-  prompt_token TEXT,
+  prompt_token TEXT NOT NULL,
   定义 TEXT NOT NULL,
-  使用提示 TEXT NOT NULL,
-  usage_rule TEXT,
-  example_usage TEXT
+  usage_rule TEXT NOT NULL,
+  example_usage TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS camera_term (
   machine_id TEXT PRIMARY KEY,
   术语 TEXT NOT NULL,
-  分类 TEXT NOT NULL,
-  prompt_token TEXT,
-  aliases TEXT,
+  prompt_token TEXT NOT NULL,
+  aliases TEXT NOT NULL,
   定义 TEXT NOT NULL,
-  使用提示 TEXT NOT NULL
+  usage_rule TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS continuity_rule (
@@ -180,7 +203,11 @@ CREATE TABLE IF NOT EXISTS transition_term (
   术语 TEXT NOT NULL,
   prompt_token TEXT NOT NULL,
   定义 TEXT NOT NULL,
-  使用规则 TEXT NOT NULL
+  使用规则 TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS story_structure_template (
@@ -190,7 +217,11 @@ CREATE TABLE IF NOT EXISTS story_structure_template (
   beat_count_range TEXT NOT NULL,
   hook_rule TEXT NOT NULL,
   turn_rule TEXT NOT NULL,
-  ending_rule TEXT NOT NULL
+  ending_rule TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS manga_structure_rule (
@@ -210,30 +241,40 @@ CREATE TABLE IF NOT EXISTS dialogue_style_rule (
   machine_id TEXT PRIMARY KEY,
   风格名 TEXT NOT NULL,
   适用场景 TEXT NOT NULL,
-  规则说明 TEXT NOT NULL
+  规则说明 TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS prompt_template (
   machine_id TEXT PRIMARY KEY,
+  stage TEXT NOT NULL,
+  name TEXT NOT NULL,
   模板名 TEXT NOT NULL,
   适用对象 TEXT NOT NULL,
+  required_inputs TEXT NOT NULL,
   输入字段 TEXT NOT NULL,
+  body TEXT NOT NULL,
   模板正文 TEXT NOT NULL,
+  expected_output_schema TEXT NOT NULL,
   输出要求 TEXT NOT NULL,
-  stage TEXT,
-  name TEXT,
-  body TEXT,
-  required_inputs TEXT,
-  expected_output_schema TEXT,
-  target_model_family TEXT,
-  is_structured_output INTEGER
+  target_model_family TEXT NOT NULL,
+  is_structured_output INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS export_template (
   machine_id TEXT PRIMARY KEY,
   sheet_name TEXT NOT NULL,
+  显示标题 TEXT NOT NULL,
   用途 TEXT NOT NULL,
-  核心字段 TEXT NOT NULL
+  核心字段 TEXT NOT NULL,
+  列定义 TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS classic_case_example (
@@ -246,8 +287,8 @@ CREATE TABLE IF NOT EXISTS classic_case_example (
   场景概要 TEXT NOT NULL,
   结构提示 TEXT NOT NULL,
   验证价值 TEXT NOT NULL,
-  source_type TEXT,
-  source_notes TEXT,
-  confidence_level TEXT,
-  last_reviewed_at TEXT
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
 );

@@ -53,7 +53,7 @@
 - 15 条 `camera_terms`
 - 3 条 `continuity_rules`
 - 8 条 `transition_vocabulary`
-- 10 条 `prompt_templates`
+- 16 条 `prompt_templates`
 - 17 条 `export_templates`
 - 12 条 `classic_case_examples`
 
@@ -464,11 +464,13 @@
 
 `story_structure_templates` 与 `dialogue_style_rules` 也已经补上来源字段，后续可以继续往“规则层 / 经验层”更清晰地分层。
 
+`0001_init_kb.sql` 也已经按当前 seed 字段重新对齐，不再停留在早期的薄 schema 状态。
+
 ---
 
 ## 9. Prompt 模板层
 
-当前已经不是 5 条占位模板，而是 10 条真正覆盖链路的模板：
+当前已经不是 5 条占位模板，而是 16 条真正覆盖链路和修复回合的模板：
 
 1. 梗概 -> Story
 2. Story -> Outline / Beats
@@ -480,6 +482,12 @@
 8. Dialogue Refine
 9. Repair Pass
 10. Export Summary
+11. Action Director Variant
+12. Emotion Director Variant
+13. Suspense Director Variant
+14. Transition Director Variant
+15. Repair Hard Locks
+16. Repair Continuity
 
 每条模板都已经有：
 
@@ -491,6 +499,13 @@
 - `is_structured_output`
 
 这部分已经能直接给 Track D / E 作为输入资产。
+
+同时它已经不只覆盖主生成链，也开始覆盖：
+
+- 导演化局部变体
+- validator 失败后的 repair pass
+- hard_locks 修复
+- continuity 修复
 
 ---
 

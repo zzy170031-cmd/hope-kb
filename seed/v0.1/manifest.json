@@ -2,7 +2,7 @@
   "snapshot_version": "v0.1",
   "snapshot_name": "hope-kb-minimum-benchmark-pack",
   "content_hash_algo": "sha256",
-  "content_hash": "bundle-sha256:777068a0b2be4016bbf8e2e4c8aea93204dbb434b77962aa92440769ca5ace42",
+  "content_hash": "bundle-sha256:366ff6b3c162abe75b0d86392cfe4879827f264c67ac770144ea30c1c1834329",
   "seed_import_format": "hope-kb-seed-bundle-v0.1",
   "imported_at": "2026-04-19",
   "primary_key": "machine_id",
@@ -49,7 +49,7 @@
     "camera_terms": 15,
     "continuity_rules": 3,
     "transition_vocabulary": 8,
-    "prompt_templates": 10,
+    "prompt_templates": 16,
     "export_templates": 17,
     "classic_case_examples": 12
   }
