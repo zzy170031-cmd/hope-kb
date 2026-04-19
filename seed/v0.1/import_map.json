@@ -1,0 +1,170 @@
+[
+  {
+    "machine_id": "import_01",
+    "file": "seed/v0.1/committee_role_definitions.json",
+    "json_path": "$",
+    "table": "committee_role_definition",
+    "record_count_key": "committee_role_definitions",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_02",
+    "file": "seed/v0.1/director_profiles.json",
+    "json_path": "$",
+    "table": "director_profile",
+    "record_count_key": "director_profiles",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_03",
+    "file": "seed/v0.1/director_rules.json",
+    "json_path": "$",
+    "table": "director_rule",
+    "record_count_key": "director_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_04",
+    "file": "seed/v0.1/director_reference_sets.json",
+    "json_path": "$",
+    "table": "director_reference_set",
+    "record_count_key": "director_reference_sets",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_05",
+    "file": "seed/v0.1/director_scene_affinity.json",
+    "json_path": "$",
+    "table": "director_scene_affinity",
+    "record_count_key": "director_scene_affinity",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_06",
+    "file": "seed/v0.1/director_cut_samples.json",
+    "json_path": "$",
+    "table": "director_cut_sample",
+    "record_count_key": "director_cut_samples",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_07",
+    "file": "seed/v0.1/committee_templates.json",
+    "json_path": "$",
+    "table": "committee_template",
+    "record_count_key": "committee_templates",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_08",
+    "file": "seed/v0.1/committee_handoff_rules.json",
+    "json_path": "$",
+    "table": "committee_handoff_rule",
+    "record_count_key": "committee_handoff_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_09",
+    "file": "seed/v0.1/committee_style_merge_rules.json",
+    "json_path": "$",
+    "table": "committee_style_merge_rule",
+    "record_count_key": "committee_style_merge_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_10",
+    "file": "seed/v0.1/story_structure_templates.json",
+    "json_path": "$",
+    "table": "story_structure_template",
+    "record_count_key": "story_structure_templates",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_11",
+    "file": "seed/v0.1/manga_structure_rules.json",
+    "json_path": "$",
+    "table": "manga_structure_rule",
+    "record_count_key": "manga_structure_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_12",
+    "file": "seed/v0.1/character_arc_patterns.json",
+    "json_path": "$",
+    "table": "character_arc_pattern",
+    "record_count_key": "character_arc_patterns",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_13",
+    "file": "seed/v0.1/dialogue_style_rules.json",
+    "json_path": "$",
+    "table": "dialogue_style_rule",
+    "record_count_key": "dialogue_style_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_14",
+    "file": "seed/v0.1/vocabulary.json",
+    "json_path": "visual_language_terms",
+    "table": "visual_language_term",
+    "record_count_key": "visual_language_terms",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_15",
+    "file": "seed/v0.1/vocabulary.json",
+    "json_path": "camera_terms",
+    "table": "camera_term",
+    "record_count_key": "camera_terms",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_16",
+    "file": "seed/v0.1/vocabulary.json",
+    "json_path": "continuity_rules",
+    "table": "continuity_rule",
+    "record_count_key": "continuity_rules",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_17",
+    "file": "seed/v0.1/transition_vocabulary.json",
+    "json_path": "$",
+    "table": "transition_term",
+    "record_count_key": "transition_vocabulary",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_18",
+    "file": "seed/v0.1/prompt_templates.json",
+    "json_path": "$",
+    "table": "prompt_template",
+    "record_count_key": "prompt_templates",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_19",
+    "file": "seed/v0.1/export_templates.json",
+    "json_path": "$",
+    "table": "export_template",
+    "record_count_key": "export_templates",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_20",
+    "file": "seed/v0.1/classic_case_examples.json",
+    "json_path": "$",
+    "table": "classic_case_example",
+    "record_count_key": "classic_case_examples",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_21",
+    "file": "seed/v0.1/failure_pattern_library.json",
+    "json_path": "$",
+    "table": "failure_pattern",
+    "record_count_key": "failure_patterns",
+    "primary_key_field": "machine_id"
+  }
+]

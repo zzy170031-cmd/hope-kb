@@ -12,6 +12,8 @@ It holds:
 - continuity rules
 - transition vocabulary
 - export templates
+- failure patterns
+- seed import mapping and validation contracts
 
 The app consumes a validated read-only snapshot of this repo.
 
@@ -27,3 +29,5 @@ The app consumes a validated read-only snapshot of this repo.
 - `docs/director-reference-index-v0.1.md`
 - `seed/v0.1-seed-manifest.md`
 - `seed/v0.1/source_register.json`
+- `seed/v0.1/import_map.json`
+- `scripts/validate-seed-bundle.ps1`

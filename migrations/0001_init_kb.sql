@@ -292,3 +292,20 @@ CREATE TABLE IF NOT EXISTS classic_case_example (
   confidence_level TEXT NOT NULL,
   last_reviewed_at TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS failure_pattern (
+  machine_id TEXT PRIMARY KEY,
+  failure_code TEXT NOT NULL,
+  failure_name TEXT NOT NULL,
+  failure_category TEXT NOT NULL,
+  symptom TEXT NOT NULL,
+  common_causes TEXT NOT NULL,
+  detection_hint TEXT NOT NULL,
+  repair_strategy TEXT NOT NULL,
+  affected_layers TEXT NOT NULL,
+  validator_hint TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
+);

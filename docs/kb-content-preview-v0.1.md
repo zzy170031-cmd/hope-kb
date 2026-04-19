@@ -33,6 +33,8 @@
 17. Prompt 模板层
 18. 导出模板层
 19. 经典案例示例层
+20. 失败模式库
+21. 导入映射层
 
 当前 `seed/v0.1/manifest.json` 中的记录数为：
 
@@ -56,6 +58,7 @@
 - 16 条 `prompt_templates`
 - 17 条 `export_templates`
 - 12 条 `classic_case_examples`
+- 8 条 `failure_patterns`
 
 这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 3 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet。
 
@@ -580,9 +583,56 @@
 - `source_type`
 - `source_notes`
 
+## 12. 失败模式库
+
+当前已写入 8 条系统级失败模式，覆盖：
+
+- 风格漂移
+- 角色外观不一致
+- 连续性断裂
+- RenderSegment 跨场景
+- Hard Locks 丢失
+- 导演交接缺口
+- 中文 Prompt 表达失真
+- 导出 contract 漂移
+
+每条都包含：
+
+- `symptom`
+- `common_causes`
+- `detection_hint`
+- `repair_strategy`
+- `affected_layers`
+- `validator_hint`
+
+这意味着 `hope-kb` 现在不仅描述“正确应该是什么”，也开始描述“错误通常长什么样、该怎么修”。
+
+## 13. 导入映射层
+
+当前已写入 `import_map.json`，用于把 seed 文件正式映射到 SQLite 表。
+
+它已经定义：
+
+- `file`
+- `json_path`
+- `table`
+- `record_count_key`
+- `primary_key_field`
+
+同时还新增了：
+
+- `scripts/validate-seed-bundle.ps1`
+
+这条脚本可以直接校验：
+
+- bundle_order 文件是否齐全
+- manifest 计数是否与真实 JSON 一致
+- machine_id 是否重复
+- bundle hash 是否一致
+
 ---
 
-## 12. 当前还没补满的地方
+## 14. 当前还没补满的地方
 
 虽然现在已经不是空壳，而且这一轮已经把最关键的补深层做进去了，但如果要继续往“更厚、更强”补，优先级最高的现在变成：
 
@@ -594,7 +644,7 @@
 
 ---
 
-## 13. 审阅结论
+## 15. 审阅结论
 
 如果只问一个问题：
 

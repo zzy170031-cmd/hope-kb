@@ -8,6 +8,8 @@ This directory stores the importable seed bundle for `hope-kb`.
   - 人读版首批种子说明
 - `v0.1/source_register.json`
   - 机器可读的来源登记表
+- `v0.1/import_map.json`
+  - 机器可读的导入映射表
 - `v0.1/*.json`
   - 各类种子记录
 - `director-profiles/`
@@ -21,4 +23,5 @@ This directory stores the importable seed bundle for `hope-kb`.
 
 - `manifest.json` 决定导入顺序
 - `source_register.json` 决定来源登记
+- `import_map.json` 决定 seed -> SQLite 的装载映射
 - 所有种子默认中文主字段

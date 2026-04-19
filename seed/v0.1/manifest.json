@@ -2,7 +2,7 @@
   "snapshot_version": "v0.1",
   "snapshot_name": "hope-kb-minimum-benchmark-pack",
   "content_hash_algo": "sha256",
-  "content_hash": "bundle-sha256:366ff6b3c162abe75b0d86392cfe4879827f264c67ac770144ea30c1c1834329",
+  "content_hash": "bundle-sha256:dfa7654fbd5fdf71523c65fd13f1fe92a4bd0c0ee612328df03bef65562e7b06",
   "seed_import_format": "hope-kb-seed-bundle-v0.1",
   "imported_at": "2026-04-19",
   "primary_key": "machine_id",
@@ -29,6 +29,8 @@
     "seed/v0.1/prompt_templates.json",
     "seed/v0.1/export_templates.json",
     "seed/v0.1/classic_case_examples.json",
+    "seed/v0.1/failure_pattern_library.json",
+    "seed/v0.1/import_map.json",
     "seed/v0.1/source_register.json"
   ],
   "record_counts": {
@@ -51,6 +53,7 @@
     "transition_vocabulary": 8,
     "prompt_templates": 16,
     "export_templates": 17,
-    "classic_case_examples": 12
+    "classic_case_examples": 12,
+    "failure_patterns": 8
   }
 }
