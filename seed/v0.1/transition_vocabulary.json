@@ -4,55 +4,87 @@
     "术语": "硬切",
     "prompt_token": "硬切",
     "定义": "直接切换到下一镜头，不做视觉缓冲。",
-    "使用规则": "适合动作爆点、揭示、节奏强化。"
+    "使用规则": "适合动作爆点、揭示、节奏强化。",
+    "source_type": "official_rule",
+    "source_notes": "结合 Adobe storyboard 基础定义与团队分镜实践整理，用于高能段直接换切。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_02",
     "术语": "柔化",
     "prompt_token": "柔化过渡",
     "定义": "用柔和衔接把情绪或空间慢慢转到下一镜头。",
-    "使用规则": "适合情感段和日常收束。"
+    "使用规则": "适合情感段和日常收束。",
+    "source_type": "official_rule",
+    "source_notes": "用于情绪段和关系停顿后的缓慢过门，强调不破坏余韵。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_03",
     "术语": "桥接镜头",
     "prompt_token": "桥接镜头",
     "定义": "用一个过渡镜头连接前后段落，让信息和情绪平稳交接。",
-    "使用规则": "适合 scene、emotion、transition 之间的 handoff。"
+    "使用规则": "适合 scene、emotion、transition 之间的 handoff。",
+    "source_type": "team_distillation",
+    "source_notes": "结合 Hope 的 committee handoff 设计，用于把前后段真正缝起来。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_04",
     "术语": "风格过渡",
     "prompt_token": "风格过渡",
     "定义": "在视觉风格发生变化时，先放一个中间态镜头作为缓冲。",
-    "使用规则": "适合今敏、汤浅政明等风格切换段。"
+    "使用规则": "适合今敏、汤浅政明等风格切换段。",
+    "source_type": "team_distillation",
+    "source_notes": "用于多导演协作时的风格切换，不把局部导演覆盖做成突兀断裂。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_05",
     "术语": "白闪",
     "prompt_token": "白闪",
     "定义": "用高亮闪白打断并抬高切换能量。",
-    "使用规则": "适合爆点、回忆触发和强转折。"
+    "使用规则": "适合爆点、回忆触发和强转折。",
+    "source_type": "team_distillation",
+    "source_notes": "作为高能切口与记忆触发的视觉提气工具，需要谨慎控制频率。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_06",
     "术语": "余像衔接",
     "prompt_token": "余像衔接",
     "定义": "用上一镜头残留的形态或光影延伸到下一镜头。",
-    "使用规则": "适合情绪段或动作后的余韵。"
+    "使用规则": "适合情绪段或动作后的余韵。",
+    "source_type": "team_distillation",
+    "source_notes": "适合延长动作或情绪后的尾音，让转场不是简单断开。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_07",
     "术语": "视线接切",
     "prompt_token": "视线接切",
     "定义": "以前一镜头人物视线方向作为下一镜头入口。",
-    "使用规则": "适合悬疑、关系戏和发现线索。"
+    "使用规则": "适合悬疑、关系戏和发现线索。",
+    "source_type": "official_rule",
+    "source_notes": "与 storyboard / continuity 中的 eyeline match 原则一致，用于保证阅读方向自然。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "transition_08",
     "术语": "运动接切",
     "prompt_token": "运动接切",
     "定义": "以前一镜头动作方向和动势承接下一镜头。",
-    "使用规则": "适合战斗、追逐和连续动作段。"
+    "使用规则": "适合战斗、追逐和连续动作段。",
+    "source_type": "official_rule",
+    "source_notes": "与 continuity 和动作轴线保持一致，适用于高速段落的可读切换。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   }
 ]

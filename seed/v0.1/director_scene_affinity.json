@@ -13,7 +13,26 @@
       "转场": 3,
       "爆发": 5
     },
-    "selection_note": "优先承担高潮、爆点和高能动作段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 4,
+      "战斗高潮": 5,
+      "追逐推进": 5,
+      "群像集结": 5,
+      "爆点揭示": 5,
+      "关系停顿": 1,
+      "微表演对白": 1,
+      "梦境切层": 2,
+      "悬疑线索": 2,
+      "片尾收束": 2
+    },
+    "preferred_scene_types": ["战斗高潮", "追逐推进", "群像集结", "爆点揭示"],
+    "non_fit_scene_types": ["微表演对白", "纯日常闲聊", "长段心理剖白"],
+    "selection_note": "优先承担高潮、爆点、追击和全员冲刺的高能段。",
+    "dispatch_hint": "当场景需要显著放大意志、速度和冲击时优先派给今石洋之；若只是稳态叙事，不要硬派。",
+    "source_type": "team_distillation",
+    "source_notes": "基于今石洋之在热血爆发、群像集结和追逐推进场面的稳定倾向归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_02",
@@ -29,7 +48,26 @@
       "转场": 3,
       "爆发": 4
     },
-    "selection_note": "优先承担群像压迫、危机推进和高密度悬疑段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 4,
+      "战斗高潮": 4,
+      "追逐推进": 4,
+      "群像集结": 5,
+      "爆点揭示": 4,
+      "关系停顿": 2,
+      "微表演对白": 1,
+      "梦境切层": 2,
+      "悬疑线索": 4,
+      "片尾收束": 2
+    },
+    "preferred_scene_types": ["群像集结", "悬疑线索", "战斗开场", "危机推进"],
+    "non_fit_scene_types": ["极轻日常玩笑", "长段柔性抒情", "主观梦境漂移"],
+    "selection_note": "优先承担群像压迫、危机推进、战前集结和高密度悬疑段。",
+    "dispatch_hint": "当场景重点是空间压迫、队列关系和危险逼近时，荒木哲郎是首选。",
+    "source_type": "team_distillation",
+    "source_notes": "基于荒木哲郎在危机场面、群像调度和压力推进中的稳定表现归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_03",
@@ -45,7 +83,26 @@
       "转场": 2,
       "爆发": 4
     },
-    "selection_note": "优先承担 1v1 近身格斗和高速打击段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 4,
+      "战斗高潮": 5,
+      "追逐推进": 4,
+      "群像集结": 2,
+      "爆点揭示": 4,
+      "关系停顿": 1,
+      "微表演对白": 1,
+      "梦境切层": 1,
+      "悬疑线索": 1,
+      "片尾收束": 1
+    },
+    "preferred_scene_types": ["战斗高潮", "近身对打", "追逐推进", "重击定点"],
+    "non_fit_scene_types": ["群像站位", "情绪景观", "长段悬疑误导"],
+    "selection_note": "优先承担 1v1 近身格斗、贴身追击和打击节拍清楚的动作段。",
+    "dispatch_hint": "凡是需要把动作轴线、受力和打击点讲清楚的场景，都优先分给朴性厚。",
+    "source_type": "team_distillation",
+    "source_notes": "基于朴性厚的近身动作、追身格斗和重击节拍归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_04",
@@ -61,7 +118,26 @@
       "转场": 4,
       "爆发": 2
     },
-    "selection_note": "优先承担情绪景观、告白、离别和片尾收束段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 1,
+      "战斗高潮": 1,
+      "追逐推进": 2,
+      "群像集结": 2,
+      "爆点揭示": 2,
+      "关系停顿": 5,
+      "微表演对白": 4,
+      "梦境切层": 3,
+      "悬疑线索": 2,
+      "片尾收束": 5
+    },
+    "preferred_scene_types": ["关系停顿", "情绪景观", "片尾收束", "转场空镜"],
+    "non_fit_scene_types": ["近身格斗", "高速群像乱战", "极强信息压迫"],
+    "selection_note": "优先承担情绪景观、告白、离别、片尾收束和带天气质感的转场段。",
+    "dispatch_hint": "当场景需要让环境和光线先于对白说话时，新海诚最合适。",
+    "source_type": "team_distillation",
+    "source_notes": "基于新海诚在情绪景观、关系停顿和尾声收束方面的稳定倾向归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_05",
@@ -77,7 +153,26 @@
       "转场": 4,
       "爆发": 1
     },
-    "selection_note": "优先承担日常互动、微表演和安静关系推进段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 1,
+      "战斗高潮": 1,
+      "追逐推进": 1,
+      "群像集结": 2,
+      "爆点揭示": 1,
+      "关系停顿": 5,
+      "微表演对白": 5,
+      "梦境切层": 2,
+      "悬疑线索": 2,
+      "片尾收束": 4
+    },
+    "preferred_scene_types": ["微表演对白", "关系停顿", "日常转场", "细小情绪回流"],
+    "non_fit_scene_types": ["高能战斗高潮", "大规模追逐", "高密度群像压迫"],
+    "selection_note": "优先承担日常互动、微表演、安静关系推进和低视点细节段。",
+    "dispatch_hint": "当一句对白太满、一个眼神太大时，交给山田尚子去把它缩回细节里。",
+    "source_type": "team_distillation",
+    "source_notes": "基于山田尚子在局部动作、安静关系和微表演叙事上的稳定倾向归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_06",
@@ -93,7 +188,26 @@
       "转场": 5,
       "爆发": 4
     },
-    "selection_note": "优先承担意识流、梦境、精神冲击和主观感受层段落。"
+    "detailed_scene_affinity": {
+      "战斗开场": 2,
+      "战斗高潮": 3,
+      "追逐推进": 3,
+      "群像集结": 1,
+      "爆点揭示": 4,
+      "关系停顿": 2,
+      "微表演对白": 1,
+      "梦境切层": 5,
+      "悬疑线索": 4,
+      "片尾收束": 3
+    },
+    "preferred_scene_types": ["梦境切层", "心理爆发", "主观奔逃", "情绪侵染转场"],
+    "non_fit_scene_types": ["平直说明对白", "写实群像站位", "无主观波动的静态日常"],
+    "selection_note": "优先承担意识流、梦境、精神冲击、主观空间扭曲和情绪侵染转场。",
+    "dispatch_hint": "当现实层需要被情绪扭曲、侵染或打断时，优先派给汤浅政明。",
+    "source_type": "team_distillation",
+    "source_notes": "基于汤浅政明在意识流、空间变形和主观情绪层上的稳定倾向归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "affinity_07",
@@ -109,6 +223,25 @@
       "转场": 5,
       "爆发": 3
     },
-    "selection_note": "优先承担现实/幻觉接缝、悬疑反转和结构错位段。"
+    "detailed_scene_affinity": {
+      "战斗开场": 2,
+      "战斗高潮": 2,
+      "追逐推进": 2,
+      "群像集结": 3,
+      "爆点揭示": 4,
+      "关系停顿": 3,
+      "微表演对白": 3,
+      "梦境切层": 4,
+      "悬疑线索": 5,
+      "片尾收束": 3
+    },
+    "preferred_scene_types": ["悬疑线索", "现实错位", "匹配剪接", "结构反转"],
+    "non_fit_scene_types": ["纯热血爆发", "长段无错位的动作打斗", "完全无结构变化的直线叙事"],
+    "selection_note": "优先承担现实/幻觉接缝、悬疑反转、结构错位和精确转场段。",
+    "dispatch_hint": "当场景的重点是让观众晚半拍意识到裂缝时，今敏是第一选择。",
+    "source_type": "team_distillation",
+    "source_notes": "基于今敏在现实/幻觉切缝、匹配接切和结构反转中的稳定倾向归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   }
 ]

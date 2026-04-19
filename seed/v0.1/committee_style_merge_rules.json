@@ -4,48 +4,83 @@
     "role_code": "chief",
     "precedence_order": 1,
     "overridable_fields": [],
-    "non_overridable_fields": ["hard_locks", "negative_prompt_defaults", "project_style_baseline"]
+    "non_overridable_fields": ["hard_locks", "negative_prompt_defaults", "project_style_baseline"],
+    "merge_note": "Chief 只定义全局基线，不接受局部覆盖。",
+    "source_type": "team_distillation",
+    "source_notes": "对应 Hope 正式方案中的 hard_locks 项目级全局规则。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_02",
     "role_code": "scene",
     "precedence_order": 2,
     "overridable_fields": ["composition_traits", "panel_rhythm_bias", "signature_camera_works"],
-    "non_overridable_fields": ["hard_locks", "project_style_baseline"]
+    "non_overridable_fields": ["hard_locks", "project_style_baseline"],
+    "merge_note": "Scene 负责场景调度与构图节奏，可细化但不能改世界基线。",
+    "source_type": "team_distillation",
+    "source_notes": "服务 chief -> scene 的稳态接管和 NarrativeScene 级场景演出。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_03",
     "role_code": "action",
     "precedence_order": 3,
     "overridable_fields": ["signature_camera_works", "panel_rhythm_bias", "action_prompt_bias"],
-    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"]
+    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"],
+    "merge_note": "Action 只强化动作轴线、节拍和冲击，不得漂人物基线。",
+    "source_type": "team_distillation",
+    "source_notes": "用于 scene/action 交接时限制动作导演越权覆盖角色一致性。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_04",
     "role_code": "emotion",
     "precedence_order": 4,
     "overridable_fields": ["emotion_expression_style", "dialogue_style_tokens", "environment_emotion_bias"],
-    "non_overridable_fields": ["hard_locks", "continuity_core"]
+    "non_overridable_fields": ["hard_locks", "continuity_core"],
+    "merge_note": "Emotion 负责情绪层细化，但不能破坏 continuity 核心。",
+    "source_type": "team_distillation",
+    "source_notes": "服务关系停顿、景观承情绪和尾声收束段的局部强化。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_05",
     "role_code": "transition",
     "precedence_order": 5,
     "overridable_fields": ["signature_transitions", "bridge_prompt_bias"],
-    "non_overridable_fields": ["hard_locks", "segment_boundary_rules"]
+    "non_overridable_fields": ["hard_locks", "segment_boundary_rules"],
+    "merge_note": "Transition 可以管过门语言，但不能动 segment 边界规则。",
+    "source_type": "team_distillation",
+    "source_notes": "确保转场导演不会越权修改 RenderSegment 和 NarrativeScene 边界。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_06",
     "role_code": "suspense",
     "precedence_order": 6,
     "overridable_fields": ["information_delay_bias", "occlusion_bias", "reveal_pacing_bias"],
-    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"]
+    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"],
+    "merge_note": "Suspense 负责延后与遮挡，但不能牺牲人物一致性。",
+    "source_type": "team_distillation",
+    "source_notes": "服务今敏系和悬疑段使用时的局部权重控制。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "merge_07",
     "role_code": "comedy",
     "precedence_order": 7,
     "overridable_fields": ["dialogue_style_tokens", "reaction_timing_bias", "lightness_bias"],
-    "non_overridable_fields": ["hard_locks", "project_style_baseline"]
+    "non_overridable_fields": ["hard_locks", "project_style_baseline"],
+    "merge_note": "Comedy 只做轻量节奏释放，不得改坏项目整体基线。",
+    "source_type": "team_distillation",
+    "source_notes": "适配轻喜缓冲段，但明确不能覆盖 chief 定下的世界与风格底色。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
   }
 ]

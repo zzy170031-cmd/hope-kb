@@ -2,7 +2,7 @@
   "snapshot_version": "v0.1",
   "snapshot_name": "hope-kb-minimum-benchmark-pack",
   "content_hash_algo": "sha256",
-  "content_hash": "bundle-sha256:eb8079f212cd042a7b56d4a662fa5bc2763571a46512209354194aefcd7bd145",
+  "content_hash": "bundle-sha256:777068a0b2be4016bbf8e2e4c8aea93204dbb434b77962aa92440769ca5ace42",
   "seed_import_format": "hope-kb-seed-bundle-v0.1",
   "imported_at": "2026-04-19",
   "primary_key": "machine_id",
@@ -37,9 +37,9 @@
     "director_rules": 7,
     "director_reference_sets": 7,
     "director_scene_affinity": 7,
-    "director_cut_samples": 7,
+    "director_cut_samples": 21,
     "committee_templates": 4,
-    "committee_handoff_rules": 8,
+    "committee_handoff_rules": 12,
     "committee_style_merge_rules": 7,
     "story_structure_templates": 4,
     "manga_structure_rules": 5,
@@ -50,7 +50,7 @@
     "continuity_rules": 3,
     "transition_vocabulary": 8,
     "prompt_templates": 10,
-    "export_templates": 6,
-    "classic_case_examples": 6
+    "export_templates": 17,
+    "classic_case_examples": 12
   }
 }

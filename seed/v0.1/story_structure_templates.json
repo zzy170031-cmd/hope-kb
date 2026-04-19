@@ -6,7 +6,11 @@
     "beat_count_range": "3-5",
     "hook_rule": "前 3 秒必须给出人物、目标或异常点。",
     "turn_rule": "中段必须发生一次清晰反转或情绪转折。",
-    "ending_rule": "结尾必须锁住一个鲜明状态或留出继续观看的钩子。"
+    "ending_rule": "结尾必须锁住一个鲜明状态或留出继续观看的钩子。",
+    "source_type": "official_rule",
+    "source_notes": "结合 SVA storyboard 课程对 dramatic beats 的要求，以及 Hope 对短时长漫剧的结构约束整理。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "structure_02",
@@ -15,7 +19,11 @@
     "beat_count_range": "8-12",
     "hook_rule": "开场要尽快立住人物标签和核心冲突。",
     "turn_rule": "中段至少一处明显升级，一处方向变化。",
-    "ending_rule": "结尾既要形成阶段性满足，也要保留后续空间。"
+    "ending_rule": "结尾既要形成阶段性满足，也要保留后续空间。",
+    "source_type": "official_rule",
+    "source_notes": "用于中短单集的稳定结构骨架，强调关系推进和节拍升级。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "structure_03",
@@ -24,7 +32,11 @@
     "beat_count_range": "12-18",
     "hook_rule": "第一幕结束前必须让主问题成立。",
     "turn_rule": "第二幕中后段必须有一次代价明显的升级。",
-    "ending_rule": "第三幕必须回收主问题并留下角色状态变化。"
+    "ending_rule": "第三幕必须回收主问题并留下角色状态变化。",
+    "source_type": "official_rule",
+    "source_notes": "适合中等长度单集，用于保证弧线与段落密度平衡。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "structure_04",
@@ -33,6 +45,10 @@
     "beat_count_range": "18-25",
     "hook_rule": "前段完成世界、人物和目标三件事的建立。",
     "turn_rule": "中段至少包含一次重大反转和一次情绪低谷。",
-    "ending_rule": "结尾既要解决本集主问题，又要为下一集保留悬念或余波。"
+    "ending_rule": "结尾既要解决本集主问题，又要为下一集保留悬念或余波。",
+    "source_type": "official_rule",
+    "source_notes": "面向上限 45min 的长单集结构模板，强调拆集前的完整单集收束。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   }
 ]

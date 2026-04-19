@@ -2,37 +2,273 @@
   {
     "machine_id": "export_01",
     "sheet_name": "Project",
-    "用途": "项目总览与全局配置展示",
-    "核心字段": ["project_name", "chief_director", "target_duration", "target_model_family"]
+    "显示标题": "项目总表",
+    "用途": "展示项目级基础信息、主导演、目标模型和全局配置。",
+    "核心字段": ["project_name", "project_id", "chief_director", "target_duration", "target_model_family", "snapshot_version"],
+    "列定义": [
+      { "列名": "项目名", "来源": "projects.name", "必填": true },
+      { "列名": "项目编号", "来源": "projects.id", "必填": true },
+      { "列名": "Chief Director", "来源": "project_committee.chief_director_id", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "根据 Hope 正式方案中的 17 sheet contract 整理。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "export_02",
     "sheet_name": "Episodes",
-    "用途": "展示分集范围与每集摘要",
-    "核心字段": ["episode_number", "title", "duration_seconds", "arc_summary"]
+    "显示标题": "分集清单",
+    "用途": "展示 Episode 切分结果、每集目标时长和弧线摘要。",
+    "核心字段": ["episode_number", "title", "target_duration_seconds", "actual_duration_seconds", "arc_summary"],
+    "列定义": [
+      { "列名": "集数", "来源": "episodes.episode_number", "必填": true },
+      { "列名": "标题", "来源": "episodes.title", "必填": true },
+      { "列名": "弧线摘要", "来源": "episodes.arc_summary", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "用于支撑长项目自动拆集后的稳定导出。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "export_03",
     "sheet_name": "RenderSegments",
-    "用途": "展示 30s-90s 下游消费单元",
-    "核心字段": ["segment_number", "episode_id", "target_duration_seconds", "actual_duration_seconds", "primary_scene_director_id"]
+    "显示标题": "分段清单",
+    "用途": "展示 30s-90s 的下游消费单元以及段级导演归属。",
+    "核心字段": ["segment_number", "episode_id", "target_duration_seconds", "actual_duration_seconds", "primary_scene_director_id", "primary_action_director_id"],
+    "列定义": [
+      { "列名": "段号", "来源": "render_segments.segment_number", "必填": true },
+      { "列名": "目标时长", "来源": "render_segments.target_duration_seconds", "必填": true },
+      { "列名": "实际时长", "来源": "render_segments.actual_duration_seconds", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "RenderSegment 是 Hope 的核心下游消费单位，必须单独成 sheet。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "export_04",
-    "sheet_name": "Cuts",
-    "用途": "展示 cut 级分镜和连续性字段",
-    "核心字段": ["cut_number", "render_segment_id", "narrative_scene_id", "camera_work", "action_description", "transition_out"]
+    "sheet_name": "Committee",
+    "显示标题": "导演委员会",
+    "用途": "展示项目当前委员会模板、角色槽位和默认导演映射。",
+    "核心字段": ["committee_template_id", "role_code", "director_id", "activation_mode"],
+    "列定义": [
+      { "列名": "委员会模板", "来源": "project_committee.committee_template_id", "必填": true },
+      { "列名": "角色", "来源": "committee_role_definitions.role_code", "必填": true },
+      { "列名": "默认导演", "来源": "committee_templates.default_roles", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "用于把委员会建模显式化，方便审阅和外部协作。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "export_05",
-    "sheet_name": "PromptPackage",
-    "用途": "展示 layout/render prompt 与 traceability",
-    "核心字段": ["episode_id", "render_segment_id", "cut_number", "layout_prompt", "render_prompt", "negative_prompt"]
+    "sheet_name": "DirectorAssignments",
+    "显示标题": "导演分派",
+    "用途": "展示每个 Episode / Scene / Segment 的导演分派结果和理由。",
+    "核心字段": ["scope_type", "scope_id", "role_code", "director_id", "assignment_reason"],
+    "列定义": [
+      { "列名": "作用域类型", "来源": "project_director_assignments.scope_type", "必填": true },
+      { "列名": "角色", "来源": "project_director_assignments.role_code", "必填": true },
+      { "列名": "分派理由", "来源": "project_director_assignments.assignment_reason", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "让导演分工不是隐藏逻辑，而是显式导出信息。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   },
   {
     "machine_id": "export_06",
+    "sheet_name": "HandoffZones",
+    "显示标题": "导演交接区",
+    "用途": "展示 handoff zone、交接类型、buffer cut 和 continuity 备注。",
+    "核心字段": ["render_segment_id", "from_role", "to_role", "from_director_id", "to_director_id", "transition_type", "buffer_cut_ids", "continuity_notes"],
+    "列定义": [
+      { "列名": "所属段", "来源": "project_handoff_zones.render_segment_id", "必填": true },
+      { "列名": "交接", "来源": "project_handoff_zones.from_role + to_role", "必填": true },
+      { "列名": "缓冲切", "来源": "project_handoff_zones.buffer_cut_ids", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "根据 handoff zone contract 增补的显式导出 sheet。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_07",
+    "sheet_name": "Synopsis",
+    "显示标题": "梗概输入",
+    "用途": "保留用户原始梗概、题材、时长意图和改写入口信息。",
+    "核心字段": ["source_text", "genre", "target_duration_seconds", "author_note"],
+    "列定义": [
+      { "列名": "原始梗概", "来源": "project_synopsis.source_text", "必填": true },
+      { "列名": "题材", "来源": "projects.genre", "必填": false },
+      { "列名": "目标时长", "来源": "projects.target_duration_seconds", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "方便回看输入与输出之间的差距。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_08",
+    "sheet_name": "WorldBible",
+    "显示标题": "世界观手册",
+    "用途": "展示 Story 层生成的世界观、基调和全局设定。",
+    "核心字段": ["world_rules", "visual_baseline", "timeline_note", "taboo_rules"],
+    "列定义": [
+      { "列名": "世界规则", "来源": "project_world_bible.world_rules", "必填": false },
+      { "列名": "视觉基线", "来源": "project_world_bible.visual_baseline", "必填": false },
+      { "列名": "禁忌规则", "来源": "project_world_bible.taboo_rules", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "WorldBible 是后续 hard_locks 和风格统一的解释层。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_09",
+    "sheet_name": "CharacterArcs",
+    "显示标题": "角色弧线",
+    "用途": "展示主要角色的起点、变化节点和落点。",
+    "核心字段": ["character_id", "arc_pattern_id", "start_state", "turning_points", "end_state"],
+    "列定义": [
+      { "列名": "角色", "来源": "character_arcs.character_id", "必填": true },
+      { "列名": "弧线模式", "来源": "character_arcs.arc_pattern_id", "必填": true },
+      { "列名": "终点状态", "来源": "character_arcs.end_state", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "连接 Story 层和 Screenplay 层的角色变化视图。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_10",
+    "sheet_name": "StoryOutline",
+    "显示标题": "故事大纲",
+    "用途": "展示 Outline / Beats 的结构骨架、节拍断点和关键推进。",
+    "核心字段": ["beat_number", "beat_label", "beat_summary", "episode_id", "estimated_duration_seconds"],
+    "列定义": [
+      { "列名": "节拍号", "来源": "story_beats.beat_number", "必填": true },
+      { "列名": "节拍摘要", "来源": "story_beats.beat_summary", "必填": true },
+      { "列名": "预计时长", "来源": "story_beats.estimated_duration_seconds", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "用于连接梗概、RenderSegment 规划和 NarrativeScene 划分。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_11",
+    "sheet_name": "Characters",
+    "显示标题": "角色表",
+    "用途": "展示项目级角色 hard_locks、外观 tokens、情绪变体和服装变体。",
+    "核心字段": ["character_name", "appearance_tokens", "emotion_variants", "costume_variants", "reference_image_hash", "notes"],
+    "列定义": [
+      { "列名": "角色名", "来源": "project_characters.name", "必填": true },
+      { "列名": "外观 tokens", "来源": "project_characters.appearance_tokens", "必填": true },
+      { "列名": "参考图哈希", "来源": "project_characters.reference_image_hash", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "角色表是 hard_locks 的核心外显层。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_12",
+    "sheet_name": "ShootingLocations",
+    "显示标题": "场景表",
+    "用途": "展示重复出现空间的统一描述和 continuity 备注。",
+    "核心字段": ["location_name", "scene_tokens", "environment_description", "reusable_elements", "continuity_notes"],
+    "列定义": [
+      { "列名": "场景名", "来源": "shooting_locations.name", "必填": true },
+      { "列名": "场景 tokens", "来源": "shooting_locations.scene_tokens", "必填": true },
+      { "列名": "连续性备注", "来源": "shooting_locations.continuity_notes", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "确保重复场景在不同 RenderSegment 中保持稳定。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_13",
+    "sheet_name": "NarrativeScenes",
+    "显示标题": "叙事场景",
+    "用途": "展示 Screenplay 层的场景划分、冲突目标和对应 Episode。",
+    "核心字段": ["narrative_scene_id", "episode_id", "scene_goal", "conflict", "outcome", "dominant_emotion"],
+    "列定义": [
+      { "列名": "场景编号", "来源": "narrative_scenes.id", "必填": true },
+      { "列名": "场景目标", "来源": "narrative_scenes.scene_goal", "必填": true },
+      { "列名": "冲突", "来源": "narrative_scenes.conflict", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "RenderSegment 不能跨 NarrativeScene，因此必须独立导出可审阅。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_14",
+    "sheet_name": "Screenplay",
+    "显示标题": "剧本",
+    "用途": "展示对白轮次、说话人、潜台词和情绪指向。",
+    "核心字段": ["dialogue_turn_id", "narrative_scene_id", "speaker", "dialogue_text", "subtext", "emotion_tag"],
+    "列定义": [
+      { "列名": "对白编号", "来源": "dialogue_turns.id", "必填": true },
+      { "列名": "说话人", "来源": "dialogue_turns.speaker", "必填": true },
+      { "列名": "潜台词", "来源": "dialogue_turns.subtext", "必填": false }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "方便把 Writer 层对白与后续 Cut 对应起来。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_15",
+    "sheet_name": "Cuts",
+    "显示标题": "分镜 Cuts",
+    "用途": "展示 cut 级分镜、运镜、动作、转场与 continuity 字段。",
+    "核心字段": ["cut_number", "episode_id", "render_segment_id", "narrative_scene_id", "camera_work", "layout_description", "action_description", "transition_out", "continuity_refs"],
+    "列定义": [
+      { "列名": "Cut 编号", "来源": "storyboard_cuts.cut_number", "必填": true },
+      { "列名": "运镜", "来源": "storyboard_cuts.camera_work", "必填": false },
+      { "列名": "动作描述", "来源": "storyboard_cuts.action_description", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "Cuts 是 Hope 结构化分镜的主表之一。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_16",
+    "sheet_name": "PromptPackage",
+    "显示标题": "提示词包",
+    "用途": "展示 layout/render prompt、negative prompt 和 traceability 主键。",
+    "核心字段": ["episode_id", "render_segment_id", "cut_number", "layout_prompt", "render_prompt", "negative_prompt", "target_model_family"],
+    "列定义": [
+      { "列名": "Episode", "来源": "prompt_packages.episode_id", "必填": true },
+      { "列名": "RenderSegment", "来源": "prompt_packages.render_segment_id", "必填": true },
+      { "列名": "render_prompt", "来源": "prompt_packages.render_prompt", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "这是 Hope 的最终主产物之一，必须确保字段和 traceability 稳定。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "export_17",
     "sheet_name": "Validation",
-    "用途": "展示导出前门禁检查结果",
-    "核心字段": ["validator_name", "status", "severity", "message", "related_cut_or_segment"]
+    "显示标题": "校验结果",
+    "用途": "展示导出前 7 个 validator 的门禁结果和阻塞性。",
+    "核心字段": ["validator_name", "status", "severity", "message", "related_cut_or_segment", "is_blocking"],
+    "列定义": [
+      { "列名": "校验器", "来源": "validation_report.validator_name", "必填": true },
+      { "列名": "状态", "来源": "validation_report.status", "必填": true },
+      { "列名": "是否阻塞", "来源": "validation_report.is_blocking", "必填": true }
+    ],
+    "source_type": "team_distillation",
+    "source_notes": "Validation sheet 直接对应导出前门禁，不允许由 exporter 私自拼装。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
   }
 ]
