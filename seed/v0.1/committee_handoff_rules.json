@@ -1,0 +1,98 @@
+[
+  {
+    "machine_id": "handoff_01",
+    "from_role": "chief",
+    "to_role": "scene",
+    "transition_type": "style_blend",
+    "buffer_guidance": "用 1 个 buffer cut 重申 hard_locks，再把局部场景偏好叠加进去。",
+    "continuity_notes": "Chief 的硬锁必须完整保留，Scene 只覆盖局部节奏和构图。",
+    "source_type": "team_distillation",
+    "source_notes": "总监督切到场景演出时，优先保留世界观和人物基线。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_02",
+    "from_role": "scene",
+    "to_role": "action",
+    "transition_type": "bridge_cut",
+    "buffer_guidance": "在进入动作段前先给一个空间定位 cut，再切进动作轴线。",
+    "continuity_notes": "必须先交代动作起始站位与屏幕方向，防止进动作后失轴。",
+    "source_type": "team_distillation",
+    "source_notes": "场景演出切到动作演出时，需要先稳空间逻辑。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_03",
+    "from_role": "action",
+    "to_role": "scene",
+    "transition_type": "hard_cut",
+    "buffer_guidance": "动作爆点后允许硬切回结果场，先给收束动作，再恢复叙事节奏。",
+    "continuity_notes": "保留爆点前后的角色姿态延续，避免硬断导致动作因果消失。",
+    "source_type": "team_distillation",
+    "source_notes": "动作段回到叙事段时，要先落地结果，再恢复信息推进。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_04",
+    "from_role": "scene",
+    "to_role": "emotion",
+    "transition_type": "soft_fade",
+    "buffer_guidance": "先放慢节奏，给环境或局部动作一个过渡镜头，再进入情绪段。",
+    "continuity_notes": "避免突然改成抒情镜头而丢失前一场的空间和关系位置。",
+    "source_type": "team_distillation",
+    "source_notes": "场景段转情绪段时，最怕情绪来得太硬，需要先托气氛。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_05",
+    "from_role": "emotion",
+    "to_role": "transition",
+    "transition_type": "style_blend",
+    "buffer_guidance": "保留上一段情绪余韵，再用景观或动作桥把下一段引进来。",
+    "continuity_notes": "情绪段的最后一个动作或视线应成为转场的接力点。",
+    "source_type": "team_distillation",
+    "source_notes": "情绪段切到转场段时，最好让转场吃到上一段余韵。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_06",
+    "from_role": "transition",
+    "to_role": "scene",
+    "transition_type": "bridge_cut",
+    "buffer_guidance": "转场的最后一个镜头必须顺手把下一场的空间入口交代清楚。",
+    "continuity_notes": "后一个 scene 不能凭空开始，至少要有入口、视线或动作承接。",
+    "source_type": "team_distillation",
+    "source_notes": "转场不是断开，而是要替下一场开门。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_07",
+    "from_role": "scene",
+    "to_role": "suspense",
+    "transition_type": "bridge_cut",
+    "buffer_guidance": "先把信息量压低，放一个可疑细节或遮挡镜头，再切到悬疑演出。",
+    "continuity_notes": "悬疑段开头不能直接把答案说出来，必须让问题先成立。",
+    "source_type": "team_distillation",
+    "source_notes": "普通叙事切悬疑时，先制造问题，再进入错位和延后。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "handoff_08",
+    "from_role": "suspense",
+    "to_role": "scene",
+    "transition_type": "hard_cut",
+    "buffer_guidance": "悬疑段揭示后允许硬切回正常叙事，但要保留揭示后的余波。",
+    "continuity_notes": "不能让真相揭示和后果场脱节，至少留一个反应点。",
+    "source_type": "team_distillation",
+    "source_notes": "悬疑段回归主叙事时，需要把揭示造成的后果带回主线。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "machine_id": "structure_01",
+    "duration_band": "45s-3min",
+    "structure_name": "三段式",
+    "beat_count_range": "3-5",
+    "hook_rule": "前 3 秒必须给出人物、目标或异常点。",
+    "turn_rule": "中段必须发生一次清晰反转或情绪转折。",
+    "ending_rule": "结尾必须锁住一个鲜明状态或留出继续观看的钩子。"
+  },
+  {
+    "machine_id": "structure_02",
+    "duration_band": "3-15min",
+    "structure_name": "起承转合",
+    "beat_count_range": "8-12",
+    "hook_rule": "开场要尽快立住人物标签和核心冲突。",
+    "turn_rule": "中段至少一处明显升级，一处方向变化。",
+    "ending_rule": "结尾既要形成阶段性满足，也要保留后续空间。"
+  },
+  {
+    "machine_id": "structure_03",
+    "duration_band": "15-30min",
+    "structure_name": "三幕简版",
+    "beat_count_range": "12-18",
+    "hook_rule": "第一幕结束前必须让主问题成立。",
+    "turn_rule": "第二幕中后段必须有一次代价明显的升级。",
+    "ending_rule": "第三幕必须回收主问题并留下角色状态变化。"
+  },
+  {
+    "machine_id": "structure_04",
+    "duration_band": "30-45min",
+    "structure_name": "三幕完整",
+    "beat_count_range": "18-25",
+    "hook_rule": "前段完成世界、人物和目标三件事的建立。",
+    "turn_rule": "中段至少包含一次重大反转和一次情绪低谷。",
+    "ending_rule": "结尾既要解决本集主问题，又要为下一集保留悬念或余波。"
+  }
+]

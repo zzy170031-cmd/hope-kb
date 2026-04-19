@@ -190,7 +190,8 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 
 12. 导演 few-shot
 13. benchmark 参考 cut
-14. `export_templates`
+14. 导演 reference sets
+15. `export_templates`
 
 ---
 
@@ -203,6 +204,7 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 3. 中文 token 规范通过
 4. 至少能服务一个 benchmark
 5. 能被 Track D / E / G 直接消费
+6. 风格类内容必须能回指到导演 reference set 或 source register
 
 ---
 

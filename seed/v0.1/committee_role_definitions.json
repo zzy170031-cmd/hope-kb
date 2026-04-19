@@ -1,0 +1,51 @@
+[
+  {
+    "machine_id": "role_01",
+    "role_code": "chief",
+    "display_name": "总监督",
+    "responsibility": "锁定项目级 hard_locks、风格基线和统一审美方向。",
+    "v0_1_activation_mode": "auto"
+  },
+  {
+    "machine_id": "role_02",
+    "role_code": "scene",
+    "display_name": "场景演出",
+    "responsibility": "负责场景级镜头语言、节奏、构图和情绪组织。",
+    "v0_1_activation_mode": "auto"
+  },
+  {
+    "machine_id": "role_03",
+    "role_code": "action",
+    "display_name": "动作演出",
+    "responsibility": "负责战斗、追逐、动作轴线和打击可读性。",
+    "v0_1_activation_mode": "auto"
+  },
+  {
+    "machine_id": "role_04",
+    "role_code": "emotion",
+    "display_name": "情绪演出",
+    "responsibility": "负责关系推进、情绪高点和潜台词的镜头组织。",
+    "v0_1_activation_mode": "manual"
+  },
+  {
+    "machine_id": "role_05",
+    "role_code": "transition",
+    "display_name": "转场演出",
+    "responsibility": "负责段落之间的衔接、handoff 和风格桥接。",
+    "v0_1_activation_mode": "manual"
+  },
+  {
+    "machine_id": "role_06",
+    "role_code": "suspense",
+    "display_name": "悬疑演出",
+    "responsibility": "负责信息延后、认知扰动和悬疑压迫段落。",
+    "v0_1_activation_mode": "reserved"
+  },
+  {
+    "machine_id": "role_07",
+    "role_code": "comedy",
+    "display_name": "喜剧演出",
+    "responsibility": "负责轻喜互动、节拍释放和关系缓冲。",
+    "v0_1_activation_mode": "reserved"
+  }
+]

@@ -79,6 +79,7 @@
 首批适用表：
 
 - `director_profiles`
+- `director_reference_sets`
 - `director_scene_affinity`
 - `committee_handoff_rules`
 - `committee_style_merge_rules`

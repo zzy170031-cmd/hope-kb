@@ -1,0 +1,38 @@
+[
+  {
+    "machine_id": "export_01",
+    "sheet_name": "Project",
+    "用途": "项目总览与全局配置展示",
+    "核心字段": ["project_name", "chief_director", "target_duration", "target_model_family"]
+  },
+  {
+    "machine_id": "export_02",
+    "sheet_name": "Episodes",
+    "用途": "展示分集范围与每集摘要",
+    "核心字段": ["episode_number", "title", "duration_seconds", "arc_summary"]
+  },
+  {
+    "machine_id": "export_03",
+    "sheet_name": "RenderSegments",
+    "用途": "展示 30s-90s 下游消费单元",
+    "核心字段": ["segment_number", "episode_id", "target_duration_seconds", "actual_duration_seconds", "primary_scene_director_id"]
+  },
+  {
+    "machine_id": "export_04",
+    "sheet_name": "Cuts",
+    "用途": "展示 cut 级分镜和连续性字段",
+    "核心字段": ["cut_number", "render_segment_id", "narrative_scene_id", "camera_work", "action_description", "transition_out"]
+  },
+  {
+    "machine_id": "export_05",
+    "sheet_name": "PromptPackage",
+    "用途": "展示 layout/render prompt 与 traceability",
+    "核心字段": ["episode_id", "render_segment_id", "cut_number", "layout_prompt", "render_prompt", "negative_prompt"]
+  },
+  {
+    "machine_id": "export_06",
+    "sheet_name": "Validation",
+    "用途": "展示导出前门禁检查结果",
+    "核心字段": ["validator_name", "status", "severity", "message", "related_cut_or_segment"]
+  }
+]

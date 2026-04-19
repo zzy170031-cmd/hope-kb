@@ -25,4 +25,5 @@ It consumes validated read-only snapshots bundled with releases.
 - `kb-seed-v0.1.md`
 - `kb-source-policy-v0.1.md`
 - `kb-source-index-v0.1.md`
+- `director-reference-index-v0.1.md`
 - `../seed/v0.1/source_register.json`

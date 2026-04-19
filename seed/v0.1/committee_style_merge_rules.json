@@ -1,0 +1,51 @@
+[
+  {
+    "machine_id": "merge_01",
+    "role_code": "chief",
+    "precedence_order": 1,
+    "overridable_fields": [],
+    "non_overridable_fields": ["hard_locks", "negative_prompt_defaults", "project_style_baseline"]
+  },
+  {
+    "machine_id": "merge_02",
+    "role_code": "scene",
+    "precedence_order": 2,
+    "overridable_fields": ["composition_traits", "panel_rhythm_bias", "signature_camera_works"],
+    "non_overridable_fields": ["hard_locks", "project_style_baseline"]
+  },
+  {
+    "machine_id": "merge_03",
+    "role_code": "action",
+    "precedence_order": 3,
+    "overridable_fields": ["signature_camera_works", "panel_rhythm_bias", "action_prompt_bias"],
+    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"]
+  },
+  {
+    "machine_id": "merge_04",
+    "role_code": "emotion",
+    "precedence_order": 4,
+    "overridable_fields": ["emotion_expression_style", "dialogue_style_tokens", "environment_emotion_bias"],
+    "non_overridable_fields": ["hard_locks", "continuity_core"]
+  },
+  {
+    "machine_id": "merge_05",
+    "role_code": "transition",
+    "precedence_order": 5,
+    "overridable_fields": ["signature_transitions", "bridge_prompt_bias"],
+    "non_overridable_fields": ["hard_locks", "segment_boundary_rules"]
+  },
+  {
+    "machine_id": "merge_06",
+    "role_code": "suspense",
+    "precedence_order": 6,
+    "overridable_fields": ["information_delay_bias", "occlusion_bias", "reveal_pacing_bias"],
+    "non_overridable_fields": ["hard_locks", "character_appearance_tokens"]
+  },
+  {
+    "machine_id": "merge_07",
+    "role_code": "comedy",
+    "precedence_order": 7,
+    "overridable_fields": ["dialogue_style_tokens", "reaction_timing_bias", "lightness_bias"],
+    "non_overridable_fields": ["hard_locks", "project_style_baseline"]
+  }
+]

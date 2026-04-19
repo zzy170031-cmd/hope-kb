@@ -103,6 +103,18 @@
       "notes": "只用于风格归纳层，必须配 source_notes 和 confidence_level。"
     },
     {
+      "source_id": "official_director_reference_sets",
+      "source_type": "official_product",
+      "label": "导演公开作品锚点",
+      "url": "",
+      "applies_to": [
+        "director_reference_sets",
+        "director_profiles"
+      ],
+      "priority": 2,
+      "notes": "通过导演代表作品的官方作品页、官方站或官方个人站，为团队风格归纳提供公开锚点。"
+    },
+    {
       "source_id": "team_distillation_handoff",
       "source_type": "team_distillation",
       "label": "委员会切换经验归纳",
@@ -112,6 +124,17 @@
       ],
       "priority": 3,
       "notes": "只用于 handoff 经验层，不能伪装成官方规则。"
+    },
+    {
+      "source_id": "internal_benchmark_examples",
+      "source_type": "internal_example",
+      "label": "内部 benchmark 与经典案例",
+      "url": "",
+      "applies_to": [
+        "classic_case_examples"
+      ],
+      "priority": 3,
+      "notes": "用于 45s、10min、60min benchmark 和经典段落示例，不作为官方规则来源。"
     }
   ]
 }

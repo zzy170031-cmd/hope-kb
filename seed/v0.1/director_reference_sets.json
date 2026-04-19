@@ -1,0 +1,100 @@
+[
+  {
+    "machine_id": "director_ref_01",
+    "director_machine_id": "director_01",
+    "代表作品": ["天元突破グレンラガン", "キルラキル", "プロメア"],
+    "公开锚点": [
+      "https://promare-movie.com/",
+      "https://promare-movie.com/about/"
+    ],
+    "用途说明": "用于支撑今石洋之在高饱和撞色、极端透视、爆发构图和热血高潮上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以《普罗米亚》官方站作为首批公开锚点，其他作品名作为代表作回指。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_02",
+    "director_machine_id": "director_02",
+    "代表作品": ["進撃の巨人", "甲鉄城のカバネリ"],
+    "公开锚点": [
+      "https://shingeki.tv/season1/staff/",
+      "https://shingeki.tv/season1/"
+    ],
+    "用途说明": "用于支撑荒木哲郎在群像危机、纵深压迫、危机推进和压迫性空间组织上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以《进击的巨人》官方 staff 页面作为首批公开锚点。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_03",
+    "director_machine_id": "director_03",
+    "代表作品": ["劇場版 呪術廻戦 ０", "神之塔 -Tower of God-"],
+    "公开锚点": [
+      "https://jujutsukaisen-movie.jp/?lang=en"
+    ],
+    "用途说明": "用于支撑朴性厚在近身格斗、打击感、动作链和速度感上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以《剧场版 咒术回战 0》官方站 staff 信息作为首批公开锚点。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_04",
+    "director_machine_id": "director_04",
+    "代表作品": ["君の名は。", "天気の子", "すずめの戸締まり"],
+    "公开锚点": [
+      "https://suzume-tojimari-movie.jp/index.html"
+    ],
+    "用途说明": "用于支撑新海诚在高光逆光、景观托情绪、天空层次和都市情绪景观上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以《铃芽之旅》官方站作为首批公开锚点，兼做新海诚作品入口。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_05",
+    "director_machine_id": "director_05",
+    "代表作品": ["映画 聲の形", "リズと青い鳥", "映画けいおん！"],
+    "公开锚点": [
+      "https://www.kyotoanimation.co.jp/works/koeM/",
+      "https://www.kyotoanimation.co.jp/works/liz/",
+      "https://www.kyotoanimation.co.jp/works/k-onMovie/"
+    ],
+    "用途说明": "用于支撑山田尚子在低视点、微表情、局部肢体细节和安静留白上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以京都动画作品页作为山田尚子代表作的首批公开锚点。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_06",
+    "director_machine_id": "director_06",
+    "代表作品": ["ピンポン THE ANIMATION", "DEVILMAN crybaby", "犬王"],
+    "公开锚点": [
+      "https://www.pingpong-anime.tv/",
+      "https://www.pingpong-anime.tv/staff-cast/"
+    ],
+    "用途说明": "用于支撑汤浅政明在意识流变形、情绪外化、线条弹性和主观感受层上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以《乒乓》官方站和 staff 页面作为首批公开锚点。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_07",
+    "director_machine_id": "director_07",
+    "代表作品": ["PERFECT BLUE", "千年女優", "東京ゴッドファーザーズ", "パプリカ"],
+    "公开锚点": [
+      "https://konstone.s-kon.net/",
+      "https://konstone.s-kon.net/modules/works/index.php?content_id=1",
+      "https://www.madhouse.co.jp/special/mhpf/mhpf_no035.html"
+    ],
+    "用途说明": "用于支撑今敏在现实/幻觉接缝、镜像反射、匹配剪接和认知错位上的风格归纳。",
+    "source_type": "official_product",
+    "source_notes": "以 KON'S TONE 官方站和 MADHOUSE People File 作为首批公开锚点。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  }
+]
