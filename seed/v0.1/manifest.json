@@ -1,0 +1,29 @@
+{
+  "snapshot_version": "v0.1",
+  "snapshot_name": "hope-kb-minimum-benchmark-pack",
+  "content_hash_algo": "sha256",
+  "content_hash": "bundle-sha256:c70e7a155a5a1adff0005b0e359240cbf6f35b03ef27b9de7bddb1c97afb53d5",
+  "seed_import_format": "hope-kb-seed-bundle-v0.1",
+  "imported_at": "2026-04-19",
+  "primary_key": "machine_id",
+  "dual_layer_model": {
+    "content_fields": "中文主字段",
+    "reference_fields": "stable machine_id"
+  },
+  "bundle_order": [
+    "seed/v0.1/director_profiles.json",
+    "seed/v0.1/director_cut_samples.json",
+    "seed/v0.1/committee_templates.json",
+    "seed/v0.1/vocabulary.json",
+    "seed/v0.1/prompt_templates.json"
+  ],
+  "record_counts": {
+    "director_profiles": 7,
+    "director_cut_samples": 7,
+    "committee_templates": 4,
+    "visual_language_terms": 20,
+    "camera_terms": 15,
+    "continuity_rules": 3,
+    "prompt_templates": 5
+  }
+}

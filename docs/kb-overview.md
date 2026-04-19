@@ -20,5 +20,9 @@ It consumes validated read-only snapshots bundled with releases.
 
 ## Build-first references
 
+- `kb-build-playbook-v0.1.md`
 - `kb-seed-checklist-v0.1.md`
+- `kb-seed-v0.1.md`
 - `kb-source-policy-v0.1.md`
+- `kb-source-index-v0.1.md`
+- `../seed/v0.1/source_register.json`

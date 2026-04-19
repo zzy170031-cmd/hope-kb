@@ -1,0 +1,82 @@
+[
+  {
+    "machine_id": "committee_01",
+    "模板名": "动作冒险组",
+    "chief_director_id": "director_01",
+    "default_roles": {
+      "chief": "director_01",
+      "scene": "director_02",
+      "action": "director_03",
+      "emotion": "director_04",
+      "transition": "director_07"
+    },
+    "适用阶段": "项目初始化到 Storyboard",
+    "使用场景": "战斗、追逐、升级冲突、高潮爆发。",
+    "决策规则": "优先保证动作可读性和风格爆发，再兼顾情绪承接与段落切换。",
+    "输出格式": "委员会角色映射 + 推荐导演覆盖范围",
+    "source_type": "team_distillation",
+    "source_notes": "基于动作/冒险类 benchmark 的导演分工需求归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "committee_02",
+    "模板名": "日常治愈组",
+    "chief_director_id": "director_05",
+    "default_roles": {
+      "chief": "director_05",
+      "scene": "director_05",
+      "emotion": "director_04",
+      "transition": "director_07",
+      "comedy": "director_05"
+    },
+    "适用阶段": "项目初始化到 Export 之前",
+    "使用场景": "日常、关系推进、安静段落、轻喜互动。",
+    "决策规则": "优先保证微表情与日常细节，再让景观和转场把情绪托起来。",
+    "输出格式": "委员会角色映射 + 日常段落导演建议",
+    "source_type": "team_distillation",
+    "source_notes": "基于日常/治愈向 benchmark 的导演协作方式归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "committee_03",
+    "模板名": "悬疑心理组",
+    "chief_director_id": "director_07",
+    "default_roles": {
+      "chief": "director_07",
+      "scene": "director_07",
+      "emotion": "director_05",
+      "transition": "director_07",
+      "suspense": "director_02"
+    },
+    "适用阶段": "Story 到 Storyboard",
+    "使用场景": "反转、心理段落、现实/幻觉错位、紧张调查。",
+    "决策规则": "先保证信息延后和结构错位成立，再补人物细部和情绪停顿。",
+    "输出格式": "委员会角色映射 + 悬疑段落导演建议",
+    "source_type": "team_distillation",
+    "source_notes": "基于悬疑/心理类 benchmark 的导演协作方式归纳。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "committee_04",
+    "模板名": "史诗群像组",
+    "chief_director_id": "director_02",
+    "default_roles": {
+      "chief": "director_02",
+      "scene": "director_02",
+      "action": "director_01",
+      "emotion": "director_04",
+      "transition": "director_07"
+    },
+    "适用阶段": "Story 到 Export 之前",
+    "使用场景": "群像、战争、集结、长段落冲突与收束。",
+    "决策规则": "先保证群像空间和压迫推进，再用动作爆点和情绪景观完成收口。",
+    "输出格式": "委员会角色映射 + 史诗群像导演建议",
+    "source_type": "team_distillation",
+    "source_notes": "基于群像/史诗类 benchmark 的导演协作方式归纳。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-19"
+  }
+]

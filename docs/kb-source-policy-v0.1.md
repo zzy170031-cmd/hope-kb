@@ -79,6 +79,18 @@
 
 ## 3. 录入规范
 
+### 录入前先登记来源
+
+在开始批量录入前，先把来源登记到：
+
+- `docs/kb-source-index-v0.1.md`
+- `seed/v0.1/source_register.json`
+
+其中：
+
+- `kb-source-index-v0.1.md` 面向人读，解释来源为什么可信、适合哪类表
+- `source_register.json` 面向导入和复核，记录来源编码、来源类型、适用表和优先级
+
 ### 所有记录必须至少标注一类来源
 
 - `source_type`
@@ -166,3 +178,4 @@ Track C 录入后，至少经过：
 - 先支持 `Qwen-compatible` 结构化输出，不先追求多模型最优适配
 - 先支持 `jimeng / kling` 外部消费，不先追求所有下游模型
 - 先让 Track C 可执行，不让它变成无限资料收集
+- 先让来源登记完整，再让内容录入扩量

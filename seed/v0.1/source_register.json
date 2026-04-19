@@ -1,0 +1,117 @@
+{
+  "snapshot_version": "v0.1",
+  "register_name": "hope-kb-source-register",
+  "updated_at": "2026-04-19",
+  "sources": [
+    {
+      "source_id": "official_rule_adobe_storyboarding",
+      "source_type": "official_rule",
+      "label": "Adobe Animation Storyboarding",
+      "url": "https://www.adobe.com/creativecloud/animation/discover/animation-storyboarding.html",
+      "applies_to": [
+        "visual_language_terms",
+        "story_structure_templates",
+        "export_templates"
+      ],
+      "priority": 1,
+      "notes": "用于支撑 storyboard 作为脚本到成片之间视觉桥梁的规则层定义。"
+    },
+    {
+      "source_id": "official_rule_adobe_12_principles",
+      "source_type": "official_rule",
+      "label": "Adobe 12 Principles of Animation",
+      "url": "https://www.adobe.com/creativecloud/animation/discover/principles-of-animation.html",
+      "applies_to": [
+        "visual_language_terms",
+        "camera_work_vocabulary",
+        "continuity_rules"
+      ],
+      "priority": 1,
+      "notes": "用于动势、节奏、重量感和夸张等动画规则归纳。"
+    },
+    {
+      "source_id": "official_rule_sva_storyboarding",
+      "source_type": "official_rule",
+      "label": "SVA Storyboarding for Animation",
+      "url": "https://qa.sva.edu/academics/continuing-education/animation/courses/storyboarding-for-animation-26-cs-anc-1024-ol",
+      "applies_to": [
+        "camera_work_vocabulary",
+        "continuity_rules",
+        "story_structure_templates",
+        "prompt_templates"
+      ],
+      "priority": 1,
+      "notes": "用于支撑 narrative、dramatic beats、camera moves、transitions 等核心字段。"
+    },
+    {
+      "source_id": "official_rule_qwen_structured_output",
+      "source_type": "official_rule",
+      "label": "Qwen Structured Output",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/qwen-structured-output",
+      "applies_to": [
+        "prompt_templates",
+        "story_structure_templates"
+      ],
+      "priority": 1,
+      "notes": "用于冻结 Qwen-compatible 的 JSON 结构化输出纪律。"
+    },
+    {
+      "source_id": "official_rule_qwen_json_mode",
+      "source_type": "official_rule",
+      "label": "Qwen JSON Mode",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/json-mode",
+      "applies_to": [
+        "prompt_templates"
+      ],
+      "priority": 1,
+      "notes": "用于 Writer 和 Storyboard 落库层的 JSON 输出策略。"
+    },
+    {
+      "source_id": "official_product_jimeng",
+      "source_type": "official_product",
+      "label": "即梦 AI 官方入口",
+      "url": "https://jimeng.jianying.com/",
+      "applies_to": [
+        "export_templates"
+      ],
+      "priority": 2,
+      "notes": "用于确认中文 Prompt 外部消费目标和 benchmark 验证方向。"
+    },
+    {
+      "source_id": "official_product_kling",
+      "source_type": "official_product",
+      "label": "Kling VIDEO 3.0 Guide",
+      "url": "https://app.klingai.com/cn/quickstart/klingai-video-3-model-user-guide",
+      "applies_to": [
+        "export_templates",
+        "committee_handoff_rules"
+      ],
+      "priority": 2,
+      "notes": "用于多镜头、多角色一致性和外部验证策略参考。"
+    },
+    {
+      "source_id": "team_distillation_directors",
+      "source_type": "team_distillation",
+      "label": "导演风格团队归纳",
+      "url": "",
+      "applies_to": [
+        "director_profiles",
+        "director_scene_affinity",
+        "committee_style_merge_rules"
+      ],
+      "priority": 3,
+      "notes": "只用于风格归纳层，必须配 source_notes 和 confidence_level。"
+    },
+    {
+      "source_id": "team_distillation_handoff",
+      "source_type": "team_distillation",
+      "label": "委员会切换经验归纳",
+      "url": "",
+      "applies_to": [
+        "committee_handoff_rules"
+      ],
+      "priority": 3,
+      "notes": "只用于 handoff 经验层，不能伪装成官方规则。"
+    }
+  ]
+}
