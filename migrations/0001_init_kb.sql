@@ -91,6 +91,23 @@ CREATE TABLE IF NOT EXISTS director_cut_sample (
 CREATE INDEX IF NOT EXISTS idx_director_cut_sample_director_machine_id
 ON director_cut_sample(director_machine_id);
 
+CREATE TABLE IF NOT EXISTS scene_taxonomy (
+  machine_id TEXT PRIMARY KEY,
+  scene_type TEXT NOT NULL,
+  display_name TEXT NOT NULL,
+  definition TEXT NOT NULL,
+  default_duration_band TEXT NOT NULL,
+  typical_committee_roles TEXT NOT NULL,
+  default_handoff_out TEXT NOT NULL,
+  risk_flags TEXT NOT NULL,
+  continuity_priority TEXT NOT NULL,
+  prompt_focus TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS director_reference_set (
   machine_id TEXT PRIMARY KEY,
   director_machine_id TEXT NOT NULL,
@@ -188,6 +205,7 @@ CREATE TABLE IF NOT EXISTS visual_language_term (
 CREATE TABLE IF NOT EXISTS camera_term (
   machine_id TEXT PRIMARY KEY,
   术语 TEXT NOT NULL,
+  分类 TEXT NOT NULL,
   prompt_token TEXT NOT NULL,
   aliases TEXT NOT NULL,
   定义 TEXT NOT NULL,
@@ -264,6 +282,7 @@ CREATE TABLE IF NOT EXISTS prompt_template (
   模板正文 TEXT NOT NULL,
   expected_output_schema TEXT NOT NULL,
   输出要求 TEXT NOT NULL,
+  repairs_failure_codes TEXT,
   target_model_family TEXT NOT NULL,
   is_structured_output INTEGER NOT NULL
 );
@@ -308,6 +327,10 @@ CREATE TABLE IF NOT EXISTS failure_pattern (
   repair_strategy TEXT NOT NULL,
   affected_layers TEXT NOT NULL,
   validator_hint TEXT NOT NULL,
+  repair_template_ids TEXT NOT NULL,
+  repair_priority TEXT NOT NULL,
+  repair_scope TEXT NOT NULL,
+  suggested_followup_validator TEXT NOT NULL,
   source_type TEXT NOT NULL,
   source_notes TEXT NOT NULL,
   confidence_level TEXT NOT NULL,

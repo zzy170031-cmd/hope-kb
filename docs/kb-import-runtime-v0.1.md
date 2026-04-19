@@ -20,6 +20,8 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
   - 记录 bundle 顺序、hash、record_counts
 - `seed/v0.1/import_map.json`
   - 定义 seed 文件到 SQLite 表的映射
+- `seed/v0.1/scene_taxonomy.json`
+  - 定义统一场景分类层，供 runtime、validator 和 handoff 共用
 - `migrations/0001_init_kb.sql`
   - 定义 v0.1 的目标表结构
 - `scripts/validate-seed-bundle.ps1`
@@ -61,6 +63,7 @@ builder 的约束：
 - 自动写入 `snapshot_meta`
 - JSON 中的数组/对象按中文 UTF-8 文本序列化后入库
 - 不反写 seed 文件
+- `scene_taxonomy`、`failure_pattern`、`prompt_template` 会一起进入 snapshot，保证场景分派和 repair pass 运行时可追溯
 
 运行前提补充：
 

@@ -131,6 +131,15 @@
     "模板正文": "根据【validator_failures：{{validator_failures}}】【current_payload：{{current_payload}}】【target_schema：{{target_schema}}】做 repair pass。",
     "expected_output_schema": "SameAsTarget",
     "输出要求": "只修复错误字段；不能改动通过校验的部分。",
+    "repairs_failure_codes": [
+      "style_drift",
+      "character_inconsistency",
+      "continuity_break",
+      "segment_cross_scene",
+      "handoff_gap",
+      "chinese_prompt_noise",
+      "export_contract_drift"
+    ],
     "target_model_family": "qwen-compatible",
     "is_structured_output": true
   },
@@ -221,6 +230,11 @@
     "模板正文": "根据【failed_cuts：{{failed_cuts}}】【hard_locks：{{hard_locks}}】【current_render_prompts：{{current_render_prompts}}】修复 render_prompt 的 hard_locks 部分。",
     "expected_output_schema": "RenderPromptRepair",
     "输出要求": "必须逐 cut 显式恢复 hard_locks 字面量一致性。",
+    "repairs_failure_codes": [
+      "style_drift",
+      "character_inconsistency",
+      "hard_lock_loss"
+    ],
     "target_model_family": "qwen-compatible",
     "is_structured_output": true
   },
@@ -236,6 +250,10 @@
     "模板正文": "根据【failed_links：{{failed_links}}】【storyboard_cuts：{{storyboard_cuts}}】【continuity_rules：{{continuity_rules}}】修复 continuity 字段和受影响 cuts。",
     "expected_output_schema": "ContinuityRepair",
     "输出要求": "必须最小改动；必须说明修复的是哪一条 continuity 规则。",
+    "repairs_failure_codes": [
+      "continuity_break",
+      "handoff_gap"
+    ],
     "target_model_family": "qwen-compatible",
     "is_structured_output": true
   }

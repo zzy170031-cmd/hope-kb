@@ -148,6 +148,31 @@
       ],
       "priority": 3,
       "notes": "用于沉淀 style drift、continuity break、hard_lock_loss、export drift 等系统失败模式。"
+    },
+    {
+      "source_id": "team_distillation_scene_taxonomy",
+      "source_type": "team_distillation",
+      "label": "场景分类与调度 taxonomy",
+      "url": "",
+      "applies_to": [
+        "scene_taxonomy",
+        "director_scene_affinity",
+        "committee_handoff_rules"
+      ],
+      "priority": 2,
+      "notes": "用于统一 Hope 运行时的 scene_type 命名，支撑分派、切段和 handoff。"
+    },
+    {
+      "source_id": "team_distillation_repair_mapping",
+      "source_type": "team_distillation",
+      "label": "失败模式到修复模板映射",
+      "url": "",
+      "applies_to": [
+        "failure_pattern_library",
+        "prompt_templates"
+      ],
+      "priority": 2,
+      "notes": "用于把 validator 失败模式和 repair pass 模板显式对齐，减少 repair 阶段的漂移。"
     }
   ]
 }

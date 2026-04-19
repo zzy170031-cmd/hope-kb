@@ -49,6 +49,14 @@
   },
   {
     "machine_id": "import_07",
+    "file": "seed/v0.1/scene_taxonomy.json",
+    "json_path": "$",
+    "table": "scene_taxonomy",
+    "record_count_key": "scene_taxonomy",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_08",
     "file": "seed/v0.1/committee_templates.json",
     "json_path": "$",
     "table": "committee_template",
@@ -56,7 +64,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_08",
+    "machine_id": "import_09",
     "file": "seed/v0.1/committee_handoff_rules.json",
     "json_path": "$",
     "table": "committee_handoff_rule",
@@ -64,7 +72,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_09",
+    "machine_id": "import_10",
     "file": "seed/v0.1/committee_style_merge_rules.json",
     "json_path": "$",
     "table": "committee_style_merge_rule",
@@ -72,7 +80,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_10",
+    "machine_id": "import_11",
     "file": "seed/v0.1/story_structure_templates.json",
     "json_path": "$",
     "table": "story_structure_template",
@@ -80,7 +88,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_11",
+    "machine_id": "import_12",
     "file": "seed/v0.1/manga_structure_rules.json",
     "json_path": "$",
     "table": "manga_structure_rule",
@@ -88,7 +96,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_12",
+    "machine_id": "import_13",
     "file": "seed/v0.1/character_arc_patterns.json",
     "json_path": "$",
     "table": "character_arc_pattern",
@@ -96,7 +104,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_13",
+    "machine_id": "import_14",
     "file": "seed/v0.1/dialogue_style_rules.json",
     "json_path": "$",
     "table": "dialogue_style_rule",
@@ -104,7 +112,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_14",
+    "machine_id": "import_15",
     "file": "seed/v0.1/vocabulary.json",
     "json_path": "visual_language_terms",
     "table": "visual_language_term",
@@ -112,7 +120,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_15",
+    "machine_id": "import_16",
     "file": "seed/v0.1/vocabulary.json",
     "json_path": "camera_terms",
     "table": "camera_term",
@@ -120,7 +128,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_16",
+    "machine_id": "import_17",
     "file": "seed/v0.1/vocabulary.json",
     "json_path": "continuity_rules",
     "table": "continuity_rule",
@@ -128,7 +136,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_17",
+    "machine_id": "import_18",
     "file": "seed/v0.1/transition_vocabulary.json",
     "json_path": "$",
     "table": "transition_term",
@@ -136,7 +144,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_18",
+    "machine_id": "import_19",
     "file": "seed/v0.1/prompt_templates.json",
     "json_path": "$",
     "table": "prompt_template",
@@ -144,7 +152,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_19",
+    "machine_id": "import_20",
     "file": "seed/v0.1/export_templates.json",
     "json_path": "$",
     "table": "export_template",
@@ -152,7 +160,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_20",
+    "machine_id": "import_21",
     "file": "seed/v0.1/classic_case_examples.json",
     "json_path": "$",
     "table": "classic_case_example",
@@ -160,7 +168,7 @@
     "primary_key_field": "machine_id"
   },
   {
-    "machine_id": "import_21",
+    "machine_id": "import_22",
     "file": "seed/v0.1/failure_pattern_library.json",
     "json_path": "$",
     "table": "failure_pattern",

@@ -18,23 +18,24 @@
 2. 导演规则层
 3. 导演公开锚点层
 4. 导演场景适配层
-5. 委员会角色层
-6. 委员会模板层
-7. handoff 规则层
-8. 风格合并规则层
-9. 视觉语言术语层
-10. 中文摄影术语层
-11. 连续性规则层
-12. 转场术语层
-13. 故事结构模板层
-14. 漫剧结构规则层
-15. 角色弧线模式层
-16. 对白风格规则层
-17. Prompt 模板层
-18. 导出模板层
-19. 经典案例示例层
-20. 失败模式库
-21. 导入映射层
+5. 场景分类层
+6. 委员会角色层
+7. 委员会模板层
+8. handoff 规则层
+9. 风格合并规则层
+10. 视觉语言术语层
+11. 中文摄影术语层
+12. 连续性规则层
+13. 转场术语层
+14. 故事结构模板层
+15. 漫剧结构规则层
+16. 角色弧线模式层
+17. 对白风格规则层
+18. Prompt 模板层
+19. 导出模板层
+20. 经典案例示例层
+21. 失败模式库
+22. 导入映射层
 
 当前 `seed/v0.1/manifest.json` 中的记录数为：
 
@@ -44,6 +45,7 @@
 - 7 条 `director_reference_sets`
 - 7 条 `director_scene_affinity`
 - 35 条 `director_cut_samples`
+- 12 条 `scene_taxonomy`
 - 4 条 `committee_templates`
 - 12 条 `committee_handoff_rules`
 - 7 条 `committee_style_merge_rules`
@@ -280,7 +282,40 @@
 
 ---
 
-## 6. 委员会与控制层
+## 6. 场景分类层
+
+当前已经新增 `scene_taxonomy`，把运行时常用的场景类别从散落的字符串约束收成一层正式知识。
+
+首批已写入 12 类：
+
+- 战斗开场
+- 战斗高潮
+- 追逐推进
+- 群像集结
+- 爆点揭示
+- 关系停顿
+- 微表演对白
+- 梦境切层
+- 悬疑线索
+- 片尾收束
+- 情绪景观
+- 转场空镜
+
+每条都包含：
+
+- `definition`
+- `default_duration_band`
+- `typical_committee_roles`
+- `default_handoff_out`
+- `risk_flags`
+- `continuity_priority`
+- `prompt_focus`
+
+这一层的作用是把 rule-based assignment、RenderSegment 规划和 handoff 规则都锚定到统一 taxonomy 上，减少不同模块各自发明场景名导致的漂移。
+
+---
+
+## 7. 委员会与控制层
 
 ### 角色定义
 
@@ -353,7 +388,7 @@
 
 ---
 
-## 7. 视觉语言与摄影术语
+## 8. 视觉语言与摄影术语
 
 ### 视觉语言术语 20 条
 
@@ -410,7 +445,7 @@
 
 ---
 
-## 8. 连续性、转场、结构、对白
+## 9. 连续性、转场、结构、对白
 
 ### 连续性规则
 
@@ -481,7 +516,7 @@
 
 ---
 
-## 9. Prompt 模板层
+## 10. Prompt 模板层
 
 当前已经不是 5 条占位模板，而是 16 条真正覆盖链路和修复回合的模板：
 
@@ -520,9 +555,30 @@
 - hard_locks 修复
 - continuity 修复
 
+并且现在 Repair 类模板已经和失败模式库建立了显式映射：
+
+- `Repair Pass`
+  - 对应：
+    - 风格漂移
+    - 角色不一致
+    - 连续性断裂
+    - RenderSegment 跨场景
+    - 导演交接缺口
+    - 中文 Prompt 表达失真
+    - 导出 contract 漂移
+- `Repair Hard Locks`
+  - 对应：
+    - 风格漂移
+    - 角色不一致
+    - Hard Locks 丢失
+- `Repair Continuity`
+  - 对应：
+    - 连续性断裂
+    - 导演交接缺口
+
 ---
 
-## 10. 导出模板层
+## 11. 导出模板层
 
 当前已写入 17 条导出模板，已经覆盖正式方案里的全部 Excel sheet：
 
@@ -556,7 +612,7 @@
 
 ---
 
-## 11. 经典案例示例
+## 12. 经典案例示例
 
 当前已写入 12 条 `classic_case_examples`。
 
@@ -593,7 +649,7 @@
 - `source_type`
 - `source_notes`
 
-## 12. 失败模式库
+## 13. 失败模式库
 
 当前已写入 8 条系统级失败模式，覆盖：
 
@@ -614,10 +670,14 @@
 - `repair_strategy`
 - `affected_layers`
 - `validator_hint`
+- `repair_template_ids`
+- `repair_priority`
+- `repair_scope`
+- `suggested_followup_validator`
 
 这意味着 `hope-kb` 现在不仅描述“正确应该是什么”，也开始描述“错误通常长什么样、该怎么修”。
 
-## 13. 导入映射层
+## 14. 导入映射层
 
 当前已写入 `import_map.json`，用于把 seed 文件正式映射到 SQLite 表。
 
@@ -642,19 +702,19 @@
 
 ---
 
-## 14. 当前还没补满的地方
+## 15. 当前还没补满的地方
 
 虽然现在已经不是空壳，而且这一轮已经把最关键的补深层做进去了，但如果要继续往“更厚、更强”补，优先级最高的现在变成：
 
-1. 让 7 位导演都从 3 条代表 cut 继续扩到 5 条左右
-2. 把 `director_scene_affinity` 再细化成更完整的 scene taxonomy，并补不适配说明
-3. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 scene/emotion/transition 的细粒度变体
-4. 把 `classic_case_examples` 继续扩成 benchmark + handoff + 导演经典语汇三层样例库
-5. 将 `v0.1` seed 逐步补到可直接导入 SQLite 的稳定脚本链，并补完整导入校验
+1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 scene/emotion/transition 的细粒度变体
+2. 把 `classic_case_examples` 继续扩成 benchmark + handoff + 导演经典语汇三层样例库
+3. 将 `v0.1` seed 逐步补到可直接导入 SQLite 的稳定脚本链，并补完整导入校验
+4. 给更多规则层补齐 `source_notes / confidence_level / last_reviewed_at`
+5. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
 
 ---
 
-## 15. 审阅结论
+## 16. 审阅结论
 
 如果只问一个问题：
 
