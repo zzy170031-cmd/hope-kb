@@ -14,3 +14,10 @@ It holds:
 - export templates
 
 The app consumes a validated read-only snapshot of this repo.
+
+## Primary docs
+
+- `docs/kb-overview.md`
+- `docs/kb-freeze-contract.md`
+- `docs/kb-seed-checklist-v0.1.md`
+- `docs/kb-source-policy-v0.1.md`

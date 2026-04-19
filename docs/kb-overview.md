@@ -17,3 +17,8 @@
 
 The app does not edit this repo at runtime.
 It consumes validated read-only snapshots bundled with releases.
+
+## Build-first references
+
+- `kb-seed-checklist-v0.1.md`
+- `kb-source-policy-v0.1.md`
