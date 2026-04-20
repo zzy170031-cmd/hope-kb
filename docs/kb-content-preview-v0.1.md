@@ -665,7 +665,7 @@
 - `source_type`
 - `source_notes`
 
-同时，`validate-seed-bundle.ps1` 现在会把 `handoff / export / prompt` 这三类 hope 主线程支持流当成硬门槛，要求 failure pattern、degraded input、failure_repair 案例和 export sheet contract 彼此对齐。
+同时，`validate-seed-bundle.ps1` 现在会把 `handoff / export / prompt` 这三类 hope 主线程支持流当成硬门槛，要求 failure pattern、degraded input、failure_repair 案例、repair template 输入/输出 contract 和 export sheet contract 彼此对齐。
 
 ## 13. 失败模式库
 

@@ -658,10 +658,16 @@ function Assert-ValidHopeSupportFlowContracts {
   $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
   $classicCases = @(Load-SeedJson -RelativePath "seed/v0.1/classic_case_examples.json" -Root $Root | ForEach-Object { $_ })
   $exportTemplates = @(Load-SeedJson -RelativePath "seed/v0.1/export_templates.json" -Root $Root | ForEach-Object { $_ })
+  $promptTemplates = @(Load-SeedJson -RelativePath "seed/v0.1/prompt_templates.json" -Root $Root | ForEach-Object { $_ })
 
   $failureByCode = @{}
   foreach ($failure in $failurePatterns) {
     $failureByCode[[string]$failure.failure_code] = $failure
+  }
+
+  $promptTemplatesById = @{}
+  foreach ($template in $promptTemplates) {
+    $promptTemplatesById[[string]$template.machine_id] = $template
   }
 
   $degradedByFailureCode = @{}
@@ -699,13 +705,26 @@ function Assert-ValidHopeSupportFlowContracts {
     )
   }
 
+  $requiredSheetCoreFields = @{
+    "HandoffZones" = @("buffer_cut_ids", "continuity_notes")
+    "PromptPackage" = @("layout_prompt", "render_prompt")
+    "Validation" = @("validator_name", "is_blocking")
+  }
+
   foreach ($sheetName in $requiredSheetContracts.Keys) {
     if (!$exportTemplatesBySheet.ContainsKey($sheetName)) {
       throw "Missing support-facing export sheet '$sheetName' in export_templates"
     }
 
-    $columnSources = @()
     $templateProperties = @($exportTemplatesBySheet[$sheetName].PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+    $coreFields = @($templateProperties[4].Value | ForEach-Object { [string]$_ })
+    foreach ($requiredField in $requiredSheetCoreFields[$sheetName]) {
+      if ($coreFields -notcontains [string]$requiredField) {
+        throw "Support-facing export sheet '$sheetName' is missing core field '$requiredField'"
+      }
+    }
+
+    $columnSources = @()
     $columnDefinitions = @($templateProperties[5].Value | ForEach-Object { $_ })
     foreach ($column in $columnDefinitions) {
       $columnProperties = @($column.PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
@@ -730,6 +749,14 @@ function Assert-ValidHopeSupportFlowContracts {
       required_layers = @("project_handoff_zones", "storyboard_cuts")
       required_validators = @("Handoff Coverage", "Continuity Validator")
       case_keywords = @("handoff", "transition bridge", "buffer cut")
+      required_templates = @(
+        @{
+          machine_id = "prompt_18"
+          stage = "repair_handoff_boundaries"
+          expected_output_schema = "HandoffZoneRepair"
+          required_inputs = @("failed_handoffs", "adjacent_cuts", "committee_handoff_rules", "current_handoff_zones")
+        }
+      )
     },
     @{
       failure_code = "export_contract_drift"
@@ -738,6 +765,14 @@ function Assert-ValidHopeSupportFlowContracts {
       required_layers = @("export_templates", "validators")
       required_validators = @("Export contract check")
       case_keywords = @("PromptPackage", "sheet", "export")
+      required_templates = @(
+        @{
+          machine_id = "prompt_17"
+          stage = "repair_export_contract"
+          expected_output_schema = "ExportContractRepair"
+          required_inputs = @("validation_findings", "export_templates", "shared_contract_rows", "current_exports")
+        }
+      )
     },
     @{
       failure_code = "chinese_prompt_noise"
@@ -746,6 +781,14 @@ function Assert-ValidHopeSupportFlowContracts {
       required_layers = @("prompt_packages", "export_templates")
       required_validators = @("Prompt quality review / Export sanity check")
       case_keywords = @("中文", "prompt", "token")
+      required_templates = @(
+        @{
+          machine_id = "prompt_09"
+          stage = "repair_pass"
+          expected_output_schema = "SameAsTarget"
+          required_inputs = @("validator_failures", "current_payload", "target_schema")
+        }
+      )
     }
   )
 
@@ -757,6 +800,7 @@ function Assert-ValidHopeSupportFlowContracts {
 
     $failure = $failureByCode[$failureCode]
     $affectedLayers = @($failure.affected_layers | ForEach-Object { [string]$_ })
+    $repairTemplateIds = @($failure.repair_template_ids | ForEach-Object { [string]$_ })
     foreach ($requiredLayer in @($contract.required_layers)) {
       if ($affectedLayers -notcontains [string]$requiredLayer) {
         throw "Support-facing failure '$failureCode' is missing affected_layer '$requiredLayer'"
@@ -771,6 +815,33 @@ function Assert-ValidHopeSupportFlowContracts {
     foreach ($requiredValidator in @($contract.required_validators)) {
       if ($allowedValidators -notcontains [string]$requiredValidator) {
         throw "Support-facing failure '$failureCode' is missing validator '$requiredValidator'"
+      }
+    }
+
+    foreach ($templateContract in @($contract.required_templates)) {
+      $templateId = [string]$templateContract.machine_id
+      if ($repairTemplateIds -notcontains $templateId) {
+        throw "Support-facing failure '$failureCode' is missing required repair template '$templateId'"
+      }
+
+      if (!$promptTemplatesById.ContainsKey($templateId)) {
+        throw "Unknown support-facing repair template '$templateId'"
+      }
+
+      $template = $promptTemplatesById[$templateId]
+      if ([string]$template.stage -ne [string]$templateContract.stage) {
+        throw "Support-facing repair template '$templateId' has unexpected stage '$([string]$template.stage)'"
+      }
+
+      if ([string]$template.expected_output_schema -ne [string]$templateContract.expected_output_schema) {
+        throw "Support-facing repair template '$templateId' has unexpected output schema '$([string]$template.expected_output_schema)'"
+      }
+
+      $templateInputs = @($template.required_inputs | ForEach-Object { [string]$_ })
+      foreach ($requiredInput in @($templateContract.required_inputs)) {
+        if ($templateInputs -notcontains [string]$requiredInput) {
+          throw "Support-facing repair template '$templateId' is missing required input '$requiredInput'"
+        }
       }
     }
 
