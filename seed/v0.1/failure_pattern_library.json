@@ -11,7 +11,7 @@
       "不同 target_model_family 的渲染顺序不一致"
     ],
     "detection_hint": "检查 hard_locks 字面量、director signature 字段和 PromptPackage 中相邻 cut 的风格词一致性。",
-    "repair_strategy": "优先重新注入 hard_locks；必要时回退到 chief + scene 的稳定组合后再叠加局部导演偏好。",
+    "repair_strategy": "优先重新注入 hard_locks；必要时回退到 chief + scene 的稳定组合后再叠加局部导演偏好，但不重写 layout_prompt 或无关叙事结构（layout_prompt unchanged）。",
     "affected_layers": ["project_style_lock", "storyboard_cuts", "prompt_packages", "validators"],
     "validator_hint": "Style Unity Validator",
     "repair_template_ids": ["prompt_09", "prompt_15"],
@@ -35,7 +35,7 @@
       "Scene/Action 层误覆盖角色层字段"
     ],
     "detection_hint": "检查 Characters sheet、hard_locks 和 render_prompt 中是否稳定包含同一组角色 tokens。",
-    "repair_strategy": "回到角色表补完整 appearance_tokens，并对受影响 cut 执行 Hard Locks Repair。",
+    "repair_strategy": "回到角色表补完整 appearance_tokens，并对受影响 cut 执行 Hard Locks Repair，不改无关动作节拍与镜头轴线（camera_axis / action_beats unchanged）。",
     "affected_layers": ["project_characters", "project_style_lock", "storyboard_cuts", "prompt_packages"],
     "validator_hint": "Style Unity Validator",
     "repair_template_ids": ["prompt_09", "prompt_15"],
@@ -59,7 +59,7 @@
       "renderer 按 target 重排了动作描述顺序"
     ],
     "detection_hint": "检查 continuity_refs、camera_work、transition_in/out 与 NarrativeScene 边界。",
-    "repair_strategy": "先修 continuity_refs，再视情况重写最少量 cut 或补 buffer cut。",
+    "repair_strategy": "先修 continuity_refs，再视情况重写最少量 cut 或补 buffer cut，不扩散到整段其余 cut 或 segment_plan（segment_plan unchanged）。",
     "affected_layers": ["storyboard_cuts", "project_handoff_zones", "validators", "export_templates"],
     "validator_hint": "Continuity Validator",
     "repair_template_ids": ["prompt_09", "prompt_16"],
@@ -82,7 +82,7 @@
       "re-segment 逻辑没有回收 scene 边界约束"
     ],
     "detection_hint": "比较 render_segment_id 与 narrative_scene_id 的聚合范围，检查是否一段对应多个场景。",
-    "repair_strategy": "强制重新规划 RenderSegment，先按 NarrativeScene 边界切，再做时长微调。",
+    "repair_strategy": "强制重新规划 RenderSegment，先按 NarrativeScene 边界切，再做时长微调，不改 NarrativeScene 内部 beat 排列（scene_beats unchanged）。",
     "affected_layers": ["render_segments", "storyboard_cuts", "prompt_packages"],
     "validator_hint": "Segment Duration Validator / Boundary Guard",
     "repair_template_ids": ["prompt_09"],
@@ -106,7 +106,7 @@
       "不同 Track 使用了不同共享类型源"
     ],
     "detection_hint": "逐 cut 比较 hard_locks 字面量是否一致，特别检查 PromptPackage 导出列。",
-    "repair_strategy": "优先执行 Repair Hard Locks 模板，只修 hard_locks 部分，不重写其它内容。",
+    "repair_strategy": "优先执行 Repair Hard Locks 模板，只修 hard_locks 部分，不重写 layout_prompt、storyboard 或其它内容。",
     "affected_layers": ["project_style_lock", "prompt_templates", "prompt_packages"],
     "validator_hint": "Hard Lock Injector Guard",
     "repair_template_ids": ["prompt_15"],
@@ -130,7 +130,7 @@
       "段边界切得过紧，没有给 buffer 留空间"
     ],
     "detection_hint": "比较相邻 cut 的 assigned director 与 project_handoff_zones 是否完整覆盖。",
-    "repair_strategy": "先补 project_handoff_zones，再按规则生成 buffer cut，必要时重排相邻两个 cut。",
+    "repair_strategy": "先补 project_handoff_zones，再按规则生成 buffer cut，必要时重排相邻两个 cut，不跨 NarrativeScene 边界，也不回改 chief / scene 基线。",
     "affected_layers": ["project_director_assignments", "project_handoff_zones", "storyboard_cuts"],
     "validator_hint": "Handoff Coverage",
     "repair_template_ids": ["prompt_09", "prompt_16", "prompt_18"],
@@ -154,7 +154,7 @@
       "中英文混写或术语表 aliases 泄露到正式输出"
     ],
     "detection_hint": "抽查 PromptPackage 中 layout/render prompt 是否像正常中文创作指令，而不是 JSON 注释。",
-    "repair_strategy": "回到 PromptRenderer 分层，先稳定 layout，再用 render 叠加，不直接拼字段标签。",
+    "repair_strategy": "回到 PromptRenderer 分层，先稳定 layout，再用 render 叠加，不直接拼字段标签，也不改人物关系、景观时序或情绪推进（relationship_timeline unchanged）。",
     "affected_layers": ["prompt_templates", "prompt_packages", "export_templates"],
     "validator_hint": "Prompt quality review / Export sanity check",
     "repair_template_ids": ["prompt_09"],
@@ -178,7 +178,7 @@
       "Validation 列由 exporter 自己重拼"
     ],
     "detection_hint": "逐项对照 PromptPackage、Cuts、Validation 三类核心导出，检查字段名和来源是否同源。",
-    "repair_strategy": "回到 export_templates 和共享类型源，对三类导出统一做列映射，不允许 exporter 本地特判。",
+    "repair_strategy": "回到 export_templates 和共享类型源，对三类导出统一做列映射，不允许 exporter 本地特判，也不反写 narrative scene 内容。",
     "affected_layers": ["export_templates", "exports", "validators"],
     "validator_hint": "Export contract check",
     "repair_template_ids": ["prompt_09", "prompt_17"],

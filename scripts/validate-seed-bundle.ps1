@@ -459,6 +459,117 @@ function Assert-ValidDegradedInputExamples {
   }
 }
 
+function Test-ContainsAnyPhrase {
+  param(
+    [string]$Text,
+    [string[]]$Phrases
+  )
+
+  foreach ($phrase in $Phrases) {
+    if ([string]::IsNullOrWhiteSpace([string]$phrase)) {
+      continue
+    }
+
+    if ($Text.Contains([string]$phrase)) {
+      return $true
+    }
+  }
+
+  return $false
+}
+
+function Assert-ValidNegativeBoundaryRepairScopes {
+  param(
+    [string]$Root
+  )
+
+  $failurePatterns = @(Load-SeedJson -RelativePath "seed/v0.1/failure_pattern_library.json" -Root $Root | ForEach-Object { $_ })
+  $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
+
+  $failureByCode = @{}
+  foreach ($failure in $failurePatterns) {
+    $failureByCode[[string]$failure.failure_code] = $failure
+  }
+
+  $scopeContracts = @{
+    "render_prompt_only" = @{
+      pass_any = @("render_prompt", "hard_locks")
+      pass_negative_any = @("layout_prompt", "narrative scene")
+      strategy_any = @("hard_locks", "render_prompt")
+      strategy_negative_any = @("layout_prompt", "storyboard")
+    }
+    "character_tokens_and_render_prompt" = @{
+      pass_any = @("appearance_tokens", "render_prompt")
+      pass_negative_any = @("camera_axis", "action_beats")
+      strategy_any = @("appearance_tokens", "Hard Locks Repair")
+      strategy_negative_any = @("camera_axis", "action_beats")
+    }
+    "continuity_fields_and_adjacent_cuts" = @{
+      pass_any = @("continuity", "cuts", "bridge")
+      pass_negative_any = @("segment_plan", "cut")
+      strategy_any = @("continuity_refs", "buffer cut", "adjacent")
+      strategy_negative_any = @("segment_plan", "cut")
+    }
+    "segment_plan" = @{
+      pass_any = @("NarrativeScene", "segment")
+      pass_negative_any = @("scene_beats", "NarrativeScene")
+      strategy_any = @("RenderSegment", "NarrativeScene", "beat")
+      strategy_negative_any = @("scene_beats", "NarrativeScene")
+    }
+    "handoff_zone_and_buffer_cuts" = @{
+      pass_any = @("handoff zone", "buffer cut")
+      pass_negative_any = @("NarrativeScene", "chief / scene")
+      strategy_any = @("project_handoff_zones", "buffer cut")
+      strategy_negative_any = @("NarrativeScene", "chief / scene")
+    }
+    "prompt_rendering_layer" = @{
+      pass_any = @("prompt", "layout", "render")
+      pass_negative_any = @("relationship_timeline", "layout", "render")
+      strategy_any = @("PromptRenderer", "layout", "render")
+      strategy_negative_any = @("relationship_timeline", "PromptRenderer")
+    }
+    "export_mapping" = @{
+      pass_any = @("contract", "exporter", "narrative scene")
+      pass_negative_any = @("narrative scene", "contract")
+      strategy_any = @("export_templates", "exporter", "contract")
+      strategy_negative_any = @("narrative scene", "contract")
+    }
+  }
+
+  foreach ($example in $degradedInputExamples) {
+    $failureCode = [string]$example.failure_code
+    $repairScope = [string]$example.expected_repair_scope
+
+    if (!$scopeContracts.ContainsKey($repairScope)) {
+      throw "Missing negative-boundary contract for repair_scope '$repairScope' in degraded_input_examples: $($example.machine_id)"
+    }
+
+    if (!$failureByCode.ContainsKey($failureCode)) {
+      throw "Unknown failure_code '$failureCode' while checking negative-boundary contracts"
+    }
+
+    $contract = $scopeContracts[$repairScope]
+    $passCondition = [string]$example.pass_condition
+    $repairStrategy = [string]$failureByCode[$failureCode].repair_strategy
+
+    if (-not (Test-ContainsAnyPhrase -Text $passCondition -Phrases $contract.pass_any)) {
+      throw "Negative-boundary pass_condition for '$($example.machine_id)' does not mention the expected repair surface for scope '$repairScope'"
+    }
+
+    if (-not (Test-ContainsAnyPhrase -Text $passCondition -Phrases $contract.pass_negative_any)) {
+      throw "Negative-boundary pass_condition for '$($example.machine_id)' does not mention the expected no-overreach boundary for scope '$repairScope'"
+    }
+
+    if (-not (Test-ContainsAnyPhrase -Text $repairStrategy -Phrases $contract.strategy_any)) {
+      throw "repair_strategy for failure_code '$failureCode' does not mention the expected repair surface for scope '$repairScope'"
+    }
+
+    if (-not (Test-ContainsAnyPhrase -Text $repairStrategy -Phrases $contract.strategy_negative_any)) {
+      throw "repair_strategy for failure_code '$failureCode' does not mention the expected no-overreach boundary for scope '$repairScope'"
+    }
+  }
+}
+
 function Test-PlaceholderLikeText {
   param(
     [string]$Value
@@ -1082,6 +1193,7 @@ Assert-ValidRepairMappings -Root $RepoRoot
 Assert-ValidCommitteeMergeRules -Root $RepoRoot
 Assert-MinimumDegradedInputCoverage -Root $RepoRoot
 Assert-ValidDegradedInputExamples -Root $RepoRoot
+Assert-ValidNegativeBoundaryRepairScopes -Root $RepoRoot
 Assert-ValidClassicCaseExamples -Root $RepoRoot
 Assert-ValidHopeSupportFlowContracts -Root $RepoRoot
 Assert-ValidCommitteeTopology -Root $RepoRoot

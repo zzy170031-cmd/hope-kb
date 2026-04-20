@@ -2,7 +2,7 @@
     "snapshot_version":  "v0.1",
     "snapshot_name":  "hope-kb-minimum-benchmark-pack",
     "content_hash_algo":  "sha256",
-    "content_hash":  "bundle-sha256:a6304fb5d0897eb01f63440a02563b18eb2529fab4849aad07fda126cef92b36",
+    "content_hash":  "bundle-sha256:288ec8d15af5b38ce31d6893cab8b30630ff9c73836b66f1c8b8386967e1403f",
     "seed_import_format":  "hope-kb-seed-bundle-v0.1",
     "imported_at":  "2026-04-19",
     "primary_key":  "machine_id",
