@@ -34,7 +34,9 @@
       "local_sheet_aliases",
       "runtime_inferred_columns",
       "stale_prompt_projection",
-      "validation_field_drop"
+      "validation_field_drop",
+      "runtime_bootstrap_missing_validation_sheet",
+      "runtime_bootstrap_missing_gate_allowlist"
     ],
     "handoff_note": "主线程启动 runtime consumer 前先核对 snapshot_meta.content_hash 与 export_template / runtime_consume_contract 是否同版本，不允许本地猜 sheet 或列定义。",
     "source_type": "team_distillation",
@@ -72,7 +74,9 @@
       "local_cut_reorder",
       "continuity_ref_drop",
       "scene_alias_passthrough",
-      "segment_cross_scene_reprojection"
+      "segment_cross_scene_reprojection",
+      "segment_projection_required_column_drop",
+      "runtime_consumer_continuity_gate_drop"
     ],
     "handoff_note": "主线程消费 RenderSegments / Cuts 时只能沿 snapshot taxonomy 和 export sheet contract 投影，不允许本地重排 cut 或跳过 alias 归并。",
     "source_type": "team_distillation",
@@ -96,6 +100,9 @@
       "Cuts"
     ],
     "required_column_sources": [
+      "project_handoff_zones.from_role + to_role",
+      "project_handoff_zones.from_director_id",
+      "project_handoff_zones.to_director_id",
       "project_handoff_zones.transition_type",
       "project_handoff_zones.buffer_cut_ids",
       "project_handoff_zones.continuity_notes",
@@ -109,7 +116,8 @@
       "handoff_pair_only_projection",
       "buffer_cut_strip",
       "continuity_note_drop",
-      "chief_scene_boundary_rewrite"
+      "chief_scene_boundary_rewrite",
+      "handoff_payload_integrity_drop"
     ],
     "handoff_note": "主线程消费 handoff payload 时必须把 transition_type / buffer_cut_ids / continuity_notes 一起带出，不允许压缩成只有 pair 标签的伪 contract。",
     "source_type": "team_distillation",
@@ -137,6 +145,7 @@
       "prompt_packages.layout_prompt",
       "prompt_packages.render_prompt",
       "prompt_packages.negative_prompt",
+      "prompt_packages.target_model_family",
       "storyboard_cuts.cut_number"
     ],
     "required_validator_gates": [
@@ -147,7 +156,8 @@
       "consumer_payload_alias_leak",
       "validation_message_prompt_leak",
       "stale_prompt_projection",
-      "negative_prompt_strip"
+      "negative_prompt_strip",
+      "local_negative_default_injection"
     ],
     "handoff_note": "主线程消费 PromptPackage 时必须直接跟随 snapshot contract，不允许把字段 alias、Validation message 或旧 PromptPackage schema 混入 render payload。",
     "source_type": "team_distillation",
@@ -172,6 +182,8 @@
     ],
     "required_column_sources": [
       "validation_report.validator_name",
+      "validation_report.status",
+      "validation_report.severity",
       "validation_report.message",
       "validation_report.related_cut_or_segment",
       "validation_report.is_blocking",

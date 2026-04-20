@@ -468,9 +468,16 @@ function Assert-MinimumSupportFacingDegradedRegressions {
 
   $requiredRegressionModes = @{
     "continuity_break" = @("adjacent_cut_axis_flip", "exporter_continuity_ref_drop", "runtime_consumer_cut_order_drift")
-    "handoff_gap" = @("director_switch_without_buffer", "runtime_consumer_handoff_zone_drop", "exporter_handoff_pair_only_projection")
-    "chinese_prompt_noise" = @("field_label_leak_into_prompt", "consumer_payload_alias_leak", "validation_message_leak_into_render_prompt")
-    "export_contract_drift" = @("exporter_local_column_invention", "runtime_consumer_stale_prompt_projection", "validation_sheet_stale_projection")
+    "handoff_gap" = @("director_switch_without_buffer", "runtime_consumer_handoff_zone_drop", "exporter_handoff_pair_only_projection", "handoff_payload_integrity_drop")
+    "chinese_prompt_noise" = @("field_label_leak_into_prompt", "consumer_payload_alias_leak", "validation_message_leak_into_render_prompt", "local_negative_default_injection")
+    "export_contract_drift" = @("exporter_local_column_invention", "runtime_consumer_stale_prompt_projection", "validation_sheet_stale_projection", "runtime_bootstrap_missing_validation_sheet", "segment_projection_required_column_drop", "non_blocking_default_flip")
+  }
+
+  $requiredRegressionMinimums = @{
+    "continuity_break" = 3
+    "handoff_gap" = 4
+    "chinese_prompt_noise" = 4
+    "export_contract_drift" = 6
   }
 
   $examplesByFailureCode = @{}
@@ -488,8 +495,8 @@ function Assert-MinimumSupportFacingDegradedRegressions {
     }
 
     $examples = @($examplesByFailureCode[$failureCode])
-    if ($examples.Count -lt 3) {
-      throw "Support-facing degraded regressions for '$failureCode' must include at least 3 examples"
+    if ($examples.Count -lt [int]$requiredRegressionMinimums[$failureCode]) {
+      throw "Support-facing degraded regressions for '$failureCode' must include at least $($requiredRegressionMinimums[$failureCode]) examples"
     }
 
     $seenModes = @{}
@@ -1267,33 +1274,33 @@ function Assert-ValidRuntimeConsumeContracts {
       required_sheets = @("RenderSegments", "HandoffZones", "Cuts", "PromptPackage", "Validation")
       required_sources = @("render_segments.narrative_scene_id", "project_handoff_zones.transition_type", "storyboard_cuts.continuity_refs", "prompt_packages.negative_prompt", "validation_report.message")
       required_validators = @("Export contract check", "Continuity Validator", "Handoff Coverage", "Prompt quality review / Export sanity check")
-      required_overrides = @("local_sheet_aliases", "runtime_inferred_columns", "stale_prompt_projection", "validation_field_drop")
+      required_overrides = @("local_sheet_aliases", "runtime_inferred_columns", "stale_prompt_projection", "validation_field_drop", "runtime_bootstrap_missing_validation_sheet", "runtime_bootstrap_missing_gate_allowlist")
     }
     "segment_and_cut_projection" = @{
       required_tables = @("scene_taxonomy", "scene_taxonomy_alias", "committee_handoff_rule", "export_template", "runtime_consume_contract")
       required_sheets = @("RenderSegments", "Cuts")
       required_sources = @("render_segments.segment_number", "render_segments.narrative_scene_id", "storyboard_cuts.render_segment_id", "storyboard_cuts.transition_out", "storyboard_cuts.continuity_refs")
       required_validators = @("Continuity Validator", "Export contract check")
-      required_overrides = @("local_cut_reorder", "continuity_ref_drop", "scene_alias_passthrough", "segment_cross_scene_reprojection")
+      required_overrides = @("local_cut_reorder", "continuity_ref_drop", "scene_alias_passthrough", "segment_cross_scene_reprojection", "segment_projection_required_column_drop", "runtime_consumer_continuity_gate_drop")
     }
     "handoff_projection" = @{
       required_tables = @("committee_handoff_rule", "failure_pattern", "degraded_input_example", "export_template", "runtime_consume_contract")
       required_sheets = @("HandoffZones", "Cuts")
-      required_sources = @("project_handoff_zones.transition_type", "project_handoff_zones.buffer_cut_ids", "project_handoff_zones.continuity_notes", "storyboard_cuts.transition_out")
+      required_sources = @("project_handoff_zones.from_role + to_role", "project_handoff_zones.from_director_id", "project_handoff_zones.to_director_id", "project_handoff_zones.transition_type", "project_handoff_zones.buffer_cut_ids", "project_handoff_zones.continuity_notes", "storyboard_cuts.transition_out")
       required_validators = @("Handoff Coverage", "Continuity Validator")
-      required_overrides = @("handoff_pair_only_projection", "buffer_cut_strip", "continuity_note_drop", "chief_scene_boundary_rewrite")
+      required_overrides = @("handoff_pair_only_projection", "buffer_cut_strip", "continuity_note_drop", "chief_scene_boundary_rewrite", "handoff_payload_integrity_drop")
     }
     "prompt_package_projection" = @{
       required_tables = @("prompt_template", "failure_pattern", "degraded_input_example", "export_template", "runtime_consume_contract")
       required_sheets = @("PromptPackage", "Cuts")
-      required_sources = @("prompt_packages.cut_number", "prompt_packages.layout_prompt", "prompt_packages.render_prompt", "prompt_packages.negative_prompt", "storyboard_cuts.cut_number")
+      required_sources = @("prompt_packages.cut_number", "prompt_packages.layout_prompt", "prompt_packages.render_prompt", "prompt_packages.negative_prompt", "prompt_packages.target_model_family", "storyboard_cuts.cut_number")
       required_validators = @("Prompt quality review / Export sanity check", "Export contract check")
-      required_overrides = @("consumer_payload_alias_leak", "validation_message_prompt_leak", "stale_prompt_projection", "negative_prompt_strip")
+      required_overrides = @("consumer_payload_alias_leak", "validation_message_prompt_leak", "stale_prompt_projection", "negative_prompt_strip", "local_negative_default_injection")
     }
     "validation_feedback_projection" = @{
       required_tables = @("failure_pattern", "prompt_template", "classic_case_example", "export_template", "runtime_consume_contract")
       required_sheets = @("Validation", "PromptPackage")
-      required_sources = @("validation_report.validator_name", "validation_report.message", "validation_report.related_cut_or_segment", "validation_report.is_blocking", "prompt_packages.render_segment_id")
+      required_sources = @("validation_report.validator_name", "validation_report.status", "validation_report.severity", "validation_report.message", "validation_report.related_cut_or_segment", "validation_report.is_blocking", "prompt_packages.render_segment_id")
       required_validators = @("Export contract check", "Handoff Coverage", "Continuity Validator", "Prompt quality review / Export sanity check")
       required_overrides = @("validation_field_drop", "validation_sheet_stale_projection", "non_blocking_default_flip", "message_to_prompt_projection")
     }
@@ -1400,6 +1407,113 @@ function Assert-ValidRuntimeConsumeContracts {
   foreach ($surface in $requiredSurfaceContracts.Keys) {
     if (!$seenSurfaces.ContainsKey($surface)) {
       throw "Missing runtime consume surface '$surface' in runtime_consume_contracts"
+    }
+  }
+}
+
+function Assert-MinimumRuntimeConsumeSurfaceVariants {
+  param(
+    [string]$Root
+  )
+
+  $runtimeContracts = @(Load-SeedJson -RelativePath "seed/v0.1/runtime_consume_contracts.json" -Root $Root | ForEach-Object { $_ })
+  $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
+
+  $runtimeContractsBySurface = @{}
+  foreach ($contract in $runtimeContracts) {
+    $runtimeContractsBySurface[[string]$contract.consumer_surface] = $contract
+  }
+
+  $degradedByMode = @{}
+  foreach ($example in $degradedInputExamples) {
+    $degradedByMode[[string]$example.degradation_mode] = $example
+  }
+
+  $surfaceVariantContracts = @(
+    @{
+      surface = "snapshot_bootstrap"
+      mode = "runtime_bootstrap_missing_validation_sheet"
+      failure_code = "export_contract_drift"
+      required_validators = @("Export contract check")
+      required_overrides = @("runtime_bootstrap_missing_validation_sheet", "runtime_bootstrap_missing_gate_allowlist")
+      keywords = @("Validation", "sheet", "gate")
+    },
+    @{
+      surface = "segment_and_cut_projection"
+      mode = "segment_projection_required_column_drop"
+      failure_code = "export_contract_drift"
+      required_validators = @("Export contract check")
+      required_overrides = @("segment_projection_required_column_drop", "runtime_consumer_continuity_gate_drop")
+      keywords = @("RenderSegments", "Cuts", "narrative_scene_id", "continuity_refs")
+    },
+    @{
+      surface = "handoff_projection"
+      mode = "handoff_payload_integrity_drop"
+      failure_code = "handoff_gap"
+      required_validators = @("Handoff Coverage", "Continuity Validator")
+      required_overrides = @("handoff_payload_integrity_drop")
+      keywords = @("from_role", "from_director_id", "transition_type", "continuity_notes")
+    },
+    @{
+      surface = "prompt_package_projection"
+      mode = "local_negative_default_injection"
+      failure_code = "chinese_prompt_noise"
+      required_validators = @("Prompt quality review / Export sanity check")
+      required_overrides = @("negative_prompt_strip", "local_negative_default_injection")
+      keywords = @("negative_prompt", "target_model_family", "default")
+    },
+    @{
+      surface = "validation_feedback_projection"
+      mode = "non_blocking_default_flip"
+      failure_code = "export_contract_drift"
+      required_validators = @("Export contract check")
+      required_overrides = @("non_blocking_default_flip")
+      keywords = @("is_blocking", "status", "severity", "message")
+    }
+  )
+
+  foreach ($surfaceVariant in $surfaceVariantContracts) {
+    $surface = [string]$surfaceVariant.surface
+    if (!$runtimeContractsBySurface.ContainsKey($surface)) {
+      throw "Missing runtime consume surface '$surface' while checking finer payload variants"
+    }
+
+    $contract = $runtimeContractsBySurface[$surface]
+    $blockedOverrides = @($contract.blocked_local_overrides | ForEach-Object { [string]$_ })
+    foreach ($requiredOverride in @($surfaceVariant.required_overrides)) {
+      if ($blockedOverrides -notcontains [string]$requiredOverride) {
+        throw "runtime consume surface '$surface' is missing blocked_local_override '$requiredOverride' for finer payload variants"
+      }
+    }
+
+    $mode = [string]$surfaceVariant.mode
+    if (!$degradedByMode.ContainsKey($mode)) {
+      throw "Missing degraded_input_example mode '$mode' for runtime consume surface '$surface'"
+    }
+
+    $example = $degradedByMode[$mode]
+    if ([string]$example.failure_code -ne [string]$surfaceVariant.failure_code) {
+      throw "degraded_input_example '$mode' has unexpected failure_code '$([string]$example.failure_code)' for runtime consume surface '$surface'"
+    }
+
+    $validatorTargets = @($example.validator_targets | ForEach-Object { [string]$_ })
+    foreach ($requiredValidator in @($surfaceVariant.required_validators)) {
+      if ($validatorTargets -notcontains [string]$requiredValidator) {
+        throw "degraded_input_example '$mode' is missing validator_target '$requiredValidator'"
+      }
+    }
+
+    $combinedText = @(
+      [string]$example.minimal_bad_input,
+      [string]$example.expected_failure_signal,
+      [string]$example.pass_condition,
+      [string]$example.source_notes
+    ) -join " "
+
+    foreach ($keyword in @($surfaceVariant.keywords)) {
+      if ($combinedText -notmatch [Regex]::Escape([string]$keyword)) {
+        throw "degraded_input_example '$mode' is missing keyword '$keyword' for runtime consume surface '$surface'"
+      }
     }
   }
 }
@@ -1627,6 +1741,7 @@ Assert-ValidNegativeBoundaryRepairScopes -Root $RepoRoot
 Assert-ValidClassicCaseExamples -Root $RepoRoot
 Assert-ValidHopeSupportFlowContracts -Root $RepoRoot
 Assert-ValidRuntimeConsumeContracts -Root $RepoRoot
+Assert-MinimumRuntimeConsumeSurfaceVariants -Root $RepoRoot
 Assert-ValidCommitteeTopology -Root $RepoRoot
 
 $bundleHash = $manifest.content_hash -replace '^bundle-sha256:', ''
