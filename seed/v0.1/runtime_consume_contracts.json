@@ -36,7 +36,8 @@
       "stale_prompt_projection",
       "validation_field_drop",
       "runtime_bootstrap_missing_validation_sheet",
-      "runtime_bootstrap_missing_gate_allowlist"
+      "runtime_bootstrap_missing_gate_allowlist",
+      "validation_sheet_alias_bootstrap"
     ],
     "handoff_note": "主线程启动 runtime consumer 前先核对 snapshot_meta.content_hash 与 export_template / runtime_consume_contract 是否同版本，不允许本地猜 sheet 或列定义。",
     "source_type": "team_distillation",
@@ -76,7 +77,8 @@
       "scene_alias_passthrough",
       "segment_cross_scene_reprojection",
       "segment_projection_required_column_drop",
-      "runtime_consumer_continuity_gate_drop"
+      "runtime_consumer_continuity_gate_drop",
+      "cut_render_segment_backfill_guess"
     ],
     "handoff_note": "主线程消费 RenderSegments / Cuts 时只能沿 snapshot taxonomy 和 export sheet contract 投影，不允许本地重排 cut 或跳过 alias 归并。",
     "source_type": "team_distillation",
@@ -117,7 +119,8 @@
       "buffer_cut_strip",
       "continuity_note_drop",
       "chief_scene_boundary_rewrite",
-      "handoff_payload_integrity_drop"
+      "handoff_payload_integrity_drop",
+      "empty_buffer_cut_default"
     ],
     "handoff_note": "主线程消费 handoff payload 时必须把 transition_type / buffer_cut_ids / continuity_notes 一起带出，不允许压缩成只有 pair 标签的伪 contract。",
     "source_type": "team_distillation",
@@ -157,7 +160,8 @@
       "validation_message_prompt_leak",
       "stale_prompt_projection",
       "negative_prompt_strip",
-      "local_negative_default_injection"
+      "local_negative_default_injection",
+      "blank_negative_prompt_local_fill"
     ],
     "handoff_note": "主线程消费 PromptPackage 时必须直接跟随 snapshot contract，不允许把字段 alias、Validation message 或旧 PromptPackage schema 混入 render payload。",
     "source_type": "team_distillation",
@@ -199,7 +203,8 @@
       "validation_field_drop",
       "validation_sheet_stale_projection",
       "non_blocking_default_flip",
-      "message_to_prompt_projection"
+      "message_to_prompt_projection",
+      "severity_only_blocking_inference"
     ],
     "handoff_note": "主线程消费 Validation payload 时要保留 failure 定位与 blocking 语义，不允许把 message 丢掉，或者把 validator 反馈反拼回 PromptPackage。",
     "source_type": "team_distillation",
