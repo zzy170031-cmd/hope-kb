@@ -11,6 +11,7 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
 - manifest 有真实 `record_counts`
 - bundle 有真实 `content_hash`
 - 可以独立跑一轮 seed 校验
+- 生成出来的 snapshot 只作为 `hope` 主线程消费这套知识资产的稳定支撑面，不替代 `hope` 主线程实现本身
 
 ## 2. 当前导入链组成
 
@@ -22,10 +23,14 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
   - 定义 seed 文件到 SQLite 表的映射
 - `seed/v0.1/scene_taxonomy.json`
   - 定义统一场景分类层，供 runtime、validator 和 handoff 共用
+- `seed/v0.1/scene_taxonomy_aliases.json`
+  - 定义接入侧细粒度场景标签到 canonical taxonomy 的归并关系
+- `seed/v0.1/degraded_input_examples.json`
+  - 定义 degraded-input baseline，供 repair hardening、validator 和 runtime consumer 对齐
 - `migrations/0001_init_kb.sql`
   - 定义 v0.1 的目标表结构
 - `scripts/validate-seed-bundle.ps1`
-  - 校验 seed 文件、计数、machine_id 与 bundle hash
+  - 校验 seed 文件、计数、machine_id、bundle hash，以及 `scene alias`、`degraded-input`、`classic-case integrity` 三层 gate
 - `scripts/build-kb-snapshot.py`
   - 按 manifest、import_map 和 migration 生成 SQLite snapshot
 
@@ -43,6 +48,7 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
    - record_counts 对齐
    - foreign key 合法
    - hash 与 manifest 一致
+   - `scene alias`、`degraded-input` 与 `classic-case integrity` gate 继续为绿
 
 ## 3.1 当前可直接使用的构建命令
 
@@ -64,6 +70,7 @@ builder 的约束：
 - JSON 中的数组/对象按中文 UTF-8 文本序列化后入库
 - 不反写 seed 文件
 - `scene_taxonomy`、`failure_pattern`、`prompt_template` 会一起进入 snapshot，保证场景分派和 repair pass 运行时可追溯
+- `scene_taxonomy_alias`、`degraded_input_example`、`classic_case_example` 也会进入 snapshot，作为 `hope` 主线程消费知识资产时的辅助支持层
 
 运行前提补充：
 

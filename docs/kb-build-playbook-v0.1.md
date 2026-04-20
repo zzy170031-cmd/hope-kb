@@ -9,6 +9,11 @@
 
 ---
 
+## 当前边界说明
+
+- `hope-kb` 的核心职责是服务 `hope` 主线程的规划、校验、发布与外部产出，不替代 `hope` 主线程本身的实现工作。
+- 截至 `2026-04-20`，v0.1 的实际构建 gate 已经包含 `scene_taxonomy_aliases`、`degraded_input_examples`、`classic_case_examples` 完整性校验，以及与 `manifest.content_hash` 对齐的 snapshot contract。
+
 ## 1. 构建目标
 
 v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
@@ -67,6 +72,7 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 - 导演 few-shot
 - benchmark 参考 cut
 - 导出模板例子
+- degraded-input / failure-repair 回归样例
 
 ---
 
@@ -164,6 +170,7 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 - 中文 token 规范
 - 来源是否已登记
 - benchmark 是否真的会用到
+- `validate-seed-bundle.ps1` 是否继续通过 `scene alias`、`degraded-input`、`classic-case integrity` 这三层 gate
 
 ---
 
@@ -197,7 +204,7 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 
 ## 6. 完成标准
 
-一批知识内容只有同时满足下面 5 条，才算进入 v0.1 首批 seed：
+一批知识内容只有同时满足下面 7 条，才算进入 v0.1 首批 seed：
 
 1. 能映射到已冻结字段
 2. 来源已登记
@@ -205,6 +212,7 @@ v0.1 的 `hope-kb` 不是百科全书，也不是自动抓取仓库。
 4. 至少能服务一个 benchmark
 5. 能被 Track D / E / G 直接消费
 6. 风格类内容必须能回指到导演 reference set 或 source register
+7. validator / snapshot contract 必须与 `manifest.content_hash` 保持一致
 
 ---
 

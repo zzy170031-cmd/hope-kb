@@ -137,6 +137,17 @@
       "notes": "用于 45s、10min、60min benchmark 和经典段落示例，不作为官方规则来源。"
     },
     {
+      "source_id": "internal_degraded_input_examples",
+      "source_type": "internal_example",
+      "label": "degraded-input 回归样例",
+      "url": "",
+      "applies_to": [
+        "degraded_input_examples"
+      ],
+      "priority": 3,
+      "notes": "用于把 failure -> repair template -> validator 的闭环回归样例固化为种子资产，不伪装成官方规则来源。"
+    },
+    {
       "source_id": "team_distillation_failure_library",
       "source_type": "team_distillation",
       "label": "系统级失败模式库",

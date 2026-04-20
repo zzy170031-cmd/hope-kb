@@ -1,0 +1,146 @@
+[
+  {
+    "machine_id": "scene_alias_01",
+    "alias_scene_type": "爆发前蓄力",
+    "canonical_scene_type": "战斗开场",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "样本层的战斗前摇细分类型，统一归并到正式 taxonomy 的战斗开场。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_02",
+    "alias_scene_type": "群像爆发集结",
+    "canonical_scene_type": "群像集结",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "群像爆发只是群体站位与压强更高的变体，仍归属于群像集结。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_03",
+    "alias_scene_type": "群像危机",
+    "canonical_scene_type": "群像集结",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "群像危机场面仍以多角色同框与空间压迫为主，先映射回群像集结。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_04",
+    "alias_scene_type": "危机推进",
+    "canonical_scene_type": "爆点揭示",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "威胁显形与压迫陡增更接近揭示段落，因此先归并到爆点揭示。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_05",
+    "alias_scene_type": "近身反击",
+    "canonical_scene_type": "战斗开场",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "近身反击属于动作冲突进入后的近距离接触，归并到战斗开场。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_06",
+    "alias_scene_type": "追逐格斗",
+    "canonical_scene_type": "追逐推进",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "追逐格斗同时保留运动方向和追击结构，归并到追逐推进。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_07",
+    "alias_scene_type": "打击高潮",
+    "canonical_scene_type": "战斗高潮",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "打击高潮是受力最强的动作爆点，归并到战斗高潮。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_08",
+    "alias_scene_type": "微表演",
+    "canonical_scene_type": "微表演对白",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "没有明确对白时仍属于微表演主导场景，统一归并到微表演对白。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_09",
+    "alias_scene_type": "日常转场",
+    "canonical_scene_type": "转场空镜",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "日常转场主要承担段落桥接功能，归并到转场空镜。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_10",
+    "alias_scene_type": "意识流变形",
+    "canonical_scene_type": "梦境切层",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "意识流变形属于主观层侵入现实层的表达，归并到梦境切层。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_11",
+    "alias_scene_type": "心理爆发",
+    "canonical_scene_type": "梦境切层",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "心理爆发通过主观空间挤压现实，归并到梦境切层。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_12",
+    "alias_scene_type": "现实错位",
+    "canonical_scene_type": "梦境切层",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "现实错位直接对应现实层与主观层错位，归并到梦境切层。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_13",
+    "alias_scene_type": "匹配剪接",
+    "canonical_scene_type": "转场空镜",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "匹配剪接属于桥接前后段落的转场技术，归并到转场空镜。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_14",
+    "alias_scene_type": "结构反转",
+    "canonical_scene_type": "爆点揭示",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "结构反转通过揭示因果错位制造爆点，归并到爆点揭示。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_15",
+    "alias_scene_type": "近身对打",
+    "canonical_scene_type": "战斗开场",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "近身对打仍属于战斗冲突建立与延续，归并到战斗开场。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_16",
+    "alias_scene_type": "重击定点",
+    "canonical_scene_type": "战斗高潮",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "重击定点是动作爆点定格，归并到战斗高潮。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_17",
+    "alias_scene_type": "情绪侵染转场",
+    "canonical_scene_type": "梦境切层",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "情绪侵染转场表现为主观情绪侵入现实环境，归并到梦境切层。",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "scene_alias_18",
+    "alias_scene_type": "转场错缝",
+    "canonical_scene_type": "转场空镜",
+    "usage_scope": "director_cut_samples",
+    "source_notes": "转场错缝仍服务于桥接与接缝处理，归并到转场空镜。",
+    "last_reviewed_at": "2026-04-20"
+  }
+]

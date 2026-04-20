@@ -256,5 +256,41 @@
     ],
     "target_model_family": "qwen-compatible",
     "is_structured_output": true
+  },
+  {
+    "machine_id": "prompt_17",
+    "stage": "repair_export_contract",
+    "name": "Export Contract 修复模板",
+    "模板名": "Repair Export Contract",
+    "适用对象": "ValidationRepair",
+    "required_inputs": ["validation_findings", "export_templates", "shared_contract_rows", "current_exports"],
+    "输入字段": "validation_findings,export_templates,shared_contract_rows,current_exports",
+    "body": "请只修复 export contract 漂移问题。统一 Excel、JSON、Markdown 的字段来源、列名和映射，不重写无关业务内容。输出为 JSON。",
+    "模板正文": "根据【validation_findings：{{validation_findings}}】【export_templates：{{export_templates}}】【shared_contract_rows：{{shared_contract_rows}}】【current_exports：{{current_exports}}】修复 export mapping。",
+    "expected_output_schema": "ExportContractRepair",
+    "输出要求": "必须明确每个修复字段回到哪一个共享 contract 来源；不允许 exporter 本地特判继续残留。",
+    "repairs_failure_codes": [
+      "export_contract_drift"
+    ],
+    "target_model_family": "qwen-compatible",
+    "is_structured_output": true
+  },
+  {
+    "machine_id": "prompt_18",
+    "stage": "repair_handoff_boundaries",
+    "name": "Handoff Boundaries 修复模板",
+    "模板名": "Repair Handoff Boundaries",
+    "适用对象": "ValidationRepair",
+    "required_inputs": ["failed_handoffs", "adjacent_cuts", "committee_handoff_rules", "current_handoff_zones"],
+    "输入字段": "failed_handoffs,adjacent_cuts,committee_handoff_rules,current_handoff_zones",
+    "body": "请只修复 handoff zone 和 buffer cut 缺口。必须保住 NarrativeScene 边界、动作/视线承接和下一场入口，不重写无关 cut。输出为 JSON。",
+    "模板正文": "根据【failed_handoffs：{{failed_handoffs}}】【adjacent_cuts：{{adjacent_cuts}}】【committee_handoff_rules：{{committee_handoff_rules}}】【current_handoff_zones：{{current_handoff_zones}}】修复 handoff zone 与 buffer cuts。",
+    "expected_output_schema": "HandoffZoneRepair",
+    "输出要求": "必须显式说明补的是哪一段 handoff zone、哪一个 buffer cut、以及保住了哪条边界规则。",
+    "repairs_failure_codes": [
+      "handoff_gap"
+    ],
+    "target_model_family": "qwen-compatible",
+    "is_structured_output": true
   }
 ]

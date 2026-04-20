@@ -56,6 +56,14 @@
     "primary_key_field": "machine_id"
   },
   {
+    "machine_id": "import_07a",
+    "file": "seed/v0.1/scene_taxonomy_aliases.json",
+    "json_path": "$",
+    "table": "scene_taxonomy_alias",
+    "record_count_key": "scene_taxonomy_aliases",
+    "primary_key_field": "machine_id"
+  },
+  {
     "machine_id": "import_08",
     "file": "seed/v0.1/committee_templates.json",
     "json_path": "$",
@@ -173,6 +181,14 @@
     "json_path": "$",
     "table": "failure_pattern",
     "record_count_key": "failure_patterns",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "import_23",
+    "file": "seed/v0.1/degraded_input_examples.json",
+    "json_path": "$",
+    "table": "degraded_input_example",
+    "record_count_key": "degraded_input_examples",
     "primary_key_field": "machine_id"
   }
 ]

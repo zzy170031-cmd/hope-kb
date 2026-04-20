@@ -341,5 +341,63 @@
         "source_notes":  "Comedy ? Transition ???????????????????????",
         "confidence_level":  "medium",
         "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_19",
+        "from_role":  "action",
+        "to_role":  "transition",
+        "transition_type":  "bridge_cut",
+        "buffer_guidance":  "先用 1 个缓冲 cut 吃住动作余震，再把节奏从受力点顺滑带入过门镜头。",
+        "continuity_notes":  "动作方向、角色姿态和空间出口不能在转场里断掉，Transition 只负责接缝，不得抹掉动作因果。",
+        "before_cut_pattern":  "动作爆点或追击推进刚刚完成，画面仍带有明显动势。",
+        "after_cut_pattern":  "转场开始承担时空桥接、节拍减速或情绪落点的接力任务。",
+        "buffer_cut_pattern":  "优先保留烟尘、脚步、风压、武器残响或镜头惯性，再让桥接物把画面带走。",
+        "applicable_director_pairs":  [
+                                          "director_03-\u003edirector_07",
+                                          "director_01-\u003edirector_07"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "Action ? Transition ?????????????????????????????????",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_20",
+        "from_role":  "scene",
+        "to_role":  "transition",
+        "transition_type":  "style_blend",
+        "buffer_guidance":  "先稳住当前场景的空间入口和视线锚点，再交给 Transition 做时空或情绪层的桥接。",
+        "continuity_notes":  "Transition 接手后必须吃到 Scene 已经建立的空间关系，不能把下一段入口做成凭空跳切。",
+        "before_cut_pattern":  "场景调度已经落稳，需要开始切层、换场或引出下一段。",
+        "after_cut_pattern":  "转场镜头开始承担桥接逻辑，但仍保留上一场的空间余脉。",
+        "buffer_cut_pattern":  "最后一个 Scene cut 应留下门口、走廊、窗边、站台或视线方向等可被转场接走的入口信号。",
+        "applicable_director_pairs":  [
+                                          "director_02-\u003edirector_07",
+                                          "director_04-\u003edirector_07",
+                                          "director_05-\u003edirector_07"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "Scene ? Transition ?????????????????????????????????????",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_21",
+        "from_role":  "transition",
+        "to_role":  "emotion",
+        "transition_type":  "soft_fade",
+        "buffer_guidance":  "让转场最后一格把节拍收柔，再把同一股余韵、光线或呼吸交给 Emotion 接住。",
+        "continuity_notes":  "Emotion 接手时必须继承转场留下的情绪锚点与环境气口，不能另起一套情绪来源。",
+        "before_cut_pattern":  "转场已经完成桥接，画面正在从结构性过门落向角色感受层。",
+        "after_cut_pattern":  "情绪段开始放大停顿、回望、景观承情或细微动作的余韵。",
+        "buffer_cut_pattern":  "优先保留风、雨、灯光、脚步、呼吸或倒影等过门元素，让它自然沉进情绪段首格。",
+        "applicable_director_pairs":  [
+                                          "director_07-\u003edirector_04",
+                                          "director_07-\u003edirector_05"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "Transition ? Emotion ?????????????????????????????????????",
+        "confidence_level":  "medium",
+        "last_reviewed_at":  "2026-04-20"
     }
 ]

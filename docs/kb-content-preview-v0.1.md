@@ -19,23 +19,25 @@
 3. 导演公开锚点层
 4. 导演场景适配层
 5. 场景分类层
-6. 委员会角色层
-7. 委员会模板层
-8. handoff 规则层
-9. 风格合并规则层
-10. 视觉语言术语层
-11. 中文摄影术语层
-12. 连续性规则层
-13. 转场术语层
-14. 故事结构模板层
-15. 漫剧结构规则层
-16. 角色弧线模式层
-17. 对白风格规则层
-18. Prompt 模板层
-19. 导出模板层
-20. 经典案例示例层
-21. 失败模式库
-22. 导入映射层
+6. 场景别名归一层
+7. 委员会角色层
+8. 委员会模板层
+9. handoff 规则层
+10. 风格合并规则层
+11. 视觉语言术语层
+12. 中文摄影术语层
+13. 连续性规则层
+14. 转场术语层
+15. 故事结构模板层
+16. 漫剧结构规则层
+17. 角色弧线模式层
+18. 对白风格规则层
+19. Prompt 模板层
+20. 导出模板层
+21. 经典案例示例层
+22. 失败模式库
+23. degraded-input 回归样例层
+24. 导入映射层
 
 当前 `seed/v0.1/manifest.json` 中的记录数为：
 
@@ -46,8 +48,9 @@
 - 7 条 `director_scene_affinity`
 - 35 条 `director_cut_samples`
 - 12 条 `scene_taxonomy`
+- 18 条 `scene_taxonomy_aliases`
 - 4 条 `committee_templates`
-- 12 条 `committee_handoff_rules`
+- 21 条 `committee_handoff_rules`
 - 7 条 `committee_style_merge_rules`
 - 4 条 `story_structure_templates`
 - 5 条 `manga_structure_rules`
@@ -57,12 +60,13 @@
 - 15 条 `camera_terms`
 - 3 条 `continuity_rules`
 - 8 条 `transition_vocabulary`
-- 16 条 `prompt_templates`
+- 18 条 `prompt_templates`
 - 17 条 `export_templates`
-- 12 条 `classic_case_examples`
+- 18 条 `classic_case_examples`
 - 8 条 `failure_patterns`
+- 8 条 `degraded_input_examples`
 
-这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库也补进了可直接生成 SQLite snapshot 的构建脚本。
+这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、degraded-input 回归样例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
 
 ---
 
@@ -614,7 +618,7 @@
 
 ## 12. 经典案例示例
 
-当前已写入 12 条 `classic_case_examples`。
+当前已写入 18 条 `classic_case_examples`。
 
 ### benchmark 级
 
@@ -633,12 +637,21 @@
 - `case_07`：Chief 到 Scene 的稳态接管段
 - `case_08`：Scene 到 Action 的动作起手段
 - `case_09`：Emotion 到 Transition 的余韵收束段
+- `case_13`：Chief 到 Transition 的压场收束段
+- `case_14`：Action 到 Emotion 的反冲缓释段
 
 ### 导演经典语汇级
 
 - `case_10`：今石式群像集结爆发段
 - `case_11`：新海式列车回望段
 - `case_12`：今敏式媒介错位揭示段
+- `case_15`：汤浅式梦境奔逃切层段
+- `case_16`：荒木式压迫推进集结段
+- `case_17`：朴式贴身追击断点段
+
+### failure / repair 回归级
+
+- `case_18`：双层 Hard Lock 回正修复段
 
 每条都带：
 
@@ -698,6 +711,7 @@
 - bundle_order 文件是否齐全
 - manifest 计数是否与真实 JSON 一致
 - machine_id 是否重复
+- scene alias、failure->repair 映射、degraded-input 样例、classic case 样例完整性是否成立
 - bundle hash 是否一致
 
 ---
@@ -706,10 +720,10 @@
 
 虽然现在已经不是空壳，而且这一轮已经把最关键的补深层做进去了，但如果要继续往“更厚、更强”补，优先级最高的现在变成：
 
-1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 scene/emotion/transition 的细粒度变体
-2. 把 `classic_case_examples` 继续扩成 benchmark + handoff + 导演经典语汇三层样例库
-3. 将 `v0.1` seed 逐步补到可直接导入 SQLite 的稳定脚本链，并补完整导入校验
-4. 给更多规则层补齐 `source_notes / confidence_level / last_reviewed_at`
+1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 chief/transition 与 action/emotion 的更多细粒度边界变体
+2. 给 `classic_case_examples` 继续补更多 `failure_repair` 样例，而不是只停在 1 条 baseline
+3. 将 `degraded_input_examples` 继续扩到 runtime-consumer / export / prompt rendering 的更细粒度回归样例
+4. 给更多预览文档和 runtime 说明同步 scene alias、degraded-input 和 snapshot 校验链
 5. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
 
 ---
@@ -733,6 +747,7 @@
 - 模板层
 - 结构层
 - 委员会控制层
-- benchmark 案例层
+- benchmark / handoff / 导演经典案例层
+- failure / repair 回归层
 
 也就是说，它已经从“知识库设计”进入了“真实知识资产”的阶段。

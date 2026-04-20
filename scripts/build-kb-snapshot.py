@@ -45,6 +45,38 @@ def validate_import_counts(conn: sqlite3.Connection, manifest: dict, import_map:
             )
 
 
+def configure_connection(conn: sqlite3.Connection):
+    conn.execute("PRAGMA temp_store = MEMORY")
+    conn.execute("PRAGMA journal_mode = MEMORY").fetchone()
+    conn.execute("PRAGMA synchronous = NORMAL")
+    conn.execute("PRAGMA foreign_keys = ON")
+
+
+def reserve_output_path(output_path: Path) -> Path:
+    if not output_path.exists():
+        return output_path
+
+    try:
+        output_path.unlink()
+        return output_path
+    except PermissionError:
+        pass
+
+    for idx in range(1, 100):
+        fallback = output_path.with_name(f"{output_path.stem}.rebuilt-{idx}{output_path.suffix}")
+        if not fallback.exists():
+            print(f"Warning: cannot overwrite {output_path}; writing snapshot to {fallback} instead.")
+            return fallback
+        try:
+            fallback.unlink()
+            print(f"Warning: cannot overwrite {output_path}; reusing fallback path {fallback}.")
+            return fallback
+        except PermissionError:
+            continue
+
+    raise RuntimeError(f"Unable to reserve snapshot output path near {output_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build hope-kb SQLite snapshot from seed bundle.")
     parser.add_argument(
@@ -62,6 +94,7 @@ def main():
     repo_root = Path(args.repo_root).resolve()
     output_path = (repo_root / args.output).resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path = reserve_output_path(output_path)
 
     manifest_path = repo_root / "seed" / "v0.1" / "manifest.json"
     import_map_path = repo_root / "seed" / "v0.1" / "import_map.json"
@@ -71,12 +104,11 @@ def main():
     import_map = load_json(import_map_path)
     migration_sql = migration_path.read_text(encoding="utf-8")
 
-    if output_path.exists():
-        output_path.unlink()
-
     conn = sqlite3.connect(output_path)
     try:
-        conn.execute("PRAGMA foreign_keys = ON")
+        # Some Windows environments reject file-backed rollback journals on this drive.
+        # Build with in-memory journaling so snapshot creation stays deterministic.
+        configure_connection(conn)
         conn.executescript(migration_sql)
 
         conn.execute(

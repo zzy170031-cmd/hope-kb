@@ -108,6 +108,22 @@ CREATE TABLE IF NOT EXISTS scene_taxonomy (
   last_reviewed_at TEXT NOT NULL
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS idx_scene_taxonomy_scene_type
+ON scene_taxonomy(scene_type);
+
+CREATE TABLE IF NOT EXISTS scene_taxonomy_alias (
+  machine_id TEXT PRIMARY KEY,
+  alias_scene_type TEXT NOT NULL,
+  canonical_scene_type TEXT NOT NULL,
+  usage_scope TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL,
+  FOREIGN KEY (canonical_scene_type) REFERENCES scene_taxonomy(scene_type)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_scene_taxonomy_alias_alias_scene_type
+ON scene_taxonomy_alias(alias_scene_type);
+
 CREATE TABLE IF NOT EXISTS director_reference_set (
   machine_id TEXT PRIMARY KEY,
   director_machine_id TEXT NOT NULL,
@@ -336,3 +352,28 @@ CREATE TABLE IF NOT EXISTS failure_pattern (
   confidence_level TEXT NOT NULL,
   last_reviewed_at TEXT NOT NULL
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_failure_pattern_failure_code
+ON failure_pattern(failure_code);
+
+CREATE TABLE IF NOT EXISTS degraded_input_example (
+  machine_id TEXT PRIMARY KEY,
+  failure_code TEXT NOT NULL,
+  example_name TEXT NOT NULL,
+  degradation_mode TEXT NOT NULL,
+  boundary_focus TEXT NOT NULL,
+  minimal_bad_input TEXT NOT NULL,
+  expected_failure_signal TEXT NOT NULL,
+  repair_template_ids TEXT NOT NULL,
+  validator_targets TEXT NOT NULL,
+  expected_repair_scope TEXT NOT NULL,
+  pass_condition TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL,
+  FOREIGN KEY (failure_code) REFERENCES failure_pattern(failure_code)
+);
+
+CREATE INDEX IF NOT EXISTS idx_degraded_input_example_failure_code
+ON degraded_input_example(failure_code);
