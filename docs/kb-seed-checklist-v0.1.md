@@ -435,3 +435,10 @@ v0.1 最少 5 条：
 - Track D / E 有稳定输入
 - `45s / 10min / 60min` 三个 benchmark 有知识支撑
 - Hope v0.1 不会在 Week 2 因“知识库没定义”而停住
+
+## 2026-04-20 Addendum
+
+- `committee_handoff_rules` must now pass finer boundary coverage for `chief->transition`, `action->emotion`, `scene->transition`, and `transition->emotion`
+- `degraded_input_examples` must now keep at least 3 support-facing regressions for `continuity_break / handoff_gap / chinese_prompt_noise / export_contract_drift`
+- `runtime_consume_contracts.json` is now a required seed asset; every consumer surface must declare `required_snapshot_tables / required_export_sheets / required_column_sources / required_validator_gates / blocked_local_overrides`
+- current manifest truth on this line is `committee_handoff_rules=27` / `degraded_input_examples=16` / `runtime_consume_contracts=5`

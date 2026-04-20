@@ -467,10 +467,10 @@ function Assert-MinimumSupportFacingDegradedRegressions {
   $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
 
   $requiredRegressionModes = @{
-    "continuity_break" = @("adjacent_cut_axis_flip", "exporter_continuity_ref_drop")
-    "handoff_gap" = @("director_switch_without_buffer", "runtime_consumer_handoff_zone_drop")
-    "chinese_prompt_noise" = @("field_label_leak_into_prompt", "consumer_payload_alias_leak")
-    "export_contract_drift" = @("exporter_local_column_invention", "runtime_consumer_stale_prompt_projection")
+    "continuity_break" = @("adjacent_cut_axis_flip", "exporter_continuity_ref_drop", "runtime_consumer_cut_order_drift")
+    "handoff_gap" = @("director_switch_without_buffer", "runtime_consumer_handoff_zone_drop", "exporter_handoff_pair_only_projection")
+    "chinese_prompt_noise" = @("field_label_leak_into_prompt", "consumer_payload_alias_leak", "validation_message_leak_into_render_prompt")
+    "export_contract_drift" = @("exporter_local_column_invention", "runtime_consumer_stale_prompt_projection", "validation_sheet_stale_projection")
   }
 
   $examplesByFailureCode = @{}
@@ -488,8 +488,8 @@ function Assert-MinimumSupportFacingDegradedRegressions {
     }
 
     $examples = @($examplesByFailureCode[$failureCode])
-    if ($examples.Count -lt 2) {
-      throw "Support-facing degraded regressions for '$failureCode' must include at least 2 examples"
+    if ($examples.Count -lt 3) {
+      throw "Support-facing degraded regressions for '$failureCode' must include at least 3 examples"
     }
 
     $seenModes = @{}
@@ -1206,6 +1206,204 @@ function Assert-ValidHopeSupportFlowContracts {
   }
 }
 
+function Assert-ValidRuntimeConsumeContracts {
+  param(
+    [string]$Root
+  )
+
+  $runtimeContracts = @(Load-SeedJson -RelativePath "seed/v0.1/runtime_consume_contracts.json" -Root $Root | ForEach-Object { $_ })
+  $exportTemplates = @(Load-SeedJson -RelativePath "seed/v0.1/export_templates.json" -Root $Root | ForEach-Object { $_ })
+  $failurePatterns = @(Load-SeedJson -RelativePath "seed/v0.1/failure_pattern_library.json" -Root $Root | ForEach-Object { $_ })
+  $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
+
+  if ($runtimeContracts.Count -lt 5) {
+    throw "runtime_consume_contracts must include at least 5 support surfaces"
+  }
+
+  $knownSnapshotTables = @{
+    "snapshot_meta" = $true
+  }
+  foreach ($entry in $importMap) {
+    $knownSnapshotTables[[string]$entry.table] = $true
+  }
+
+  $knownExportSheets = @{}
+  $knownColumnSources = @{}
+  foreach ($template in $exportTemplates) {
+    $sheetName = [string]$template.sheet_name
+    $knownExportSheets[$sheetName] = $true
+
+    $templateProperties = @($template.PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+    $columnDefinitions = @($templateProperties[5].Value | ForEach-Object { $_ })
+    foreach ($column in $columnDefinitions) {
+      $columnProperties = @($column.PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+      if ($columnProperties.Count -lt 2) {
+        throw "Malformed export_template column definitions while validating runtime_consume_contracts: $sheetName"
+      }
+
+      $knownColumnSources[[string]$columnProperties[1].Value] = $true
+    }
+  }
+
+  $knownValidatorGates = @{}
+  foreach ($failure in $failurePatterns) {
+    $knownValidatorGates[[string]$failure.validator_hint] = $true
+    if ($null -ne $failure.suggested_followup_validator) {
+      foreach ($validatorName in @($failure.suggested_followup_validator)) {
+        $knownValidatorGates[[string]$validatorName] = $true
+      }
+    }
+  }
+
+  foreach ($example in $degradedInputExamples) {
+    foreach ($validatorName in @($example.validator_targets)) {
+      $knownValidatorGates[[string]$validatorName] = $true
+    }
+  }
+
+  $requiredSurfaceContracts = @{
+    "snapshot_bootstrap" = @{
+      required_tables = @("snapshot_meta", "export_template", "failure_pattern", "degraded_input_example", "runtime_consume_contract")
+      required_sheets = @("RenderSegments", "HandoffZones", "Cuts", "PromptPackage", "Validation")
+      required_sources = @("render_segments.narrative_scene_id", "project_handoff_zones.transition_type", "storyboard_cuts.continuity_refs", "prompt_packages.negative_prompt", "validation_report.message")
+      required_validators = @("Export contract check", "Continuity Validator", "Handoff Coverage", "Prompt quality review / Export sanity check")
+      required_overrides = @("local_sheet_aliases", "runtime_inferred_columns", "stale_prompt_projection", "validation_field_drop")
+    }
+    "segment_and_cut_projection" = @{
+      required_tables = @("scene_taxonomy", "scene_taxonomy_alias", "committee_handoff_rule", "export_template", "runtime_consume_contract")
+      required_sheets = @("RenderSegments", "Cuts")
+      required_sources = @("render_segments.segment_number", "render_segments.narrative_scene_id", "storyboard_cuts.render_segment_id", "storyboard_cuts.transition_out", "storyboard_cuts.continuity_refs")
+      required_validators = @("Continuity Validator", "Export contract check")
+      required_overrides = @("local_cut_reorder", "continuity_ref_drop", "scene_alias_passthrough", "segment_cross_scene_reprojection")
+    }
+    "handoff_projection" = @{
+      required_tables = @("committee_handoff_rule", "failure_pattern", "degraded_input_example", "export_template", "runtime_consume_contract")
+      required_sheets = @("HandoffZones", "Cuts")
+      required_sources = @("project_handoff_zones.transition_type", "project_handoff_zones.buffer_cut_ids", "project_handoff_zones.continuity_notes", "storyboard_cuts.transition_out")
+      required_validators = @("Handoff Coverage", "Continuity Validator")
+      required_overrides = @("handoff_pair_only_projection", "buffer_cut_strip", "continuity_note_drop", "chief_scene_boundary_rewrite")
+    }
+    "prompt_package_projection" = @{
+      required_tables = @("prompt_template", "failure_pattern", "degraded_input_example", "export_template", "runtime_consume_contract")
+      required_sheets = @("PromptPackage", "Cuts")
+      required_sources = @("prompt_packages.cut_number", "prompt_packages.layout_prompt", "prompt_packages.render_prompt", "prompt_packages.negative_prompt", "storyboard_cuts.cut_number")
+      required_validators = @("Prompt quality review / Export sanity check", "Export contract check")
+      required_overrides = @("consumer_payload_alias_leak", "validation_message_prompt_leak", "stale_prompt_projection", "negative_prompt_strip")
+    }
+    "validation_feedback_projection" = @{
+      required_tables = @("failure_pattern", "prompt_template", "classic_case_example", "export_template", "runtime_consume_contract")
+      required_sheets = @("Validation", "PromptPackage")
+      required_sources = @("validation_report.validator_name", "validation_report.message", "validation_report.related_cut_or_segment", "validation_report.is_blocking", "prompt_packages.render_segment_id")
+      required_validators = @("Export contract check", "Handoff Coverage", "Continuity Validator", "Prompt quality review / Export sanity check")
+      required_overrides = @("validation_field_drop", "validation_sheet_stale_projection", "non_blocking_default_flip", "message_to_prompt_projection")
+    }
+  }
+
+  $seenSurfaces = @{}
+  foreach ($contract in $runtimeContracts) {
+    $machineId = [string]$contract.machine_id
+    $surface = [string]$contract.consumer_surface
+
+    if ([string]::IsNullOrWhiteSpace($surface)) {
+      throw "Missing consumer_surface in runtime_consume_contracts: $machineId"
+    }
+
+    if ($seenSurfaces.ContainsKey($surface)) {
+      throw "Duplicate consumer_surface '$surface' in runtime_consume_contracts"
+    }
+    $seenSurfaces[$surface] = $true
+
+    foreach ($fieldName in @("contract_scope", "handoff_note", "source_notes")) {
+      if (Test-PlaceholderLikeText -Value ([string]$contract.$fieldName)) {
+        throw "Placeholder-like text detected in runtime_consume_contracts field '$fieldName': $machineId"
+      }
+    }
+
+    $requiredSnapshotTables = @($contract.required_snapshot_tables | ForEach-Object { [string]$_ })
+    $requiredExportSheets = @($contract.required_export_sheets | ForEach-Object { [string]$_ })
+    $requiredColumnSources = @($contract.required_column_sources | ForEach-Object { [string]$_ })
+    $requiredValidatorGates = @($contract.required_validator_gates | ForEach-Object { [string]$_ })
+    $blockedOverrides = @($contract.blocked_local_overrides | ForEach-Object { [string]$_ })
+
+    foreach ($fieldContract in @(
+      @{ name = "required_snapshot_tables"; value = $requiredSnapshotTables },
+      @{ name = "required_export_sheets"; value = $requiredExportSheets },
+      @{ name = "required_column_sources"; value = $requiredColumnSources },
+      @{ name = "required_validator_gates"; value = $requiredValidatorGates },
+      @{ name = "blocked_local_overrides"; value = $blockedOverrides }
+    )) {
+      if ($fieldContract.value.Count -eq 0) {
+        throw "Missing $($fieldContract.name) in runtime_consume_contracts: $machineId"
+      }
+    }
+
+    foreach ($tableName in $requiredSnapshotTables) {
+      if (!$knownSnapshotTables.ContainsKey($tableName)) {
+        throw "Unknown required_snapshot_table '$tableName' in runtime_consume_contracts: $machineId"
+      }
+    }
+
+    foreach ($sheetName in $requiredExportSheets) {
+      if (!$knownExportSheets.ContainsKey($sheetName)) {
+        throw "Unknown required_export_sheet '$sheetName' in runtime_consume_contracts: $machineId"
+      }
+    }
+
+    foreach ($columnSource in $requiredColumnSources) {
+      if (!$knownColumnSources.ContainsKey($columnSource)) {
+        throw "Unknown required_column_source '$columnSource' in runtime_consume_contracts: $machineId"
+      }
+    }
+
+    foreach ($validatorName in $requiredValidatorGates) {
+      if (!$knownValidatorGates.ContainsKey($validatorName)) {
+        throw "Unknown required_validator_gate '$validatorName' in runtime_consume_contracts: $machineId"
+      }
+    }
+
+    if (!$requiredSurfaceContracts.ContainsKey($surface)) {
+      throw "Unexpected runtime consume surface '$surface' in runtime_consume_contracts"
+    }
+
+    $surfaceContract = $requiredSurfaceContracts[$surface]
+    foreach ($requiredTable in @($surfaceContract.required_tables)) {
+      if ($requiredSnapshotTables -notcontains [string]$requiredTable) {
+        throw "runtime_consume_contract '$surface' is missing required_snapshot_table '$requiredTable'"
+      }
+    }
+
+    foreach ($requiredSheet in @($surfaceContract.required_sheets)) {
+      if ($requiredExportSheets -notcontains [string]$requiredSheet) {
+        throw "runtime_consume_contract '$surface' is missing required_export_sheet '$requiredSheet'"
+      }
+    }
+
+    foreach ($requiredSource in @($surfaceContract.required_sources)) {
+      if ($requiredColumnSources -notcontains [string]$requiredSource) {
+        throw "runtime_consume_contract '$surface' is missing required_column_source '$requiredSource'"
+      }
+    }
+
+    foreach ($requiredValidator in @($surfaceContract.required_validators)) {
+      if ($requiredValidatorGates -notcontains [string]$requiredValidator) {
+        throw "runtime_consume_contract '$surface' is missing required_validator_gate '$requiredValidator'"
+      }
+    }
+
+    foreach ($requiredOverride in @($surfaceContract.required_overrides)) {
+      if ($blockedOverrides -notcontains [string]$requiredOverride) {
+        throw "runtime_consume_contract '$surface' is missing blocked_local_override '$requiredOverride'"
+      }
+    }
+  }
+
+  foreach ($surface in $requiredSurfaceContracts.Keys) {
+    if (!$seenSurfaces.ContainsKey($surface)) {
+      throw "Missing runtime consume surface '$surface' in runtime_consume_contracts"
+    }
+  }
+}
+
 function Assert-ValidCommitteeTopology {
   param(
     [string]$Root
@@ -1230,9 +1428,12 @@ function Assert-ValidCommitteeTopology {
   }
 
   $knownHandoffPairs = @{}
+  $handoffPairCounts = @{}
+  $handoffPairTransitionTypes = @{}
   foreach ($rule in $committeeHandoffRules) {
     $fromRole = [string]$rule.from_role
     $toRole = [string]$rule.to_role
+    $transitionType = [string]$rule.transition_type
 
     if (!$knownRoleCodes.ContainsKey($fromRole)) {
       throw "Unknown from_role '$fromRole' in committee_handoff_rules: $($rule.machine_id)"
@@ -1244,6 +1445,21 @@ function Assert-ValidCommitteeTopology {
 
     $pairKey = "$fromRole->$toRole"
     $knownHandoffPairs[$pairKey] = $true
+    if (!$handoffPairCounts.ContainsKey($pairKey)) {
+      $handoffPairCounts[$pairKey] = 0
+    }
+    $handoffPairCounts[$pairKey]++
+
+    if (!$handoffPairTransitionTypes.ContainsKey($pairKey)) {
+      $handoffPairTransitionTypes[$pairKey] = @{}
+    }
+    $handoffPairTransitionTypes[$pairKey][$transitionType] = $true
+
+    foreach ($fieldName in @("buffer_guidance", "continuity_notes", "before_cut_pattern", "after_cut_pattern", "buffer_cut_pattern", "source_notes")) {
+      if (Test-PlaceholderLikeText -Value ([string]$rule.$fieldName)) {
+        throw "Placeholder-like text detected in committee_handoff_rules field '$fieldName': $($rule.machine_id)"
+      }
+    }
 
     foreach ($directorPair in @($rule.applicable_director_pairs)) {
       $parts = @(([string]$directorPair) -split '->')
@@ -1255,6 +1471,37 @@ function Assert-ValidCommitteeTopology {
         if (!$knownDirectorIds.ContainsKey($directorId)) {
           throw "Unknown director '$directorId' in committee_handoff_rules: $($rule.machine_id)"
         }
+      }
+    }
+  }
+
+  $requiredBoundaryVariants = @{
+    "chief->transition" = @{
+      min_count = 3
+      transition_types = @("style_blend", "bridge_cut", "soft_fade")
+    }
+    "action->emotion" = @{
+      min_count = 3
+      transition_types = @("bridge_cut", "soft_fade", "hard_cut")
+    }
+    "scene->transition" = @{
+      min_count = 2
+      transition_types = @("style_blend", "bridge_cut")
+    }
+    "transition->emotion" = @{
+      min_count = 2
+      transition_types = @("soft_fade", "style_blend")
+    }
+  }
+
+  foreach ($pairKey in $requiredBoundaryVariants.Keys) {
+    if (!$handoffPairCounts.ContainsKey($pairKey) -or [int]$handoffPairCounts[$pairKey] -lt [int]$requiredBoundaryVariants[$pairKey].min_count) {
+      throw "Insufficient committee_handoff_rules variants for '$pairKey'"
+    }
+
+    foreach ($transitionType in @($requiredBoundaryVariants[$pairKey].transition_types)) {
+      if (!$handoffPairTransitionTypes[$pairKey].ContainsKey([string]$transitionType)) {
+        throw "Missing transition_type '$transitionType' for committee_handoff_rules pair '$pairKey'"
       }
     }
   }
@@ -1379,6 +1626,7 @@ Assert-MinimumSupportFacingDegradedRegressions -Root $RepoRoot
 Assert-ValidNegativeBoundaryRepairScopes -Root $RepoRoot
 Assert-ValidClassicCaseExamples -Root $RepoRoot
 Assert-ValidHopeSupportFlowContracts -Root $RepoRoot
+Assert-ValidRuntimeConsumeContracts -Root $RepoRoot
 Assert-ValidCommitteeTopology -Root $RepoRoot
 
 $bundleHash = $manifest.content_hash -replace '^bundle-sha256:', ''

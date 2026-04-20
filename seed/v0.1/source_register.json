@@ -148,6 +148,19 @@
       "notes": "用于把 failure -> repair template -> validator 的闭环回归样例固化为种子资产，不伪装成官方规则来源。"
     },
     {
+      "source_id": "team_distillation_runtime_consume_contracts",
+      "source_type": "team_distillation",
+      "label": "runtime consume contract 鍥㈤槦褰掔撼",
+      "url": "",
+      "applies_to": [
+        "runtime_consume_contracts",
+        "export_templates",
+        "degraded_input_examples"
+      ],
+      "priority": 2,
+      "notes": "鐢ㄤ簬鎶?hope 涓荤嚎绋嬫秷璐?snapshot 鐨?runtime-consumer 鎺ュ叆杈圭晫鍥哄寲涓?KB contract锛屼笉鍏佽浜у搧渚ч潬鏈湴鐗瑰垽琛ュ瓧娈点€?
+    },
+    {
       "source_id": "team_distillation_failure_library",
       "source_type": "team_distillation",
       "label": "系统级失败模式库",

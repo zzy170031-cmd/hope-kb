@@ -27,6 +27,7 @@ This KB exists to support Hope main-thread execution and outputs; it does not re
 - `docs/kb-overview.md`
 - `docs/kb-build-playbook-v0.1.md`
 - `docs/kb-freeze-contract.md`
+- `docs/runtime-consume-integration-packet-v0.1.md`
 - `docs/kb-seed-checklist-v0.1.md`
 - `docs/kb-seed-v0.1.md`
 - `docs/kb-source-policy-v0.1.md`

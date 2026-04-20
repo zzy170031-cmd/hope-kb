@@ -233,17 +233,17 @@
         "from_role":  "chief",
         "to_role":  "transition",
         "transition_type":  "style_blend",
-        "buffer_guidance":  "???????????????????????????????????",
-        "continuity_notes":  "Chief ? hard_locks ????????????Transition ??????????????????",
-        "before_cut_pattern":  "??????????????????????????????????????",
-        "after_cut_pattern":  "??????????????????????????????",
-        "buffer_cut_pattern":  "??????????????????????????????????????",
+        "buffer_guidance":  "先保住 chief 已建立的世界观基线、角色 hard_locks 和空间压强，再用 1 个桥接 cut 把节拍交给 Transition。",
+        "continuity_notes":  "Chief 的 hard_locks 必须完整保留，Transition 只接时空或情绪过门，不得改人物基线与主场景事实。",
+        "before_cut_pattern":  "群像压场、危机推进或关系基线已经建立，马上要切到过门、换场或片尾收束。",
+        "after_cut_pattern":  "转场开始承担桥接、余韵延伸或下一场入口引出的任务。",
+        "buffer_cut_pattern":  "最后一个 chief cut 先钉住站位与出口，再让广播、风声、灯光或视线承接进 Transition。",
         "applicable_director_pairs":  [
                                           "director_02-\u003edirector_07",
-                                          "director_04-\u003edirector_07"
+                                          "director_05-\u003edirector_07"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Chief ?? Transition ???????????????????????????????",
+        "source_notes":  "Chief 切到 Transition 时，关键不是换掉基线，而是只把桥接权交出去。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -252,17 +252,17 @@
         "from_role":  "transition",
         "to_role":  "suspense",
         "transition_type":  "bridge_cut",
-        "buffer_guidance":  "??????????????????????????????????????",
-        "continuity_notes":  "????????Suspense ?????????????????",
-        "before_cut_pattern":  "??????????????????????????????",
-        "after_cut_pattern":  "????????????????????????????",
-        "buffer_cut_pattern":  "??????????????????????????????????",
+        "buffer_guidance":  "让 Transition 的最后一格先留下一个可疑细节、异响或遮挡，再把同一线索交给 Suspense 放大。",
+        "continuity_notes":  "Suspense 接手时必须继承转场留下的线索物、视点或遮挡关系，不能另起一套问题来源。",
+        "before_cut_pattern":  "转场已经完成时空桥接，但观众刚察觉到异样感或信息缺口。",
+        "after_cut_pattern":  "悬疑段开始放大错位、延后揭示或局部异常。",
+        "buffer_cut_pattern":  "优先保留门缝、倒影、停顿的声源或被遮住的动作，让 Suspense 接着追问。",
         "applicable_director_pairs":  [
                                           "director_07-\u003edirector_07",
                                           "director_04-\u003edirector_07"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Transition ? Suspense ?????????????????????????",
+        "source_notes":  "Transition 切 Suspense 时，最怕问题来源换轨，所以要让同一个异常被接着放大。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -271,17 +271,17 @@
         "from_role":  "suspense",
         "to_role":  "action",
         "transition_type":  "hard_cut",
-        "buffer_guidance":  "???????????????????????????????????",
-        "continuity_notes":  "?????????????????Action ?????????????",
-        "before_cut_pattern":  "?????????????????????????????",
-        "after_cut_pattern":  "??????????????????????????",
-        "buffer_cut_pattern":  "???????? cut??????????????????????",
+        "buffer_guidance":  "在揭示危险后允许硬切进动作，但先用 1 个受力目标或逃生方向把威胁落到身体行动上。",
+        "continuity_notes":  "Action 接手时必须保住 Suspense 已建立的威胁方位、出口和追击关系，不能把恐惧来源切丢。",
+        "before_cut_pattern":  "悬疑段已经让危险、真相或埋伏对象显形，紧张感正压向爆发点。",
+        "after_cut_pattern":  "动作段开始以追击、闪避、反击或逃生推进。",
+        "buffer_cut_pattern":  "优先让视线锁定、脚步启动、武器抬起或出口暴露成为硬切前的最后一格。",
         "applicable_director_pairs":  [
                                           "director_07-\u003edirector_03",
                                           "director_07-\u003edirector_01"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Suspense ? Action ?????????????????????????????",
+        "source_notes":  "Suspense 切 Action 时，最重要的是让危险对象和动作方向保持同一条线。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -290,17 +290,17 @@
         "from_role":  "action",
         "to_role":  "emotion",
         "transition_type":  "bridge_cut",
-        "buffer_guidance":  "???????????????????????????????",
-        "continuity_notes":  "Emotion ??? Action ????????????????????",
-        "before_cut_pattern":  "????????????????????????????",
-        "after_cut_pattern":  "????????????????????????????",
-        "buffer_cut_pattern":  "????????????????????????????",
+        "buffer_guidance":  "先用 1 个缓冲 cut 回收受力、呼吸和姿态，再把视线、手部或停顿交给 Emotion 放大。",
+        "continuity_notes":  "Emotion 接手时必须继承动作因果和身体余震，不能把前一格的受力关系切断。",
+        "before_cut_pattern":  "动作爆点刚结束，身体仍处在受力、失衡、喘息或回收状态。",
+        "after_cut_pattern":  "情绪段开始放大余震后的迟疑、后怕、痛感或关系回流。",
+        "buffer_cut_pattern":  "优先保留落地、收拳、握紧、喘息、视线回收等动作残响，再进入情绪细读。",
         "applicable_director_pairs":  [
                                           "director_03-\u003edirector_04",
-                                          "director_01-\u003edirector_04"
+                                          "director_01-\u003edirector_05"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Action ? Emotion ??????????????????????????",
+        "source_notes":  "Action 切 Emotion 时，真正需要保护的是动作因果和身体余震，而不是单独重开一个抒情段。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -309,17 +309,17 @@
         "from_role":  "emotion",
         "to_role":  "comedy",
         "transition_type":  "soft_fade",
-        "buffer_guidance":  "??????????????????????????????",
-        "continuity_notes":  "Comedy ?????????????????????????",
-        "before_cut_pattern":  "????????????????????????????????",
-        "after_cut_pattern":  "?????????????????????????",
-        "buffer_cut_pattern":  "????????????????????????????????",
+        "buffer_guidance":  "先让情绪段把气口放松，再用一个反应落差、小失手或环境回弹把节奏带进 Comedy。",
+        "continuity_notes":  "Comedy 接手时要吃到 Emotion 留下的关系状态，不能把人物刚建立的心境直接抹掉。",
+        "before_cut_pattern":  "情绪停顿、轻微尴尬或关系波动已经成立，但需要往轻松或松弛方向回弹。",
+        "after_cut_pattern":  "喜剧段开始放大落差、误会回弹或带一点余温的轻松反应。",
+        "buffer_cut_pattern":  "优先让表情回收、手忙脚乱、目光闪躲或道具小事故承担接缝，不直接硬切成段子。",
         "applicable_director_pairs":  [
                                           "director_04-\u003edirector_05",
                                           "director_05-\u003edirector_05"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Emotion ? Comedy ???????????????????????????",
+        "source_notes":  "Emotion 切 Comedy 时，真正的笑点应该来自情绪余温被轻轻反弹，而不是强行转调。",
         "confidence_level":  "medium",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -328,17 +328,17 @@
         "from_role":  "comedy",
         "to_role":  "transition",
         "transition_type":  "bridge_cut",
-        "buffer_guidance":  "????????????????????????????????????????",
-        "continuity_notes":  "Transition ?????????????????????????????",
-        "before_cut_pattern":  "???????????????????????????",
-        "after_cut_pattern":  "????????????????????????????",
-        "buffer_cut_pattern":  "????????????????????????????????????",
+        "buffer_guidance":  "先让笑点余波落在人物关系或环境反应上，再把同一股节拍交给 Transition 带走。",
+        "continuity_notes":  "Transition 接手时必须继承 Comedy 留下的关系落点与动作余波，不能把笑点变成无来源的断场。",
+        "before_cut_pattern":  "喜剧反应刚完成，人物和道具还留有余波，但段落需要往下一场移动。",
+        "after_cut_pattern":  "转场开始承担节拍减速、关系过门或下一场入口铺垫。",
+        "buffer_cut_pattern":  "优先保留笑后的停顿、收拾道具、互看一眼或环境回声，再交给桥接镜头离场。",
         "applicable_director_pairs":  [
                                           "director_05-\u003edirector_07",
-                                          "director_05-\u003edirector_02"
+                                          "director_05-\u003edirector_06"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Comedy ? Transition ???????????????????????",
+        "source_notes":  "Comedy 切 Transition 时，要让笑点结果变成过门材料，而不是把段子单独扔下。",
         "confidence_level":  "medium",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -357,7 +357,7 @@
                                           "director_01-\u003edirector_07"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Action ? Transition ?????????????????????????????????",
+        "source_notes":  "Action 切 Transition 时，要让动作余震继续带着观众过门，而不是把动作因果截断。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -377,7 +377,7 @@
                                           "director_05-\u003edirector_07"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Scene ? Transition ?????????????????????????????????????",
+        "source_notes":  "Scene 切 Transition 时，关键是让上一场的空间入口和视线锚点被下一段自然接走。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
@@ -396,7 +396,127 @@
                                           "director_07-\u003edirector_05"
                                       ],
         "source_type":  "team_distillation",
-        "source_notes":  "Transition ? Emotion ?????????????????????????????????????",
+        "source_notes":  "Transition 切 Emotion 时，要让过门留下的气口变成情绪段的来源，而不是另起一套感受入口。",
+        "confidence_level":  "medium",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_22",
+        "from_role":  "chief",
+        "to_role":  "transition",
+        "transition_type":  "bridge_cut",
+        "buffer_guidance":  "先用 1 个明确的出口或入口 cut 把 chief 段的空间关系钉住，再让 Transition 吃住同一条方向线离场。",
+        "continuity_notes":  "Chief 负责的群像压强、站位和 hard_locks 必须保持原样，Transition 只能接出口、视线或环境桥接，不得改事件主语。",
+        "before_cut_pattern":  "主段刚到收束点，人物关系与空间通道都还处在高压可读状态。",
+        "after_cut_pattern":  "转场镜头开始顺着同一条出口、广播、脚步或灯光把观众带去下一段。",
+        "buffer_cut_pattern":  "优先保留门口、走廊、车门、站台边线或角色回头的出口信号，让桥接镜头接着走。",
+        "applicable_director_pairs":  [
+                                          "director_01-\u003edirector_07",
+                                          "director_02-\u003edirector_06",
+                                          "director_05-\u003edirector_07"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 chief -> transition 的出口型变体，重点是把群像或关系场的空间出口稳定交给过门镜头。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_23",
+        "from_role":  "chief",
+        "to_role":  "transition",
+        "transition_type":  "soft_fade",
+        "buffer_guidance":  "先让 chief 段把情绪或危机压到最后一格，再把同一股余韵通过光线、呼吸或景观慢慢让给 Transition。",
+        "continuity_notes":  "Soft fade 只负责把 chief 留下的压强放缓，不得消解 hard_locks、关系张力或主线危机事实。",
+        "before_cut_pattern":  "片尾收束、危机余波或关系停顿刚刚到达尾音状态。",
+        "after_cut_pattern":  "转场开始承担情绪缓冲、片尾余韵或下一段的轻量铺垫。",
+        "buffer_cut_pattern":  "优先保留窗光、风声、脚步、余震、环境噪声或静止视线，让同一股尾音自然流进 Transition。",
+        "applicable_director_pairs":  [
+                                          "director_05-\u003edirector_06",
+                                          "director_02-\u003edirector_07",
+                                          "director_07-\u003edirector_06"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 chief -> transition 的余韵型变体，适合片尾和危机缓释场景中的过门接力。",
+        "confidence_level":  "medium",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_24",
+        "from_role":  "action",
+        "to_role":  "emotion",
+        "transition_type":  "soft_fade",
+        "buffer_guidance":  "先把爆点后的呼吸、颤抖和失衡放慢，再让 Emotion 从同一股身体余震里接手。",
+        "continuity_notes":  "Emotion 只能放大动作留下的后果，不得把战斗因果擦掉或抽成无来源抒情。",
+        "before_cut_pattern":  "高强度动作刚结束，角色还在喘息、站稳或回收姿态。",
+        "after_cut_pattern":  "情绪段开始读取后怕、迟疑、痛感或关系回流，但仍带着动作残响。",
+        "buffer_cut_pattern":  "优先保留手抖、腿软、视线回避、呼吸变化或环境静下来的一瞬，让情绪段顺势接住。",
+        "applicable_director_pairs":  [
+                                          "director_03-\u003edirector_05",
+                                          "director_01-\u003edirector_05",
+                                          "director_03-\u003edirector_06"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 action -> emotion 的缓释型变体，强调动作余震如何沉进情绪读取。",
+        "confidence_level":  "medium",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_25",
+        "from_role":  "action",
+        "to_role":  "emotion",
+        "transition_type":  "hard_cut",
+        "buffer_guidance":  "允许在爆点后硬切到情绪反应，但切口前必须给一个结果姿态、受击对象或落地位置。",
+        "continuity_notes":  "Hard cut 只能压缩中间桥接，不得让 Emotion 看起来像脱离动作后果独立开场。",
+        "before_cut_pattern":  "重击、坠落、躲开或反杀刚刚定点，结果已经清楚可读。",
+        "after_cut_pattern":  "情绪段立即接入惊愕、失神、崩溃或回望，但仍对准刚才的动作结果。",
+        "buffer_cut_pattern":  "最后一格动作 cut 必须锁定谁倒下、谁站稳、谁回头看向谁，再允许硬切进表情或停顿。",
+        "applicable_director_pairs":  [
+                                          "director_03-\u003edirector_04",
+                                          "director_03-\u003edirector_05",
+                                          "director_01-\u003edirector_04"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 action -> emotion 的结果型变体，适合在高冲击后直接切入人物反应，但不能丢掉动作后果。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_26",
+        "from_role":  "scene",
+        "to_role":  "transition",
+        "transition_type":  "bridge_cut",
+        "buffer_guidance":  "先让当前场景留下一个可被接走的入口、路线或视线锚点，再用桥接 cut 把观众带出场。",
+        "continuity_notes":  "Transition 接手时必须继承 Scene 已经建立的空间入口和角色落点，不能让下一段像凭空开始。",
+        "before_cut_pattern":  "场景推进已经落稳，需要开始换场、跨时空或把注意力从叙事面转到过门面。",
+        "after_cut_pattern":  "转场镜头顺着同一条入口、路线或视线把结构推进到下一段。",
+        "buffer_cut_pattern":  "优先保留门口、拐角、窗边、走廊、站台或角色出画方向，让过门镜头沿着同一路径离场。",
+        "applicable_director_pairs":  [
+                                          "director_02-\u003edirector_07",
+                                          "director_04-\u003edirector_07",
+                                          "director_05-\u003edirector_06"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 scene -> transition 的入口型变体，用于把稳定场景自然交给过门层。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "handoff_27",
+        "from_role":  "transition",
+        "to_role":  "emotion",
+        "transition_type":  "style_blend",
+        "buffer_guidance":  "让 Transition 最后一格继续保留景观、光线或环境声的尾音，再把同一组元素交给 Emotion 放大。",
+        "continuity_notes":  "Emotion 接手时必须继承 Transition 已经建立的气口和景观锚点，不能把情绪来源改成别的对象。",
+        "before_cut_pattern":  "过门已经完成结构桥接，画面正在从外部变化沉到角色感受层。",
+        "after_cut_pattern":  "情绪段开始吸收同一股景观或环境余韵，把它转成回望、停顿或关系波动。",
+        "buffer_cut_pattern":  "优先保留倒影、风、雨、车声、霓虹、暮色或呼吸等过门元素，让 Emotion 首格直接接住。",
+        "applicable_director_pairs":  [
+                                          "director_07-\u003edirector_04",
+                                          "director_06-\u003edirector_05",
+                                          "director_07-\u003edirector_05"
+                                      ],
+        "source_type":  "team_distillation",
+        "source_notes":  "这是 transition -> emotion 的景观承情型变体，用于把结构过门平滑沉进人物感受层。",
         "confidence_level":  "medium",
         "last_reviewed_at":  "2026-04-20"
     }

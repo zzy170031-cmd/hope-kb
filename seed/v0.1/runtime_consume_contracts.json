@@ -1,0 +1,198 @@
+[
+  {
+    "machine_id": "runtime_01",
+    "consumer_surface": "snapshot_bootstrap",
+    "contract_scope": "manifest_and_snapshot_gate",
+    "required_snapshot_tables": [
+      "snapshot_meta",
+      "export_template",
+      "failure_pattern",
+      "degraded_input_example",
+      "runtime_consume_contract"
+    ],
+    "required_export_sheets": [
+      "RenderSegments",
+      "HandoffZones",
+      "Cuts",
+      "PromptPackage",
+      "Validation"
+    ],
+    "required_column_sources": [
+      "render_segments.narrative_scene_id",
+      "project_handoff_zones.transition_type",
+      "storyboard_cuts.continuity_refs",
+      "prompt_packages.negative_prompt",
+      "validation_report.message"
+    ],
+    "required_validator_gates": [
+      "Export contract check",
+      "Continuity Validator",
+      "Handoff Coverage",
+      "Prompt quality review / Export sanity check"
+    ],
+    "blocked_local_overrides": [
+      "local_sheet_aliases",
+      "runtime_inferred_columns",
+      "stale_prompt_projection",
+      "validation_field_drop"
+    ],
+    "handoff_note": "主线程启动 runtime consumer 前先核对 snapshot_meta.content_hash 与 export_template / runtime_consume_contract 是否同版本，不允许本地猜 sheet 或列定义。",
+    "source_type": "team_distillation",
+    "source_notes": "用于把 hope 主线程的 runtime consume 启动条件固化成可验证 contract，而不是让产品侧临场猜测 KB 输出面。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "runtime_02",
+    "consumer_surface": "segment_and_cut_projection",
+    "contract_scope": "rendersegment_and_cut_payloads",
+    "required_snapshot_tables": [
+      "scene_taxonomy",
+      "scene_taxonomy_alias",
+      "committee_handoff_rule",
+      "export_template",
+      "runtime_consume_contract"
+    ],
+    "required_export_sheets": [
+      "RenderSegments",
+      "Cuts"
+    ],
+    "required_column_sources": [
+      "render_segments.segment_number",
+      "render_segments.narrative_scene_id",
+      "storyboard_cuts.render_segment_id",
+      "storyboard_cuts.transition_out",
+      "storyboard_cuts.continuity_refs"
+    ],
+    "required_validator_gates": [
+      "Continuity Validator",
+      "Export contract check"
+    ],
+    "blocked_local_overrides": [
+      "local_cut_reorder",
+      "continuity_ref_drop",
+      "scene_alias_passthrough",
+      "segment_cross_scene_reprojection"
+    ],
+    "handoff_note": "主线程消费 RenderSegments / Cuts 时只能沿 snapshot taxonomy 和 export sheet contract 投影，不允许本地重排 cut 或跳过 alias 归并。",
+    "source_type": "team_distillation",
+    "source_notes": "用于把 runtime consumer 对 RenderSegments / Cuts 的消费面和 continuity 边界重新钉死到 KB snapshot 上。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "runtime_03",
+    "consumer_surface": "handoff_projection",
+    "contract_scope": "handoff_zone_payloads",
+    "required_snapshot_tables": [
+      "committee_handoff_rule",
+      "failure_pattern",
+      "degraded_input_example",
+      "export_template",
+      "runtime_consume_contract"
+    ],
+    "required_export_sheets": [
+      "HandoffZones",
+      "Cuts"
+    ],
+    "required_column_sources": [
+      "project_handoff_zones.transition_type",
+      "project_handoff_zones.buffer_cut_ids",
+      "project_handoff_zones.continuity_notes",
+      "storyboard_cuts.transition_out"
+    ],
+    "required_validator_gates": [
+      "Handoff Coverage",
+      "Continuity Validator"
+    ],
+    "blocked_local_overrides": [
+      "handoff_pair_only_projection",
+      "buffer_cut_strip",
+      "continuity_note_drop",
+      "chief_scene_boundary_rewrite"
+    ],
+    "handoff_note": "主线程消费 handoff payload 时必须把 transition_type / buffer_cut_ids / continuity_notes 一起带出，不允许压缩成只有 pair 标签的伪 contract。",
+    "source_type": "team_distillation",
+    "source_notes": "用于把 runtime consumer / exporter 对 HandoffZones 的投影压成可验证 contract，避免 handoff_gap 在支持面复发。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "runtime_04",
+    "consumer_surface": "prompt_package_projection",
+    "contract_scope": "promptpackage_payloads",
+    "required_snapshot_tables": [
+      "prompt_template",
+      "failure_pattern",
+      "degraded_input_example",
+      "export_template",
+      "runtime_consume_contract"
+    ],
+    "required_export_sheets": [
+      "PromptPackage",
+      "Cuts"
+    ],
+    "required_column_sources": [
+      "prompt_packages.cut_number",
+      "prompt_packages.layout_prompt",
+      "prompt_packages.render_prompt",
+      "prompt_packages.negative_prompt",
+      "storyboard_cuts.cut_number"
+    ],
+    "required_validator_gates": [
+      "Prompt quality review / Export sanity check",
+      "Export contract check"
+    ],
+    "blocked_local_overrides": [
+      "consumer_payload_alias_leak",
+      "validation_message_prompt_leak",
+      "stale_prompt_projection",
+      "negative_prompt_strip"
+    ],
+    "handoff_note": "主线程消费 PromptPackage 时必须直接跟随 snapshot contract，不允许把字段 alias、Validation message 或旧 PromptPackage schema 混入 render payload。",
+    "source_type": "team_distillation",
+    "source_notes": "用于把 PromptPackage 的 hope-facing 消费面钉死在 snapshot contract 和 prompt repair gate 上。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-20"
+  },
+  {
+    "machine_id": "runtime_05",
+    "consumer_surface": "validation_feedback_projection",
+    "contract_scope": "validator_feedback_payloads",
+    "required_snapshot_tables": [
+      "failure_pattern",
+      "prompt_template",
+      "classic_case_example",
+      "export_template",
+      "runtime_consume_contract"
+    ],
+    "required_export_sheets": [
+      "Validation",
+      "PromptPackage"
+    ],
+    "required_column_sources": [
+      "validation_report.validator_name",
+      "validation_report.message",
+      "validation_report.related_cut_or_segment",
+      "validation_report.is_blocking",
+      "prompt_packages.render_segment_id"
+    ],
+    "required_validator_gates": [
+      "Export contract check",
+      "Handoff Coverage",
+      "Continuity Validator",
+      "Prompt quality review / Export sanity check"
+    ],
+    "blocked_local_overrides": [
+      "validation_field_drop",
+      "validation_sheet_stale_projection",
+      "non_blocking_default_flip",
+      "message_to_prompt_projection"
+    ],
+    "handoff_note": "主线程消费 Validation payload 时要保留 failure 定位与 blocking 语义，不允许把 message 丢掉，或者把 validator 反馈反拼回 PromptPackage。",
+    "source_type": "team_distillation",
+    "source_notes": "用于把 runtime consumer 对 Validation feedback 的消费边界固定成可回放、可追溯的 contract。",
+    "confidence_level": "high",
+    "last_reviewed_at": "2026-04-20"
+  }
+]

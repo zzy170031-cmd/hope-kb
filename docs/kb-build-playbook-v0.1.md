@@ -229,3 +229,10 @@ v0.1 不在 `hope-kb` 里优先做：
 结论：
 
 `hope-kb` v0.1 先做“可执行、可追溯、能支撑 benchmark 的知识底座”，而不是“看起来很全”的资料仓。
+
+## 2026-04-20 Addendum
+
+- current gate set already includes scene_taxonomy_aliases, degraded_input_examples, classic_case_examples, consumer-facing export guard, and untime_consume_contracts
+- committee_handoff_rules must now pass finer boundary coverage for chief->transition, ction->emotion, scene->transition, and 	ransition->emotion
+- degraded_input_examples now requires at least 3 support-facing regressions each for continuity_break / handoff_gap / chinese_prompt_noise / export_contract_drift
+- untime_consume_contracts.json is the KB-side handoff packet for hope; it freezes which snapshot tables, export sheets, column sources, and validator gates the product runtime should trust

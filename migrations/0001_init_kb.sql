@@ -377,3 +377,19 @@ CREATE TABLE IF NOT EXISTS degraded_input_example (
 
 CREATE INDEX IF NOT EXISTS idx_degraded_input_example_failure_code
 ON degraded_input_example(failure_code);
+
+CREATE TABLE IF NOT EXISTS runtime_consume_contract (
+  machine_id TEXT PRIMARY KEY,
+  consumer_surface TEXT NOT NULL,
+  contract_scope TEXT NOT NULL,
+  required_snapshot_tables TEXT NOT NULL,
+  required_export_sheets TEXT NOT NULL,
+  required_column_sources TEXT NOT NULL,
+  required_validator_gates TEXT NOT NULL,
+  blocked_local_overrides TEXT NOT NULL,
+  handoff_note TEXT NOT NULL,
+  source_type TEXT NOT NULL,
+  source_notes TEXT NOT NULL,
+  confidence_level TEXT NOT NULL,
+  last_reviewed_at TEXT NOT NULL
+);

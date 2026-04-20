@@ -763,3 +763,13 @@
 - failure / repair 回归层
 
 也就是说，它已经从“知识库设计”进入了“真实知识资产”的阶段。
+
+---
+
+## 2026-04-20 Addendum
+
+- current manifest baseline: `committee_handoff_rules=27` / `degraded_input_examples=16` / `runtime_consume_contracts=5`
+- `committee_handoff_rules` now includes finer boundary variants for `chief->transition`, `action->emotion`, `scene->transition`, and `transition->emotion`
+- `degraded_input_examples` now carries second-wave support-facing regressions, with 3 examples each for `continuity_break / handoff_gap / chinese_prompt_noise / export_contract_drift`
+- `runtime_consume_contracts.json` is now part of the KB seed, freezing 5 hope-facing runtime handoff surfaces inside Git
+- the remaining work after these three packages is no longer these baseline hardening packs, but finer consumer payload variants and the eventual product-side runtime consume hookup in `hope`

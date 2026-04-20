@@ -2,9 +2,9 @@
     "snapshot_version":  "v0.1",
     "snapshot_name":  "hope-kb-minimum-benchmark-pack",
     "content_hash_algo":  "sha256",
-    "content_hash":  "bundle-sha256:93865cbd055a29ef000cc7baee83da401a29c4fac3ac902c76737e5ffde50205",
+    "content_hash":  "bundle-sha256:ffce6bb70c3aec1c1484725958aefca60f62bc80bf809db3cc5082c41954932b",
     "seed_import_format":  "hope-kb-seed-bundle-v0.1",
-    "imported_at":  "2026-04-19",
+    "imported_at":  "2026-04-20",
     "primary_key":  "machine_id",
     "dual_layer_model":  {
                              "content_fields":  "中文主字段",
@@ -33,6 +33,7 @@
                          "seed/v0.1/classic_case_examples.json",
                          "seed/v0.1/failure_pattern_library.json",
                          "seed/v0.1/degraded_input_examples.json",
+                         "seed/v0.1/runtime_consume_contracts.json",
                          "seed/v0.1/import_map.json",
                          "seed/v0.1/source_register.json"
                      ],
@@ -46,7 +47,7 @@
                           "scene_taxonomy":  12,
                           "scene_taxonomy_aliases":  18,
                           "committee_templates":  4,
-                          "committee_handoff_rules":  21,
+                          "committee_handoff_rules":  27,
                           "committee_style_merge_rules":  7,
                           "story_structure_templates":  4,
                           "manga_structure_rules":  5,
@@ -60,6 +61,7 @@
                           "export_templates":  17,
                           "classic_case_examples":  28,
                           "failure_patterns":  8,
-                          "degraded_input_examples":  12
+                          "degraded_input_examples":  16,
+                          "runtime_consume_contracts":  5
                       }
 }

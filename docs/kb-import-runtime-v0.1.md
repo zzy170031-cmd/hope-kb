@@ -101,3 +101,10 @@ builder 的约束：
 也就是说，当前缺的已经不是“知识库内容定义”，而是后续由产品仓库消费这套 bundle 的装载实现。
 
 而在本仓库内部，v0.1 已经从“只有内容种子包”推进到“内容种子包 + 校验链 + snapshot 构建脚本”。
+
+## 2026-04-20 Addendum
+
+- `seed/v0.1/runtime_consume_contracts.json` has joined the bundle as the KB-side runtime handoff packet for `hope`
+- `import_map.json` now imports that file into the `runtime_consume_contract` table, so the standard snapshot carries the contract with the rest of the seed pack
+- `validate-seed-bundle.ps1` now checks runtime consume surfaces, required snapshot tables, required export sheets, required column sources, and required validator gates
+- this remains a `hope-kb` artifact only; the actual product-side runtime consumer implementation still belongs to `hope`
