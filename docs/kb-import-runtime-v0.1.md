@@ -27,10 +27,12 @@ v0.1 不要求在本仓库里直接完成完整的产品级导入器实现，但
   - 定义接入侧细粒度场景标签到 canonical taxonomy 的归并关系
 - `seed/v0.1/degraded_input_examples.json`
   - 定义 degraded-input baseline，供 repair hardening、validator 和 runtime consumer 对齐
+- `seed/v0.1/export_templates.json`
+  - 定义 consumer-facing export sheet contract，确保 `RenderSegments / HandoffZones / Cuts / PromptPackage / Validation` 的 traceability 字段对主线程可见
 - `migrations/0001_init_kb.sql`
   - 定义 v0.1 的目标表结构
 - `scripts/validate-seed-bundle.ps1`
-  - 校验 seed 文件、计数、machine_id、bundle hash，以及 `scene alias`、`degraded-input`、`classic-case integrity` 三层 gate
+  - 校验 seed 文件、计数、machine_id、bundle hash，以及 `scene alias`、`degraded-input`、`classic-case integrity`、consumer-facing export guard 四层 gate
 - `scripts/build-kb-snapshot.py`
   - 按 manifest、import_map 和 migration 生成 SQLite snapshot
 
@@ -71,6 +73,7 @@ builder 的约束：
 - 不反写 seed 文件
 - `scene_taxonomy`、`failure_pattern`、`prompt_template` 会一起进入 snapshot，保证场景分派和 repair pass 运行时可追溯
 - `scene_taxonomy_alias`、`degraded_input_example`、`classic_case_example` 也会进入 snapshot，作为 `hope` 主线程消费知识资产时的辅助支持层
+- runtime consumer 应优先信任 snapshot 中的 `export_template` contract，而不是在产品侧私自猜测 `RenderSegments / HandoffZones / Cuts / PromptPackage / Validation` 的字段集
 
 运行前提补充：
 
