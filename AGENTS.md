@@ -27,6 +27,29 @@ Every lane handoff must include:
 2. seed files or schema touched
 3. validation command actually run
 4. blockers / merge risks
+5. current canonical thread label
+6. key-node reminder line when applicable
+
+## Milestone status labels
+
+The KB thread follows the same canonical milestone-label system as the main Hope project thread.
+
+- Use the display format `线程名【状态标签】`.
+- Use the shared policy in `E:\codex\ENGINEERING_THREAD_LABEL_POLICY.md`.
+- Update the label whenever the KB thread crosses a key node such as: checkpoint accepted, standby entered, bounded feedback received, commit-ready, or environment-blocked.
+- The label must reflect the real local KB state, not only the remote Git state.
+- Every key-node handoff must end with:
+  `关键节点提醒：请立即刷新线程标签、锚点提交、工作树状态和边界说明。`
+- Keep one canonical label for the active KB thread and make sure it stays traceable to:
+  1. repo path
+  2. branch
+  3. anchor commit
+  4. clean / dirty worktree state
+  5. one-line scope boundary
+
+### Current KB canonical name and label
+
+- `Hope-KB-检查点支持【检查点待命】`
 
 ## Main references
 
@@ -36,3 +59,4 @@ Every lane handoff must include:
 - `docs/kb-build-playbook-v0.1.md`
 - `docs/kb-freeze-contract.md`
 - `docs/kb-import-runtime-v0.1.md`
+- `E:\codex\ENGINEERING_THREAD_LABEL_POLICY.md`
