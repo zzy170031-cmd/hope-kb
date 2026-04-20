@@ -649,6 +649,196 @@ function Assert-ValidClassicCaseExamples {
   }
 }
 
+function Assert-ValidHopeSupportFlowContracts {
+  param(
+    [string]$Root
+  )
+
+  $failurePatterns = @(Load-SeedJson -RelativePath "seed/v0.1/failure_pattern_library.json" -Root $Root | ForEach-Object { $_ })
+  $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
+  $classicCases = @(Load-SeedJson -RelativePath "seed/v0.1/classic_case_examples.json" -Root $Root | ForEach-Object { $_ })
+  $exportTemplates = @(Load-SeedJson -RelativePath "seed/v0.1/export_templates.json" -Root $Root | ForEach-Object { $_ })
+
+  $failureByCode = @{}
+  foreach ($failure in $failurePatterns) {
+    $failureByCode[[string]$failure.failure_code] = $failure
+  }
+
+  $degradedByFailureCode = @{}
+  foreach ($example in $degradedInputExamples) {
+    $failureCode = [string]$example.failure_code
+    if (!$degradedByFailureCode.ContainsKey($failureCode)) {
+      $degradedByFailureCode[$failureCode] = @()
+    }
+    $degradedByFailureCode[$failureCode] += ,$example
+  }
+
+  $caseProperties = @($classicCases[0].PSObject.Properties | ForEach-Object { $_.Name })
+  $caseTypeField = $caseProperties[2]
+  $structureField = $caseProperties[7]
+  $validationField = $caseProperties[8]
+  $failureRepairCases = @($classicCases | Where-Object { [string]$_.PSObject.Properties[$caseTypeField].Value -eq "failure_repair" })
+
+  $exportTemplatesBySheet = @{}
+  foreach ($template in $exportTemplates) {
+    $exportTemplatesBySheet[[string]$template.sheet_name] = $template
+  }
+
+  $requiredSheetContracts = @{
+    "HandoffZones" = @(
+      "project_handoff_zones.render_segment_id",
+      "project_handoff_zones.buffer_cut_ids"
+    )
+    "PromptPackage" = @(
+      "prompt_packages.render_prompt",
+      "prompt_packages.render_segment_id"
+    )
+    "Validation" = @(
+      "validation_report.validator_name",
+      "validation_report.is_blocking"
+    )
+  }
+
+  foreach ($sheetName in $requiredSheetContracts.Keys) {
+    if (!$exportTemplatesBySheet.ContainsKey($sheetName)) {
+      throw "Missing support-facing export sheet '$sheetName' in export_templates"
+    }
+
+    $columnSources = @()
+    $templateProperties = @($exportTemplatesBySheet[$sheetName].PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+    $columnDefinitions = @($templateProperties[5].Value | ForEach-Object { $_ })
+    foreach ($column in $columnDefinitions) {
+      $columnProperties = @($column.PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+      if ($columnProperties.Count -lt 2) {
+        throw "Support-facing export sheet '$sheetName' has malformed column definitions"
+      }
+      $columnSources += [string]$columnProperties[1].Value
+    }
+
+    foreach ($requiredSource in $requiredSheetContracts[$sheetName]) {
+      if ($columnSources -notcontains $requiredSource) {
+        throw "Support-facing export sheet '$sheetName' is missing source '$requiredSource'"
+      }
+    }
+  }
+
+  $supportContracts = @(
+    @{
+      failure_code = "handoff_gap"
+      boundary_focus = "handoff_boundary"
+      repair_scope = "handoff_zone_and_buffer_cuts"
+      required_layers = @("project_handoff_zones", "storyboard_cuts")
+      required_validators = @("Handoff Coverage", "Continuity Validator")
+      case_keywords = @("handoff", "transition bridge", "buffer cut")
+    },
+    @{
+      failure_code = "export_contract_drift"
+      boundary_focus = "export_contract_boundary"
+      repair_scope = "export_mapping"
+      required_layers = @("export_templates", "validators")
+      required_validators = @("Export contract check")
+      case_keywords = @("PromptPackage", "sheet", "export")
+    },
+    @{
+      failure_code = "chinese_prompt_noise"
+      boundary_focus = "language_boundary"
+      repair_scope = "prompt_rendering_layer"
+      required_layers = @("prompt_packages", "export_templates")
+      required_validators = @("Prompt quality review / Export sanity check")
+      case_keywords = @("中文", "prompt", "token")
+    }
+  )
+
+  foreach ($contract in $supportContracts) {
+    $failureCode = [string]$contract.failure_code
+    if (!$failureByCode.ContainsKey($failureCode)) {
+      throw "Missing support-facing failure contract '$failureCode' in failure_pattern_library"
+    }
+
+    $failure = $failureByCode[$failureCode]
+    $affectedLayers = @($failure.affected_layers | ForEach-Object { [string]$_ })
+    foreach ($requiredLayer in @($contract.required_layers)) {
+      if ($affectedLayers -notcontains [string]$requiredLayer) {
+        throw "Support-facing failure '$failureCode' is missing affected_layer '$requiredLayer'"
+      }
+    }
+
+    $allowedValidators = @([string]$failure.validator_hint)
+    if ($null -ne $failure.suggested_followup_validator) {
+      $allowedValidators += @($failure.suggested_followup_validator | ForEach-Object { [string]$_ })
+    }
+
+    foreach ($requiredValidator in @($contract.required_validators)) {
+      if ($allowedValidators -notcontains [string]$requiredValidator) {
+        throw "Support-facing failure '$failureCode' is missing validator '$requiredValidator'"
+      }
+    }
+
+    if (!$degradedByFailureCode.ContainsKey($failureCode)) {
+      throw "Missing degraded_input_examples coverage for support-facing failure '$failureCode'"
+    }
+
+    $matchedDegradedExample = $false
+    foreach ($example in @($degradedByFailureCode[$failureCode])) {
+      if ([string]$example.boundary_focus -ne [string]$contract.boundary_focus) {
+        continue
+      }
+
+      if ([string]$example.expected_repair_scope -ne [string]$contract.repair_scope) {
+        continue
+      }
+
+      $validatorTargets = @($example.validator_targets | ForEach-Object { [string]$_ })
+      $missingValidator = $false
+      foreach ($requiredValidator in @($contract.required_validators)) {
+        if ($validatorTargets -notcontains [string]$requiredValidator) {
+          $missingValidator = $true
+          break
+        }
+      }
+
+      if (!$missingValidator) {
+        $matchedDegradedExample = $true
+        break
+      }
+    }
+
+    if (-not $matchedDegradedExample) {
+      throw "Support-facing failure '$failureCode' is missing a degraded_input_example with the expected boundary / repair / validator contract"
+    }
+
+    $matchedClassicCase = $false
+    foreach ($case in $failureRepairCases) {
+      $combinedText = @(
+        [string]$case.PSObject.Properties[$structureField].Value,
+        [string]$case.PSObject.Properties[$validationField].Value,
+        [string]$case.source_notes
+      ) -join " "
+
+      if (!$combinedText.Contains($failureCode)) {
+        continue
+      }
+
+      $keywordMatch = $false
+      foreach ($keyword in @($contract.case_keywords)) {
+        if ($combinedText -match [Regex]::Escape([string]$keyword)) {
+          $keywordMatch = $true
+          break
+        }
+      }
+
+      if ($keywordMatch) {
+        $matchedClassicCase = $true
+        break
+      }
+    }
+
+    if (-not $matchedClassicCase) {
+      throw "Support-facing failure '$failureCode' is missing a semantically aligned failure_repair case in classic_case_examples"
+    }
+  }
+}
+
 function Assert-ValidCommitteeTopology {
   param(
     [string]$Root
@@ -819,6 +1009,7 @@ Assert-ValidCommitteeMergeRules -Root $RepoRoot
 Assert-MinimumDegradedInputCoverage -Root $RepoRoot
 Assert-ValidDegradedInputExamples -Root $RepoRoot
 Assert-ValidClassicCaseExamples -Root $RepoRoot
+Assert-ValidHopeSupportFlowContracts -Root $RepoRoot
 Assert-ValidCommitteeTopology -Root $RepoRoot
 
 $bundleHash = $manifest.content_hash -replace '^bundle-sha256:', ''

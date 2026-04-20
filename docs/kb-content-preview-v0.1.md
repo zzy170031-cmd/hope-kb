@@ -665,6 +665,8 @@
 - `source_type`
 - `source_notes`
 
+同时，`validate-seed-bundle.ps1` 现在会把 `handoff / export / prompt` 这三类 hope 主线程支持流当成硬门槛，要求 failure pattern、degraded input、failure_repair 案例和 export sheet contract 彼此对齐。
+
 ## 13. 失败模式库
 
 当前已写入 8 条系统级失败模式，覆盖：
