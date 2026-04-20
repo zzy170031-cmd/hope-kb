@@ -2,7 +2,7 @@
     "snapshot_version":  "v0.1",
     "snapshot_name":  "hope-kb-minimum-benchmark-pack",
     "content_hash_algo":  "sha256",
-    "content_hash":  "bundle-sha256:728a532153df063bd72a09837204a10972e74e9f7cafa7e60231e443874c5ddb",
+    "content_hash":  "bundle-sha256:135698d8092fe6422e2ce225fa3079ccb9e4b2c53875379f4b772e92b38ff2a2",
     "seed_import_format":  "hope-kb-seed-bundle-v0.1",
     "imported_at":  "2026-04-19",
     "primary_key":  "machine_id",
@@ -60,6 +60,6 @@
                           "export_templates":  17,
                           "classic_case_examples":  24,
                           "failure_patterns":  8,
-                          "degraded_input_examples":  8
+                          "degraded_input_examples":  12
                       }
 }

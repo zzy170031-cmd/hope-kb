@@ -5,20 +5,20 @@ Update this file for online sync after every 10-20 minute work package.
 ## Current Focus
 
 - current thread state: `codex/contracts-freeze`, `hope-kb` only, no merge with `hope`
-- current task: Lane 5 runtime-consumer handoff sync after consumer-facing export guard hardening
+- current task: Lane 5 support-facing degraded-input regression expansion for runtime-consumer / exporter flows
 - owner / lane: Lane 5 integrator, coordinating thread governance and validation flow
-- last updated: 2026-04-20 15:52:53 +08:00
+- last updated: 2026-04-20 16:25:47 +08:00
 
 ## Latest Completed
 
-- latest pushed commit: `5796a8e`
-- latest local-only change: synced `kb-build-playbook-v0.1.md` and `kb-import-runtime-v0.1.md` to the current consumer-facing export guard baseline so runtime handoff docs match the validated snapshot contract
+- latest pushed commit: `1f4f88d`
+- latest local-only change: expanded `degraded_input_examples` from 8 to 12, promoted support-facing `runtime-consumer / exporter` regressions to validator gates, and rebuilt the standard snapshot path with bundle hash `bundle-sha256:135698d8092fe6422e2ce225fa3079ccb9e4b2c53875379f4b772e92b38ff2a2`
 - latest validation command: `& 'E:\codex\hope-kb\scripts\validate-seed-bundle.ps1'`, `python E:\codex\hope-kb\scripts\build-kb-snapshot.py --repo-root E:\codex\hope-kb`
 
 ## Next Up
 
-- next 30 minutes: capture a KB-only checkpoint for the runtime handoff doc sync package
-- next 60-90 minutes: extend runtime-consumer / exporter degraded-input regressions without reopening merge scope
+- next 30 minutes: capture a KB-only checkpoint for the support-facing degraded-input regression pack
+- next 60-90 minutes: extend support-facing `classic_case_examples` for exporter / consumer payload drift without reopening merge scope
 
 ## Blockers / Risks
 

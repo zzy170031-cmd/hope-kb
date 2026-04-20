@@ -459,6 +459,52 @@ function Assert-ValidDegradedInputExamples {
   }
 }
 
+function Assert-MinimumSupportFacingDegradedRegressions {
+  param(
+    [string]$Root
+  )
+
+  $degradedInputExamples = @(Load-SeedJson -RelativePath "seed/v0.1/degraded_input_examples.json" -Root $Root | ForEach-Object { $_ })
+
+  $requiredRegressionModes = @{
+    "continuity_break" = @("adjacent_cut_axis_flip", "exporter_continuity_ref_drop")
+    "handoff_gap" = @("director_switch_without_buffer", "runtime_consumer_handoff_zone_drop")
+    "chinese_prompt_noise" = @("field_label_leak_into_prompt", "consumer_payload_alias_leak")
+    "export_contract_drift" = @("exporter_local_column_invention", "runtime_consumer_stale_prompt_projection")
+  }
+
+  $examplesByFailureCode = @{}
+  foreach ($example in $degradedInputExamples) {
+    $failureCode = [string]$example.failure_code
+    if (!$examplesByFailureCode.ContainsKey($failureCode)) {
+      $examplesByFailureCode[$failureCode] = @()
+    }
+    $examplesByFailureCode[$failureCode] += ,$example
+  }
+
+  foreach ($failureCode in $requiredRegressionModes.Keys) {
+    if (!$examplesByFailureCode.ContainsKey($failureCode)) {
+      throw "Missing support-facing degraded regressions for failure_code '$failureCode'"
+    }
+
+    $examples = @($examplesByFailureCode[$failureCode])
+    if ($examples.Count -lt 2) {
+      throw "Support-facing degraded regressions for '$failureCode' must include at least 2 examples"
+    }
+
+    $seenModes = @{}
+    foreach ($example in $examples) {
+      $seenModes[[string]$example.degradation_mode] = $true
+    }
+
+    foreach ($requiredMode in @($requiredRegressionModes[$failureCode])) {
+      if (!$seenModes.ContainsKey([string]$requiredMode)) {
+        throw "Missing support-facing degraded regression mode '$requiredMode' for failure_code '$failureCode'"
+      }
+    }
+  }
+}
+
 function Test-ContainsAnyPhrase {
   param(
     [string]$Text,
@@ -1294,6 +1340,7 @@ Assert-ValidRepairMappings -Root $RepoRoot
 Assert-ValidCommitteeMergeRules -Root $RepoRoot
 Assert-MinimumDegradedInputCoverage -Root $RepoRoot
 Assert-ValidDegradedInputExamples -Root $RepoRoot
+Assert-MinimumSupportFacingDegradedRegressions -Root $RepoRoot
 Assert-ValidNegativeBoundaryRepairScopes -Root $RepoRoot
 Assert-ValidClassicCaseExamples -Root $RepoRoot
 Assert-ValidHopeSupportFlowContracts -Root $RepoRoot

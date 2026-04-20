@@ -64,9 +64,9 @@
 - 17 条 `export_templates`
 - 24 条 `classic_case_examples`
 - 8 条 `failure_patterns`
-- 8 条 `degraded_input_examples`
+- 12 条 `degraded_input_examples`
 
-这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、degraded-input 回归样例、4 条 failure/repair 修复案例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
+这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、12 条 degraded-input 回归样例、7 条 failure/repair 修复案例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
 
 ---
 
@@ -731,10 +731,9 @@
 虽然现在已经不是空壳，而且这一轮已经把最关键的补深层做进去了，但如果要继续往“更厚、更强”补，优先级最高的现在变成：
 
 1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 chief/transition 与 action/emotion 的更多细粒度边界变体
-2. 把 `degraded_input_examples` 继续扩到 runtime-consumer / export / prompt rendering 的更细粒度回归样例，而不只是当前 baseline 8 条
+2. 把 `degraded_input_examples` 从当前 12 条继续扩到更细的 runtime-consumer / export / prompt rendering regressions，而不只停在第一批 support-facing pack
 3. 给 `classic_case_examples` 再补更细的 support-facing `failure_repair` 案例，尤其是 exporter / consumer payload 漂移
-4. 给更多 build/runtime 文档同步 scene alias、degraded-input、consumer-facing export guard 和 snapshot 校验链
-5. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
+4. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
 
 ---
 
