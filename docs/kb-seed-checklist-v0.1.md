@@ -21,7 +21,7 @@
 
 - `scene_taxonomy_aliases` 已经进入 seed bundle，用来把接入侧细粒度场景标签归并回 canonical taxonomy。
 - `degraded_input_examples` 需要覆盖当前 8 个 baseline `failure_code`，并与 repair template、validator target、repair scope 保持一致。
-- `classic_case_examples` 需要同时满足无占位符脏文本、导演/委员会引用合法，以及当前最小分布 `director_classic=3 / benchmark_reference=3 / director_few_shot=5 / committee_handoff=6 / failure_repair=4`。
+- `classic_case_examples` 需要同时满足无占位符脏文本、导演/委员会引用合法，以及当前最小分布 `director_classic=3 / benchmark_reference=3 / director_few_shot=5 / committee_handoff=6 / failure_repair=7`。
 - `handoff / export / prompt` 三类 hope 主线程支持流必须在 `failure_pattern_library`、`degraded_input_examples`、`classic_case_examples` 和 `export_templates` 之间保持同向一致。
 - `validate-seed-bundle.ps1` 与 `build-kb-snapshot.py` 需要持续为绿，且 `snapshot_meta.content_hash` 必须与 `manifest.content_hash` 对齐。
 

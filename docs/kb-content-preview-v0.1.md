@@ -62,7 +62,7 @@
 - 8 条 `transition_vocabulary`
 - 18 条 `prompt_templates`
 - 17 条 `export_templates`
-- 21 条 `classic_case_examples`
+- 24 条 `classic_case_examples`
 - 8 条 `failure_patterns`
 - 8 条 `degraded_input_examples`
 
@@ -618,7 +618,7 @@
 
 ## 12. 经典案例示例
 
-当前已写入 21 条 `classic_case_examples`。
+当前已写入 24 条 `classic_case_examples`。
 
 ### benchmark 级
 
@@ -655,6 +655,9 @@
 - `case_19`：Chief/Transition 交接缺口回正段
 - `case_20`：导出合同漂移回正段
 - `case_21`：中文脏提示清洗回正段
+- `case_22`：相邻 Cut 连续性断裂回正段
+- `case_23`：跨场景 Segment 回切修复段
+- `case_24`：Hard Locks 顺序漂移回正段
 
 每条都带：
 

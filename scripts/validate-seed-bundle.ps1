@@ -531,7 +531,7 @@ function Assert-ValidClassicCaseExamples {
     $classicSegmentCaseType = 3
     $handoffCaseType = 5
     $directorSignatureCaseType = 6
-    $failureRepairCaseType = 4
+    $failureRepairCaseType = 7
   }
 
   $knownCommittees = @{}
@@ -553,6 +553,9 @@ function Assert-ValidClassicCaseExamples {
   $requiredFailureRepairCodes = @(
     "style_drift",
     "character_inconsistency",
+    "continuity_break",
+    "segment_cross_scene",
+    "hard_lock_loss",
     "handoff_gap",
     "export_contract_drift",
     "chinese_prompt_noise"

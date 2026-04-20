@@ -380,5 +380,59 @@
         "source_notes":  "用于验证 failure_pattern_library 对 chinese_prompt_noise -> prompt_09 的映射，能为 hope 主线程提供稳定的中文提示清洗资产。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_22",
+        "案例名":  "相邻 Cut 连续性断裂回正段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "30-60 秒",
+        "推荐委员会":  "动作冒险组",
+        "推荐导演组合":  [
+                       "朴性厚",
+                       "荒木哲郎"
+                   ],
+        "场景概要":  "近身追击段的第二个 cut 把角色从左进右出改成右进左出，同时视线和动作落点都没继续承接，形成 continuity_break。",
+        "结构提示":  "先由 Continuity Validator 标出 continuity_break，再用 prompt_16 只修 continuity refs、动作接续和相邻 cut 的入口/出口，不重写整段 action block。",
+        "验证价值":  "适合验证 continuity_break 的修复是否停留在相邻 cut 与 continuity 字段层，而不是借机重排整段镜头组织。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 continuity_break -> prompt_16 的映射，能为 hope 主线程提供稳定的相邻 cut 连续性修复资产。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_23",
+        "案例名":  "跨场景 Segment 回切修复段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "45-75 秒",
+        "推荐委员会":  "史诗群像组",
+        "推荐导演组合":  [
+                       "荒木哲郎",
+                       "今石洋之"
+                   ],
+        "场景概要":  "导出前的 RenderSegment 规划把两个相邻 NarrativeScene 合并进同一段，群像推进和下一场入口被压成一个 segment，形成 segment_cross_scene。",
+        "结构提示":  "先由 Segment Duration Validator / Boundary Guard 标出 segment_cross_scene，再用 repair pass 只把 segment_plan 按 NarrativeScene 边界拆回合法范围，不改 scene 内部 beat 排列。",
+        "验证价值":  "适合验证 segment_cross_scene 的修复边界是否停留在分段规划层，不把 scene 内容反向改写成新结构。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 segment_cross_scene -> prompt_09 的映射，能为 hope 主线程提供稳定的分段边界回正资产。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_24",
+        "案例名":  "Hard Locks 顺序漂移回正段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "30-45 秒",
+        "推荐委员会":  "悬疑心理组",
+        "推荐导演组合":  [
+                       "今敏",
+                       "山田尚子"
+                   ],
+        "场景概要":  "局部 repair 后虽然保住了剧情，但 render_prompt 里的 hard_locks 被重写成乱序版本，关键角色 token 和镜头基线都发生 hard_lock_loss。",
+        "结构提示":  "先由 Hard Lock Injector Guard 与 Style Unity Validator 标出 hard_lock_loss，再用 prompt_15 只回正 hard_locks 字面量和顺序，不改 layout、叙事和无关 prompt 片段。",
+        "验证价值":  "适合验证 hard_lock_loss 的修复是否严格停留在 render_prompt 层，不让修复动作外溢到结构层。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 hard_lock_loss -> prompt_15 的映射，能为 hope 主线程提供稳定的 hard lock 回正资产。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
     }
 ]
