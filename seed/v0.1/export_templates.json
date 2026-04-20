@@ -36,11 +36,15 @@
     "sheet_name": "RenderSegments",
     "显示标题": "分段清单",
     "用途": "展示 30s-90s 的下游消费单元以及段级导演归属。",
-    "核心字段": ["segment_number", "episode_id", "target_duration_seconds", "actual_duration_seconds", "primary_scene_director_id", "primary_action_director_id"],
+    "核心字段": ["segment_number", "episode_id", "narrative_scene_id", "target_duration_seconds", "actual_duration_seconds", "primary_scene_director_id", "primary_action_director_id"],
     "列定义": [
       { "列名": "段号", "来源": "render_segments.segment_number", "必填": true },
+      { "列名": "Episode", "来源": "render_segments.episode_id", "必填": true },
+      { "列名": "NarrativeScene", "来源": "render_segments.narrative_scene_id", "必填": true },
       { "列名": "目标时长", "来源": "render_segments.target_duration_seconds", "必填": true },
-      { "列名": "实际时长", "来源": "render_segments.actual_duration_seconds", "必填": true }
+      { "列名": "实际时长", "来源": "render_segments.actual_duration_seconds", "必填": true },
+      { "列名": "场景导演", "来源": "render_segments.primary_scene_director_id", "必填": false },
+      { "列名": "动作导演", "来源": "render_segments.primary_action_director_id", "必填": false }
     ],
     "source_type": "team_distillation",
     "source_notes": "RenderSegment 是 Hope 的核心下游消费单位，必须单独成 sheet。",
@@ -88,7 +92,11 @@
     "列定义": [
       { "列名": "所属段", "来源": "project_handoff_zones.render_segment_id", "必填": true },
       { "列名": "交接", "来源": "project_handoff_zones.from_role + to_role", "必填": true },
-      { "列名": "缓冲切", "来源": "project_handoff_zones.buffer_cut_ids", "必填": false }
+      { "列名": "交接类型", "来源": "project_handoff_zones.transition_type", "必填": true },
+      { "列名": "交出导演", "来源": "project_handoff_zones.from_director_id", "必填": false },
+      { "列名": "接手导演", "来源": "project_handoff_zones.to_director_id", "必填": false },
+      { "列名": "缓冲切", "来源": "project_handoff_zones.buffer_cut_ids", "必填": false },
+      { "列名": "连续性备注", "来源": "project_handoff_zones.continuity_notes", "必填": false }
     ],
     "source_type": "team_distillation",
     "source_notes": "根据 handoff zone contract 增补的显式导出 sheet。",
@@ -231,8 +239,13 @@
     "核心字段": ["cut_number", "episode_id", "render_segment_id", "narrative_scene_id", "camera_work", "layout_description", "action_description", "transition_out", "continuity_refs"],
     "列定义": [
       { "列名": "Cut 编号", "来源": "storyboard_cuts.cut_number", "必填": true },
+      { "列名": "RenderSegment", "来源": "storyboard_cuts.render_segment_id", "必填": true },
+      { "列名": "NarrativeScene", "来源": "storyboard_cuts.narrative_scene_id", "必填": true },
       { "列名": "运镜", "来源": "storyboard_cuts.camera_work", "必填": false },
-      { "列名": "动作描述", "来源": "storyboard_cuts.action_description", "必填": true }
+      { "列名": "layout 描述", "来源": "storyboard_cuts.layout_description", "必填": true },
+      { "列名": "动作描述", "来源": "storyboard_cuts.action_description", "必填": true },
+      { "列名": "转场", "来源": "storyboard_cuts.transition_out", "必填": false },
+      { "列名": "continuity 引用", "来源": "storyboard_cuts.continuity_refs", "必填": false }
     ],
     "source_type": "team_distillation",
     "source_notes": "Cuts 是 Hope 结构化分镜的主表之一。",
@@ -248,7 +261,11 @@
     "列定义": [
       { "列名": "Episode", "来源": "prompt_packages.episode_id", "必填": true },
       { "列名": "RenderSegment", "来源": "prompt_packages.render_segment_id", "必填": true },
-      { "列名": "render_prompt", "来源": "prompt_packages.render_prompt", "必填": true }
+      { "列名": "Cut", "来源": "prompt_packages.cut_number", "必填": true },
+      { "列名": "layout_prompt", "来源": "prompt_packages.layout_prompt", "必填": true },
+      { "列名": "render_prompt", "来源": "prompt_packages.render_prompt", "必填": true },
+      { "列名": "negative_prompt", "来源": "prompt_packages.negative_prompt", "必填": false },
+      { "列名": "target_model_family", "来源": "prompt_packages.target_model_family", "必填": true }
     ],
     "source_type": "team_distillation",
     "source_notes": "这是 Hope 的最终主产物之一，必须确保字段和 traceability 稳定。",
@@ -264,6 +281,9 @@
     "列定义": [
       { "列名": "校验器", "来源": "validation_report.validator_name", "必填": true },
       { "列名": "状态", "来源": "validation_report.status", "必填": true },
+      { "列名": "严重级别", "来源": "validation_report.severity", "必填": true },
+      { "列名": "提示信息", "来源": "validation_report.message", "必填": true },
+      { "列名": "关联 cut / segment", "来源": "validation_report.related_cut_or_segment", "必填": false },
       { "列名": "是否阻塞", "来源": "validation_report.is_blocking", "必填": true }
     ],
     "source_type": "team_distillation",

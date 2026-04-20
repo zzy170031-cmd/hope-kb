@@ -22,7 +22,7 @@
 - `scene_taxonomy_aliases` 已经进入 seed bundle，用来把接入侧细粒度场景标签归并回 canonical taxonomy。
 - `degraded_input_examples` 需要覆盖当前 8 个 baseline `failure_code`，并与 repair template、validator target、repair scope 保持一致，同时带出显式 negative-boundary marker，说明哪些层不能被顺手改写。
 - `classic_case_examples` 需要同时满足无占位符脏文本、导演/委员会引用合法，以及当前最小分布 `director_classic=3 / benchmark_reference=3 / director_few_shot=5 / committee_handoff=6 / failure_repair=7`。
-- `handoff / export / prompt` 三类 hope 主线程支持流必须在 `failure_pattern_library`、`degraded_input_examples`、`classic_case_examples` 和 `export_templates` 之间保持同向一致。
+- `handoff / export / prompt` 三类 hope 主线程支持流必须在 `failure_pattern_library`、`degraded_input_examples`、`classic_case_examples` 和 `export_templates` 之间保持同向一致；其中 `RenderSegments / HandoffZones / Cuts / PromptPackage / Validation` 不能只写 `核心字段`，还必须把 traceability / continuity / validator message 真实落到 `列定义`。
 - `validate-seed-bundle.ps1` 与 `build-kb-snapshot.py` 需要持续为绿，且 `snapshot_meta.content_hash` 必须与 `manifest.content_hash` 对齐。
 
 ## A. Day 1 必录
@@ -354,6 +354,14 @@ v0.1 最少 5 条：
 - `Cuts`
 - `PromptPackage`
 - `Validation`
+
+并且要额外守住：
+
+- `RenderSegments` 需要显式导出 `episode_id / narrative_scene_id / primary_*_director_id`
+- `HandoffZones` 需要显式导出 `transition_type / buffer_cut_ids / continuity_notes`
+- `Cuts` 需要显式导出 `render_segment_id / narrative_scene_id / transition_out / continuity_refs`
+- `PromptPackage` 需要显式导出 `cut_number / layout_prompt / render_prompt / negative_prompt`
+- `Validation` 需要显式导出 `status / message / related_cut_or_segment / is_blocking`
 
 ---
 

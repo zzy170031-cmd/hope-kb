@@ -805,24 +805,100 @@ function Assert-ValidHopeSupportFlowContracts {
   }
 
   $requiredSheetContracts = @{
+    "RenderSegments" = @(
+      "render_segments.segment_number",
+      "render_segments.episode_id",
+      "render_segments.narrative_scene_id",
+      "render_segments.primary_scene_director_id",
+      "render_segments.primary_action_director_id"
+    )
     "HandoffZones" = @(
       "project_handoff_zones.render_segment_id",
-      "project_handoff_zones.buffer_cut_ids"
+      "project_handoff_zones.transition_type",
+      "project_handoff_zones.buffer_cut_ids",
+      "project_handoff_zones.continuity_notes"
+    )
+    "Cuts" = @(
+      "storyboard_cuts.cut_number",
+      "storyboard_cuts.render_segment_id",
+      "storyboard_cuts.narrative_scene_id",
+      "storyboard_cuts.layout_description",
+      "storyboard_cuts.transition_out",
+      "storyboard_cuts.continuity_refs"
     )
     "PromptPackage" = @(
+      "prompt_packages.cut_number",
+      "prompt_packages.layout_prompt",
       "prompt_packages.render_prompt",
+      "prompt_packages.negative_prompt",
       "prompt_packages.render_segment_id"
     )
     "Validation" = @(
       "validation_report.validator_name",
+      "validation_report.status",
+      "validation_report.message",
+      "validation_report.related_cut_or_segment",
       "validation_report.is_blocking"
     )
   }
 
   $requiredSheetCoreFields = @{
-    "HandoffZones" = @("buffer_cut_ids", "continuity_notes")
-    "PromptPackage" = @("layout_prompt", "render_prompt")
-    "Validation" = @("validator_name", "is_blocking")
+    "RenderSegments" = @("episode_id", "narrative_scene_id", "primary_scene_director_id", "primary_action_director_id")
+    "HandoffZones" = @("transition_type", "buffer_cut_ids", "continuity_notes")
+    "Cuts" = @("render_segment_id", "narrative_scene_id", "layout_description", "transition_out", "continuity_refs")
+    "PromptPackage" = @("cut_number", "layout_prompt", "render_prompt", "negative_prompt")
+    "Validation" = @("validator_name", "message", "related_cut_or_segment", "is_blocking")
+  }
+
+  $requiredPromptContracts = @()
+  $requiredPromptContracts += @{
+    sheet_name = "RenderSegments"
+    machine_id = "prompt_04"
+    stage = "screenplay_to_segments"
+    expected_output_schema = "RenderSegments"
+    required_inputs = @("narrative_scenes", "story_beats")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "HandoffZones"
+    machine_id = "prompt_18"
+    stage = "repair_handoff_boundaries"
+    expected_output_schema = "HandoffZoneRepair"
+    required_inputs = @("failed_handoffs", "adjacent_cuts", "current_handoff_zones")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "Cuts"
+    machine_id = "prompt_05"
+    stage = "segment_to_cuts"
+    expected_output_schema = "StoryboardCuts"
+    required_inputs = @("render_segment", "committee", "hard_locks")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "Cuts"
+    machine_id = "prompt_16"
+    stage = "repair_continuity"
+    expected_output_schema = "ContinuityRepair"
+    required_inputs = @("failed_links", "storyboard_cuts", "continuity_rules")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "PromptPackage"
+    machine_id = "prompt_07"
+    stage = "layout_to_render"
+    expected_output_schema = "RenderPrompt"
+    required_inputs = @("layout_prompt", "negative_prompt_defaults")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "PromptPackage"
+    machine_id = "prompt_15"
+    stage = "repair_hardlocks"
+    expected_output_schema = "RenderPromptRepair"
+    required_inputs = @("failed_cuts", "current_render_prompts")
+  }
+  $requiredPromptContracts += @{
+    sheet_name = "Validation"
+    machine_id = "prompt_17"
+    stage = "repair_export_contract"
+    expected_output_schema = "ExportContractRepair"
+    required_inputs = @("validation_findings", "export_templates", "current_exports")
   }
 
   foreach ($sheetName in $requiredSheetContracts.Keys) {
@@ -830,7 +906,8 @@ function Assert-ValidHopeSupportFlowContracts {
       throw "Missing support-facing export sheet '$sheetName' in export_templates"
     }
 
-    $templateProperties = @($exportTemplatesBySheet[$sheetName].PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
+    $template = $exportTemplatesBySheet[$sheetName]
+    $templateProperties = @($template.PSObject.Properties | Where-Object { $_.MemberType -eq "NoteProperty" })
     $coreFields = @($templateProperties[4].Value | ForEach-Object { [string]$_ })
     foreach ($requiredField in $requiredSheetCoreFields[$sheetName]) {
       if ($coreFields -notcontains [string]$requiredField) {
@@ -851,6 +928,30 @@ function Assert-ValidHopeSupportFlowContracts {
     foreach ($requiredSource in $requiredSheetContracts[$sheetName]) {
       if ($columnSources -notcontains $requiredSource) {
         throw "Support-facing export sheet '$sheetName' is missing source '$requiredSource'"
+      }
+    }
+
+    $promptContractsForSheet = @($requiredPromptContracts | Where-Object { [string]$_.sheet_name -eq $sheetName })
+    foreach ($promptContract in $promptContractsForSheet) {
+      $promptId = [string]$promptContract.machine_id
+      if (!$promptTemplatesById.ContainsKey($promptId)) {
+        throw "Support-facing export sheet '$sheetName' is missing prompt anchor '$promptId'"
+      }
+
+      $prompt = $promptTemplatesById[$promptId]
+      if ([string]$prompt.stage -ne [string]$promptContract.stage) {
+        throw "Prompt anchor '$promptId' for sheet '$sheetName' has unexpected stage '$([string]$prompt.stage)'"
+      }
+
+      if ([string]$prompt.expected_output_schema -ne [string]$promptContract.expected_output_schema) {
+        throw "Prompt anchor '$promptId' for sheet '$sheetName' has unexpected output schema '$([string]$prompt.expected_output_schema)'"
+      }
+
+      $promptInputs = @($prompt.required_inputs | ForEach-Object { [string]$_ })
+      foreach ($requiredInput in @($promptContract.required_inputs)) {
+        if ($promptInputs -notcontains [string]$requiredInput) {
+          throw "Prompt anchor '$promptId' for sheet '$sheetName' is missing required input '$requiredInput'"
+        }
       }
     }
   }

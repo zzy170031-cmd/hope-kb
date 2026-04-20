@@ -668,7 +668,9 @@
 - `source_type`
 - `source_notes`
 
-同时，`validate-seed-bundle.ps1` 现在会把 `handoff / export / prompt` 这三类 hope 主线程支持流当成硬门槛，要求 failure pattern、degraded input、failure_repair 案例、repair template 输入/输出 contract 和 export sheet contract 彼此对齐；并且会继续检查 `negative-boundary` marker，确认 repair scope 没有悄悄越层。
+截至 `2026-04-20`，`RenderSegments / HandoffZones / Cuts / PromptPackage / Validation` 这 5 张 hope 主线程支持 sheet 已经把 `narrative_scene_id`、`continuity_notes`、`transition_out`、`negative_prompt`、`validation message` 等字段真实落成可导出列，不再只是停留在 `核心字段` 注释层。
+
+同时，`validate-seed-bundle.ps1` 现在会把 `handoff / export / prompt` 这三类 hope 主线程支持流当成硬门槛，要求 failure pattern、degraded input、failure_repair 案例、repair template 输入/输出 contract 和 export sheet contract 彼此对齐；并且会继续检查 `negative-boundary` marker，确认 repair scope 没有悄悄越层。新增的 consumer-facing guardrail 还会检查 `RenderSegments / HandoffZones / Cuts / PromptPackage / Validation` 是否把关键 traceability 字段真实暴露成列，以及这些 sheet 仍然和 `prompt_04 / 05 / 07 / 15 / 16 / 17 / 18` 的 prompt contract 对齐。
 
 ## 13. 失败模式库
 
@@ -729,9 +731,9 @@
 虽然现在已经不是空壳，而且这一轮已经把最关键的补深层做进去了，但如果要继续往“更厚、更强”补，优先级最高的现在变成：
 
 1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 chief/transition 与 action/emotion 的更多细粒度边界变体
-2. 给 `classic_case_examples` 继续补更多 `failure_repair` 样例，而不是只停在 1 条 baseline
-3. 将 `degraded_input_examples` 继续扩到 runtime-consumer / export / prompt rendering 的更细粒度回归样例
-4. 给更多预览文档和 runtime 说明同步 scene alias、degraded-input 和 snapshot 校验链
+2. 把 `degraded_input_examples` 继续扩到 runtime-consumer / export / prompt rendering 的更细粒度回归样例，而不只是当前 baseline 8 条
+3. 给 `classic_case_examples` 再补更细的 support-facing `failure_repair` 案例，尤其是 exporter / consumer payload 漂移
+4. 给更多 build/runtime 文档同步 scene alias、degraded-input、consumer-facing export guard 和 snapshot 校验链
 5. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
 
 ---
