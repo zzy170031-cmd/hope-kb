@@ -326,5 +326,59 @@
         "source_notes":  "用于验证 failure_pattern_library 到 repair template 的映射在双层 hard lock 回正场景里可实际落地。",
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_19",
+        "案例名":  "Chief/Transition 交接缺口回正段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "30-60 秒",
+        "推荐委员会":  "史诗群像组",
+        "推荐导演组合":  [
+                       "荒木哲郎",
+                       "今敏"
+                   ],
+        "场景概要":  "群像危机段结束后直接切入下一场内景，chief 保住了人物与空间基线，但丢了 transition 层该承担的桥接声、视线接力和出口方向，造成 handoff_gap。",
+        "结构提示":  "先由 Handoff Coverage 与 Continuity Validator 标出 handoff_gap，再用 repair pass 最小补回 transition bridge、广播噪声和视线承接，不重写 chief 基线或下一场 action block。",
+        "验证价值":  "适合验证 handoff_gap 是否能通过最小桥接修复回正，而不是把两场内容整体重排。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 handoff_gap -> prompt_18 / prompt_16 的映射，能为 hope 主线程提供稳定的 handoff repair 支撑。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_20",
+        "案例名":  "导出合同漂移回正段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "30-60 秒",
+        "推荐委员会":  "日常治愈组",
+        "推荐导演组合":  [
+                       "新海诚",
+                       "山田尚子"
+                   ],
+        "场景概要":  "同一段黄昏列车回望内容在导出 workbook 前出现 export_contract_drift：PromptPackage 字段顺序错位、sheet 名称缩写不一致，外部消费面会误读镜头和对白关系。",
+        "结构提示":  "先由 Export contract check 标出 export_contract_drift，再用 repair template 只回正 sheet 字段、PromptPackage 顺序和缺失的 hard_locks，不改 narrative scene 的原始意图。",
+        "验证价值":  "适合验证 export_contract_drift 的修复是否停留在导出合同层，而不是反向重写场景本体。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 export_contract_drift -> prompt_17 的映射，能够稳定支撑 hope 主线程的对外交付物。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
+    },
+    {
+        "machine_id":  "case_21",
+        "案例名":  "中文脏提示清洗回正段",
+        "案例类型":  "failure_repair",
+        "目标时长":  "30-45 秒",
+        "推荐委员会":  "日常治愈组",
+        "推荐导演组合":  [
+                       "山田尚子",
+                       "新海诚"
+                   ],
+        "场景概要":  "黄昏放学路段在多轮接入后混入英文占位、重复 token 和接口残片，形成 chinese_prompt_noise，但目标内容仍然是同一段克制的关系推进。",
+        "结构提示":  "先由 Prompt quality review 与 Export sanity check 标出 chinese_prompt_noise，再用 repair pass 只清洗中文字段、统一 token 与标点，不改人物关系、景观时序或情绪推进。",
+        "验证价值":  "适合验证 chinese_prompt_noise 的修复边界是否停留在提示层，不把日常段落误重写成新剧情。",
+        "source_type":  "internal_example",
+        "source_notes":  "用于验证 failure_pattern_library 对 chinese_prompt_noise -> prompt_09 的映射，能为 hope 主线程提供稳定的中文提示清洗资产。",
+        "confidence_level":  "high",
+        "last_reviewed_at":  "2026-04-20"
     }
 ]

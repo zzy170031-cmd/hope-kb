@@ -531,7 +531,7 @@ function Assert-ValidClassicCaseExamples {
     $classicSegmentCaseType = 3
     $handoffCaseType = 5
     $directorSignatureCaseType = 6
-    $failureRepairCaseType = 1
+    $failureRepairCaseType = 4
   }
 
   $knownCommittees = @{}
@@ -550,6 +550,14 @@ function Assert-ValidClassicCaseExamples {
   }
 
   $caseTypeCounts = @{}
+  $requiredFailureRepairCodes = @(
+    "style_drift",
+    "character_inconsistency",
+    "handoff_gap",
+    "export_contract_drift",
+    "chinese_prompt_noise"
+  )
+  $failureRepairCoverage = @{}
 
   foreach ($case in $classicCases) {
     $caseId = [string]$case.machine_id
@@ -609,15 +617,15 @@ function Assert-ValidClassicCaseExamples {
         throw "failure_repair case must mention repair or validator flow in classic_case_examples: $caseId"
       }
 
-      $mentionsFailureCode = $false
+      $mentionedFailureCodes = @()
       foreach ($failureCode in $knownFailureCodes) {
         if ($combinedText.Contains($failureCode)) {
-          $mentionsFailureCode = $true
-          break
+          $mentionedFailureCodes += $failureCode
+          $failureRepairCoverage[$failureCode] = $true
         }
       }
 
-      if (-not $mentionsFailureCode) {
+      if ($mentionedFailureCodes.Count -eq 0) {
         throw "failure_repair case must mention at least one failure_code in classic_case_examples: $caseId"
       }
     }
@@ -631,6 +639,12 @@ function Assert-ValidClassicCaseExamples {
 
     if ($actualCount -lt [int]$minimumCaseTypeCounts[$caseType]) {
       throw "Insufficient classic_case_examples coverage for case type '$caseType': expected at least $($minimumCaseTypeCounts[$caseType]), actual $actualCount"
+    }
+  }
+
+  foreach ($failureCode in $requiredFailureRepairCodes) {
+    if (!$failureRepairCoverage.ContainsKey($failureCode)) {
+      throw "Insufficient failure_repair coverage in classic_case_examples: missing '$failureCode'"
     }
   }
 }

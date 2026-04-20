@@ -62,11 +62,11 @@
 - 8 条 `transition_vocabulary`
 - 18 条 `prompt_templates`
 - 17 条 `export_templates`
-- 18 条 `classic_case_examples`
+- 21 条 `classic_case_examples`
 - 8 条 `failure_patterns`
 - 8 条 `degraded_input_examples`
 
-这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、degraded-input 回归样例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
+这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、degraded-input 回归样例、4 条 failure/repair 修复案例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
 
 ---
 
@@ -618,7 +618,7 @@
 
 ## 12. 经典案例示例
 
-当前已写入 18 条 `classic_case_examples`。
+当前已写入 21 条 `classic_case_examples`。
 
 ### benchmark 级
 
@@ -652,6 +652,9 @@
 ### failure / repair 回归级
 
 - `case_18`：双层 Hard Lock 回正修复段
+- `case_19`：Chief/Transition 交接缺口回正段
+- `case_20`：导出合同漂移回正段
+- `case_21`：中文脏提示清洗回正段
 
 每条都带：
 
