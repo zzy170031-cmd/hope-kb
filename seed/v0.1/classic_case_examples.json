@@ -417,10 +417,10 @@
         "confidence_level":  "high",
         "last_reviewed_at":  "2026-04-20"
     },
-    {
-        "machine_id":  "case_24",
-        "案例名":  "Hard Locks 顺序漂移回正段",
-        "案例类型":  "failure_repair",
+  {
+    "machine_id":  "case_24",
+    "案例名":  "Hard Locks 顺序漂移回正段",
+    "案例类型":  "failure_repair",
         "目标时长":  "30-45 秒",
         "推荐委员会":  "悬疑心理组",
         "推荐导演组合":  [
@@ -431,8 +431,80 @@
         "结构提示":  "先由 Hard Lock Injector Guard 与 Style Unity Validator 标出 hard_lock_loss，再用 prompt_15 只回正 hard_locks 字面量和顺序，不改 layout、叙事和无关 prompt 片段。",
         "验证价值":  "适合验证 hard_lock_loss 的修复是否严格停留在 render_prompt 层，不让修复动作外溢到结构层。",
         "source_type":  "internal_example",
-        "source_notes":  "用于验证 failure_pattern_library 对 hard_lock_loss -> prompt_15 的映射，能为 hope 主线程提供稳定的 hard lock 回正资产。",
-        "confidence_level":  "high",
-        "last_reviewed_at":  "2026-04-20"
-    }
+    "source_notes":  "用于验证 failure_pattern_library 对 hard_lock_loss -> prompt_15 的映射，能为 hope 主线程提供稳定的 hard lock 回正资产。",
+    "confidence_level":  "high",
+    "last_reviewed_at":  "2026-04-20"
+  },
+  {
+    "machine_id":  "case_25",
+    "案例名":  "Exporter continuity 列回补修复段",
+    "案例类型":  "failure_repair",
+    "目标时长":  "30-60 秒",
+    "推荐委员会":  "动作冒险组",
+    "推荐导演组合":  [
+                       "朴性厚",
+                       "荒木哲郎"
+                   ],
+    "场景概要":  "近身追击段本体仍成立，但 exporter 投影 Cuts 时丢掉 continuity_refs 和 transition_out，runtime consumer 只能看到 action_description，导致 continuity_break 在支持面上重新出现。",
+    "结构提示":  "先由 Continuity Validator 与 Handoff Coverage 标出 continuity_break，再用 prompt_16 只回补 continuity_refs、transition_out 和相邻 cut 桥接，不重写 segment_plan，也不改原始动作段组织。",
+    "验证价值":  "适合验证 exporter continuity payload 漂移是否能停留在 continuity 字段层修复，而不是借机重写整段镜头；关键词覆盖 continuity_break、continuity_refs、exporter、payload。",
+    "source_type":  "internal_example",
+    "source_notes":  "用于验证 support-facing failure_repair 在 continuity_break / exporter_continuity_ref_drop 场景下成立，确保 exporter payload 丢列不会破坏 hope 主线程的 continuity repair 闭环。",
+    "confidence_level":  "high",
+    "last_reviewed_at":  "2026-04-20"
+  },
+  {
+    "machine_id":  "case_26",
+    "案例名":  "Runtime consumer handoff zone 投影回正段",
+    "案例类型":  "failure_repair",
+    "目标时长":  "30-60 秒",
+    "推荐委员会":  "史诗群像组",
+    "推荐导演组合":  [
+                       "荒木哲郎",
+                       "今敏"
+                   ],
+    "场景概要":  "群像段原始 handoff zone 已存在，但 runtime consumer 只带出 buffer_cut_ids，没有带出 handoff zone 的 transition_type 和 continuity_notes，导致 handoff_gap 在支持 payload 中被误判为普通段落切换。",
+    "结构提示":  "先由 Handoff Coverage 与 Continuity Validator 标出 handoff_gap，再用 prompt_18 / prompt_16 只回补 handoff zone、transition_type、continuity_notes 和必要 buffer cut，不跨 NarrativeScene，也不回改 chief / scene 基线。",
+    "验证价值":  "适合验证 runtime consumer handoff payload 漂移是否能在 handoff_boundary 内修复；关键词覆盖 handoff_gap、runtime consumer、handoff zone、continuity_notes。",
+    "source_type":  "internal_example",
+    "source_notes":  "用于验证 support-facing failure_repair 在 handoff_gap / runtime_consumer_handoff_zone_drop 场景下成立，保证 hope 主线程消费 handoff payload 时仍能走最小修复路径。",
+    "confidence_level":  "high",
+    "last_reviewed_at":  "2026-04-20"
+  },
+  {
+    "machine_id":  "case_27",
+    "案例名":  "PromptPackage 列标签泄露清洗段",
+    "案例类型":  "failure_repair",
+    "目标时长":  "30-45 秒",
+    "推荐委员会":  "日常治愈组",
+    "推荐导演组合":  [
+                       "山田尚子",
+                       "新海诚"
+                   ],
+    "场景概要":  "日常关系段的 PromptPackage 在 consumer payload 侧混入 field alias、列标签和 Validation 表头残片，render_prompt 因此出现 chinese_prompt_noise，但 narrative scene 本体没有变化。",
+    "结构提示":  "先由 Prompt quality review / Export sanity check 标出 chinese_prompt_noise，再用 prompt_09 只清洗 PromptPackage、field alias 和 payload 表头噪声，不改 relationship_timeline、layout 目标或景观推进。",
+    "验证价值":  "适合验证 consumer payload alias leak 是否能被当成提示层问题处理；关键词覆盖 chinese_prompt_noise、PromptPackage、alias、payload、field label。",
+    "source_type":  "internal_example",
+    "source_notes":  "用于验证 support-facing failure_repair 在 chinese_prompt_noise / consumer_payload_alias_leak 场景下成立，确保主线程拿到的 PromptPackage 不会被列标签污染。",
+    "confidence_level":  "high",
+    "last_reviewed_at":  "2026-04-20"
+  },
+  {
+    "machine_id":  "case_28",
+    "案例名":  "旧版 PromptPackage 投影回正段",
+    "案例类型":  "failure_repair",
+    "目标时长":  "30-60 秒",
+    "推荐委员会":  "日常治愈组",
+    "推荐导演组合":  [
+                       "新海诚",
+                       "山田尚子"
+                   ],
+    "场景概要":  "runtime consumer 仍沿用旧版 PromptPackage 投影，只输出 render_prompt，漏掉 layout_prompt、negative_prompt 和 cut_number，形成 export_contract_drift，外部消费面无法对齐 snapshot contract。",
+    "结构提示":  "先由 Export contract check 标出 export_contract_drift，再用 prompt_17 只回正 PromptPackage、layout_prompt、negative_prompt、cut_number 和 shared contract rows，不反写 narrative scene 或 scene beats。",
+    "验证价值":  "适合验证 runtime consumer 使用旧 schema 时能否只在 export_mapping 层修复；关键词覆盖 export_contract_drift、runtime consumer、PromptPackage、layout_prompt、negative_prompt。",
+    "source_type":  "internal_example",
+    "source_notes":  "用于验证 support-facing failure_repair 在 export_contract_drift / runtime_consumer_stale_prompt_projection 场景下成立，确保 hope 主线程外发 payload 与 snapshot contract 重新同源。",
+    "confidence_level":  "high",
+    "last_reviewed_at":  "2026-04-20"
+  }
 ]

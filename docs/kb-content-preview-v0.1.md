@@ -62,11 +62,11 @@
 - 8 条 `transition_vocabulary`
 - 18 条 `prompt_templates`
 - 17 条 `export_templates`
-- 24 条 `classic_case_examples`
+- 28 条 `classic_case_examples`
 - 8 条 `failure_patterns`
 - 12 条 `degraded_input_examples`
 
-这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、12 条 degraded-input 回归样例、7 条 failure/repair 修复案例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
+这一轮补充后，导演样例已经从“每位导演 1 条代表 cut”扩到了“每位导演 5 条代表 cut”，导出模板也已经补齐到正式方案要求的 17 张 sheet，同时知识库还补进了 scene alias 归一、12 条 degraded-input 回归样例、11 条 failure/repair 修复案例、bundle 校验脚本和可直接生成 SQLite snapshot 的构建链。
 
 ---
 
@@ -618,7 +618,7 @@
 
 ## 12. 经典案例示例
 
-当前已写入 24 条 `classic_case_examples`。
+当前已写入 28 条 `classic_case_examples`。
 
 ### benchmark 级
 
@@ -658,6 +658,10 @@
 - `case_22`：相邻 Cut 连续性断裂回正段
 - `case_23`：跨场景 Segment 回切修复段
 - `case_24`：Hard Locks 顺序漂移回正段
+- `case_25`：Exporter continuity 列回补修复段
+- `case_26`：Runtime consumer handoff zone 投影回正段
+- `case_27`：PromptPackage 列标签泄露清洗段
+- `case_28`：旧版 PromptPackage 投影回正段
 
 每条都带：
 
@@ -732,8 +736,7 @@
 
 1. 继续扩 `committee_handoff_rules` 的跨风格样例，尤其补 chief/transition 与 action/emotion 的更多细粒度边界变体
 2. 把 `degraded_input_examples` 从当前 12 条继续扩到更细的 runtime-consumer / export / prompt rendering regressions，而不只停在第一批 support-facing pack
-3. 给 `classic_case_examples` 再补更细的 support-facing `failure_repair` 案例，尤其是 exporter / consumer payload 漂移
-4. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
+3. 在产品仓库里把 `scene_taxonomy`、failure->repair 映射和 validator / repair pass 真正接起来
 
 ---
 

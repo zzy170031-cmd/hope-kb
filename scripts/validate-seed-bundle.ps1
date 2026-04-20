@@ -688,7 +688,7 @@ function Assert-ValidClassicCaseExamples {
     $classicSegmentCaseType = 3
     $handoffCaseType = 5
     $directorSignatureCaseType = 6
-    $failureRepairCaseType = 7
+    $failureRepairCaseType = 11
   }
 
   $knownCommittees = @{}
@@ -718,6 +718,7 @@ function Assert-ValidClassicCaseExamples {
     "chinese_prompt_noise"
   )
   $failureRepairCoverage = @{}
+  $failureRepairCaseTexts = @()
 
   foreach ($case in $classicCases) {
     $caseId = [string]$case.machine_id
@@ -772,6 +773,7 @@ function Assert-ValidClassicCaseExamples {
         [string]$case.PSObject.Properties[$validationField].Value,
         [string]$case.source_notes
       ) -join " "
+      $failureRepairCaseTexts += ,$combinedText
 
       if ($combinedText -notmatch 'repair|validator') {
         throw "failure_repair case must mention repair or validator flow in classic_case_examples: $caseId"
@@ -805,6 +807,39 @@ function Assert-ValidClassicCaseExamples {
   foreach ($failureCode in $requiredFailureRepairCodes) {
     if (!$failureRepairCoverage.ContainsKey($failureCode)) {
       throw "Insufficient failure_repair coverage in classic_case_examples: missing '$failureCode'"
+    }
+  }
+  
+  $requiredSupportCases = @{
+    "continuity_break" = @("continuity_refs", "exporter", "payload")
+    "handoff_gap" = @("runtime consumer", "handoff zone", "continuity_notes")
+    "chinese_prompt_noise" = @("PromptPackage", "alias", "payload")
+    "export_contract_drift" = @("runtime consumer", "PromptPackage", "layout_prompt", "negative_prompt")
+  }
+
+  foreach ($failureCode in $requiredSupportCases.Keys) {
+    $matchedCase = $false
+    foreach ($combinedText in $failureRepairCaseTexts) {
+      if (!$combinedText.Contains($failureCode)) {
+        continue
+      }
+
+      $allKeywordsPresent = $true
+      foreach ($keyword in @($requiredSupportCases[$failureCode])) {
+        if ($combinedText -notmatch [Regex]::Escape([string]$keyword)) {
+          $allKeywordsPresent = $false
+          break
+        }
+      }
+
+      if ($allKeywordsPresent) {
+        $matchedCase = $true
+        break
+      }
+    }
+
+    if (-not $matchedCase) {
+      throw "Missing support-facing failure_repair case for '$failureCode' in classic_case_examples"
     }
   }
 }
