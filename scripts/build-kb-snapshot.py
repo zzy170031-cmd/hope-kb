@@ -4,8 +4,28 @@ import sqlite3
 from pathlib import Path
 
 
+SNAPSHOT_CONFIGS = {
+    "v0.1": {
+        "manifest": Path("seed/v0.1/manifest.json"),
+        "import_map": Path("seed/v0.1/import_map.json"),
+        "migration": Path("migrations/0001_init_kb.sql"),
+        "default_output": "snapshots/hope-kb-v0.1.sqlite3",
+        "summary_count_key": "director_cut_samples",
+        "summary_label": "Director cut samples",
+    },
+    "v0.2": {
+        "manifest": Path("seed/v0.2/manifest.json"),
+        "import_map": Path("seed/v0.2/import_map.json"),
+        "migration": Path("migrations/0002_golden_sample_v0_2.sql"),
+        "default_output": "snapshots/hope-kb-v0.2.sqlite3",
+        "summary_count_key": "golden_sample_library",
+        "summary_label": "Golden sample library",
+    },
+}
+
+
 def load_json(path: Path):
-    with path.open("r", encoding="utf-8") as handle:
+    with path.open("r", encoding="utf-8-sig") as handle:
         return json.load(handle)
 
 
@@ -85,20 +105,28 @@ def main():
         help="Repository root for hope-kb",
     )
     parser.add_argument(
+        "--version",
+        default="v0.1",
+        choices=sorted(SNAPSHOT_CONFIGS.keys()),
+        help="Snapshot seed version to build. Defaults to v0.1 for backward compatibility.",
+    )
+    parser.add_argument(
         "--output",
-        default="snapshots/hope-kb-v0.1.sqlite3",
-        help="Relative output path under repo root",
+        default=None,
+        help="Relative output path under repo root. Defaults to the selected version's standard path.",
     )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
-    output_path = (repo_root / args.output).resolve()
+    config = SNAPSHOT_CONFIGS[args.version]
+    output_arg = args.output or config["default_output"]
+    output_path = (repo_root / output_arg).resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path = reserve_output_path(output_path)
 
-    manifest_path = repo_root / "seed" / "v0.1" / "manifest.json"
-    import_map_path = repo_root / "seed" / "v0.1" / "import_map.json"
-    migration_path = repo_root / "migrations" / "0001_init_kb.sql"
+    manifest_path = repo_root / config["manifest"]
+    import_map_path = repo_root / config["import_map"]
+    migration_path = repo_root / config["migration"]
 
     manifest = load_json(manifest_path)
     import_map = load_json(import_map_path)
@@ -149,7 +177,9 @@ def main():
 
     print(f"Built snapshot: {output_path}")
     print(f"Snapshot version: {manifest['snapshot_version']}")
-    print(f"Director cut samples: {manifest['record_counts']['director_cut_samples']}")
+    summary_key = config["summary_count_key"]
+    if summary_key in manifest["record_counts"]:
+        print(f"{config['summary_label']}: {manifest['record_counts'][summary_key]}")
 
 
 if __name__ == "__main__":

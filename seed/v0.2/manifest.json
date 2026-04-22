@@ -1,0 +1,25 @@
+{
+  "snapshot_version": "v0.2",
+  "snapshot_name": "hope-kb-golden-sample-library-v0.2",
+  "content_hash_algo": "sha256",
+  "content_hash": "bundle-sha256:b62c565b7c048bb5e0d2623b438eb83e269471283e2b10fcdd7646ef06c83bf2",
+  "seed_import_format": "hope-kb-golden-sample-seed-bundle-v0.2",
+  "imported_at": "2026-04-22",
+  "primary_key": "machine_id",
+  "bundle_order": [
+    "seed/v0.2/golden_sample_library.json",
+    "seed/v0.2/golden_sample_field_coverage_rules.json",
+    "seed/v0.2/golden_sample_failure_mapping.json",
+    "seed/v0.2/golden_sample_repair_mapping.json",
+    "seed/v0.2/source_register.json",
+    "seed/v0.2/import_map.json"
+  ],
+  "record_counts": {
+    "golden_sample_library": 40,
+    "golden_sample_field_coverage_rules": 5,
+    "golden_sample_failure_mapping": 40,
+    "golden_sample_repair_mapping": 40,
+    "golden_sample_sources": 3,
+    "golden_sample_provenance_entries": 1
+  }
+}

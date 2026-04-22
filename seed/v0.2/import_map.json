@@ -1,0 +1,50 @@
+[
+  {
+    "machine_id": "v0_2_import_01",
+    "file": "seed/v0.2/golden_sample_library.json",
+    "json_path": "records",
+    "table": "golden_sample_library",
+    "record_count_key": "golden_sample_library",
+    "primary_key_field": "machine_id"
+  },
+  {
+    "machine_id": "v0_2_import_02",
+    "file": "seed/v0.2/golden_sample_field_coverage_rules.json",
+    "json_path": "records",
+    "table": "golden_sample_field_coverage_rule",
+    "record_count_key": "golden_sample_field_coverage_rules",
+    "primary_key_field": "rule_id"
+  },
+  {
+    "machine_id": "v0_2_import_03",
+    "file": "seed/v0.2/golden_sample_failure_mapping.json",
+    "json_path": "records",
+    "table": "golden_sample_failure_mapping",
+    "record_count_key": "golden_sample_failure_mapping",
+    "primary_key_field": "mapping_id"
+  },
+  {
+    "machine_id": "v0_2_import_04",
+    "file": "seed/v0.2/golden_sample_repair_mapping.json",
+    "json_path": "records",
+    "table": "golden_sample_repair_mapping",
+    "record_count_key": "golden_sample_repair_mapping",
+    "primary_key_field": "mapping_id"
+  },
+  {
+    "machine_id": "v0_2_import_05",
+    "file": "seed/v0.2/source_register.json",
+    "json_path": "sources",
+    "table": "golden_sample_source",
+    "record_count_key": "golden_sample_sources",
+    "primary_key_field": "source_id"
+  },
+  {
+    "machine_id": "v0_2_import_06",
+    "file": "seed/v0.2/source_register.json",
+    "json_path": "provenance_entries",
+    "table": "golden_sample_provenance",
+    "record_count_key": "golden_sample_provenance_entries",
+    "primary_key_field": "provenance_id"
+  }
+]
