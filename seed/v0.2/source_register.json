@@ -42,7 +42,7 @@
       "source_id": "seedance2_v108_raw_xlsx_2026_04_23",
       "source_type": "immutable_raw_xlsx",
       "label": "Seedance2.0 V108 fused golden sample library XLSX",
-      "path": "golden-samples/seedance2-v108/Seedance2.0?????V108_???????.xlsx",
+      "path": "golden-samples/seedance2-v108/Seedance2.0黄金样本库V108_单表融合字段版.xlsx",
       "sha256": "2c7f7a0b37f5d7a6f90f18c0080a78fa568fcb4528b1b4e6fbdbfb959cfe9e34",
       "applies_to": [
         "seedance2_v108_source_package",
@@ -54,7 +54,7 @@
       "source_id": "seedance2_v108_raw_docx_2026_04_23",
       "source_type": "immutable_raw_docx",
       "label": "Seedance2.0 V108 fused golden sample library explanation DOCX",
-      "path": "golden-samples/seedance2-v108/Seedance2.0?????V108_?????????.docx",
+      "path": "golden-samples/seedance2-v108/Seedance2.0黄金样本库V108_单表融合字段版说明.docx",
       "sha256": "a2335102154ab88cb5c01517b2b20bbb15efdbdd25f0d32eeb9715d42e8d7ed3",
       "applies_to": [
         "seedance2_v108_source_package",
@@ -80,24 +80,37 @@
       "source_type": "field_mapping_review",
       "label": "Seedance2.0 V108 field mapping review",
       "path": "docs/seedance2-v108-field-mapping-review-2026-04-23.md",
-      "sha256": "a5039c942edff85d5957d3974694a686864fb7457b722bbea03eb32ab86cccea",
+      "sha256": "74ade7815f2d6745bdcb9210a36f18abf80e98c4ebfd479f836232577c38e1f9",
       "applies_to": [
         "golden_sample_vnext_import_gate",
         "external_reference_handles_candidate"
       ],
-      "notes": "Documents mappable fields, schema gaps, external_reference_handles handling, and few-shot/evidence split."
+      "notes": "Documents mappable fields, schema gaps, V3 alignment gaps, external_reference_handles handling, and few-shot/evidence split."
     },
     {
       "source_id": "seedance2_v108_sample_update_readiness_2026_04_23",
       "source_type": "sample_update_readiness_note",
       "label": "Seedance2.0 V108 sample update readiness note",
       "path": "docs/seedance2-v108-sample-update-readiness-2026-04-23.md",
-      "sha256": "9a1e31bf119fb5340ca2ea80bcac25226ac53aa90df8c696a2b618b5f5a79ee1",
+      "sha256": "a9d49d5a521bcae932c8837d65acdc077bb801041d1a75f7e6dfa49f519a5bc8",
       "applies_to": [
         "seedance2_v108_source_package",
         "golden_sample_vnext_import_gate"
       ],
-      "notes": "Records readiness decision: raw source and normalized staging accepted; v0.2 sample rows remain unchanged pending future gate."
+      "notes": "Records readiness decision: raw source, normalized staging, and V3 alignment evidence accepted; v0.2 sample rows remain unchanged pending future gate."
+    },
+    {
+      "source_id": "seedance2_v108_v3_alignment_report_2026_04_23",
+      "source_type": "v3_alignment_report",
+      "label": "Seedance2.0 V108 V3 alignment report",
+      "path": "docs/seedance2-v108-v3-alignment-report-2026-04-23.md",
+      "sha256": "b120cafe504a45d4b215a1c37767a2db4f8c8307bcd5cc7223c8049eb38a2373",
+      "applies_to": [
+        "seedance2_v108_source_package",
+        "v3_alignment_gap",
+        "golden_sample_vnext_import_gate"
+      ],
+      "notes": "KB-side alignment report comparing V108 canonical source fields against historical V3 proposal material and current v0.2 seed fields. Does not modify the V3 branch."
     }
   ],
   "provenance_entries": [
@@ -128,12 +141,14 @@
         "seedance2_v108_raw_docx_2026_04_23",
         "seedance2_v108_normalized_staging_2026_04_23",
         "seedance2_v108_field_mapping_review_2026_04_23",
-        "seedance2_v108_sample_update_readiness_2026_04_23"
+        "seedance2_v108_sample_update_readiness_2026_04_23",
+        "seedance2_v108_v3_alignment_report_2026_04_23"
       ],
       "generated_files": [
         "docs/normalized-staging/seedance2-v108-fused-golden-sample.normalized.json",
         "docs/seedance2-v108-field-mapping-review-2026-04-23.md",
-        "docs/seedance2-v108-sample-update-readiness-2026-04-23.md"
+        "docs/seedance2-v108-sample-update-readiness-2026-04-23.md",
+        "docs/seedance2-v108-v3-alignment-report-2026-04-23.md"
       ],
       "preservation_contract": {
         "preserves_raw_artifact_filenames": true,
@@ -144,7 +159,11 @@
         "reserve_samples_excluded_from_positive_fewshot": true,
         "external_reference_handles_are_object_names_not_assets": true,
         "does_not_create_reference_control_core": true,
-        "planning_only_until_main_control_acceptance": true
+        "planning_only_until_main_control_acceptance": true,
+        "v3_branch_modified": false,
+        "v108_is_canonical_source_format": true,
+        "v3_alignment_gaps_documented": true,
+        "future_model_fill_surfaces_not_counted_as_records": true
       }
     }
   ]

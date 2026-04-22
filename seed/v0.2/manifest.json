@@ -2,7 +2,7 @@
   "snapshot_version": "v0.2",
   "snapshot_name": "hope-kb-golden-sample-library-v0.2",
   "content_hash_algo": "sha256",
-  "content_hash": "bundle-sha256:d34619ef705a0654c93a67c143ecd6a5f7ab1308cfe5fd536703597bc0f69e34",
+  "content_hash": "bundle-sha256:3a813e8417cc23f9dbbb2115c40be5a811ece21e76f2d743f05df9ab038c9c0c",
   "seed_import_format": "hope-kb-golden-sample-seed-bundle-v0.2",
   "imported_at": "2026-04-23",
   "primary_key": "machine_id",
@@ -19,7 +19,7 @@
     "golden_sample_field_coverage_rules": 5,
     "golden_sample_failure_mapping": 40,
     "golden_sample_repair_mapping": 40,
-    "golden_sample_sources": 8,
+    "golden_sample_sources": 9,
     "golden_sample_provenance_entries": 2
   }
 }

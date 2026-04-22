@@ -8,11 +8,23 @@ fused golden sample source package.
 - repo: `E:\codex\hope-kb`
 - branch: `codex/contracts-freeze`
 - anchor before this package: `818c098`
-- package type: KB-only raw source receipt, normalized staging, and mapping review
+- latest pushed source receipt commit before this alignment addendum: `e056e7d`
+- package type: KB-only raw source receipt, normalized staging, field mapping
+  review, and V3 alignment supervision
 
 This package does not modify `E:\codex\hope`, V3 proposal files, desktop,
 intake, Qwen, Seedance, or Hope product/runtime code. It does not merge
 `hope-kb` into `hope`.
+
+## Canonical Format Decision
+
+The local V108 XLSX / DOCX table format is the latest canonical source format
+for this gate.
+
+Historical V3 remote branch content from
+`E:\codex\hope / origin/codex/v3-field-overlay-proposal @ 69c645c` is used only
+as proposal / freeze-candidate reference. It is not treated as the current field
+format truth and is not modified in this gate.
 
 ## Source Artifacts
 
@@ -29,6 +41,10 @@ Derived staging artifact:
 
 - `docs/normalized-staging/seedance2-v108-fused-golden-sample.normalized.json`
   - sha256: `a9ace9098ae60ce942ee5101b39329dc5b9ee70ab2d73e20d058d6db5938c167`
+
+V3 alignment report:
+
+- `docs/seedance2-v108-v3-alignment-report-2026-04-23.md`
 
 ## Read-Only XLSX Check
 
@@ -50,12 +66,12 @@ Derived staging artifact:
   - `Yes = 97`
   - `No = 11`
 
-Placeholder scan:
+Placeholder and empty-surface scan:
 
 - rows with placeholder-like `待补` text: `102`
 - official rows with placeholder-like text: `95`
 - reserve rows with placeholder-like text: `7`
-- affected fields:
+- affected placeholder fields:
   - `reference_bundle = 102`
   - `prompt_body = 102`
   - `technical_profile = 41`
@@ -63,40 +79,69 @@ Placeholder scan:
   - `camera_directing_core = 42`
   - `audio_directing_core = 67`
   - `reserve_reason = 1`
+- empty / conditional field surfaces:
+  - `reserve_reason = 108` blank official rows
+  - `sequence_id = 79` blank single-shot rows
+  - `shot_order = 79` blank single-shot rows
+
+Empty, blank, and placeholder surfaces are preserved and marked as
+`future_model_fill_surface` or schema/content gaps. They are not deleted, locally
+filled, counted as separate sample records, promoted to positive few-shot, or
+used as current validator evidence.
 
 ## Field Mapping Review
 
-| V108 source field | Current v0.2 mapping | Review status |
-| --- | --- | --- |
-| `shot_id` | `sample_id` candidate and preserved in `source_fields` | mappable |
-| `library_status` | preserved in `source_fields`; drives official/reserve split | mappable as gate metadata |
-| `reserve_reason` | validator / repair / gap evidence only | mappable as evidence, not positive few-shot |
-| `sample_type` | preserved in `source_fields`; `sequence_shot` needs sequence semantics | partial; vNext gap |
-| `sequence_id` | preserved in `source_fields` | vNext sequence gap |
-| `shot_order` | preserved in `source_fields` | vNext sequence gap |
-| `sample_title` | existing `source_fields.sample_title` | mappable |
-| `style_cluster` | classification/source metadata candidate | partial; no dedicated v0.2 field |
-| `scene_category` | scene/genre metadata candidate | partial; no dedicated v0.2 field |
-| `scene_tag` | existing scene tag style metadata candidate | mappable |
-| `quality_grade` | existing `tier` equivalent candidate | mappable |
-| `usable_for_fewshot` | existing few-shot source gate candidate | mappable, still blocked by reserve/negative/placeholder gates |
-| `technical_profile` | derived `technical_profile` candidate | schema gap; no top-level v0.2 column |
-| `scene_performance_core` | derived `scene_performance_core` candidate | schema gap; no top-level v0.2 column |
-| `camera_directing_core` | existing core axis candidate | partial; v0.2 has one core per record, V108 carries multiple fused cores |
-| `audio_directing_core` | existing core axis candidate | partial; v0.2 has one core per record, V108 carries multiple fused cores |
-| `continuity_negative_core` | negative/continuity validator evidence candidate | partial; needs dedicated continuity negative structure |
-| `reference_bundle` | `external_reference_handles` source value and candidate extraction | semantic gap; source is media descriptor / placeholder, not canonical object-name list |
-| `ip_abstraction_note` | compliance/source note | mappable as evidence; no product prompt expansion |
-| `covered_points` | existing validator evidence | mappable |
-| `missed_points` | existing validator evidence | mappable |
-| `teaching_note` | existing validator / repair planning evidence | mappable |
-| `prompt_body` | `prompt_body_candidate` when placeholder-free | partial; 102 rows blocked by placeholder text |
+| V108 column | meaning | old V3 field if any | current KB v0.2 field if any | mapping status | notes |
+| --- | --- | --- | --- | --- | --- |
+| `shot_id` | Source row / shot identifier for V108 samples. | `shot_id`; golden-sample proposal `sample_id` | `sample_id`; `source_fields.sample_id` | rename | V108 uses `shot_id`; current KB v0.2 golden sample rows use `sample_id`. Preserve source value and map only after explicit import gate. |
+| `library_status` | Official/reserve library split. | none exact; do not confuse with old V3 `sample_type` | none in current seed rows; staged in normalized artifact | new | `official/reserve` is V108 source governance metadata. `reserve` rows are excluded from positive few-shot. |
+| `reserve_reason` | Reason a reserve row stays out of official positive promotion. | `repair_hint`, `negative_boundary_marker`, and validator notes are only historical analogues | validator / repair evidence candidate only | new | Blank for 108 official rows. Blank area is conditional metadata, not missing sample content. |
+| `sample_type` | V108 structure type: `single_shot` or `sequence_shot`. | `structure_mode`; conflicts with old golden-sample `sample_type=positive/negative/repair_before/repair_after` | none dedicated | rename | `v3_alignment_gap`: V108 `sample_type` does not mean old V3 golden-sample `sample_type`. |
+| `sequence_id` | Sequence grouping key for `sequence_shot` rows. | `shot_beats_link`, `sequence_no`, `shot_beats` | none | future_model_fill | Blank for 79 single-shot rows; preserve as future sequence surface and do not count blank cells as records. |
+| `shot_order` | Per-sequence order for sequence shots. | `beat_order`, `shot_beats`, `sequence_no` | none | future_model_fill | Blank for 79 single-shot rows; preserve for future model fill / sequence validator design. |
+| `sample_title` | Human-readable sample title. | `sample_title` | `source_fields.sample_title` | exact | Safe source title / retrieval label. |
+| `style_cluster` | Broad style cluster such as basic migration, anime, guoman, US comic, original. | `style_profile_id` / `retrieval_tags` historical analogues | no dedicated field; possible retrieval tag only | new | Do not emit as imitation language. Needs future retrieval taxonomy review. |
+| `scene_category` | Broad scene category / scenario family. | `kb_scene_type`, `shot_function_code`, `retrieval_tags` | no dedicated field; closest current tags are `classification.genre_tags` / `scene_tags` | rename | Candidate scene taxonomy input; not imported into current v0.2 rows. |
+| `scene_tag` | Source scene tag. | `scene_tag`, `retrieval_tags` | `source_fields.scene_tag`; `classification.scene_tags` | exact | Existing v0.2 supports scene tags from the earlier 17-field export. |
+| `quality_grade` | Quality tier label. | `tier` | `source_fields.tier`; `classification.tier` | rename | Preserve source labels `优/好/中/差`. |
+| `usable_for_fewshot` | Source few-shot eligibility flag. | `usable_for_fewshot`; `fewshot.eligible` | `source_fields.usable_for_fewshot`; `fewshot.eligible` | exact | Still gated by official/reserve, negative, placeholder, and reference-handle checks. |
+| `technical_profile` | Duration, shot size, transition, lens / aperture / frame-rate, movement profile. | split across `target_clip_duration_sec`, `shot_type`, `transition_note`, `lens_feel`, model-capability fields | none dedicated | split | Contains `待补` in 41 rows. `future_model_fill_surface` until deterministic values exist. |
+| `scene_performance_core` | Fused environment, subject, action, micro-expression, light/material, and beat content. | merge of `visual_scene_core` and `motion_performance_core` | no full-content field; current KB stores `core` axis and evidence text | merge | V108 intentionally fuses old V3 visual and motion/performance material. Requires vNext schema decision. |
+| `camera_directing_core` | Camera purpose, composition, motion path, axis rule, and relation to adjacent shots. | `camera_directing_core` | no full-content field; current KB stores core-axis samples only | exact | Old V3 field name matches, but current KB v0.2 does not have a top-level long-text content field. |
+| `audio_directing_core` | Sound layers, sync points, silence, music/SFX, audio-picture relation. | `audio_directing_core` | no full-content field; current KB stores core-axis samples only | exact | Old V3 field name matches, but current KB v0.2 stores evidence, not fused prompt body content. |
+| `continuity_negative_core` | Continuity locks plus prohibitions, empty-word blacklist, and failure risks. | `continuity_lock_core`, `blocking_failure_codes`, `negative_boundary_marker` | `negative_sample`, `validator_evidence`, failure mapping analogues only | split | `v3_alignment_gap`: V108 combines continuity lock and negative constraints; old V3 had separate reference/continuity/validator concepts. |
+| `reference_bundle` | Source reference descriptor that must normalize to external reference handle candidates. | historical `reference_control_core`, `asset_registry`, `image_ref_assets`, `video_ref_assets`, `audio_ref_assets` | none dedicated; normalized staging derives `external_reference_handles_candidate` | rename | `v3_alignment_gap`: V108 canonical interpretation is `external_reference_handles` as object-name list, not asset binding or completed `reference_control_core`. |
+| `ip_abstraction_note` | IP abstraction / compliance note. | `rights_or_ip_risk_flag`, `copyright_risk_flag`, `negative_boundary_marker` | none dedicated | new | Compliance evidence only; no Hope product prompt expansion. |
+| `covered_points` | Source coverage evidence. | `covered_points`, `covered_core_fields`, `covered_atomic_fields` | `validator_evidence.covered_points`; coverage rules | exact | First-class validator evidence when imported through a future gate. |
+| `missed_points` | Source missing-point evidence. | `missed_points`, `missing_items`, expected failure evidence | `validator_evidence.missed_points`; failure / repair mapping evidence | exact | Used only as validator / repair / gap evidence. |
+| `teaching_note` | Human explanation of why the sample is useful, weak, or risky. | `teaching_note`, `repair_hint` | `source_fields.teaching_note`; `planned_repair_inputs.teaching_note` | exact | Can support future repair rationale, not current product behavior. |
+| `prompt_body` | Source prompt text / prompt candidate body. | `sample_text`; historical compiled prompt fields are not canonical truth | none dedicated in current KB v0.2 seed rows | rename | `prompt_body_candidate` is preserved only for 13 placeholder-free rows; 102 rows with `待补` are blocked and recorded as gaps. |
+
+## V3 Alignment Gaps
+
+The following conflicts are intentionally not fixed in the old V3 branch:
+
+- `sample_type`: V108 means `single_shot/sequence_shot`; old golden-sample V3
+  proposal used `sample_type` for positive/negative/repair categories.
+- `reference_bundle`: V108 normalizes toward `external_reference_handles`;
+  old V3 discussed `reference_control_core` and asset registry / ref-assets.
+- `continuity_negative_core`: V108 fuses continuity locks and negative
+  constraints; old V3 separated `continuity_lock_core`, validator blockers,
+  and negative boundary concepts.
+- `scene_performance_core`: V108 fuses the old visual and motion/performance
+  axes into one source field.
+- `prompt_body`: V108 treats source prompt body as sample text /
+  `prompt_body_candidate`; old compiled Seedance prompt fields are adapter
+  outputs and must not become source truth.
+
+Each item above is marked `v3_alignment_gap` and should wait for main-control
+acceptance before any V3 docs-only refresh is scheduled.
 
 ## external_reference_handles Conclusion
 
 `reference_bundle` is treated only as source input for
-`external_reference_handles`, not as image files, URLs, asset IDs, or a completed
-`reference_control_core`.
+`external_reference_handles`, not as image files, URLs, asset IDs, real material
+bindings, or a completed `reference_control_core`.
 
 - `reference_handle_needs_canonical_name = 75`
 - `reference_handle_normalization_needed = 115`
@@ -141,11 +186,14 @@ Placeholder scan:
   canonical external object names.
 - 102 rows contain placeholder-like text and must not be guessed into completed
   prompt candidates.
+- Empty / conditional surfaces are preserved as `future_model_fill_surface` and
+  do not alter the source row count.
 
 ## Decision
 
-This package stages the V108 source package and mapping review only. It does not
-directly import the 115 V108 rows into `seed/v0.2/golden_sample_library.json`,
-coverage rules, failure mapping, or repair mapping. A later vNext or explicit
-main-control import gate should decide the schema extension and promotion rules.
+This package stages the V108 source package, mapping review, and V3 alignment
+report only. It does not directly import the 115 V108 rows into
+`seed/v0.2/golden_sample_library.json`, coverage rules, failure mapping, or
+repair mapping. A later vNext or explicit main-control import gate should decide
+the schema extension and promotion rules.
 

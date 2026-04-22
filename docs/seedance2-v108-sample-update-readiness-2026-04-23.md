@@ -8,7 +8,9 @@ V108 fused golden sample source package.
 - repo: `E:\codex\hope-kb`
 - branch: `codex/contracts-freeze`
 - anchor before this package: `818c098`
-- package type: immutable raw source receipt plus normalized staging
+- latest pushed source receipt commit before this alignment addendum: `e056e7d`
+- package type: immutable raw source receipt, normalized staging, field mapping
+  review, and V3 alignment report
 
 This package does not modify Hope product code, V3 proposal files, desktop,
 intake, Qwen, Seedance, or the v0.1 seed/snapshot contract.
@@ -25,6 +27,7 @@ as immutable raw source artifacts.
 
 - `docs/normalized-staging/seedance2-v108-fused-golden-sample.normalized.json`
 - `docs/seedance2-v108-field-mapping-review-2026-04-23.md`
+- `docs/seedance2-v108-v3-alignment-report-2026-04-23.md`
 - `docs/seedance2-v108-sample-update-readiness-2026-04-23.md`
 
 ## XLSX Formal Counts
@@ -40,9 +43,13 @@ as immutable raw source artifacts.
 
 ## Readiness Decision
 
-The V108 package has entered KB-side sample update readiness as raw source and
-normalized staging. It has not been promoted into positive few-shot runtime
-material.
+The V108 package has entered KB-side sample update readiness as raw source,
+normalized staging, field mapping review, and V3 alignment evidence. It has not
+been promoted into positive few-shot runtime material.
+
+The local V108 XLSX / DOCX table format is the current canonical source format
+for this gate. Historical V3 material from `E:\codex\hope /
+origin/codex/v3-field-overlay-proposal` is reference-only and remains unchanged.
 
 Current v0.2 sample row counts remain unchanged in this package:
 
@@ -51,8 +58,31 @@ Current v0.2 sample row counts remain unchanged in this package:
 - `golden_sample_failure_mapping = 40`
 - `golden_sample_repair_mapping = 40`
 
-The v0.2 source register and provenance are updated to record the V108 raw and
-derived source package.
+The v0.2 source register and provenance record the V108 raw and derived source
+package. The V3 alignment report is a KB-side generated artifact only.
+
+## V3 Alignment Readiness
+
+Generated report:
+
+- `docs/seedance2-v108-v3-alignment-report-2026-04-23.md`
+
+Alignment conclusions:
+
+- V108 `sample_type` conflicts with old V3 golden-sample `sample_type`
+  semantics and is marked `v3_alignment_gap`.
+- V108 `scene_performance_core` merges old V3 visual and motion/performance
+  axes and is marked `v3_alignment_gap`.
+- V108 `continuity_negative_core` combines continuity and negative constraints
+  and is marked `v3_alignment_gap`.
+- V108 `reference_bundle` should normalize to `external_reference_handles`;
+  it is not `reference_control_core`, asset binding, image path, URL, or asset
+  ID.
+- V108 `prompt_body` is source sample text / `prompt_body_candidate`, not
+  compiled Seedance adapter output.
+
+No V3 docs-only refresh is performed here. It should wait for main-control
+acceptance of this KB update.
 
 ## external_reference_handles Handling
 
@@ -72,13 +102,24 @@ derived source package.
 - No missing prompt body content was guessed or locally filled.
 - No appearance, clothing, scene art, image path, URL, or asset ID was appended.
 
+## Future Model Fill / Gap Handling
+
+- Blank `reserve_reason` on official rows: `108`; conditional metadata only.
+- Blank `sequence_id` on single-shot rows: `79`; `future_model_fill_surface`.
+- Blank `shot_order` on single-shot rows: `79`; `future_model_fill_surface`.
+- Placeholder `待补` appears in current source content and is preserved as a
+  gap, not filled.
+- Empty / placeholder surfaces do not alter the 115 source row count.
+- Empty / placeholder surfaces do not enter current positive few-shot or current
+  validator evidence.
+
 ## Positive Few-Shot / Validator Split
 
 - Official samples may become later positive few-shot candidates only after
   usable/negative/reference/placeholder gates pass.
 - Reserve samples are excluded from positive few-shot.
-- Reserve, negative, unusable, and placeholder-bearing samples remain validator,
-  repair, and gap evidence.
+- Reserve, negative, unusable, placeholder-bearing, and V3 alignment-gap rows
+  remain validator, repair, and gap evidence.
 - Source official few-shot `Yes` rows: `97`
 - Placeholder-clean positive few-shot candidates after this staging pass: `13`
 - Rows promoted to positive few-shot in this package: `0`
@@ -95,4 +136,5 @@ derived source package.
 - 102 rows include placeholder-like `待补` text.
 - Canonical external object names must be reviewed before prompt reference
   append or later positive few-shot promotion.
+- Old V3 documents need a later docs-only refresh after main-control acceptance.
 
