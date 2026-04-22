@@ -1,64 +1,151 @@
-﻿{
-    "schema_version":  "hope-kb-v0.2-source-register",
-    "register_name":  "hope-kb-v0.2-source-register",
-    "updated_at":  "2026-04-22",
-    "sources":  [
-                    {
-                        "source_id":  "golden_sample_library_csv_2026_04_22",
-                        "source_type":  "internal_golden_sample_export",
-                        "label":  "Golden Sample Library CSV export 2026-04-22",
-                        "path":  "docs/source-exports/golden-sample-library-642bd7876e0d4649814f35fb133b67f3-2026-04-22.csv",
-                        "sha256":  "2d0ce22f8c85ca59de6abf35a48239aadef9a2bd01bb3f7b4685bf80e06bf843",
-                        "applies_to":  [
-                                           "golden_sample_library",
-                                           "golden_sample_field_coverage_rules",
-                                           "golden_sample_failure_mapping",
-                                           "golden_sample_repair_mapping"
-                                       ],
-                        "notes":  "Canonical committed source export. All 40 rows and 17 fields must remain lossless."
-                    },
-                    {
-                        "source_id":  "golden_sample_normalized_staging_2026_04_22",
-                        "source_type":  "normalized_staging_artifact",
-                        "label":  "Lossless normalized staging artifact for golden sample library",
-                        "path":  "docs/normalized-staging/golden-sample-library-642bd7876e0d4649814f35fb133b67f3-2026-04-22.normalized.json",
-                        "sha256":  "3cc6ed6ee30a2c55c15805919d6b692e14c12fe1b1b2a605bdb279ced48bdb85",
-                        "applies_to":  [
-                                           "golden_sample_library"
-                                       ],
-                        "notes":  "Intermediate KB-only staging artifact accepted before v0.2 schema promotion."
-                    },
-                    {
-                        "source_id":  "hope_v0_2_scope_gate_readiness_2026_04_22",
-                        "source_type":  "main_control_readiness_memo",
-                        "label":  "Hope v0.2 scope gate readiness memo",
-                        "path":  "E:/codex/hope/docs/v0.2-scope-gate-readiness-2026-04-22.md",
-                        "applies_to":  [
-                                           "golden_sample_library_v0_2_schema_package"
-                                       ],
-                        "notes":  "Read-only main-control input. This KB package does not modify the Hope repo."
-                    }
-                ],
-    "provenance_entries":  [
-                               {
-                                   "provenance_id":  "golden_sample_v0_2_seed_package_2026_04_22",
-                                   "source_ids":  [
-                                                      "golden_sample_library_csv_2026_04_22",
-                                                      "golden_sample_normalized_staging_2026_04_22",
-                                                      "hope_v0_2_scope_gate_readiness_2026_04_22"
-                                                  ],
-                                   "generated_files":  [
-                                                           "seed/v0.2/golden_sample_library.json",
-                                                           "seed/v0.2/golden_sample_field_coverage_rules.json",
-                                                           "seed/v0.2/golden_sample_failure_mapping.json",
-                                                           "seed/v0.2/golden_sample_repair_mapping.json"
-                                                       ],
-                                   "preservation_contract":  {
-                                                                 "preserves_all_source_rows":  true,
-                                                                 "preserves_all_17_source_fields":  true,
-                                                                 "imports_into_v0_1_snapshot":  false,
-                                                                 "planning_only_until_future_hope_gate":  true
-                                                             }
-                               }
-                           ]
+{
+  "schema_version": "hope-kb-v0.2-source-register",
+  "register_name": "hope-kb-v0.2-source-register",
+  "updated_at": "2026-04-23",
+  "sources": [
+    {
+      "source_id": "golden_sample_library_csv_2026_04_22",
+      "source_type": "internal_golden_sample_export",
+      "label": "Golden Sample Library CSV export 2026-04-22",
+      "path": "docs/source-exports/golden-sample-library-642bd7876e0d4649814f35fb133b67f3-2026-04-22.csv",
+      "sha256": "2d0ce22f8c85ca59de6abf35a48239aadef9a2bd01bb3f7b4685bf80e06bf843",
+      "applies_to": [
+        "golden_sample_library",
+        "golden_sample_field_coverage_rules",
+        "golden_sample_failure_mapping",
+        "golden_sample_repair_mapping"
+      ],
+      "notes": "Canonical committed source export. All 40 rows and 17 fields must remain lossless."
+    },
+    {
+      "source_id": "golden_sample_normalized_staging_2026_04_22",
+      "source_type": "normalized_staging_artifact",
+      "label": "Lossless normalized staging artifact for golden sample library",
+      "path": "docs/normalized-staging/golden-sample-library-642bd7876e0d4649814f35fb133b67f3-2026-04-22.normalized.json",
+      "sha256": "3cc6ed6ee30a2c55c15805919d6b692e14c12fe1b1b2a605bdb279ced48bdb85",
+      "applies_to": [
+        "golden_sample_library"
+      ],
+      "notes": "Intermediate KB-only staging artifact accepted before v0.2 schema promotion."
+    },
+    {
+      "source_id": "hope_v0_2_scope_gate_readiness_2026_04_22",
+      "source_type": "main_control_readiness_memo",
+      "label": "Hope v0.2 scope gate readiness memo",
+      "path": "E:/codex/hope/docs/v0.2-scope-gate-readiness-2026-04-22.md",
+      "applies_to": [
+        "golden_sample_library_v0_2_schema_package"
+      ],
+      "notes": "Read-only main-control input. This KB package does not modify the Hope repo."
+    },
+    {
+      "source_id": "seedance2_v108_raw_xlsx_2026_04_23",
+      "source_type": "immutable_raw_xlsx",
+      "label": "Seedance2.0 V108 fused golden sample library XLSX",
+      "path": "golden-samples/seedance2-v108/Seedance2.0?????V108_???????.xlsx",
+      "sha256": "2c7f7a0b37f5d7a6f90f18c0080a78fa568fcb4528b1b4e6fbdbfb959cfe9e34",
+      "applies_to": [
+        "seedance2_v108_source_package",
+        "golden_sample_vnext_import_gate"
+      ],
+      "notes": "Immutable raw primary data table. Filename and content preserved exactly; 115 rows total, 108 official, 7 reserve."
+    },
+    {
+      "source_id": "seedance2_v108_raw_docx_2026_04_23",
+      "source_type": "immutable_raw_docx",
+      "label": "Seedance2.0 V108 fused golden sample library explanation DOCX",
+      "path": "golden-samples/seedance2-v108/Seedance2.0?????V108_?????????.docx",
+      "sha256": "a2335102154ab88cb5c01517b2b20bbb15efdbdd25f0d32eeb9715d42e8d7ed3",
+      "applies_to": [
+        "seedance2_v108_source_package",
+        "golden_sample_vnext_import_gate"
+      ],
+      "notes": "Immutable raw explanation document. Filename and content preserved exactly; records the formal 115/108/7 source??."
+    },
+    {
+      "source_id": "seedance2_v108_normalized_staging_2026_04_23",
+      "source_type": "normalized_staging_artifact",
+      "label": "Seedance2.0 V108 normalized staging artifact",
+      "path": "docs/normalized-staging/seedance2-v108-fused-golden-sample.normalized.json",
+      "sha256": "a9ace9098ae60ce942ee5101b39329dc5b9ee70ab2d73e20d058d6db5938c167",
+      "applies_to": [
+        "seedance2_v108_source_package",
+        "external_reference_handles_candidate",
+        "prompt_body_candidate"
+      ],
+      "notes": "KB-side derived staging only. Preserves source values and marks placeholder/reference/schema gaps without promoting rows into positive few-shot."
+    },
+    {
+      "source_id": "seedance2_v108_field_mapping_review_2026_04_23",
+      "source_type": "field_mapping_review",
+      "label": "Seedance2.0 V108 field mapping review",
+      "path": "docs/seedance2-v108-field-mapping-review-2026-04-23.md",
+      "sha256": "a5039c942edff85d5957d3974694a686864fb7457b722bbea03eb32ab86cccea",
+      "applies_to": [
+        "golden_sample_vnext_import_gate",
+        "external_reference_handles_candidate"
+      ],
+      "notes": "Documents mappable fields, schema gaps, external_reference_handles handling, and few-shot/evidence split."
+    },
+    {
+      "source_id": "seedance2_v108_sample_update_readiness_2026_04_23",
+      "source_type": "sample_update_readiness_note",
+      "label": "Seedance2.0 V108 sample update readiness note",
+      "path": "docs/seedance2-v108-sample-update-readiness-2026-04-23.md",
+      "sha256": "9a1e31bf119fb5340ca2ea80bcac25226ac53aa90df8c696a2b618b5f5a79ee1",
+      "applies_to": [
+        "seedance2_v108_source_package",
+        "golden_sample_vnext_import_gate"
+      ],
+      "notes": "Records readiness decision: raw source and normalized staging accepted; v0.2 sample rows remain unchanged pending future gate."
+    }
+  ],
+  "provenance_entries": [
+    {
+      "provenance_id": "golden_sample_v0_2_seed_package_2026_04_22",
+      "source_ids": [
+        "golden_sample_library_csv_2026_04_22",
+        "golden_sample_normalized_staging_2026_04_22",
+        "hope_v0_2_scope_gate_readiness_2026_04_22"
+      ],
+      "generated_files": [
+        "seed/v0.2/golden_sample_library.json",
+        "seed/v0.2/golden_sample_field_coverage_rules.json",
+        "seed/v0.2/golden_sample_failure_mapping.json",
+        "seed/v0.2/golden_sample_repair_mapping.json"
+      ],
+      "preservation_contract": {
+        "preserves_all_source_rows": true,
+        "preserves_all_17_source_fields": true,
+        "imports_into_v0_1_snapshot": false,
+        "planning_only_until_future_hope_gate": true
+      }
+    },
+    {
+      "provenance_id": "seedance2_v108_source_receipt_gate_2026_04_23",
+      "source_ids": [
+        "seedance2_v108_raw_xlsx_2026_04_23",
+        "seedance2_v108_raw_docx_2026_04_23",
+        "seedance2_v108_normalized_staging_2026_04_23",
+        "seedance2_v108_field_mapping_review_2026_04_23",
+        "seedance2_v108_sample_update_readiness_2026_04_23"
+      ],
+      "generated_files": [
+        "docs/normalized-staging/seedance2-v108-fused-golden-sample.normalized.json",
+        "docs/seedance2-v108-field-mapping-review-2026-04-23.md",
+        "docs/seedance2-v108-sample-update-readiness-2026-04-23.md"
+      ],
+      "preservation_contract": {
+        "preserves_raw_artifact_filenames": true,
+        "preserves_raw_artifact_content": true,
+        "imports_into_v0_1_snapshot": false,
+        "imports_into_v0_2_golden_sample_library": false,
+        "positive_fewshot_promotion_closed": true,
+        "reserve_samples_excluded_from_positive_fewshot": true,
+        "external_reference_handles_are_object_names_not_assets": true,
+        "does_not_create_reference_control_core": true,
+        "planning_only_until_main_control_acceptance": true
+      }
+    }
+  ]
 }
