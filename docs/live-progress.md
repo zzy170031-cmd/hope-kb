@@ -5,15 +5,16 @@ Update this file for online sync after every 10-20 minute work package.
 ## Current Focus
 
 - current thread state: `codex/contracts-freeze`, `hope-kb` only, no merge with `hope`
-- current task: Seedance2.0 V108 `reference_bundle` to `external_reference_handles` canonical-name review is complete as KB-only evidence; V108 XLSX / DOCX remains the canonical source format; v0.2 sample rows remain unchanged
+- current task: Seedance2.0 V108 `reference_bundle` to `external_reference_handles` canonical-name review is complete as KB-only evidence; the 23 V108 worksheet headers are pinned as the canonical field surface; v0.2 sample rows remain unchanged
 - owner / lane: KB integration owner, coordinating V108 reference-handle boundary review, source evidence preservation, validation flow, and boundary sync with `hope`
-- last updated: 2026-04-23 01:20:48 +08:00
+- last updated: 2026-04-23 01:23:57 +08:00
 
 ## Latest Completed
 
 - latest pushed commit before this canonical-name review: `6f210f0` (`docs: align Seedance2 V108 fields with V3 proposal`)
-- latest local change: added `docs/seedance2-v108-external-reference-handles-canonical-name-review-2026-04-23.md`
+- latest local change: added `docs/seedance2-v108-external-reference-handles-canonical-name-review-2026-04-23.md`; follow-up pinned the V108 header row as the canonical field surface
 - XLSX formal count: 115 total rows, 108 official, 7 reserve; official few-shot source flag is 97 Yes / 11 No
+- V108 field source: 23 worksheet headers are canonical; cell content below headers is source value/evidence only and must not create extra fields
 - external reference handling: `reference_bundle` remains raw source evidence only; 37 candidate stems were retained as non-canonical evidence, product-ready `external_reference_handles = 0`, and no image paths, URLs, asset IDs, real material bindings, or `reference_control_core` were created
 - V3 alignment handling: V108 XLSX/DOCX is canonical for this gate; old V3 proposal material is historical reference only; conflicts are marked `v3_alignment_gap`; empty/placeholder areas are marked `future_model_fill_surface`
 - latest validation command before this addendum: v0.1 no-regression validation passed; v0.1 default snapshot build passed; v0.2 explicit snapshot build passed with SQLite `quick_check = ok`

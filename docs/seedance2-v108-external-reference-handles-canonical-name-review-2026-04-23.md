@@ -24,7 +24,57 @@ exporters, workbook contracts, or IPC. It does not merge `hope-kb` into
 The V108 XLSX / DOCX field table is the current source of truth for this gate.
 Old V3 documents are historical proposal / freeze-candidate references only.
 
-The relevant V108 field is:
+## Canonical Header Rule
+
+The V108 worksheet header row is the canonical field surface. All downstream
+mapping, schema, handle, validator, repair, and prompt-boundary decisions must
+derive from these header strings, not from old V3 document field names or from
+free-text sections inside cell values.
+
+Canonical V108 headers:
+
+```text
+shot_id
+library_status
+reserve_reason
+sample_type
+sequence_id
+shot_order
+sample_title
+style_cluster
+scene_category
+scene_tag
+quality_grade
+usable_for_fewshot
+technical_profile
+scene_performance_core
+camera_directing_core
+audio_directing_core
+continuity_negative_core
+reference_bundle
+ip_abstraction_note
+covered_points
+missed_points
+teaching_note
+prompt_body
+```
+
+The cells below these headers are source values, evidence, examples, gaps, or
+future-fill surfaces. They are not additional field names.
+
+Operational consequences:
+
+- A downstream field may be exact, renamed, split, merged, new, deprecated, or a
+  gap only by citing one or more of the 23 V108 headers above.
+- Text inside `prompt_body`, including a `参考素材` block, remains content under
+  the `prompt_body` field. It must not create a separate reference field.
+- `reference_bundle` is the only V108 header reviewed by this package for
+  external-reference naming.
+- Media labels inside `reference_bundle`, such as image/video/audio labels, are
+  values under that header. They are not field headers and are not final
+  `external_reference_handles`.
+
+The relevant V108 field for this review is:
 
 ```text
 reference_bundle
