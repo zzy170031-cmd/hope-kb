@@ -5,23 +5,24 @@ Update this file for online sync after every 10-20 minute work package.
 ## Current Focus
 
 - current thread state: `codex/contracts-freeze`, `hope-kb` only, no merge with `hope`
-- current task: checkpoint support standby; keep the pushed baseline stable and wait for `hope` main-thread controlled intake scheduling
-- owner / lane: Lane 5 integrator, coordinating thread governance, validation flow, and snapshot convergence
-- last updated: 2026-04-20 18:58:42 +08:00
+- current task: independent hardening / standby after Hope desktop WriterReadiness stable-stop; keep the pushed KB baseline stable and wait for an explicit KB hardening package or merge-readiness reopen
+- owner / lane: KB integration owner, coordinating thread governance, validation flow, snapshot convergence, and boundary sync with `hope`
+- last updated: 2026-04-22 17:26:31 +08:00
 
 ## Latest Completed
 
-- latest pushed commit: `1035da6`
-- latest local-only change: none; stable baseline remains `0d534a4` for the runtime-consumer edge-case checkpoint plus `1035da6` for review-doc sync
-- latest validation command: `& 'E:\codex\hope-kb\scripts\validate-seed-bundle.ps1'`, `python E:\codex\hope-kb\scripts\build-kb-snapshot.py --repo-root E:\codex\hope-kb`
+- latest pushed commit: `c3997a0` (`docs: solidify KB thread label and key-node reminder rules`)
+- latest local-only change: this live-progress alignment only; no KB content, runtime, snapshot, or manifest change
+- latest Hope boundary sync: `hope` `codex/contracts-freeze` at `c82160f` accepted the desktop WriterReadiness stable-stop and kept `hope-kb` separate
+- latest validation command: not rerun for this standby alignment because no KB content, runtime, snapshot, or manifest files changed
 
 ## Next Up
 
-- next 30 minutes: hold the current pushed checkpoint and review docs steady while waiting for `hope` main-thread controlled intake scheduling
-- next 60-90 minutes: respond only with bounded feedback if `hope` returns review notes; do not start a new hardening package
+- next 30 minutes: hold the current pushed checkpoint and live-progress alignment steady while `hope` continues RC release confirmation and baseline protection
+- next 60-90 minutes: respond only with bounded feedback if `hope` explicitly opens a KB hardening package; do not start a new package from the desktop WriterReadiness or V3/V4 proposal threads
 
 ## Blockers / Risks
 
-- blocker: no active blocker inside `hope-kb`; checkpoint baseline is approved and in standby
-- risk to `hope` separation: none in implementation scope; keep `hope` product-side runtime hookup out of this repo
+- blocker: no active blocker inside `hope-kb`; current baseline is approved and in standby
+- risk to `hope` separation: none in implementation scope; keep `hope` product-side runtime hookup, desktop WriterReadiness, and V3/V4 field implementation out of this repo
 - merge-readiness status: closed, not reopened
