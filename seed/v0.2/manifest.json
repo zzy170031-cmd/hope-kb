@@ -1,25 +1,25 @@
 {
-  "snapshot_version": "v0.2",
-  "snapshot_name": "hope-kb-golden-sample-library-v0.2",
-  "content_hash_algo": "sha256",
-  "content_hash": "bundle-sha256:3a813e8417cc23f9dbbb2115c40be5a811ece21e76f2d743f05df9ab038c9c0c",
-  "seed_import_format": "hope-kb-golden-sample-seed-bundle-v0.2",
-  "imported_at": "2026-04-23",
-  "primary_key": "machine_id",
-  "bundle_order": [
-    "seed/v0.2/golden_sample_library.json",
-    "seed/v0.2/golden_sample_field_coverage_rules.json",
-    "seed/v0.2/golden_sample_failure_mapping.json",
-    "seed/v0.2/golden_sample_repair_mapping.json",
-    "seed/v0.2/source_register.json",
-    "seed/v0.2/import_map.json"
-  ],
-  "record_counts": {
-    "golden_sample_library": 40,
-    "golden_sample_field_coverage_rules": 5,
-    "golden_sample_failure_mapping": 40,
-    "golden_sample_repair_mapping": 40,
-    "golden_sample_sources": 9,
-    "golden_sample_provenance_entries": 2
-  }
+    "snapshot_version": "v0.2",
+    "snapshot_name": "hope-kb-golden-sample-library-v0.2",
+    "content_hash_algo": "sha256",
+    "content_hash": "bundle-sha256:2b7948e93f2a5180ffde964a441c34f4bc6090f049b5d9f1fe3f50a996c523b5",
+    "seed_import_format": "hope-kb-golden-sample-seed-bundle-v0.2",
+    "imported_at": "2026-04-23",
+    "primary_key": "machine_id",
+    "bundle_order": [
+        "seed/v0.2/golden_sample_library.json",
+        "seed/v0.2/golden_sample_field_coverage_rules.json",
+        "seed/v0.2/golden_sample_failure_mapping.json",
+        "seed/v0.2/golden_sample_repair_mapping.json",
+        "seed/v0.2/source_register.json",
+        "seed/v0.2/import_map.json"
+    ],
+    "record_counts": {
+        "golden_sample_library": 120,
+        "golden_sample_field_coverage_rules": 5,
+        "golden_sample_failure_mapping": 120,
+        "golden_sample_repair_mapping": 120,
+        "golden_sample_sources": 13,
+        "golden_sample_provenance_entries": 3
+    }
 }
