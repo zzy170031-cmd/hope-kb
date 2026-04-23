@@ -96,5 +96,71 @@
     "source_notes": "以 KON'S TONE 官方站和 MADHOUSE People File 作为首批公开锚点。",
     "confidence_level": "high",
     "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_ref_08",
+    "director_machine_id": "director_08",
+    "代表作品": ["雾山五行", "哪吒之魔童降世", "哪吒之魔童闹海"],
+    "公开锚点": [
+      "https://bgm.tv/subject/305515",
+      "https://m.1905.com/m/film/feature/2243707.shtml",
+      "https://finance.sina.cn/2025-02-07/detail-ineirmwe0752856.d.html?vt=4",
+      "docs/seedance2-v108-director-style-web-research-2026-04-23.md"
+    ],
+    "用途说明": "用于支撑国风武侠/仙侠动作在轻功纵向运动、兵器连续性、屋檐追逐、竹林对峙和爆发落点上的内部镜头语言归纳。",
+    "source_type": "web_research_public_sources",
+    "source_notes": "公开链接仅作为研究锚点；不创建外部 reference handles、资产 URL、产品提示词或真实导演模仿指令。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_ref_09",
+    "director_machine_id": "director_09",
+    "代表作品": ["长安三万里", "哪吒之魔童闹海"],
+    "公开锚点": [
+      "https://cinephilia.net/84772/",
+      "https://news.bjd.com.cn/2023/07/14/10495943.shtml",
+      "https://finance.sina.cn/2025-02-07/detail-ineirmwe0752856.d.html?vt=4",
+      "docs/seedance2-v108-director-style-web-research-2026-04-23.md"
+    ],
+    "用途说明": "用于支撑国漫史诗群像/战争场面在城楼誓师、军阵纵深、旗帜桥接、战鼓节奏和大规模冲阵上的内部镜头语言归纳。",
+    "source_type": "web_research_public_sources",
+    "source_notes": "公开链接仅作为研究锚点；不创建外部 reference handles、资产 URL、产品提示词或真实导演模仿指令。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_ref_10",
+    "director_machine_id": "director_10",
+    "代表作品": ["灵笼", "灵笼 第二季"],
+    "公开锚点": [
+      "https://www.sohu.com/a/921231673_121620820",
+      "https://k.sina.com.cn/article_7857201856_1d45362c001902wz2k.html",
+      "https://www.hb.chinanews.com.cn/news/2025/0525/417311.html",
+      "docs/seedance2-v108-director-style-web-research-2026-04-23.md"
+    ],
+    "用途说明": "用于支撑都市末世/工业压迫在地铁断电、高架废墟、撤离阻塞、警报声场和基础设施压迫上的内部镜头语言归纳。",
+    "source_type": "web_research_public_sources",
+    "source_notes": "公开链接仅作为研究锚点；不创建外部 reference handles、资产 URL、产品提示词或真实导演模仿指令。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_ref_11",
+    "director_machine_id": "director_11",
+    "代表作品": ["天官赐福 全新动画短片：太子悦神·惊鸿一瞥", "我为歌狂之旋律重启"],
+    "公开锚点": [
+      "https://www.bilibili.com/opus/1031137468618899457",
+      "https://bgm.tv/ep/1418982",
+      "https://www.bilibili.com/bangumi/media/md28223062/",
+      "https://bgm.tv/subject/219141",
+      "https://sh.people.com.cn/n2/2020/1211/c350122-34468870.html",
+      "docs/seedance2-v108-director-style-web-research-2026-04-23.md"
+    ],
+    "用途说明": "用于支撑国潮舞台/原创表演在舞台轴线、聚光灯、同步群舞、音乐拍点、表演入场和最终定格上的内部镜头语言归纳。",
+    "source_type": "web_research_public_sources",
+    "source_notes": "公开链接仅作为研究锚点；不创建外部 reference handles、资产 URL、产品提示词或真实导演模仿指令。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
   }
 ]

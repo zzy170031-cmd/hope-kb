@@ -96,5 +96,61 @@
     "source_notes": "服务今敏风格的运行时规则。",
     "confidence_level": "high",
     "last_reviewed_at": "2026-04-19"
+  },
+  {
+    "machine_id": "director_rule_08",
+    "director_machine_id": "director_08",
+    "visual_non_negotiables": ["武器连续性", "轻功运动轴线", "国风空间关系"],
+    "camera_rules": ["先交代屋檐、竹林或山门空间，再进入高速动作", "轻功、拔刀、回身必须保留清晰方向和落点"],
+    "dialogue_rules": ["对峙段对白要短", "用呼吸、眼神、身法启动替代解释性台词"],
+    "scene_rules": ["国风武侠对峙、屋檐追逐、竹林雨夜、仙侠动作爆发优先"],
+    "transition_rules": ["动作接切、硬切落点和纵向位移接切优先", "避免用纯光效抹掉动作因果"],
+    "anti_patterns": ["只写仙气不写动作", "高速乱切", "武器位置漂移", "屋檐轴线混乱"],
+    "source_type": "web_research_distillation",
+    "source_notes": "服务 director_08 内部风格通道；依据 docs/seedance2-v108-director-style-web-research-2026-04-23.md，不作为真实导演模仿规则。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_rule_09",
+    "director_machine_id": "director_09",
+    "visual_non_negotiables": ["军阵朝向", "指挥中心", "战场纵深"],
+    "camera_rules": ["先建立群像层级和战场纵深，再推进到指挥者或冲阵落点", "大规模队列切换必须保留旗帜、鼓点或阵列方向作为方位锚"],
+    "dialogue_rules": ["誓师和群体响应要服务场面层级", "避免单人喊话替代队列调度"],
+    "scene_rules": ["城楼誓师、军阵集结、大军冲阵、战鼓群像优先"],
+    "transition_rules": ["鼓点接切、旗帜桥接和阵列方向接切优先", "规模变化时不跳过空间交代"],
+    "anti_patterns": ["群众随机乱跑", "只有主角没有队列", "战场方位消失", "旗帜和阵列漂移"],
+    "source_type": "web_research_distillation",
+    "source_notes": "服务 director_09 内部风格通道；依据 docs/seedance2-v108-director-style-web-research-2026-04-23.md，不作为真实导演模仿规则。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_rule_10",
+    "director_machine_id": "director_10",
+    "visual_non_negotiables": ["逃生轴线", "工业压迫空间", "警报节奏"],
+    "camera_rules": ["先标明地铁、高架、通道或废墟的逃生方向，再压缩空间", "追逐和撤离必须保留障碍来源、警报来源和光源失效顺序"],
+    "dialogue_rules": ["危机段对白服务路线选择和风险判断", "避免用末世氛围旁白替代空间压力"],
+    "scene_rules": ["地铁断电、高架废墟、工业通道、撤离阻塞和警报升级优先"],
+    "transition_rules": ["警报声桥接、熄灯接切、闸门硬切和障碍遮挡转场优先"],
+    "anti_patterns": ["只有废墟美术没有逃生路线", "随机爆炸", "警报来源不明", "通道方向漂移"],
+    "source_type": "web_research_distillation",
+    "source_notes": "服务 director_10 内部风格通道；依据 docs/seedance2-v108-director-style-web-research-2026-04-23.md，不作为真实导演模仿规则。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
+  },
+  {
+    "machine_id": "director_rule_11",
+    "director_machine_id": "director_11",
+    "visual_non_negotiables": ["舞台轴线", "队形连续性", "音乐拍点"],
+    "camera_rules": ["先建立舞台和表演轴线，再在全景队形、中景动作、特写反应间切换", "群舞必须绑定音乐拍点、站位和最终定格"],
+    "dialogue_rules": ["表演段少用解释性台词", "让音乐、灯光和动作同步承担情绪推进"],
+    "scene_rules": ["舞台亮灯、表演入场、同步群舞、聚光灯切换和全员定格优先"],
+    "transition_rules": ["熄灯接切、聚光灯桥接、音乐重拍接切和动作定格优先"],
+    "anti_patterns": ["只有华丽背景没有站位", "群舞不同步", "音乐拍点缺失", "聚光灯方向漂移"],
+    "source_type": "web_research_distillation",
+    "source_notes": "服务 director_11 内部风格通道；依据 docs/seedance2-v108-director-style-web-research-2026-04-23.md，不作为真实导演模仿规则。",
+    "confidence_level": "medium",
+    "last_reviewed_at": "2026-04-23"
   }
 ]
