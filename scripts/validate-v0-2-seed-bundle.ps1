@@ -236,11 +236,11 @@ foreach ($row in $newRows) {
   }
 }
 
-if ($sourceRecords.Count -ne 14) {
+if ($sourceRecords.Count -ne [int]$manifest.record_counts.golden_sample_sources) {
   throw "source_register sources count mismatch"
 }
 
-if ($provenanceRecords.Count -ne 4) {
+if ($provenanceRecords.Count -ne [int]$manifest.record_counts.golden_sample_provenance_entries) {
   throw "source_register provenance_entries count mismatch"
 }
 

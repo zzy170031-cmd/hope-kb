@@ -3,7 +3,7 @@
     "asset_name": "golden_sample_failure_mapping",
     "generated_at": "2026-04-24",
     "source_context": {
-        "primary_source_id": "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
+        "primary_source_id": "seedance2_v120_safe_plus_final_xlsx_2026_04_24",
         "comparison_source_id": "seedance2_v108_raw_xlsx_2026_04_23"
     },
     "failure_code_definitions": [
@@ -3979,9 +3979,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：建立国战开场的空间和阵营压力，让后续攻防有可信起点。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "军阵组织 / 人数密度 / 旗色层级 / 风向锚定 / 秒点动作 / 鼓点同步 / 负向清单 / reference handles / IP抽象",
+                "missed_points": "已吸收 safe-plus 的军阵组织、秒点动作、风向/人数/兵器轨迹和旗面负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：建立国战开场的空间、阵营和压迫关系，让后续攻防有可信起点。。内部双锚点会审只保留抽象能力：主锚点负责军阵秩序、阵营压迫和旗面层次，辅锚点负责尘土重量、鼓点节拍和队列呼吸。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ01",
@@ -4014,9 +4014,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把军阵从静态展示推进到行动状态，服务“命令即将传递”的故事节拍。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "盾阵压近 / 行进节拍 / 盾矛层次 / 前中后景组织 / 重踏同步 / 风尘一致 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的军阵组织、秒点动作、风向/人数/兵器轨迹和旗面负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把军阵从静态展示推进到行动状态，服务命令即将传递的故事节拍。。内部双锚点会审只保留抽象能力：主锚点负责军阵秩序、阵营压迫和旗面层次，辅锚点负责尘土重量、鼓点节拍和队列呼吸。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ01",
@@ -4049,9 +4049,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把“国战军阵”转成可读的包抄动作，不只展示人多，而是交代战术变化。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "两翼展开 / 包抄口 / 方向链 / 多层兵种 / 鼓点节点 / 中轴留白 / 负向清单 / 会审抽象",
+                "missed_points": "已吸收 safe-plus 的军阵组织、秒点动作、风向/人数/兵器轨迹和旗面负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把军阵组织转成可读的战术变化，让观众知道局势正在收紧。。内部双锚点会审只保留抽象能力：主锚点负责军阵秩序、阵营压迫和旗面层次，辅锚点负责尘土重量、鼓点节拍和队列呼吸。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ01",
@@ -4084,9 +4084,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：收束建立序列，让战事从“排列”进入“执行”，为下一组武将或城池攻防留入口。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "令旗调度 / 指令停顿 / 队列响应 / 风旗一致 / 画面停顿 / 闷响同步 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的军阵组织、秒点动作、风向/人数/兵器轨迹和旗面负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：收束建立序列，让战事从排列进入执行，为后续高光或攻城留入口。。内部双锚点会审只保留抽象能力：主锚点负责军阵秩序、阵营压迫和旗面层次，辅锚点负责尘土重量、鼓点节拍和队列呼吸。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ01",
@@ -4119,9 +4119,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把武将登场落到兵器重量和手部受力，而不是只靠角色帅气亮相。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "武将高光 / 坐骑节奏 / 视线停顿 / 风向统一 / 焦段压缩 / 低鼓同步 / 负向清单 / reference handles",
+                "missed_points": "已吸收 safe-plus 的高光出场、突阵轨迹、兵器弧线、收势停顿和战场负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：先让主将站住气场，再把后续突阵动作建立为可信延伸。。内部双锚点会审只保留抽象能力：主锚点负责人物高光和兵器重量，辅锚点负责泥尘冲击、跟拍速度和收势停顿。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ02",
@@ -4154,9 +4154,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：说明武将爆发前的重心和地面阻力，让动作不是漂浮的技能展示。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "突阵速度 / 兵器弧线 / 敌兵落点 / 跟拍距离 / 打击同步 / 节奏加速 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的高光出场、突阵轨迹、兵器弧线、收势停顿和战场负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把高光人物从亮相推进到真实可感的突阵动作，建立一骑破阵的说服力。。内部双锚点会审只保留抽象能力：主锚点负责人物高光和兵器重量，辅锚点负责泥尘冲击、跟拍速度和收势停顿。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ02",
@@ -4189,9 +4189,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把高光动作拆成可见受力链，避免只出现漂亮光效。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "破盾轨迹 / 单主动作链 / 低机位压迫 / 盾裂音色 / 碎片方向 / 负向清单 / 会审抽象",
+                "missed_points": "已吸收 safe-plus 的高光出场、突阵轨迹、兵器弧线、收势停顿和战场负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把高光从速度推进到命中重量，证明人物不是只会摆姿态。。内部双锚点会审只保留抽象能力：主锚点负责人物高光和兵器重量，辅锚点负责泥尘冲击、跟拍速度和收势停顿。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ02",
@@ -4224,9 +4224,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：用收势确认高光的结果，避免只把武将当海报式 pose。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "收势停顿 / 升格回收 / 肩线稳定 / 呼吸静默 / 披风惯性 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的高光出场、突阵轨迹、兵器弧线、收势停顿和战场负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把人物高光收束成可记忆的尾态，为下一个序列留下情绪余量。。内部双锚点会审只保留抽象能力：主锚点负责人物高光和兵器重量，辅锚点负责泥尘冲击、跟拍速度和收势停顿。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ02",
@@ -4259,9 +4259,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：建立军帐决策空间，让权谋发生在地图、站位和静默里。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "权谋空间 / 席位秩序 / 中轴关系 / 光源方向 / 器物层级 / 低声环境 / 负向清单 / IP抽象",
+                "missed_points": "已吸收 safe-plus 的朝堂权谋结构、席位人数、甩镜反应、拍案重量和器物负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：建立军政决策空间，让后续发言、急报和军令都有权力基础。。内部双锚点会审只保留抽象能力：主锚点负责权谋空间、席位秩序和视线压迫，辅锚点负责甩镜节奏、拍案重量和群像反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ03",
@@ -4294,9 +4294,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把剧情转折放在屏外信息和微表情，不靠大喊大叫。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "发言压迫 / 肩线锁定 / 桌案节拍 / 视线反馈 / 环境回落 / 负向清单 / 会审抽象",
+                "missed_points": "已吸收 safe-plus 的朝堂权谋结构、席位人数、甩镜反应、拍案重量和器物负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把权谋重心从空间转到发言者，让决策冲突真正启动。。内部双锚点会审只保留抽象能力：主锚点负责权谋空间、席位秩序和视线压迫，辅锚点负责甩镜节奏、拍案重量和群像反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ03",
@@ -4329,9 +4329,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把决策动作具体化，令牌位置就是下一镜行军路线的原因。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "群像反应 / 甩镜节奏 / 拍案重量 / 器物弹动 / 席位稳定 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的朝堂权谋结构、席位人数、甩镜反应、拍案重量和器物负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：用群臣哗然把前一镜的话语杀伤力落成可见冲击。。内部双锚点会审只保留抽象能力：主锚点负责权谋空间、席位秩序和视线压迫，辅锚点负责甩镜节奏、拍案重量和群像反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ03",
@@ -4364,9 +4364,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：收束权谋序列，把室内决断转成外部行动。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "定论落点 / 令牌路径 / 执行转场 / 单侧光源 / 脚步同步 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的朝堂权谋结构、席位人数、甩镜反应、拍案重量和器物负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把权谋辩论收束成真正的命令执行，让序列完成闭环。。内部双锚点会审只保留抽象能力：主锚点负责权谋空间、席位秩序和视线压迫，辅锚点负责甩镜节奏、拍案重量和群像反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ03",
@@ -4399,9 +4399,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：建立城池攻防的守方视角，让观众先知道城墙和敌军方向。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "警戒建立 / 钟响节拍 / 城头层级 / 风旗一致 / 远近威胁 / 负向清单 / 会审抽象",
+                "missed_points": "已吸收 safe-plus 的攻城组织、器械推进、城门受击、守城旗面和攻防负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：建立守城方已经感知到攻城压力，让后续梯具逼近有先兆。。内部双锚点会审只保留抽象能力：主锚点负责攻城几何、梯具压迫和旗面落点，辅锚点负责城墙受击、烟尘节拍和守军反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ04",
@@ -4434,9 +4434,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把攻城拆成具体可见路径，不写空泛“攻城大战”。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "云梯推进 / 盾墙护头 / 重量步频 / 城墙斜压 / 撞击同步 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的攻城组织、器械推进、城门受击、守城旗面和攻防负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把攻城威胁从远景预警推进到真实贴近城墙的压迫。。内部双锚点会审只保留抽象能力：主锚点负责攻城几何、梯具压迫和旗面落点，辅锚点负责城墙受击、烟尘节拍和守军反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ04",
@@ -4469,9 +4469,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：通过受力链表现攻防，不靠火光和爆炸堆气氛。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "城门受击 / 门缝烟尘 / 裂纹追踪 / 冲车主线 / 闷响层次 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的攻城组织、器械推进、城门受击、守城旗面和攻防负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把攻城从逼近推进到真正破防，让守城压力具象化。。内部双锚点会审只保留抽象能力：主锚点负责攻城几何、梯具压迫和旗面落点，辅锚点负责城墙受击、烟尘节拍和守军反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ04",
@@ -4504,9 +4504,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：让城池攻防以“守住一拍”收束，给下一段反击或撤离留下空间。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "守城收势 / 旗影稳定 / 回防层级 / 晨火双光 / 克制静默 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的攻城组织、器械推进、城门受击、守城旗面和攻防负向清单；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把攻守序列收束在“城还守得住”的状态，为后续更大规模攻防留接口。。内部双锚点会审只保留抽象能力：主锚点负责攻城几何、梯具压迫和旗面落点，辅锚点负责城墙受击、烟尘节拍和守军反应层次。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNWARSEQ04",
@@ -4539,9 +4539,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：建立策略视口的世界关系，让后续行军和城建有空间依据。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "沙盘视口 / 地形比例 / 边界点亮 / 下沉镜头 / 轻 UI 声 / 负向清单 / reference handles",
+                "missed_points": "已吸收 safe-plus 的沙盘视口、边界点亮、行军轨迹和穿入切换能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：建立策略视口的世界关系，让后续关隘聚焦和斥候入画有空间依据。。内部双锚点会审只保留抽象能力：主锚点负责沙盘视口、地形比例和边界可读性，辅锚点负责轨迹节拍、镜头穿入和 UI 呼吸感。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ01",
@@ -4574,9 +4574,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把沙盘信息转成实际地面镜头，让策略视口服务故事推进。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "关隘聚焦 / 支路读图 / 视口压近 / UI 节拍 / 边界贴地 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的沙盘视口、边界点亮、行军轨迹和穿入切换能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把全局视图收束到真正影响局势的要冲位置，服务后续行动线。。内部双锚点会审只保留抽象能力：主锚点负责沙盘视口、地形比例和边界可读性，辅锚点负责轨迹节拍、镜头穿入和 UI 呼吸感。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ01",
@@ -4609,9 +4609,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：让战略视口落到具体角色行动，不停留在地图展示。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "行军轨迹 / 斥候入画 / 起终点可读 / 轨迹节拍 / 轻绕拍 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的沙盘视口、边界点亮、行军轨迹和穿入切换能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把策略视口从静态地图推进成真正可推演的行动网络。。内部双锚点会审只保留抽象能力：主锚点负责沙盘视口、地形比例和边界可读性，辅锚点负责轨迹节拍、镜头穿入和 UI 呼吸感。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ01",
@@ -4644,9 +4644,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：完成“全局-地面-角色-回流”的视口链路。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "边界回收 / 全局停顿 / 信息回看 / 视口稳定 / UI 底噪 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的沙盘视口、边界点亮、行军轨迹和穿入切换能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把斥候与行军信息重新归回全局，让这一组视口建立完整闭环。。内部双锚点会审只保留抽象能力：主锚点负责沙盘视口、地形比例和边界可读性，辅锚点负责轨迹节拍、镜头穿入和 UI 呼吸感。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ01",
@@ -4679,9 +4679,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把联盟行动拆成可见路线，而不是空写“多方集结”。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "多路线出征 / 主支线分工 / 集结城池 / 轨迹层级 / 集结音效 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的多路线出征、补给受阻、联盟合围和撤退线提示能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把出征从单一路线升级成真正可读的多线推进，为后续阻断和合围埋下逻辑。。内部双锚点会审只保留抽象能力：主锚点负责多路线调度、补给节点和联盟合围逻辑，辅锚点负责光轨密度、攻城器械权重和撤退线提示。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ02",
@@ -4714,9 +4714,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：让合围前出现真实阻力，使策略变化有故事原因。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "补给阻断 / 节点警报 / 路线降速 / 局部缩放 / 告警音效 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的多路线出征、补给受阻、联盟合围和撤退线提示能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：让观众清楚看到推进为什么卡住，而不是只知道战线忽然不动。。内部双锚点会审只保留抽象能力：主锚点负责多路线调度、补给节点和联盟合围逻辑，辅锚点负责光轨密度、攻城器械权重和撤退线提示。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ02",
@@ -4749,9 +4749,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把联盟合围做成镜头可读的空间关系。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "联盟合围 / 汇流口 / 器械推进 / 方向收束 / 三路节拍 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的多路线出征、补给受阻、联盟合围和撤退线提示能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把多线推进收束为真正的包围优势，让战局进入压城阶段。。内部双锚点会审只保留抽象能力：主锚点负责多路线调度、补给节点和联盟合围逻辑，辅锚点负责光轨密度、攻城器械权重和撤退线提示。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ02",
@@ -4784,9 +4784,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：给联盟合围留下风险提示，避免把策略镜头做成单纯胜利展示。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "撤退线 / 反向收缩 / 安全通道 / 战报信息面板 / UI 提示 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的多路线出征、补给受阻、联盟合围和撤退线提示能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把战局从合围推进到风险管理，让观众知道哪些线还能安全退出。。内部双锚点会审只保留抽象能力：主锚点负责多路线调度、补给节点和联盟合围逻辑，辅锚点负责光轨密度、攻城器械权重和撤退线提示。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ02",
@@ -4819,9 +4819,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把城建演进从一个可信起点开始。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "开荒立桩 / 格网建立 / 材料堆位 / 等距视口 / 工序节拍 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的开荒立桩、筑墙升级、资源反馈和昼夜季节能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：先把一片空地变成可施工的秩序面，为后续升级建立逻辑。。内部双锚点会审只保留抽象能力：主锚点负责城建演进、光影时间流逝和材质升级，辅锚点负责夯石节拍、资源反馈和昼夜季节变化。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ03",
@@ -4854,9 +4854,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把“升级”翻译成可见施工过程。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "筑墙升级 / time-lapse / 日影变化 / 工序分层 / 夯石节拍 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的开荒立桩、筑墙升级、资源反馈和昼夜季节能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：让建设进度可视化，把资源投入转成真正看得见的城防成长。。内部双锚点会审只保留抽象能力：主锚点负责城建演进、光影时间流逝和材质升级，辅锚点负责夯石节拍、资源反馈和昼夜季节变化。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ03",
@@ -4889,9 +4889,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把资源反馈从抽象数值变成可见生产镜头。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "资源反馈 / 生产入库 / 轻 UI 面板 / 运输闭环 / 清脆确认音 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的开荒立桩、筑墙升级、资源反馈和昼夜季节能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把建设成果转成真正的收益反馈，让城建不只是在长墙，而是在形成系统循环。。内部双锚点会审只保留抽象能力：主锚点负责城建演进、光影时间流逝和材质升级，辅锚点负责夯石节拍、资源反馈和昼夜季节变化。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ03",
@@ -4924,9 +4924,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：用时间流逝收束城建演进，保留故事里的“建设成果”。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "昼夜季节 / 灯火层次 / 同视口连续性 / 环境床变化 / 全貌停顿 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的开荒立桩、筑墙升级、资源反馈和昼夜季节能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：让一组城建镜头收束成完整成长时间线，证明这座城在持续演进。。内部双锚点会审只保留抽象能力：主锚点负责城建演进、光影时间流逝和材质升级，辅锚点负责夯石节拍、资源反馈和昼夜季节变化。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ03",
@@ -4959,9 +4959,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：用战报卷轴引出武将，而不是直接堆角色名和稀有度。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "卷轴揭示 / 面板进场顺序 / 指向线 / UI 呼吸空间 / 提示音 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的卷轴揭示、兵损反馈、倒计时和战报收束能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：建立战报入口，让后续兵损和资源信息有可信的信息框架。。内部双锚点会审只保留抽象能力：主锚点负责战报 UI、兵损反馈和倒计时结构，辅锚点负责卷轴揭示、数据层次和收束闭环。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ04",
@@ -4994,9 +4994,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把战报结果转成动漫镜头语言，避免空泛数值展示。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "兵损反馈 / 主损失高亮 / 阅读顺序 / 数值击音 / 面板聚焦 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的卷轴揭示、兵损反馈、倒计时和战报收束能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把结果从“输了多少”整理成观众能立刻读懂的代价结构。。内部双锚点会审只保留抽象能力：主锚点负责战报 UI、兵损反馈和倒计时结构，辅锚点负责卷轴揭示、数据层次和收束闭环。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ04",
@@ -5029,9 +5029,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把赛季结算压力落到时间和资源动作上。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "资源倒计时 / 面板布局 / 阈值提示 / 资源缩减 / 节点告警 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的卷轴揭示、兵损反馈、倒计时和战报收束能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把结果压力从静态数字推进成时间驱动的决策紧迫感。。内部双锚点会审只保留抽象能力：主锚点负责战报 UI、兵损反馈和倒计时结构，辅锚点负责卷轴揭示、数据层次和收束闭环。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ04",
@@ -5064,9 +5064,9 @@
                 "golden_reserve_sample"
             ],
             "validator_evidence": {
-                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
-                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
-                "teaching_note": "V120专项增强候选。故事功能：把战报 UI 收束回故事现场，为下一轮行动留下可接镜头。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "covered_points": "战报收束 / 结论栏 / 模块归位 / 阅读停顿 / 极轻底噪 / 负向清单 / reserve gate",
+                "missed_points": "已吸收 safe-plus 的卷轴揭示、兵损反馈、倒计时和战报收束能力；当前仍保留 reserve，仅作为能力池候选，不进入 official/Yes。",
+                "teaching_note": "V120 safe-plus reserve 精修。故事功能：把一组信息镜头收成真正可投放的战报闭环，让观众带着结论离开。。内部双锚点会审只保留抽象能力：主锚点负责战报 UI、兵损反馈和倒计时结构，辅锚点负责卷轴揭示、数据层次和收束闭环。。本镜继续只作为内部能力池候选，不进入 official / Yes。",
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "SLGSEQ04",

@@ -173,6 +173,46 @@
                 "golden_sample_repair_mapping"
             ],
             "notes": "Candidate pool workbook with 152 total rows. Existing 120 rows remain unchanged; new 32 reserve sequence rows are ingested after prompt_body safety normalization."
+        },
+        {
+            "source_id": "seedance2_v148_plan_docx_2026_04_24",
+            "source_type": "immutable_raw_docx",
+            "label": "V148 safe-plus plan docx",
+            "path": "C:/Users/Administrator/Desktop/claude/V148_最新交付/Seedance2.0黄金样本库V148建设方案_导演风格版.docx",
+            "sha256": "1afe54ffc423708f896cb30a7deb44a1f151ca9ac0b078b4c98cbada2088a465",
+            "applies_to": [
+                "golden_sample_library",
+                "golden_sample_failure_mapping",
+                "golden_sample_repair_mapping"
+            ],
+            "notes": "Read-only capability plan. Used only for safe-plus ability absorption; director names remain abstract and never enter prompt_body."
+        },
+        {
+            "source_id": "seedance2_v148_director_style_xlsx_2026_04_24",
+            "source_type": "immutable_raw_xlsx",
+            "label": "V148 24-field director-style workbook",
+            "path": "C:/Users/Administrator/Desktop/claude/V148_最新交付/Seedance2.0黄金样本库V148_24字段导演风格版.xlsx",
+            "sha256": "9ae414f5b086130875d04b17640b4f8858c05ff2de6f711650cdc671a49f02fb",
+            "applies_to": [
+                "golden_sample_library",
+                "golden_sample_failure_mapping",
+                "golden_sample_repair_mapping"
+            ],
+            "notes": "Capability donor only. `director_style_ref` is not imported into Hope seed fields."
+        },
+        {
+            "source_id": "seedance2_v120_safe_plus_final_xlsx_2026_04_24",
+            "source_type": "normalized_safe_plus_xlsx",
+            "label": "V120 safe-plus final 23-field workbook",
+            "path": "E:/codex/outputs/黄金样本库v120究极版_V120国产动漫三国SLG专项增强候选池_最终版.xlsx",
+            "sha256": "b24fa72898d1ede5ee4eb14d1cd0f64f2bc1027718b05580bd942d06defbb2ed",
+            "applies_to": [
+                "golden_sample_library",
+                "golden_sample_field_coverage_rules",
+                "golden_sample_failure_mapping",
+                "golden_sample_repair_mapping"
+            ],
+            "notes": "Canonical 23-field workbook after safe-plus absorption of V148 capability into the current 32 reserve candidates."
         }
     ],
     "provenance_entries": [
@@ -288,6 +328,37 @@
                 "does_not_create_reference_control_core": true,
                 "desktop_and_intake_runtime_unchanged": true,
                 "qwen_and_seedance_calls": false
+            }
+        },
+        {
+            "provenance_id": "seedance2_v120_v148_safe_plus_seed_package_2026_04_24",
+            "source_ids": [
+                "seedance2_v120_safe_plus_final_xlsx_2026_04_24",
+                "seedance2_v148_plan_docx_2026_04_24",
+                "seedance2_v148_director_style_xlsx_2026_04_24",
+                "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
+                "hope_seedance2_v120_full_kb_ingest_review_2026_04_23",
+                "hope_v120_v3_kb_full_ingest_dispatch_2026_04_23"
+            ],
+            "generated_files": [
+                "seed/v0.2/golden_sample_library.json",
+                "seed/v0.2/golden_sample_field_coverage_rules.json",
+                "seed/v0.2/golden_sample_failure_mapping.json",
+                "seed/v0.2/golden_sample_repair_mapping.json",
+                "seed/v0.2/source_register.json",
+                "seed/v0.2/manifest.json",
+                "docs/v120-v148-safe-plus-absorption-report-2026-04-24.md"
+            ],
+            "preservation_contract": {
+                "schema_remains_23_fields": true,
+                "row_count_remains_152": true,
+                "original_120_rows_unchanged": true,
+                "new_32_rows_stay_reserve_no": true,
+                "director_style_ref_imported": false,
+                "official_yes_promotion_opened": false,
+                "runtime_opened": false,
+                "qwen_doubao_seedance_opened": false,
+                "reference_control_core_created": false
             }
         }
     ]
