@@ -1,9 +1,9 @@
 {
     "schema_version": "golden_sample_field_coverage_rules.v0.2",
     "asset_name": "golden_sample_field_coverage_rules",
-    "generated_at": "2026-04-23",
+    "generated_at": "2026-04-24",
     "source_context": {
-        "primary_source_id": "seedance2_v120_raw_xlsx_2026_04_23",
+        "primary_source_id": "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
         "comparison_source_id": "seedance2_v108_raw_xlsx_2026_04_23"
     },
     "record_count": 5,
@@ -11,7 +11,7 @@
         {
             "rule_id": "gs_field_rule_technical_profile",
             "core": "technical_profile",
-            "row_count": 120,
+            "row_count": 152,
             "source_sample_ids": [
                 "GS-7",
                 "GS-1",
@@ -132,7 +132,39 @@
                 "GS120-117",
                 "GS120-118",
                 "GS120-119",
-                "GS120-120"
+                "GS120-120",
+                "GS120-CAND-001",
+                "GS120-CAND-002",
+                "GS120-CAND-003",
+                "GS120-CAND-004",
+                "GS120-CAND-005",
+                "GS120-CAND-006",
+                "GS120-CAND-007",
+                "GS120-CAND-008",
+                "GS120-CAND-009",
+                "GS120-CAND-010",
+                "GS120-CAND-011",
+                "GS120-CAND-012",
+                "GS120-CAND-013",
+                "GS120-CAND-014",
+                "GS120-CAND-015",
+                "GS120-CAND-016",
+                "GS120-CAND-017",
+                "GS120-CAND-018",
+                "GS120-CAND-019",
+                "GS120-CAND-020",
+                "GS120-CAND-021",
+                "GS120-CAND-022",
+                "GS120-CAND-023",
+                "GS120-CAND-024",
+                "GS120-CAND-025",
+                "GS120-CAND-026",
+                "GS120-CAND-027",
+                "GS120-CAND-028",
+                "GS120-CAND-029",
+                "GS120-CAND-030",
+                "GS120-CAND-031",
+                "GS120-CAND-032"
             ],
             "required_source_fields": [
                 "shot_id",
@@ -182,36 +214,36 @@
             "coverage_summary": {
                 "library_status": {
                     "official": 108,
-                    "reserve": 12
+                    "reserve": 44
                 },
                 "sample_type": {
                     "single_shot": 72,
-                    "sequence_shot": 48
+                    "sequence_shot": 80
                 },
                 "quality_grade": {
                     "优": 54,
                     "差": 11,
-                    "中": 22,
+                    "中": 54,
                     "好": 33
                 },
                 "usable_for_fewshot": {
                     "Yes": 97,
-                    "No": 23
+                    "No": 55
                 },
                 "style_cluster": {
                     "基础迁移": 40,
                     "日漫": 22,
-                    "国漫": 38,
+                    "国漫": 70,
                     "美漫": 12,
                     "原创": 8
                 },
                 "scene_category": {
-                    "情绪对话": 19,
+                    "情绪对话": 22,
                     "相遇表演": 7,
-                    "其他": 13,
-                    "场域追逐": 28,
-                    "热血打斗": 24,
-                    "群像表演": 29
+                    "其他": 23,
+                    "场域追逐": 33,
+                    "热血打斗": 29,
+                    "群像表演": 38
                 },
                 "sequence_groups": {
                     "JPSEQ01": 4,
@@ -225,10 +257,18 @@
                     "MIXSEQ01": 4,
                     "CNSEQ04": 4,
                     "CNSEQ05": 4,
-                    "CNSEQ06": 4
+                    "CNSEQ06": 4,
+                    "CNWARSEQ01": 4,
+                    "CNWARSEQ02": 4,
+                    "CNWARSEQ03": 4,
+                    "CNWARSEQ04": 4,
+                    "SLGSEQ01": 4,
+                    "SLGSEQ02": 4,
+                    "SLGSEQ03": 4,
+                    "SLGSEQ04": 4
                 },
                 "surface_completeness": {
-                    "technical_profile": 120
+                    "technical_profile": 152
                 }
             },
             "future_gate_owner": [
@@ -241,7 +281,7 @@
         {
             "rule_id": "gs_field_rule_scene_performance_core",
             "core": "scene_performance_core",
-            "row_count": 120,
+            "row_count": 152,
             "source_sample_ids": [
                 "GS-7",
                 "GS-1",
@@ -362,7 +402,39 @@
                 "GS120-117",
                 "GS120-118",
                 "GS120-119",
-                "GS120-120"
+                "GS120-120",
+                "GS120-CAND-001",
+                "GS120-CAND-002",
+                "GS120-CAND-003",
+                "GS120-CAND-004",
+                "GS120-CAND-005",
+                "GS120-CAND-006",
+                "GS120-CAND-007",
+                "GS120-CAND-008",
+                "GS120-CAND-009",
+                "GS120-CAND-010",
+                "GS120-CAND-011",
+                "GS120-CAND-012",
+                "GS120-CAND-013",
+                "GS120-CAND-014",
+                "GS120-CAND-015",
+                "GS120-CAND-016",
+                "GS120-CAND-017",
+                "GS120-CAND-018",
+                "GS120-CAND-019",
+                "GS120-CAND-020",
+                "GS120-CAND-021",
+                "GS120-CAND-022",
+                "GS120-CAND-023",
+                "GS120-CAND-024",
+                "GS120-CAND-025",
+                "GS120-CAND-026",
+                "GS120-CAND-027",
+                "GS120-CAND-028",
+                "GS120-CAND-029",
+                "GS120-CAND-030",
+                "GS120-CAND-031",
+                "GS120-CAND-032"
             ],
             "required_source_fields": [
                 "shot_id",
@@ -412,36 +484,36 @@
             "coverage_summary": {
                 "library_status": {
                     "official": 108,
-                    "reserve": 12
+                    "reserve": 44
                 },
                 "sample_type": {
                     "single_shot": 72,
-                    "sequence_shot": 48
+                    "sequence_shot": 80
                 },
                 "quality_grade": {
                     "优": 54,
                     "差": 11,
-                    "中": 22,
+                    "中": 54,
                     "好": 33
                 },
                 "usable_for_fewshot": {
                     "Yes": 97,
-                    "No": 23
+                    "No": 55
                 },
                 "style_cluster": {
                     "基础迁移": 40,
                     "日漫": 22,
-                    "国漫": 38,
+                    "国漫": 70,
                     "美漫": 12,
                     "原创": 8
                 },
                 "scene_category": {
-                    "情绪对话": 19,
+                    "情绪对话": 22,
                     "相遇表演": 7,
-                    "其他": 13,
-                    "场域追逐": 28,
-                    "热血打斗": 24,
-                    "群像表演": 29
+                    "其他": 23,
+                    "场域追逐": 33,
+                    "热血打斗": 29,
+                    "群像表演": 38
                 },
                 "sequence_groups": {
                     "JPSEQ01": 4,
@@ -455,10 +527,18 @@
                     "MIXSEQ01": 4,
                     "CNSEQ04": 4,
                     "CNSEQ05": 4,
-                    "CNSEQ06": 4
+                    "CNSEQ06": 4,
+                    "CNWARSEQ01": 4,
+                    "CNWARSEQ02": 4,
+                    "CNWARSEQ03": 4,
+                    "CNWARSEQ04": 4,
+                    "SLGSEQ01": 4,
+                    "SLGSEQ02": 4,
+                    "SLGSEQ03": 4,
+                    "SLGSEQ04": 4
                 },
                 "surface_completeness": {
-                    "scene_performance_core": 120
+                    "scene_performance_core": 152
                 }
             },
             "future_gate_owner": [
@@ -471,7 +551,7 @@
         {
             "rule_id": "gs_field_rule_camera_directing_core",
             "core": "camera_directing_core",
-            "row_count": 120,
+            "row_count": 152,
             "source_sample_ids": [
                 "GS-7",
                 "GS-1",
@@ -592,7 +672,39 @@
                 "GS120-117",
                 "GS120-118",
                 "GS120-119",
-                "GS120-120"
+                "GS120-120",
+                "GS120-CAND-001",
+                "GS120-CAND-002",
+                "GS120-CAND-003",
+                "GS120-CAND-004",
+                "GS120-CAND-005",
+                "GS120-CAND-006",
+                "GS120-CAND-007",
+                "GS120-CAND-008",
+                "GS120-CAND-009",
+                "GS120-CAND-010",
+                "GS120-CAND-011",
+                "GS120-CAND-012",
+                "GS120-CAND-013",
+                "GS120-CAND-014",
+                "GS120-CAND-015",
+                "GS120-CAND-016",
+                "GS120-CAND-017",
+                "GS120-CAND-018",
+                "GS120-CAND-019",
+                "GS120-CAND-020",
+                "GS120-CAND-021",
+                "GS120-CAND-022",
+                "GS120-CAND-023",
+                "GS120-CAND-024",
+                "GS120-CAND-025",
+                "GS120-CAND-026",
+                "GS120-CAND-027",
+                "GS120-CAND-028",
+                "GS120-CAND-029",
+                "GS120-CAND-030",
+                "GS120-CAND-031",
+                "GS120-CAND-032"
             ],
             "required_source_fields": [
                 "shot_id",
@@ -642,36 +754,36 @@
             "coverage_summary": {
                 "library_status": {
                     "official": 108,
-                    "reserve": 12
+                    "reserve": 44
                 },
                 "sample_type": {
                     "single_shot": 72,
-                    "sequence_shot": 48
+                    "sequence_shot": 80
                 },
                 "quality_grade": {
                     "优": 54,
                     "差": 11,
-                    "中": 22,
+                    "中": 54,
                     "好": 33
                 },
                 "usable_for_fewshot": {
                     "Yes": 97,
-                    "No": 23
+                    "No": 55
                 },
                 "style_cluster": {
                     "基础迁移": 40,
                     "日漫": 22,
-                    "国漫": 38,
+                    "国漫": 70,
                     "美漫": 12,
                     "原创": 8
                 },
                 "scene_category": {
-                    "情绪对话": 19,
+                    "情绪对话": 22,
                     "相遇表演": 7,
-                    "其他": 13,
-                    "场域追逐": 28,
-                    "热血打斗": 24,
-                    "群像表演": 29
+                    "其他": 23,
+                    "场域追逐": 33,
+                    "热血打斗": 29,
+                    "群像表演": 38
                 },
                 "sequence_groups": {
                     "JPSEQ01": 4,
@@ -685,10 +797,18 @@
                     "MIXSEQ01": 4,
                     "CNSEQ04": 4,
                     "CNSEQ05": 4,
-                    "CNSEQ06": 4
+                    "CNSEQ06": 4,
+                    "CNWARSEQ01": 4,
+                    "CNWARSEQ02": 4,
+                    "CNWARSEQ03": 4,
+                    "CNWARSEQ04": 4,
+                    "SLGSEQ01": 4,
+                    "SLGSEQ02": 4,
+                    "SLGSEQ03": 4,
+                    "SLGSEQ04": 4
                 },
                 "surface_completeness": {
-                    "camera_directing_core": 120
+                    "camera_directing_core": 152
                 }
             },
             "future_gate_owner": [
@@ -701,7 +821,7 @@
         {
             "rule_id": "gs_field_rule_audio_directing_core",
             "core": "audio_directing_core",
-            "row_count": 120,
+            "row_count": 152,
             "source_sample_ids": [
                 "GS-7",
                 "GS-1",
@@ -822,7 +942,39 @@
                 "GS120-117",
                 "GS120-118",
                 "GS120-119",
-                "GS120-120"
+                "GS120-120",
+                "GS120-CAND-001",
+                "GS120-CAND-002",
+                "GS120-CAND-003",
+                "GS120-CAND-004",
+                "GS120-CAND-005",
+                "GS120-CAND-006",
+                "GS120-CAND-007",
+                "GS120-CAND-008",
+                "GS120-CAND-009",
+                "GS120-CAND-010",
+                "GS120-CAND-011",
+                "GS120-CAND-012",
+                "GS120-CAND-013",
+                "GS120-CAND-014",
+                "GS120-CAND-015",
+                "GS120-CAND-016",
+                "GS120-CAND-017",
+                "GS120-CAND-018",
+                "GS120-CAND-019",
+                "GS120-CAND-020",
+                "GS120-CAND-021",
+                "GS120-CAND-022",
+                "GS120-CAND-023",
+                "GS120-CAND-024",
+                "GS120-CAND-025",
+                "GS120-CAND-026",
+                "GS120-CAND-027",
+                "GS120-CAND-028",
+                "GS120-CAND-029",
+                "GS120-CAND-030",
+                "GS120-CAND-031",
+                "GS120-CAND-032"
             ],
             "required_source_fields": [
                 "shot_id",
@@ -872,36 +1024,36 @@
             "coverage_summary": {
                 "library_status": {
                     "official": 108,
-                    "reserve": 12
+                    "reserve": 44
                 },
                 "sample_type": {
                     "single_shot": 72,
-                    "sequence_shot": 48
+                    "sequence_shot": 80
                 },
                 "quality_grade": {
                     "优": 54,
                     "差": 11,
-                    "中": 22,
+                    "中": 54,
                     "好": 33
                 },
                 "usable_for_fewshot": {
                     "Yes": 97,
-                    "No": 23
+                    "No": 55
                 },
                 "style_cluster": {
                     "基础迁移": 40,
                     "日漫": 22,
-                    "国漫": 38,
+                    "国漫": 70,
                     "美漫": 12,
                     "原创": 8
                 },
                 "scene_category": {
-                    "情绪对话": 19,
+                    "情绪对话": 22,
                     "相遇表演": 7,
-                    "其他": 13,
-                    "场域追逐": 28,
-                    "热血打斗": 24,
-                    "群像表演": 29
+                    "其他": 23,
+                    "场域追逐": 33,
+                    "热血打斗": 29,
+                    "群像表演": 38
                 },
                 "sequence_groups": {
                     "JPSEQ01": 4,
@@ -915,10 +1067,18 @@
                     "MIXSEQ01": 4,
                     "CNSEQ04": 4,
                     "CNSEQ05": 4,
-                    "CNSEQ06": 4
+                    "CNSEQ06": 4,
+                    "CNWARSEQ01": 4,
+                    "CNWARSEQ02": 4,
+                    "CNWARSEQ03": 4,
+                    "CNWARSEQ04": 4,
+                    "SLGSEQ01": 4,
+                    "SLGSEQ02": 4,
+                    "SLGSEQ03": 4,
+                    "SLGSEQ04": 4
                 },
                 "surface_completeness": {
-                    "audio_directing_core": 120
+                    "audio_directing_core": 152
                 }
             },
             "future_gate_owner": [
@@ -931,7 +1091,7 @@
         {
             "rule_id": "gs_field_rule_continuity_negative_core",
             "core": "continuity_negative_core",
-            "row_count": 120,
+            "row_count": 152,
             "source_sample_ids": [
                 "GS-7",
                 "GS-1",
@@ -1052,7 +1212,39 @@
                 "GS120-117",
                 "GS120-118",
                 "GS120-119",
-                "GS120-120"
+                "GS120-120",
+                "GS120-CAND-001",
+                "GS120-CAND-002",
+                "GS120-CAND-003",
+                "GS120-CAND-004",
+                "GS120-CAND-005",
+                "GS120-CAND-006",
+                "GS120-CAND-007",
+                "GS120-CAND-008",
+                "GS120-CAND-009",
+                "GS120-CAND-010",
+                "GS120-CAND-011",
+                "GS120-CAND-012",
+                "GS120-CAND-013",
+                "GS120-CAND-014",
+                "GS120-CAND-015",
+                "GS120-CAND-016",
+                "GS120-CAND-017",
+                "GS120-CAND-018",
+                "GS120-CAND-019",
+                "GS120-CAND-020",
+                "GS120-CAND-021",
+                "GS120-CAND-022",
+                "GS120-CAND-023",
+                "GS120-CAND-024",
+                "GS120-CAND-025",
+                "GS120-CAND-026",
+                "GS120-CAND-027",
+                "GS120-CAND-028",
+                "GS120-CAND-029",
+                "GS120-CAND-030",
+                "GS120-CAND-031",
+                "GS120-CAND-032"
             ],
             "required_source_fields": [
                 "shot_id",
@@ -1102,36 +1294,36 @@
             "coverage_summary": {
                 "library_status": {
                     "official": 108,
-                    "reserve": 12
+                    "reserve": 44
                 },
                 "sample_type": {
                     "single_shot": 72,
-                    "sequence_shot": 48
+                    "sequence_shot": 80
                 },
                 "quality_grade": {
                     "优": 54,
                     "差": 11,
-                    "中": 22,
+                    "中": 54,
                     "好": 33
                 },
                 "usable_for_fewshot": {
                     "Yes": 97,
-                    "No": 23
+                    "No": 55
                 },
                 "style_cluster": {
                     "基础迁移": 40,
                     "日漫": 22,
-                    "国漫": 38,
+                    "国漫": 70,
                     "美漫": 12,
                     "原创": 8
                 },
                 "scene_category": {
-                    "情绪对话": 19,
+                    "情绪对话": 22,
                     "相遇表演": 7,
-                    "其他": 13,
-                    "场域追逐": 28,
-                    "热血打斗": 24,
-                    "群像表演": 29
+                    "其他": 23,
+                    "场域追逐": 33,
+                    "热血打斗": 29,
+                    "群像表演": 38
                 },
                 "sequence_groups": {
                     "JPSEQ01": 4,
@@ -1145,10 +1337,18 @@
                     "MIXSEQ01": 4,
                     "CNSEQ04": 4,
                     "CNSEQ05": 4,
-                    "CNSEQ06": 4
+                    "CNSEQ06": 4,
+                    "CNWARSEQ01": 4,
+                    "CNWARSEQ02": 4,
+                    "CNWARSEQ03": 4,
+                    "CNWARSEQ04": 4,
+                    "SLGSEQ01": 4,
+                    "SLGSEQ02": 4,
+                    "SLGSEQ03": 4,
+                    "SLGSEQ04": 4
                 },
                 "surface_completeness": {
-                    "continuity_negative_core": 120
+                    "continuity_negative_core": 152
                 }
             },
             "future_gate_owner": [

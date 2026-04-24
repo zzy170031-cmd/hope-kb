@@ -1,7 +1,7 @@
 {
     "schema_version": "hope-kb-v0.2-source-register",
     "register_name": "hope-kb-v0.2-source-register",
-    "updated_at": "2026-04-23",
+    "updated_at": "2026-04-24",
     "sources": [
         {
             "source_id": "golden_sample_library_csv_2026_04_22",
@@ -159,6 +159,20 @@
                 "golden_sample_v120_full_ingest_gate"
             ],
             "notes": "Dispatch that sets V120 as primary source, V108 as comparison baseline, and keeps Hope runtime promotion closed."
+        },
+        {
+            "source_id": "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
+            "source_type": "immutable_raw_xlsx",
+            "label": "V120 CN war / SLG candidate pool workbook",
+            "path": "E:/codex/outputs/黄金样本库v120究极版_V120专项增强候选池_20260424.xlsx",
+            "sha256": "28ccdbefac8181f9b82e6e71aac13ce4029ac6f6d26722fa4c621d1a11216967",
+            "applies_to": [
+                "golden_sample_library",
+                "golden_sample_field_coverage_rules",
+                "golden_sample_failure_mapping",
+                "golden_sample_repair_mapping"
+            ],
+            "notes": "Candidate pool workbook with 152 total rows. Existing 120 rows remain unchanged; new 32 reserve sequence rows are ingested after prompt_body safety normalization."
         }
     ],
     "provenance_entries": [
@@ -237,6 +251,37 @@
                 "v108_is_comparison_baseline": true,
                 "preserves_all_120_source_rows": true,
                 "preserves_all_23_source_fields": true,
+                "imports_into_v0_2_golden_sample_library": true,
+                "imports_into_live_hope_runtime": false,
+                "product_ready_external_reference_handles_closed": true,
+                "does_not_create_reference_control_core": true,
+                "desktop_and_intake_runtime_unchanged": true,
+                "qwen_and_seedance_calls": false
+            }
+        },
+        {
+            "provenance_id": "seedance2_v120_cnwar_slg_candidate_pool_seed_package_2026_04_24",
+            "source_ids": [
+                "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
+                "hope_seedance2_v120_full_kb_ingest_review_2026_04_23",
+                "hope_v120_v3_kb_full_ingest_dispatch_2026_04_23",
+                "seedance2_v108_raw_xlsx_2026_04_23",
+                "seedance2_v108_raw_docx_2026_04_23"
+            ],
+            "generated_files": [
+                "seed/v0.2/golden_sample_library.json",
+                "seed/v0.2/golden_sample_field_coverage_rules.json",
+                "seed/v0.2/golden_sample_failure_mapping.json",
+                "seed/v0.2/golden_sample_repair_mapping.json",
+                "seed/v0.2/source_register.json",
+                "seed/v0.2/manifest.json"
+            ],
+            "preservation_contract": {
+                "v120_is_primary_source": true,
+                "v108_is_comparison_baseline": true,
+                "preserves_existing_120_rows": true,
+                "ingests_32_new_reserve_sequence_rows": true,
+                "prompt_body_safety_normalized_for_new_rows": true,
                 "imports_into_v0_2_golden_sample_library": true,
                 "imports_into_live_hope_runtime": false,
                 "product_ready_external_reference_handles_closed": true,

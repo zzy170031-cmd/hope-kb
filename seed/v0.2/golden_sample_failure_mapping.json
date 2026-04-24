@@ -1,9 +1,9 @@
 {
     "schema_version": "golden_sample_failure_mapping.v0.2",
     "asset_name": "golden_sample_failure_mapping",
-    "generated_at": "2026-04-23",
+    "generated_at": "2026-04-24",
     "source_context": {
-        "primary_source_id": "seedance2_v120_raw_xlsx_2026_04_23",
+        "primary_source_id": "seedance2_v120_cnwar_slg_candidate_pool_xlsx_2026_04_24",
         "comparison_source_id": "seedance2_v108_raw_xlsx_2026_04_23"
     },
     "failure_code_definitions": [
@@ -42,7 +42,7 @@
             "meaning": "The source row is preserved as a reserve sample and must not be treated as live runtime truth."
         }
     ],
-    "record_count": 120,
+    "record_count": 152,
     "records": [
         {
             "mapping_id": "gs_failure_map_gs_7",
@@ -3950,6 +3950,1126 @@
                 "library_status": "reserve",
                 "sample_type": "sequence_shot",
                 "sequence_id": "CNSEQ06",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_001",
+            "sample_id": "GS120-CAND-001",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：建立国战开场的空间和阵营压力，让后续攻防有可信起点。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ01",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_002",
+            "sample_id": "GS120-CAND-002",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把军阵从静态展示推进到行动状态，服务“命令即将传递”的故事节拍。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ01",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_003",
+            "sample_id": "GS120-CAND-003",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把“国战军阵”转成可读的包抄动作，不只展示人多，而是交代战术变化。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ01",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_004",
+            "sample_id": "GS120-CAND-004",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：收束建立序列，让战事从“排列”进入“执行”，为下一组武将或城池攻防留入口。。内部会审启用：国战军阵能力 + 东方奇观能力；监督：泥尘战场能力。本镜必须先服务 国战军阵建立 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ01",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_005",
+            "sample_id": "GS120-CAND-005",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把武将登场落到兵器重量和手部受力，而不是只靠角色帅气亮相。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ02",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_006",
+            "sample_id": "GS120-CAND-006",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：说明武将爆发前的重心和地面阻力，让动作不是漂浮的技能展示。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ02",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_007",
+            "sample_id": "GS120-CAND-007",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把高光动作拆成可见受力链，避免只出现漂亮光效。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ02",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_008",
+            "sample_id": "GS120-CAND-008",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：用收势确认高光的结果，避免只把武将当海报式 pose。。内部会审启用：武将动作能力 + 泥尘战场能力；监督：国战军阵能力。本镜必须先服务 武将兵器高光 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ02",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_009",
+            "sample_id": "GS120-CAND-009",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：建立军帐决策空间，让权谋发生在地图、站位和静默里。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ03",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_010",
+            "sample_id": "GS120-CAND-010",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把剧情转折放在屏外信息和微表情，不靠大喊大叫。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ03",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_011",
+            "sample_id": "GS120-CAND-011",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把决策动作具体化，令牌位置就是下一镜行军路线的原因。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ03",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_012",
+            "sample_id": "GS120-CAND-012",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：收束权谋序列，把室内决断转成外部行动。。内部会审启用：朝堂权谋能力 + 沙盘视口能力；监督：行军轨迹能力。本镜必须先服务 朝堂/军帐权谋 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ03",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_013",
+            "sample_id": "GS120-CAND-013",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：建立城池攻防的守方视角，让观众先知道城墙和敌军方向。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ04",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_014",
+            "sample_id": "GS120-CAND-014",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把攻城拆成具体可见路径，不写空泛“攻城大战”。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ04",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_015",
+            "sample_id": "GS120-CAND-015",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：通过受力链表现攻防，不靠火光和爆炸堆气氛。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ04",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_016",
+            "sample_id": "GS120-CAND-016",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：让城池攻防以“守住一拍”收束，给下一段反击或撤离留下空间。。内部会审启用：国战军阵能力 + 泥尘战场能力；监督：城建演进能力。本镜必须先服务 城池攻防 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "CNWARSEQ04",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_017",
+            "sample_id": "GS120-CAND-017",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：建立策略视口的世界关系，让后续行军和城建有空间依据。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ01",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_018",
+            "sample_id": "GS120-CAND-018",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把沙盘信息转成实际地面镜头，让策略视口服务故事推进。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ01",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_019",
+            "sample_id": "GS120-CAND-019",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：让战略视口落到具体角色行动，不停留在地图展示。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ01",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_020",
+            "sample_id": "GS120-CAND-020",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：完成“全局-地面-角色-回流”的视口链路。。内部会审启用：沙盘视口能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 沙盘战略视口 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ01",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_021",
+            "sample_id": "GS120-CAND-021",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把联盟行动拆成可见路线，而不是空写“多方集结”。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ02",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_022",
+            "sample_id": "GS120-CAND-022",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：让合围前出现真实阻力，使策略变化有故事原因。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ02",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_023",
+            "sample_id": "GS120-CAND-023",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把联盟合围做成镜头可读的空间关系。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ02",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_024",
+            "sample_id": "GS120-CAND-024",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：给联盟合围留下风险提示，避免把策略镜头做成单纯胜利展示。。内部会审启用：行军轨迹能力 + 沙盘视口能力；监督：国战军阵能力。本镜必须先服务 行军轨迹与联盟合围 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ02",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_025",
+            "sample_id": "GS120-CAND-025",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把城建演进从一个可信起点开始。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ03",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_026",
+            "sample_id": "GS120-CAND-026",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把“升级”翻译成可见施工过程。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ03",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_027",
+            "sample_id": "GS120-CAND-027",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把资源反馈从抽象数值变成可见生产镜头。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ03",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_028",
+            "sample_id": "GS120-CAND-028",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：用时间流逝收束城建演进，保留故事里的“建设成果”。。内部会审启用：城建演进能力 + 东方奇观能力；监督：战报UI能力。本镜必须先服务 城建演进与资源反馈 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ03",
+                "shot_order": "4",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_029",
+            "sample_id": "GS120-CAND-029",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：用战报卷轴引出武将，而不是直接堆角色名和稀有度。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ04",
+                "shot_order": "1",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_030",
+            "sample_id": "GS120-CAND-030",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把战报结果转成动漫镜头语言，避免空泛数值展示。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ04",
+                "shot_order": "2",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_031",
+            "sample_id": "GS120-CAND-031",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把赛季结算压力落到时间和资源动作上。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ04",
+                "shot_order": "3",
+                "reference_bundle_present": true
+            },
+            "source_field_refs": [
+                "library_status",
+                "reserve_reason",
+                "sample_type",
+                "sequence_id",
+                "shot_order",
+                "quality_grade",
+                "usable_for_fewshot",
+                "covered_points",
+                "missed_points",
+                "teaching_note"
+            ]
+        },
+        {
+            "mapping_id": "gs_failure_map_gs120_cand_032",
+            "sample_id": "GS120-CAND-032",
+            "core": "full_stack_sequence_sample",
+            "tier": "中",
+            "usable_for_fewshot": "No",
+            "negative_sample_signal": false,
+            "planned_failure_codes": [
+                "golden_coverage_gap",
+                "golden_fewshot_closed",
+                "golden_reserve_sample"
+            ],
+            "validator_evidence": {
+                "covered_points": "故事功能 / 动漫分镜 / 23字段完整 / 导演会议能力池 / 国漫三国抽象 / SLG可见镜头语法 / reserve候选 / IP抽象",
+                "missed_points": "未实测：Seedance稳定性、镜头节奏、画面可控性和桌面调用表现；保留为 reserve，不进入正向 few-shot。",
+                "teaching_note": "V120专项增强候选。故事功能：把战报 UI 收束回故事现场，为下一轮行动留下可接镜头。。内部会审启用：战报UI能力 + 武将动作能力；监督：朝堂权谋能力。本镜必须先服务 武将揭示与战报收束 的叙事连续性，不为炫风格牺牲角色、空间和行动线一致。",
+                "library_status": "reserve",
+                "sample_type": "sequence_shot",
+                "sequence_id": "SLGSEQ04",
                 "shot_order": "4",
                 "reference_bundle_present": true
             },
