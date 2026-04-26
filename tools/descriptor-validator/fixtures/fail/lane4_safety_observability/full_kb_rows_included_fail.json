@@ -1,0 +1,22 @@
+{
+  "descriptor_type": "QueryResult",
+  "descriptor_version": "v0.2",
+  "descriptor_hash": "sha256:full-kb-rows-fail",
+  "artifact_class": "prompt_payload",
+  "schema_version": "v0.2",
+  "descriptor_id": "lane4-full-kb-rows-fail",
+  "query_type": "runtime_query",
+  "resolved_intent": "storyboard_prompt_governance",
+  "intent_confidence": 1,
+  "intent_routing_status": "resolved",
+  "selected_sample_ids": [],
+  "selected_kb_rules": [],
+  "kb_context_summary": "sanitized governance summary only",
+  "retrieval_trace_ref": "lane4-full-kb-rows-trace",
+  "fallback_reason_code": "on_empty_pool",
+  "freshness_status": "fresh",
+  "activation_status": "activated",
+  "snapshot_hash": "sha256:snapshot-fail",
+  "index_hash": "sha256:index-fail",
+  "full_kb_rows_included": 1
+}

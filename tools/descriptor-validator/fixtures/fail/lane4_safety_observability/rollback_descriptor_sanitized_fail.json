@@ -1,0 +1,22 @@
+{
+  "descriptor_type": "RollbackDescriptor",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane4-rollback-descriptor-fail",
+  "descriptor_hash": "sha256:rollback-descriptor-fail",
+  "artifact_class": "retrieval_trace_log_telemetry_shadow_rollback",
+  "schema_version": "v0.2",
+  "rollback_trigger": "on_threshold_breach_or_gate_failure",
+  "catastrophic_trigger": "on_any_structural_leak_or_secret_leak",
+  "rollback_trigger_code": "synthetic_gate_failure",
+  "sanitized_incident_id": "synthetic-incident-fail",
+  "timestamp_bucket": "2026-04-26T12",
+  "disabled_path_name": "candidate_runtime_surface",
+  "previous_path_name": "deterministic_fallback_surface",
+  "remediation_state": "blocked_pending_review",
+  "rollback_pointer_id": "rollback-pointer-fail",
+  "target_lkg_descriptor_id": "activation-lkg-fail",
+  "target_lkg_descriptor_hash": "sha256:lkg-fail",
+  "actions": [
+    "stop_emitting_candidate_payload"
+  ]
+}

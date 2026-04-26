@@ -1,0 +1,18 @@
+{
+  "descriptor_type": "LastKnownGoodDescriptor",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane2-lkg-fail-001",
+  "descriptor_hash": "sha256:lane2lkgfail001",
+  "artifact_class": "activation_descriptor",
+  "schema_version": "v0.2",
+  "lkg_descriptor_id": "lane2-activation-fail-001",
+  "lkg_descriptor_hash": "lane2activationfail001",
+  "lkg_seed_bundle_hash": "bundle-sha256:lane2seedfail001",
+  "lkg_manifest_hash": "sha256:lane2manifestfail001",
+  "lkg_snapshot_hash": "sha256:lane2snapshotfail001",
+  "lkg_index_hash": "sha256:lane2indexfail001",
+  "lkg_verified_at_bucket": "2026-04-26T14",
+  "lkg_activation_status": "verified",
+  "lkg_freshness_status": "stale_snapshot",
+  "lkg_reason_code": "synthetic_non_fresh_lkg"
+}

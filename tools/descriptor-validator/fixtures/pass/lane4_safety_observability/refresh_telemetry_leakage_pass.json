@@ -1,0 +1,25 @@
+{
+  "descriptor_type": "RefreshTelemetryRecord",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane4-refresh-telemetry-pass",
+  "descriptor_hash": "sha256:refresh-telemetry-pass",
+  "artifact_class": "retrieval_trace_log_telemetry_shadow_rollback",
+  "schema_version": "v0.2",
+  "snapshot_hash": "sha256:snapshot-pass",
+  "index_hash": "sha256:index-pass",
+  "activation_status": "activated",
+  "freshness_status": "fresh",
+  "stale_reason_code": "none",
+  "fallback_reason_code": "on_empty_pool",
+  "source_delta_count": 0,
+  "payload_bytes": 96,
+  "selected_sample_ids": [],
+  "selected_kb_rules": [],
+  "lint_rule_ids": [
+    "denied_field_scan",
+    "full_kb_rows_guard",
+    "leakage_count_guard"
+  ],
+  "leakage_count": 0,
+  "timestamp_bucket": "2026-04-26T12"
+}

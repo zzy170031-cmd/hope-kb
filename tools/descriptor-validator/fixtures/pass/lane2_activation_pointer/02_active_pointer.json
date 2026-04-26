@@ -1,0 +1,21 @@
+{
+  "descriptor_type": "ActivePointer",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane2-active-pointer-pass-001",
+  "descriptor_hash": "sha256:lane2activepointerpass001",
+  "artifact_class": "activation_descriptor",
+  "schema_version": "v0.2",
+  "pointer_type": "active_pointer",
+  "pointer_id": "lane2-active-pointer-pass-001",
+  "target_activation_descriptor_id": "lane2-activation-pass-001",
+  "target_activation_descriptor_hash": "sha256:lane2activationpass001",
+  "target_seed_bundle_hash": "bundle-sha256:lane2seedpass001",
+  "target_manifest_hash": "sha256:lane2manifestpass001",
+  "target_snapshot_hash": "sha256:lane2snapshotpass001",
+  "target_index_hash": "sha256:lane2indexpass001",
+  "pointer_status": "active",
+  "atomic_switch_txn_id": "lane2-atomic-switch-pass-001",
+  "previous_pointer_id": "lane2-active-pointer-pass-000",
+  "switched_at_bucket": "2026-04-26T14",
+  "controller_approval_id": "lane2-controller-approval-pass-001"
+}

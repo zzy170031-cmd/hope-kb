@@ -1,0 +1,23 @@
+{
+  "descriptor_type": "RefreshTelemetryRecord",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane4-leakage-count-fail",
+  "descriptor_hash": "sha256:leakage-count-fail",
+  "artifact_class": "retrieval_trace_log_telemetry_shadow_rollback",
+  "schema_version": "v0.2",
+  "snapshot_hash": "sha256:snapshot-fail",
+  "index_hash": "sha256:index-fail",
+  "activation_status": "activated",
+  "freshness_status": "fresh",
+  "stale_reason_code": "none",
+  "fallback_reason_code": "on_empty_pool",
+  "source_delta_count": 0,
+  "payload_bytes": 96,
+  "selected_sample_ids": [],
+  "selected_kb_rules": [],
+  "lint_rule_ids": [
+    "leakage_count_guard"
+  ],
+  "leakage_count": 1,
+  "timestamp_bucket": "2026-04-26T12"
+}

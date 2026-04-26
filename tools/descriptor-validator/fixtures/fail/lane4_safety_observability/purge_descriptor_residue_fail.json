@@ -1,0 +1,22 @@
+{
+  "descriptor_type": "PurgeDescriptor",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane4-purge-descriptor-fail",
+  "descriptor_hash": "sha256:purge-descriptor-fail",
+  "artifact_class": "retrieval_trace_log_telemetry_shadow_rollback",
+  "schema_version": "v0.2",
+  "local_telemetry_only": true,
+  "purge_required": true,
+  "purge_scope": [
+    "local_aggregate_files"
+  ],
+  "purge_action": [
+    "remove_file"
+  ],
+  "purge_status": "failed",
+  "files_removed_or_empty": false,
+  "bytes_remaining": 1,
+  "raw_event_backups_remaining": 1,
+  "reconstructable_sensitive_content_remaining": 1,
+  "timestamp_bucket": "2026-04-26T12"
+}

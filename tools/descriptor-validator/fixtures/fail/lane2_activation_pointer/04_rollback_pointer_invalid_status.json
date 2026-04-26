@@ -1,0 +1,17 @@
+{
+  "descriptor_type": "RollbackPointer",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane2-rollback-pointer-fail-001",
+  "descriptor_hash": "sha256:lane2rollbackpointerfail001",
+  "artifact_class": "retrieval_trace_log_telemetry_shadow_rollback",
+  "schema_version": "v0.2",
+  "rollback_pointer_id": "lane2-rollback-pointer-fail-001",
+  "rollback_trigger_code": "activation_failed",
+  "current_failed_descriptor_id": "lane2-activation-fail-001",
+  "current_failed_descriptor_hash": "lane2activationfail001",
+  "target_lkg_descriptor_id": "lane2-lkg-fail-001",
+  "target_lkg_descriptor_hash": "sha256:lane2lkgfail001",
+  "rollback_status": "candidate",
+  "rolled_back_at_bucket": "2026-04-26T14",
+  "sanitized_incident_id": "lane2-incident-fail-001"
+}

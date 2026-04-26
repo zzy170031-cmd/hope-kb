@@ -1,0 +1,18 @@
+{
+  "descriptor_type": "LastKnownGoodDescriptor",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane2-lkg-pass-001",
+  "descriptor_hash": "sha256:lane2lkgpass001",
+  "artifact_class": "activation_descriptor",
+  "schema_version": "v0.2",
+  "lkg_descriptor_id": "lane2-activation-pass-001",
+  "lkg_descriptor_hash": "sha256:lane2activationpass001",
+  "lkg_seed_bundle_hash": "bundle-sha256:lane2seedpass001",
+  "lkg_manifest_hash": "sha256:lane2manifestpass001",
+  "lkg_snapshot_hash": "sha256:lane2snapshotpass001",
+  "lkg_index_hash": "sha256:lane2indexpass001",
+  "lkg_verified_at_bucket": "2026-04-26T14",
+  "lkg_activation_status": "activated",
+  "lkg_freshness_status": "fresh",
+  "lkg_reason_code": "previous_verified_activation"
+}
