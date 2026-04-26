@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 12:35:23 +08:00
+- last updated: 2026-04-26 12:46:19 +08:00
 
 ## Latest Completed
 
@@ -28,6 +28,7 @@ Update this file for online sync after every 10-20 minute work package.
 - stale `.git/index.lock` was removed after explicit approval; no active Git process was observed on the second process check
 - docs-only governance package was committed and pushed as `9fcb391` (`docs: add v0.2 prompt knowledge governance contracts`); `AGENTS.md` was intentionally excluded from the commit
 - v0.2 control rules in `AGENTS.md` were reviewed, committed, and pushed as `aa1e224` (`docs: sync v0.2 control rules`)
+- Freshness / Activation four-lane reports were received and integrated into `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
 
 ## Five-Agent Start Readiness
 
@@ -122,18 +123,21 @@ git status：
   - Lane 2: activation descriptor, atomic switch, hash binding, last-known-good, and rollback pointer
   - Lane 3: stale index/eval/query blocking, FutureQA freshness status, and fallback reason codes
   - Lane 4: refresh telemetry, leakage restrictions, purge/rollback records, and denied fields
+- integration decision: `freshness_status` uses `fresh`, `stale_source`, `stale_index`, `stale_eval`, `stale_snapshot`, `activation_failed`, `unknown`, and `blocked`
+- integration decision: `activation_status` uses `candidate`, `validating`, `verified`, `activated`, `failed`, `rolled_back`, and `superseded`; `no_kb_context` remains a fallback reason, not an activation status
+- integration decision: `source_delta` may bind only through aggregate `source_delta_batch_hash`, `source_delta_count`, and `source_freshness_digest`
+- integration decision: `rollback_pointer` may point only to a verified last-known-good activation descriptor, not raw snapshot paths
 
 ## Next Up
 
-- wait for Freshness / Activation branch reports in text code blocks
-- integrate only docs-only contract outputs into `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
-- keep the machine-checkable descriptor / validator implementation gate closed until this freshness contract is accepted
+- verify and commit the docs-only Freshness / Activation contract if the staged diff matches the whitelist
+- keep the machine-checkable descriptor / validator implementation gate closed until total control explicitly opens it
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
 
 - blocker: none for the docs-only integration package after stale `.git/index.lock` removal
-- blocker: Freshness / Activation branch reports not yet received
+- blocker: none for the docs-only Freshness / Activation contract draft
 - risk: current package is docs/RFC and governance baseline only; it does not yet implement machine-checkable validator gates for the new QA contracts
 - risk: standard ignored `snapshots/hope-kb-v0.2.sqlite3` previously differed from verified `rebuilt-5`; any future runtime activation must bind a chosen snapshot by hash instead of relying on path name
 - risk to `hope` separation: none in current scope; keep Hope product-side runtime hookup, desktop, intake, Qwen, Doubao, Seedance, GraphRAG, hybrid/rerank default, and runtime LLM summarize out of this repo/package
