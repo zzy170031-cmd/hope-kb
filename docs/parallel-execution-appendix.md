@@ -47,3 +47,33 @@ Use five-agent governance at milestones, not every small commit:
 - taxonomy / repair validation green
 - snapshot build + import validation green
 - merge-readiness review before any explicit thread merge
+
+## Current v0.2 Five-Agent Assignment
+
+For `hope-kb-图谱制作`, use exactly one total-control thread plus four branch
+threads:
+
+- Main control: `HopePrompt知识库-【v0.2总控】`
+- Lane 1: `HopePrompt知识库-【来源入库与知识治理】`
+- Lane 2: `HopePrompt知识库-【图谱Schema与快照合同】`
+- Lane 3: `HopePrompt知识库-【路由评测与FutureQA】`
+- Lane 4: `HopePrompt知识库-【安全Lint与泄漏防护】`
+
+Control responsibilities:
+
+- own integration decisions
+- own docs/live-progress sync
+- own commit/push decisions
+- whitelist staging before any commit
+- keep `hope` mainline, desktop, intake, image/video runtime, GraphRAG,
+  hybrid/rerank defaults, runtime network fetch, runtime auto-ingest, and
+  runtime LLM summarization out of v0.2 unless a future gate explicitly reopens
+  them
+
+Lane responsibilities:
+
+- own only the bounded files and contract surface assigned by total control
+- verify live Git state before acting
+- avoid broad replanning
+- do not commit or push by default
+- report back in the core `总控回报` text-code-block format
