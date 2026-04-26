@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 15:27:11 +08:00
+- last updated: 2026-04-26 15:33:47 +08:00
 
 ## Latest Completed
 
@@ -50,6 +50,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Lane 3 read-only review was received and accepted: cross-descriptor binding does not open verified fallback exceptions, does not relax stale/index-miss empty-selection rules, keeps `auto_switch_allowed=true` limited to fresh/all-gates/controller-approved/runtime-flags-false cases, keeps FutureQACandidate out of eval truth, and does not misapply `cross_descriptor_binding` diagnostics to QueryResult, RetrievalTrace, EvalArtifact, or FutureQACandidate fixtures.
 - Lane 4 read-only review was received and accepted: `cross_descriptor_binding` diagnostics still use the sanitized five-field shape only (`descriptor_type`, `descriptor_id`, `field_path`, `denied_class`, `rule_id`), do not emit matched values or raw path/source/prompt/secret content, do not misapply to Lane 4 safety fixtures, and preserve denied-scan / full-KB-row / leakage-count / purge / rollback boundaries.
 - Duplicate Descriptor Identity Gate is opened in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`: duplicate literal `descriptor_id + descriptor_hash` identities must fail closed in offline fixture sets; recursive fixture runner, canonical digest recomputation, SourceDeltaBatch implementation, and verified fallback exceptions remain closed.
+- Lane 2 duplicate descriptor identity implementation was received and control-verified: `DescriptorSet` tracks duplicate `descriptor_id + descriptor_hash` occurrences, `duplicate_descriptor_identity` diagnostics mark the second and later duplicate descriptors without emitting descriptor hashes or matched values, and Lane 2 fail fixtures now include `06_duplicate_descriptor_identity.json`. Validation passed with 52 Rust tests, Lane 2/3/4 pass/fail fixture matrix, v0.2 seed bundle validation, `git diff --check`, and duplicate fixture whitespace/sensitive-pattern scans.
 
 ## Five-Agent Start Readiness
 
@@ -151,8 +152,8 @@ git status：
 
 ## Next Up
 
-- commit and push Lane 2 cross-descriptor binding implementation after whitelist staging
-- dispatch Lane 2 to implement duplicate `descriptor_id + descriptor_hash` fail-closed in `DescriptorSet` or nearest fixture-set indexing module
+- commit and push Lane 2 duplicate descriptor identity implementation after whitelist staging
+- dispatch Lane 4 for read-only review of `duplicate_descriptor_identity` diagnostic shape and safety boundary
 - keep recursive fixture runner, canonical digest recomputation, SourceDeltaBatch implementation, and verified fallback exceptions closed
 - keep Lane 1 read-only on future SourceDeltaBatch participation; no source-delta implementation in this gate
 - keep `E:\codex\hope` untouched

@@ -3,9 +3,11 @@ use crate::diagnostic::Diagnostic;
 use crate::json_walk::JsonValue;
 
 const RULE_ID: &str = "cross_descriptor_binding";
+const DUPLICATE_RULE_ID: &str = "duplicate_descriptor_identity";
 
 pub fn validate_cross_descriptor_bindings(descriptor_set: &DescriptorSet<'_>) -> Vec<Diagnostic> {
     let mut diagnostics = Vec::new();
+    diagnostics.extend(validate_duplicate_descriptor_identities(descriptor_set));
     for descriptor in descriptor_set.descriptors() {
         match descriptor_type(descriptor) {
             "ActivePointer" => {
@@ -24,6 +26,21 @@ pub fn validate_cross_descriptor_bindings(descriptor_set: &DescriptorSet<'_>) ->
         }
     }
     diagnostics
+}
+
+fn validate_duplicate_descriptor_identities(descriptor_set: &DescriptorSet<'_>) -> Vec<Diagnostic> {
+    descriptor_set
+        .duplicate_descriptors()
+        .map(|descriptor| {
+            Diagnostic::new(
+                descriptor_type(descriptor),
+                descriptor_id(descriptor),
+                "$.descriptor_id",
+                "duplicate_descriptor_identity",
+                DUPLICATE_RULE_ID,
+            )
+        })
+        .collect()
 }
 
 fn validate_active_pointer_binding(
@@ -488,6 +505,28 @@ mod tests {
         assert!(diagnostics.iter().any(|diagnostic| {
             diagnostic.denied_class == "rollback_current_failed_activation_status_not_failed"
         }));
+    }
+
+    #[test]
+    fn rejects_duplicate_descriptor_identity_without_hash_leak() {
+        let descriptors = parse_set(&[
+            passing_activation(),
+            r#"{
+              "descriptor_type":"ActivePointer",
+              "descriptor_id":"activation-1",
+              "descriptor_hash":"sha256:activation1"
+            }"#,
+        ]);
+        let set = DescriptorSet::new(&descriptors);
+        let diagnostics = validate_cross_descriptor_bindings(&set);
+
+        assert!(diagnostics.iter().any(|diagnostic| {
+            diagnostic.denied_class == "duplicate_descriptor_identity"
+                && diagnostic.rule_id == "duplicate_descriptor_identity"
+        }));
+        assert!(diagnostics
+            .iter()
+            .all(|diagnostic| !diagnostic.to_string().contains("sha256:activation1")));
     }
 
     fn parse_set(raw_descriptors: &[&str]) -> Vec<JsonValue> {
