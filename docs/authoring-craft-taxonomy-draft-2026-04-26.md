@@ -62,23 +62,31 @@ brand, or protected style.
 Recommended priority:
 
 ```text
-content
-> screenplay_structure
-> director_blocking
-> shot_storyboard
+content_facts
+> writing_continuity
+> scene_expression_adaptation
+> director_scheduling
+> shot_language
 > prompt_text
+```
+
+Chinese shorthand:
+
+```text
+内容定事实，写作保连续，场景定表达，导演做调度，镜头落分镜。
 ```
 
 Interpretation:
 
 - content facts, user facts, character intent, continuity, and story causality
   outrank every downstream craft hint
-- screenplay structure makes content playable, but cannot rewrite the user's
-  facts or the story's established facts
-- director blocking gives staging suggestions, but cannot override content
-  intent or screenplay facts
-- shot storyboard turns staging into executable shots, but cannot replace the
-  previous layer's meaning
+- writing serves content continuity, not decorative prose
+- scene expression adaptation makes content playable and storyboard-ready, but
+  cannot rewrite the user's facts or the story's established facts
+- director scheduling serves writing continuity and scene expression; it cannot
+  override content intent or scene facts
+- shot language serves director scheduling and the final storyboard; it cannot
+  replace the previous layer's meaning
 - `prompt_text` is the final packaging surface, not the source of truth
 
 ### Should Serve
@@ -173,8 +181,9 @@ Layer responsibility:
 ```text
 authoring_layer serves content
 content serves story_continuity
-director_layer serves content
-shot_layer serves director_blocking
+scene_layer serves content expression and storyboard adaptation
+director_layer serves writing continuity and scene expression
+shot_layer serves director scheduling and finalized storyboard output
 prompt_text packages the accepted result
 ```
 
@@ -281,8 +290,9 @@ imitate a person or protected work.
 Recommended layer handoff:
 
 1. The authoring layer provides content intent.
-2. The screenplay layer provides performable structure.
-3. The director layer provides blocking and staging suggestions.
+2. The scene expression layer provides performable structure and storyboard
+   adaptation.
+3. The director layer provides scheduling, blocking, and staging suggestions.
 4. The shot layer provides executable shots.
 5. The later layer must not overwrite facts from the earlier layer.
 
@@ -291,8 +301,8 @@ Practical rule:
 ```text
 user facts and continuity facts
 > authoring craft intent
-> screenplay structure
-> director blocking
+> scene expression adaptation
+> director scheduling
 > shot execution
 > prompt_text packaging
 ```
@@ -322,8 +332,8 @@ Recommended capability layers:
 
 ```text
 writing_continuity
-screenplay_structure
-director_blocking
+scene_expression_adaptation
+director_scheduling
 shot_language
 ```
 
@@ -332,20 +342,21 @@ Layer responsibilities:
 | Layer | Purpose | Capability Tags |
 | --- | --- | --- |
 | writing_continuity | keeps plot, motivation, conflict, emotion, time, prop state, setup/payoff, and next segment bridge continuous | `story_continuity`, `character_motivation_continuity`, `conflict_causality`, `emotional_progression`, `timeline_integrity`, `prop_state_integrity`, `next_scene_bridge`, `setup_payoff_recovery`, `chapter_cliffhanger_with_cause` |
-| screenplay_structure | turns story material into filmable script structure without losing facts or motivation | `screenplay_compression`, `scene_purpose`, `dialogue_intent`, `action_blocking`, `turning_point_preservation`, `scene_causality_check` |
-| director_blocking | serves content by improving performance, staging, rhythm, attention, and emotional landing | `director_layer_handoff`, `performance_focus`, `blocking_hint`, `rhythm_hint`, `visual_focus`, `continuity_note` |
-| shot_language | turns director blocking into shot tasks, shot scene type, camera movement, image description, action, and clean `prompt_text` | `shot_intent`, `shot_scene_type`, `camera_movement`, `scene_scale`, `visualizable_action`, `prompt_text_cleanliness`, `seedance_friendly_segmentation` |
+| scene_expression_adaptation | turns content into filmable scene expression and storyboard-ready structure without losing facts or motivation | `screenplay_compression`, `scene_purpose`, `dialogue_intent`, `action_blocking`, `turning_point_preservation`, `scene_causality_check` |
+| director_scheduling | serves writing continuity and scene expression by improving performance, staging, rhythm, attention, and emotional landing | `director_layer_handoff`, `performance_focus`, `blocking_hint`, `rhythm_hint`, `visual_focus`, `continuity_note` |
+| shot_language | turns director scheduling into shot tasks, shot scene type, camera movement, image description, action, and clean `prompt_text` | `shot_intent`, `shot_scene_type`, `camera_movement`, `scene_scale`, `visualizable_action`, `prompt_text_cleanliness`, `seedance_friendly_segmentation` |
 
 Cross-layer priority:
 
 ```text
-user_content_facts
+用户内容事实
 > continuity_state
 > finalized_storyboard_bank
-> kb_writing_advice
-> kb_screenplay_advice
-> kb_director_advice
-> kb_shot_advice
+> 写作连续性
+> 场景表达适配
+> 导演调度
+> 镜头语言
+> prompt_text
 ```
 
 The downstream product may ask KB for compact guidance at each layer, but KB

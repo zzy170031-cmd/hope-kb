@@ -34,8 +34,8 @@ Recommended chain:
 user topic / synopsis / document / screenplay material
 -> KB capability routing summary
 -> story generation or story optimization
--> screenplay structure
--> director blocking
+-> scene expression adaptation
+-> director scheduling
 -> shot breakdown
 -> storyboard rows
 -> prompt_text
@@ -52,13 +52,14 @@ truth over user facts or accepted storyboard facts.
 Hard priority:
 
 ```text
-user_content_facts
+用户内容事实
 > continuity_state
 > finalized_storyboard_bank
-> kb_writing_advice
-> kb_screenplay_advice
-> kb_director_advice
-> kb_shot_advice
+> 写作连续性
+> 场景表达适配
+> 导演调度
+> 镜头语言
+> prompt_text
 ```
 
 Implications:
@@ -66,8 +67,11 @@ Implications:
 - user facts cannot be overwritten by KB
 - continuity state cannot be ignored for a stronger scene
 - finalized storyboard rows cannot be rewritten by a later authoring hint
-- director advice must serve content
-- shot advice must serve director blocking and content
+- writing continuity preserves content continuity; it does not serve style
+  showmanship
+- scene expression adaptation serves content expression and storyboard fit
+- director advice must serve writing continuity and scene expression
+- shot advice must serve director scheduling and content
 - `prompt_text` is packaging, not the source of truth
 
 ## Layer 1: Writing Continuity Capability
@@ -102,12 +106,12 @@ Routing rules:
 - carry setup/payoff obligations into later stages
 - end chapters with a bridge that can support the next segment
 
-## Layer 2: Screenplay Structure Capability
+## Layer 2: Scene Expression Adaptation Capability
 
 Purpose:
 
-Turn story material into filmable script structure without losing key facts,
-motivation, scene purpose, or causality.
+Turn story material into filmable scene expression and storyboard-ready
+structure without losing key facts, motivation, scene purpose, or causality.
 
 Capability tags:
 
@@ -128,14 +132,15 @@ Routing rules:
   preserves intent
 - keep turning points and emotional turns visible
 - reject decorative scenes with no causal purpose
-- prepare clean handoff to director blocking
+- prepare clean handoff to director scheduling
 
-## Layer 3: Director Blocking Capability
+## Layer 3: Director Scheduling Capability
 
 Purpose:
 
-Serve content by improving staging, performance, rhythm, attention, and
-emotional landing. Director advice must not overwrite content.
+Serve writing continuity and scene expression by improving staging,
+performance, rhythm, attention, and emotional landing. Director advice must
+not overwrite content or scene facts.
 
 Capability tags:
 
@@ -150,7 +155,7 @@ continuity_note
 
 Routing rules:
 
-- inherit content intent, screenplay structure, and continuity constraints
+- inherit content intent, scene expression, and continuity constraints
 - suggest performance focus only where it supports character motivation
 - suggest blocking only where it clarifies scene purpose or conflict
 - adjust rhythm without deleting cause/effect
@@ -161,7 +166,7 @@ Routing rules:
 
 Purpose:
 
-Turn director blocking into shot tasks, scene type, camera movement, scale,
+Turn director scheduling into shot tasks, scene type, camera movement, scale,
 image description, character action, and clean `prompt_text`.
 
 Capability tags:
@@ -178,7 +183,7 @@ seedance_friendly_segmentation
 
 Routing rules:
 
-- choose shot intent from scene purpose and director blocking
+- choose shot intent from scene purpose and director scheduling
 - keep shot scene type aligned with story and screenplay context
 - use camera movement only to clarify action, emotion, or scale
 - choose scene scale based on continuity and scene purpose
@@ -191,11 +196,11 @@ Routing rules:
 
 | source_input_type | Primary Goal | Required KB Layers | Notes |
 | --- | --- | --- | --- |
-| `synopsis` | generate a sustainable plot skeleton | writing continuity, screenplay structure, director blocking, shot language | establish character goals, conflict causality, emotional progression, and next-segment bridge before prose expansion |
-| `full_story` | optimize and adapt an existing story | writing continuity, screenplay structure, director blocking, shot language | preserve facts first, then compress to script, organize scene staging, and break into shots |
-| `novel_chapter` | continue a chapter and prepare next chapter | writing continuity, screenplay structure, director blocking, shot language | maintain long arc and do not break continuity for a single-chapter climax |
-| `screenplay_text` | organize existing script into storyboard-ready structure | screenplay structure, director blocking, shot language, optional writing continuity check | use continuity only to check motivation, causality, timeline, and prop state |
-| `mixed_material` | conservatively identify facts and preserve consistency | writing continuity, screenplay structure, then director blocking and shot language | when uncertain, summarize ambiguity and avoid invention |
+| `synopsis` | generate a sustainable plot skeleton | writing continuity, scene expression adaptation, director scheduling, shot language | establish character goals, conflict causality, emotional progression, and next-segment bridge before prose expansion |
+| `full_story` | optimize and adapt an existing story | writing continuity, scene expression adaptation, director scheduling, shot language | preserve facts first, then adapt expression for scenes, organize staging, and break into shots |
+| `novel_chapter` | continue a chapter and prepare next chapter | writing continuity, scene expression adaptation, director scheduling, shot language | maintain long arc and do not break continuity for a single-chapter climax |
+| `screenplay_text` | organize existing script into storyboard-ready structure | scene expression adaptation, director scheduling, shot language, optional writing continuity check | use continuity only to check motivation, causality, timeline, and prop state |
+| `mixed_material` | conservatively identify facts and preserve consistency | writing continuity, scene expression adaptation, then director scheduling and shot language | when uncertain, summarize ambiguity and avoid invention |
 
 ## Summary-Only KB Contract
 
@@ -264,7 +269,7 @@ Recommended product-side use:
 2. select required KB capability layers
 3. request summary-only KB advice
 4. generate or optimize content
-5. convert to screenplay structure
+5. adapt story into scene expression and storyboard-ready structure
 6. pass content-safe director notes
 7. produce shot rows and clean `prompt_text`
 8. lock accepted rows in the finalized storyboard bank

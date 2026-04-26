@@ -47,8 +47,8 @@ user facts
 > continuity state
 > finalized storyboard bank
 > authoring continuity summary
-> screenplay structure
-> director blocking
+> scene expression adaptation
+> director scheduling
 > shot execution
 > prompt_text packaging
 ```
