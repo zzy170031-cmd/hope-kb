@@ -4,6 +4,7 @@ pub mod descriptor_set;
 pub mod diagnostic;
 pub mod error;
 pub mod json_walk;
+pub mod matrix;
 pub mod model;
 pub mod rules;
 
