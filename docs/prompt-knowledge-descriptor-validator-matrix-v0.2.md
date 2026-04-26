@@ -42,6 +42,48 @@ summarization.
   verified fallback path and a sanitized fallback reason is present. They must
   never select from a stale or mismatched index.
 
+## Cross-Descriptor Review Decisions 2026-04-26
+
+- The next Rust implementation slice remains offline JSON fixture validation.
+  It still must not read runtime artifacts, snapshot SQLite files, raw KB rows,
+  full source registers, or Hope runtime state.
+- Implement static descriptor rules before collection-level binding rules:
+  activation descriptors, active pointers, last-known-good descriptors,
+  rollback pointers, runtime flags, auto-switch rules, eval artifacts, query
+  results, retrieval traces, and FutureQA candidates.
+- `descriptor_hash` is the logical descriptor identity hash. The target
+  definition is a canonical JSON descriptor digest that excludes the
+  `descriptor_hash` field itself. The immediate validator may check hash shape
+  and cross-descriptor literal consistency; recomputing canonical digests is a
+  later gate.
+- `manifest_hash` canonical recomputation is deferred. The immediate validator
+  checks presence, hash shape, no path/locator leakage, and literal binding
+  consistency across fixture descriptors.
+- `on_index_miss`, `on_stale_index`, and `on_stale_snapshot` use strict mode in
+  the first validator: `selected_sample_ids` and `selected_kb_rules` must be
+  empty. A verified fallback exception is deferred until fallback descriptor
+  fields are standardized.
+- If a verified fallback exception is opened later, the minimum proof fields are
+  `fallback_descriptor_id`, `fallback_descriptor_hash`,
+  `fallback_snapshot_hash`, and `fallback_index_hash`; those fields still must
+  not expose raw paths or source locators.
+- `auto_switch_allowed=true` requires `freshness_status=fresh`,
+  `all_gates_pass=true`, a non-empty `controller_approval_id`, and all
+  runtime/media/expensive path flags set to `false`. Any stale, blocked,
+  unknown, activation-failed, or missing gate state forces
+  `auto_switch_allowed=false`.
+- `controller_approval_id` is the required approval marker for v0.2. A separate
+  `approval_status=approved` field may be added later, but it is not required
+  for the first implementation.
+- `FutureQACandidate` must never mutate itself into eval truth. If promotion is
+  represented later, it must reference an external eval truth artifact via
+  `promoted_eval_artifact_id` and `promoted_eval_artifact_hash`, while keeping
+  `is_eval_truth=false` and `enters_eval_truth_by_default=false`.
+- `LastKnownGoodDescriptor` first implementation accepts only
+  `lkg_activation_status=activated` and `lkg_freshness_status=fresh`. Accepted
+  previous-good states such as `superseded` or `rolled_back` are deferred until
+  an explicit historical-activation descriptor contract exists.
+
 ## Canonical Artifact Classes
 
 | artifact_class | Visibility | Allowed role |
