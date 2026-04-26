@@ -1,6 +1,7 @@
 use std::fmt;
 use std::str::FromStr;
 
+use crate::diagnostic::Diagnostic;
 use crate::error::ValidationError;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -8,6 +9,8 @@ pub enum DescriptorType {
     SourceDeltaBatch,
     ActivationDescriptor,
     ActivePointer,
+    LastKnownGoodDescriptor,
+    RollbackPointer,
     QueryResult,
     RetrievalTrace,
     FutureQACandidate,
@@ -23,6 +26,8 @@ impl DescriptorType {
             Self::SourceDeltaBatch => "SourceDeltaBatch",
             Self::ActivationDescriptor => "ActivationDescriptor",
             Self::ActivePointer => "ActivePointer",
+            Self::LastKnownGoodDescriptor => "LastKnownGoodDescriptor",
+            Self::RollbackPointer => "RollbackPointer",
             Self::QueryResult => "QueryResult",
             Self::RetrievalTrace => "RetrievalTrace",
             Self::FutureQACandidate => "FutureQACandidate",
@@ -48,6 +53,10 @@ impl FromStr for DescriptorType {
             "SourceDeltaBatch" | "source_delta_batch" => Ok(Self::SourceDeltaBatch),
             "ActivationDescriptor" | "activation_descriptor" => Ok(Self::ActivationDescriptor),
             "ActivePointer" | "active_pointer" => Ok(Self::ActivePointer),
+            "LastKnownGoodDescriptor" | "last_known_good_descriptor" => {
+                Ok(Self::LastKnownGoodDescriptor)
+            }
+            "RollbackPointer" | "rollback_pointer" => Ok(Self::RollbackPointer),
             "QueryResult" | "query_result" => Ok(Self::QueryResult),
             "RetrievalTrace" | "retrieval_trace" => Ok(Self::RetrievalTrace),
             "FutureQACandidate" | "future_qa_candidate" => Ok(Self::FutureQACandidate),
@@ -288,6 +297,7 @@ pub struct ValidationReport {
     pub fixture_dir: Option<String>,
     pub descriptors_checked: usize,
     pub errors: Vec<ValidationError>,
+    pub diagnostics: Vec<Diagnostic>,
     pub warnings: Vec<String>,
 }
 
@@ -298,8 +308,9 @@ impl ValidationReport {
             fixture_dir,
             descriptors_checked: 0,
             errors: Vec::new(),
+            diagnostics: Vec::new(),
             warnings: vec![
-                "scaffold_only_no_descriptor_rules_executed".to_string(),
+                "first_wave_offline_descriptor_rules_available".to_string(),
                 "runtime_artifacts_snapshot_sqlite_raw_kb_and_source_register_not_read".to_string(),
             ],
         }
@@ -311,7 +322,32 @@ impl ValidationReport {
             fixture_dir,
             descriptors_checked: 0,
             errors,
+            diagnostics: Vec::new(),
             warnings: Vec::new(),
+        }
+    }
+
+    pub fn from_parts(
+        fixture_dir: Option<String>,
+        descriptors_checked: usize,
+        errors: Vec<ValidationError>,
+        diagnostics: Vec<Diagnostic>,
+    ) -> Self {
+        let status = if errors.is_empty() && diagnostics.is_empty() {
+            ValidationStatus::Passed
+        } else {
+            ValidationStatus::Failed
+        };
+        Self {
+            status,
+            fixture_dir,
+            descriptors_checked,
+            errors,
+            diagnostics,
+            warnings: vec![
+                "runtime_artifacts_snapshot_sqlite_raw_kb_and_source_register_not_read".to_string(),
+                "diagnostics_do_not_include_matched_values".to_string(),
+            ],
         }
     }
 
@@ -343,19 +379,26 @@ impl ValidationReport {
             })
             .collect::<Vec<_>>()
             .join(",\n");
+        let diagnostics = self
+            .diagnostics
+            .iter()
+            .map(|diagnostic| diagnostic.to_json_pretty(4))
+            .collect::<Vec<_>>()
+            .join(",\n");
 
         format!(
-            "{{\n  \"status\": \"{}\",\n  \"fixture_dir\": {},\n  \"descriptors_checked\": {},\n  \"errors\": [\n{}\n  ],\n  \"warnings\": [\n{}\n  ]\n}}",
+            "{{\n  \"status\": \"{}\",\n  \"fixture_dir\": {},\n  \"descriptors_checked\": {},\n  \"errors\": [\n{}\n  ],\n  \"diagnostics\": [\n{}\n  ],\n  \"warnings\": [\n{}\n  ]\n}}",
             self.status,
             fixture_dir,
             self.descriptors_checked,
             errors,
+            diagnostics,
             warnings
         )
     }
 }
 
-fn escape_json(value: &str) -> String {
+pub(crate) fn escape_json(value: &str) -> String {
     let mut escaped = String::with_capacity(value.len());
     for ch in value.chars() {
         match ch {
@@ -380,6 +423,10 @@ mod tests {
         assert_eq!(
             "ActivationDescriptor".parse::<DescriptorType>(),
             Ok(DescriptorType::ActivationDescriptor)
+        );
+        assert_eq!(
+            "RollbackPointer".parse::<DescriptorType>(),
+            Ok(DescriptorType::RollbackPointer)
         );
         assert_eq!(
             "retrieval_trace_log_telemetry_shadow_rollback".parse::<ArtifactClass>(),

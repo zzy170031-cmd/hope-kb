@@ -1,6 +1,7 @@
 use std::env;
 use std::process;
 
+use descriptor_validator::model::ValidationStatus;
 use descriptor_validator::validate_fixture_dir;
 
 fn main() {
@@ -28,9 +29,10 @@ fn main() {
     }
 
     let report = validate_fixture_dir(fixture_dir);
+    let failed = report.status == ValidationStatus::Failed;
     println!("{}", report.to_json_pretty());
 
-    if !report.errors.is_empty() {
+    if failed {
         process::exit(1);
     }
 }
@@ -44,8 +46,9 @@ Usage:
   descriptor-validator <fixture-dir>
   descriptor-validator --help
 
-First-wave offline scaffold for Hope KB descriptor validation.
-This tool only validates the fixture directory boundary today. It does not read
+First-wave offline validator for Hope KB descriptor fixtures.
+This tool validates JSON descriptor fixtures with artifact-class allow-listing,
+recursive denied-field scanning, and first-wave leakage guards. It does not read
 runtime artifacts, snapshot SQLite files, raw KB rows, or full source_register
 content."
     );
