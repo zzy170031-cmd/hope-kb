@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 16:14:55 +08:00
+- last updated: 2026-04-26 16:38:53 +08:00
 
 ## Latest Completed
 
@@ -54,6 +54,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Lane 4 read-only review of `duplicate_descriptor_identity` was received and accepted: diagnostics keep the sanitized five-field shape, do not emit duplicate descriptor hash / matched value / file path / raw path / raw source text / prompt body / source register / secret, and do not misapply to Lane 4 safety/observability fixtures.
 - Recursive Fixture Matrix Runner Gate is opened in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`: the next tool slice should run all existing pass/fail fixture leaves from one explicit fixture root while preserving current validation semantics and sanitized reporting. Canonical digest recomputation, SourceDeltaBatch implementation, verified fallback exceptions, runtime reads, snapshot SQLite reads, raw KB reads, and Hope runtime access remain closed.
 - Lane 4 recursive fixture matrix runner implementation was received and control-verified: `descriptor-validator --matrix <fixture-root>` now validates all existing `pass/<leaf>/` and `fail/<leaf>/` directories in one run, treats expected failing leaves as successful matrix cases, keeps the original single-directory mode, and outputs only sanitized leaf-level summary fields. Validation passed with 55 Rust tests, Lane 2/3/4 single-leaf pass/fail checks, matrix `status=passed` across 6 leaves, v0.2 seed bundle validation, `git diff --check`, and a matrix-summary sensitive-pattern check.
+- Lane 4 thin PowerShell wrapper was received and control-verified: `scripts/validate-descriptor-fixtures.ps1` only orchestrates the Rust matrix runner, accepts `-RepoRoot` and optional `-FixtureRoot`, keeps `FixtureRoot` inside `RepoRoot`, returns the Rust CLI exit code, and contains no raw KB / source-register / prompt / secret/provider output path. Control verified default matrix execution, outside-root rejection with exit code 2, 55 Rust tests, and `git diff --check`.
 
 ## Five-Agent Start Readiness
 
@@ -155,8 +156,8 @@ git status：
 
 ## Next Up
 
-- commit and push Lane 4 recursive fixture matrix runner after whitelist staging
-- next gate candidate: add a thin `scripts/validate-descriptor-fixtures.ps1` wrapper over Rust `--matrix`, or pause implementation for a validator usage note
+- commit and push `scripts/validate-descriptor-fixtures.ps1` after whitelist staging
+- next gate candidate: pause implementation for a validator usage note and total-control readiness checkpoint before opening canonical digest or SourceDeltaBatch work
 - keep canonical digest recomputation, SourceDeltaBatch implementation, verified fallback exceptions, runtime reads, snapshot SQLite reads, raw KB reads, and Hope runtime access closed
 - keep Lane 1 read-only on future SourceDeltaBatch participation; no source-delta implementation in this gate
 - keep `E:\codex\hope` untouched
