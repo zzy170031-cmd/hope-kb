@@ -49,6 +49,71 @@ Forbidden disclosure includes raw prompt content, raw KB rows, full source
 registry values, overlay payloads, provider bodies, secrets, local paths, and
 any expanded provenance payload.
 
+## Content-First Principle
+
+`authoring_craft` is not an author-style library. It is a content-creation
+capability library.
+
+Its job is to help generated chapters become better stories: more readable,
+more causally continuous, more performable, and easier to convert into
+screenplay and storyboard form. It must not imitate any real author, real IP,
+brand, or protected style.
+
+Recommended priority:
+
+```text
+content
+> screenplay_structure
+> director_blocking
+> shot_storyboard
+> prompt_text
+```
+
+Interpretation:
+
+- content facts, user facts, character intent, continuity, and story causality
+  outrank every downstream craft hint
+- screenplay structure makes content playable, but cannot rewrite the user's
+  facts or the story's established facts
+- director blocking gives staging suggestions, but cannot override content
+  intent or screenplay facts
+- shot storyboard turns staging into executable shots, but cannot replace the
+  previous layer's meaning
+- `prompt_text` is the final packaging surface, not the source of truth
+
+### Should Serve
+
+`authoring_craft` should serve these content and adaptation functions:
+
+1. story hook
+2. character desire
+3. character pressure
+4. conflict engine
+5. emotional turn
+6. suspense setup
+7. setup/payoff recovery
+8. scene purpose
+9. visualizable action
+10. chapter hook
+11. novel-to-screenplay compression
+12. director-layer handoff
+
+In V0, character pressure is covered by the combination of
+`character_desire`, `conflict_escalation`, and `emotional_turn`; scene purpose
+is covered by the combination of `narrative_hook`, `scene_transition`, and
+`director_blocking_bridge`.
+
+### Should Not Serve
+
+`authoring_craft` should not serve:
+
+1. real author imitation
+2. IP style replication
+3. brand style replication
+4. generic prose beautification without story function
+5. director showmanship that conflicts with user facts or established story
+   facts
+
 ## V0 Taxonomy
 
 `authoring_craft` is a retrieval and summary taxonomy. It describes what craft
@@ -117,6 +182,43 @@ Practical mapping:
 This relationship keeps director knowledge useful without importing real
 director names, adding a `director_style_ref` field, or asking the runtime to
 imitate a person or protected work.
+
+## Layered Integration With Director KB
+
+Recommended layer handoff:
+
+1. The authoring layer provides content intent.
+2. The screenplay layer provides performable structure.
+3. The director layer provides blocking and staging suggestions.
+4. The shot layer provides executable shots.
+5. The later layer must not overwrite facts from the earlier layer.
+
+Practical rule:
+
+```text
+user facts and continuity facts
+> authoring craft intent
+> screenplay structure
+> director blocking
+> shot execution
+> prompt_text packaging
+```
+
+Director KB may contribute only when it supports the inherited content intent.
+If a director hint looks visually stronger but changes character desire,
+conflict logic, continuity, or user facts, the hint should be dropped or
+downgraded in the compact retrieval summary.
+
+Recommended warning codes for future sidecar or telemetry use only:
+
+```text
+kb_director_hint_dropped_due_to_story_conflict
+authoring_hint_dropped_due_to_user_fact_conflict
+continuity_fact_overrode_kb_hint
+```
+
+These warning codes are not new seed fields and must not enter the 23-field
+main schema in the current freeze.
 
 ## Novel Chapter Stage Retrieval
 
