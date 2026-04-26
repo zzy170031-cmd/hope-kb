@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 12:46:19 +08:00
+- last updated: 2026-04-26 12:56:09 +08:00
 
 ## Latest Completed
 
@@ -29,6 +29,7 @@ Update this file for online sync after every 10-20 minute work package.
 - docs-only governance package was committed and pushed as `9fcb391` (`docs: add v0.2 prompt knowledge governance contracts`); `AGENTS.md` was intentionally excluded from the commit
 - v0.2 control rules in `AGENTS.md` were reviewed, committed, and pushed as `aa1e224` (`docs: sync v0.2 control rules`)
 - Freshness / Activation four-lane reports were received and integrated into `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
+- Machine-Checkable Descriptor / Validator Gate opened by total control after `2bd7f0c`; first step is four-lane read-only descriptor breakdown, not validator implementation
 
 ## Five-Agent Start Readiness
 
@@ -130,14 +131,15 @@ git status：
 
 ## Next Up
 
-- verify and commit the docs-only Freshness / Activation contract if the staged diff matches the whitelist
-- keep the machine-checkable descriptor / validator implementation gate closed until total control explicitly opens it
+- wait for Machine-Checkable Descriptor / Validator branch reports in text code blocks
+- integrate only docs-only descriptor plans; do not implement validators until total control accepts the descriptor matrix
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
 
 - blocker: none for the docs-only integration package after stale `.git/index.lock` removal
 - blocker: none for the docs-only Freshness / Activation contract draft
+- blocker: Machine-Checkable Descriptor / Validator branch reports not yet received
 - risk: current package is docs/RFC and governance baseline only; it does not yet implement machine-checkable validator gates for the new QA contracts
 - risk: standard ignored `snapshots/hope-kb-v0.2.sqlite3` previously differed from verified `rebuilt-5`; any future runtime activation must bind a chosen snapshot by hash instead of relying on path name
 - risk to `hope` separation: none in current scope; keep Hope product-side runtime hookup, desktop, intake, Qwen, Doubao, Seedance, GraphRAG, hybrid/rerank default, and runtime LLM summarize out of this repo/package
