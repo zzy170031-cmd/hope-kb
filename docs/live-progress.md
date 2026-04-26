@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 14:54:15 +08:00
+- last updated: 2026-04-26 15:00:03 +08:00
 
 ## Latest Completed
 
@@ -44,6 +44,8 @@ Update this file for online sync after every 10-20 minute work package.
 - Descriptor Fixture Gate reports were received from Lane 2, Lane 3, and Lane 4. Total control verified the live untracked `tools/descriptor-validator/fixtures/` tree matches the reported lane-owned pass/fail fixture directories and contains no extra unreported fixture leaves.
 - Descriptor fixture validation matrix passed under total control: Lane 2 activation/pointer pass `status=passed` with 4 descriptors and fail `status=failed` with 4 descriptors; Lane 3 router/eval/FutureQA pass `status=passed` with 4 descriptors and fail `status=failed` with 6 descriptors; Lane 4 safety/observability pass `status=passed` with 5 descriptors and fail `status=failed` with 6 descriptors.
 - Control verification also passed `cargo +1.95.0 test --manifest-path tools/descriptor-validator/Cargo.toml` with 45 tests, `git diff --check`, `scripts/validate-v0-2-seed-bundle.ps1`, fixture trailing-whitespace scan, and a fixture sensitive-pattern scan. The only sensitive-pattern hits were intentional synthetic fail-field names / trigger-code strings or denial text, not real raw KB, paths, source registers, prompts, or secrets.
+- Descriptor Fixture Gate was committed and pushed as `f1a63d3` (`tools: add descriptor validator fixtures`); live Git is clean and aligned with `origin/codex/contracts-freeze`.
+- Cross-Descriptor Fixture-Set Binding Gate is opened after `f1a63d3` in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`. This next gate stays offline JSON fixture-only and targets literal `descriptor_id + descriptor_hash` binding for activation/pointer/LKG/rollback descriptors; canonical digest recomputation, verified fallback exceptions, SourceDeltaBatch implementation, runtime artifact reads, snapshot SQLite reads, raw KB reads, and Hope runtime access remain closed.
 
 ## Five-Agent Start Readiness
 
@@ -145,9 +147,10 @@ git status：
 
 ## Next Up
 
-- commit and push the Lane 2 / Lane 3 / Lane 4 canonical passing/failing JSON fixture package after whitelist staging
-- next implementation gate should add a recursive fixture runner or cross-descriptor fixture-set binding, not ad-hoc runtime artifact reads
-- keep verified fallback exception and canonical digest recomputation closed until fixture coverage is stable
+- dispatch Lane 2 as primary implementer for `descriptor_set` / `fixture_set` indexing and activation pointer binding
+- dispatch Lane 3 for read-only review of stale auto-switch interaction; no verified fallback exception yet
+- dispatch Lane 4 for read-only review of sanitized diagnostics and denied-field boundary; no matched values in binding diagnostics
+- keep Lane 1 read-only on future SourceDeltaBatch participation; no source-delta implementation in this gate
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks

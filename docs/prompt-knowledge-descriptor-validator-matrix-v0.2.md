@@ -124,6 +124,59 @@ tools/descriptor-validator/fixtures/fail/lane4_safety_observability/
   JSON, snapshots, runtime code, migrations, or Hope main-thread code unless
   total control opens a separate gate.
 
+## Cross-Descriptor Fixture-Set Binding Gate Decisions 2026-04-26
+
+- This gate opens after `f1a63d3`. It implements offline fixture-set binding
+  only. It must not read runtime artifacts, snapshot SQLite files, raw KB rows,
+  full source registers, source raw text, Hope runtime state, or network data.
+- The first implementation target is a descriptor-set index over explicitly
+  supplied JSON fixtures. The index may recurse inside a named fixture-set
+  directory, but it still reads only `.json` descriptor fixtures.
+- Descriptor identity for this gate is literal `descriptor_id +
+  descriptor_hash`. Canonical JSON digest recomputation remains deferred.
+- `manifest_hash`, `snapshot_hash`, `index_hash`, `seed_bundle_hash`,
+  `source_delta_batch_hash`, and `source_freshness_digest` are checked for
+  literal consistency across related descriptors. They are not recomputed in
+  this gate.
+- `ActivePointer.target_activation_descriptor_id +
+  target_activation_descriptor_hash` must resolve to an `ActivationDescriptor`
+  in the same fixture set. The target must have `verification_status=passed`
+  and `activation_status=verified` or `activation_status=activated`.
+- Active pointer target hashes for seed bundle, manifest, snapshot, and index
+  must exactly match the referenced `ActivationDescriptor`.
+- `LastKnownGoodDescriptor.lkg_descriptor_id + lkg_descriptor_hash` must
+  resolve to a verified last-known-good `ActivationDescriptor` in the same
+  fixture set. The first implementation allows only `activation_status=activated`
+  and `freshness_status=fresh`.
+- `RollbackPointer.target_lkg_descriptor_id + target_lkg_descriptor_hash` must
+  resolve to either a `LastKnownGoodDescriptor` or the activation descriptor it
+  binds to. `RollbackPointer.current_failed_descriptor_id +
+  current_failed_descriptor_hash` must resolve to a failed activation candidate
+  in the same fixture set.
+- Cross-binding diagnostics remain sanitized: report descriptor type, descriptor
+  id, field path, denied class, and rule id only. Do not emit matched values,
+  raw paths, raw source text, source registers, prompt bodies, or secrets.
+- Verified fallback exceptions for `QueryResult` and `RetrievalTrace` remain
+  closed. `on_index_miss`, `on_stale_index`, and `on_stale_snapshot` still
+  require empty selected IDs/rules in this gate.
+- SourceDeltaBatch implementation remains deferred. Lane 1 may review whether
+  future source-delta descriptors should participate in cross binding, but no
+  source-delta Rust rules or fixtures are opened here.
+
+Expected implementation ownership:
+
+```text
+Lane 2: primary Rust implementation for descriptor_set / fixture_set indexing
+        and ActivationDescriptor / ActivePointer / LastKnownGoodDescriptor /
+        RollbackPointer binding.
+Lane 3: read-only review of router/eval interaction; no verified fallback
+        exception, no auto-switch relaxation.
+Lane 4: read-only review of sanitized diagnostics and denied-field coverage;
+        no raw values in binding diagnostics.
+Lane 1: read-only SourceDeltaBatch participation review only; no source-delta
+        implementation in this gate.
+```
+
 ## Canonical Artifact Classes
 
 | artifact_class | Visibility | Allowed role |
