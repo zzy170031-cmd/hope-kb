@@ -144,6 +144,10 @@ timeline_integrity
 prop_state_integrity
 next_scene_bridge
 scene_causality_check
+setup_payoff_recovery
+chapter_cliffhanger_with_cause
+screenplay_compression
+director_layer_handoff
 ```
 
 Recommended blocked-risk tags:
@@ -156,6 +160,12 @@ timeline_break
 prop_state_conflict
 unfilmable_poetic_drift
 continuity_break
+real_author_style_imitation
+ip_style_clone
+director_hint_overrode_story
+kb_hint_overrode_user_fact
+continuity_state_ignored
+finalized_storyboard_bank_ignored
 ```
 
 Layer responsibility:
@@ -172,6 +182,10 @@ No later layer may overwrite facts from an earlier layer. If a beautiful line,
 strong reversal, striking shot, or director hint breaks motivation, timeline,
 prop state, scene causality, or next-scene handoff, it should be rejected from
 the compact KB summary.
+
+Authoring craft must also preserve the finalized storyboard bank. Once a
+storyboard area is finalized, authoring hints may summarize, continue, or
+bridge from it, but must not rewrite it.
 
 ## V0 Taxonomy
 
@@ -190,6 +204,8 @@ timeline_integrity
 prop_state_integrity
 next_scene_bridge
 scene_causality_check
+setup_payoff_recovery
+chapter_cliffhanger_with_cause
 narrative_hook
 character_desire
 conflict_escalation
@@ -216,6 +232,8 @@ director_blocking_bridge
 | `prop_state_integrity` | Preserves object, clue, weapon, location, evidence, and costume state across scenes and shots. | screenplay rewrite, director storyboard | prop state carryover and contradiction warning |
 | `next_scene_bridge` | Ensures the current beat leaves a usable handoff into the next scene or chapter. | all stages | transition hook and carryover cue |
 | `scene_causality_check` | Checks whether the scene exists for a causal purpose rather than decorative prose or spectacle. | screenplay rewrite, director storyboard | scene-purpose test and drop/merge hint |
+| `setup_payoff_recovery` | Keeps planted details available for later payoff and prevents accidental loss during compression or shot splitting. | all stages | setup/payoff ledger reminder and recovery cue |
+| `chapter_cliffhanger_with_cause` | Ends a chapter with forward pressure that follows from existing desire, conflict, clue, or decision. | novel chapter | causal cliffhanger note and next-chapter bridge |
 | `narrative_hook` | Opens a chapter, scene, or beat with a concrete question, threat, promise, or desire. | novel chapter | one compact hook principle plus matched safe sample IDs |
 | `character_desire` | Clarifies what the focal character wants now and what cost, fear, or limit blocks it. | novel chapter | desire/obstacle wording and character-state constraints |
 | `conflict_escalation` | Raises pressure through stakes, reversals, power shifts, or tactical complications. | novel chapter, screenplay rewrite | escalation ladder and do-not-flatten warning |
@@ -294,6 +312,46 @@ continuity_fact_overrode_kb_hint
 
 These warning codes are not new seed fields and must not enter the 23-field
 main schema in the current freeze.
+
+## Full-Chain Capability Layers
+
+For V0, `authoring_craft` should be understood as the first layer of a full
+content-production chain rather than a standalone writing feature.
+
+Recommended capability layers:
+
+```text
+writing_continuity
+screenplay_structure
+director_blocking
+shot_language
+```
+
+Layer responsibilities:
+
+| Layer | Purpose | Capability Tags |
+| --- | --- | --- |
+| writing_continuity | keeps plot, motivation, conflict, emotion, time, prop state, setup/payoff, and next segment bridge continuous | `story_continuity`, `character_motivation_continuity`, `conflict_causality`, `emotional_progression`, `timeline_integrity`, `prop_state_integrity`, `next_scene_bridge`, `setup_payoff_recovery`, `chapter_cliffhanger_with_cause` |
+| screenplay_structure | turns story material into filmable script structure without losing facts or motivation | `screenplay_compression`, `scene_purpose`, `dialogue_intent`, `action_blocking`, `turning_point_preservation`, `scene_causality_check` |
+| director_blocking | serves content by improving performance, staging, rhythm, attention, and emotional landing | `director_layer_handoff`, `performance_focus`, `blocking_hint`, `rhythm_hint`, `visual_focus`, `continuity_note` |
+| shot_language | turns director blocking into shot tasks, shot scene type, camera movement, image description, action, and clean `prompt_text` | `shot_intent`, `shot_scene_type`, `camera_movement`, `scene_scale`, `visualizable_action`, `prompt_text_cleanliness`, `seedance_friendly_segmentation` |
+
+Cross-layer priority:
+
+```text
+user_content_facts
+> continuity_state
+> finalized_storyboard_bank
+> kb_writing_advice
+> kb_screenplay_advice
+> kb_director_advice
+> kb_shot_advice
+```
+
+The downstream product may ask KB for compact guidance at each layer, but KB
+must remain summary-only advisory. The KB layer may recommend, warn, or route;
+it must not overwrite user facts, continuity state, finalized storyboard rows,
+or accepted upstream content.
 
 ## Novel Chapter Stage Retrieval
 
