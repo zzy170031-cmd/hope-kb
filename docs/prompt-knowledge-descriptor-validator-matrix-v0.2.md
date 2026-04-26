@@ -56,6 +56,12 @@ summarization.
   `descriptor_hash` field itself. The immediate validator may check hash shape
   and cross-descriptor literal consistency; recomputing canonical digests is a
   later gate.
+- The immediate static hash shape accepts `sha256:<token>` and
+  `bundle-sha256:<token>` with a non-empty fixture token made from
+  alphanumeric characters, `.`, `_`, or `-`, and still rejects raw paths,
+  source locators, seed paths, source-register names, and snapshot SQLite
+  paths. Strict 64-hex digest enforcement is deferred to the canonical digest
+  gate.
 - `manifest_hash` canonical recomputation is deferred. The immediate validator
   checks presence, hash shape, no path/locator leakage, and literal binding
   consistency across fixture descriptors.
@@ -422,7 +428,9 @@ Must equal or match:
 - `lkg_descriptor_id` and `lkg_descriptor_hash` identify a previously verified
   activation descriptor.
 - Snapshot and index hashes bind to that descriptor.
-- `lkg_freshness_status` is `fresh` or an accepted previous-good state.
+- `lkg_freshness_status` is `fresh` for the v0.2 first implementation.
+  Accepted previous-good states are deferred until an explicit
+  historical-activation descriptor contract exists.
 
 Reject if:
 

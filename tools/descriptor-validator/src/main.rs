@@ -49,7 +49,8 @@ Usage:
 Offline validator for Hope KB descriptor fixtures.
 This tool validates JSON descriptor fixtures with artifact-class allow-listing,
 recursive denied-field scanning, leakage guards, purge checks, rollback checks,
-and refresh telemetry checks. It does not read runtime artifacts, snapshot SQLite
-files, raw KB rows, or full source_register content."
+refresh telemetry checks, and activation/pointer static checks. It does not
+read runtime artifacts, snapshot SQLite files, raw KB rows, or full
+source_register content."
     );
 }
