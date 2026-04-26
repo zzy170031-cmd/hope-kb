@@ -46,10 +46,10 @@ Usage:
   descriptor-validator <fixture-dir>
   descriptor-validator --help
 
-First-wave offline validator for Hope KB descriptor fixtures.
+Offline validator for Hope KB descriptor fixtures.
 This tool validates JSON descriptor fixtures with artifact-class allow-listing,
-recursive denied-field scanning, and first-wave leakage guards. It does not read
-runtime artifacts, snapshot SQLite files, raw KB rows, or full source_register
-content."
+recursive denied-field scanning, leakage guards, purge checks, rollback checks,
+and refresh telemetry checks. It does not read runtime artifacts, snapshot SQLite
+files, raw KB rows, or full source_register content."
     );
 }
