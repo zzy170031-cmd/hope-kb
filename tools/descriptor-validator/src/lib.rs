@@ -1,5 +1,6 @@
 pub mod artifact_class;
 pub mod denied_scan;
+pub mod descriptor_set;
 pub mod diagnostic;
 pub mod error;
 pub mod json_walk;
@@ -11,10 +12,11 @@ use std::path::{Path, PathBuf};
 
 use artifact_class::validate_artifact_class;
 use denied_scan::scan_denied_fields;
+use descriptor_set::DescriptorSet;
 use error::{ValidationError, ValidationErrorCode};
 use json_walk::{parse_json, JsonValue};
 use model::ValidationReport;
-use rules::validate_first_wave_rules;
+use rules::{validate_cross_descriptor_rules, validate_first_wave_rules};
 
 pub fn validate_fixture_dir(path: impl AsRef<Path>) -> ValidationReport {
     let path = path.as_ref();
@@ -45,13 +47,19 @@ pub fn validate_fixture_dir(path: impl AsRef<Path>) -> ValidationReport {
     let mut errors = Vec::new();
     let mut diagnostics = Vec::new();
     let mut descriptors_checked = 0;
+    let mut descriptors = Vec::new();
 
     for fixture_path in json_fixture_paths(path) {
         match fs::read_to_string(&fixture_path) {
             Ok(raw) => match parse_json(&raw) {
                 Ok(value) => {
-                    descriptors_checked +=
-                        validate_json_root(&value, &fixture_path, &mut errors, &mut diagnostics);
+                    descriptors_checked += validate_json_root(
+                        &value,
+                        &fixture_path,
+                        &mut errors,
+                        &mut diagnostics,
+                        &mut descriptors,
+                    );
                 }
                 Err(error) => errors.push(ValidationError::new(
                     ValidationErrorCode::InvalidArgument,
@@ -66,6 +74,9 @@ pub fn validate_fixture_dir(path: impl AsRef<Path>) -> ValidationReport {
             )),
         }
     }
+
+    let descriptor_set = DescriptorSet::new(&descriptors);
+    diagnostics.extend(validate_cross_descriptor_rules(&descriptor_set));
 
     ValidationReport::from_parts(Some(display_path), descriptors_checked, errors, diagnostics)
 }
@@ -95,10 +106,12 @@ fn validate_json_root(
     fixture_path: &Path,
     errors: &mut Vec<ValidationError>,
     diagnostics: &mut Vec<diagnostic::Diagnostic>,
+    descriptors: &mut Vec<JsonValue>,
 ) -> usize {
     match value {
         JsonValue::Object(_) => {
             validate_descriptor(value, diagnostics);
+            descriptors.push(value.clone());
             1
         }
         JsonValue::Array(items) => {
@@ -106,6 +119,7 @@ fn validate_json_root(
             for (index, item) in items.iter().enumerate() {
                 if matches!(item, JsonValue::Object(_)) {
                     validate_descriptor(item, diagnostics);
+                    descriptors.push(item.clone());
                     count += 1;
                 } else {
                     errors.push(ValidationError::new(

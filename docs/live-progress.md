@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 15:00:03 +08:00
+- last updated: 2026-04-26 15:16:05 +08:00
 
 ## Latest Completed
 
@@ -46,6 +46,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Control verification also passed `cargo +1.95.0 test --manifest-path tools/descriptor-validator/Cargo.toml` with 45 tests, `git diff --check`, `scripts/validate-v0-2-seed-bundle.ps1`, fixture trailing-whitespace scan, and a fixture sensitive-pattern scan. The only sensitive-pattern hits were intentional synthetic fail-field names / trigger-code strings or denial text, not real raw KB, paths, source registers, prompts, or secrets.
 - Descriptor Fixture Gate was committed and pushed as `f1a63d3` (`tools: add descriptor validator fixtures`); live Git is clean and aligned with `origin/codex/contracts-freeze`.
 - Cross-Descriptor Fixture-Set Binding Gate is opened after `f1a63d3` in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`. This next gate stays offline JSON fixture-only and targets literal `descriptor_id + descriptor_hash` binding for activation/pointer/LKG/rollback descriptors; canonical digest recomputation, verified fallback exceptions, SourceDeltaBatch implementation, runtime artifact reads, snapshot SQLite reads, raw KB reads, and Hope runtime access remain closed.
+- Lane 2 cross-descriptor binding implementation was received and control-verified: `DescriptorSet` indexes offline JSON fixture descriptors by `descriptor_id + descriptor_hash`, `ActivePointer` binds to `ActivationDescriptor`, `LastKnownGoodDescriptor` binds to verified activated/fresh activation descriptors, and `RollbackPointer` binds failed activation candidates to verified LKG targets. Validation passed with 50 Rust tests, Lane 2/3/4 pass/fail fixture matrix, v0.2 seed bundle validation, `git diff --check`, Lane 2 fixture trailing-whitespace scan, and Lane 2 fixture sensitive-pattern scan.
 
 ## Five-Agent Start Readiness
 
@@ -147,9 +148,10 @@ git status：
 
 ## Next Up
 
-- dispatch Lane 2 as primary implementer for `descriptor_set` / `fixture_set` indexing and activation pointer binding
+- commit and push Lane 2 cross-descriptor binding implementation after whitelist staging
 - dispatch Lane 3 for read-only review of stale auto-switch interaction; no verified fallback exception yet
 - dispatch Lane 4 for read-only review of sanitized diagnostics and denied-field boundary; no matched values in binding diagnostics
+- next implementation decision after reviews: prefer duplicate `descriptor_id + descriptor_hash` fail-closed before recursive fixture runner
 - keep Lane 1 read-only on future SourceDeltaBatch participation; no source-delta implementation in this gate
 - keep `E:\codex\hope` untouched
 

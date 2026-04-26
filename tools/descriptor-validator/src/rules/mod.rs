@@ -1,6 +1,7 @@
 pub mod activation;
 pub mod active_pointer;
 pub mod auto_switch;
+pub mod cross_descriptor;
 pub mod eval_artifact;
 pub mod full_kb_rows;
 pub mod future_qa_candidate;
@@ -14,6 +15,7 @@ pub mod rollback;
 pub mod rollback_pointer;
 pub mod runtime_flags;
 
+use crate::descriptor_set::DescriptorSet;
 use crate::diagnostic::Diagnostic;
 use crate::json_walk::JsonValue;
 
@@ -41,6 +43,10 @@ pub fn validate_first_wave_rules(descriptor: &JsonValue) -> Vec<Diagnostic> {
         descriptor,
     ));
     diagnostics
+}
+
+pub fn validate_cross_descriptor_rules(descriptor_set: &DescriptorSet<'_>) -> Vec<Diagnostic> {
+    cross_descriptor::validate_cross_descriptor_bindings(descriptor_set)
 }
 
 pub(crate) fn descriptor_type(descriptor: &JsonValue) -> String {

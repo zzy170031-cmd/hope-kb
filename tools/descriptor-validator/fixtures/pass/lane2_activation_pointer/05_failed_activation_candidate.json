@@ -1,0 +1,50 @@
+{
+  "descriptor_type": "ActivationDescriptor",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane2-activation-failed-pass-001",
+  "descriptor_hash": "sha256:lane2activationfailedpass001",
+  "artifact_class": "activation_descriptor",
+  "schema_version": "v0.2",
+  "seed_bundle_hash": "bundle-sha256:lane2seedfailedpass001",
+  "manifest_hash": "sha256:lane2manifestfailedpass001",
+  "snapshot_hash": "sha256:lane2snapshotfailedpass001",
+  "index_hash": "sha256:lane2indexfailedpass001",
+  "snapshot_version": "v0.2",
+  "snapshot_name": "lane2_failed_candidate_activation",
+  "record_counts": {
+    "activation_descriptors": 1
+  },
+  "runtime_selection_predicates": [
+    "candidate_activation_not_runtime_visible"
+  ],
+  "quarantine_exclusion_predicates": [
+    "exclude_quarantined"
+  ],
+  "candidate_exclusion_predicates": [
+    "exclude_candidates"
+  ],
+  "source_delta_batch_hash": "sha256:lane2sourcebatchfailedpass001",
+  "source_delta_count": 0,
+  "source_freshness_digest": "sha256:lane2sourcefreshfailedpass001",
+  "activation_status": "failed",
+  "freshness_status": "activation_failed",
+  "verification_status": "failed",
+  "active_pointer": {
+    "descriptor_id": "lane2-active-pointer-pass-001",
+    "descriptor_hash": "sha256:lane2activepointerpass001"
+  },
+  "last_known_good_snapshot": {
+    "descriptor_id": "lane2-lkg-pass-001",
+    "descriptor_hash": "sha256:lane2lkgpass001"
+  },
+  "last_known_good_activation_descriptor": {
+    "descriptor_id": "lane2-activation-pass-001",
+    "descriptor_hash": "sha256:lane2activationpass001"
+  },
+  "rollback_pointer": {
+    "descriptor_id": "lane2-rollback-pointer-pass-001",
+    "descriptor_hash": "sha256:lane2rollbackpointerpass001"
+  },
+  "activation_verified_at_bucket": "2026-04-26T14",
+  "controller_approval_id": "lane2-controller-approval-pass-001"
+}
