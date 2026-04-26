@@ -51,6 +51,7 @@ This tool validates JSON descriptor fixtures with artifact-class allow-listing,
 recursive denied-field scanning, leakage guards, purge checks, rollback checks,
 refresh telemetry checks, and activation/pointer static checks. It does not
 read runtime artifacts, snapshot SQLite files, raw KB rows, or full
-source_register content."
+source_register content. It also enforces router, eval, FutureQA, runtime flag,
+and auto-switch static checks."
     );
 }

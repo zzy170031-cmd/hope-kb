@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 14:25:33 +08:00
+- last updated: 2026-04-26 14:38:47 +08:00
 
 ## Latest Completed
 
@@ -39,6 +39,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Cross-Descriptor Binding Review Gate is opened after `14d391e`; Lane 2 and Lane 3 should report read-only implementation breakdowns for activation/hash/pointer binding and stale auto-switch blocking before total control opens the next Rust implementation slice
 - Lane 2 and Lane 3 cross-descriptor read-only reports were received; total control recorded decisions in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`, including strict empty selected IDs for stale/index-miss first pass, deferred verified fallback exceptions, static-before-cross implementation order, and deferred canonical digest recomputation
 - Lane 2 activation/pointer static implementation was received for total-control review: `ActivationDescriptor`, `ActivePointer`, `LastKnownGoodDescriptor`, and `RollbackPointer` single-descriptor rules are implemented without cross fixture binding; hash shape remains fixture-friendly `sha256:<token>` / `bundle-sha256:<token>` until the canonical digest gate
+- Lane 3 router/eval/FutureQA static implementation was received for total-control review: runtime/media/expensive flags, auto-switch gating, `EvalArtifact`, `QueryResult`, `RetrievalTrace`, and `FutureQACandidate` single-descriptor rules are implemented without verified fallback exceptions or cross fixture binding
 
 ## Five-Agent Start Readiness
 
@@ -140,9 +141,9 @@ git status：
 
 ## Next Up
 
-- commit Lane 2 activation/pointer static descriptor rules if validation and staged diff match the whitelist
-- next bounded Rust-first slice should go to Lane 3 for runtime flags, auto-switch, EvalArtifact, QueryResult, RetrievalTrace, and FutureQACandidate static rules
-- then start Lane 1 and Lane 3 fixture coverage against the Rust scaffold: `SourceDeltaBatch`, `QueryResult`, `RetrievalTrace`, `FutureQACandidate`, and `EvalArtifact`
+- commit Lane 3 router/eval/FutureQA static descriptor rules if validation and staged diff match the whitelist
+- next bounded gate should add canonical passing/failing JSON fixtures for descriptor validator coverage before opening cross fixture binding
+- keep verified fallback exception and canonical digest recomputation closed until fixture coverage is stable
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
