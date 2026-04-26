@@ -90,6 +90,40 @@ summarization.
   previous-good states such as `superseded` or `rolled_back` are deferred until
   an explicit historical-activation descriptor contract exists.
 
+## Descriptor Fixture Gate Decisions 2026-04-26
+
+- The next gate adds canonical JSON fixtures before cross fixture binding. It
+  covers the implemented static validator rules only.
+- Fixtures live under `tools/descriptor-validator/fixtures/` and are split by
+  expected result and lane-owned topic:
+
+```text
+tools/descriptor-validator/fixtures/pass/lane2_activation_pointer/
+tools/descriptor-validator/fixtures/fail/lane2_activation_pointer/
+tools/descriptor-validator/fixtures/pass/lane3_router_eval_futureqa/
+tools/descriptor-validator/fixtures/fail/lane3_router_eval_futureqa/
+tools/descriptor-validator/fixtures/pass/lane4_safety_observability/
+tools/descriptor-validator/fixtures/fail/lane4_safety_observability/
+```
+
+- Lane 1 source-delta fixtures stay deferred until `SourceDeltaBatch` static
+  validator rules are opened.
+- The current CLI validates JSON files in one provided fixture directory. Until
+  a recursive fixture runner is opened, each leaf directory is validated
+  independently with `descriptor-validator <fixture-dir>`.
+- Passing fixture directories must produce `status=passed`. Failing fixture
+  directories must produce `status=failed` and sanitized diagnostics only.
+- Fixture files must be UTF-8 JSON. Each file may contain one descriptor object
+  or an array of descriptor objects.
+- Failing fixtures must use synthetic placeholder values only. Do not put real
+  raw KB rows, raw prompt bodies, source-register dumps, overlay JSON, raw
+  graph payloads, local absolute paths, API keys, tokens, provider headers, or
+  matched snippets into fixtures. Use safe sentinel strings that trigger field
+  name or shape checks without exposing sensitive content.
+- Fixture work may add JSON files only. It must not change Rust rules, seed
+  JSON, snapshots, runtime code, migrations, or Hope main-thread code unless
+  total control opens a separate gate.
+
 ## Canonical Artifact Classes
 
 | artifact_class | Visibility | Allowed role |
