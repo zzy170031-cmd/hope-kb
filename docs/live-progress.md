@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 13:14:20 +08:00
+- last updated: 2026-04-26 13:19:57 +08:00
 
 ## Latest Completed
 
@@ -32,6 +32,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Machine-Checkable Descriptor / Validator Gate opened by total control after `2bd7f0c`; first step is four-lane read-only descriptor breakdown, not validator implementation
 - Machine-Checkable Descriptor / Validator four-lane reports were received and integrated into `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`
 - Implementation language policy recorded: when code implementation is explicitly opened, validators and durable governance logic are Rust-first; PowerShell remains only thin Windows orchestration or explicit total-control exception
+- Offline Descriptor Fixture Validator Implementation Gate is opened as a Rust-first implementation gate after `8f8bd87`; first wave priority is Lane 2 Rust crate/scaffold and Lane 4 structural leakage scanner design/implementation, with Lane 1 and Lane 3 waiting for the scaffold before adding domain fixtures/rules
 
 ## Five-Agent Start Readiness
 
@@ -133,8 +134,9 @@ git status：
 
 ## Next Up
 
-- verify and commit the docs-only descriptor validator matrix if the staged diff matches the whitelist
-- keep validator implementation closed until total control opens the first offline fixture validator gate
+- start Lane 2 first for Rust crate scaffold, CLI shape, descriptor loading, shared enums, and activation/pointer descriptor model
+- start Lane 4 next for recursive denied-field scanning, artifact-class allow-list, zero-residue purge checks, rollback sanitization checks, and `full_kb_rows_included=0`
+- keep Lane 1 and Lane 3 on standby until the scaffold exists, then add SourceDeltaBatch and Query/Trace/FutureQA/Eval fixture coverage
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
@@ -142,6 +144,7 @@ git status：
 - blocker: none for the docs-only integration package after stale `.git/index.lock` removal
 - blocker: none for the docs-only Freshness / Activation contract draft
 - blocker: none for the docs-only descriptor validator matrix draft
+- blocker: Rust validator crate does not exist yet; Lane 2 scaffold is the next critical path item
 - risk: current package is docs/RFC and governance baseline only; it does not yet implement machine-checkable validator gates for the new QA contracts
 - risk: standard ignored `snapshots/hope-kb-v0.2.sqlite3` previously differed from verified `rebuilt-5`; any future runtime activation must bind a chosen snapshot by hash instead of relying on path name
 - risk to `hope` separation: none in current scope; keep Hope product-side runtime hookup, desktop, intake, Qwen, Doubao, Seedance, GraphRAG, hybrid/rerank default, and runtime LLM summarize out of this repo/package
