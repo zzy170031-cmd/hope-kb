@@ -32,6 +32,15 @@ This repo is built through Codex-only parallel execution.
 - Do not force-feed new KB scope back into `hope` until merge readiness is explicitly re-opened.
 - Keep runtime hardening, taxonomy expansion, and repair coverage traceable to seed assets and validation scripts.
 
+## Implementation language policy
+
+- When a gate explicitly opens code implementation, prefer Rust first for
+  validators, descriptor checkers, CLI tools, and durable governance logic.
+- Use PowerShell only for thin Windows orchestration, existing script
+  compatibility, or explicit total-control exceptions.
+- Docs-only gates remain docs-only. Do not introduce Rust or any other code
+  until total control explicitly opens an implementation gate.
+
 ## Five-agent lanes
 
 - Main thread: only integrator, only merge-readiness owner, only cross-repo sync owner with `hope`

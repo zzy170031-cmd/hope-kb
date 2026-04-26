@@ -905,6 +905,11 @@ raw source text.
 
 The implementation gate remains closed until total control opens it.
 
+When code implementation is explicitly opened, use Rust first for descriptor
+validators and durable governance logic. PowerShell may remain only as a thin
+Windows orchestration wrapper, compatibility layer for existing scripts, or an
+explicit total-control exception.
+
 When opened, the minimum first validator should:
 
 1. Load JSON descriptor fixtures from an explicitly named offline fixture

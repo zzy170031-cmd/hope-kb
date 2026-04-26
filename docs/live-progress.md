@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 13:11:16 +08:00
+- last updated: 2026-04-26 13:14:20 +08:00
 
 ## Latest Completed
 
@@ -31,6 +31,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Freshness / Activation four-lane reports were received and integrated into `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
 - Machine-Checkable Descriptor / Validator Gate opened by total control after `2bd7f0c`; first step is four-lane read-only descriptor breakdown, not validator implementation
 - Machine-Checkable Descriptor / Validator four-lane reports were received and integrated into `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`
+- Implementation language policy recorded: when code implementation is explicitly opened, validators and durable governance logic are Rust-first; PowerShell remains only thin Windows orchestration or explicit total-control exception
 
 ## Five-Agent Start Readiness
 
