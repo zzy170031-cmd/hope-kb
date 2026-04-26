@@ -114,6 +114,65 @@ is covered by the combination of `narrative_hook`, `scene_transition`, and
 5. director showmanship that conflicts with user facts or established story
    facts
 
+## Continuity-First Constraint
+
+`authoring_craft` is not a virtuoso-writing or spectacle-writing library. Its
+first target is `story_continuity`.
+
+It must help the plot remain continuous, character motivation stay stable,
+conflict preserve cause and effect, and the next scene remain bridgeable.
+
+Continuity rules:
+
+1. Writing craft may intensify the story, but it must not overwrite the story.
+2. Exaggeration, rhetoric, high conflict, spectacle, and reversal all require a
+   causal foundation.
+3. Any authoring hint that damages continuity state must be downgraded or
+   dropped.
+4. User facts, continuity facts, character motivation, timeline state, and prop
+   state outrank all authoring hints.
+5. Later stages cannot cover or replace earlier-stage facts.
+
+Recommended continuity-support tags:
+
+```text
+story_continuity
+character_motivation_continuity
+conflict_causality
+emotional_progression
+timeline_integrity
+prop_state_integrity
+next_scene_bridge
+scene_causality_check
+```
+
+Recommended blocked-risk tags:
+
+```text
+style_over_story
+exaggeration_without_cause
+motivation_jump
+timeline_break
+prop_state_conflict
+unfilmable_poetic_drift
+continuity_break
+```
+
+Layer responsibility:
+
+```text
+authoring_layer serves content
+content serves story_continuity
+director_layer serves content
+shot_layer serves director_blocking
+prompt_text packages the accepted result
+```
+
+No later layer may overwrite facts from an earlier layer. If a beautiful line,
+strong reversal, striking shot, or director hint breaks motivation, timeline,
+prop state, scene causality, or next-scene handoff, it should be rejected from
+the compact KB summary.
+
 ## V0 Taxonomy
 
 `authoring_craft` is a retrieval and summary taxonomy. It describes what craft
@@ -123,6 +182,14 @@ main-table field in the current freeze.
 Recommended initial enum:
 
 ```text
+story_continuity
+character_motivation_continuity
+conflict_causality
+emotional_progression
+timeline_integrity
+prop_state_integrity
+next_scene_bridge
+scene_causality_check
 narrative_hook
 character_desire
 conflict_escalation
@@ -141,6 +208,14 @@ director_blocking_bridge
 
 | authoring_craft | Definition | Best stage | Typical summary contribution |
 | --- | --- | --- | --- |
+| `story_continuity` | Preserves causal story flow across beats, chapters, scenes, and stages. | all stages | continuity reminder and next-step constraints |
+| `character_motivation_continuity` | Keeps character desire, fear, pressure, and decision logic stable unless a justified turn occurs. | novel chapter, screenplay rewrite | motivation before/after summary and jump warning |
+| `conflict_causality` | Ensures conflict escalation follows visible causes, stakes, and consequences. | all stages | cause/effect chain and unsupported-conflict warning |
+| `emotional_progression` | Ensures emotional shifts move through readable pressure, reaction, and turn rather than abrupt mood changes. | novel chapter, screenplay rewrite | emotional state path and turn evidence |
+| `timeline_integrity` | Keeps time order, elapsed time, flashback, and sequence transitions coherent. | all stages | timeline note and bridge requirement |
+| `prop_state_integrity` | Preserves object, clue, weapon, location, evidence, and costume state across scenes and shots. | screenplay rewrite, director storyboard | prop state carryover and contradiction warning |
+| `next_scene_bridge` | Ensures the current beat leaves a usable handoff into the next scene or chapter. | all stages | transition hook and carryover cue |
+| `scene_causality_check` | Checks whether the scene exists for a causal purpose rather than decorative prose or spectacle. | screenplay rewrite, director storyboard | scene-purpose test and drop/merge hint |
 | `narrative_hook` | Opens a chapter, scene, or beat with a concrete question, threat, promise, or desire. | novel chapter | one compact hook principle plus matched safe sample IDs |
 | `character_desire` | Clarifies what the focal character wants now and what cost, fear, or limit blocks it. | novel chapter | desire/obstacle wording and character-state constraints |
 | `conflict_escalation` | Raises pressure through stakes, reversals, power shifts, or tactical complications. | novel chapter, screenplay rewrite | escalation ladder and do-not-flatten warning |
