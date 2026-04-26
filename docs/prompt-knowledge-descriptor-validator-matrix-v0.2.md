@@ -194,6 +194,48 @@ Lane 3: standby unless router/eval fixtures are unexpectedly affected.
 Lane 1: standby.
 ```
 
+## Recursive Fixture Matrix Runner Gate Decisions 2026-04-26
+
+- This gate opens after duplicate descriptor identity implementation and Lane 4
+  safety review. It remains an offline JSON fixture validator gate.
+- The goal is operational ergonomics only: run all known fixture leaf
+  directories in one command and verify expected pass/fail outcomes.
+- The runner must read only `.json` descriptor fixtures under the explicitly
+  supplied fixture root. It must not read runtime artifacts, snapshot SQLite
+  files, raw KB rows, full source registers, source raw text, Hope runtime
+  state, or network data.
+- The first implementation should support the existing fixture layout:
+
+```text
+tools/descriptor-validator/fixtures/pass/<leaf>/
+tools/descriptor-validator/fixtures/fail/<leaf>/
+```
+
+- Every `pass` leaf must produce `status=passed` and exit successfully. Every
+  `fail` leaf must produce `status=failed`; expected failing leaves should not
+  make the matrix runner itself fail.
+- The matrix runner must fail if a pass leaf fails, a fail leaf passes, a leaf
+  cannot be read, a leaf has invalid JSON, or an unknown expectation directory
+  is encountered.
+- The matrix summary may report fixture root, expectation, leaf name,
+  descriptors checked, status, and sanitized diagnostics count. It must not
+  print matched values, descriptor hashes, raw paths, source text, prompt
+  bodies, source-register rows, provider material, or secrets.
+- This gate must not change descriptor validation semantics. It only adds a
+  runner over existing per-leaf validation.
+- Canonical digest recomputation, SourceDeltaBatch implementation, verified
+  fallback exceptions, and runtime/snapshot activation remain closed.
+
+Recursive runner implementation ownership:
+
+```text
+Lane 4: primary Rust implementation for the matrix runner and safety-preserving
+        summary output.
+Lane 2: standby unless fixture-set indexing needs a small adapter.
+Lane 3: standby unless router/eval fixture expectations are affected.
+Lane 1: standby.
+```
+
 Cross binding gate implementation ownership:
 
 ```text
