@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 15:22:49 +08:00
+- last updated: 2026-04-26 15:27:11 +08:00
 
 ## Latest Completed
 
@@ -48,6 +48,8 @@ Update this file for online sync after every 10-20 minute work package.
 - Cross-Descriptor Fixture-Set Binding Gate is opened after `f1a63d3` in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`. This next gate stays offline JSON fixture-only and targets literal `descriptor_id + descriptor_hash` binding for activation/pointer/LKG/rollback descriptors; canonical digest recomputation, verified fallback exceptions, SourceDeltaBatch implementation, runtime artifact reads, snapshot SQLite reads, raw KB reads, and Hope runtime access remain closed.
 - Lane 2 cross-descriptor binding implementation was received and control-verified: `DescriptorSet` indexes offline JSON fixture descriptors by `descriptor_id + descriptor_hash`, `ActivePointer` binds to `ActivationDescriptor`, `LastKnownGoodDescriptor` binds to verified activated/fresh activation descriptors, and `RollbackPointer` binds failed activation candidates to verified LKG targets. Validation passed with 50 Rust tests, Lane 2/3/4 pass/fail fixture matrix, v0.2 seed bundle validation, `git diff --check`, Lane 2 fixture trailing-whitespace scan, and Lane 2 fixture sensitive-pattern scan.
 - Lane 3 read-only review was received and accepted: cross-descriptor binding does not open verified fallback exceptions, does not relax stale/index-miss empty-selection rules, keeps `auto_switch_allowed=true` limited to fresh/all-gates/controller-approved/runtime-flags-false cases, keeps FutureQACandidate out of eval truth, and does not misapply `cross_descriptor_binding` diagnostics to QueryResult, RetrievalTrace, EvalArtifact, or FutureQACandidate fixtures.
+- Lane 4 read-only review was received and accepted: `cross_descriptor_binding` diagnostics still use the sanitized five-field shape only (`descriptor_type`, `descriptor_id`, `field_path`, `denied_class`, `rule_id`), do not emit matched values or raw path/source/prompt/secret content, do not misapply to Lane 4 safety fixtures, and preserve denied-scan / full-KB-row / leakage-count / purge / rollback boundaries.
+- Duplicate Descriptor Identity Gate is opened in `docs/prompt-knowledge-descriptor-validator-matrix-v0.2.md`: duplicate literal `descriptor_id + descriptor_hash` identities must fail closed in offline fixture sets; recursive fixture runner, canonical digest recomputation, SourceDeltaBatch implementation, and verified fallback exceptions remain closed.
 
 ## Five-Agent Start Readiness
 
@@ -150,8 +152,8 @@ git status：
 ## Next Up
 
 - commit and push Lane 2 cross-descriptor binding implementation after whitelist staging
-- wait for Lane 4 read-only review of sanitized diagnostics and denied-field boundary; no matched values in binding diagnostics
-- next implementation decision after reviews: prefer duplicate `descriptor_id + descriptor_hash` fail-closed before recursive fixture runner
+- dispatch Lane 2 to implement duplicate `descriptor_id + descriptor_hash` fail-closed in `DescriptorSet` or nearest fixture-set indexing module
+- keep recursive fixture runner, canonical digest recomputation, SourceDeltaBatch implementation, and verified fallback exceptions closed
 - keep Lane 1 read-only on future SourceDeltaBatch participation; no source-delta implementation in this gate
 - keep `E:\codex\hope` untouched
 

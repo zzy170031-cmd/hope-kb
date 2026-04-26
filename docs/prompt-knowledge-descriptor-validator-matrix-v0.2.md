@@ -163,7 +163,38 @@ tools/descriptor-validator/fixtures/fail/lane4_safety_observability/
   future source-delta descriptors should participate in cross binding, but no
   source-delta Rust rules or fixtures are opened here.
 
-Expected implementation ownership:
+## Duplicate Descriptor Identity Gate Decisions 2026-04-26
+
+- This gate opens after Lane 3 and Lane 4 read-only review of
+  `cross_descriptor_binding`. It remains an offline JSON fixture validator gate.
+- The validator must fail closed when the same literal `descriptor_id +
+  descriptor_hash` identity appears more than once in a supplied fixture set.
+- Duplicate detection applies across all descriptor types and all JSON files
+  loaded from the explicitly supplied fixture directory.
+- Duplicate diagnostics must remain sanitized and structural. They may report
+  descriptor type, descriptor id, field path, denied class, and rule id only.
+  They must not print the duplicate descriptor hash, matched values, file paths,
+  raw source text, raw prompt bodies, source-register rows, provider material,
+  or secrets.
+- The initial implementation may keep the existing non-recursive fixture
+  directory reader. Recursive fixture-set runner remains a later gate.
+- Canonical digest recomputation remains closed. Duplicates are detected by the
+  literal identity already present in the fixture descriptors.
+- SourceDeltaBatch implementation and verified fallback exceptions remain
+  closed.
+
+Duplicate gate implementation ownership:
+
+```text
+Lane 2: implement duplicate identity detection in DescriptorSet or the nearest
+        fixture-set indexing module, plus one pass-preserving and one failing
+        duplicate fixture.
+Lane 4: optional read-only review if diagnostics shape changes.
+Lane 3: standby unless router/eval fixtures are unexpectedly affected.
+Lane 1: standby.
+```
+
+Cross binding gate implementation ownership:
 
 ```text
 Lane 2: primary Rust implementation for descriptor_set / fixture_set indexing
