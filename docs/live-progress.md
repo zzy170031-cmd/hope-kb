@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 14:08:03 +08:00
+- last updated: 2026-04-26 14:11:16 +08:00
 
 ## Latest Completed
 
@@ -36,6 +36,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Lane 2 Rust scaffold was received and control-verified: `tools/descriptor-validator` exists, exposes CLI help, defines canonical descriptor/freshness/activation/fallback enums, includes six artifact classes, and passes `cargo +1.95.0 test` with 4 tests; `target/` is ignored as a build artifact
 - Lane 4 first-wave safety base was received and control-integrated: `tools/descriptor-validator` now validates offline JSON descriptor fixtures with artifact-class allow-listing, recursive denied-field scanning, sanitized diagnostics, `full_kb_rows_included=0`, and `leakage_count=0`; control fixed CLI failure semantics so diagnostics return a non-zero exit code, refreshed help text, added UTF-8 BOM tolerance, and kept `target/` ignored
 - Lane 4 second-wave safety rules were received and control-verified: `PurgeDescriptor` zero-residue checks, `RollbackDescriptor` sanitized-only checks, and `RefreshTelemetryRecord` required-field checks are implemented in Rust; validation passes with 23 tests and remains limited to offline JSON fixtures
+- Cross-Descriptor Binding Review Gate is opened after `14d391e`; Lane 2 and Lane 3 should report read-only implementation breakdowns for activation/hash/pointer binding and stale auto-switch blocking before total control opens the next Rust implementation slice
 
 ## Five-Agent Start Readiness
 
@@ -137,8 +138,8 @@ git status：
 
 ## Next Up
 
-- commit Lane 4 second-wave descriptor safety rules if the staged diff matches the whitelist
-- start Lane 2 / Lane 3 cross-descriptor design review for activation/hash/pointer binding and stale auto-switch blocking
+- wait for Lane 2 / Lane 3 cross-descriptor design reports on activation/hash/pointer binding and stale auto-switch blocking
+- keep implementation closed until total control receives those reports and issues a bounded Rust-first task
 - then start Lane 1 and Lane 3 fixture coverage against the Rust scaffold: `SourceDeltaBatch`, `QueryResult`, `RetrievalTrace`, `FutureQACandidate`, and `EvalArtifact`
 - keep `E:\codex\hope` untouched
 
