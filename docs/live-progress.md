@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 12:23:26 +08:00
+- last updated: 2026-04-26 12:26:28 +08:00
 
 ## Latest Completed
 
@@ -26,6 +26,7 @@ Update this file for online sync after every 10-20 minute work package.
 - docs-only integration reports received from Lane 1, Lane 2, Lane 3, and Lane 4. Target documents now contain source field normalization mapping, hash semantic split, runtime artifact classes, QueryResult / RetrievalTrace / FutureQACandidate / EvalArtifact descriptor drafts, lint artifact-class allow-list, denied aliases, telemetry purge descriptor, and rollback descriptor. Total-control verification found `diff --check` clean and v0.2 seed validation passing.
 - Lane 2 / Lane 4 terminology alignment received and control-verified: `retrieval_trace_log_telemetry_shadow_rollback` is the canonical non-model-visible artifact class for retrieval trace, log, telemetry, shadow, and rollback records; `retrieval_trace_log_telemetry` is not a separate canonical class.
 - stale `.git/index.lock` was removed after explicit approval; no active Git process was observed on the second process check
+- docs-only governance package was committed and pushed as `9fcb391` (`docs: add v0.2 prompt knowledge governance contracts`); `AGENTS.md` was intentionally excluded from the commit
 
 ## Five-Agent Start Readiness
 
@@ -108,9 +109,8 @@ git status：
 
 ## Next Up
 
-- run final verification after whitelist staging
-- commit the docs-only governance package if the staged diff matches the whitelist
-- push only after commit succeeds and the branch still points at `codex/contracts-freeze`
+- decide whether to explicitly stage/commit the local `AGENTS.md` rule sync, or leave it as local working-tree guidance
+- keep the next implementation gate closed until total control opens a machine-checkable descriptor / validator task
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
