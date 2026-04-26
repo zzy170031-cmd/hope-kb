@@ -13,3 +13,6 @@
 /tmp/
 /artifacts/
 /snapshots/plain-write.txt
+
+# Rust build artifacts
+target/
