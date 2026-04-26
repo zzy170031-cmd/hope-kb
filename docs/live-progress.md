@@ -8,7 +8,7 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
 - current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
 - owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 12:26:28 +08:00
+- last updated: 2026-04-26 12:35:23 +08:00
 
 ## Latest Completed
 
@@ -27,6 +27,7 @@ Update this file for online sync after every 10-20 minute work package.
 - Lane 2 / Lane 4 terminology alignment received and control-verified: `retrieval_trace_log_telemetry_shadow_rollback` is the canonical non-model-visible artifact class for retrieval trace, log, telemetry, shadow, and rollback records; `retrieval_trace_log_telemetry` is not a separate canonical class.
 - stale `.git/index.lock` was removed after explicit approval; no active Git process was observed on the second process check
 - docs-only governance package was committed and pushed as `9fcb391` (`docs: add v0.2 prompt knowledge governance contracts`); `AGENTS.md` was intentionally excluded from the commit
+- v0.2 control rules in `AGENTS.md` were reviewed, committed, and pushed as `aa1e224` (`docs: sync v0.2 control rules`)
 
 ## Five-Agent Start Readiness
 
@@ -107,16 +108,32 @@ git status：
 ...
 ```
 
+## Freshness / Activation Gate
+
+- status: opened by total control after `aa1e224`
+- goal: define how KB data can be refreshed quickly while keeping runtime consumption limited to verified snapshots
+- output target: `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
+- gate type: docs-only contract planning before validator/runtime implementation
+- runtime boundary: no runtime network fetch, no runtime auto-ingest, no raw source exposure, no default LLM summarize, no GraphRAG/hybrid/rerank default, and no image/video generation
+- freshness model: source deltas enter governance first, then pass validation, then activate through atomic snapshot pointer update
+- fallback model: runtime remains on last-known-good snapshot if source ingestion, validation, eval, leakage lint, or activation binding fails
+- branch work requested:
+  - Lane 1: source delta, freshness metadata, provenance locator, and review-status boundaries
+  - Lane 2: activation descriptor, atomic switch, hash binding, last-known-good, and rollback pointer
+  - Lane 3: stale index/eval/query blocking, FutureQA freshness status, and fallback reason codes
+  - Lane 4: refresh telemetry, leakage restrictions, purge/rollback records, and denied fields
+
 ## Next Up
 
-- decide whether to explicitly stage/commit the local `AGENTS.md` rule sync, or leave it as local working-tree guidance
-- keep the next implementation gate closed until total control opens a machine-checkable descriptor / validator task
+- wait for Freshness / Activation branch reports in text code blocks
+- integrate only docs-only contract outputs into `docs/prompt-knowledge-freshness-activation-contract-v0.2.md`
+- keep the machine-checkable descriptor / validator implementation gate closed until this freshness contract is accepted
 - keep `E:\codex\hope` untouched
 
 ## Blockers / Risks
 
 - blocker: none for the docs-only integration package after stale `.git/index.lock` removal
-- caution: `AGENTS.md` is modified but remains excluded from the commit whitelist unless explicitly approved
+- blocker: Freshness / Activation branch reports not yet received
 - risk: current package is docs/RFC and governance baseline only; it does not yet implement machine-checkable validator gates for the new QA contracts
 - risk: standard ignored `snapshots/hope-kb-v0.2.sqlite3` previously differed from verified `rebuilt-5`; any future runtime activation must bind a chosen snapshot by hash instead of relying on path name
 - risk to `hope` separation: none in current scope; keep Hope product-side runtime hookup, desktop, intake, Qwen, Doubao, Seedance, GraphRAG, hybrid/rerank default, and runtime LLM summarize out of this repo/package
