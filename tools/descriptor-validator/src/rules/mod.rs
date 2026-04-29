@@ -14,6 +14,7 @@ pub mod retrieval_trace;
 pub mod rollback;
 pub mod rollback_pointer;
 pub mod runtime_flags;
+pub mod source_delta_batch;
 
 use crate::descriptor_set::DescriptorSet;
 use crate::diagnostic::Diagnostic;
@@ -21,6 +22,9 @@ use crate::json_walk::JsonValue;
 
 pub fn validate_first_wave_rules(descriptor: &JsonValue) -> Vec<Diagnostic> {
     let mut diagnostics = Vec::new();
+    diagnostics.extend(source_delta_batch::validate_source_delta_batch_descriptor(
+        descriptor,
+    ));
     diagnostics.extend(activation::validate_activation_descriptor(descriptor));
     diagnostics.extend(active_pointer::validate_active_pointer(descriptor));
     diagnostics.extend(runtime_flags::validate_runtime_flags(descriptor));

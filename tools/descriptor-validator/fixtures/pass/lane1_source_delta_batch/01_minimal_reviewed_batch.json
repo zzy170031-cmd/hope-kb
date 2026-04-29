@@ -1,0 +1,43 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-minimal-pass",
+  "descriptor_hash": "sha256:lane1SourceDeltaMinimalPass",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_batch_hash": "sha256:lane1BatchMinimalPass",
+  "source_delta_count": 1,
+  "source_freshness_digest": "sha256:lane1FreshnessMinimalPass",
+  "freshness_status": "fresh",
+  "stale_reason_code": "unknown_freshness",
+  "source_ids": [
+    "source-alpha"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha"
+  ],
+  "review_status_summary": "reviewed",
+  "effective_confidence_summary": "high",
+  "ingested_at_bucket": "2026-04-30T10",
+  "review_status_counts": {
+    "reviewed": 1
+  },
+  "confidence_bucket_counts": {
+    "high": 1
+  },
+  "accepted_source_delta_count": 1,
+  "rejected_source_delta_count": 0,
+  "quarantined_source_delta_count": 0,
+  "limited_source_delta_count": 0,
+  "all_required_reviews_present": true,
+  "all_hashes_normalized": true,
+  "all_sources_locator_sanitized": true,
+  "all_sources_runtime_excluded": true,
+  "activation_requested": true,
+  "activation_blocked_reason_codes": [],
+  "leakage_count": 0,
+  "notes_summary_ref": "lane1-minimal-summary"
+}

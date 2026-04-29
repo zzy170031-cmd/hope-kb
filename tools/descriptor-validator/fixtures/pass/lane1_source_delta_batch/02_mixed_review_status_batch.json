@@ -1,0 +1,62 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-mixed-pass",
+  "descriptor_hash": "sha256:lane1SourceDeltaMixedPass",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_batch_hash": "sha256:lane1BatchMixedPass",
+  "source_delta_count": 4,
+  "source_freshness_digest": "sha256:lane1FreshnessMixedPass",
+  "freshness_status": "blocked",
+  "stale_reason_code": "activation_policy_blocked",
+  "source_ids": [
+    "source-alpha",
+    "source-beta",
+    "source-gamma",
+    "source-delta"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha",
+    "sha256:lane1ContentBeta",
+    "sha256:lane1ContentGamma",
+    "sha256:lane1ContentDelta"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha",
+    "sha256:lane1PreviousBeta",
+    "sha256:lane1PreviousGamma",
+    "sha256:lane1PreviousDelta"
+  ],
+  "review_status_summary": "mixed_review",
+  "effective_confidence_summary": "mixed_confidence",
+  "ingested_at_bucket": "2026-04-30T10",
+  "controller_review_id": "lane1-controller-review-mixed",
+  "reviewed_at_bucket": "2026-04-30T11",
+  "review_status_counts": {
+    "reviewed": 1,
+    "rejected": 1,
+    "quarantined": 1,
+    "accepted_limited": 1
+  },
+  "confidence_bucket_counts": {
+    "high": 1,
+    "medium": 1,
+    "low": 1,
+    "rejected": 1
+  },
+  "accepted_source_delta_count": 1,
+  "rejected_source_delta_count": 1,
+  "quarantined_source_delta_count": 1,
+  "limited_source_delta_count": 1,
+  "all_required_reviews_present": true,
+  "all_hashes_normalized": true,
+  "all_sources_locator_sanitized": true,
+  "all_sources_runtime_excluded": true,
+  "activation_requested": false,
+  "activation_blocked_reason_codes": [
+    "activation_policy_blocked"
+  ],
+  "leakage_count": 0,
+  "notes_summary_ref": "lane1-mixed-summary"
+}

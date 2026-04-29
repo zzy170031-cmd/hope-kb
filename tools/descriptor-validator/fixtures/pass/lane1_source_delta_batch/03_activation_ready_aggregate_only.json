@@ -1,0 +1,49 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-activation-ready-pass",
+  "descriptor_hash": "sha256:lane1SourceDeltaActivationReadyPass",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_batch_hash": "sha256:lane1BatchActivationReadyPass",
+  "source_delta_count": 2,
+  "source_freshness_digest": "sha256:lane1FreshnessActivationReadyPass",
+  "freshness_status": "fresh",
+  "stale_reason_code": "unknown_freshness",
+  "source_ids": [
+    "source-alpha",
+    "source-beta"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha",
+    "sha256:lane1ContentBeta"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha",
+    "sha256:lane1PreviousBeta"
+  ],
+  "review_status_summary": "all_reviewed",
+  "effective_confidence_summary": "high_and_medium",
+  "ingested_at_bucket": "2026-04-30T10",
+  "controller_review_id": "lane1-controller-review-ready",
+  "reviewed_at_bucket": "2026-04-30T11",
+  "review_status_counts": {
+    "reviewed": 2
+  },
+  "confidence_bucket_counts": {
+    "high": 1,
+    "medium": 1
+  },
+  "accepted_source_delta_count": 2,
+  "rejected_source_delta_count": 0,
+  "quarantined_source_delta_count": 0,
+  "limited_source_delta_count": 0,
+  "all_required_reviews_present": true,
+  "all_hashes_normalized": true,
+  "all_sources_locator_sanitized": true,
+  "all_sources_runtime_excluded": true,
+  "activation_requested": true,
+  "activation_blocked_reason_codes": [],
+  "leakage_count": 0,
+  "notes_summary_ref": "lane1-ready-summary"
+}

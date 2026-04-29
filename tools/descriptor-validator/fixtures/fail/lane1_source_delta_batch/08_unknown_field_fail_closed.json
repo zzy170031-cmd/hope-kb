@@ -1,0 +1,28 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-unknown-field-fail",
+  "descriptor_hash": "sha256:lane1SourceDeltaUnknownFieldFail",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_batch_hash": "sha256:lane1BatchUnknownFieldFail",
+  "source_delta_count": 1,
+  "source_freshness_digest": "sha256:lane1FreshnessUnknownFieldFail",
+  "freshness_status": "fresh",
+  "stale_reason_code": "unknown_freshness",
+  "source_ids": [
+    "source-alpha"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha"
+  ],
+  "review_status_summary": "reviewed",
+  "effective_confidence_summary": "high",
+  "ingested_at_bucket": "2026-04-30T10",
+  "all_sources_runtime_excluded": true,
+  "leakage_count": 0,
+  "unexpected_debug_field": "synthetic-placeholder"
+}

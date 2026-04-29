@@ -1,0 +1,20 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-missing-fields-fail",
+  "descriptor_hash": "sha256:lane1SourceDeltaMissingFieldsFail",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_count": 1,
+  "source_ids": [
+    "source-alpha"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha"
+  ],
+  "all_sources_runtime_excluded": true,
+  "leakage_count": 0
+}

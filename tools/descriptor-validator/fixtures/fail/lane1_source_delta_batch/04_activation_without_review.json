@@ -1,0 +1,29 @@
+{
+  "descriptor_type": "SourceDeltaBatch",
+  "descriptor_version": "v0.2",
+  "descriptor_id": "lane1-source-delta-activation-without-review-fail",
+  "descriptor_hash": "sha256:lane1SourceDeltaActivationWithoutReviewFail",
+  "artifact_class": "governance_descriptor",
+  "schema_version": "v0.2",
+  "source_delta_batch_hash": "sha256:lane1BatchActivationWithoutReviewFail",
+  "source_delta_count": 1,
+  "source_freshness_digest": "sha256:lane1FreshnessActivationWithoutReviewFail",
+  "freshness_status": "stale_source",
+  "stale_reason_code": "source_delta_pending_review",
+  "source_ids": [
+    "source-alpha"
+  ],
+  "content_hashes": [
+    "sha256:lane1ContentAlpha"
+  ],
+  "previous_content_hashes": [
+    "sha256:lane1PreviousAlpha"
+  ],
+  "review_status_summary": "pending_review",
+  "effective_confidence_summary": "unknown",
+  "ingested_at_bucket": "2026-04-30T10",
+  "all_required_reviews_present": false,
+  "all_sources_runtime_excluded": true,
+  "activation_requested": true,
+  "leakage_count": 0
+}
