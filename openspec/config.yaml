@@ -1,0 +1,28 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+context: |
+  HopePrompt KB serves the Hope main project; it is not an independent product.
+  The repository path for this machine is `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`.
+  The active branch is `codex/contracts-freeze`; live Git state is authoritative over handoff text.
+  Governance uses one total-control thread plus four branch lanes:
+  source governance, schema/snapshot contract, router/FutureQA, and safety lint/leakage protection.
+  v0.2 scope is Prompt knowledge governance for storyboard prompt optimization.
+  Do not add image/video generation, runtime network fetch, runtime auto-ingest, default LLM summarize, or default GraphRAG/hybrid/rerank.
+  Runtime-facing context must remain summary-only and must not leak raw KB rows, prompt bodies, source registers, overlay JSON, raw graph payloads, local paths, secrets, tokens, or provider config.
+  OpenSpec acts as the total-control assistant and supervisor: it records gates, required evidence, falsification questions, audit boundaries, and validation results, but it does not replace total-control decision ownership.
+  Global Codex rule anchors for this setup are `E:\codex\AGENTS.md` and `E:\codex\hope-kb\docs\codex-usage-core-rules.md` at commit `9391519`.
+  Every major gate must include Core Challenger pressure, Audit Specialist read-only boundary checks, key-node label reminders, small-block verification, and explicit no-runtime/no-UI/no-seed/no-fixture impact statements unless a separate gate opens those surfaces.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
