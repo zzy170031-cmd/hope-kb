@@ -91,3 +91,10 @@
 - [x] 12.3 Verify `git diff --check`, cargo fmt check, cargo test, descriptor fixture matrix, and OpenSpec validation.
 - [x] 12.4 Record total-control acceptance and residual hardening notes in `source-delta-validator-implementation-intake.md`.
 - [x] 12.5 Keep source acquisition, source storage, source fetching, cross-descriptor binding, seed, snapshot, runtime, UI, export, canonical digest recomputation, verified fallback exceptions, and wrapper/toolchain repair closed.
+
+## 13. Source To Wiki Minimal Loop Dispatch
+
+- [x] 13.1 Prepare total-control dispatch draft for an offline source acquisition to reviewed wiki minimal loop design gate.
+- [x] 13.2 Run OpenSpec dispatch review for the read-only design draft.
+- [x] 13.3 Record approved OpenSpec-guided dispatch in `source-to-wiki-loop-dispatch.md`.
+- [x] 13.4 Keep file edits, source fetching, source storage, seed, snapshot, runtime, UI, export, validator changes, fixtures, staging, commit, and push closed for the target lane.
