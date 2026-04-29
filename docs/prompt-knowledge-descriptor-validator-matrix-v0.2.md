@@ -394,6 +394,7 @@ Required fields:
 ```text
 descriptor_type=SourceDeltaBatch
 descriptor_version
+descriptor_id
 descriptor_hash
 artifact_class=governance_descriptor
 schema_version
@@ -419,6 +420,16 @@ review_status_counts
 confidence_bucket_counts
 rejected_source_delta_count
 accepted_source_delta_count
+quarantined_source_delta_count
+limited_source_delta_count
+all_required_reviews_present
+all_hashes_normalized
+all_sources_locator_sanitized
+all_sources_runtime_excluded
+activation_requested
+activation_blocked_reason_codes
+leakage_count=0
+notes_summary_ref
 ```
 
 Must equal or match:
@@ -427,20 +438,60 @@ Must equal or match:
   `sha256:<digest>`.
 - `source_delta_count` equals the number of source deltas represented by the
   batch.
+- accepted, rejected, quarantined, and limited status counts must not exceed
+  `source_delta_count`; when review is complete, their sum should equal
+  `source_delta_count`.
 - `source_delta_batch_hash` and `source_freshness_digest` are aggregate
   digests, not serialized source-register content.
+- `freshness_status` and `stale_reason_code` use the canonical enums in this
+  matrix.
+- `activation_requested=true` requires `all_required_reviews_present=true`.
+- `all_sources_runtime_excluded=true` is required.
+- `leakage_count` is required when present and must be `0`.
 
 Reject if:
 
 - Any hash is missing or malformed.
 - `review_status_summary` or `effective_confidence_summary` is missing while
   activation is requested.
+- `source_delta_count` does not match represented source IDs or status counts.
+- Required review completion is false while activation is requested.
+- Unknown fields appear in a v0.2 descriptor fixture.
 - Any source locator, path, URL/path alias, source-register path, raw source
   text, credential, or secret appears.
 - The descriptor is copied into runtime payload, runtime logs, UI disclosure,
   telemetry, shadow, rollback, or chat-visible summaries.
 
 Future validator name: `Validate-SourceDeltaBatchDescriptor`.
+
+Future fixture matrix, when total control opens fixture write scope:
+
+```text
+pass/lane1_source_delta_batch/01_minimal_reviewed_batch.json
+pass/lane1_source_delta_batch/02_mixed_review_status_batch.json
+pass/lane1_source_delta_batch/03_activation_ready_aggregate_only.json
+fail/lane1_source_delta_batch/01_missing_required_fields.json
+fail/lane1_source_delta_batch/02_bad_hash_shape.json
+fail/lane1_source_delta_batch/03_count_mismatch.json
+fail/lane1_source_delta_batch/04_activation_without_review.json
+fail/lane1_source_delta_batch/05_denied_locator_or_source_payload.json
+fail/lane1_source_delta_batch/06_runtime_artifact_class_mismatch.json
+fail/lane1_source_delta_batch/07_leakage_count_nonzero.json
+fail/lane1_source_delta_batch/08_unknown_field_fail_closed.json
+```
+
+Fixture design rules:
+
+- pass fixtures use synthetic reviewed batches, valid aggregate hashes, matched
+  counts, completed summaries, `leakage_count=0`, and runtime exclusion.
+- mixed-status pass fixtures may represent accepted, rejected, quarantined, and
+  limited counts when activation is not requested or is explicitly blocked.
+- activation-ready pass fixtures must be aggregate-only and must not include
+  per-source locators, raw source text, source-register rows, or denied fields.
+- fail fixtures use synthetic safe sentinel fields only; they must not contain
+  real raw KB rows, raw prompt bodies, raw source text, source-register dumps,
+  overlay JSON, raw graph payloads, local path details, credentials, provider
+  material, request/response bodies, or matched snippets.
 
 ### ActivationDescriptor
 
@@ -1111,6 +1162,22 @@ source_freshness_digest
 They must not include source locators, paths, full source-register entries, or
 raw source text.
 
+Source-delta diagnostics and summaries are aggregate-only:
+
+- diagnostics may report only `descriptor_type`, `descriptor_id`,
+  `field_path`, `denied_class`, and `rule_id`
+- diagnostics must not include matched values, local file details, original
+  source excerpts, source locator values, credential-like values,
+  request/response bodies, provider details, or raw prompt/source/graph content
+- activation descriptors, query results, retrieval traces, telemetry,
+  rollback records, UI, logs, and prompt payloads must not include per-source
+  source-delta evidence
+- matrix summaries may report expectation, leaf name, descriptors checked,
+  status, diagnostics count, errors count, and outcome only
+- accepted source-delta aggregate bindings are limited to
+  `source_delta_batch_hash`, `source_delta_count`, and
+  `source_freshness_digest`
+
 ## Suggested Implementation Order
 
 The implementation gate remains closed until total control opens it.
@@ -1135,6 +1202,24 @@ When opened, the minimum first validator should:
 8. Validate purge zero-residue fields.
 9. Print sanitized failure paths, rule IDs, and denied classes only.
 
+The smallest future Rust-first SourceDeltaBatch implementation gate should:
+
+1. Add a static `SourceDeltaBatch` rule module only.
+2. Register that rule in the first-wave validator dispatcher.
+3. Validate required fields, artifact class, canonical freshness/stale enums,
+   hash shape, count consistency, review/confidence summaries, activation
+   review preconditions, `leakage_count=0`, runtime exclusion, and
+   unknown-field fail-closed behavior.
+4. Reuse the existing global denied-field scan before descriptor-specific
+   checks.
+5. Add Lane 1 synthetic pass/fail fixtures only after total control opens
+   fixture write scope.
+6. Extend the fixture matrix only by adding new pass/fail leaves; do not
+   change matrix semantics.
+7. Add unit tests for pass descriptor, missing fields, bad hash shape, count
+   mismatch, activation without review, denied field, artifact-class mismatch,
+   nonzero leakage, and unknown field.
+
 The first validator must not:
 
 - read runtime artifacts
@@ -1145,3 +1230,6 @@ The first validator must not:
 - call a model
 - generate images or video
 - modify seed, snapshot, migration, runtime, or Hope files
+- implement source acquisition, source storage, source fetching, activation
+  switching, telemetry export, canonical digest recomputation, or verified
+  fallback exceptions

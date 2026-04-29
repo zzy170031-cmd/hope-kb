@@ -33,6 +33,44 @@ The first v0.2 use of an LLM Wiki architecture is therefore limited to offline
 governance, compilation assistance, conflict detection, and QA review support.
 It is not a default runtime auto-maintenance path.
 
+## Source Acquisition Boundary
+
+Source acquisition for v0.2 is an offline governance design surface only. It
+may define human-controlled source registration, source intent review,
+quarantine classification, digest requirements, review-status flow,
+confidence review, rejection reasons, and seed-candidate planning.
+
+It must not implement or imply:
+
+- runtime network fetch
+- automatic ingest
+- user-session writes
+- runtime fallback source lookup
+- query-time raw-layer or wiki-layer maintenance
+- direct seed mutation
+- snapshot mutation
+- runtime selection expansion
+
+The acquisition path remains layered:
+
+1. Intake material remains governance-only.
+2. Labeled material may support a wiki draft.
+3. Reviewed wiki material may support future seed-candidate planning.
+4. Nothing becomes runtime-selectable without a later approved
+   seed/snapshot/index rebuild and activation verification.
+
+Every intake item should be represented by bounded metadata: stable
+`source_id`, controlled `source_type`, content digest, review owner or review
+status, confidence placeholder, risk flags, and candidate Prompt knowledge
+type. Screening summaries must stay bounded and must not contain raw source
+text, raw prompt bodies, local path details, matched sensitive values, or
+credential material.
+
+Material that is unsupported, unverifiable, secret-like, path-bearing,
+prompt-body-bearing, or licensing-unclear must be rejected or kept in
+quarantine. Promotion out of quarantine requires human review and a later
+approved seed/snapshot/index gate.
+
 ## Layer Mapping
 
 ### `raw_layer`
@@ -282,6 +320,59 @@ A source is acceptable for Prompt knowledge governance only when:
 - source material can map to at least one Prompt knowledge type
 - unsupported, unverifiable, secret-bearing, path-bearing, or licensing-unclear
   content is rejected or kept in quarantine
+
+## Source Quality Scoring Rubric
+
+Source quality scoring is a review aid only for v0.2 governance. It must not
+auto-promote a source, wiki page, seed candidate, eval truth item, snapshot,
+index, active pointer, or runtime selection.
+
+Use categorical confidence labels:
+
+```text
+high
+medium
+low
+rejected
+unknown
+```
+
+Review dimensions:
+
+- authority: official or product-backed material can be high only after digest,
+  review, and applicability checks; team distillation and internal examples
+  should be capped conservatively unless explicitly reviewed and limited
+- provenance completeness: stable ID, controlled source type, digest, review
+  status, and bounded notes are required before confidence can rise above
+  unknown
+- content support: claims must map to a recognized Prompt knowledge type or a
+  source policy note
+- freshness: source deltas remain stale until reviewed; stale or unknown
+  freshness blocks activation planning
+- licensing and retention: unclear retention or licensing blocks promotion
+- leakage risk: any sensitive content class blocks promotion until remediated;
+  acceptance requires `leakage_count=0`
+- conflict risk: conflicts with reviewed wiki or schema targets require limited
+  confidence or an explicit open question
+- applicability: general style experience must be marked as team distillation
+  or limited confidence when it is not authority-backed
+
+Suggested label behavior:
+
+- `high`: reviewed, complete digest, clear authority or strong team-reviewed
+  evidence, no high-risk open questions, no leakage, and relevant schema links
+- `medium`: reviewed or accepted-limited, useful but scoped, with minor open
+  questions retained as limits and no leakage
+- `low`: weak support, narrow applicability, or unresolved non-critical
+  questions; it must not drive activation planning by itself
+- `unknown`: intake or labeled state before review; it cannot support reviewed
+  wiki or activation planning
+- `rejected`: unsupported, unsafe, unverifiable, blocked by retention or
+  licensing, sensitive, or not relevant
+
+Scoring outputs should be categorical labels plus bounded summaries and bucket
+counts. They must not include raw excerpts, locator values, matched sensitive
+values, source-register dumps, or raw prompt/source material.
 
 ## Quarantine Acceptance Checklist
 
