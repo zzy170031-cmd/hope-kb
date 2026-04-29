@@ -98,3 +98,10 @@
 - [x] 13.2 Run OpenSpec dispatch review for the read-only design draft.
 - [x] 13.3 Record approved OpenSpec-guided dispatch in `source-to-wiki-loop-dispatch.md`.
 - [x] 13.4 Keep file edits, source fetching, source storage, seed, snapshot, runtime, UI, export, validator changes, fixtures, staging, commit, and push closed for the target lane.
+
+## 14. Source To Wiki Minimal Loop Intake And Contract Dispatch
+
+- [x] 14.1 Intake Lane 1 source-to-wiki minimal loop design report.
+- [x] 14.2 Record accepted loop design, Core Challenger notes, and Audit Specialist boundaries in `source-to-wiki-loop-intake.md`.
+- [x] 14.3 Prepare and approve OpenSpec-reviewed docs-only artifact contract dispatch in `source-wiki-artifact-contract-dispatch.md`.
+- [x] 14.4 Keep artifact creation, source fetching/storage, seed, snapshot, runtime, UI, export, validator changes, fixtures, staging, commit, and push closed for the target lane.
