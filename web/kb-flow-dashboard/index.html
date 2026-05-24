@@ -61,7 +61,7 @@
 
       .topbar {
         display: grid;
-        grid-template-columns: minmax(320px, 1fr) auto;
+        grid-template-columns: minmax(280px, 0.8fr) minmax(360px, 1.1fr) auto;
         gap: 16px;
         align-items: center;
         min-height: 80px;
@@ -86,6 +86,40 @@
         flex-wrap: wrap;
         justify-content: flex-end;
         gap: 7px;
+      }
+
+      .api-doc-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .toolbar-button {
+        min-height: 30px;
+        border-color: #cbd9ee;
+        border-radius: 9px;
+        padding: 5px 12px;
+        background: #f9fbff;
+        color: #173b72;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .toolbar-button:hover {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(79, 126, 255, 0.10);
+      }
+
+      .api-doc-note {
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .pill, .chip, .tag {
@@ -405,9 +439,68 @@
       .status-badge.confirming { border-color: #9dccf2; background: #ecf7ff; color: #1774b8; }
       .feed, .feed-card, .meta, .scene-cloud { display: none; }
 
+      .dialog-backdrop[hidden] { display: none; }
+      .dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(9, 24, 48, 0.22);
+      }
+
+      .api-dialog {
+        width: min(920px, 100%);
+        max-height: min(760px, calc(100vh - 48px));
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 28px 70px rgba(20, 45, 82, 0.18);
+      }
+
+      .api-dialog-head {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.96);
+      }
+
+      .api-dialog-head h2 { margin: 0; font-size: 20px; line-height: 1.2; }
+      .api-dialog-head p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+      .dialog-close { min-width: 68px; padding: 4px 12px; }
+      .api-doc-body { display: grid; gap: 14px; padding: 18px 20px 22px; }
+      .api-doc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .api-doc-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: #fbfdff; }
+      .api-doc-card h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.25; }
+      .api-doc-card p, .api-doc-card li { color: #405b7f; font-size: 12px; line-height: 1.7; }
+      .api-doc-card ul { margin: 0; padding-left: 18px; }
+      .api-doc-code {
+        display: block;
+        overflow: auto;
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f1f6fd;
+        color: #102d55;
+        font-family: Consolas, "SFMono-Regular", monospace;
+        font-size: 12px;
+        line-height: 1.55;
+        white-space: pre;
+      }
+
       @media (max-width: 1180px) {
-        .topbar, .intake-form, .tables { grid-template-columns: 1fr; }
+        .topbar, .intake-form, .tables, .api-doc-grid { grid-template-columns: 1fr; }
         .status-strip { justify-content: flex-start; }
+        .api-doc-actions { justify-content: flex-start; flex-wrap: wrap; }
+        .api-doc-note { white-space: normal; }
         .field-chips { align-content: start; }
         .graph-workbench { height: auto; min-height: 760px; }
         .graph-canvas { height: auto; min-height: 760px; display: grid; gap: 10px; padding: 14px; }
@@ -427,7 +520,11 @@
       <header class="panel topbar">
         <div class="brand">
           <h1>知识图谱：入库流程</h1>
-          <p>以知识图谱驱动应用的精准入库，实时呈现知识流转与映射关系。</p>
+        </div>
+        <div class="api-doc-actions" aria-label="API 接入文档">
+          <button class="toolbar-button" type="button" id="apiDocsButton">API文档</button>
+          <a class="toolbar-button" href="api-docs.html" target="_blank" rel="noreferrer">打开文档</a>
+          <span class="api-doc-note">服务端 env 接入，前端不保存密钥</span>
         </div>
         <div class="status-strip">
           <span class="pill" data-tone="ok">验证已通过</span>
@@ -565,6 +662,78 @@
       </section>
     </div>
 
+    <div class="dialog-backdrop" id="apiDocsModal" hidden>
+      <section class="api-dialog" role="dialog" aria-modal="true" aria-labelledby="apiDocsTitle">
+        <header class="api-dialog-head">
+          <div>
+            <h2 id="apiDocsTitle">API 接入文档</h2>
+            <p>5179 控制台只负责搜索候选、确认包和 KB 写入门禁；密钥只从服务端 env 读取。</p>
+          </div>
+          <button class="dialog-close" type="button" id="apiDocsClose">关闭</button>
+        </header>
+        <div class="api-doc-body">
+          <div class="api-doc-grid">
+            <section class="api-doc-card">
+              <h3>服务端环境</h3>
+              <ul>
+                <li>默认读取桌面 <code>hope-kb-search.env</code>，也可用 <code>HOPE_KB_SEARCH_ENV_FILE</code> 指定。</li>
+                <li>必需：<code>HOPE_KB_SEARCH_KEY</code>、<code>HOPE_KB_SEARCH_MODEL</code>、<code>HOPE_KB_SEARCH_BASE_URL</code>。</li>
+                <li>兼容 PWA 变量：<code>HOPE_WEB_API_KEY</code>、<code>HOPE_TEXT_MODEL_API_KEY</code>。</li>
+                <li>前端不会读取或存储 API Key，包文件只记录 provider、model、host 和状态。</li>
+              </ul>
+            </section>
+            <section class="api-doc-card">
+              <h3>入库边界</h3>
+              <ul>
+                <li>开始搜索只写 draft package，不写 <code>reviewed_wiki</code>。</li>
+                <li>必须先生成 confirmed package，才能调用 apply 写入 KB。</li>
+                <li>写入只通过 <code>apply-confirmed-intake-package.js</code> 执行。</li>
+                <li>PWA 只消费 summary-only adapter 输出，不读取 raw KB、来源正文或密钥。</li>
+              </ul>
+            </section>
+          </div>
+          <section class="api-doc-card">
+            <h3>接口顺序</h3>
+            <code class="api-doc-code">GET  /api/intake/latest
+POST /api/intake/start
+POST /api/intake/:run_id/sources
+POST /api/intake/:run_id/screen
+POST /api/intake/:run_id/recommendations
+POST /api/intake/:run_id/confirm
+POST /api/intake/:run_id/apply</code>
+          </section>
+          <section class="api-doc-card">
+            <h3>最小请求</h3>
+            <code class="api-doc-code">POST /api/intake/start
+Content-Type: application/json
+
+{
+  "title": "即梦国漫动作分镜提示词提升",
+  "search_focus": "seedance_anime_prompt"
+}</code>
+          </section>
+          <section class="api-doc-card">
+            <h3>关键返回字段</h3>
+            <code class="api-doc-code">package.status:
+  request_recorded | sources_collected | screened |
+  recommendations_ready | confirmed_package | applied_to_kb | failed
+
+package.search_plan.search_provider_status:
+  status: live_search | fixture_fallback
+  reason: ok | missing_credential | live_search_timeout | live_search_failed
+
+package.artifacts:
+  draft_package
+  confirmed_package
+  reviewed_wiki
+  wiki_to_runtime_mapping
+  runtime_snapshot
+  pwa_adapter_output</code>
+          </section>
+        </div>
+      </section>
+    </div>
+
     <script>
       const sceneTypes = [['hot_blood_battle','热血战斗','conflict'],['ensemble_performance','群像表演','performance'],['emotional_dialogue','情绪对话','performance'],['encounter_performance','相遇表演','performance'],['field_chase','场域追逐','conflict'],['spectacle_showcase','奇观展示','spectacle'],['daily_healing','日常治愈','performance'],['guoman_hot_blood_combat','国漫热血打斗','conflict'],['guoman_ensemble_performance','国漫群像表演','performance'],['ink_wuxia_combat','水墨武打','conflict'],['eastern_spectacle','东方奇观','spectacle'],['xianxia_action','仙侠动作','conflict'],['urban_fantasy','都市奇幻','spectacle'],['chinese_war_formation','国战军阵','epic'],['weapon_highlight','武器高光','conflict'],['council_strategy','朝堂权谋','epic'],['siege_defense','攻城守御','epic'],['slg_sandbox_view','沙盘战略视角','epic'],['slg_march_encirclement','行军合围','epic'],['slg_city_growth','城建演进','epic'],['slg_battle_report','战报界面','epic']];
       const wikiRows = [['K-0001','场景类型','创建/更新','已审','即梦动漫提示词','2025-05-25 16:40:12'],['K-0002','动作链','生成/修复','已审','即梦动漫提示词','2025-05-25 16:41:05'],['K-0003','镜头景别','选镜/匹配','待审','互联网候选','2025-05-25 16:41:32'],['K-0004','提示词文本','生成','已审','即梦动漫提示词','2025-05-25 16:42:11'],['K-0005','规则候选','映射/生成','待确认','规则对照','2025-05-25 16:42:58']];
@@ -584,9 +753,10 @@
       function tone(decision) { if (decision === 'keep' || decision === '保留' || decision === 'ready_for_confirmation' || decision === 'confirmed') return 'ok'; if (decision === 'reject' || decision === '拒绝') return 'reject'; return 'warn'; }
       function setNodeStates(s) { const order = ['start','scene','action','shot','prompt','snapshot']; const support = ['writing','camera','guard','source','rules','rw','confirm']; document.querySelectorAll('.graph-node').forEach((node) => { node.classList.remove('is-complete','is-running','is-pending','is-error'); node.classList.add('is-pending'); }); const status = s.status || 'idle'; const active = status === 'sources_collected' ? 'source' : status === 'screened' ? 'rules' : status === 'recommendations_ready' ? 'rw' : status === 'confirmed_package' ? 'confirm' : status === 'applied_to_kb' ? 'snapshot' : status === 'failed' ? 'confirm' : 'start'; order.concat(support).forEach((id) => { const node = document.querySelector('[data-node="' + id + '"]'); if (!node) return; node.classList.remove('is-pending'); if (id === active) node.classList.add(status === 'failed' ? 'is-error' : 'is-running'); else if (status === 'applied_to_kb' || ['start','scene','action','shot','prompt'].includes(id)) node.classList.add('is-complete'); else node.classList.add('is-pending'); }); }
       async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} }
-      function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
+      function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); const artifact = s.artifacts?.draft_package || ''; if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；草稿已落盘：' + artifact + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
       function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
-      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = phaseLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } sourceFeed.innerHTML = sources.map((item) => { const decision = item.decision || item.decision_label; return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
+      function searchModeLabel(s) { const status = s.search_plan?.search_provider_status; if (!status) return phaseLabel(s); const mode = status.status === 'live_search' ? 'Hope 搜索' : '登记候选'; const detail = status.reason === 'missing_credential' ? '未配置密钥' : status.reason === 'live_search_timeout' ? '联网搜索超时回退' : status.reason === 'live_search_failed' ? '搜索失败回退' : status.reason === 'no_url_bound_candidates' ? '无可用来源回退' : status.reason === 'ok' ? '已返回来源' : status.reason || ''; return phaseLabel(s) + ' · ' + mode + (detail ? ' · ' + detail : ''); }
+      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = searchModeLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } sourceFeed.innerHTML = sources.map((item) => { const decision = item.decision || item.decision_label; const sourceLink = item.source_url ? '<a href="' + escapeHtml(item.source_url) + '" target="_blank" rel="noreferrer">查看来源</a>' : '来源待补'; return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>来源：' + sourceLink + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
       function renderScreening(s) { const board = document.getElementById('screeningBoard'); if (!board) return; if (!s.run_id) { board.innerHTML = '<div class="feed-card"><strong>未开始</strong><p>筛选必须从应用分镜和提示词文本问题出发。</p></div>'; return; } const rows = s.screening_results?.length ? s.screening_results : screeningChecks.map((row) => ({ title: row[0], summary: row[1], result: row[2] === 'ok' ? '通过' : '需确认' })); board.innerHTML = rows.map((row) => '<div class="feed-card"><strong>' + escapeHtml(row.source_id || row.title || '筛选项') + '</strong><p>' + escapeHtml(row.summary || ('字段=' + row.serves_pwa_fields + '；即梦适配=' + row.serves_seedance_prompt + '；运行目标=' + row.runtime_target_possible + '；泄漏=' + row.leakage_risk_ok)) + '</p><span class="tag" data-tone="' + tone(row.result) + '">' + escapeHtml(row.result || '需确认') + '</span></div>').join(''); }
       function renderRecommendations(s) { const feed = document.getElementById('recommendationFeed'); if (!feed) return; const recs = s.recommendations?.length ? s.recommendations : sampleRecommendations; if (!s.run_id) { feed.innerHTML = '<div class="feed-card"><strong>未生成入库建议</strong><p>生成建议后显示规则候选；确认包生成前不写仓库。</p></div>'; return; } feed.innerHTML = recs.map((item) => '<div class="feed-card"><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span></div></div>').join(''); }
       function statusClass(value) { if (value === '待审') return 'waiting'; if (value === '待确认') return 'confirming'; return ''; }
@@ -728,6 +898,12 @@
       document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
       document.getElementById('markWaiting')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
+      const apiDocsModal = document.getElementById('apiDocsModal');
+      function toggleApiDocs(open) { if (apiDocsModal) apiDocsModal.hidden = !open; }
+      document.getElementById('apiDocsButton')?.addEventListener('click', () => toggleApiDocs(true));
+      document.getElementById('apiDocsClose')?.addEventListener('click', () => toggleApiDocs(false));
+      apiDocsModal?.addEventListener('click', (event) => { if (event.target === apiDocsModal) toggleApiDocs(false); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') toggleApiDocs(false); });
       setInterval(() => { document.getElementById('clock').textContent = now(); }, 1000);
       window.addEventListener('resize', () => requestAnimationFrame(updateGraphConnections));
       loadSamples().then(render);

@@ -8,11 +8,11 @@ leakage_count: 0
 
 ## Purpose
 
-把材质、光影、空气介质和环境反馈加入分镜提示词，使画面更有物理真实感。
+材质光影空气物理反馈规则: Add scene-bound material feedback, light direction, and air medium cues to visible frame and prompt text.
 
 ## Source Basis
 
-Manual product-side intake summary and local image batch were used only as summarized evidence. Runtime output must not include source images, raw article text, OCR text, local paths, hashes, or source registers.
+This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
 
 ## Applies To
 
@@ -22,32 +22,24 @@ Manual product-side intake summary and local image batch were used only as summa
 
 ## Claims Summary
 
-- 材质描述应落到重量、阻力、湿度、粗糙、磨损、反光或受力反馈。
-- 光影与空气介质只在场景逻辑支持时加入，例如侧逆光、轮廓光、雨雾、尘埃、烟气、水汽和湿地反光。
-- 环境反馈必须绑定当前人物动作或物体状态，不能凭空扩展世界观。
-- 该规则主要改善 visual_description、character_action、prompt_text、negative_constraints 和 kb_context_summary。
+- Add visible material weight, resistance, wetness, roughness, wear, or reflection when tied to action.
+- Add light direction, hardness, rim light, side backlight, haze, rain, dust, smoke, steam, sparks, or water reflection only when supported by scene logic.
+- Keep physical detail bound to current action.
 
 ## Runtime Mapping
 
-- director_rule_packs: `dg-material-light-air-physicality`
-- selected_kb_rules: `rule:material-light-air-physicality`
-- negative_constraints: physical detail must stay scene-bound
-- summary_fragment: `summary:material-light-air-physicality`
+- director_rule_packs: dg-material-light-air-physicality
+- selected_kb_rules: rule:material-light-air-physicality
+- runtime_targets: director_rule_packs, selected_kb_rules, negative_constraints, kb_context_summary
 
 ## PWA Fields Served
 
 - visual_description
 - character_action
-- camera
-- shot_size
 - prompt_text
-- scene_profile
 - negative_constraints
-- kb_context_summary
-- selected_kb_rules
 
 ## Negative Constraints
 
-- Do not add material, light, weather, smoke, dust, or fire effects unsupported by the current scene.
+- Do not add unsupported world facts or weather effects.
 - Do not replace action with texture lists.
-- Do not expose source images or raw article text.

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hope-KB API 接入文档</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f8fc;
+        --surface: #ffffff;
+        --ink: #0a2148;
+        --muted: #667892;
+        --line: #d9e5f3;
+        --blue: #4f7eff;
+        --teal: #1f9e92;
+        --orange: #f4a63f;
+        --shadow: 0 12px 30px rgba(41, 74, 119, 0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-width: 320px;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+        color: var(--ink);
+        font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      }
+      .shell {
+        display: grid;
+        gap: 12px;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 18px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow);
+      }
+      header.panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 22px;
+      }
+      h1, h2, h3, p { margin: 0; }
+      h1 { font-size: 24px; line-height: 1.2; }
+      h2 { font-size: 18px; line-height: 1.25; }
+      h3 { font-size: 15px; line-height: 1.25; }
+      p, li { color: #405b7f; font-size: 13px; line-height: 1.75; }
+      small { color: var(--muted); font-size: 12px; }
+      a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        border: 1px solid #cbd9ee;
+        border-radius: 9px;
+        padding: 5px 12px;
+        background: #f9fbff;
+        color: #173b72;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .card {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+      }
+      .card ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      code {
+        border-radius: 5px;
+        background: #eef5fd;
+        padding: 1px 5px;
+        color: #12376b;
+        font-family: Consolas, "SFMono-Regular", monospace;
+        font-size: 12px;
+      }
+      pre {
+        overflow: auto;
+        margin: 0;
+        border-radius: 10px;
+        background: #f1f6fd;
+        padding: 14px;
+        color: #102d55;
+        font-family: Consolas, "SFMono-Regular", monospace;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .tag {
+        border: 1px solid #9fd4b0;
+        border-radius: 999px;
+        padding: 4px 9px;
+        background: #edf8f2;
+        color: #218257;
+        font-size: 12px;
+      }
+      .tag.warn { border-color: #edc780; background: #fff5e5; color: #b96f18; }
+      @media (max-width: 840px) {
+        header.panel, .grid { grid-template-columns: 1fr; display: grid; }
+        header.panel { align-items: start; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="panel">
+        <div>
+          <h1>Hope-KB API 接入文档</h1>
+          <small>5179 本地控制台用于手动搜索候选、生成确认包、写入 KB，并产出 PWA 可消费的 summary-only adapter。</small>
+        </div>
+        <a href="./">返回入库流程</a>
+      </header>
+
+      <section class="panel card">
+        <h2>接入边界</h2>
+        <div class="tag-row">
+          <span class="tag">服务端 env 管密钥</span>
+          <span class="tag">确认前只写 draft</span>
+          <span class="tag warn">人工确认后才入库</span>
+          <span class="tag">PWA 只消费 summary-only</span>
+        </div>
+        <p>这个 dashboard 不是 PWA 主流程，也不是图谱浏览器。它只增强现有链路：reviewed_wiki -> wiki-to-runtime mapping -> runtime KB snapshot -> PWA adapter output。</p>
+      </section>
+
+      <section class="grid">
+        <section class="panel card">
+          <h2>服务端环境</h2>
+          <ul>
+            <li>默认自动读取桌面 <code>hope-kb-search.env</code>。</li>
+            <li>也可以用 <code>HOPE_KB_SEARCH_ENV_FILE</code> 指定 env 文件。</li>
+            <li>前端不会读取、保存或提交 API Key。</li>
+            <li>包文件只记录 provider、model、base_url_host、credential_state、web_search 和状态原因。</li>
+          </ul>
+        </section>
+        <section class="panel card">
+          <h2>推荐 env</h2>
+          <pre>HOPE_KB_SEARCH_PROVIDER=qwen
+HOPE_KB_SEARCH_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+HOPE_KB_SEARCH_ENDPOINT=/chat/completions
+HOPE_KB_SEARCH_MODEL=qwen3.6-plus
+HOPE_KB_SEARCH_KEY=你的 DashScope API Key
+HOPE_KB_ENABLE_SEARCH=true
+HOPE_KB_SEARCH_TIMEOUT_MS=30000</pre>
+        </section>
+      </section>
+
+      <section class="panel card">
+        <h2>接口顺序</h2>
+        <pre>GET  /api/intake/latest
+POST /api/intake/start
+POST /api/intake/:run_id/sources
+POST /api/intake/:run_id/screen
+POST /api/intake/:run_id/recommendations
+POST /api/intake/:run_id/confirm
+POST /api/intake/:run_id/apply</pre>
+      </section>
+
+      <section class="grid">
+        <section class="panel card">
+          <h2>最小请求</h2>
+          <pre>POST /api/intake/start
+Content-Type: application/json
+
+{
+  "title": "即梦国漫动作分镜提示词提升",
+  "search_focus": "seedance_anime_prompt"
+}</pre>
+        </section>
+        <section class="panel card">
+          <h2>状态字段</h2>
+          <pre>package.status:
+  request_recorded
+  sources_collected
+  screened
+  recommendations_ready
+  confirmed_package
+  applied_to_kb
+  failed</pre>
+        </section>
+      </section>
+
+      <section class="grid">
+        <section class="panel card">
+          <h2>搜索状态</h2>
+          <pre>package.search_plan.search_provider_status:
+  status: live_search | fixture_fallback
+  reason:
+    ok
+    missing_credential
+    live_search_timeout
+    live_search_failed
+    no_url_bound_candidates</pre>
+        </section>
+        <section class="panel card">
+          <h2>落盘证据</h2>
+          <pre>package.artifacts:
+  draft_package
+  confirmed_package
+  reviewed_wiki
+  wiki_to_runtime_mapping
+  runtime_snapshot
+  pwa_adapter_output</pre>
+        </section>
+      </section>
+
+      <section class="panel card">
+        <h2>写入与验证</h2>
+        <pre>node scripts/validate-manual-intake-package.js --package knowledge/intake_runs/&lt;run_id&gt;/intake-package.confirmed.json
+node scripts/apply-confirmed-intake-package.js --package knowledge/intake_runs/&lt;run_id&gt;/intake-package.confirmed.json
+node scripts/build-pwa-kb-adapter-output.js --check
+powershell.exe -ExecutionPolicy Bypass -File scripts/validate-kb-runtime-prototype.ps1</pre>
+      </section>
+    </main>
+  </body>
+</html>

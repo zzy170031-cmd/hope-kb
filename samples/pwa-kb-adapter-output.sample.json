@@ -196,66 +196,58 @@
       {
         "id": "dg-material-light-air-physicality",
         "name": "Material light air physicality",
-        "intent": "Add visible material feedback, light direction, air medium, and environmental response to make prompt text filmable.",
+        "intent": "Add scene-bound material feedback, light direction, and air medium cues to visible frame and prompt text.",
         "influenceAxes": [
           "physicality",
-          "lighting",
-          "air_medium",
           "visual_grounding",
           "prompt_boundary"
         ],
         "directives": [
-          "Add material weight, resistance, wetness, roughness, wear, reflection, or texture only when tied to current action.",
-          "Describe light direction, hardness, contrast, rim light, side backlight, shafts, reflection, and shadow relation when visible.",
-          "Use rain, fog, dust, smoke, steam, sparks, mist, or water reflection only when supported by scene logic."
+          "Add visible material weight, resistance, wetness, roughness, wear, or reflection when tied to action.",
+          "Add light direction, hardness, rim light, side backlight, haze, rain, dust, smoke, steam, sparks, or water reflection only when supported by scene logic.",
+          "Keep physical detail bound to current action."
         ],
         "negativeConstraints": [
-          "Do not add unsupported props, weather, or world facts.",
-          "Do not use texture words without physical relation to action or environment.",
-          "Do not flatten lighting into generic bright or dark labels."
+          "Do not add unsupported world facts or weather effects.",
+          "Do not replace action with texture lists."
         ]
       },
       {
         "id": "dg-expression-physicalization",
         "name": "Expression physicalization",
-        "intent": "Translate abstract emotion into visible facial and body performance cues suitable for shot scale and camera distance.",
+        "intent": "Convert abstract emotion into visible face, posture, breath, and blocking cues that fit shot scale.",
         "influenceAxes": [
           "performance",
           "character_action",
-          "visual_grounding",
-          "prompt_boundary"
+          "visual_grounding"
         ],
         "directives": [
-          "Convert emotional labels into visible cues such as jaw tension, cheek muscle, locked gaze, eye widening or narrowing, nasal flare, lip pressure, trembling breath, shoulder contraction, guarded posture, or hand hesitation.",
-          "Use close-up facial detail only when shot scale supports it.",
-          "Use posture, blocking, silhouette, and motion for wide shots."
+          "Convert abstract emotion into visible performance cues.",
+          "Use close-up cues such as jaw tension, cheek muscle, locked gaze, nasal flare, lip pressure, or trembling breath only when shot scale supports them.",
+          "Use posture, silhouette, blocking, and motion for wide shots."
         ],
         "negativeConstraints": [
-          "Do not prompt only vague emotions such as angry, sad, or moved.",
-          "Do not over-specify facial muscles in wide shots.",
-          "Do not introduce character facts absent from accepted body."
+          "Do not output abstract mood without visible action.",
+          "Do not force invisible micro-expression cues into wide shots."
         ]
       },
       {
         "id": "dg-transition-motion-dynamics",
-        "name": "Transition and motion dynamics",
-        "intent": "Use transition and motion dynamics as controlled guidance for rhythm, continuity, and shot-to-shot readability.",
+        "name": "Transition motion dynamics",
+        "intent": "Use transitions and motion dynamics to express rhythm, continuity, action pressure, and emotional direction.",
         "influenceAxes": [
-          "transition",
           "motion_dynamics",
-          "structure",
-          "prompt_boundary",
-          "duration_density"
+          "continuity",
+          "structure"
         ],
         "directives": [
-          "Select fade, dissolve, flash white or black, wipe, push, pull, match cut, or montage according to scene function and emotional rhythm.",
-          "Select horizontal, vertical, diagonal, curved, radial, spiral, or S-curve motion according to action pressure and emotional direction.",
-          "Keep transition and motion instructions local to the selected storyboard task fragment and confirmed row sequence."
+          "Use transitions and motion dynamics to express rhythm and continuity.",
+          "Select fade, dissolve, flash, wipe, push, pull, match cut, or montage by scene function.",
+          "Select horizontal, vertical, diagonal, curved, radial, spiral, or S-curve motion by action pressure and emotional direction."
         ],
         "negativeConstraints": [
-          "Do not overuse flashy transitions when a direct cut or quiet hold fits.",
-          "Do not change story facts for a stronger transition.",
-          "Do not apply motion dynamics that contradict visible action direction."
+          "Do not add decorative transitions unrelated to scene function.",
+          "Do not break action continuity or accepted event order."
         ]
       },
       {

@@ -7,6 +7,33 @@ const repoRoot = path.resolve(__dirname, "..");
 const root = path.join(repoRoot, "web", "kb-flow-dashboard");
 const runsRoot = path.join(repoRoot, "knowledge", "intake_runs");
 const host = "127.0.0.1";
+function parseEnvValue(value) {
+  const trimmed = String(value || "").trim();
+  if ((trimmed.startsWith("\"") && trimmed.endsWith("\"")) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) return trimmed.slice(1, -1);
+  return trimmed;
+}
+function loadSearchEnvFile() {
+  const userProfile = process.env.USERPROFILE || process.env.HOME || "";
+  const candidates = [
+    process.env.HOPE_KB_SEARCH_ENV_FILE,
+    process.env.HOPE_KB_DASHBOARD_ENV_FILE,
+    userProfile ? path.join(userProfile, "Desktop", "hope-kb-search.env") : ""
+  ].filter(Boolean);
+  const file = candidates.find((candidate) => fs.existsSync(candidate));
+  if (!file) return { loaded: false };
+  const lines = fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "").split(/\r?\n/);
+  let count = 0;
+  lines.forEach((line) => {
+    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/);
+    if (!match) return;
+    const key = match[1];
+    if (process.env[key]) return;
+    process.env[key] = parseEnvValue(match[2]);
+    count += 1;
+  });
+  return { loaded: true, count };
+}
+const envFileStatus = loadSearchEnvFile();
 const port = Number(process.env.HOPE_KB_DASHBOARD_PORT || 5179);
 
 const contentTypes = {
@@ -77,6 +104,182 @@ function loadSources() {
   const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
   return Array.isArray(parsed.source_candidates) ? parsed.source_candidates : [];
 }
+function searchConfig() {
+  const baseUrl = process.env.HOPE_KB_SEARCH_BASE_URL || process.env.HOPE_WEB_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1";
+  const enableSearch = !/^(0|false|off)$/i.test(process.env.HOPE_KB_ENABLE_SEARCH || "true");
+  const requestedTimeoutMs = Number(process.env.HOPE_KB_SEARCH_TIMEOUT_MS || 30000);
+  return {
+    provider: process.env.HOPE_KB_SEARCH_PROVIDER || process.env.HOPE_WEB_PROVIDER || "qwen",
+    baseUrl,
+    endpoint: process.env.HOPE_KB_SEARCH_ENDPOINT || process.env.HOPE_WEB_ENDPOINT || "/chat/completions",
+    model: process.env.HOPE_KB_SEARCH_MODEL || process.env.HOPE_WEB_MODEL || "qwen3.6-plus",
+    key: process.env.HOPE_KB_SEARCH_KEY || process.env.HOPE_KB_API_KEY || process.env.HOPE_WEB_API_KEY || process.env.HOPE_TEXT_MODEL_API_KEY || process.env.DASHSCOPE_API_KEY || "",
+    enableSearch,
+    timeoutMs: Number.isFinite(requestedTimeoutMs) && requestedTimeoutMs > 0 ? requestedTimeoutMs : 30000
+  };
+}
+function hostOf(value) {
+  try { return new URL(value).host; } catch { return ""; }
+}
+function endpointUrl(config) {
+  return config.baseUrl.replace(/\/+$/, "") + "/" + config.endpoint.replace(/^\/+/, "");
+}
+function providerStatus(config, status, extra) {
+  return Object.assign({
+    status,
+    provider: config.provider,
+    model: config.model,
+    base_url_host: hostOf(config.baseUrl),
+    credential_state: config.key ? "configured" : "missing",
+    web_search: config.enableSearch ? "enabled" : "disabled"
+  }, extra || {});
+}
+function jsonFromModelText(text) {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) throw new Error("model returned empty content");
+  if (trimmed.startsWith("{") || trimmed.startsWith("[")) return JSON.parse(trimmed);
+  const start = Math.min(...["{", "["].map((char) => trimmed.indexOf(char)).filter((index) => index >= 0));
+  const end = Math.max(trimmed.lastIndexOf("}"), trimmed.lastIndexOf("]"));
+  if (!Number.isFinite(start) || end <= start) throw new Error("model response did not contain JSON");
+  return JSON.parse(trimmed.slice(start, end + 1));
+}
+function asArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+function asText(value, fallback) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  return text || fallback || "";
+}
+function asUrl(value) {
+  const text = asText(value, "");
+  if (!/^https?:\/\//i.test(text)) return "";
+  return text;
+}
+function safeSourceId(value, index) {
+  const id = slug(value || ("source-" + (index + 1))).replace(/^-+|-+$/g, "");
+  return id.startsWith("src-") ? id : "src-" + id;
+}
+function decisionLabel(decision) {
+  if (decision === "keep") return "保留";
+  if (decision === "reject") return "拒绝";
+  return "后续复核";
+}
+function normalizeSourceCandidate(raw, index, runId, acquisitionStep) {
+  const fields = asArray(raw.serves_pwa_fields).filter((field) => targetFields.includes(field));
+  const url = asUrl(raw.source_url || raw.url || raw.link);
+  if (!url) return null;
+  const riskFlags = asArray(raw.risk_flags).map((item) => asText(item, "")).filter(Boolean);
+  const decision = fields.length ? (raw.decision === "reject" ? "reject" : "keep") : "future_qa";
+  return {
+    source_id: safeSourceId(raw.source_id || raw.id || raw.title, index),
+    title: asText(raw.title, "未命名候选"),
+    source_url: url,
+    source_type_label: asText(raw.source_type_label || raw.source_type, "互联网候选"),
+    language: asText(raw.language, "未标注"),
+    confidence: asText(raw.confidence, "medium"),
+    decision,
+    decision_label: decisionLabel(decision),
+    risk_flags: riskFlags,
+    serves_pwa_fields: fields,
+    target_pwa_actions: asArray(raw.target_pwa_actions).filter((action) => ["create_story_task", "generate_storyboard", "repair_storyboard", "validate_result", "export_result"].includes(action)),
+    pwa_relevance: asText(raw.pwa_relevance || raw.summary, "需进一步确认其对 PWA 字段的帮助。"),
+    kb_gap: asText(raw.kb_gap, ""),
+    leakage_check: asText(raw.leakage_check, "summary_only_no_raw_source"),
+    run_id: runId,
+    acquisition_step: acquisitionStep
+  };
+}
+function fallbackSourceCandidates(pkg, acquisitionStep) {
+  return loadSources().map((item, index) => normalizeSourceCandidate(item, index, pkg.run_id, acquisitionStep)).filter(Boolean);
+}
+function searchPrompt(pkg) {
+  return [
+    "请为 Hope-KB 手动入库控制台生成小批量互联网搜索候选。",
+    "只输出 JSON，不要 Markdown。不要输出原文摘录，不要输出密钥、本地路径、raw prompt、raw KB。",
+    "候选必须能服务 PWA 分镜字段之一：visual_description, character_action, camera, shot_size, prompt_text。",
+    "优先选择官方文档、主流采访、制作解析、可信教程。每个候选必须有可访问的 http/https source_url。",
+    "输出最多 5 条候选，字段结构为：",
+    JSON.stringify({
+      source_candidates: [{
+        source_id: "src-short-id",
+        title: "候选标题",
+        source_url: "https://example.com",
+        source_type_label: "官方文档/主流采访/制作解析/可信教程",
+        language: "中文/英文",
+        confidence: "high/medium/low",
+        decision: "keep/future_qa/reject",
+        serves_pwa_fields: targetFields,
+        target_pwa_actions: ["create_story_task", "generate_storyboard", "repair_storyboard"],
+        pwa_relevance: "一句话说明如何改善 PWA 输出字段",
+        kb_gap: "一句话说明填补的 KB 缺口",
+        risk_flags: ["summary_only"],
+        leakage_check: "summary_only_no_raw_source"
+      }]
+    })
+  ].join("\n");
+}
+async function fetchLiveSourceCandidates(pkg) {
+  const config = searchConfig();
+  if (!config.key) {
+    return {
+      candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
+      status: providerStatus(config, "fixture_fallback", { reason: "missing_credential", candidate_count: 0 })
+    };
+  }
+  if (typeof fetch !== "function") {
+    return {
+      candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
+      status: providerStatus(config, "fixture_fallback", { reason: "fetch_unavailable", candidate_count: 0 })
+    };
+  }
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+  try {
+    const payload = {
+      model: config.model,
+      messages: [
+        { role: "system", content: searchPrompt(pkg) },
+        { role: "user", content: JSON.stringify({ demand: pkg.demand, generated_queries: pkg.search_plan.generated_queries, required_answers: pkg.search_plan.required_answers }) }
+      ],
+      temperature: 0.2
+    };
+    if (/^(1|true|on)$/i.test(process.env.HOPE_KB_RESPONSE_FORMAT_JSON || "")) payload.response_format = { type: "json_object" };
+    if (config.enableSearch) payload.enable_search = true;
+    const response = await fetch(endpointUrl(config), {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "content-type": "application/json", authorization: "Bearer " + config.key },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status + " " + response.statusText);
+    const json = await response.json();
+    const content = json && json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content;
+    const parsed = jsonFromModelText(content);
+    const candidates = asArray(parsed.source_candidates || parsed.candidates)
+      .map((item, index) => normalizeSourceCandidate(item, index, pkg.run_id, "hope_env_web_search"))
+      .filter(Boolean)
+      .slice(0, 5);
+    if (!candidates.length) {
+      return {
+        candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
+        status: providerStatus(config, "fixture_fallback", { reason: "no_url_bound_candidates", candidate_count: 0 })
+      };
+    }
+    return {
+      candidates,
+      status: providerStatus(config, "live_search", { reason: "ok", candidate_count: candidates.length })
+    };
+  } catch (error) {
+    const errorSummary = asText(error && error.message, "unknown error").slice(0, 180);
+    const timedOut = /aborted|abort|timeout|timed out/i.test(errorSummary);
+    return {
+      candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
+      status: providerStatus(config, "fixture_fallback", { reason: timedOut ? "live_search_timeout" : "live_search_failed", error_summary: errorSummary, candidate_count: 0 })
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 function makePackage(body) {
   const runId = "intake-" + new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14) + "-" + slug(body.title || body.search_focus);
   const focus = body.search_focus || body.focus || "seedance_anime_prompt";
@@ -91,17 +294,30 @@ function makePackage(body) {
     screening_results: [],
     recommendations: [],
     confirmation: { confirmed: false, confirmed_at: "", confirmed_by: "", accepted_reviewed_wiki_ids: [] },
-    kb_application: { applied: false, applied_at: "", command: "", validation_status: "not_run", output: null }
+    kb_application: { applied: false, applied_at: "", command: "", validation_status: "not_run", output: null },
+    artifacts: {
+      draft_package: "knowledge/intake_runs/" + runId + "/intake-package.draft.json",
+      confirmed_package: "knowledge/intake_runs/" + runId + "/intake-package.confirmed.json",
+      reviewed_wiki: "knowledge/reviewed_wiki",
+      wiki_to_runtime_mapping: "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+      runtime_snapshot: "knowledge/runtime_snapshots/latest.candidate.json",
+      pwa_adapter_output: "samples/pwa-kb-adapter-output.sample.json"
+    }
   };
 }
-function sourceStep(pkg) {
-  const candidates = loadSources().map((item) => Object.assign({}, item, { run_id: pkg.run_id, acquisition_step: "registered_source_candidate" }));
-  pkg.source_candidates = candidates;
+async function sourceStep(pkg) {
+  const result = await fetchLiveSourceCandidates(pkg);
+  pkg.source_candidates = result.candidates;
+  pkg.search_plan.search_provider_status = result.status;
+  pkg.search_plan.acquisition_mode = result.status.status === "live_search" ? "hope_env_web_search" : "registered_source_candidate_fallback";
   pkg.status = "sources_collected";
   return pkg;
 }
 function screenStep(pkg) {
-  if (!pkg.source_candidates.length) sourceStep(pkg);
+  if (!pkg.source_candidates.length) {
+    pkg.source_candidates = fallbackSourceCandidates(pkg, "registered_source_candidate_fallback");
+    pkg.search_plan.search_provider_status = providerStatus(searchConfig(), "fixture_fallback", { reason: "screen_without_source_step", candidate_count: pkg.source_candidates.length });
+  }
   pkg.screening_results = pkg.source_candidates.map((item) => {
     const fields = item.serves_pwa_fields || [];
     const servesPwa = fields.some((field) => targetFields.includes(field));
@@ -115,7 +331,14 @@ function screenStep(pkg) {
 function recommendationStep(pkg) {
   if (!pkg.screening_results.length) screenStep(pkg);
   const keptIds = new Set(pkg.screening_results.filter((item) => item.result === "keep").map((item) => item.source_id));
-  pkg.recommendations = recommendationCatalog.map((rec) => Object.assign({}, rec, { status: rec.source_candidate_refs.some((id) => keptIds.has(id)) ? "ready_for_confirmation" : "future_qa", write_state: "not_written", runtime_state: "not_runtime" }));
+  const keptSources = pkg.source_candidates.filter((item) => keptIds.has(item.source_id));
+  pkg.recommendations = recommendationCatalog.map((rec) => {
+    const sourceRefs = rec.source_candidate_refs || [];
+    const catalogMatch = sourceRefs.some((id) => keptIds.has(id));
+    const fieldMatch = keptSources.some((source) => (source.serves_pwa_fields || []).some((field) => (rec.serves_pwa_fields || []).includes(field)));
+    const activatedRefs = catalogMatch ? sourceRefs.filter((id) => keptIds.has(id)) : keptSources.filter((source) => (source.serves_pwa_fields || []).some((field) => (rec.serves_pwa_fields || []).includes(field))).map((source) => source.source_id).slice(0, 3);
+    return Object.assign({}, rec, { source_candidate_refs: activatedRefs, status: catalogMatch || fieldMatch ? "ready_for_confirmation" : "future_qa", write_state: "not_written", runtime_state: "not_runtime" });
+  });
   pkg.status = "recommendations_ready";
   return pkg;
 }
@@ -154,7 +377,7 @@ async function handleApi(request, response, url) {
     const action = match[2];
     let pkg = readPackage(runId);
     if (!pkg) return sendJson(response, 404, { error: "run not found", run_id: runId });
-    if (action === "sources") pkg = sourceStep(pkg);
+    if (action === "sources") pkg = await sourceStep(pkg);
     if (action === "screen") pkg = screenStep(pkg);
     if (action === "recommendations") pkg = recommendationStep(pkg);
     if (action === "confirm") pkg = confirmStep(pkg);
@@ -176,4 +399,7 @@ const server = http.createServer((request, response) => {
     response.end(data);
   });
 });
-server.listen(port, host, () => { console.log("Hope-KB flow dashboard: http://" + host + ":" + port + "/"); });
+server.listen(port, host, () => {
+  const envNote = envFileStatus.loaded ? " env:file(" + envFileStatus.count + " vars)" : " env:process";
+  console.log("Hope-KB flow dashboard: http://" + host + ":" + port + "/" + envNote);
+});
