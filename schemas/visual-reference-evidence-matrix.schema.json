@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hope-kb.local/schemas/visual-reference-evidence-matrix.schema.json",
+  "title": "Hope KB Visual Reference Evidence Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "matrix_id",
+    "status",
+    "source_collections",
+    "deduplication",
+    "entries",
+    "runtime_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "hope-kb-visual-reference-evidence-matrix/v0.2"
+    },
+    "matrix_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "deduped", "extracted", "reviewed", "applied_to_kb", "rejected"]
+    },
+    "source_collections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source_collection" }
+    },
+    "deduplication": { "$ref": "#/$defs/deduplication" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/matrix_entry" }
+    },
+    "runtime_boundary": { "$ref": "#/$defs/runtime_boundary" }
+  },
+  "$defs": {
+    "source_collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["collection_id", "label", "file_count", "notes"],
+      "properties": {
+        "collection_id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "file_count": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+    "deduplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "exact_duplicate_groups", "near_duplicate_groups", "canonical_image_count", "duplicate_policy"],
+      "properties": {
+        "method": { "type": "string", "minLength": 1 },
+        "exact_duplicate_groups": { "type": "array", "items": { "$ref": "#/$defs/duplicate_group" } },
+        "near_duplicate_groups": { "type": "array", "items": { "$ref": "#/$defs/duplicate_group" } },
+        "canonical_image_count": { "type": "integer", "minimum": 0 },
+        "duplicate_policy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "duplicate_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_id", "canonical_image_id", "duplicate_image_ids", "review_status"],
+      "properties": {
+        "group_id": { "type": "string", "minLength": 1 },
+        "canonical_image_id": { "type": "string", "minLength": 1 },
+        "duplicate_image_ids": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "review_status": { "type": "string", "enum": ["unreviewed", "reviewed", "rejected"] }
+      }
+    },
+    "matrix_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "canonical_image_id",
+        "content_sha256",
+        "visual_summary",
+        "extracted_rule_point",
+        "pwa_field_mapping",
+        "positive_directive",
+        "negative_constraint",
+        "allowed_in_prompt_text",
+        "must_not_expose",
+        "confidence",
+        "review_status",
+        "runtime_projection"
+      ],
+      "properties": {
+        "entry_id": { "type": "string", "minLength": 1 },
+        "canonical_image_id": { "type": "string", "minLength": 1 },
+        "content_sha256": { "type": "string", "pattern": "^sha256:[a-fA-F0-9]{64}$" },
+        "visual_summary": { "type": "string", "minLength": 1 },
+        "extracted_rule_point": { "type": "string", "minLength": 1 },
+        "pwa_field_mapping": { "$ref": "#/$defs/pwa_storyboard_fields" },
+        "positive_directive": { "type": "string", "minLength": 1 },
+        "negative_constraint": { "type": "string", "minLength": 1 },
+        "applicable_scene_types": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "allowed_in_prompt_text": { "type": "boolean" },
+        "must_not_expose": { "$ref": "#/$defs/denied_surface_array" },
+        "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+        "review_status": { "type": "string", "enum": ["candidate", "needs_review", "reviewed", "rejected"] },
+        "runtime_projection": { "$ref": "#/$defs/runtime_projection" },
+        "notes": { "type": "string" }
+      }
+    },
+    "runtime_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewed_wiki_id",
+        "mapping_id",
+        "runtime_rule_group",
+        "runtime_rule_pack_id",
+        "runtime_targets",
+        "target_field_paths",
+        "pwa_snapshot_paths",
+        "pwa_storyboard_fields",
+        "consumed_by_actions",
+        "fallback_behavior"
+      ],
+      "properties": {
+        "reviewed_wiki_id": { "type": "string", "minLength": 1 },
+        "mapping_id": { "type": "string", "minLength": 1 },
+        "runtime_rule_group": { "type": "string", "enum": ["writing_group", "director_group", "validation_group", "future_qa"] },
+        "runtime_rule_pack_id": { "type": "string", "minLength": 1 },
+        "runtime_targets": { "$ref": "#/$defs/runtime_targets" },
+        "target_field_paths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "pwa_snapshot_paths": { "$ref": "#/$defs/pwa_snapshot_paths" },
+        "pwa_storyboard_fields": { "$ref": "#/$defs/pwa_storyboard_fields" },
+        "consumed_by_actions": { "$ref": "#/$defs/kb_actions" },
+        "fallback_behavior": { "type": "string", "enum": ["supporting_rule", "explicit_fallback", "future_qa_only", "blocked"] }
+      }
+    },
+    "runtime_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary_only", "pwa_receives", "pwa_must_not_receive", "copy_policy"],
+      "properties": {
+        "summary_only": { "type": "boolean", "const": true },
+        "pwa_receives": { "$ref": "#/$defs/pwa_snapshot_paths" },
+        "pwa_must_not_receive": { "$ref": "#/$defs/denied_surface_array" },
+        "copy_policy": { "type": "string", "enum": ["rewrite_only_no_verbatim_reference_output"] }
+      }
+    },
+    "runtime_targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "writing_rule_packs",
+          "director_rule_packs",
+          "validation_rule_packs",
+          "scene_mappings",
+          "duration_profiles",
+          "selected_kb_rules",
+          "kb_context_summary",
+          "negative_constraints",
+          "action_results",
+          "future_qa_backlog"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "pwa_snapshot_paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "pwa_snapshot.writingRulePacks[].directives",
+          "pwa_snapshot.writingRulePacks[].negativeConstraints",
+          "pwa_snapshot.directorRulePacks[].directives",
+          "pwa_snapshot.directorRulePacks[].negativeConstraints",
+          "pwa_snapshot.validationRulePacks[].directives",
+          "pwa_snapshot.validationRulePacks[].negativeConstraints",
+          "pwa_snapshot.sceneMappings.*.writingRulePackIds",
+          "pwa_snapshot.sceneMappings.*.directorRulePackIds",
+          "pwa_snapshot.sceneMappings.*.validationRulePackIds",
+          "pwa_snapshot.sceneMappings.*.sceneProfile",
+          "pwa_snapshot.sceneMappings.*.negativeConstraints",
+          "pwa_snapshot.sceneMappings.*.influenceAxes",
+          "pwa_snapshot.durationProfiles[].pacingDirective"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "pwa_storyboard_fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["camera", "shot_size", "visual_description", "character_action", "dialogue_or_narration", "prompt_text", "note"]
+      },
+      "uniqueItems": true
+    },
+    "kb_actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["create_story_task", "generate_storyboard", "repair_storyboard", "validate_result", "export_result"]
+      },
+      "uniqueItems": true
+    },
+    "denied_surface_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["local_path", "file_name", "ocr_text", "screenshot_text", "tutorial_source", "source_caption", "watermark", "rule_id", "evidence_row_id", "duplicate_group_id", "raw_kb"]
+      },
+      "uniqueItems": true
+    }
+  }
+}

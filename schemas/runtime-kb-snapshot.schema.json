@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hope-kb.local/schemas/runtime-kb-snapshot.schema.json",
+  "title": "Hope Runtime KB Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "snapshot_version",
+    "snapshot_hash",
+    "schema_version",
+    "generated_at_bucket",
+    "source_delta_batch_hash",
+    "source_freshness_digest",
+    "activation_status",
+    "freshness_status",
+    "scene_types",
+    "allowed_durations",
+    "writing_rule_packs",
+    "director_rule_packs",
+    "validation_rule_packs",
+    "scene_mappings",
+    "duration_profiles",
+    "action_results",
+    "runtime_safety",
+    "coverage_matrix"
+  ],
+  "properties": {
+    "snapshot_version": { "type": "string", "minLength": 1 },
+    "snapshot_hash": { "type": "string", "pattern": "^sha256:[A-Za-z0-9._-]+$" },
+    "schema_version": { "type": "string", "const": "runtime-kb-snapshot/v0.2" },
+    "generated_at_bucket": { "type": "string", "minLength": 1 },
+    "source_delta_batch_hash": { "type": "string", "pattern": "^bundle-sha256:[A-Za-z0-9._-]+$" },
+    "source_freshness_digest": { "type": "string", "pattern": "^sha256:[A-Za-z0-9._-]+$" },
+    "activation_status": {
+      "type": "string",
+      "enum": ["candidate", "validating", "verified", "activated", "failed", "rolled_back", "superseded"]
+    },
+    "freshness_status": {
+      "type": "string",
+      "enum": ["fresh", "stale_source", "stale_index", "stale_eval", "stale_snapshot", "activation_failed", "unknown", "blocked"]
+    },
+    "scene_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scene_type" }
+    },
+    "allowed_durations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "integer", "minimum": 1 },
+      "uniqueItems": true
+    },
+    "writing_rule_packs": { "$ref": "#/$defs/rule_pack_array" },
+    "director_rule_packs": { "$ref": "#/$defs/rule_pack_array" },
+    "validation_rule_packs": { "$ref": "#/$defs/rule_pack_array" },
+    "scene_mappings": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/scene_mapping" }
+    },
+    "duration_profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/duration_profile" }
+    },
+    "action_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/action_result" }
+    },
+    "runtime_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_kb_rows_included",
+        "raw_sample_text_absent",
+        "source_register_absent",
+        "overlay_json_absent",
+        "prompt_body_absent",
+        "raw_graph_absent",
+        "local_paths_absent",
+        "secrets_absent",
+        "runtime_graph_lookup_used",
+        "runtime_auto_ingest_used",
+        "runtime_llm_summarize_used"
+      ],
+      "properties": {
+        "raw_kb_rows_included": { "type": "integer", "const": 0 },
+        "raw_sample_text_absent": { "type": "boolean", "const": true },
+        "source_register_absent": { "type": "boolean", "const": true },
+        "overlay_json_absent": { "type": "boolean", "const": true },
+        "prompt_body_absent": { "type": "boolean", "const": true },
+        "raw_graph_absent": { "type": "boolean", "const": true },
+        "local_paths_absent": { "type": "boolean", "const": true },
+        "secrets_absent": { "type": "boolean", "const": true },
+        "runtime_graph_lookup_used": { "type": "boolean", "const": false },
+        "runtime_auto_ingest_used": { "type": "boolean", "const": false },
+        "runtime_llm_summarize_used": { "type": "boolean", "const": false }
+      }
+    },
+    "coverage_matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_type_rule_group_coverage",
+        "kb_action_coverage",
+        "duration_profile_coverage",
+        "unmapped_runtime_eligible_wiki_count",
+        "leakage_count"
+      ],
+      "properties": {
+        "scene_type_rule_group_coverage": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/scene_type_coverage" }
+        },
+        "kb_action_coverage": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/action_coverage" }
+        },
+        "duration_profile_coverage": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/duration_coverage" }
+        },
+        "unmapped_runtime_eligible_wiki_count": { "type": "integer", "const": 0 },
+        "leakage_count": { "type": "integer", "const": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "scene_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "family"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "family": { "type": "string", "enum": ["conflict", "performance", "spectacle", "epic", "other"] }
+      }
+    },
+    "rule_pack_array": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/rule_pack" }
+    },
+    "rule_pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "intent", "influence_axes", "directives", "negative_constraints", "source_reviewed_wiki_ids"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "intent": { "type": "string", "minLength": 1 },
+        "influence_axes": { "type": "array", "items": { "type": "string" } },
+        "directives": { "type": "array", "items": { "type": "string" } },
+        "negative_constraints": { "type": "array", "items": { "type": "string" } },
+        "source_reviewed_wiki_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "scene_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "writing_rule_pack_ids",
+        "director_rule_pack_ids",
+        "validation_rule_pack_ids",
+        "scene_profile",
+        "negative_constraints",
+        "influence_axes",
+        "selected_sample_ids",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "properties": {
+        "writing_rule_pack_ids": { "type": "array", "items": { "type": "string" } },
+        "director_rule_pack_ids": { "type": "array", "items": { "type": "string" } },
+        "validation_rule_pack_ids": { "type": "array", "items": { "type": "string" } },
+        "scene_profile": { "type": "string" },
+        "negative_constraints": { "type": "array", "items": { "type": "string" } },
+        "influence_axes": { "type": "array", "items": { "type": "string" } },
+        "selected_sample_ids": { "type": "array", "items": { "type": "string" } },
+        "selected_kb_rules": { "type": "array", "items": { "type": "string" } },
+        "kb_context_summary": { "type": "string" }
+      }
+    },
+    "duration_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["duration", "target_shot_count", "beat_density", "pacing_directive", "source_reviewed_wiki_ids"],
+      "properties": {
+        "duration": { "type": "integer", "minimum": 1 },
+        "target_shot_count": { "type": "integer", "minimum": 1 },
+        "beat_density": { "type": "string" },
+        "pacing_directive": { "type": "string" },
+        "source_reviewed_wiki_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "action_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "primary_group",
+        "secondary_groups",
+        "state",
+        "summary",
+        "blocked_reason",
+        "influence_axes",
+        "kb_oracle_affects_structure"
+      ],
+      "properties": {
+        "action": { "type": "string" },
+        "primary_group": { "type": "string", "enum": ["writing_group", "director_group", "validation_group"] },
+        "secondary_groups": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["writing_group", "director_group", "validation_group"] }
+        },
+        "state": { "type": "string", "enum": ["ready", "passed", "blocked", "not_run"] },
+        "summary": { "type": "string" },
+        "blocked_reason": { "type": "string" },
+        "influence_axes": { "type": "array", "items": { "type": "string" } },
+        "kb_oracle_affects_structure": { "type": "boolean" }
+      }
+    },
+    "scene_type_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scene_type_id", "writing", "director", "validation"],
+      "properties": {
+        "scene_type_id": { "type": "string" },
+        "writing": { "type": "boolean" },
+        "director": { "type": "boolean" },
+        "validation": { "type": "boolean" }
+      }
+    },
+    "action_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kb_action", "covered", "rule_pack_ids"],
+      "properties": {
+        "kb_action": { "type": "string" },
+        "covered": { "type": "boolean" },
+        "rule_pack_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "duration_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["duration", "covered", "rule_pack_ids"],
+      "properties": {
+        "duration": { "type": "integer" },
+        "covered": { "type": "boolean" },
+        "rule_pack_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

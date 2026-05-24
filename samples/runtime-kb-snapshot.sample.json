@@ -1,0 +1,2445 @@
+{
+  "snapshot_version": "hope-kb-runtime-v0.2-batch1-visual-prompt-rules",
+  "snapshot_hash": "sha256:sample-runtime-kb-snapshot-v0.2-batch1-visual-prompt-rules",
+  "schema_version": "runtime-kb-snapshot/v0.2",
+  "generated_at_bucket": "2026-05-23",
+  "source_delta_batch_hash": "bundle-sha256:manual-video-prompt-intake-batch2",
+  "source_freshness_digest": "sha256:summary-manual-video-prompt-intake-batch2",
+  "activation_status": "candidate",
+  "freshness_status": "fresh",
+  "scene_types": [
+    {
+      "id": "hot_blood_battle",
+      "label": "hot blood battle",
+      "family": "conflict"
+    },
+    {
+      "id": "ensemble_performance",
+      "label": "ensemble performance",
+      "family": "performance"
+    },
+    {
+      "id": "emotional_dialogue",
+      "label": "emotional dialogue",
+      "family": "performance"
+    },
+    {
+      "id": "encounter_performance",
+      "label": "encounter performance",
+      "family": "performance"
+    },
+    {
+      "id": "field_chase",
+      "label": "field chase",
+      "family": "conflict"
+    },
+    {
+      "id": "spectacle_showcase",
+      "label": "spectacle showcase",
+      "family": "spectacle"
+    },
+    {
+      "id": "daily_healing",
+      "label": "daily healing",
+      "family": "performance"
+    },
+    {
+      "id": "guoman_hot_blood_combat",
+      "label": "guoman hot blood combat",
+      "family": "conflict"
+    },
+    {
+      "id": "guoman_ensemble_performance",
+      "label": "guoman ensemble performance",
+      "family": "performance"
+    },
+    {
+      "id": "ink_wuxia_combat",
+      "label": "ink wuxia combat",
+      "family": "conflict"
+    },
+    {
+      "id": "eastern_spectacle",
+      "label": "eastern spectacle",
+      "family": "spectacle"
+    },
+    {
+      "id": "xianxia_action",
+      "label": "xianxia action",
+      "family": "conflict"
+    },
+    {
+      "id": "urban_fantasy",
+      "label": "urban fantasy",
+      "family": "spectacle"
+    },
+    {
+      "id": "chinese_war_formation",
+      "label": "chinese war formation",
+      "family": "epic"
+    },
+    {
+      "id": "weapon_highlight",
+      "label": "weapon highlight",
+      "family": "conflict"
+    },
+    {
+      "id": "council_strategy",
+      "label": "council strategy",
+      "family": "epic"
+    },
+    {
+      "id": "siege_defense",
+      "label": "siege defense",
+      "family": "epic"
+    },
+    {
+      "id": "slg_sandbox_view",
+      "label": "slg sandbox view",
+      "family": "epic"
+    },
+    {
+      "id": "slg_march_encirclement",
+      "label": "slg march encirclement",
+      "family": "epic"
+    },
+    {
+      "id": "slg_city_growth",
+      "label": "slg city growth",
+      "family": "epic"
+    },
+    {
+      "id": "slg_battle_report",
+      "label": "slg battle report",
+      "family": "epic"
+    }
+  ],
+  "allowed_durations": [
+    5,
+    10,
+    15,
+    30,
+    45,
+    60
+  ],
+  "writing_rule_packs": [
+    {
+      "id": "wg-continuity-core",
+      "name": "Writing continuity core",
+      "intent": "Preserve accepted user facts, motivation, causality, timeline, and prop state before scene expression or prompt packaging.",
+      "influence_axes": [
+        "source_facts",
+        "character_continuity",
+        "event_order"
+      ],
+      "directives": [
+        "Keep accepted user facts above KB suggestions.",
+        "Require cause and consequence for escalation.",
+        "Carry unresolved setup and payoff obligations into later stages."
+      ],
+      "negative_constraints": [
+        "Do not rewrite accepted facts for stronger style.",
+        "Do not expose raw source or raw KB rows."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-writing-continuity-core"
+      ]
+    },
+    {
+      "id": "wg-scene-expression-visible-action",
+      "name": "Visible action scene expression",
+      "intent": "Convert accepted story material into scene objective, obstacle, visible action, reaction, and turning point.",
+      "influence_axes": [
+        "scene_expression",
+        "event_order",
+        "visual_grounding"
+      ],
+      "directives": [
+        "Expose objective, obstacle, action, reaction, and turning point.",
+        "Convert exposition into visible behavior only when original intent is preserved.",
+        "Block decorative scenes that have no causal purpose."
+      ],
+      "negative_constraints": [
+        "Do not replace visible action with abstract mood.",
+        "Do not let style overwrite story facts."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action"
+      ]
+    }
+  ],
+  "director_rule_packs": [
+    {
+      "id": "dg-director-scheduling-core",
+      "name": "Director scheduling core",
+      "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff.",
+      "influence_axes": [
+        "structure",
+        "visual_grounding",
+        "continuity"
+      ],
+      "directives": [
+        "Blocking must clarify objective, conflict, relation, or reveal.",
+        "Rhythm may adjust emphasis but must not delete cause and effect.",
+        "Viewer attention should serve visible story function."
+      ],
+      "negative_constraints": [
+        "Do not let director hints overwrite accepted story facts.",
+        "Do not expose internal evidence in storyboard rows."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-director-scheduling-core"
+      ]
+    },
+    {
+      "id": "dg-shot-intent-taxonomy",
+      "name": "Shot intent taxonomy",
+      "intent": "Select shot intent from scene purpose and director scheduling.",
+      "influence_axes": [
+        "shot_intent",
+        "structure",
+        "visual_grounding"
+      ],
+      "directives": [
+        "Use establish, reveal, pursue, clash, reaction, transition, payoff, spectacle, or detail_insert as first-pass shot intents.",
+        "Every shot intent must correspond to visible row behavior.",
+        "Shot intent must not require runtime graph traversal."
+      ],
+      "negative_constraints": [
+        "Do not use intent labels alone as prompt text.",
+        "Do not create rows with no visible function."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-shot-intent-taxonomy"
+      ]
+    },
+    {
+      "id": "dg-duration-density",
+      "name": "Duration density",
+      "intent": "Bind target duration to shot count, beat density, row duration, and validation checks.",
+      "influence_axes": [
+        "duration_density",
+        "structure",
+        "validation_gate"
+      ],
+      "directives": [
+        "Match the target duration exactly.",
+        "Use duration-specific shot count guidance.",
+        "Reject zero-duration rows and repeated full-budget rows."
+      ],
+      "negative_constraints": [
+        "Do not accept duration sum mismatch.",
+        "Do not treat zero-duration rows as success."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "id": "dg-prompt-text-boundary",
+      "name": "Prompt text boundary",
+      "intent": "Compile clean generation-facing prompt text from accepted facts and confirmed storyboard rows.",
+      "influence_axes": [
+        "prompt_boundary",
+        "visual_grounding",
+        "export_safety"
+      ],
+      "directives": [
+        "Prompt text must include subject, action, frame, camera, duration, and negative constraints.",
+        "Prompt text must align with visual_description.",
+        "Prompt text must be compiled after the confirmed row."
+      ],
+      "negative_constraints": [
+        "Do not expose trace refs, schema IDs, source registers, or internal hashes.",
+        "Do not emit empty prompt text."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-prompt-text-boundary"
+      ]
+    },
+    {
+      "id": "dg-visual-master-consistency",
+      "name": "Visual master consistency",
+      "intent": "Carry a compact visual master into storyboard rows while preserving accepted facts.",
+      "influence_axes": [
+        "visual_master",
+        "character_continuity",
+        "visual_grounding"
+      ],
+      "directives": [
+        "Carry subject identity, world, palette, lighting logic, material feel, era, and key props into every storyboard row.",
+        "Vary framing and action without resetting the visual world.",
+        "Treat visual master as continuity guidance, not as a source of new facts."
+      ],
+      "negative_constraints": [
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-visual-master-consistency"
+      ]
+    },
+    {
+      "id": "dg-camera-language-grammar",
+      "name": "Camera language grammar",
+      "intent": "Bind shot function, scale, angle, movement, composition, and adjacent-shot relation to PWA storyboard fields.",
+      "influence_axes": [
+        "camera_language",
+        "shot_intent",
+        "structure"
+      ],
+      "directives": [
+        "Each row should include shot function, shot scale, camera angle, camera movement, and composition logic when useful.",
+        "Prefer precise camera language over broad cinematic quality words.",
+        "Avoid repeating the same framing and movement across all rows."
+      ],
+      "negative_constraints": [
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-camera-language-grammar"
+      ]
+    },
+    {
+      "id": "dg-material-light-air-physicality",
+      "name": "Material light air physicality",
+      "intent": "Add visible material feedback, light direction, air medium, and environmental response to make prompt text filmable.",
+      "influence_axes": [
+        "physicality",
+        "lighting",
+        "air_medium",
+        "visual_grounding",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Add material weight, resistance, wetness, roughness, wear, reflection, or texture only when tied to current action.",
+        "Describe light direction, hardness, contrast, rim light, side backlight, shafts, reflection, and shadow relation when visible.",
+        "Use rain, fog, dust, smoke, steam, sparks, mist, or water reflection only when supported by scene logic."
+      ],
+      "negative_constraints": [
+        "Do not add unsupported props, weather, or world facts.",
+        "Do not use texture words without physical relation to action or environment.",
+        "Do not flatten lighting into generic bright or dark labels."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-material-light-air-physicality"
+      ]
+    },
+    {
+      "id": "dg-expression-physicalization",
+      "name": "Expression physicalization",
+      "intent": "Translate abstract emotion into visible facial and body performance cues suitable for shot scale and camera distance.",
+      "influence_axes": [
+        "performance",
+        "character_action",
+        "visual_grounding",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Convert emotional labels into visible cues such as jaw tension, cheek muscle, locked gaze, eye widening or narrowing, nasal flare, lip pressure, trembling breath, shoulder contraction, guarded posture, or hand hesitation.",
+        "Use close-up facial detail only when shot scale supports it.",
+        "Use posture, blocking, silhouette, and motion for wide shots."
+      ],
+      "negative_constraints": [
+        "Do not prompt only vague emotions such as angry, sad, or moved.",
+        "Do not over-specify facial muscles in wide shots.",
+        "Do not introduce character facts absent from accepted body."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-expression-physicalization"
+      ]
+    },
+    {
+      "id": "dg-transition-motion-dynamics",
+      "name": "Transition and motion dynamics",
+      "intent": "Use transition and motion dynamics as controlled guidance for rhythm, continuity, and shot-to-shot readability.",
+      "influence_axes": [
+        "transition",
+        "motion_dynamics",
+        "structure",
+        "prompt_boundary",
+        "duration_density"
+      ],
+      "directives": [
+        "Select fade, dissolve, flash white or black, wipe, push, pull, match cut, or montage according to scene function and emotional rhythm.",
+        "Select horizontal, vertical, diagonal, curved, radial, spiral, or S-curve motion according to action pressure and emotional direction.",
+        "Keep transition and motion instructions local to the selected storyboard task fragment and confirmed row sequence."
+      ],
+      "negative_constraints": [
+        "Do not overuse flashy transitions when a direct cut or quiet hold fits.",
+        "Do not change story facts for a stronger transition.",
+        "Do not apply motion dynamics that contradict visible action direction."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-transition-motion-dynamics"
+      ]
+    },
+    {
+      "id": "dg-preproduction-storyboard-guide",
+      "name": "Preproduction storyboard guide",
+      "intent": "Organize character/style reference, environment route, camera map, storyboard rows, lighting, audio, and cinematography notes into executable prompt_text guidance.",
+      "influence_axes": [
+        "preproduction_plan",
+        "visual_master",
+        "camera_language",
+        "audio_tone",
+        "post_style",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Storyboard rows should inherit character/style reference, environment route, camera position, lighting mood, audio tone, and cinematography notes as compact production guidance.",
+        "Each row should carry camera type, shot size, movement mode, action, emotion, sound cue, and duration when supported by the current fragment.",
+        "Prompt text must remain a user-facing generation prompt, not a visual planning board or internal knowledge dump."
+      ],
+      "negative_constraints": [
+        "Do not output layout instructions or a full visual planning board.",
+        "Do not expose source images, raw prompt text, local paths, or internal wiki IDs.",
+        "Do not expand beyond the selected storyboard task fragment and duration."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-preproduction-storyboard-guide"
+      ]
+    }
+  ],
+  "validation_rule_packs": [
+    {
+      "id": "vg-prompt-text-boundary",
+      "name": "Prompt text validation",
+      "intent": "Validate that prompt_text is present, aligned, and summary-only.",
+      "influence_axes": [
+        "prompt_boundary",
+        "validation_gate"
+      ],
+      "directives": [
+        "prompt_text must be non-empty.",
+        "prompt_text must align with visual_description.",
+        "prompt_text must not include internal refs."
+      ],
+      "negative_constraints": [
+        "No raw KB",
+        "No source register",
+        "No internal hashes"
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-prompt-text-boundary"
+      ]
+    },
+    {
+      "id": "vg-no-pseudo-success",
+      "name": "No pseudo success",
+      "intent": "Prevent empty rows, missing prompt text, blocked state, stale tasks, or stale artifacts from being treated as success.",
+      "influence_axes": [
+        "validation_gate",
+        "export_safety"
+      ],
+      "directives": [
+        "Rows must be non-empty.",
+        "visual_description and prompt_text must be non-empty.",
+        "Blocked export cannot be marked ready."
+      ],
+      "negative_constraints": [
+        "No rows=0 success",
+        "No blocked export as ready"
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-validation-no-pseudo-success"
+      ]
+    },
+    {
+      "id": "vg-no-leakage",
+      "name": "No leakage",
+      "intent": "Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking.",
+      "influence_axes": [
+        "validation_gate",
+        "export_safety",
+        "source_lineage"
+      ],
+      "directives": [
+        "raw_kb_rows_included must be 0.",
+        "source_register, overlay_json, prompt_body, raw_graph, local paths, provider config, keys, tokens, and secrets must be absent.",
+        "User exports must not include internal hashes or refs."
+      ],
+      "negative_constraints": [
+        "No raw KB",
+        "No prompt body",
+        "No local paths",
+        "No secrets"
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-validation-no-leakage"
+      ]
+    },
+    {
+      "id": "vg-duration-integrity",
+      "name": "Duration integrity",
+      "intent": "Validate duration sum, row duration, and duration-density boundaries.",
+      "influence_axes": [
+        "duration_density",
+        "validation_gate"
+      ],
+      "directives": [
+        "Row durations must sum to the target duration.",
+        "No row may have zero duration.",
+        "Repeated full-budget rows are invalid."
+      ],
+      "negative_constraints": [
+        "No duration mismatch",
+        "No zero-duration row"
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    }
+  ],
+  "scene_mappings": {
+    "hot_blood_battle": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace action with abstract intensity.",
+        "Do not expose raw KB material.",
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "source_facts",
+        "event_order",
+        "visual_grounding",
+        "prompt_boundary",
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-hot-blood-battle-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "ensemble_performance": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-ensemble_performance-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "emotional_dialogue": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-emotional_dialogue-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "encounter_performance": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-encounter_performance-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "field_chase": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-field_chase-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "spectacle_showcase": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-spectacle_showcase-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "daily_healing": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-daily_healing-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "guoman_hot_blood_combat": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-guoman_hot_blood_combat-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "guoman_ensemble_performance": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-guoman_ensemble_performance-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "ink_wuxia_combat": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-ink_wuxia_combat-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "eastern_spectacle": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-eastern_spectacle-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "xianxia_action": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-xianxia_action-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "urban_fantasy": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
+      "negative_constraints": [
+        "Do not add unsupported worldbuilding facts.",
+        "Do not expose graph or source internals.",
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "source_facts",
+        "visual_grounding",
+        "export_safety",
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-urban-fantasy-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "chinese_war_formation": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-chinese_war_formation-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "weapon_highlight": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-weapon_highlight-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "council_strategy": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-council_strategy-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "siege_defense": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-siege_defense-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "slg_sandbox_view": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-slg_sandbox_view-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "slg_march_encirclement": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-slg_march_encirclement-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "slg_city_growth": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-slg_city_growth-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    },
+    "slg_battle_report": {
+      "writing_rule_pack_ids": [
+        "wg-continuity-core",
+        "wg-scene-expression-visible-action"
+      ],
+      "director_rule_pack_ids": [
+        "dg-director-scheduling-core",
+        "dg-shot-intent-taxonomy",
+        "dg-duration-density",
+        "dg-prompt-text-boundary",
+        "dg-visual-master-consistency",
+        "dg-camera-language-grammar",
+        "dg-material-light-air-physicality",
+        "dg-expression-physicalization",
+        "dg-transition-motion-dynamics",
+        "dg-preproduction-storyboard-guide"
+      ],
+      "validation_rule_pack_ids": [
+        "vg-prompt-text-boundary",
+        "vg-no-pseudo-success",
+        "vg-no-leakage",
+        "vg-duration-integrity"
+      ],
+      "scene_profile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
+      "negative_constraints": [
+        "Do not replace accepted facts with visual master suggestions.",
+        "Do not add unsupported material, light, weather, or transition facts.",
+        "Do not expose raw source, source image, OCR text, prompt body, local path, or internal refs.",
+        "Do not reset visual identity between rows.",
+        "Do not output visual planning-board layout instructions at runtime.",
+        "Do not use unsupported material, light, weather, audio, or post-production details.",
+        "Do not use the full accepted body when the selected storyboard task is local."
+      ],
+      "influence_axes": [
+        "visual_master",
+        "camera_language",
+        "physicality",
+        "performance",
+        "motion_dynamics",
+        "prompt_boundary",
+        "preproduction_plan",
+        "lighting",
+        "air_medium",
+        "transition",
+        "audio_tone",
+        "post_style"
+      ],
+      "selected_sample_ids": [
+        "sample-slg_battle_report-summary-A"
+      ],
+      "selected_kb_rules": [
+        "rule:writing-continuity-core",
+        "rule:scene-expression-visible-action",
+        "rule:director-scheduling-core",
+        "rule:shot-intent-taxonomy",
+        "rule:duration-density",
+        "rule:prompt-text-boundary",
+        "rule:visual-master-consistency",
+        "rule:camera-language-grammar",
+        "rule:material-light-air-physicality",
+        "rule:expression-physicalization",
+        "rule:transition-motion-dynamics",
+        "rule:no-pseudo-success",
+        "rule:no-leakage",
+        "rule:preproduction-storyboard-guide"
+      ],
+      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+    }
+  },
+  "duration_profiles": [
+    {
+      "duration": 5,
+      "target_shot_count": 3,
+      "beat_density": "high",
+      "pacing_directive": "Use three compact shots with setup, action, and payoff.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "duration": 10,
+      "target_shot_count": 4,
+      "beat_density": "high",
+      "pacing_directive": "Use four compact shots to establish relation, action, reaction, and turn.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "duration": 15,
+      "target_shot_count": 5,
+      "beat_density": "medium",
+      "pacing_directive": "Use five shots to preserve scene purpose, action turn, and visual grounding.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "duration": 30,
+      "target_shot_count": 7,
+      "beat_density": "medium",
+      "pacing_directive": "Use seven shots with one breathing beat while keeping the main conflict visible.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "duration": 45,
+      "target_shot_count": 9,
+      "beat_density": "layered",
+      "pacing_directive": "Use nine shots for layered action, reaction, space, and payoff.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    },
+    {
+      "duration": 60,
+      "target_shot_count": 12,
+      "beat_density": "layered",
+      "pacing_directive": "Use twelve shots for multi-layer progression without losing focus.",
+      "source_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ]
+    }
+  ],
+  "action_results": [
+    {
+      "action": "import_source",
+      "primary_group": "validation_group",
+      "secondary_groups": [
+        "writing_group"
+      ],
+      "state": "ready",
+      "summary": "Imported material may only produce summary-only source readiness, not raw source disclosure.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "source_lineage",
+        "validation_gate"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "expand_story",
+      "primary_group": "writing_group",
+      "secondary_groups": [
+        "validation_group"
+      ],
+      "state": "ready",
+      "summary": "Writing continuity and visible action rules guide expansion while preserving accepted facts.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "source_facts",
+        "character_continuity",
+        "scene_expression"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "rewrite_story",
+      "primary_group": "writing_group",
+      "secondary_groups": [
+        "validation_group"
+      ],
+      "state": "ready",
+      "summary": "Rewrite keeps facts, motivation, and causality stable while improving expression.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "source_facts",
+        "event_order",
+        "scene_expression"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "accept_story_body",
+      "primary_group": "validation_group",
+      "secondary_groups": [
+        "writing_group"
+      ],
+      "state": "ready",
+      "summary": "Accepted body locks the fact boundary before storyboard planning.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "source_lineage",
+        "validation_gate"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "create_story_task",
+      "primary_group": "director_group",
+      "secondary_groups": [
+        "writing_group"
+      ],
+      "state": "ready",
+      "summary": "Director scheduling, visual master consistency, camera grammar, and motion dynamics convert accepted body into storyboard task structure.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "structure",
+        "duration_density",
+        "visual_grounding"
+      ],
+      "kb_oracle_affects_structure": true
+    },
+    {
+      "action": "generate_storyboard",
+      "primary_group": "director_group",
+      "secondary_groups": [
+        "validation_group"
+      ],
+      "state": "ready",
+      "summary": "Storyboard rows use visible action, shot intent, duration density, visual master continuity, camera grammar, physicality, expression physicalization, motion dynamics, and prompt boundary rules.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "structure",
+        "visual_grounding",
+        "prompt_boundary"
+      ],
+      "kb_oracle_affects_structure": true
+    },
+    {
+      "action": "repair_storyboard",
+      "primary_group": "director_group",
+      "secondary_groups": [
+        "validation_group",
+        "writing_group"
+      ],
+      "state": "ready",
+      "summary": "Repair targets validation failures while preserving accepted facts, visual continuity, shot-scale performance cues, and prompt boundary safety.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "validation_gate",
+        "structure",
+        "prompt_boundary"
+      ],
+      "kb_oracle_affects_structure": true
+    },
+    {
+      "action": "validate_result",
+      "primary_group": "validation_group",
+      "secondary_groups": [],
+      "state": "ready",
+      "summary": "Validation blocks pseudo-success, duration mismatch, prompt boundary failures, and leakage.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "validation_gate",
+        "export_safety"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "export_result",
+      "primary_group": "validation_group",
+      "secondary_groups": [],
+      "state": "ready",
+      "summary": "Export is allowed only from validated, summary-only, confirmed rows.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "export_safety",
+        "validation_gate"
+      ],
+      "kb_oracle_affects_structure": false
+    },
+    {
+      "action": "golden_sample_review",
+      "primary_group": "validation_group",
+      "secondary_groups": [
+        "writing_group",
+        "director_group"
+      ],
+      "state": "ready",
+      "summary": "Golden sample review may inform governance but must not expose raw sample text at runtime.",
+      "blocked_reason": "",
+      "influence_axes": [
+        "validation_gate",
+        "source_facts",
+        "prompt_boundary"
+      ],
+      "kb_oracle_affects_structure": false
+    }
+  ],
+  "runtime_safety": {
+    "raw_kb_rows_included": 0,
+    "raw_sample_text_absent": true,
+    "source_register_absent": true,
+    "overlay_json_absent": true,
+    "prompt_body_absent": true,
+    "raw_graph_absent": true,
+    "local_paths_absent": true,
+    "secrets_absent": true,
+    "runtime_graph_lookup_used": false,
+    "runtime_auto_ingest_used": false,
+    "runtime_llm_summarize_used": false
+  },
+  "coverage_matrix": {
+    "scene_type_rule_group_coverage": [
+      {
+        "scene_type_id": "hot_blood_battle",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "ensemble_performance",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "emotional_dialogue",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "encounter_performance",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "field_chase",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "spectacle_showcase",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "daily_healing",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "guoman_hot_blood_combat",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "guoman_ensemble_performance",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "ink_wuxia_combat",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "eastern_spectacle",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "xianxia_action",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "urban_fantasy",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "chinese_war_formation",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "weapon_highlight",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "council_strategy",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "siege_defense",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "slg_sandbox_view",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "slg_march_encirclement",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "slg_city_growth",
+        "writing": true,
+        "director": true,
+        "validation": true
+      },
+      {
+        "scene_type_id": "slg_battle_report",
+        "writing": true,
+        "director": true,
+        "validation": true
+      }
+    ],
+    "kb_action_coverage": [
+      {
+        "kb_action": "import_source",
+        "covered": true,
+        "rule_pack_ids": [
+          "vg-no-leakage"
+        ]
+      },
+      {
+        "kb_action": "expand_story",
+        "covered": true,
+        "rule_pack_ids": [
+          "wg-continuity-core",
+          "wg-scene-expression-visible-action"
+        ]
+      },
+      {
+        "kb_action": "rewrite_story",
+        "covered": true,
+        "rule_pack_ids": [
+          "wg-continuity-core",
+          "wg-scene-expression-visible-action"
+        ]
+      },
+      {
+        "kb_action": "accept_story_body",
+        "covered": true,
+        "rule_pack_ids": [
+          "wg-continuity-core",
+          "vg-no-pseudo-success"
+        ]
+      },
+      {
+        "kb_action": "create_story_task",
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-director-scheduling-core",
+          "dg-shot-intent-taxonomy",
+          "dg-duration-density",
+          "dg-visual-master-consistency",
+          "dg-camera-language-grammar",
+          "dg-transition-motion-dynamics",
+          "dg-preproduction-storyboard-guide"
+        ]
+      },
+      {
+        "kb_action": "generate_storyboard",
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-shot-intent-taxonomy",
+          "dg-prompt-text-boundary",
+          "vg-prompt-text-boundary",
+          "dg-visual-master-consistency",
+          "dg-camera-language-grammar",
+          "dg-material-light-air-physicality",
+          "dg-expression-physicalization",
+          "dg-transition-motion-dynamics",
+          "dg-preproduction-storyboard-guide"
+        ]
+      },
+      {
+        "kb_action": "repair_storyboard",
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-shot-intent-taxonomy",
+          "vg-no-pseudo-success",
+          "vg-prompt-text-boundary",
+          "dg-camera-language-grammar",
+          "dg-material-light-air-physicality",
+          "dg-expression-physicalization",
+          "dg-transition-motion-dynamics",
+          "dg-preproduction-storyboard-guide"
+        ]
+      },
+      {
+        "kb_action": "validate_result",
+        "covered": true,
+        "rule_pack_ids": [
+          "vg-no-pseudo-success",
+          "vg-no-leakage",
+          "vg-duration-integrity",
+          "vg-prompt-text-boundary",
+          "dg-material-light-air-physicality",
+          "dg-expression-physicalization"
+        ]
+      },
+      {
+        "kb_action": "export_result",
+        "covered": true,
+        "rule_pack_ids": [
+          "vg-no-pseudo-success",
+          "vg-no-leakage",
+          "vg-prompt-text-boundary"
+        ]
+      },
+      {
+        "kb_action": "golden_sample_review",
+        "covered": true,
+        "rule_pack_ids": [
+          "vg-no-leakage"
+        ]
+      }
+    ],
+    "duration_profile_coverage": [
+      {
+        "duration": 5,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      },
+      {
+        "duration": 10,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      },
+      {
+        "duration": 15,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      },
+      {
+        "duration": 30,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      },
+      {
+        "duration": 45,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      },
+      {
+        "duration": 60,
+        "covered": true,
+        "rule_pack_ids": [
+          "dg-duration-density",
+          "vg-duration-integrity"
+        ]
+      }
+    ],
+    "unmapped_runtime_eligible_wiki_count": 0,
+    "leakage_count": 0
+  }
+}

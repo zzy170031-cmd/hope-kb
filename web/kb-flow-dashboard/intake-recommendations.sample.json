@@ -1,0 +1,332 @@
+{
+  "schema_version": "hope-kb-intake-recommendations.sample/v0.1",
+  "generated_for": "manual Seedance/anime PWA storyboard intake visualization",
+  "dashboard_only": true,
+  "no_runtime_effect": true,
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-seedance-storyboard-prompt-field-contract",
+      "chinese_title": "Seedance 分镜提示词字段合同",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "动作",
+        "运镜",
+        "景别",
+        "时长",
+        "节奏",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-seedance-tech-report"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-shot-intent-taxonomy"
+      ],
+      "status": "waiting_user_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-visual-description-visible-action",
+      "chinese_title": "动漫画面描述：可见动作",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "visual_description"
+      ],
+      "serves_prompt_sections": [
+        "画面",
+        "动作"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs"
+      ],
+      "source_candidate_refs": [
+        "src-nezha-production-chinanews"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-character-action-continuity",
+      "chinese_title": "动漫角色动作连续性",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "character_action"
+      ],
+      "serves_prompt_sections": [
+        "动作",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "repair_mapping"
+      ],
+      "source_candidate_refs": [
+        "src-nezha2-storyboard-interview-thepaper",
+        "src-seedance-tech-report"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-writing-continuity-core"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-camera-shot-language",
+      "chinese_title": "动漫镜头与景别语言",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-nezha2-storyboard-interview-thepaper"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-director-scheduling-core",
+        "rw-shot-intent-taxonomy"
+      ],
+      "status": "waiting_user_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-motion-readability",
+      "chinese_title": "动漫动作可读性",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera"
+      ],
+      "serves_prompt_sections": [
+        "画面",
+        "动作",
+        "运镜"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-tech-report",
+        "src-nezha-production-chinanews"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-pseudo-success"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-character-identity-lock",
+      "chinese_title": "动漫角色身份锁定",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-seedance-tech-report"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-leakage"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-style-and-frame-constraint",
+      "chinese_title": "动漫风格与画面约束",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "风格",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "negative_constraints",
+        "prompt_boundary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-wushan-director-interview-bilibili"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-anime-negative-constraint-pack",
+      "chinese_title": "Seedance 动漫负面约束包",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "export_safety"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-tech-report"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-leakage",
+        "rw-validation-no-pseudo-success"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-duration-rhythm-density",
+      "chinese_title": "Seedance 时长节奏密度",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "时长",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard"
+      ],
+      "runtime_targets": [
+        "duration_profiles",
+        "validation_rule_packs"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-tech-report"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-duration-density-rules"
+      ],
+      "status": "proposal_only",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance-prompt-repair-routing",
+      "chinese_title": "Seedance prompt 修复路由",
+      "target_model_context": "Seedance anime PWA storyboard prompt_text",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "character_action"
+      ],
+      "serves_prompt_sections": [
+        "动作",
+        "运镜",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "failure_pattern",
+        "repair_mapping",
+        "action_results"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-tech-report",
+        "src-nezha2-storyboard-interview-thepaper"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-pseudo-success"
+      ],
+      "status": "waiting_user_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ]
+}

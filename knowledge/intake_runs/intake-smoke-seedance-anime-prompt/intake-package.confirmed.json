@@ -1,0 +1,381 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-smoke-seedance-anime-prompt",
+  "status": "confirmed_package",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true
+  },
+  "demand": {
+    "title": "Seedance 国漫动作分镜 prompt 提升",
+    "search_focus": "seedance_anime_prompt",
+    "target_model": "Seedance",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text"
+    ],
+    "target_pwa_fields": [
+      "visual_description",
+      "character_action",
+      "camera",
+      "shot_size",
+      "prompt_text"
+    ],
+    "created_at": "2026-05-23T14:38:25.457Z"
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_web_search_or_registered_source_candidates",
+    "generated_queries": [
+      "Seedance anime prompt storyboard camera action",
+      "国漫 动作 分镜 运镜 景别 制作解析"
+    ],
+    "allowed_source_types": [
+      "official_doc",
+      "mainstream_interview",
+      "production_breakdown",
+      "community_tutorial"
+    ],
+    "required_answers": [
+      "improves which PWA field",
+      "improves which prompt_text section",
+      "maps to which PWA action",
+      "fills which KB gap",
+      "leakage risk"
+    ]
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-seedance-official-overview",
+      "title": "Seedance 官方模型介绍",
+      "source_url": "https://seed.bytedance.com/zh/seedance",
+      "source_type": "official_doc",
+      "source_type_label": "官方文档",
+      "language": "中文",
+      "confidence": "high",
+      "risk_flags": [],
+      "decision": "keep",
+      "decision_label": "保留",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "动作",
+        "运镜",
+        "风格"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "kb_gap": "补足 Seedance 多镜头叙事、动作稳定性、镜头控制对 prompt_text 的字段约束。",
+      "pwa_relevance": "用于把 PWA 分镜行中的画面描述、角色动作和运镜字段组织成可被 Seedance 理解的提示词段落。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body"
+    },
+    {
+      "source_id": "src-seedance-tech-report",
+      "title": "Seedance 1.0 技术报告",
+      "source_url": "https://seed.bytedance.com/public_papers/seedance-1-0-exploring-the-boundaries-of-video-generation-models",
+      "source_type": "official_doc",
+      "source_type_label": "官方技术报告",
+      "language": "英文",
+      "confidence": "high",
+      "risk_flags": [
+        "requires_summary_only"
+      ],
+      "decision": "keep",
+      "decision_label": "保留",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "动作",
+        "时长",
+        "节奏",
+        "一致性"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "kb_gap": "补足多镜头一致性、复杂动作指令遵循、时空连续性评估维度。",
+      "pwa_relevance": "用于校验 PWA 生成的分镜是否把动作、时长、镜头段落拆分到合适粒度。",
+      "leakage_check": "summary_only_no_internal_refs"
+    },
+    {
+      "source_id": "src-nezha2-storyboard-interview-thepaper",
+      "title": "《哪吒之魔童闹海》分镜制作采访",
+      "source_url": "https://m.thepaper.cn/newsDetail_forward_30164552",
+      "source_type": "mainstream_interview",
+      "source_type_label": "主流采访",
+      "language": "中文",
+      "confidence": "medium_high",
+      "risk_flags": [
+        "avoid_story_setting_copy",
+        "use_process_only"
+      ],
+      "decision": "keep",
+      "decision_label": "保留",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "动作",
+        "运镜",
+        "景别",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "kb_gap": "补足国漫动作戏分镜节奏、角色表演与镜头角度要求的过程性知识。",
+      "pwa_relevance": "用于改进 PWA 分镜行对动作戏镜头拆分和镜头角度选择的表达。",
+      "leakage_check": "summary_only_no_plot_or_ip_setting_copy"
+    },
+    {
+      "source_id": "src-nezha-production-chinanews",
+      "title": "《哪吒》制作流程与分镜头脚本报道",
+      "source_url": "https://www.chinanews.com.cn/m/yl/2019/08-14/8926119.shtml?f=qbapp",
+      "source_type": "production_breakdown",
+      "source_type_label": "制作解析",
+      "language": "中文",
+      "confidence": "medium_high",
+      "risk_flags": [
+        "process_article_not_prompt_guide"
+      ],
+      "decision": "keep",
+      "decision_label": "保留",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera"
+      ],
+      "serves_prompt_sections": [
+        "画面",
+        "动作",
+        "运镜"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "kb_gap": "补足动画前期流程中剧本、角色、场景、道具、分镜头脚本之间的转换关系。",
+      "pwa_relevance": "用于让 PWA storyboard rows 更像分镜生产流程的中间产物，而不是泛文本摘要。",
+      "leakage_check": "process_summary_only"
+    },
+    {
+      "source_id": "src-jimeng-official-home",
+      "title": "即梦 AI 官方产品入口",
+      "source_url": "https://www.jimeng.com/",
+      "source_type": "official_doc",
+      "source_type_label": "官方产品入口",
+      "language": "中文",
+      "confidence": "medium",
+      "risk_flags": [
+        "product_page_not_rule_source"
+      ],
+      "decision": "future_qa",
+      "decision_label": "FutureQA",
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "模型入口",
+        "能力边界"
+      ],
+      "target_pwa_actions": [
+        "validate_result"
+      ],
+      "kb_gap": "可作为产品入口事实核对，不直接形成导演或写作规则。",
+      "pwa_relevance": "只用于确认目标模型/产品语境，不能单独入库为写作规则。",
+      "leakage_check": "no_runtime_write"
+    },
+    {
+      "source_id": "src-generic-anime-gallery",
+      "title": "泛动漫资讯/作品设定介绍",
+      "source_url": "https://example.invalid/anime-gallery",
+      "source_type": "community_tutorial",
+      "source_type_label": "社区资料",
+      "language": "中文",
+      "confidence": "low",
+      "risk_flags": [
+        "too_generic",
+        "not_pwa_field_bound"
+      ],
+      "decision": "reject",
+      "decision_label": "拒绝",
+      "serves_pwa_fields": [],
+      "serves_prompt_sections": [],
+      "target_pwa_actions": [],
+      "kb_gap": "不补足 PWA 字段缺口。",
+      "pwa_relevance": "不改善 storyboard rows 或 prompt_text，拒绝进入 KB。",
+      "leakage_check": "reject_no_runtime_write"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-seedance-official-overview",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": false,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-seedance-tech-report",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-nezha2-storyboard-interview-thepaper",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-nezha-production-chinanews",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-jimeng-official-home",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": true,
+      "result": "future_qa"
+    },
+    {
+      "source_id": "src-generic-anime-gallery",
+      "serves_pwa_fields": false,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": true,
+      "result": "reject"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-visual-master-consistency",
+      "chinese_title": "视觉母版一致性规则",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "风格",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-nezha-production-chinanews"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-writing-continuity-core",
+        "rw-director-scheduling-core"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-language-grammar",
+      "chinese_title": "镜头语言语法规则",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "画面",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-overview",
+        "src-nezha2-storyboard-interview-thepaper"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-director-scheduling-core"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-23T14:38:25.457Z",
+    "confirmed_by": "smoke_test_package",
+    "accepted_reviewed_wiki_ids": [
+      "rw-visual-master-consistency",
+      "rw-camera-language-grammar"
+    ]
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge/intake_runs/intake-smoke-seedance-anime-prompt/intake-package.confirmed.json",
+    "validation_status": "not_run",
+    "output": null
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hope-kb.local/schemas/wiki-to-runtime-mapping.schema.json",
+  "title": "Hope Wiki To Runtime Mapping",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mapping_version",
+    "generated_at_bucket",
+    "source_delta_batch_hash",
+    "mappings",
+    "coverage_summary",
+    "runtime_safety"
+  ],
+  "properties": {
+    "mapping_version": { "type": "string", "const": "wiki-to-runtime/v0.2" },
+    "generated_at_bucket": { "type": "string", "minLength": 1 },
+    "source_delta_batch_hash": { "type": "string", "pattern": "^bundle-sha256:[A-Za-z0-9._-]+$" },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/mapping" }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_eligible_wiki_count",
+        "mapped_runtime_eligible_wiki_count",
+        "unmapped_runtime_eligible_wiki_count",
+        "scene_type_count",
+        "kb_action_count",
+        "leakage_count"
+      ],
+      "properties": {
+        "runtime_eligible_wiki_count": { "type": "integer", "minimum": 0 },
+        "mapped_runtime_eligible_wiki_count": { "type": "integer", "minimum": 0 },
+        "unmapped_runtime_eligible_wiki_count": { "type": "integer", "const": 0 },
+        "scene_type_count": { "type": "integer", "minimum": 1 },
+        "kb_action_count": { "type": "integer", "minimum": 1 },
+        "leakage_count": { "type": "integer", "const": 0 }
+      }
+    },
+    "runtime_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_source_text_absent",
+        "raw_kb_rows_absent",
+        "source_register_absent",
+        "prompt_body_absent",
+        "raw_graph_absent",
+        "local_paths_absent",
+        "secrets_absent"
+      ],
+      "properties": {
+        "raw_source_text_absent": { "type": "boolean", "const": true },
+        "raw_kb_rows_absent": { "type": "boolean", "const": true },
+        "source_register_absent": { "type": "boolean", "const": true },
+        "prompt_body_absent": { "type": "boolean", "const": true },
+        "raw_graph_absent": { "type": "boolean", "const": true },
+        "local_paths_absent": { "type": "boolean", "const": true },
+        "secrets_absent": { "type": "boolean", "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mapping_id",
+        "mapping_version",
+        "reviewed_wiki_id",
+        "reviewed_wiki_hash",
+        "wiki_type",
+        "runtime_targets",
+        "scene_type_ids",
+        "kb_actions",
+        "rule_group",
+        "runtime_rule_pack_ids",
+        "selected_kb_rule_ids",
+        "summary_fragment_ids",
+        "negative_constraint_ids",
+        "target_field_paths",
+        "duration_targets",
+        "failure_pattern_ids",
+        "repair_mapping_ids",
+        "future_qa_ids",
+        "sanitized_fragment_hashes",
+        "fallback_behavior",
+        "reviewed_at_bucket",
+        "runtime_eligible_reason",
+        "blocked_reason",
+        "coverage_status",
+        "review_status",
+        "effective_confidence",
+        "runtime_eligible",
+        "leakage_count"
+      ],
+      "properties": {
+        "mapping_id": { "type": "string", "minLength": 1 },
+        "mapping_version": { "type": "string", "const": "wiki-to-runtime/v0.2" },
+        "reviewed_wiki_id": { "type": "string", "minLength": 1 },
+        "reviewed_wiki_hash": { "type": "string", "pattern": "^sha256:[A-Za-z0-9._-]+$" },
+        "wiki_type": {
+          "type": "string",
+          "enum": [
+            "writing_continuity_rule",
+            "scene_expression_rule",
+            "director_scheduling_rule",
+            "shot_language_rule",
+            "validation_rule",
+            "failure_pattern",
+            "repair_mapping",
+            "future_qa_candidate",
+            "source_policy_note"
+          ]
+        },
+        "runtime_targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "writing_rule_packs",
+              "director_rule_packs",
+              "validation_rule_packs",
+              "scene_mappings",
+              "duration_profiles",
+              "selected_kb_rules",
+              "kb_context_summary",
+              "negative_constraints",
+              "action_results",
+              "future_qa_backlog"
+            ]
+          }
+        },
+        "scene_type_ids": { "type": "array", "items": { "type": "string" } },
+        "kb_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "import_source",
+              "expand_story",
+              "rewrite_story",
+              "accept_story_body",
+              "create_story_task",
+              "generate_storyboard",
+              "repair_storyboard",
+              "validate_result",
+              "export_result",
+              "golden_sample_review"
+            ]
+          }
+        },
+        "rule_group": {
+          "type": "string",
+          "enum": ["writing_group", "director_group", "validation_group", "future_qa"]
+        },
+        "runtime_rule_pack_ids": { "type": "array", "items": { "type": "string" } },
+        "selected_kb_rule_ids": { "type": "array", "items": { "type": "string" } },
+        "summary_fragment_ids": { "type": "array", "items": { "type": "string" } },
+        "negative_constraint_ids": { "type": "array", "items": { "type": "string" } },
+        "target_field_paths": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "duration_targets": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "failure_pattern_ids": { "type": "array", "items": { "type": "string" } },
+        "repair_mapping_ids": { "type": "array", "items": { "type": "string" } },
+        "future_qa_ids": { "type": "array", "items": { "type": "string" } },
+        "sanitized_fragment_hashes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^sha256:[A-Za-z0-9._-]+$" }
+        },
+        "fallback_behavior": {
+          "type": "string",
+          "enum": ["supporting_rule", "explicit_fallback", "future_qa_only", "blocked"]
+        },
+        "reviewed_at_bucket": { "type": "string" },
+        "runtime_eligible_reason": { "type": "string" },
+        "blocked_reason": { "type": "string" },
+        "coverage_status": {
+          "type": "string",
+          "enum": ["covered", "covered_limited", "future_qa_only", "blocked"]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": ["reviewed", "accepted_limited", "rejected", "superseded"]
+        },
+        "effective_confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "rejected"]
+        },
+        "runtime_eligible": { "type": "boolean" },
+        "leakage_count": { "type": "integer", "const": 0 }
+      }
+    }
+  }
+}

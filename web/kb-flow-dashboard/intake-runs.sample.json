@@ -1,0 +1,50 @@
+{
+  "schema_version": "hope-kb-manual-intake-runs.sample/v0.1",
+  "generated_for": "web/kb-flow-dashboard",
+  "dashboard_only": true,
+  "write_policy": {
+    "mode": "manual_intake_only",
+    "can_search": true,
+    "can_screen": true,
+    "can_recommend": true,
+    "can_write_reviewed_wiki": false,
+    "can_write_runtime": false,
+    "confirmation_required_before_write": true
+  },
+  "runs": [
+    {
+      "run_id": "intake-seedance-anime-storyboard-v0.1",
+      "title": "Seedance 动漫分镜 prompt 提升",
+      "target_model": "Seedance",
+      "target_output": [
+        "PWA storyboard rows",
+        "prompt_text"
+      ],
+      "target_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "search_focus": [
+        "Seedance 动漫 prompt",
+        "国漫动作分镜",
+        "动画镜头语言",
+        "角色动作连续性",
+        "负面约束与修复策略"
+      ],
+      "current_phase": "waiting_user_confirmation",
+      "repository_write_state": "not_written",
+      "runtime_write_state": "not_runtime",
+      "manual_gate": "user_confirmation_required",
+      "created_for_demo_at": "2026-05-23T00:00:00+08:00",
+      "acceptance_boundary": [
+        "候选来源只用于本地可视化和人工判断",
+        "未确认前不写入 knowledge/reviewed_wiki",
+        "未确认前不更新 knowledge/runtime_snapshots/latest.candidate.json",
+        "最终只服务 hope-web-pwa 的 storyboard rows 与 prompt_text"
+      ]
+    }
+  ]
+}

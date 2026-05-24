@@ -105,3 +105,37 @@
 - [x] 14.2 Record accepted loop design, Core Challenger notes, and Audit Specialist boundaries in `source-to-wiki-loop-intake.md`.
 - [x] 14.3 Prepare and approve OpenSpec-reviewed docs-only artifact contract dispatch in `source-wiki-artifact-contract-dispatch.md`.
 - [x] 14.4 Keep artifact creation, source fetching/storage, seed, snapshot, runtime, UI, export, validator changes, fixtures, staging, commit, and push closed for the target lane.
+
+## 15. KB Product Chain And PWA Snapshot Contract
+
+- [x] 15.1 Fast-forward `E:\codex\hope-kb` to `origin/codex/contracts-freeze` at `3df5bd6`.
+- [x] 15.2 Restate the project requirement as a reviewed wiki / graph KB that publishes summary-only runtime snapshots to `hope-web-pwa`.
+- [x] 15.3 Add `docs/kb-product-chain-contract-v0.2.md` with KB/PWA responsibilities, runtime snapshot boundary, mapping completeness rules, leakage boundaries, knowledge content plan, and release gates.
+- [x] 15.4 Add `schemas/runtime-kb-snapshot.schema.json` and `schemas/wiki-to-runtime-mapping.schema.json`.
+- [x] 15.5 Add `samples/runtime-kb-snapshot.sample.json` and `samples/wiki-to-runtime-mapping.sample.json`.
+- [x] 15.6 Add `docs/knowledge-plan-v0.2.md` with the knowledge-domain plan and document inventory.
+- [x] 15.7 Run JSON parse checks, light sample validation, targeted anchor search, `git diff --check`, and `git status --short --branch`.
+
+## 16. Batch 1 Reviewed Wiki Prototype And Closed-Loop Repair
+
+- [x] 16.1 Add `docs/knowledge-intake-candidate-list-v0.2.md` with the approved Batch 1 and deferred Batch 2 knowledge entries.
+- [x] 16.2 Add `docs/product-action-crosswalk-v0.2.md` to keep KB actions aligned with `hope-web-pwa` and adjacent Hope production artifacts.
+- [x] 16.3 Add eight Batch 1 reviewed wiki prototype pages under `knowledge/reviewed_wiki/`.
+- [x] 16.4 Add Batch 1 prototype mapping at `knowledge/mappings/wiki-to-runtime-mapping.v0.2.json`.
+- [x] 16.5 Add Batch 1 prototype runtime snapshot at `knowledge/runtime_snapshots/latest.candidate.json`.
+- [x] 16.6 Align Batch 1 IDs across knowledge plan, candidate list, reviewed wiki pages, mapping, and runtime snapshot.
+- [x] 16.7 Add structure-level `action_results`, mapping item version, field-path, duration-target, fallback, and sanitization fields to schemas.
+- [x] 16.8 Add `scripts/validate-kb-runtime-prototype.ps1` for duration, action, rule-pack, reviewed-wiki, mapping, and leakage-boundary checks.
+- [x] 16.9 Run prototype validation and confirm 8 reviewed wiki pages, 8 mappings, 10 rule packs, 6 durations, and 10 KB actions pass.
+
+## 17. PWA Adapter And Flow Dashboard Prototype
+
+- [x] 17.1 Add `docs/pwa-adapter-contract-v0.2.md` to define the KB snapshot to `hope-web-pwa` adapter boundary.
+- [x] 17.2 Add `schemas/pwa-kb-adapter-output.schema.json` for the wrapped PWA adapter output.
+- [x] 17.3 Add `samples/pwa-kb-adapter-output.sample.json` with camelCase `KbSnapshot`-shaped data and fail-closed metadata.
+- [x] 17.4 Add `scripts/build-pwa-kb-adapter-output.js` so the adapter sample can be regenerated and checked for drift.
+- [x] 17.5 Extend `scripts/validate-kb-runtime-prototype.ps1` to validate adapter status, partial scene catalog boundary, camelCase PWA fields, rule-pack references, duration profiles, summary-only boundary, and fail-closed metadata.
+- [x] 17.6 Add `web/kb-flow-dashboard/index.html` as a Chinese-first visual flow dashboard showing Hope demand, role knowledge, reviewed wiki, mapping, PWA KB snapshot, adapter flow, and local draft additions.
+- [x] 17.7 Add `scripts/serve-kb-flow-dashboard.js` for local dashboard preview at `http://127.0.0.1:5179/`.
+- [x] 17.8 Run `node scripts/build-pwa-kb-adapter-output.js --check`, `scripts/validate-kb-runtime-prototype.ps1`, dashboard script syntax check, preview HTTP 200 check, and `git diff --check`.
+- [x] 17.9 Add `docs/kb-pwa-integration-progress-2026-05-23.md` as the current progress, evidence, non-claims, and next-gate report.

@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>知识图谱入库流程</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f8fc;
+        --surface: #ffffff;
+        --ink: #0a2148;
+        --muted: #667892;
+        --line: #d9e5f3;
+        --line-soft: rgba(79, 126, 255, 0.016);
+        --blue: #4f7eff;
+        --blue-strong: #2f61df;
+        --teal: #5cc9b3;
+        --orange: #f4a63f;
+        --green: #2ea873;
+        --red: #d85252;
+        --shadow: 0 12px 30px rgba(41, 74, 119, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+        color: var(--ink);
+        font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      }
+
+      button, input, select { font: inherit; }
+
+      button {
+        min-height: 34px;
+        border: 1px solid #cbd9ee;
+        border-radius: 9px;
+        background: #fff;
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      button:hover { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79, 126, 255, 0.10); }
+
+      .shell {
+        display: grid;
+        gap: 8px;
+        padding: 12px 14px 16px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(320px, 1fr) auto;
+        gap: 16px;
+        align-items: center;
+        min-height: 80px;
+        padding: 14px 22px;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .brand p {
+        margin: 7px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .status-strip {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 7px;
+      }
+
+      .pill, .chip, .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 24px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 3px 9px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .pill[data-tone="ok"], .tag[data-tone="ok"] { border-color: #9fd4b0; background: #edf8f2; color: #218257; }
+      .pill[data-tone="warn"], .tag[data-tone="warn"] { border-color: #edc780; background: #fff5e5; color: #b96f18; }
+      .tag[data-tone="reject"] { border-color: #e9aaa3; background: #fff1ef; color: #bb3f35; }
+
+      .intake-panel {
+        min-height: 108px;
+        padding: 14px 18px 12px;
+      }
+
+      .panel-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 10px;
+      }
+
+      .panel-title h2 {
+        margin: 0;
+        font-size: 17px;
+        line-height: 1.25;
+      }
+
+      .intake-form {
+        display: grid;
+        grid-template-columns: minmax(360px, 1fr) 280px minmax(360px, auto) 104px;
+        gap: 10px;
+        align-items: end;
+      }
+
+      label {
+        display: grid;
+        gap: 5px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      input, select {
+        width: 100%;
+        height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 7px 10px;
+        background: #fff;
+        color: var(--ink);
+        outline: none;
+      }
+
+      input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79, 126, 255, 0.10); }
+
+      .field-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-content: end;
+        padding-bottom: 1px;
+      }
+
+      .primary {
+        border-color: #1f9e92;
+        background: #1f9e92;
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(31, 158, 146, 0.18);
+      }
+
+      .primary::before { content: "⌕"; margin-right: 6px; font-weight: 700; }
+      .quick-actions { display: none; }
+
+      .graph-panel {
+        overflow: hidden;
+      }
+
+      .graph-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: start;
+        min-height: 68px;
+        padding: 15px 18px 0;
+      }
+
+      .graph-head h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .graph-head p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 8px;
+      }
+
+      .icon-button {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-color: #cbd9ee;
+        background: #f9fbff;
+        color: #365985;
+        font-size: 15px;
+        line-height: 1;
+      }
+
+      .graph-workbench {
+        height: 520px;
+        padding: 8px 16px 14px;
+      }
+
+      .graph-canvas {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        background-color: #fff;
+        --graph-pad-x: 48px;
+        --graph-pad-y: 40px;
+        background-image:
+          linear-gradient(var(--line-soft) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+
+      .graph-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .edge {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .edge.main-base { stroke: rgba(47, 99, 238, 0.96); stroke-width: 3.2; filter: drop-shadow(0 0 8px rgba(47, 99, 238, 0.18)); }
+      .edge.main-flow { stroke: rgba(47, 99, 238, 0.58); stroke-width: 3.8; stroke-dasharray: 14 108; animation: routeFlow 2.5s linear infinite; filter: drop-shadow(0 0 6px rgba(47, 99, 238, 0.28)); }
+      .edge.candidate { stroke: rgba(38, 174, 151, 0.82); stroke-width: 1.75; stroke-dasharray: 7 8; }
+      .edge.confirm { stroke: rgba(232, 137, 28, 0.94); stroke-width: 2.8; filter: drop-shadow(0 0 8px rgba(232, 137, 28, 0.20)); }
+      .edge.assist { stroke: rgba(38, 174, 151, 0.74); stroke-width: 1.45; stroke-dasharray: 7 8; }
+      .flow-dot { fill: rgba(47, 99, 238, 0.92); stroke: #ffffff; stroke-width: 1.25; filter: drop-shadow(0 0 7px rgba(47, 99, 238, 0.58)); }
+      .flow-dot.second { opacity: 0.64; }
+      .anchor-dot { fill: rgba(47, 99, 238, 0.62); stroke: #fff; stroke-width: 1.35; filter: drop-shadow(0 0 5px rgba(47, 99, 238, 0.26)); }
+      .anchor-dot.candidate-anchor { fill: rgba(38, 174, 151, 0.64); filter: drop-shadow(0 0 5px rgba(38, 174, 151, 0.22)); }
+      .anchor-dot.confirm-anchor { fill: rgba(232, 137, 28, 0.70); filter: drop-shadow(0 0 5px rgba(232, 137, 28, 0.26)); }
+
+      @keyframes routeFlow {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -282; }
+      }
+
+      .graph-node {
+        position: absolute;
+        z-index: 3;
+        left: calc(var(--x) * 1% - var(--w) / 2);
+        top: calc(var(--y) - var(--h) / 2);
+        width: var(--w, 180px);
+        height: var(--h, 96px);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 12px 15px;
+        border: 1px solid rgba(79, 126, 255, 0.42);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 16px 34px rgba(35, 70, 116, 0.09);
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      }
+
+      .graph-node:hover, .graph-node.is-running {
+        border-color: rgba(79, 126, 255, 0.78);
+        box-shadow: 0 18px 42px rgba(79, 126, 255, 0.18), 0 0 0 4px rgba(79, 126, 255, 0.10);
+      }
+
+      .graph-node.is-running { transform: translateY(-1px); }
+      .graph-node.is-complete { border-color: rgba(46, 168, 115, 0.48); }
+      .graph-node.is-pending { border-color: rgba(244, 166, 63, 0.50); }
+      .graph-node.is-error { border-color: rgba(216, 82, 82, 0.58); box-shadow: 0 18px 42px rgba(216, 82, 82, 0.12); }
+
+      .graph-node .node-tag {
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        max-width: 100%;
+        min-height: 18px;
+        border-radius: 999px;
+        padding: 3px 8px;
+        background: rgba(79, 126, 255, 0.09);
+        color: var(--blue-strong);
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .graph-node.candidate-node .node-tag { background: rgba(92, 201, 179, 0.13); color: #168a79; }
+      .graph-node.confirm-node .node-tag, .graph-node.snapshot-node .node-tag { background: rgba(244, 166, 63, 0.14); color: #b36d16; }
+      .graph-node strong {
+        display: block;
+        flex: 0 0 auto;
+        max-width: 100%;
+        margin-top: 6px;
+        color: var(--ink);
+        font-size: 15px;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+      }
+
+      .graph-node p {
+        display: block;
+        overflow: hidden;
+        max-width: 100%;
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.2;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow-wrap: normal;
+      }
+
+      .assist-node {
+        --w: 120px;
+        --h: 64px;
+        justify-content: center;
+        padding: 8px 12px;
+        text-align: center;
+        border-color: rgba(91, 119, 158, 0.34);
+        box-shadow: 0 12px 26px rgba(35, 70, 116, 0.07);
+      }
+
+      .assist-node .node-tag { display: none; }
+      .assist-node strong { margin-top: 0; font-size: 13px; line-height: 1.1; }
+      .assist-node p { margin-top: 4px; font-size: 10px; line-height: 1.2; }
+
+      .edge-label { display: none; }
+
+      .flow-legend {
+        position: absolute;
+        z-index: 5;
+        left: 18px;
+        bottom: 18px;
+        display: grid;
+        grid-template-columns: auto;
+        gap: 8px;
+        width: 174px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 26px rgba(35, 70, 116, 0.08);
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .legend-item { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; }
+      .legend-line { display: inline-block; width: 36px; height: 0; border-top: 3px solid var(--blue); border-radius: 999px; }
+      .legend-line.candidate { border-top: 2px dashed var(--teal); }
+      .legend-line.confirm { border-top-color: var(--orange); }
+
+      .metrics, .evidence-row { display: none; }
+
+      .tables {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .table-panel { overflow: hidden; }
+      .table-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 11px 18px; border-bottom: 1px solid var(--line); }
+      .table-head h2 { margin: 0; font-size: 18px; line-height: 1.2; }
+      .table-head small { color: var(--muted); font-size: 12px; }
+      .table-wrap { overflow: auto; max-height: 246px; }
+      table { width: 100%; min-width: 0; border-collapse: collapse; table-layout: fixed; }
+      th, td { border-bottom: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: middle; color: #17335f; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      th { position: sticky; top: 0; z-index: 2; background: #f8faf6; color: #61708a; font-weight: 700; }
+      tr:last-child td { border-bottom: 0; }
+      .table-panel:first-child th:nth-child(1), .table-panel:first-child td:nth-child(1) { width: 70px; }
+      .table-panel:first-child th:nth-child(2), .table-panel:first-child td:nth-child(2) { width: 82px; }
+      .table-panel:first-child th:nth-child(3), .table-panel:first-child td:nth-child(3) { width: 86px; }
+      .table-panel:first-child th:nth-child(4), .table-panel:first-child td:nth-child(4) { width: 60px; }
+      .table-panel:first-child th:nth-child(5), .table-panel:first-child td:nth-child(5) { width: 132px; }
+      .table-panel:first-child th:nth-child(6), .table-panel:first-child td:nth-child(6) { width: 136px; }
+      .table-panel:nth-child(2) th:nth-child(1), .table-panel:nth-child(2) td:nth-child(1) { width: 112px; }
+      .table-panel:nth-child(2) th:nth-child(2), .table-panel:nth-child(2) td:nth-child(2) { width: 104px; }
+      .table-panel:nth-child(2) th:nth-child(3), .table-panel:nth-child(2) td:nth-child(3) { width: 132px; }
+      .table-panel:nth-child(2) th:nth-child(4), .table-panel:nth-child(2) td:nth-child(4) { width: 58px; }
+      .table-panel:nth-child(2) th:nth-child(5), .table-panel:nth-child(2) td:nth-child(5) { width: 150px; }
+      .status-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 22px; border-radius: 6px; padding: 3px 8px; border: 1px solid #a9d6b5; background: #ebf8f0; color: #17824e; font-weight: 700; }
+      .status-badge.waiting { border-color: #e5bf7d; background: #fff7eb; color: #a86612; }
+      .status-badge.confirming { border-color: #9dccf2; background: #ecf7ff; color: #1774b8; }
+      .feed, .feed-card, .meta, .scene-cloud { display: none; }
+
+      @media (max-width: 1180px) {
+        .topbar, .intake-form, .tables { grid-template-columns: 1fr; }
+        .status-strip { justify-content: flex-start; }
+        .field-chips { align-content: start; }
+        .graph-workbench { height: auto; min-height: 760px; }
+        .graph-canvas { height: auto; min-height: 760px; display: grid; gap: 10px; padding: 14px; }
+        .graph-svg, .edge-label, .flow-legend { display: none; }
+        .graph-node { position: relative; left: auto; top: auto; width: auto; height: auto; min-height: 88px; }
+      }
+
+      @media (max-width: 760px) {
+        .shell { padding: 8px; }
+        .brand h1 { font-size: 20px; }
+        .panel-title { display: grid; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="panel topbar">
+        <div class="brand">
+          <h1>知识图谱：入库流程</h1>
+          <p>以知识图谱驱动应用的精准入库，实时呈现知识流转与映射关系。</p>
+        </div>
+        <div class="status-strip">
+          <span class="pill" data-tone="ok">验证已通过</span>
+          <span class="pill" data-tone="warn">快照候选</span>
+          <span class="pill" data-tone="warn">仅手动发起入库</span>
+          <span class="pill" id="clock">--:--:--</span>
+        </div>
+      </header>
+
+      <section class="panel intake-panel">
+        <div class="panel-title"><h2>手动需求入口</h2></div>
+        <form class="intake-form" id="intakeForm">
+          <label>当前需求标题<input id="intakeTitle" required placeholder="请输入或粘贴需求  例如：即梦国漫动作分镜提示词提升" /></label>
+          <label>搜索目标<select id="searchFocus">
+            <option value="seedance_anime_prompt">即梦动漫提示词</option>
+            <option value="pwa_storyboard_prompt">应用分镜提示词</option>
+            <option value="domestic_anime_action">国漫动作分镜</option>
+            <option value="anime_camera_language">动画镜头语言</option>
+            <option value="repair_strategy">负面约束与修复策略</option>
+          </select></label>
+          <div class="field-chips" aria-label="应用字段">
+            <span class="chip">视觉描述</span><span class="chip">角色动作</span><span class="chip">镜头</span><span class="chip">景别</span><span class="chip">提示词文本</span>
+          </div>
+          <button class="primary" type="submit">开始搜索</button>
+        </form>
+        <div class="quick-actions" aria-hidden="true">
+          <button class="ghost" type="button" id="showSources">重新展示搜索候选</button>
+          <button class="ghost" type="button" id="buildRecommendations">第 2 步：生成入库建议</button>
+          <button class="ghost" type="button" id="markWaiting">第 3 步：生成确认包</button>
+          <button class="ghost" type="button" id="applyPackage">第 4 步：写入 KB 并验证</button>
+        </div>
+      </section>
+
+      <section class="panel graph-panel">
+        <div class="graph-head">
+          <div>
+            <h2>知识图谱实时运行区</h2>
+            <p>拖动画布 / 滚轮缩放 / 点击节点查看详情</p>
+          </div>
+          <div class="toolbar" aria-label="图谱工具">
+            <button class="icon-button" type="button" title="放大">+</button>
+            <button class="icon-button" type="button" title="缩小">-</button>
+            <button class="icon-button" type="button" title="定位">⌖</button>
+            <button class="icon-button" type="button" title="全屏">⛶</button>
+          </div>
+        </div>
+        <div class="graph-workbench">
+          <div class="graph-canvas" id="knowledgeGraph" data-phase="idle">
+            <svg class="graph-svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <path id="mainSeg1" />
+                <path id="mainSeg2" />
+                <path id="mainSeg3" />
+                <path id="mainSeg4" />
+                <path id="mainSeg5" />
+                <path id="confirmFlow" />
+              </defs>
+              <path id="mainLine1" class="edge main-base" />
+              <path id="mainLine2" class="edge main-base" />
+              <path id="mainLine3" class="edge main-base" />
+              <path id="mainLine4" class="edge main-base" />
+              <path id="mainLine5" class="edge main-base" />
+              <path id="mainGlow1" class="edge main-flow" />
+              <path id="mainGlow2" class="edge main-flow" />
+              <path id="mainGlow3" class="edge main-flow" />
+              <path id="mainGlow4" class="edge main-flow" />
+              <path id="mainGlow5" class="edge main-flow" />
+              <circle class="flow-dot" r="4"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg1" /></animateMotion></circle>
+              <circle class="flow-dot" r="4"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg2" /></animateMotion></circle>
+              <circle class="flow-dot" r="4"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg3" /></animateMotion></circle>
+              <circle class="flow-dot" r="4"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg4" /></animateMotion></circle>
+              <circle class="flow-dot" r="4"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg5" /></animateMotion></circle>
+              <circle class="flow-dot second" r="3.2"><animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg1" /></animateMotion></circle>
+              <circle class="flow-dot second" r="3.2"><animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg2" /></animateMotion></circle>
+              <circle class="flow-dot second" r="3.2"><animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg3" /></animateMotion></circle>
+              <circle class="flow-dot second" r="3.2"><animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg4" /></animateMotion></circle>
+              <circle class="flow-dot second" r="3.2"><animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#mainSeg5" /></animateMotion></circle>
+              <path id="assistWriting" class="edge assist" />
+              <path id="assistCamera" class="edge assist" />
+              <path id="assistGuard" class="edge assist" />
+              <path id="candidateSceneSource" class="edge candidate" />
+              <path id="candidateSourceRules" class="edge candidate" />
+              <path id="candidateRulesRw" class="edge candidate" />
+              <path id="candidateRwConfirm" class="edge candidate" />
+              <path id="candidatePromptConfirm" class="edge candidate" />
+              <path id="confirmLine" class="edge confirm" />
+              <circle class="flow-dot second" r="3.2" style="fill:rgba(244,166,63,0.72);filter:drop-shadow(0 0 6px rgba(244,166,63,0.32))"><animateMotion dur="2.5s" repeatCount="indefinite" rotate="auto"><mpath href="#confirmFlow" /></animateMotion></circle>
+              <g id="anchorDots"></g>
+            </svg>
+
+            <article class="graph-node main-node" data-node="start" style="--x:8;--y:250px;--w:180px;--h:96px"><span class="node-tag">唯一入口</span><strong>手动需求</strong><p>确认待补强的应用内容问题</p></article>
+            <article class="graph-node main-node" data-node="scene" style="--x:25;--y:250px;--w:180px;--h:96px"><span class="node-tag">场景</span><strong>场景类型</strong><p>先定场景，再调规则节奏</p></article>
+            <article class="graph-node main-node" data-node="action" style="--x:42;--y:250px;--w:180px;--h:96px"><span class="node-tag">动作链</span><strong>动作链 动作链</strong><p>创建 / 生成 / 修复</p></article>
+            <article class="graph-node main-node" data-node="shot" style="--x:59;--y:250px;--w:180px;--h:96px"><span class="node-tag">分镜字段</span><strong>分镜 / 镜头 / 动作</strong><p>人物、镜头、景别、动作</p></article>
+            <article class="graph-node main-node" data-node="prompt" style="--x:76;--y:250px;--w:180px;--h:96px"><span class="node-tag">模型输出</span><strong>提示词文本</strong><p>由分镜字段生成提示词</p></article>
+            <article class="graph-node snapshot-node" data-node="snapshot" style="--x:91;--y:250px;--w:180px;--h:96px"><span class="node-tag">应用消费</span><strong>知识库快照</strong><p>只消费验证后的摘要规则</p></article>
+
+            <article class="graph-node assist-node" data-node="writing" style="--x:25;--y:95px;--w:120px;--h:64px"><strong>写作</strong><p>事实连接</p></article>
+            <article class="graph-node assist-node" data-node="camera" style="--x:42;--y:95px;--w:120px;--h:64px"><strong>镜头景别</strong><p>景别运镜</p></article>
+            <article class="graph-node assist-node" data-node="guard" style="--x:76;--y:95px;--w:120px;--h:64px"><strong>校验</strong><p>安全边界</p></article>
+
+            <article class="graph-node candidate-node" data-node="source" style="--x:25;--y:405px;--w:180px;--h:96px"><span class="node-tag">搜索</span><strong>互联网候选</strong><p>动漫/即梦优先，服务字段</p></article>
+            <article class="graph-node candidate-node" data-node="rules" style="--x:42;--y:405px;--w:180px;--h:96px"><span class="node-tag">筛选</span><strong>规则对照</strong><p>筛字段、泄漏、重复、映射</p></article>
+            <article class="graph-node candidate-node" data-node="rw" style="--x:59;--y:405px;--w:180px;--h:96px"><span class="node-tag">建议</span><strong>规则候选</strong><p>生成待确认入库对象</p></article>
+            <article class="graph-node confirm-node" data-node="confirm" style="--x:76;--y:405px;--w:180px;--h:96px"><span class="node-tag">门禁</span><strong>用户确认</strong><p>写入已审知识并生成快照</p></article>
+
+            <span class="edge-label" style="left:15.4%;top:42.5%">触发</span>
+            <span class="edge-label" style="left:33.4%;top:42.5%">关联</span>
+            <span class="edge-label" style="left:51.0%;top:42.5%">驱动生成</span>
+            <span class="edge-label" style="left:67.8%;top:42.5%">校验约束</span>
+            <span class="edge-label" style="left:84.0%;top:42.5%">验证入库</span>
+            <span class="edge-label" style="left:21.1%;top:61.6%">扩展候选</span>
+            <span class="edge-label" style="left:34.3%;top:76.5%">对照校验</span>
+            <span class="edge-label" style="left:51.6%;top:76.5%">生成建议</span>
+            <span class="edge-label" style="left:78.2%;top:62.0%">提交验证</span>
+            <span class="edge-label" style="left:86.4%;top:70.8%">确认写入</span>
+
+            <div class="flow-legend" aria-label="图例">
+              <span class="legend-item"><i class="legend-line"></i>主链路</span>
+              <span class="legend-item"><i class="legend-line candidate"></i>候选与校验</span>
+              <span class="legend-item"><i class="legend-line confirm"></i>确认入库</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="KB 覆盖指标">
+        <div class="metric"><span>已审知识</span><strong id="metricWiki">13</strong></div><div class="metric"><span>映射条目</span><strong id="metricMappings">13</strong></div><div class="metric"><span>规则包</span><strong id="metricRules">15</strong></div><div class="metric"><span>时长档位</span><strong id="metricDurations">6</strong></div><div class="metric"><span>场景覆盖</span><strong id="metricScenes">21</strong></div>
+      </section>
+      <section class="evidence-row"><details class="panel evidence-detail"><summary><span><h2>当前状态</h2><small id="phaseSummary">等待用户发起</small></span></summary><div class="feed"><div class="feed-card"><strong>关联规则</strong><p>实线是应用产出路径；虚线是手动搜索入库路径；用户确认只允许写入已审知识。</p></div><div class="feed-card"><strong>运行边界</strong><p id="draftSummary">本地需求 0，等待用户手动发起。</p></div><div class="feed-card"><strong>21 个应用场景</strong><div class="scene-cloud" id="sceneCloud"></div></div></div></details><details class="panel evidence-detail"><summary><span><h2>互联网搜索候选</h2><small id="searchStatus">等待用户发起</small></span></summary><div class="feed" id="sourceFeed"></div></details><details class="panel evidence-detail"><summary><span><h2>规则筛选与 KB 对照</h2><small>规则与映射</small></span></summary><div class="feed" id="screeningBoard"></div></details><details class="panel evidence-detail"><summary><span><h2>入库建议队列</h2><small>等待确认</small></span></summary><div class="feed" id="recommendationFeed"></div></details></section>
+
+      <section class="tables">
+        <section class="panel table-panel"><div class="table-head"><h2>知识条目</h2><small>第 2 批已审知识</small></div><div class="table-wrap"><table><thead><tr><th>知识 ID</th><th>类型</th><th>支持动作</th><th>状态</th><th>来源</th><th>更新时间</th></tr></thead><tbody id="wikiRows"></tbody></table></div></section>
+        <section class="panel table-panel"><div class="table-head"><h2>映射覆盖</h2><small>21 场景运行目标</small></div><div class="table-wrap"><table><thead><tr><th>已审知识</th><th>规则包</th><th>运行时目标</th><th>泄露数</th><th>更新时间</th></tr></thead><tbody id="mappingRows"></tbody></table></div></section>
+      </section>
+    </div>
+
+    <script>
+      const sceneTypes = [['hot_blood_battle','热血战斗','conflict'],['ensemble_performance','群像表演','performance'],['emotional_dialogue','情绪对话','performance'],['encounter_performance','相遇表演','performance'],['field_chase','场域追逐','conflict'],['spectacle_showcase','奇观展示','spectacle'],['daily_healing','日常治愈','performance'],['guoman_hot_blood_combat','国漫热血打斗','conflict'],['guoman_ensemble_performance','国漫群像表演','performance'],['ink_wuxia_combat','水墨武打','conflict'],['eastern_spectacle','东方奇观','spectacle'],['xianxia_action','仙侠动作','conflict'],['urban_fantasy','都市奇幻','spectacle'],['chinese_war_formation','国战军阵','epic'],['weapon_highlight','武器高光','conflict'],['council_strategy','朝堂权谋','epic'],['siege_defense','攻城守御','epic'],['slg_sandbox_view','沙盘战略视角','epic'],['slg_march_encirclement','行军合围','epic'],['slg_city_growth','城建演进','epic'],['slg_battle_report','战报界面','epic']];
+      const wikiRows = [['K-0001','场景类型','创建/更新','已审','即梦动漫提示词','2025-05-25 16:40:12'],['K-0002','动作链','生成/修复','已审','即梦动漫提示词','2025-05-25 16:41:05'],['K-0003','镜头景别','选镜/匹配','待审','互联网候选','2025-05-25 16:41:32'],['K-0004','提示词文本','生成','已审','即梦动漫提示词','2025-05-25 16:42:11'],['K-0005','规则候选','映射/生成','待确认','规则对照','2025-05-25 16:42:58']];
+      const mappingRows = [['场景类型','规则包 v3.1','场景类型目标',0,'2025-05-25 16:40:12'],['动作链','规则包 v3.1','动作链目标',1,'2025-05-25 16:41:05'],['分镜/镜头/动作','规则包 v3.1','分镜目标',0,'2025-05-25 16:41:32'],['提示词文本','规则包 v3.1','提示词目标',0,'2025-05-25 16:42:11'],['规则候选','规则包 v3.1','规则映射目标',2,'2025-05-25 16:42:58']];
+      const fallbackSources = [{title:'即梦官方模型材料',source_type_label:'官方文档',language:'中文/英文',confidence:'high',risk_flags:[],decision_label:'保留',decision:'keep',serves_pwa_fields:['visual_description','character_action','camera','prompt_text'],pwa_relevance:'用于把应用分镜字段组织成即梦可用提示词。'},{title:'国漫动作分镜与制作采访',source_type_label:'主流采访',language:'中文',confidence:'medium_high',risk_flags:['use_process_only'],decision_label:'保留',decision:'keep',serves_pwa_fields:['camera','shot_size','character_action'],pwa_relevance:'用于改进动作戏镜头拆分和镜头角度选择。'},{title:'泛动漫资讯作品设定介绍',source_type_label:'社区分析',language:'中文',confidence:'low',risk_flags:['too_generic'],decision_label:'拒绝',decision:'reject',serves_pwa_fields:[],pwa_relevance:'不改善应用字段，拒绝进入候选。'}];
+      const fallbackRecommendations = [{reviewed_wiki_id:'rw-seedance-storyboard-prompt-field-contract',chinese_title:'即梦分镜提示词字段合同',serves_pwa_fields:['visual_description','character_action','camera','shot_size','prompt_text'],target_pwa_actions:['generate_storyboard','repair_storyboard'],runtime_targets:['director_rule_packs','selected_kb_rules'],status:'waiting_user_confirmation'},{reviewed_wiki_id:'rw-seedance-anime-camera-shot-language',chinese_title:'动漫镜头与景别语言',serves_pwa_fields:['camera','shot_size','prompt_text'],target_pwa_actions:['generate_storyboard'],runtime_targets:['director_rule_packs','scene_mappings'],status:'proposal_only'}];
+      const screeningChecks = [['服务应用字段','必须改善视觉描述 / 角色动作 / 镜头 / 景别 / 提示词文本','ok'],['服务 即梦动漫提示词','只保留能改善主体、画面、动作、运镜、景别、节奏、约束的内容','ok'],['对照现有知识库','重复内容合并为来源覆盖，不新增规则','warn'],['可映射 运行目标','未来必须能落到导演规则包 / 校验规则包 / 场景映射','ok'],['泄漏风险','不得包含原始来源、提示正文、来源登记、令牌、本地路径','ok'],['用户确认','未确认前只停留在本地建议队列','warn']];
+      let sampleSources = fallbackSources;
+      let sampleRecommendations = fallbackRecommendations;
+      let currentPackage = null;
+      function escapeHtml(value) { return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;').replaceAll("'",'&#39;'); }
+      function fieldLabel(value) { return ({ visual_description: '视觉描述', character_action: '角色动作', camera: '镜头', shot_size: '景别', prompt_text: '提示词文本', duration_seconds: '时长', negative_constraints: '负面约束' })[value] || String(value || '').replaceAll('_', ' '); }
+      function now() { return new Date().toLocaleTimeString('zh-CN', { hour12: false }); }
+      async function api(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok) throw new Error(payload.error || '请求失败'); return payload.package; }
+      function state() { return currentPackage || { status: 'idle', source_candidates: [], screening_results: [], recommendations: [], confirmation: { confirmed: false }, kb_application: { applied: false } }; }
+      function phaseLabel(s) { if (!s || s.status === 'idle') return '等待用户发起'; if (s.status === 'request_recorded') return '需求已记录'; if (s.status === 'sources_collected') return '候选已采集'; if (s.status === 'screened') return '筛选已完成'; if (s.status === 'recommendations_ready') return '入库建议已生成'; if (s.status === 'confirmed_package') return '确认包已生成'; if (s.status === 'applied_to_kb') return '已写入 KB 并验证'; if (s.status === 'failed') return '执行失败'; return s.status || '等待用户发起'; }
+      function tone(decision) { if (decision === 'keep' || decision === '保留' || decision === 'ready_for_confirmation' || decision === 'confirmed') return 'ok'; if (decision === 'reject' || decision === '拒绝') return 'reject'; return 'warn'; }
+      function setNodeStates(s) { const order = ['start','scene','action','shot','prompt','snapshot']; const support = ['writing','camera','guard','source','rules','rw','confirm']; document.querySelectorAll('.graph-node').forEach((node) => { node.classList.remove('is-complete','is-running','is-pending','is-error'); node.classList.add('is-pending'); }); const status = s.status || 'idle'; const active = status === 'sources_collected' ? 'source' : status === 'screened' ? 'rules' : status === 'recommendations_ready' ? 'rw' : status === 'confirmed_package' ? 'confirm' : status === 'applied_to_kb' ? 'snapshot' : status === 'failed' ? 'confirm' : 'start'; order.concat(support).forEach((id) => { const node = document.querySelector('[data-node="' + id + '"]'); if (!node) return; node.classList.remove('is-pending'); if (id === active) node.classList.add(status === 'failed' ? 'is-error' : 'is-running'); else if (status === 'applied_to_kb' || ['start','scene','action','shot','prompt'].includes(id)) node.classList.add('is-complete'); else node.classList.add('is-pending'); }); }
+      async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} }
+      function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
+      function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
+      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = phaseLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } sourceFeed.innerHTML = sources.map((item) => { const decision = item.decision || item.decision_label; return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
+      function renderScreening(s) { const board = document.getElementById('screeningBoard'); if (!board) return; if (!s.run_id) { board.innerHTML = '<div class="feed-card"><strong>未开始</strong><p>筛选必须从应用分镜和提示词文本问题出发。</p></div>'; return; } const rows = s.screening_results?.length ? s.screening_results : screeningChecks.map((row) => ({ title: row[0], summary: row[1], result: row[2] === 'ok' ? '通过' : '需确认' })); board.innerHTML = rows.map((row) => '<div class="feed-card"><strong>' + escapeHtml(row.source_id || row.title || '筛选项') + '</strong><p>' + escapeHtml(row.summary || ('字段=' + row.serves_pwa_fields + '；即梦适配=' + row.serves_seedance_prompt + '；运行目标=' + row.runtime_target_possible + '；泄漏=' + row.leakage_risk_ok)) + '</p><span class="tag" data-tone="' + tone(row.result) + '">' + escapeHtml(row.result || '需确认') + '</span></div>').join(''); }
+      function renderRecommendations(s) { const feed = document.getElementById('recommendationFeed'); if (!feed) return; const recs = s.recommendations?.length ? s.recommendations : sampleRecommendations; if (!s.run_id) { feed.innerHTML = '<div class="feed-card"><strong>未生成入库建议</strong><p>生成建议后显示规则候选；确认包生成前不写仓库。</p></div>'; return; } feed.innerHTML = recs.map((item) => '<div class="feed-card"><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span></div></div>').join(''); }
+      function statusClass(value) { if (value === '待审') return 'waiting'; if (value === '待确认') return 'confirming'; return ''; }
+      function renderTables() { document.getElementById('wikiRows').innerHTML = wikiRows.map((r) => '<tr>' + r.map((cell, index) => '<td>' + (index === 3 ? '<span class="status-badge ' + statusClass(cell) + '">' + escapeHtml(cell) + '</span>' : escapeHtml(cell)) + '</td>').join('') + '</tr>').join(''); document.getElementById('mappingRows').innerHTML = mappingRows.map((r) => '<tr><td>' + r.map(escapeHtml).join('</td><td>') + '</td></tr>').join(''); }
+
+      function updateGraphConnections() {
+        const canvas = document.getElementById('knowledgeGraph');
+        const svg = canvas?.querySelector('.graph-svg');
+        if (!canvas || !svg) return;
+        const nodeSpecs = {
+          start: { x: 8, y: 250, w: 180, h: 96 },
+          scene: { x: 25, y: 250, w: 180, h: 96 },
+          action: { x: 42, y: 250, w: 180, h: 96 },
+          shot: { x: 59, y: 250, w: 180, h: 96 },
+          prompt: { x: 76, y: 250, w: 180, h: 96 },
+          snapshot: { x: 91, y: 250, w: 180, h: 96 },
+          writing: { x: 25, y: 95, w: 120, h: 64 },
+          camera: { x: 42, y: 95, w: 120, h: 64 },
+          guard: { x: 76, y: 95, w: 120, h: 64 },
+          source: { x: 25, y: 405, w: 180, h: 96 },
+          rules: { x: 42, y: 405, w: 180, h: 96 },
+          rw: { x: 59, y: 405, w: 180, h: 96 },
+          confirm: { x: 76, y: 405, w: 180, h: 96 }
+        };
+        const layoutGraphNodes = () => {
+          const bounds = canvas.getBoundingClientRect();
+          const padX = 48;
+          const usableWidth = Math.max(1, bounds.width - padX * 2);
+          Object.entries(nodeSpecs).forEach(([id, spec]) => {
+            const el = canvas.querySelector('[data-node="' + id + '"]');
+            if (!el) return;
+            const cx = padX + usableWidth * spec.x / 100;
+            el.style.setProperty('--w', spec.w + 'px');
+            el.style.setProperty('--h', spec.h + 'px');
+            el.style.width = spec.w + 'px';
+            el.style.height = spec.h + 'px';
+            el.style.left = (cx - spec.w / 2) + 'px';
+            el.style.top = (spec.y - spec.h / 2) + 'px';
+          });
+        };
+        layoutGraphNodes();
+        const cr = canvas.getBoundingClientRect();
+        const box = (id) => {
+          const el = canvas.querySelector('[data-node="' + id + '"]');
+          if (!el) return null;
+          const r = el.getBoundingClientRect();
+          return {
+            left: r.left - cr.left,
+            right: r.right - cr.left,
+            top: r.top - cr.top,
+            bottom: r.bottom - cr.top,
+            cx: r.left - cr.left + r.width / 2,
+            cy: r.top - cr.top + r.height / 2,
+            w: r.width,
+            h: r.height
+          };
+        };
+        const setPath = (id, d) => {
+          const el = svg.querySelector('#' + id);
+          if (el) el.setAttribute('d', d);
+        };
+        svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+        const softHorizontal = (from, to, amp = 16) => {
+          const y = (from.cy + to.cy) / 2;
+          const x1 = from.right;
+          const x2 = to.left;
+          const dx = Math.max(1, x2 - x1);
+          const control = Math.min(88, Math.max(54, dx * 0.38));
+          return 'M' + x1 + ' ' + y + ' C ' + (x1 + control) + ' ' + (y - amp) + ' ' + (x2 - control) + ' ' + (y - amp) + ' ' + x2 + ' ' + y;
+        };
+        const softVertical = (from, to, fromSide, toSide, amp = 18) => {
+          const x1 = from.cx;
+          const y1 = fromSide === 'bottom' ? from.bottom : from.top;
+          const x2 = to.cx;
+          const y2 = toSide === 'top' ? to.top : to.bottom;
+          const dy = y2 - y1;
+          return 'M' + x1 + ' ' + y1 + ' C ' + (x1 - amp) + ' ' + (y1 + dy * 0.36) + ' ' + (x2 + amp) + ' ' + (y2 - dy * 0.36) + ' ' + x2 + ' ' + y2;
+        };
+        const collectAnchors = [];
+        const applyPair = (segId, baseId, glowId, fromId, toId) => {
+          const from = box(fromId), to = box(toId);
+          if (!from || !to) return;
+          const d = softHorizontal(from, to, 14);
+          setPath(segId, d); setPath(baseId, d); setPath(glowId, d);
+          collectAnchors.push(['main', from.right, (from.cy + to.cy) / 2, 2.7], ['main', to.left, (from.cy + to.cy) / 2, 2.7]);
+        };
+        applyPair('mainSeg1', 'mainLine1', 'mainGlow1', 'start', 'scene');
+        applyPair('mainSeg2', 'mainLine2', 'mainGlow2', 'scene', 'action');
+        applyPair('mainSeg3', 'mainLine3', 'mainGlow3', 'action', 'shot');
+        applyPair('mainSeg4', 'mainLine4', 'mainGlow4', 'shot', 'prompt');
+        applyPair('mainSeg5', 'mainLine5', 'mainGlow5', 'prompt', 'snapshot');
+        const verticalPairs = [
+          ['assistWriting', 'writing', 'scene', 'bottom', 'top', 16],
+          ['assistCamera', 'camera', 'action', 'bottom', 'top', 16],
+          ['assistGuard', 'guard', 'prompt', 'bottom', 'top', 16],
+          ['candidateSceneSource', 'scene', 'source', 'bottom', 'top', 18],
+          ['candidatePromptConfirm', 'prompt', 'confirm', 'bottom', 'top', 18]
+        ];
+        verticalPairs.forEach(([pathId, fromId, toId, fromSide, toSide, amp]) => {
+          const from = box(fromId), to = box(toId);
+          if (!from || !to) return;
+          const d = softVertical(from, to, fromSide, toSide, amp);
+          setPath(pathId, d);
+          const y1 = fromSide === 'bottom' ? from.bottom : from.top;
+          const y2 = toSide === 'top' ? to.top : to.bottom;
+          collectAnchors.push(['candidate', from.cx, y1, 2.2], ['candidate', to.cx, y2, 2.2]);
+        });
+        [['candidateSourceRules', 'source', 'rules'], ['candidateRulesRw', 'rules', 'rw'], ['candidateRwConfirm', 'rw', 'confirm']].forEach(([pathId, fromId, toId]) => {
+          const from = box(fromId), to = box(toId);
+          if (!from || !to) return;
+          const d = softHorizontal(from, to, -12);
+          setPath(pathId, d);
+          collectAnchors.push(['candidate', from.right, (from.cy + to.cy) / 2, 2.2], ['candidate', to.left, (from.cy + to.cy) / 2, 2.2]);
+        });
+        const confirm = box('confirm'), snap = box('snapshot');
+        if (confirm && snap) {
+          const x1 = confirm.right;
+          const y1 = confirm.cy;
+          const x2 = snap.left;
+          const y2 = snap.cy;
+          const dx = Math.max(1, x2 - x1);
+          const c1 = Math.min(150, Math.max(90, dx * 0.45));
+          const c2 = Math.min(90, Math.max(50, dx * 0.24));
+          const d = 'M' + x1 + ' ' + y1 + ' C ' + (x1 + c1) + ' ' + y1 + ' ' + (x2 - c2) + ' ' + y2 + ' ' + x2 + ' ' + y2;
+          setPath('confirmLine', d);
+          setPath('confirmFlow', d);
+          collectAnchors.push(['confirm', x1, y1, 2.5], ['confirm', x2, y2, 2.5]);
+        }
+        const anchorLayer = svg.querySelector('#anchorDots');
+        if (anchorLayer) {
+          anchorLayer.innerHTML = collectAnchors.map(([tone, x, y, r]) => '<circle class="anchor-dot ' + (tone === 'candidate' ? 'candidate-anchor' : tone === 'confirm' ? 'confirm-anchor' : '') + '" cx="' + x + '" cy="' + y + '" r="' + r + '" />').join('');
+        }
+      }
+
+      function render() { const s = state(); document.getElementById('clock').textContent = now(); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); requestAnimationFrame(updateGraphConnections); }
+      async function mutate(action) { try { if (!currentPackage?.run_id) return; currentPackage = await api('/api/intake/' + currentPackage.run_id + '/' + action, {}); render(); } catch (error) { alert(error.message || String(error)); } }
+      document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); const title = document.getElementById('intakeTitle').value.trim(); if (!title) return; try { currentPackage = await api('/api/intake/start', { title, search_focus: document.getElementById('searchFocus').value }); currentPackage = await api('/api/intake/' + currentPackage.run_id + '/sources', {}); render(); } catch (error) { alert(error.message || String(error)); } });
+      document.getElementById('showSources')?.addEventListener('click', () => mutate('sources'));
+      document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
+      document.getElementById('markWaiting')?.addEventListener('click', () => mutate('confirm'));
+      document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
+      setInterval(() => { document.getElementById('clock').textContent = now(); }, 1000);
+      window.addEventListener('resize', () => requestAnimationFrame(updateGraphConnections));
+      loadSamples().then(render);
+    </script>
+  </body>
+</html>
