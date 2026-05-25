@@ -791,8 +791,8 @@
 
       .graph-node .node-status {
         position: absolute;
-        top: 9px;
-        right: 10px;
+        top: 8px;
+        right: 9px;
         max-width: 72px;
         overflow: hidden;
         border: 1px solid #dce8f6;
@@ -834,15 +834,23 @@
       .assist-node {
         --w: 120px;
         --h: 64px;
-        justify-content: center;
-        padding: 8px 12px;
+        justify-content: flex-start;
+        padding: 21px 10px 8px;
         text-align: center;
         border-color: rgba(91, 119, 158, 0.34);
         box-shadow: 0 12px 26px rgba(35, 70, 116, 0.07);
       }
 
       .assist-node .node-tag { display: none; }
-      .assist-node strong { margin-top: 0; font-size: 13px; line-height: 1.1; }
+      .assist-node .node-status {
+        top: 6px;
+        right: 8px;
+        max-width: 54px;
+        padding: 1px 5px;
+        font-size: 9px;
+        line-height: 1.15;
+      }
+      .assist-node strong { margin-top: 0; font-size: 13px; line-height: 1.15; }
       .assist-node p { margin-top: 4px; font-size: 10px; line-height: 1.2; }
 
       .edge-label { display: none; }
@@ -1528,7 +1536,7 @@ package.artifacts:
       function escapeHtml(value) { return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;').replaceAll("'",'&#39;'); }
       function fieldLabel(value) { return ({ visual_description: '视觉描述', character_action: '角色动作', camera: '镜头', shot_size: '景别', prompt_text: '提示词文本', duration_seconds: '时长', negative_constraints: '负面约束' })[value] || String(value || '').replaceAll('_', ' '); }
       function now() { return new Date().toLocaleTimeString('zh-CN', { hour12: false }); }
-      async function apiJson(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok || payload.error) throw new Error(payload.error || '请求失败'); return payload; }
+      async function apiJson(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', cache: 'no-store', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok || payload.error) throw new Error(payload.error || '请求失败'); return payload; }
       async function api(path, body) { return (await apiJson(path, body)).package; }
       async function loadProviderStatus() {
         try {
@@ -1622,12 +1630,16 @@ package.artifacts:
           confirmCount.dataset.tone = acceptedCount || selectedCount ? 'ok' : (confirmableCount ? 'warn' : 'warn');
           confirmCount.textContent = applied
             ? ('已写入 ' + acceptedCount)
-            : ('已选 ' + selectedCount + ' / 可确认 ' + confirmableCount);
+            : acceptedCount
+              ? ('已确认 ' + acceptedCount + ' / 待写入')
+              : ('已选 ' + selectedCount + ' / 可确认 ' + confirmableCount);
         }
         if (confirmText) {
           confirmText.textContent = applied
             ? '确认包已写入 KB；落盘结果已进入 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。'
-            : confirmableCount
+            : acceptedCount
+              ? '确认包已生成，下面的已确认建议进入只读状态；下一步只需要点击“写入 KB 并验证”。'
+              : confirmableCount
               ? '这里是唯一执行入口。先在下方勾选要入库的 reviewed_wiki 条目，再点击生成确认包；图谱区同步每一步状态。'
               : '这里是唯一执行入口。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';
         }
