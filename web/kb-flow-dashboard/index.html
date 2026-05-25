@@ -162,9 +162,20 @@
 
       .intake-form {
         display: grid;
-        grid-template-columns: minmax(360px, 1fr) 280px minmax(360px, auto) 104px;
+        grid-template-columns: minmax(360px, 1fr) 280px minmax(360px, auto);
         gap: 10px;
         align-items: end;
+      }
+
+      .intake-note {
+        margin: 10px 0 0;
+        border: 1px solid #d9e8f6;
+        border-radius: 8px;
+        padding: 8px 10px;
+        background: #fbfdff;
+        color: #405b7f;
+        font-size: 12px;
+        line-height: 1.45;
       }
 
       label {
@@ -1209,6 +1220,7 @@
             <span class="chip">视觉描述</span><span class="chip">角色动作</span><span class="chip">镜头</span><span class="chip">景别</span><span class="chip">提示词文本</span>
           </div>
         </form>
+        <p class="intake-note">后续新内容搜索：在这里输入新的需求标题和搜索目标，再用图谱区“当前操作入口”创建新的 intake run。每个 run 独立落盘；未确认、未写入的内容不会进入 reviewed_wiki、runtime 或 PWA。</p>
       </section>
 
       <section class="panel graph-panel">
@@ -1581,7 +1593,9 @@ package.artifacts:
         const applied = s.status === 'applied_to_kb' || s.kb_application?.applied;
         const hasRecommendations = (s.recommendations || []).length > 0;
         if (summary) {
-          summary.textContent = s.run_id
+          summary.textContent = applied
+            ? ('当前 run 已写入 KB 并验证；如需搜索其他内容，修改上方需求后点击“开始新的搜索 run”。')
+            : s.run_id
             ? ('当前状态：' + phaseLabel(s) + '；候选 ' + (s.source_candidates || []).length + '；建议 ' + (s.recommendations || []).length + '；已确认 ' + acceptedCount + '。')
             : '先在上方录入手动需求，再按候选、筛选、确认、写入的顺序推进。';
         }
@@ -1595,8 +1609,10 @@ package.artifacts:
           let target = 'sources';
           let disabled = true;
           if (applied) {
-            label = '已写入 KB 并验证';
-            target = 'apply';
+            action = 'start';
+            label = '开始新的搜索 run';
+            target = 'sources';
+            disabled = false;
           } else if (!s.run_id) {
             action = 'start';
             label = '先填写需求并开始搜索';
@@ -1636,9 +1652,9 @@ package.artifacts:
         }
         if (confirmText) {
           confirmText.textContent = applied
-            ? '确认包已写入 KB；落盘结果已进入 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。'
+            ? '当前 run 已写入 KB；如需其他内容，修改上方需求并创建新的独立 run。'
             : acceptedCount
-              ? '确认包已生成，下面的已确认建议进入只读状态；下一步只需要点击“写入 KB 并验证”。'
+              ? '确认包已生成；下一步点击“写入 KB 并验证”，完成 reviewed_wiki、mapping、runtime 和 PWA adapter 更新。'
               : confirmableCount
               ? '这里是唯一执行入口。先在下方勾选要入库的 reviewed_wiki 条目，再点击生成确认包；图谱区同步每一步状态。'
               : '这里是唯一执行入口。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';

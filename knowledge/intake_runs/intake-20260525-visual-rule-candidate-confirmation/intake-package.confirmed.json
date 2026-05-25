@@ -1,0 +1,585 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "Visual rule candidate confirmation package",
+    "search_focus": "image_rule_candidate_dedupe_confirmation",
+    "target_model": "PWA storyboard prompt compiler",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text",
+      "summary-only KB adapter"
+    ],
+    "target_pwa_fields": [
+      "visual_description",
+      "character_action",
+      "camera",
+      "shot_size",
+      "person",
+      "prompt_text"
+    ],
+    "created_at": "2026-05-25T18:35:00+08:00"
+  },
+  "search_plan": {
+    "acquisition_mode": "hope_env_web_search",
+    "live_search_connector": "not_used",
+    "generated_queries": [],
+    "allowed_source_types": [
+      "graph_candidate_summary",
+      "visual_reference_boundary",
+      "existing_reviewed_wiki",
+      "field_matrix"
+    ],
+    "required_answers": [
+      "which current PWA field is served",
+      "which existing reviewed wiki already covers the rule",
+      "whether the candidate is a merge, a new candidate, a runtime reject, or FutureQA",
+      "whether the candidate stays summary-only before any runtime use"
+    ],
+    "search_provider_status": {
+      "status": "live_search",
+      "provider": "qwen",
+      "model": "qwen3.6-plus",
+      "base_url_host": "dashscope.aliyuncs.com",
+      "credential_state": "configured",
+      "web_search": "enabled",
+      "reason": "ok",
+      "candidate_count": 5
+    },
+    "dedupe_summary": {
+      "received_candidates": 17,
+      "merge_existing": 14,
+      "new_reviewed_wiki_candidate": 0,
+      "reject_runtime": 1,
+      "future_qa": 2,
+      "confirmation_queue_items": 9,
+      "apply_deferred": true,
+      "pwa_sync_deferred": true
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-pwa-vis-01",
+      "title": "Cinematic Shot Types and Visual Language Guide for AI Storyboarding",
+      "source_url": "https://www.filmmakeriq.com/lessons/cinematography-basics-shot-sizes-and-angles/",
+      "source_type_label": "可信教程",
+      "language": "英文",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "camera",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "create_story_task"
+      ],
+      "pwa_relevance": "提供标准的镜头景别（如CU, MS, LS）和角度定义，用于标准化PWA的shot_size和camera字段输出。",
+      "kb_gap": "填补PWA在生成分镜时缺乏统一电影术语映射表的缺口。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-pwa-char-02",
+      "title": "Character Consistency and Action Description Best Practices in Generative Video",
+      "source_url": "https://runwayml.com/blog/guide-to-character-consistency",
+      "source_type_label": "官方文档",
+      "language": "英文",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "指导如何构建清晰的角色动作描述，以优化PWA的character_action字段并减少生成歧义。",
+      "kb_gap": "解决PWA在处理复杂角色连续动作时描述模糊的问题。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-pwa-prompt-03",
+      "title": "Structuring Effective Prompts for Visual Storytelling Models",
+      "source_url": "https://docs.midjourney.com/docs/prompt-structure",
+      "source_type_label": "官方文档",
+      "language": "英文",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard"
+      ],
+      "pwa_relevance": "确立prompt_text的结构化模板（主体+环境+风格+参数），提升PWA输出提示词的可执行性。",
+      "kb_gap": "建立PWA内部提示词编译器的语法规范基准。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-pwa-cam-04",
+      "title": "Camera Movement Terminology for AI Video Generation",
+      "source_url": "https://www.lensrentals.com/blog/understanding-camera-movements",
+      "source_type_label": "可信教程",
+      "language": "英文",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard"
+      ],
+      "pwa_relevance": "明确推拉摇移等运镜术语的视觉表现，辅助PWA准确填充camera字段。",
+      "kb_gap": "补充PWA对动态运镜指令的理解库，避免静态与动态描述混淆。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-pwa-dedup-05",
+      "title": "Visual Deduplication Strategies in Knowledge Base Management",
+      "source_url": "https://arxiv.org/abs/2104.08763",
+      "source_type_label": "制作解析",
+      "language": "英文",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "提供图像语义去重的理论依据，用于优化PWA分镜行的唯一性检查逻辑。",
+      "kb_gap": "当前KB缺乏针对视觉描述重复性的自动化判定规则。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525-visual-rule-candidate-confirmation",
+      "acquisition_step": "hope_env_web_search"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-visual-candidate-001",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-002",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-003",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-004",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-005",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-006",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-007",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-008",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-009",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-010",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-011",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-012",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-013",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-014",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-candidate-015",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": false,
+      "result": "reject"
+    },
+    {
+      "source_id": "src-visual-candidate-016",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": true,
+      "result": "future_qa"
+    },
+    {
+      "source_id": "src-visual-candidate-017",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": true,
+      "result": "future_qa"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-visual-master-consistency",
+      "chinese_title": "视觉母版一致性规则",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "风格",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-pwa-vis-01",
+        "src-pwa-char-02",
+        "src-pwa-prompt-03"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-writing-continuity-core",
+        "rw-director-scheduling-core"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-language-grammar",
+      "chinese_title": "镜头语言语法规则",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "画面",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-pwa-vis-01",
+        "src-pwa-cam-04",
+        "src-pwa-prompt-03"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-director-scheduling-core"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-material-light-air-physicality",
+      "chinese_title": "材质光影空气物理反馈规则",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "画面",
+        "动作",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-pwa-vis-01",
+        "src-pwa-char-02",
+        "src-pwa-prompt-03"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action",
+        "rw-prompt-text-boundary"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-expression-physicalization",
+      "chinese_title": "表情表演物理化规则",
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "动作",
+        "画面",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-pwa-char-02",
+        "src-pwa-vis-01",
+        "src-pwa-prompt-03"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action",
+        "rw-validation-no-pseudo-success"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-transition-motion-dynamics",
+      "chinese_title": "转场与动势调度规则",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-pwa-cam-04",
+        "src-pwa-vis-01",
+        "src-pwa-prompt-03"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-director-scheduling-core",
+        "rw-duration-density-rules"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-25T11:32:40.728Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-visual-master-consistency",
+      "rw-camera-language-grammar",
+      "rw-material-light-air-physicality",
+      "rw-expression-physicalization",
+      "rw-transition-motion-dynamics"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-visual-master-consistency",
+      "rw-camera-language-grammar",
+      "rw-material-light-air-physicality",
+      "rw-expression-physicalization",
+      "rw-transition-motion-dynamics"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-25T11:44:03.828Z",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260525-visual-rule-candidate-confirmation\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "stdout_summary": "{ \"status\": \"applied\", \"package\": \"knowledge\\\\intake_runs\\\\intake-20260525-visual-rule-candidate-confirmation\\\\intake-package.confirmed.json\", \"applied_reviewed_wiki_ids\": [ \"rw-visual-master-consistency\", \"rw-camera-language-grammar\", \"rw-material-light-air-physicality\", \"rw-expression-physicalization\", \"rw-transition-motion-dynamics\" ], \"validate\": { \"status\": \"passed\", \"package\": \"intake-package.confirmed.json\", \"run_id\": \"intake-20260525-visual-rule-candidate-confirmation\", \"source_candidates\": 5, \"recommendations\": 5, \"confirmed\": true }, \"build\": { \"status\": \"written\", \"output\": \"samples\\\\pwa-kb-adapter-output.sample.json\", \"scene_count\": 21, \"rule_pack_count\": 18 } }",
+      "stderr_summary": "",
+      "status": 0
+    }
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260525-visual-rule-candidate-confirmation/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260525-visual-rule-candidate-confirmation/intake-package.confirmed.json",
+    "dedupe_report": "knowledge/intake_runs/intake-20260525-visual-rule-candidate-confirmation/dedupe-report.md",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  }
+}

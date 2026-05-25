@@ -575,7 +575,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "source_facts",
@@ -595,7 +605,12 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-hot-blood-battle-summary-A"
@@ -656,7 +671,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -673,7 +698,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-ensemble_performance-summary-A"
@@ -734,7 +765,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -751,7 +792,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-emotional_dialogue-summary-A"
@@ -812,7 +859,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -829,7 +886,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-encounter_performance-summary-A"
@@ -890,7 +953,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -907,7 +980,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-field_chase-summary-A"
@@ -968,7 +1047,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -985,7 +1074,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-spectacle_showcase-summary-A"
@@ -1046,7 +1141,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1063,7 +1168,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-daily_healing-summary-A"
@@ -1124,7 +1235,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1141,7 +1262,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-guoman_hot_blood_combat-summary-A"
@@ -1202,7 +1329,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1219,7 +1356,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-guoman_ensemble_performance-summary-A"
@@ -1280,7 +1423,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1297,7 +1450,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-ink_wuxia_combat-summary-A"
@@ -1358,7 +1517,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1375,7 +1544,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-eastern_spectacle-summary-A"
@@ -1436,7 +1611,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1453,7 +1638,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-xianxia_action-summary-A"
@@ -1516,7 +1707,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "source_facts",
@@ -1535,7 +1736,12 @@
         "audio_tone",
         "post_style",
         "field_boundary",
-        "entity_integrity"
+        "entity_integrity",
+        "character_continuity",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-urban-fantasy-summary-A"
@@ -1596,7 +1802,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1613,7 +1829,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-chinese_war_formation-summary-A"
@@ -1674,7 +1896,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1691,7 +1923,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-weapon_highlight-summary-A"
@@ -1752,7 +1990,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1769,7 +2017,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-council_strategy-summary-A"
@@ -1830,7 +2084,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1847,7 +2111,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-siege_defense-summary-A"
@@ -1908,7 +2178,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -1925,7 +2205,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-slg_sandbox_view-summary-A"
@@ -1986,7 +2272,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -2003,7 +2299,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-slg_march_encirclement-summary-A"
@@ -2064,7 +2366,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -2081,7 +2393,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-slg_city_growth-summary-A"
@@ -2142,7 +2460,17 @@
         "Do not use the full accepted body when the selected storyboard task is local.",
         "Do not invent character names.",
         "Do not put location, action, camera, visual style, source, or KB terms into person.",
-        "Do not expose governance wording in user exports."
+        "Do not expose governance wording in user exports.",
+        "Do not overwrite accepted body facts.",
+        "Do not expose source images, OCR text, local paths, or source registers.",
+        "Do not use camera vocabulary as empty decoration.",
+        "Do not expose internal rule ids in prompt_text.",
+        "Do not add unsupported world facts or weather effects.",
+        "Do not replace action with texture lists.",
+        "Do not output abstract mood without visible action.",
+        "Do not force invisible micro-expression cues into wide shots.",
+        "Do not add decorative transitions unrelated to scene function.",
+        "Do not break action continuity or accepted event order."
       ],
       "influence_axes": [
         "visual_master",
@@ -2159,7 +2487,13 @@
         "post_style",
         "field_boundary",
         "entity_integrity",
-        "export_safety"
+        "export_safety",
+        "character_continuity",
+        "visual_grounding",
+        "shot_intent",
+        "structure",
+        "character_action",
+        "continuity"
       ],
       "selected_sample_ids": [
         "sample-slg_battle_report-summary-A"
@@ -2581,7 +2915,8 @@
           "dg-visual-master-consistency",
           "dg-camera-language-grammar",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-expression-physicalization"
         ]
       },
       {
@@ -2612,7 +2947,8 @@
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
-          "vg-field-aware-entity"
+          "vg-field-aware-entity",
+          "dg-visual-master-consistency"
         ]
       },
       {
