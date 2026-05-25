@@ -287,6 +287,94 @@
         font-weight: 700;
       }
 
+      .handoff-board {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .handoff-card {
+        display: grid;
+        gap: 8px;
+        min-height: 154px;
+        border: 1px solid #d7e5f4;
+        border-radius: 10px;
+        padding: 11px 12px;
+        background: #ffffff;
+      }
+
+      .handoff-card[data-state="done"] {
+        border-color: #9fd4b0;
+        background: #f6fcf8;
+      }
+
+      .handoff-card[data-state="running"] {
+        border-color: #e5bf7d;
+        background: #fffaf1;
+      }
+
+      .handoff-card[data-state="blocked"] {
+        border-color: #e9aaa3;
+        background: #fff6f4;
+      }
+
+      .handoff-card h3 {
+        margin: 0;
+        color: #17335f;
+        font-size: 13px;
+        line-height: 1.25;
+      }
+
+      .handoff-card p {
+        margin: 0;
+        color: #405b7f;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .artifact-list {
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .artifact-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        min-width: 0;
+        color: #5b708f;
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      .artifact-list code {
+        overflow: hidden;
+        color: #153c72;
+        font-family: Consolas, "SFMono-Regular", monospace;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .sync-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .mini-ghost {
+        min-height: 28px;
+        padding: 4px 9px;
+        border-color: #bed0e8;
+        background: #f9fbff;
+        color: #173b72;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
       .ghost {
         min-height: 42px;
         padding: 8px 12px;
@@ -744,7 +832,7 @@
 
       @media (max-width: 1180px) {
         .topbar, .intake-form, .tables, .api-doc-grid { grid-template-columns: 1fr; }
-        .action-head, .quick-actions, .confirmation-dock { grid-template-columns: 1fr; }
+        .action-head, .quick-actions, .confirmation-dock, .handoff-board { grid-template-columns: 1fr; }
         .evidence-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .confirmation-status { justify-content: flex-start; }
         .status-strip { justify-content: flex-start; }
@@ -921,6 +1009,41 @@
             <button class="mini-primary" type="button" id="confirmSelectedDock">确认所选入库建议</button>
           </div>
         </div>
+        <div class="handoff-board" aria-label="图谱 KB PWA 落地链路">
+          <article class="handoff-card" id="graphLinkCard" data-state="running">
+            <div class="sync-row">
+              <h3>1. 图谱入口</h3>
+              <span class="tag" id="graphLinkStatus" data-tone="warn">等待搜索</span>
+            </div>
+            <p id="graphLinkSummary">搜索候选和规则筛选只产生 intake package，不直接写 KB。</p>
+            <ul class="artifact-list" id="graphArtifacts"></ul>
+          </article>
+          <article class="handoff-card" id="gateLinkCard" data-state="running">
+            <div class="sync-row">
+              <h3>2. 用户确认</h3>
+              <span class="tag" id="gateLinkStatus" data-tone="warn">等待勾选</span>
+            </div>
+            <p id="gateLinkSummary">只有 accepted_reviewed_wiki_ids 进入确认包，才允许 apply。</p>
+            <ul class="artifact-list" id="gateArtifacts"></ul>
+          </article>
+          <article class="handoff-card" id="kbLinkCard" data-state="running">
+            <div class="sync-row">
+              <h3>3. KB 落库</h3>
+              <span class="tag" id="kbLinkStatus" data-tone="warn">等待写入</span>
+            </div>
+            <p id="kbLinkSummary">apply 成功后写 reviewed_wiki、mapping 和 runtime snapshot。</p>
+            <ul class="artifact-list" id="kbArtifacts"></ul>
+          </article>
+          <article class="handoff-card" id="pwaLinkCard" data-state="running">
+            <div class="sync-row">
+              <h3>4. PWA 消费</h3>
+              <span class="tag" id="pwaLinkStatus" data-tone="warn">检查中</span>
+              <button class="mini-ghost" type="button" id="syncPwaNow">同步到 PWA</button>
+            </div>
+            <p id="pwaLinkSummary">PWA 只读取 summary-only 的 latest.json，不读取图谱或 raw KB。</p>
+            <ul class="artifact-list" id="pwaArtifacts"></ul>
+          </article>
+        </div>
       </section>
 
       <section class="metrics" aria-label="KB 覆盖指标">
@@ -969,6 +1092,8 @@
             <code class="api-doc-code">GET  /api/intake/latest
 GET  /api/provider/status
 POST /api/provider/test
+GET  /api/pwa/status
+POST /api/pwa/sync
 POST /api/intake/start
 POST /api/intake/:run_id/sources
 POST /api/intake/:run_id/screen
@@ -996,6 +1121,12 @@ Content-Type: application/json
     "rw-seedance2-storyboard-field-discipline"
   ]
 }</code>
+          </section>
+          <section class="api-doc-card">
+            <h3>PWA 同步</h3>
+            <code class="api-doc-code">GET  /api/pwa/status
+POST /api/pwa/sync</code>
+            <p>同步接口只把 <code>samples/pwa-kb-adapter-output.sample.json</code> 复制到 PWA 的 <code>latest.json</code>，并运行 adapter check 与 PWA 测试。</p>
           </section>
           <section class="api-doc-card">
             <h3>关键返回字段</h3>
@@ -1031,17 +1162,27 @@ package.artifacts:
       let sampleRecommendations = fallbackRecommendations;
       let currentPackage = null;
       let providerState = null;
+      let pwaState = null;
+      let pwaSyncState = null;
       let selectedConfirmIds = new Set();
       let confirmSelectionTouched = false;
       function escapeHtml(value) { return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;').replaceAll("'",'&#39;'); }
       function fieldLabel(value) { return ({ visual_description: '视觉描述', character_action: '角色动作', camera: '镜头', shot_size: '景别', prompt_text: '提示词文本', duration_seconds: '时长', negative_constraints: '负面约束' })[value] || String(value || '').replaceAll('_', ' '); }
       function now() { return new Date().toLocaleTimeString('zh-CN', { hour12: false }); }
-      async function api(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok) throw new Error(payload.error || '请求失败'); return payload.package; }
+      async function apiJson(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok || payload.error) throw new Error(payload.error || '请求失败'); return payload; }
+      async function api(path, body) { return (await apiJson(path, body)).package; }
       async function loadProviderStatus() {
         try {
           providerState = await fetch('/api/provider/status', { cache: 'no-store' }).then((response) => response.json());
         } catch {
           providerState = null;
+        }
+      }
+      async function loadPwaStatus() {
+        try {
+          pwaState = await fetch('/api/pwa/status', { cache: 'no-store' }).then((response) => response.json());
+        } catch {
+          pwaState = null;
         }
       }
       function renderProviderStatus() {
@@ -1055,9 +1196,10 @@ package.artifacts:
           provider.title = providerState ? ('env=' + (providerState.env_loaded ? 'loaded' : 'missing') + '; credential=' + providerState.credential_state + '; latest=' + providerState.effective_search_mode + '/' + (providerState.latest_search_reason || '')) : '';
         }
         if (pwa) {
-          const synced = state().status === 'applied_to_kb' && state().kb_application?.validation_status === 'passed';
+          const synced = pwaState?.status === 'synced';
           pwa.dataset.tone = synced ? 'ok' : 'warn';
-          pwa.textContent = synced ? 'PWA adapter ready' : 'PWA adapter pending';
+          pwa.textContent = synced ? 'PWA synced' : 'PWA pending';
+          pwa.title = pwaState ? ('public=' + (pwaState.public_latest_synced ? 'synced' : 'pending') + '; dist=' + (pwaState.dist_latest_synced ? 'synced' : 'pending') + '; sample=' + (pwaState.sample_hash || '')) : '';
         }
       }
       function renderActionRail(s) {
@@ -1120,8 +1262,111 @@ package.artifacts:
           if (accepted.length) selectedConfirmIds = new Set(accepted);
         }
       }
+      function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+      function setTag(id, label, tagTone) { const el = document.getElementById(id); if (!el) return; el.textContent = label; el.dataset.tone = tagTone; }
+      function setCardState(id, cardState) { const el = document.getElementById(id); if (el) el.dataset.state = cardState; }
+      function compactPath(value) {
+        const text = String(value || '').replaceAll('\\', '/');
+        if (!text) return '等待生成';
+        const parts = text.split('/').filter(Boolean);
+        return parts.length > 3 ? parts.slice(-3).join('/') : text;
+      }
+      function defaultArtifact(s, key) {
+        const runId = s.run_id || '<run_id>';
+        const defaults = {
+          draft_package: 'knowledge/intake_runs/' + runId + '/intake-package.draft.json',
+          confirmed_package: 'knowledge/intake_runs/' + runId + '/intake-package.confirmed.json',
+          reviewed_wiki: 'knowledge/reviewed_wiki',
+          wiki_to_runtime_mapping: 'knowledge/mappings/wiki-to-runtime-mapping.v0.2.json',
+          runtime_snapshot: 'knowledge/runtime_snapshots/latest.candidate.json',
+          pwa_adapter_output: 'samples/pwa-kb-adapter-output.sample.json'
+        };
+        return defaults[key] || '';
+      }
+      function artifactPath(s, key) {
+        return s.artifacts?.[key] || (s.run_id ? defaultArtifact(s, key) : '');
+      }
+      function shortList(values, emptyLabel) {
+        const list = (values || []).filter(Boolean);
+        if (!list.length) return emptyLabel || '无';
+        return list.length > 2 ? list.slice(0, 2).join(', ') + ' +' + (list.length - 2) : list.join(', ');
+      }
+      function renderArtifactList(id, rows) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = rows.map(([label, value]) => '<li><span>' + escapeHtml(label) + '</span><code>' + escapeHtml(value) + '</code></li>').join('');
+      }
+      function renderHandoffBoard(s) {
+        const sources = s.source_candidates || [];
+        const keptSources = sources.filter((item) => item.decision === 'keep' || item.decision_label === '保留').length;
+        const screening = s.screening_results || [];
+        const keptScreening = screening.filter((item) => item.result === 'keep' || item.result === '通过').length;
+        const recs = s.recommendations || [];
+        const accepted = s.confirmation?.accepted_reviewed_wiki_ids || [];
+        const applied = s.status === 'applied_to_kb' || s.kb_application?.applied;
+        const validationPassed = s.kb_application?.validation_status === 'passed';
+        const pwaSynced = pwaState?.status === 'synced';
+        const pwaRootReady = !!pwaState?.pwa_root_exists;
+        const pwaSyncing = pwaSyncState?.status === 'running';
+
+        const graphDone = !!sources.length && !!screening.length;
+        setCardState('graphLinkCard', graphDone ? 'done' : (s.run_id ? 'running' : 'blocked'));
+        setTag('graphLinkStatus', graphDone ? ('保留 ' + keptScreening + ' / 筛选 ' + screening.length) : (sources.length ? ('候选 ' + sources.length) : '等待搜索'), graphDone ? 'ok' : 'warn');
+        setText('graphLinkSummary', graphDone
+          ? ('图谱已把候选收敛为筛选结果；保留 ' + keptSources + ' 条来源，只能进入入库建议，不会直接写 KB。')
+          : '从手动需求开始搜索，候选只写入 intake package 草稿。');
+        renderArtifactList('graphArtifacts', [
+          ['run', s.run_id || '未创建'],
+          ['package', compactPath((s.confirmation?.confirmed || s.kb_application?.applied) ? artifactPath(s, 'confirmed_package') : artifactPath(s, 'draft_package'))],
+          ['来源/筛选', sources.length + ' / ' + screening.length]
+        ]);
+
+        const gateDone = !!accepted.length;
+        const gateBlocked = !!recs.length && !accepted.length;
+        setCardState('gateLinkCard', gateDone ? 'done' : (gateBlocked ? 'blocked' : 'running'));
+        setTag('gateLinkStatus', gateDone ? ('已确认 ' + accepted.length) : (recs.length ? '待勾选确认' : '等待建议'), gateDone ? 'ok' : 'warn');
+        setText('gateLinkSummary', gateDone
+          ? ('确认包只接受这些 reviewed_wiki：' + shortList(accepted, '无') + '。')
+          : '在入库建议队列勾选条目后，点击“生成确认包”才会形成用户确认证据。');
+        renderArtifactList('gateArtifacts', [
+          ['confirmed', compactPath(artifactPath(s, 'confirmed_package'))],
+          ['accepted', shortList(accepted, '未确认')],
+          ['可确认', String(confirmableRecommendationIds(s).length)]
+        ]);
+
+        const kbDone = applied && validationPassed;
+        setCardState('kbLinkCard', kbDone ? 'done' : (applied ? 'blocked' : 'running'));
+        setTag('kbLinkStatus', kbDone ? '校验通过' : (applied ? '校验异常' : '等待写入'), kbDone ? 'ok' : 'warn');
+        setText('kbLinkSummary', kbDone
+          ? 'apply 已写入 reviewed_wiki、mapping、runtime snapshot，并重新生成 PWA adapter 输出。'
+          : '写入只能通过 confirmed package 触发，未确认建议不能进入 reviewed_wiki 或 runtime。');
+        renderArtifactList('kbArtifacts', [
+          ['reviewed_wiki', compactPath(artifactPath(s, 'reviewed_wiki'))],
+          ['mapping', compactPath(artifactPath(s, 'wiki_to_runtime_mapping'))],
+          ['runtime', compactPath(artifactPath(s, 'runtime_snapshot'))],
+          ['adapter', compactPath(artifactPath(s, 'pwa_adapter_output'))]
+        ]);
+
+        setCardState('pwaLinkCard', !applied ? 'running' : (pwaSynced ? 'done' : (pwaRootReady ? 'running' : 'blocked')));
+        setTag('pwaLinkStatus', !applied ? '等待 KB 输出' : (pwaSynced ? '已同步' : (pwaRootReady ? '待同步' : 'PWA 根目录缺失')), pwaSynced ? 'ok' : 'warn');
+        setText('pwaLinkSummary', pwaState
+          ? ('sample ' + (pwaState.sample_hash || '无') + '；public ' + (pwaState.public_latest_synced ? '一致' : '待更新') + '；dist ' + (pwaState.dist_latest_synced ? '一致' : '待更新') + '。')
+          : 'PWA 状态未取到；同步只复制 summary-only latest.json。');
+        renderArtifactList('pwaArtifacts', [
+          ['PWA', pwaState?.pwa_root_label || '未配置'],
+          ['sample', pwaState?.sample_hash || '无'],
+          ['public', (pwaState?.public_latest_hash || '无') + (pwaState?.public_latest_synced ? ' / synced' : ' / pending')],
+          ['dist', (pwaState?.dist_latest_hash || '无') + (pwaState?.dist_latest_synced ? ' / synced' : ' / pending')]
+        ]);
+        const syncButton = document.getElementById('syncPwaNow');
+        if (syncButton) {
+          syncButton.disabled = !applied || !pwaRootReady || pwaSyncing;
+          syncButton.textContent = pwaSyncing ? '同步中...' : (pwaSynced ? '重新同步' : '同步到 PWA');
+          syncButton.title = !applied ? '先完成写入 KB 并验证' : (!pwaRootReady ? 'PWA 根目录不存在' : '复制 latest.json 并运行 PWA kbAdapter 测试');
+        }
+      }
       function setNodeStates(s) { const order = ['start','scene','action','shot','prompt','snapshot']; const support = ['writing','camera','guard','source','rules','rw','confirm']; document.querySelectorAll('.graph-node').forEach((node) => { node.classList.remove('is-complete','is-running','is-pending','is-error'); node.classList.add('is-pending'); }); const status = s.status || 'idle'; const active = status === 'sources_collected' ? 'source' : status === 'screened' ? 'rules' : status === 'recommendations_ready' ? 'rw' : status === 'confirmed_package' ? 'confirm' : status === 'applied_to_kb' ? 'snapshot' : status === 'failed' ? 'confirm' : 'start'; order.concat(support).forEach((id) => { const node = document.querySelector('[data-node="' + id + '"]'); if (!node) return; node.classList.remove('is-pending'); if (id === active) node.classList.add(status === 'failed' ? 'is-error' : 'is-running'); else if (status === 'applied_to_kb' || ['start','scene','action','shot','prompt'].includes(id)) node.classList.add('is-complete'); else node.classList.add('is-pending'); }); }
-      async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} await loadProviderStatus(); }
+      async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} await loadProviderStatus(); await loadPwaStatus(); }
       function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); const artifact = s.artifacts?.draft_package || ''; if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；草稿已落盘：' + artifact + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
       function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
       function searchModeLabel(s) { const status = s.search_plan?.search_provider_status; if (!status) return phaseLabel(s); const mode = status.status === 'live_search' ? 'Hope 搜索' : status.status === 'model_search' ? '模型候选' : status.status === 'model_fallback' ? '模型回退候选' : '登记候选'; const detail = status.reason === 'missing_credential' ? '未配置密钥' : status.reason === 'live_search_timeout' ? '联网搜索超时回退' : status.reason === 'live_search_failed' ? '搜索失败回退' : status.reason === 'live_search_timeout_model_ok' ? '联网搜索超时，普通模型已返回' : status.reason === 'live_search_failed_model_ok' ? '联网搜索失败，普通模型已返回' : status.reason === 'live_search_timeout_model_failed' ? '联网和模型回退均失败' : status.reason === 'live_search_failed_model_failed' ? '搜索和模型回退均失败' : status.reason === 'no_url_bound_candidates' ? '无可用来源回退' : status.reason === 'ok' ? '已返回来源' : status.reason || ''; return phaseLabel(s) + ' · ' + mode + (detail ? ' · ' + detail : ''); }
@@ -1290,8 +1535,8 @@ package.artifacts:
         }
       }
 
-      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); requestAnimationFrame(updateGraphConnections); }
-      async function refreshProviderAndRender() { await loadProviderStatus(); render(); }
+      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); renderHandoffBoard(s); requestAnimationFrame(updateGraphConnections); }
+      async function refreshProviderAndRender() { await Promise.all([loadProviderStatus(), loadPwaStatus()]); render(); }
       async function startSources() {
         const title = document.getElementById('intakeTitle').value.trim();
         if (!title) { document.getElementById('intakeTitle').focus(); return; }
@@ -1325,12 +1570,30 @@ package.artifacts:
           alert(error.message || String(error));
         }
       }
+      async function syncPwaNow() {
+        pwaSyncState = { status: 'running' };
+        render();
+        try {
+          const payload = await apiJson('/api/pwa/sync', {});
+          pwaSyncState = payload;
+          pwaState = payload.pwa || pwaState;
+          await loadPwaStatus();
+          render();
+          if (payload.status !== 'passed') alert('PWA 同步未通过，请查看同步证据。');
+        } catch (error) {
+          pwaSyncState = { status: 'failed', error: error.message || String(error) };
+          await loadPwaStatus();
+          render();
+          alert(error.message || String(error));
+        }
+      }
       document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); try { await startSources(); } catch (error) { alert(error.message || String(error)); } });
       document.getElementById('showSources')?.addEventListener('click', () => mutate('sources'));
       document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
       document.getElementById('markWaiting')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('confirmSelectedDock')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
+      document.getElementById('syncPwaNow')?.addEventListener('click', syncPwaNow);
       document.getElementById('recommendationFeed')?.addEventListener('change', (event) => {
         const target = event.target;
         if (!target || !target.classList || !target.classList.contains('recommendation-checkbox')) return;

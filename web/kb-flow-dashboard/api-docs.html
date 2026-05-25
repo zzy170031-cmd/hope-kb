@@ -163,6 +163,8 @@ HOPE_KB_SEARCH_TIMEOUT_MS=30000</pre>
         <pre>GET  /api/intake/latest
 GET  /api/provider/status
 POST /api/provider/test
+GET  /api/pwa/status
+POST /api/pwa/sync
 POST /api/intake/start
 POST /api/intake/:run_id/sources
 POST /api/intake/:run_id/screen
@@ -192,6 +194,12 @@ Content-Type: application/json
     "rw-seedance2-storyboard-field-discipline"
   ]
 }</pre>
+        </section>
+        <section class="panel card">
+          <h2>PWA 同步接口</h2>
+          <pre>GET  /api/pwa/status
+POST /api/pwa/sync</pre>
+          <p>同步只复制 summary-only adapter 输出到 PWA <code>latest.json</code>，并运行 Hope-KB adapter check 与 PWA kbAdapter 测试。</p>
         </section>
         <section class="panel card">
           <h2>状态字段</h2>

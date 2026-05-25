@@ -6,12 +6,35 @@ Update this file for online sync after every 10-20 minute work package.
 
 - current thread state: `codex/contracts-freeze`, `hope-kb` only, no merge with `hope`
 - repo path: `E:\codex\hope-kb-live-20260525`
-- current task: productize the 5179 manual intake loop from live search through user confirmation, KB apply, runtime snapshot, and PWA summary-only handoff
+- current task: keep 5179 as the visible graph -> KB -> PWA intake handoff surface, then continue candidate confirmation through summary-only runtime handoff
 - owner / lane: KB integration owner as total control, coordinating four verification lanes and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-05-25 17:30:00 +08:00
+- last updated: 2026-05-25 17:56:00 +08:00
 
 ## Latest Completed
 
+- 2026-05-25 17:56 +08: 5179 dashboard now shows a concrete
+  graph -> confirmation -> KB -> PWA landing board under the execution chain.
+  The board derives live state from the latest intake package and PWA snapshot
+  hashes: candidate/screening counts, accepted reviewed_wiki ids, KB validation
+  status, adapter hash, PWA `public/kb/latest.json`, and PWA
+  `dist/kb/latest.json`. It makes the confirmation point visible and keeps
+  `keep` source decisions as screening-only evidence until the user generates a
+  confirmed package.
+- Added dashboard APIs `GET /api/pwa/status` and `POST /api/pwa/sync`. The sync
+  endpoint runs the existing KB adapter check, copies the summary-only adapter
+  output into the PWA public/dist latest snapshots, and runs PWA
+  `src/lib/kbAdapter.test.ts`. The endpoint returns sanitized output summaries
+  and hash/status evidence, not API keys, raw sources, prompt bodies, or local
+  paths.
+- Verification for this dashboard work passed:
+  `node --check scripts\serve-kb-flow-dashboard.js`, inline dashboard script
+  parsing, `git diff --check`, `node scripts\validate-manual-intake-package.js
+  --package knowledge\intake_runs\intake-20260525-person-identity-lock\intake-package.confirmed.json`,
+  `node scripts\build-pwa-kb-adapter-output.js --check`,
+  `node scripts\validate-manual-intake-samples.js`,
+  `powershell.exe -ExecutionPolicy Bypass -File
+  scripts\validate-kb-runtime-prototype.ps1`, and live `POST /api/pwa/sync`
+  through the running 5179 server. PWA `kbAdapter.test.ts` passed 13 tests.
 - 2026-05-25 17:30 +08: Graph-thread field alignment promoted the P0
   `person` boundary into a confirmed KB intake package:
   `knowledge/intake_runs/intake-20260525-person-identity-lock/intake-package.confirmed.json`.

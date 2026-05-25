@@ -1,11 +1,13 @@
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
+const crypto = require("crypto");
 const { spawnSync } = require("child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
 const root = path.join(repoRoot, "web", "kb-flow-dashboard");
 const runsRoot = path.join(repoRoot, "knowledge", "intake_runs");
+const adapterSamplePath = path.join(repoRoot, "samples", "pwa-kb-adapter-output.sample.json");
 const host = "127.0.0.1";
 function parseEnvValue(value) {
   const trimmed = String(value || "").trim();
@@ -463,6 +465,68 @@ function sanitizeProcessText(value) {
     .replace(/sk-[A-Za-z0-9]{12,}/g, "sk-[redacted]")
     .slice(0, 1200);
 }
+function defaultPwaRoot() {
+  const userProfile = process.env.USERPROFILE || process.env.HOME || "";
+  return userProfile ? path.join(userProfile, "Documents", "New project", "hope-web-pwa-inspect") : "";
+}
+function configuredPwaRoot() {
+  const candidate = process.env.HOPE_KB_PWA_ROOT || process.env.HOPE_WEB_PWA_ROOT || defaultPwaRoot();
+  return candidate ? path.resolve(candidate) : "";
+}
+function fileHash(file) {
+  if (!fs.existsSync(file)) return "";
+  return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").toUpperCase();
+}
+function shortHash(hash) {
+  return hash ? hash.slice(0, 12) : "";
+}
+function pwaStatus() {
+  const pwaRoot = configuredPwaRoot();
+  const publicTarget = path.join(pwaRoot, "public", "kb", "latest.json");
+  const distTarget = path.join(pwaRoot, "dist", "kb", "latest.json");
+  const sampleHash = fileHash(adapterSamplePath);
+  const publicHash = fileHash(publicTarget);
+  const distHash = fileHash(distTarget);
+  const rootExists = !!pwaRoot && fs.existsSync(pwaRoot);
+  const publicSynced = !!sampleHash && sampleHash === publicHash;
+  const distSynced = !!sampleHash && sampleHash === distHash;
+  return {
+    status: rootExists && publicSynced && distSynced ? "synced" : "pending",
+    pwa_root_configured: !!pwaRoot,
+    pwa_root_exists: rootExists,
+    pwa_root_label: pwaRoot ? path.basename(pwaRoot) : "",
+    sample_exists: fs.existsSync(adapterSamplePath),
+    sample_hash: shortHash(sampleHash),
+    public_latest_exists: fs.existsSync(publicTarget),
+    public_latest_hash: shortHash(publicHash),
+    public_latest_synced: publicSynced,
+    dist_latest_exists: fs.existsSync(distTarget),
+    dist_latest_hash: shortHash(distHash),
+    dist_latest_synced: distSynced,
+    targets: ["public/kb/latest.json", "dist/kb/latest.json"],
+    checked_at: new Date().toISOString()
+  };
+}
+function syncPwaLatest() {
+  const pwaRoot = configuredPwaRoot();
+  if (!pwaRoot || !fs.existsSync(pwaRoot)) throw new Error("PWA root not found.");
+  const result = spawnSync(process.execPath, [path.join(repoRoot, "scripts", "sync-pwa-kb-latest.js"), "--pwa-root", pwaRoot], { cwd: repoRoot, encoding: "utf8" });
+  let parsed = null;
+  try { parsed = JSON.parse(result.stdout); } catch {}
+  return {
+    status: result.status === 0 && !result.error ? "passed" : "failed",
+    exit_status: result.status,
+    error_summary: result.error ? sanitizeProcessText(result.error.message) : "",
+    adapter_check_passed: !!(parsed && parsed.adapter_check && parsed.adapter_check.passed),
+    copy_passed: !!(parsed && parsed.copy && parsed.copy.passed),
+    pwa_test_passed: !!(parsed && parsed.pwa_test && parsed.pwa_test.passed),
+    targets: parsed && Array.isArray(parsed.targets) ? parsed.targets : ["public\\kb\\latest.json", "dist\\kb\\latest.json"],
+    stdout_summary: sanitizeProcessText(result.stdout),
+    stderr_summary: sanitizeProcessText(result.stderr),
+    synced_at: new Date().toISOString(),
+    pwa: pwaStatus()
+  };
+}
 function applyStep(pkg) {
   if (!pkg.confirmation || pkg.confirmation.confirmed !== true) throw new Error("Package must be confirmed before apply.");
   if (!asArray(pkg.confirmation.accepted_reviewed_wiki_ids).length) throw new Error("Package confirmation has no accepted reviewed_wiki ids.");
@@ -487,6 +551,8 @@ async function handleApi(request, response, url) {
       lastProviderTestResult = await testProvider();
       return sendJson(response, 200, publicProviderStatus({ last_test_result: lastProviderTestResult }));
     }
+    if (request.method === "GET" && url.pathname === "/api/pwa/status") return sendJson(response, 200, pwaStatus());
+    if (request.method === "POST" && url.pathname === "/api/pwa/sync") return sendJson(response, 200, syncPwaLatest());
     if (request.method === "GET" && url.pathname === "/api/intake/latest") return sendJson(response, 200, { package: latestPackage() });
     if (request.method === "POST" && url.pathname === "/api/intake/start") { const pkg = makePackage(await readBody(request)); writePackage(pkg, false); return sendJson(response, 200, { package: pkg }); }
     const match = url.pathname.match(/^\/api\/intake\/([^/]+)\/(sources|screen|recommendations|confirm|apply)$/);
