@@ -799,56 +799,58 @@
         align-items: start;
       }
 
-      .evidence-detail {
-        overflow: hidden;
-        border-color: #cfdeef;
-        background: #ffffff;
-      }
-
-      .evidence-detail summary {
+      .evidence-card {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 18px;
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 12px;
         align-items: center;
-        min-height: 66px;
+        min-height: 68px;
         padding: 12px 14px;
+        border-color: #cfdeef;
+        background: #ffffff;
+        color: inherit;
         cursor: pointer;
-        list-style: none;
-        border-bottom: 1px solid transparent;
-        background:
-          linear-gradient(180deg, rgba(249, 252, 255, 0.98), rgba(255, 255, 255, 0.98));
+        font-family: inherit;
+        text-align: left;
+        transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
       }
 
-      .evidence-detail summary::-webkit-details-marker { display: none; }
-
-      .evidence-detail summary::after {
-        content: "";
-        width: 9px;
-        height: 9px;
-        justify-self: center;
-        border-right: 2px solid #6f85a6;
-        border-bottom: 2px solid #6f85a6;
-        transform: rotate(45deg);
-        transition: transform 0.18s ease;
+      .evidence-card:hover {
+        border-color: #9fb8d8;
+        box-shadow: 0 12px 28px rgba(35, 70, 115, 0.08);
+        transform: translateY(-1px);
       }
 
-      .evidence-detail[open] summary {
-        border-bottom-color: var(--line);
-        background: #fbfdff;
+      .evidence-card:focus-visible {
+        outline: 3px solid rgba(54, 107, 230, 0.18);
+        outline-offset: 2px;
       }
 
-      .evidence-detail[open] summary::after {
-        transform: rotate(225deg);
+      .evidence-card .open-indicator {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        height: 28px;
+        padding: 0 8px;
+        border: 1px solid #d9e5f3;
+        border-radius: 999px;
+        color: #5f789d;
+        font-size: 11px;
+        line-height: 1;
+        background: #f8fbff;
       }
 
-      .evidence-detail summary h2 {
+      .evidence-card-title {
+        display: block;
         margin: 0;
         color: var(--ink);
         font-size: 16px;
+        font-weight: 700;
         line-height: 1.2;
       }
 
-      .evidence-detail summary small {
+      .evidence-card small {
         display: block;
         overflow: hidden;
         margin-top: 7px;
@@ -859,14 +861,47 @@
         white-space: nowrap;
       }
 
-      .evidence-detail .feed {
-        max-height: 320px;
-        overflow: auto;
-        padding: 10px 12px 12px;
+      .evidence-dialog {
+        width: min(980px, 100%);
+        max-height: min(780px, calc(100vh - 48px));
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 28px 70px rgba(20, 45, 82, 0.2);
       }
 
-      .evidence-detail:not([open]) {
-        min-height: 0;
+      .evidence-dialog-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfdff;
+      }
+
+      .evidence-dialog-head h2 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .evidence-dialog-body {
+        max-height: calc(min(780px, 100vh - 48px) - 66px);
+        overflow: auto;
+        padding: 14px;
+        background: #f6f9fd;
+      }
+
+      .evidence-dialog-panel[hidden] {
+        display: none;
+      }
+
+      .evidence-dialog-panel .feed {
+        display: grid;
+        gap: 10px;
       }
 
       .dialog-backdrop[hidden] { display: none; }
@@ -946,7 +981,8 @@
         .brand h1 { font-size: 20px; }
         .panel-title { display: grid; }
         .evidence-row { grid-template-columns: 1fr; }
-        .evidence-detail summary { min-height: 68px; padding: 12px 14px; }
+        .evidence-dialog-head { align-items: flex-start; }
+        .evidence-dialog-body { padding: 10px; }
       }
     </style>
   </head>
@@ -1156,11 +1192,51 @@
       <section class="metrics" aria-label="KB 覆盖指标">
         <div class="metric"><span>已审知识</span><strong id="metricWiki">13</strong></div><div class="metric"><span>映射条目</span><strong id="metricMappings">13</strong></div><div class="metric"><span>规则包</span><strong id="metricRules">15</strong></div><div class="metric"><span>时长档位</span><strong id="metricDurations">6</strong></div><div class="metric"><span>场景覆盖</span><strong id="metricScenes">21</strong></div>
       </section>
-      <section class="evidence-row"><details class="panel evidence-detail"><summary><span><h2>当前状态</h2><small id="phaseSummary">等待用户发起</small></span></summary><div class="feed"><div class="feed-card"><strong>关联规则</strong><p>实线是应用产出路径；虚线是手动搜索入库路径；用户确认只允许写入已审知识。</p></div><div class="feed-card"><strong>运行边界</strong><p id="draftSummary">本地需求 0，等待用户手动发起。</p></div><div class="feed-card"><strong>21 个应用场景</strong><div class="scene-cloud" id="sceneCloud"></div></div></div></details><details class="panel evidence-detail"><summary><span><h2>互联网搜索候选</h2><small id="searchStatus">等待用户发起</small></span></summary><div class="feed" id="sourceFeed"></div></details><details class="panel evidence-detail"><summary><span><h2>规则筛选与 KB 对照</h2><small id="screeningStatus">规则与映射</small></span></summary><div class="feed" id="screeningBoard"></div></details><details class="panel evidence-detail"><summary><span><h2>入库建议队列</h2><small id="recommendationStatus">等待确认</small></span></summary><div class="feed" id="recommendationFeed"></div></details></section>
+      <section class="evidence-row" aria-label="入库链路详情">
+        <button class="panel evidence-card" type="button" data-evidence-dialog="status">
+          <span><span class="evidence-card-title">当前状态</span><small id="phaseSummary">等待用户发起</small></span><span class="open-indicator" aria-hidden="true">查看</span>
+        </button>
+        <button class="panel evidence-card" type="button" data-evidence-dialog="sources">
+          <span><span class="evidence-card-title">互联网搜索候选</span><small id="searchStatus">等待用户发起</small></span><span class="open-indicator" aria-hidden="true">查看</span>
+        </button>
+        <button class="panel evidence-card" type="button" data-evidence-dialog="screening">
+          <span><span class="evidence-card-title">规则筛选与 KB 对照</span><small id="screeningStatus">规则与映射</small></span><span class="open-indicator" aria-hidden="true">查看</span>
+        </button>
+        <button class="panel evidence-card" type="button" data-evidence-dialog="recommendations">
+          <span><span class="evidence-card-title">入库建议队列</span><small id="recommendationStatus">等待确认</small></span><span class="open-indicator" aria-hidden="true">查看</span>
+        </button>
+      </section>
 
       <section class="tables">
         <section class="panel table-panel"><div class="table-head"><h2>知识条目</h2><small>第 2 批已审知识</small></div><div class="table-wrap"><table><thead><tr><th>知识 ID</th><th>类型</th><th>支持动作</th><th>状态</th><th>来源</th><th>更新时间</th></tr></thead><tbody id="wikiRows"></tbody></table></div></section>
         <section class="panel table-panel"><div class="table-head"><h2>映射覆盖</h2><small>21 场景运行目标</small></div><div class="table-wrap"><table><thead><tr><th>已审知识</th><th>规则包</th><th>运行时目标</th><th>泄露数</th><th>更新时间</th></tr></thead><tbody id="mappingRows"></tbody></table></div></section>
+      </section>
+    </div>
+
+    <div class="dialog-backdrop" id="evidenceDialog" hidden>
+      <section class="evidence-dialog" role="dialog" aria-modal="true" aria-labelledby="evidenceDialogTitle">
+        <header class="evidence-dialog-head">
+          <h2 id="evidenceDialogTitle">链路详情</h2>
+          <button class="dialog-close" type="button" id="evidenceDialogClose">关闭</button>
+        </header>
+        <div class="evidence-dialog-body">
+          <section class="evidence-dialog-panel" data-evidence-panel="status">
+            <div class="feed">
+              <div class="feed-card"><strong>关联规则</strong><p>实线是应用产出路径；虚线是手动搜索入库路径；用户确认只允许写入已审知识。</p></div>
+              <div class="feed-card"><strong>运行边界</strong><p id="draftSummary">本地需求 0，等待用户手动发起。</p></div>
+              <div class="feed-card"><strong>21 个应用场景</strong><div class="scene-cloud" id="sceneCloud"></div></div>
+            </div>
+          </section>
+          <section class="evidence-dialog-panel" data-evidence-panel="sources" hidden>
+            <div class="feed" id="sourceFeed"></div>
+          </section>
+          <section class="evidence-dialog-panel" data-evidence-panel="screening" hidden>
+            <div class="feed" id="screeningBoard"></div>
+          </section>
+          <section class="evidence-dialog-panel" data-evidence-panel="recommendations" hidden>
+            <div class="feed" id="recommendationFeed"></div>
+          </section>
+        </div>
       </section>
     </div>
 
@@ -1770,7 +1846,29 @@ package.artifacts:
       document.getElementById('apiDocsButton')?.addEventListener('click', () => toggleApiDocs(true));
       document.getElementById('apiDocsClose')?.addEventListener('click', () => toggleApiDocs(false));
       apiDocsModal?.addEventListener('click', (event) => { if (event.target === apiDocsModal) toggleApiDocs(false); });
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') toggleApiDocs(false); });
+      const evidenceDialog = document.getElementById('evidenceDialog');
+      const evidenceDialogTitles = {
+        status: '当前状态',
+        sources: '互联网搜索候选',
+        screening: '规则筛选与 KB 对照',
+        recommendations: '入库建议队列'
+      };
+      function toggleEvidenceDialog(panel) {
+        if (!evidenceDialog) return;
+        const open = Boolean(panel);
+        evidenceDialog.hidden = !open;
+        if (!open) return;
+        setText('evidenceDialogTitle', evidenceDialogTitles[panel] || '链路详情');
+        document.querySelectorAll('.evidence-dialog-panel').forEach((item) => {
+          item.hidden = item.dataset.evidencePanel !== panel;
+        });
+      }
+      document.querySelectorAll('[data-evidence-dialog]').forEach((button) => {
+        button.addEventListener('click', () => toggleEvidenceDialog(button.dataset.evidenceDialog));
+      });
+      document.getElementById('evidenceDialogClose')?.addEventListener('click', () => toggleEvidenceDialog(null));
+      evidenceDialog?.addEventListener('click', (event) => { if (event.target === evidenceDialog) toggleEvidenceDialog(null); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { toggleApiDocs(false); toggleEvidenceDialog(null); } });
       setInterval(() => { document.getElementById('clock').textContent = now(); }, 1000);
       setInterval(refreshProviderAndRender, 15000);
       window.addEventListener('resize', () => requestAnimationFrame(updateGraphConnections));
