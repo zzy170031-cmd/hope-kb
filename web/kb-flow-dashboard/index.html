@@ -254,6 +254,10 @@
         background: #fbfdff;
       }
 
+      .graph-action-dock {
+        margin: 10px 18px 0;
+      }
+
       .confirm-copy {
         display: grid;
         gap: 4px;
@@ -428,6 +432,30 @@
         line-height: 1.5;
       }
 
+      .handoff-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        border: 1px solid #d9e8f6;
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #fbfdff;
+      }
+
+      .handoff-summary strong {
+        color: #17335f;
+        font-size: 13px;
+        line-height: 1.3;
+      }
+
+      .handoff-summary p {
+        margin: 4px 0 0;
+        color: #405b7f;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
       .artifact-list {
         display: grid;
         gap: 4px;
@@ -519,6 +547,9 @@
         gap: 4px 8px;
         align-items: center;
         min-height: 54px;
+        border: 1px solid #d5e3f4;
+        border-radius: 10px;
+        padding: 8px 10px;
         border-color: #d5e3f4;
         background: #f8fbff;
         color: #17335f;
@@ -1108,7 +1139,7 @@
 
       @media (max-width: 1180px) {
         .topbar, .intake-form, .tables, .api-doc-grid { grid-template-columns: 1fr; }
-        .action-head, .quick-actions, .confirmation-dock, .handoff-board, .graph-run-rail { grid-template-columns: 1fr; }
+        .action-head, .quick-actions, .confirmation-dock, .handoff-board, .handoff-summary, .graph-run-rail { grid-template-columns: 1fr; }
         .evidence-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .confirmation-status { justify-content: flex-start; }
         .status-strip { justify-content: flex-start; }
@@ -1169,7 +1200,6 @@
           <div class="field-chips" aria-label="应用字段">
             <span class="chip">视觉描述</span><span class="chip">角色动作</span><span class="chip">镜头</span><span class="chip">景别</span><span class="chip">提示词文本</span>
           </div>
-          <button class="primary" type="submit">开始搜索</button>
         </form>
       </section>
 
@@ -1177,7 +1207,7 @@
         <div class="graph-head">
           <div>
             <h2>知识图谱实时运行区</h2>
-            <p>上方步骤即执行入口；节点状态与下方确认、落库和 PWA 证据链联动。</p>
+            <p id="actionSummary">执行流程在这里同步；节点状态与下方唯一选择区、KB 落库和 PWA 证据链联动。</p>
           </div>
           <div class="toolbar" aria-label="图谱工具">
             <button class="icon-button" type="button" title="放大">+</button>
@@ -1187,10 +1217,21 @@
           </div>
         </div>
         <div class="graph-run-rail" aria-label="运行步骤状态">
-          <button class="graph-step" type="button" id="graphStepSources" data-flow-control="sources"><span>1</span><strong>搜索候选</strong><small>等待需求</small></button>
-          <button class="graph-step" type="button" id="graphStepScreening" data-flow-control="screening"><span>2</span><strong>规则筛选 / 入库建议</strong><small>等待候选</small></button>
-          <button class="graph-step" type="button" id="graphStepConfirm" data-flow-control="confirm"><span>3</span><strong>用户确认 / 确认包</strong><small>等待选择</small></button>
-          <button class="graph-step" type="button" id="graphStepApply" data-flow-control="apply"><span>4</span><strong>写入 KB / PWA</strong><small>等待确认包</small></button>
+          <div class="graph-step" id="graphStepSources" data-flow-control="sources"><span>1</span><strong>搜索候选</strong><small>等待需求</small></div>
+          <div class="graph-step" id="graphStepScreening" data-flow-control="screening"><span>2</span><strong>规则筛选 / 入库建议</strong><small>等待候选</small></div>
+          <div class="graph-step" id="graphStepConfirm" data-flow-control="confirm"><span>3</span><strong>用户确认 / 确认包</strong><small>等待选择</small></div>
+          <div class="graph-step" id="graphStepApply" data-flow-control="apply"><span>4</span><strong>写入 KB / PWA</strong><small>等待确认包</small></div>
+        </div>
+        <div class="confirmation-dock graph-action-dock" id="confirmationDock">
+          <div class="confirm-copy">
+            <strong>当前操作入口</strong>
+            <p id="confirmDockText">这里是唯一执行入口；图谱同步状态，下方勾选只提供用户选择。</p>
+          </div>
+          <div class="confirmation-status">
+            <span class="pill" id="actionRunId" data-tone="warn">未开始</span>
+            <span class="pill" id="confirmCount" data-tone="warn">已选 0 / 可确认 0</span>
+            <button class="mini-primary" type="button" id="primaryFlowAction" data-flow-target="screening">等待可执行操作</button>
+          </div>
         </div>
         <div class="graph-workbench">
           <div class="graph-canvas" id="knowledgeGraph" data-phase="idle">
@@ -1272,24 +1313,7 @@
         </div>
       </section>
 
-      <section class="panel action-panel" aria-label="执行链路">
-        <div class="action-head">
-          <div>
-            <h2>执行链路</h2>
-            <p id="actionSummary">先在上方录入手动需求，再按候选、筛选、确认、写入的顺序推进。</p>
-          </div>
-          <span class="pill" id="actionRunId" data-tone="warn">未开始</span>
-        </div>
-        <div class="confirmation-dock" id="confirmationDock">
-          <div class="confirm-copy">
-            <strong>用户确认入口</strong>
-            <p id="confirmDockText">候选里的“保留”只是规则筛选结论，不会写入 KB。只有在待确认入库建议里勾选条目并生成确认包后，才允许进入写入与验证。</p>
-          </div>
-          <div class="confirmation-status">
-            <span class="pill" id="confirmCount" data-tone="warn">已选 0 / 可确认 0</span>
-            <button class="mini-primary" type="button" id="confirmSelectedDock" data-flow-target="confirm">确认所选入库建议</button>
-          </div>
-        </div>
+      <section class="panel action-panel" aria-label="用户确认选择与证据">
         <div class="confirm-inline-panel" id="confirmInlinePanel" data-flow-target="confirm">
           <div class="confirm-inline-head">
             <strong>待确认入库建议</strong>
@@ -1301,40 +1325,12 @@
           </div>
           <div class="confirm-inline-list" id="confirmInlineList"></div>
         </div>
-        <div class="handoff-board" aria-label="图谱 KB PWA 落地链路">
-          <article class="handoff-card" id="graphLinkCard" data-state="running" data-flow-target="sources">
-            <div class="sync-row">
-              <h3>1. 图谱入口</h3>
-              <span class="tag" id="graphLinkStatus" data-tone="warn">等待搜索</span>
-            </div>
-            <p id="graphLinkSummary">搜索候选和规则筛选只产生 intake package，不直接写 KB。</p>
-            <ul class="artifact-list" id="graphArtifacts"></ul>
-          </article>
-          <article class="handoff-card" id="gateLinkCard" data-state="running" data-flow-target="confirm">
-            <div class="sync-row">
-              <h3>2. 用户确认</h3>
-              <span class="tag" id="gateLinkStatus" data-tone="warn">等待勾选</span>
-            </div>
-            <p id="gateLinkSummary">只有 accepted_reviewed_wiki_ids 进入确认包，才允许 apply。</p>
-            <ul class="artifact-list" id="gateArtifacts"></ul>
-          </article>
-          <article class="handoff-card" id="kbLinkCard" data-state="running" data-flow-target="apply">
-            <div class="sync-row">
-              <h3>3. KB 落库</h3>
-              <span class="tag" id="kbLinkStatus" data-tone="warn">等待写入</span>
-            </div>
-            <p id="kbLinkSummary">apply 成功后写 reviewed_wiki、mapping 和 runtime snapshot。</p>
-            <ul class="artifact-list" id="kbArtifacts"></ul>
-          </article>
-          <article class="handoff-card" id="pwaLinkCard" data-state="running" data-flow-target="apply">
-            <div class="sync-row">
-              <h3>4. PWA 消费</h3>
-              <span class="tag" id="pwaLinkStatus" data-tone="warn">检查中</span>
-              <button class="mini-ghost" type="button" id="syncPwaNow">同步到 PWA</button>
-            </div>
-            <p id="pwaLinkSummary">PWA 只读取 summary-only 的 latest.json，不读取图谱或 raw KB。</p>
-            <ul class="artifact-list" id="pwaArtifacts"></ul>
-          </article>
+        <div class="handoff-summary" aria-label="落地证据链摘要">
+          <div>
+            <strong>落地证据链（只读）</strong>
+            <p id="handoffSummaryText">展示图谱、确认、KB 落库和 PWA 同步证据，不承担执行或确认操作。</p>
+          </div>
+          <button class="mini-ghost" type="button" id="openHandoffEvidence">查看证据</button>
         </div>
       </section>
 
@@ -1378,6 +1374,43 @@
           </section>
           <section class="evidence-dialog-panel" data-evidence-panel="screening" hidden>
             <div class="feed" id="screeningBoard"></div>
+          </section>
+          <section class="evidence-dialog-panel" data-evidence-panel="handoff" hidden>
+            <div class="handoff-board" aria-label="图谱 KB PWA 落地链路">
+              <article class="handoff-card" id="graphLinkCard" data-state="running" data-flow-target="sources">
+                <div class="sync-row">
+                  <h3>1. 图谱入口</h3>
+                  <span class="tag" id="graphLinkStatus" data-tone="warn">等待搜索</span>
+                </div>
+                <p id="graphLinkSummary">搜索候选和规则筛选只产生 intake package，不直接写 KB。</p>
+                <ul class="artifact-list" id="graphArtifacts"></ul>
+              </article>
+              <article class="handoff-card" id="gateLinkCard" data-state="running" data-flow-target="confirm">
+                <div class="sync-row">
+                  <h3>2. 用户确认</h3>
+                  <span class="tag" id="gateLinkStatus" data-tone="warn">等待勾选</span>
+                </div>
+                <p id="gateLinkSummary">只有 accepted_reviewed_wiki_ids 进入确认包，才允许 apply。</p>
+                <ul class="artifact-list" id="gateArtifacts"></ul>
+              </article>
+              <article class="handoff-card" id="kbLinkCard" data-state="running" data-flow-target="apply">
+                <div class="sync-row">
+                  <h3>3. KB 落库</h3>
+                  <span class="tag" id="kbLinkStatus" data-tone="warn">等待写入</span>
+                </div>
+                <p id="kbLinkSummary">apply 成功后写 reviewed_wiki、mapping 和 runtime snapshot。</p>
+                <ul class="artifact-list" id="kbArtifacts"></ul>
+              </article>
+              <article class="handoff-card" id="pwaLinkCard" data-state="running" data-flow-target="apply">
+                <div class="sync-row">
+                  <h3>4. PWA 消费</h3>
+                  <span class="tag" id="pwaLinkStatus" data-tone="warn">检查中</span>
+                  <button class="mini-ghost" type="button" id="syncPwaNow">同步到 PWA</button>
+                </div>
+                <p id="pwaLinkSummary">PWA 只读取 summary-only 的 latest.json，不读取图谱或 raw KB。</p>
+                <ul class="artifact-list" id="pwaArtifacts"></ul>
+              </article>
+            </div>
           </section>
         </div>
       </section>
@@ -1531,17 +1564,14 @@ package.artifacts:
       function renderActionRail(s) {
         const summary = document.getElementById('actionSummary');
         const runId = document.getElementById('actionRunId');
-        const sourceButton = document.getElementById('graphStepSources');
-        const buildButton = document.getElementById('graphStepScreening');
-        const confirmButton = document.getElementById('graphStepConfirm');
-        const applyButton = document.getElementById('graphStepApply');
-        const dockButton = document.getElementById('confirmSelectedDock');
+        const primaryButton = document.getElementById('primaryFlowAction');
         const confirmCount = document.getElementById('confirmCount');
         const confirmText = document.getElementById('confirmDockText');
         const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
         const confirmableCount = confirmableRecommendationIds(s).length;
         const selectedCount = selectedConfirmableIds().length;
         const applied = s.status === 'applied_to_kb' || s.kb_application?.applied;
+        const hasRecommendations = (s.recommendations || []).length > 0;
         if (summary) {
           summary.textContent = s.run_id
             ? ('当前状态：' + phaseLabel(s) + '；候选 ' + (s.source_candidates || []).length + '；建议 ' + (s.recommendations || []).length + '；已确认 ' + acceptedCount + '。')
@@ -1551,13 +1581,42 @@ package.artifacts:
           runId.dataset.tone = applied ? 'ok' : (s.run_id ? 'warn' : 'warn');
           runId.textContent = s.run_id ? (s.run_id + (applied ? ' / 已写入' : ' / 进行中')) : '未开始';
         }
-        if (sourceButton) sourceButton.disabled = applied;
-        if (buildButton) buildButton.disabled = !s.run_id || applied;
-        if (confirmButton) confirmButton.disabled = !selectedCount || applied;
-        if (applyButton) applyButton.disabled = !s.run_id || applied || !s.confirmation?.confirmed || !acceptedCount;
-        if (dockButton) {
-          dockButton.disabled = !selectedCount || applied;
-          dockButton.textContent = applied ? '确认已完成' : (selectedCount ? '确认所选入库建议' : '先勾选入库建议');
+        if (primaryButton) {
+          let action = '';
+          let label = '等待手动需求';
+          let target = 'sources';
+          let disabled = true;
+          if (applied) {
+            label = '已写入 KB 并验证';
+            target = 'apply';
+          } else if (!s.run_id) {
+            action = 'start';
+            label = '先填写需求并开始搜索';
+            target = 'sources';
+            disabled = false;
+          } else if (!hasRecommendations) {
+            action = 'build';
+            label = '执行规则筛选 / 入库建议';
+            target = 'screening';
+            disabled = false;
+          } else if (!s.confirmation?.confirmed) {
+            action = 'confirm';
+            target = 'confirm';
+            label = selectedCount ? '生成确认包' : '先勾选入库建议';
+            disabled = !selectedCount;
+          } else if (!acceptedCount) {
+            label = '确认包缺少 accepted';
+            target = 'confirm';
+          } else {
+            action = 'apply';
+            label = '写入 KB 并验证';
+            target = 'apply';
+            disabled = false;
+          }
+          primaryButton.dataset.action = action;
+          primaryButton.dataset.flowTarget = target;
+          primaryButton.disabled = disabled;
+          primaryButton.textContent = label;
         }
         if (confirmCount) {
           confirmCount.dataset.tone = acceptedCount || selectedCount ? 'ok' : (confirmableCount ? 'warn' : 'warn');
@@ -1569,8 +1628,8 @@ package.artifacts:
           confirmText.textContent = applied
             ? '确认包已写入 KB；落盘结果已进入 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。'
             : confirmableCount
-              ? '候选里的“保留”只是规则筛选结论。请直接在下方勾选要入库的 reviewed_wiki 条目，然后点击这里或第 3 步生成确认包。'
-              : '还没有可确认的入库建议。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';
+              ? '这里是唯一执行入口。先在下方勾选要入库的 reviewed_wiki 条目，再点击生成确认包；图谱区同步每一步状态。'
+              : '这里是唯一执行入口。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';
         }
       }
       function renderInlineConfirmQueue(s) {
@@ -1743,6 +1802,11 @@ package.artifacts:
         const pwaSyncing = pwaSyncState?.status === 'running';
 
         const graphDone = !!sources.length && !!screening.length;
+        setText('handoffSummaryText',
+          '只读证据：图谱保留 ' + keptScreening + ' / 筛选 ' + screening.length +
+          '；用户确认 ' + accepted.length +
+          '；KB ' + (applied ? (validationPassed ? '已校验' : '待复核') : '待写入') +
+          '；PWA ' + (pwaSynced ? '已同步' : '待同步') + '。');
         setCardState('graphLinkCard', graphDone ? 'done' : (s.run_id ? 'running' : 'blocked'));
         setTag('graphLinkStatus', graphDone ? ('保留 ' + keptScreening + ' / 筛选 ' + screening.length) : (sources.length ? ('候选 ' + sources.length) : '等待搜索'), graphDone ? 'ok' : 'warn');
         setText('graphLinkSummary', graphDone
@@ -2019,6 +2083,27 @@ package.artifacts:
           alert(error.message || String(error));
         }
       }
+      async function runPrimaryFlowAction() {
+        const button = document.getElementById('primaryFlowAction');
+        const action = button?.dataset.action || '';
+        if (!action) return;
+        if (action === 'start') {
+          await startSources();
+          return;
+        }
+        if (action === 'build') {
+          await mutate('screen');
+          await mutate('recommendations');
+          return;
+        }
+        if (action === 'confirm') {
+          await mutate('confirm');
+          return;
+        }
+        if (action === 'apply') {
+          await mutate('apply');
+        }
+      }
       document.querySelectorAll('.graph-node[data-flow-step]').forEach((item) => {
         item.addEventListener('click', () => linkFlowStep(item.dataset.flowStep));
         item.addEventListener('keydown', (event) => {
@@ -2029,14 +2114,7 @@ package.artifacts:
         });
       });
       document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); try { await startSources(); } catch (error) { alert(error.message || String(error)); } });
-      document.getElementById('graphStepSources')?.addEventListener('click', async () => {
-        if (currentPackage?.run_id) await mutate('sources');
-        else await startSources();
-      });
-      document.getElementById('graphStepScreening')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
-      document.getElementById('graphStepConfirm')?.addEventListener('click', () => mutate('confirm'));
-      document.getElementById('confirmSelectedDock')?.addEventListener('click', () => mutate('confirm'));
-      document.getElementById('graphStepApply')?.addEventListener('click', () => mutate('apply'));
+      document.getElementById('primaryFlowAction')?.addEventListener('click', () => runPrimaryFlowAction());
       document.getElementById('syncPwaNow')?.addEventListener('click', syncPwaNow);
       function handleRecommendationCheckboxChange(event) {
         const target = event.target;
@@ -2069,6 +2147,7 @@ package.artifacts:
         status: '当前状态',
         sources: '互联网搜索候选',
         screening: '规则筛选与 KB 对照',
+        handoff: '落地证据链（只读）'
       };
       function toggleEvidenceDialog(panel) {
         if (!evidenceDialog) return;
@@ -2083,6 +2162,7 @@ package.artifacts:
       document.querySelectorAll('[data-evidence-dialog]').forEach((button) => {
         button.addEventListener('click', () => toggleEvidenceDialog(button.dataset.evidenceDialog));
       });
+      document.getElementById('openHandoffEvidence')?.addEventListener('click', () => toggleEvidenceDialog('handoff'));
       document.getElementById('evidenceDialogClose')?.addEventListener('click', () => toggleEvidenceDialog(null));
       evidenceDialog?.addEventListener('click', (event) => { if (event.target === evidenceDialog) toggleEvidenceDialog(null); });
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { toggleApiDocs(false); toggleEvidenceDialog(null); } });
