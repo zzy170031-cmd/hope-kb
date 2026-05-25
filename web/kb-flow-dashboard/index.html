@@ -939,7 +939,7 @@
 
       .evidence-row {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 8px;
         align-items: start;
       }
@@ -1177,7 +1177,7 @@
         <div class="graph-head">
           <div>
             <h2>知识图谱实时运行区</h2>
-            <p>节点状态与下方唯一执行入口联动；点击运行节点会定位到对应操作。</p>
+            <p>上方步骤即执行入口；节点状态与下方确认、落库和 PWA 证据链联动。</p>
           </div>
           <div class="toolbar" aria-label="图谱工具">
             <button class="icon-button" type="button" title="放大">+</button>
@@ -1187,10 +1187,10 @@
           </div>
         </div>
         <div class="graph-run-rail" aria-label="运行步骤状态">
-          <button class="graph-step" type="button" id="graphStepSources" data-flow-step="sources"><span>1</span><strong>搜索候选</strong><small>等待需求</small></button>
-          <button class="graph-step" type="button" id="graphStepScreening" data-flow-step="screening"><span>2</span><strong>规则筛选 / 入库建议</strong><small>等待候选</small></button>
-          <button class="graph-step" type="button" id="graphStepConfirm" data-flow-step="confirm"><span>3</span><strong>用户确认 / 确认包</strong><small>等待选择</small></button>
-          <button class="graph-step" type="button" id="graphStepApply" data-flow-step="apply"><span>4</span><strong>写入 KB / PWA</strong><small>等待确认包</small></button>
+          <button class="graph-step" type="button" id="graphStepSources" data-flow-control="sources"><span>1</span><strong>搜索候选</strong><small>等待需求</small></button>
+          <button class="graph-step" type="button" id="graphStepScreening" data-flow-control="screening"><span>2</span><strong>规则筛选 / 入库建议</strong><small>等待候选</small></button>
+          <button class="graph-step" type="button" id="graphStepConfirm" data-flow-control="confirm"><span>3</span><strong>用户确认 / 确认包</strong><small>等待选择</small></button>
+          <button class="graph-step" type="button" id="graphStepApply" data-flow-control="apply"><span>4</span><strong>写入 KB / PWA</strong><small>等待确认包</small></button>
         </div>
         <div class="graph-workbench">
           <div class="graph-canvas" id="knowledgeGraph" data-phase="idle">
@@ -1280,16 +1280,10 @@
           </div>
           <span class="pill" id="actionRunId" data-tone="warn">未开始</span>
         </div>
-        <div class="quick-actions">
-          <button class="ghost" type="button" id="showSources" data-flow-target="sources">第 1 步：搜索候选</button>
-          <button class="ghost" type="button" id="buildRecommendations" data-flow-target="screening">第 2 步：规则筛选 / 入库建议</button>
-          <button class="ghost" type="button" id="markWaiting" data-flow-target="confirm">第 3 步：生成确认包</button>
-          <button class="ghost" type="button" id="applyPackage" data-flow-target="apply">第 4 步：写入 KB 并验证</button>
-        </div>
         <div class="confirmation-dock" id="confirmationDock">
           <div class="confirm-copy">
             <strong>用户确认入口</strong>
-            <p id="confirmDockText">候选里的“保留”只是规则筛选结论，不会写入 KB。只有在入库建议队列勾选条目并生成确认包后，才允许进入写入与验证。</p>
+            <p id="confirmDockText">候选里的“保留”只是规则筛选结论，不会写入 KB。只有在待确认入库建议里勾选条目并生成确认包后，才允许进入写入与验证。</p>
           </div>
           <div class="confirmation-status">
             <span class="pill" id="confirmCount" data-tone="warn">已选 0 / 可确认 0</span>
@@ -1357,9 +1351,6 @@
         <button class="panel evidence-card" type="button" data-evidence-dialog="screening">
           <span><span class="evidence-card-title">规则筛选与 KB 对照</span><small id="screeningStatus">规则与映射</small></span><span class="open-indicator" aria-hidden="true">查看</span>
         </button>
-        <button class="panel evidence-card" type="button" data-evidence-dialog="recommendations">
-          <span><span class="evidence-card-title">入库建议队列</span><small id="recommendationStatus">等待确认</small></span><span class="open-indicator" aria-hidden="true">查看</span>
-        </button>
       </section>
 
       <section class="tables">
@@ -1387,9 +1378,6 @@
           </section>
           <section class="evidence-dialog-panel" data-evidence-panel="screening" hidden>
             <div class="feed" id="screeningBoard"></div>
-          </section>
-          <section class="evidence-dialog-panel" data-evidence-panel="recommendations" hidden>
-            <div class="feed" id="recommendationFeed"></div>
           </section>
         </div>
       </section>
@@ -1543,10 +1531,10 @@ package.artifacts:
       function renderActionRail(s) {
         const summary = document.getElementById('actionSummary');
         const runId = document.getElementById('actionRunId');
-        const sourceButton = document.getElementById('showSources');
-        const buildButton = document.getElementById('buildRecommendations');
-        const confirmButton = document.getElementById('markWaiting');
-        const applyButton = document.getElementById('applyPackage');
+        const sourceButton = document.getElementById('graphStepSources');
+        const buildButton = document.getElementById('graphStepScreening');
+        const confirmButton = document.getElementById('graphStepConfirm');
+        const applyButton = document.getElementById('graphStepApply');
         const dockButton = document.getElementById('confirmSelectedDock');
         const confirmCount = document.getElementById('confirmCount');
         const confirmText = document.getElementById('confirmDockText');
@@ -1563,7 +1551,7 @@ package.artifacts:
           runId.dataset.tone = applied ? 'ok' : (s.run_id ? 'warn' : 'warn');
           runId.textContent = s.run_id ? (s.run_id + (applied ? ' / 已写入' : ' / 进行中')) : '未开始';
         }
-        if (sourceButton) sourceButton.disabled = !s.run_id || applied;
+        if (sourceButton) sourceButton.disabled = applied;
         if (buildButton) buildButton.disabled = !s.run_id || applied;
         if (confirmButton) confirmButton.disabled = !selectedCount || applied;
         if (applyButton) applyButton.disabled = !s.run_id || applied || !s.confirmation?.confirmed || !acceptedCount;
@@ -1691,16 +1679,16 @@ package.artifacts:
         badge.textContent = label;
       }
       function flowTargetSelector(step) {
-        if (step === 'sources') return state().run_id ? '#showSources' : '#intakeForm';
-        if (step === 'screening') return '#buildRecommendations';
+        if (step === 'sources') return state().run_id ? '#graphStepSources' : '#intakeForm';
+        if (step === 'screening') return '#graphStepScreening';
         if (step === 'confirm') return '#confirmInlinePanel';
-        if (step === 'apply') return '#applyPackage';
+        if (step === 'apply') return '#graphStepApply';
         return '#actionSummary';
       }
       function linkFlowStep(step) {
         if (!step) return;
         document.querySelectorAll('.is-linked').forEach((item) => item.classList.remove('is-linked'));
-        const targets = Array.from(document.querySelectorAll('[data-flow-step="' + step + '"], [data-flow-target="' + step + '"]'));
+        const targets = Array.from(document.querySelectorAll('[data-flow-step="' + step + '"], [data-flow-control="' + step + '"], [data-flow-target="' + step + '"]'));
         const target = document.querySelector(flowTargetSelector(step));
         if (target && !targets.includes(target)) targets.push(target);
         targets.forEach((item) => item.classList.add('is-linked'));
@@ -1772,7 +1760,7 @@ package.artifacts:
         setTag('gateLinkStatus', gateDone ? ('已确认 ' + accepted.length) : (recs.length ? '待勾选确认' : '等待建议'), gateDone ? 'ok' : 'warn');
         setText('gateLinkSummary', gateDone
           ? ('确认包只接受这些 reviewed_wiki：' + shortList(accepted, '无') + '。')
-          : '在入库建议队列勾选条目后，点击“生成确认包”才会形成用户确认证据。');
+          : '在待确认入库建议里勾选条目后，点击“生成确认包”才会形成用户确认证据。');
         renderArtifactList('gateArtifacts', [
           ['confirmed', compactPath(artifactPath(s, 'confirmed_package'))],
           ['accepted', shortList(accepted, '未确认')],
@@ -1845,38 +1833,8 @@ package.artifacts:
       function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); const artifact = s.artifacts?.draft_package || ''; if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；草稿已落盘：' + artifact + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
       function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
       function searchModeLabel(s) { const status = s.search_plan?.search_provider_status; if (!status) return phaseLabel(s); const mode = status.status === 'live_search' ? 'Hope 搜索' : status.status === 'model_search' ? '模型候选' : status.status === 'model_fallback' ? '模型回退候选' : '登记候选'; const detail = status.reason === 'missing_credential' ? '未配置密钥' : status.reason === 'live_search_timeout' ? '联网搜索超时回退' : status.reason === 'live_search_failed' ? '搜索失败回退' : status.reason === 'live_search_timeout_model_ok' ? '联网搜索超时，普通模型已返回' : status.reason === 'live_search_failed_model_ok' ? '联网搜索失败，普通模型已返回' : status.reason === 'live_search_timeout_model_failed' ? '联网和模型回退均失败' : status.reason === 'live_search_failed_model_failed' ? '搜索和模型回退均失败' : status.reason === 'no_url_bound_candidates' ? '无可用来源回退' : status.reason === 'ok' ? '已返回来源' : status.reason || ''; return phaseLabel(s) + ' · ' + mode + (detail ? ' · ' + detail : ''); }
-      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = searchModeLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } const sourcePrimer = '<div class="feed-card decision-primer"><strong>筛选说明</strong><p>“保留”表示该来源通过字段、映射和泄漏风险筛选，只能进入建议生成；最终是否入库必须在“入库建议队列”勾选并生成确认包。</p></div>'; sourceFeed.innerHTML = sourcePrimer + sources.map((item) => { const decision = item.decision || item.decision_label; const url = String(item.source_url || ''); const sourceLink = /^https?:\/\//i.test(url) ? '<a href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">查看来源</a>' : escapeHtml(url || '来源待补'); return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>来源：' + sourceLink + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span>筛选结论：</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
+      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = searchModeLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } const sourcePrimer = '<div class="feed-card decision-primer"><strong>筛选说明</strong><p>“保留”表示该来源通过字段、映射和泄漏风险筛选，只能进入建议生成；最终是否入库必须在“待确认入库建议”里勾选并生成确认包。</p></div>'; sourceFeed.innerHTML = sourcePrimer + sources.map((item) => { const decision = item.decision || item.decision_label; const url = String(item.source_url || ''); const sourceLink = /^https?:\/\//i.test(url) ? '<a href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">查看来源</a>' : escapeHtml(url || '来源待补'); return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>来源：' + sourceLink + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span>筛选结论：</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
       function renderScreening(s) { const board = document.getElementById('screeningBoard'); const screeningStatus = document.getElementById('screeningStatus'); if (!board) return; if (screeningStatus) screeningStatus.textContent = s.run_id ? ((s.screening_results || []).length + ' 条筛选记录') : '规则与映射'; if (!s.run_id) { board.innerHTML = '<div class="feed-card"><strong>未开始</strong><p>筛选必须从应用分镜和提示词文本问题出发。</p></div>'; return; } const rows = s.screening_results?.length ? s.screening_results : screeningChecks.map((row) => ({ title: row[0], summary: row[1], result: row[2] === 'ok' ? '通过' : '需确认' })); board.innerHTML = rows.map((row) => '<div class="feed-card"><strong>' + escapeHtml(row.source_id || row.title || '筛选项') + '</strong><p>' + escapeHtml(row.summary || ('字段=' + row.serves_pwa_fields + '；即梦适配=' + row.serves_seedance_prompt + '；运行目标=' + row.runtime_target_possible + '；泄漏=' + row.leakage_risk_ok)) + '</p><span class="tag" data-tone="' + tone(row.result) + '">' + escapeHtml(row.result || '需确认') + '</span></div>').join(''); }
-      function renderRecommendations(s) {
-        const feed = document.getElementById('recommendationFeed');
-        const recommendationStatus = document.getElementById('recommendationStatus');
-        if (!feed) return;
-        const recs = s.recommendations?.length ? s.recommendations : sampleRecommendations;
-        if (recommendationStatus) {
-          const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
-          recommendationStatus.textContent = s.kb_application?.applied
-            ? ('已写入 ' + acceptedCount)
-            : s.confirmation?.confirmed
-              ? ('已确认 ' + acceptedCount + '，等待写入')
-              : s.run_id
-                ? ((s.recommendations || []).length + ' 条建议，可查看详情')
-                : '等待确认';
-        }
-        if (!s.run_id) {
-          feed.innerHTML = '<div class="feed-card"><strong>未生成入库建议</strong><p>生成建议后显示规则候选；确认包生成前不写仓库。</p></div>';
-          return;
-        }
-        const readyIds = new Set(confirmableRecommendationIds(s));
-        const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
-        const help = readyIds.size
-          ? '<div class="confirm-help">' + (s.confirmation?.confirmed && !acceptedCount ? '当前确认包缺少 accepted 记录，请在页面主区域“待确认入库建议”重新选择，再点击第 3 步“生成确认包”。' : '这里仅展示建议详情；入库确认只在页面主区域“待确认入库建议”操作，避免重复勾选。') + '</div>'
-          : '';
-        feed.innerHTML = help + recs.map((item) => {
-          const canConfirm = readyIds.has(item.reviewed_wiki_id);
-          const stateText = canConfirm ? '可在主区域确认' : '仅查看';
-          return '<div class="feed-card"><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span><span>' + escapeHtml(stateText) + '</span></div></div>';
-        }).join('');
-      }
       function statusClass(value) { if (value === '待审') return 'waiting'; if (value === '待确认') return 'confirming'; return ''; }
       function renderTables() { document.getElementById('wikiRows').innerHTML = wikiRows.map((r) => '<tr>' + r.map((cell, index) => '<td>' + (index === 3 ? '<span class="status-badge ' + statusClass(cell) + '">' + escapeHtml(cell) + '</span>' : escapeHtml(cell)) + '</td>').join('') + '</tr>').join(''); document.getElementById('mappingRows').innerHTML = mappingRows.map((r) => '<tr><td>' + r.map(escapeHtml).join('</td><td>') + '</td></tr>').join(''); }
 
@@ -2009,7 +1967,7 @@ package.artifacts:
         }
       }
 
-      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); renderInlineConfirmQueue(s); renderHandoffBoard(s); requestAnimationFrame(updateGraphConnections); }
+      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderTables(); renderProviderStatus(); renderActionRail(s); renderInlineConfirmQueue(s); renderHandoffBoard(s); requestAnimationFrame(updateGraphConnections); }
       async function refreshProviderAndRender() { await Promise.all([loadProviderStatus(), loadPwaStatus()]); render(); }
       async function startSources() {
         const title = document.getElementById('intakeTitle').value.trim();
@@ -2032,7 +1990,7 @@ package.artifacts:
           if (action === 'confirm') {
             const ids = selectedConfirmableIds();
             if (!ids.length) {
-              alert('请先在“入库建议队列”里勾选要进入确认包的建议。');
+              alert('请先在“待确认入库建议”里勾选要进入确认包的建议。');
               return;
             }
             body = { accepted_reviewed_wiki_ids: ids };
@@ -2061,7 +2019,7 @@ package.artifacts:
           alert(error.message || String(error));
         }
       }
-      document.querySelectorAll('[data-flow-step]').forEach((item) => {
+      document.querySelectorAll('.graph-node[data-flow-step]').forEach((item) => {
         item.addEventListener('click', () => linkFlowStep(item.dataset.flowStep));
         item.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
@@ -2071,11 +2029,14 @@ package.artifacts:
         });
       });
       document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); try { await startSources(); } catch (error) { alert(error.message || String(error)); } });
-      document.getElementById('showSources')?.addEventListener('click', () => mutate('sources'));
-      document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
-      document.getElementById('markWaiting')?.addEventListener('click', () => mutate('confirm'));
+      document.getElementById('graphStepSources')?.addEventListener('click', async () => {
+        if (currentPackage?.run_id) await mutate('sources');
+        else await startSources();
+      });
+      document.getElementById('graphStepScreening')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
+      document.getElementById('graphStepConfirm')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('confirmSelectedDock')?.addEventListener('click', () => mutate('confirm'));
-      document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
+      document.getElementById('graphStepApply')?.addEventListener('click', () => mutate('apply'));
       document.getElementById('syncPwaNow')?.addEventListener('click', syncPwaNow);
       function handleRecommendationCheckboxChange(event) {
         const target = event.target;
@@ -2108,7 +2069,6 @@ package.artifacts:
         status: '当前状态',
         sources: '互联网搜索候选',
         screening: '规则筛选与 KB 对照',
-        recommendations: '入库建议队列'
       };
       function toggleEvidenceDialog(panel) {
         if (!evidenceDialog) return;
