@@ -506,6 +506,89 @@
         font-size: 12px;
       }
 
+      .graph-run-rail {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        padding: 10px 18px 0;
+      }
+
+      .graph-step {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 4px 8px;
+        align-items: center;
+        min-height: 54px;
+        border-color: #d5e3f4;
+        background: #f8fbff;
+        color: #17335f;
+        text-align: left;
+      }
+
+      .graph-step span {
+        grid-row: span 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: #eaf2ff;
+        color: #2f63ee;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .graph-step strong {
+        display: block;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .graph-step small {
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .graph-step[data-state="done"] {
+        border-color: rgba(41, 170, 105, 0.72);
+        outline: 3px solid rgba(41, 170, 105, 0.10);
+        outline-offset: 2px;
+        background: #f6fcf8;
+        box-shadow: 0 0 18px rgba(41, 170, 105, 0.16);
+        animation: graphPulseGreen 1.9s ease-in-out infinite;
+      }
+
+      .graph-step[data-state="running"] {
+        border-color: rgba(223, 71, 71, 0.72);
+        outline: 3px solid rgba(223, 71, 71, 0.10);
+        outline-offset: 2px;
+        background: #fff8f8;
+        box-shadow: 0 0 18px rgba(223, 71, 71, 0.16);
+        animation: graphPulseRed 1.35s ease-in-out infinite;
+      }
+
+      .graph-step[data-state="blocked"] {
+        border-color: #d5e3f4;
+        background: #f8fbff;
+      }
+
+      .graph-step[data-state="error"] {
+        border-color: rgba(229, 155, 33, 0.78);
+        outline: 3px solid rgba(229, 155, 33, 0.12);
+        outline-offset: 2px;
+        background: #fffaf1;
+        box-shadow: 0 0 18px rgba(229, 155, 33, 0.20);
+        animation: graphPulseYellow 1.45s ease-in-out infinite;
+      }
+
       .toolbar {
         display: flex;
         gap: 8px;
@@ -571,6 +654,21 @@
         to { stroke-dashoffset: -282; }
       }
 
+      @keyframes graphPulseRed {
+        0%, 100% { outline-color: rgba(223, 71, 71, 0.10); }
+        50% { outline-color: rgba(223, 71, 71, 0.36); }
+      }
+
+      @keyframes graphPulseGreen {
+        0%, 100% { outline-color: rgba(41, 170, 105, 0.10); }
+        50% { outline-color: rgba(41, 170, 105, 0.34); }
+      }
+
+      @keyframes graphPulseYellow {
+        0%, 100% { outline-color: rgba(229, 155, 33, 0.12); }
+        50% { outline-color: rgba(229, 155, 33, 0.38); }
+      }
+
       .graph-node {
         position: absolute;
         z-index: 3;
@@ -590,15 +688,56 @@
         transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
       }
 
-      .graph-node:hover, .graph-node.is-running {
+      .graph-node:hover {
         border-color: rgba(79, 126, 255, 0.78);
         box-shadow: 0 18px 42px rgba(79, 126, 255, 0.18), 0 0 0 4px rgba(79, 126, 255, 0.10);
       }
 
-      .graph-node.is-running { transform: translateY(-1px); }
-      .graph-node.is-complete { border-color: rgba(46, 168, 115, 0.48); }
+      .graph-node[data-flow-step] {
+        cursor: pointer;
+      }
+
+      .graph-node[data-flow-step]:focus-visible {
+        outline: 3px solid rgba(54, 107, 230, 0.20);
+        outline-offset: 3px;
+      }
+
+      .graph-node.is-linked, .graph-step.is-linked,
+      .ghost.is-linked, .mini-primary.is-linked, .confirm-inline-panel.is-linked, .handoff-card.is-linked {
+        box-shadow: 0 0 0 3px rgba(47, 99, 238, 0.14), 0 16px 34px rgba(35, 70, 116, 0.12);
+        border-color: rgba(47, 99, 238, 0.62);
+      }
+
+      .graph-node.is-running {
+        border-color: rgba(223, 71, 71, 0.76);
+        outline: 4px solid rgba(223, 71, 71, 0.10);
+        outline-offset: 3px;
+        box-shadow: 0 0 18px rgba(223, 71, 71, 0.20);
+        transform: translateY(-1px);
+        animation: graphPulseRed 1.35s ease-in-out infinite;
+      }
+
+      .graph-node.is-complete {
+        border-color: rgba(41, 170, 105, 0.70);
+        outline: 4px solid rgba(41, 170, 105, 0.10);
+        outline-offset: 3px;
+        box-shadow: 0 0 16px rgba(41, 170, 105, 0.16);
+        animation: graphPulseGreen 1.9s ease-in-out infinite;
+      }
+
+      .main-node.is-complete, .assist-node.is-complete {
+        box-shadow: 0 12px 26px rgba(35, 70, 116, 0.07);
+        animation: none;
+      }
+
       .graph-node.is-pending { border-color: rgba(244, 166, 63, 0.50); }
-      .graph-node.is-error { border-color: rgba(216, 82, 82, 0.58); box-shadow: 0 18px 42px rgba(216, 82, 82, 0.12); }
+      .graph-node.is-error {
+        border-color: rgba(229, 155, 33, 0.82);
+        outline: 4px solid rgba(229, 155, 33, 0.12);
+        outline-offset: 3px;
+        box-shadow: 0 0 18px rgba(229, 155, 33, 0.22);
+        animation: graphPulseYellow 1.45s ease-in-out infinite;
+      }
 
       .graph-node .node-tag {
         display: inline-flex;
@@ -618,6 +757,25 @@
 
       .graph-node.candidate-node .node-tag { background: rgba(92, 201, 179, 0.13); color: #168a79; }
       .graph-node.confirm-node .node-tag, .graph-node.snapshot-node .node-tag { background: rgba(244, 166, 63, 0.14); color: #b36d16; }
+
+      .graph-node .node-status {
+        position: absolute;
+        top: 9px;
+        right: 10px;
+        max-width: 72px;
+        overflow: hidden;
+        border: 1px solid #dce8f6;
+        border-radius: 999px;
+        padding: 2px 7px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #5b708f;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       .graph-node strong {
         display: block;
         flex: 0 0 auto;
@@ -756,19 +914,6 @@
         border-radius: 7px;
         padding: 3px 7px;
         background: #fff;
-      }
-
-      .recommendation-confirm {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 8px;
-        align-items: start;
-      }
-
-      .recommendation-confirm input {
-        width: 16px;
-        height: 16px;
-        margin-top: 1px;
       }
 
       .confirm-help {
@@ -963,7 +1108,7 @@
 
       @media (max-width: 1180px) {
         .topbar, .intake-form, .tables, .api-doc-grid { grid-template-columns: 1fr; }
-        .action-head, .quick-actions, .confirmation-dock, .handoff-board { grid-template-columns: 1fr; }
+        .action-head, .quick-actions, .confirmation-dock, .handoff-board, .graph-run-rail { grid-template-columns: 1fr; }
         .evidence-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .confirmation-status { justify-content: flex-start; }
         .status-strip { justify-content: flex-start; }
@@ -983,6 +1128,10 @@
         .evidence-row { grid-template-columns: 1fr; }
         .evidence-dialog-head { align-items: flex-start; }
         .evidence-dialog-body { padding: 10px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .graph-node, .graph-step { animation: none !important; }
       }
     </style>
   </head>
@@ -1028,7 +1177,7 @@
         <div class="graph-head">
           <div>
             <h2>知识图谱实时运行区</h2>
-            <p>拖动画布 / 滚轮缩放 / 点击节点查看详情</p>
+            <p>节点状态与下方唯一执行入口联动；点击运行节点会定位到对应操作。</p>
           </div>
           <div class="toolbar" aria-label="图谱工具">
             <button class="icon-button" type="button" title="放大">+</button>
@@ -1036,6 +1185,12 @@
             <button class="icon-button" type="button" title="定位">⌖</button>
             <button class="icon-button" type="button" title="全屏">⛶</button>
           </div>
+        </div>
+        <div class="graph-run-rail" aria-label="运行步骤状态">
+          <button class="graph-step" type="button" id="graphStepSources" data-flow-step="sources"><span>1</span><strong>搜索候选</strong><small>等待需求</small></button>
+          <button class="graph-step" type="button" id="graphStepScreening" data-flow-step="screening"><span>2</span><strong>规则筛选 / 入库建议</strong><small>等待候选</small></button>
+          <button class="graph-step" type="button" id="graphStepConfirm" data-flow-step="confirm"><span>3</span><strong>用户确认 / 确认包</strong><small>等待选择</small></button>
+          <button class="graph-step" type="button" id="graphStepApply" data-flow-step="apply"><span>4</span><strong>写入 KB / PWA</strong><small>等待确认包</small></button>
         </div>
         <div class="graph-workbench">
           <div class="graph-canvas" id="knowledgeGraph" data-phase="idle">
@@ -1086,16 +1241,16 @@
             <article class="graph-node main-node" data-node="action" style="--x:42;--y:250px;--w:180px;--h:96px"><span class="node-tag">动作链</span><strong>动作链 动作链</strong><p>创建 / 生成 / 修复</p></article>
             <article class="graph-node main-node" data-node="shot" style="--x:59;--y:250px;--w:180px;--h:96px"><span class="node-tag">分镜字段</span><strong>分镜 / 镜头 / 动作</strong><p>人物、镜头、景别、动作</p></article>
             <article class="graph-node main-node" data-node="prompt" style="--x:76;--y:250px;--w:180px;--h:96px"><span class="node-tag">模型输出</span><strong>提示词文本</strong><p>由分镜字段生成提示词</p></article>
-            <article class="graph-node snapshot-node" data-node="snapshot" style="--x:91;--y:250px;--w:180px;--h:96px"><span class="node-tag">应用消费</span><strong>知识库快照</strong><p>只消费验证后的摘要规则</p></article>
+            <article class="graph-node snapshot-node" data-node="snapshot" data-flow-step="apply" role="button" tabindex="0" style="--x:91;--y:250px;--w:180px;--h:96px"><span class="node-tag">应用消费</span><strong>知识库快照</strong><p>只消费验证后的摘要规则</p></article>
 
             <article class="graph-node assist-node" data-node="writing" style="--x:25;--y:95px;--w:120px;--h:64px"><strong>写作</strong><p>事实连接</p></article>
             <article class="graph-node assist-node" data-node="camera" style="--x:42;--y:95px;--w:120px;--h:64px"><strong>镜头景别</strong><p>景别运镜</p></article>
             <article class="graph-node assist-node" data-node="guard" style="--x:76;--y:95px;--w:120px;--h:64px"><strong>校验</strong><p>安全边界</p></article>
 
-            <article class="graph-node candidate-node" data-node="source" style="--x:25;--y:405px;--w:180px;--h:96px"><span class="node-tag">搜索</span><strong>互联网候选</strong><p>动漫/即梦优先，服务字段</p></article>
-            <article class="graph-node candidate-node" data-node="rules" style="--x:42;--y:405px;--w:180px;--h:96px"><span class="node-tag">筛选</span><strong>规则对照</strong><p>筛字段、泄漏、重复、映射</p></article>
-            <article class="graph-node candidate-node" data-node="rw" style="--x:59;--y:405px;--w:180px;--h:96px"><span class="node-tag">建议</span><strong>规则候选</strong><p>生成待确认入库对象</p></article>
-            <article class="graph-node confirm-node" data-node="confirm" style="--x:76;--y:405px;--w:180px;--h:96px"><span class="node-tag">门禁</span><strong>用户确认</strong><p>写入已审知识并生成快照</p></article>
+            <article class="graph-node candidate-node" data-node="source" data-flow-step="sources" role="button" tabindex="0" style="--x:25;--y:405px;--w:180px;--h:96px"><span class="node-tag">搜索</span><strong>互联网候选</strong><p>动漫/即梦优先，服务字段</p></article>
+            <article class="graph-node candidate-node" data-node="rules" data-flow-step="screening" role="button" tabindex="0" style="--x:42;--y:405px;--w:180px;--h:96px"><span class="node-tag">筛选</span><strong>规则对照</strong><p>筛字段、泄漏、重复、映射</p></article>
+            <article class="graph-node candidate-node" data-node="rw" data-flow-step="screening" role="button" tabindex="0" style="--x:59;--y:405px;--w:180px;--h:96px"><span class="node-tag">建议</span><strong>规则候选</strong><p>生成待确认入库对象</p></article>
+            <article class="graph-node confirm-node" data-node="confirm" data-flow-step="confirm" role="button" tabindex="0" style="--x:76;--y:405px;--w:180px;--h:96px"><span class="node-tag">门禁</span><strong>用户确认</strong><p>写入已审知识并生成快照</p></article>
 
             <span class="edge-label" style="left:15.4%;top:42.5%">触发</span>
             <span class="edge-label" style="left:33.4%;top:42.5%">关联</span>
@@ -1126,10 +1281,10 @@
           <span class="pill" id="actionRunId" data-tone="warn">未开始</span>
         </div>
         <div class="quick-actions">
-          <button class="ghost" type="button" id="showSources">第 1 步：搜索候选</button>
-          <button class="ghost" type="button" id="buildRecommendations">第 2 步：规则筛选 / 入库建议</button>
-          <button class="ghost" type="button" id="markWaiting">第 3 步：生成确认包</button>
-          <button class="ghost" type="button" id="applyPackage">第 4 步：写入 KB 并验证</button>
+          <button class="ghost" type="button" id="showSources" data-flow-target="sources">第 1 步：搜索候选</button>
+          <button class="ghost" type="button" id="buildRecommendations" data-flow-target="screening">第 2 步：规则筛选 / 入库建议</button>
+          <button class="ghost" type="button" id="markWaiting" data-flow-target="confirm">第 3 步：生成确认包</button>
+          <button class="ghost" type="button" id="applyPackage" data-flow-target="apply">第 4 步：写入 KB 并验证</button>
         </div>
         <div class="confirmation-dock" id="confirmationDock">
           <div class="confirm-copy">
@@ -1138,10 +1293,10 @@
           </div>
           <div class="confirmation-status">
             <span class="pill" id="confirmCount" data-tone="warn">已选 0 / 可确认 0</span>
-            <button class="mini-primary" type="button" id="confirmSelectedDock">确认所选入库建议</button>
+            <button class="mini-primary" type="button" id="confirmSelectedDock" data-flow-target="confirm">确认所选入库建议</button>
           </div>
         </div>
-        <div class="confirm-inline-panel" id="confirmInlinePanel">
+        <div class="confirm-inline-panel" id="confirmInlinePanel" data-flow-target="confirm">
           <div class="confirm-inline-head">
             <strong>待确认入库建议</strong>
             <div class="confirm-inline-actions">
@@ -1153,7 +1308,7 @@
           <div class="confirm-inline-list" id="confirmInlineList"></div>
         </div>
         <div class="handoff-board" aria-label="图谱 KB PWA 落地链路">
-          <article class="handoff-card" id="graphLinkCard" data-state="running">
+          <article class="handoff-card" id="graphLinkCard" data-state="running" data-flow-target="sources">
             <div class="sync-row">
               <h3>1. 图谱入口</h3>
               <span class="tag" id="graphLinkStatus" data-tone="warn">等待搜索</span>
@@ -1161,7 +1316,7 @@
             <p id="graphLinkSummary">搜索候选和规则筛选只产生 intake package，不直接写 KB。</p>
             <ul class="artifact-list" id="graphArtifacts"></ul>
           </article>
-          <article class="handoff-card" id="gateLinkCard" data-state="running">
+          <article class="handoff-card" id="gateLinkCard" data-state="running" data-flow-target="confirm">
             <div class="sync-row">
               <h3>2. 用户确认</h3>
               <span class="tag" id="gateLinkStatus" data-tone="warn">等待勾选</span>
@@ -1169,7 +1324,7 @@
             <p id="gateLinkSummary">只有 accepted_reviewed_wiki_ids 进入确认包，才允许 apply。</p>
             <ul class="artifact-list" id="gateArtifacts"></ul>
           </article>
-          <article class="handoff-card" id="kbLinkCard" data-state="running">
+          <article class="handoff-card" id="kbLinkCard" data-state="running" data-flow-target="apply">
             <div class="sync-row">
               <h3>3. KB 落库</h3>
               <span class="tag" id="kbLinkStatus" data-tone="warn">等待写入</span>
@@ -1177,7 +1332,7 @@
             <p id="kbLinkSummary">apply 成功后写 reviewed_wiki、mapping 和 runtime snapshot。</p>
             <ul class="artifact-list" id="kbArtifacts"></ul>
           </article>
-          <article class="handoff-card" id="pwaLinkCard" data-state="running">
+          <article class="handoff-card" id="pwaLinkCard" data-state="running" data-flow-target="apply">
             <div class="sync-row">
               <h3>4. PWA 消费</h3>
               <span class="tag" id="pwaLinkStatus" data-tone="warn">检查中</span>
@@ -1490,6 +1645,71 @@ package.artifacts:
       function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
       function setTag(id, label, tagTone) { const el = document.getElementById(id); if (!el) return; el.textContent = label; el.dataset.tone = tagTone; }
       function setCardState(id, cardState) { const el = document.getElementById(id); if (el) el.dataset.state = cardState; }
+      function flowSnapshot(s) {
+        const sourcesDone = (s.source_candidates || []).length > 0;
+        const screeningDone = (s.screening_results || []).length > 0;
+        const recommendationsDone = (s.recommendations || []).length > 0;
+        const accepted = s.confirmation?.accepted_reviewed_wiki_ids || [];
+        const confirmed = !!s.confirmation?.confirmed;
+        const applied = s.status === 'applied_to_kb' || !!s.kb_application?.applied;
+        const failed = s.status === 'failed';
+        const emptyConfirmedPackage = confirmed && recommendationsDone && !accepted.length && !applied;
+        const pwaFailed = pwaSyncState?.status === 'failed';
+        return { sourcesDone, screeningDone, recommendationsDone, accepted, confirmed, applied, failed, emptyConfirmedPackage, pwaFailed };
+      }
+      function setGraphStepState(id, stepState, label) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.dataset.state = stepState;
+        const note = el.querySelector('small');
+        if (note) note.textContent = label;
+      }
+      function renderGraphRunRail(s, flow) {
+        setGraphStepState('graphStepSources',
+          flow.failed && !flow.sourcesDone ? 'error' : (flow.sourcesDone ? 'done' : (s.run_id ? 'running' : 'blocked')),
+          flow.sourcesDone ? '已采集候选' : (s.run_id ? '正在搜索/回退' : '等待需求'));
+        setGraphStepState('graphStepScreening',
+          flow.failed && !flow.recommendationsDone ? 'error' : (flow.recommendationsDone ? 'done' : (flow.sourcesDone ? 'running' : 'blocked')),
+          flow.recommendationsDone ? '建议已生成' : (flow.sourcesDone ? '待筛选生成' : '等待候选'));
+        setGraphStepState('graphStepConfirm',
+          flow.emptyConfirmedPackage || (flow.failed && !flow.confirmed) ? 'error' : (flow.confirmed || flow.applied ? 'done' : (flow.recommendationsDone ? 'running' : 'blocked')),
+          flow.emptyConfirmedPackage ? '确认包缺少 accepted' : (flow.confirmed || flow.applied ? '确认包已生成' : (flow.recommendationsDone ? '等待用户勾选' : '等待建议')));
+        setGraphStepState('graphStepApply',
+          flow.pwaFailed || flow.failed ? 'error' : (flow.applied ? 'done' : (flow.confirmed ? 'running' : 'blocked')),
+          flow.pwaFailed ? 'PWA 同步异常' : (flow.applied ? 'KB 已写入验证' : (flow.confirmed ? '待写入验证' : '等待确认包')));
+      }
+      function setGraphNodeState(node, nodeState, label) {
+        if (!node) return;
+        node.classList.remove('is-complete', 'is-running', 'is-pending', 'is-error');
+        node.classList.add(nodeState === 'done' ? 'is-complete' : nodeState === 'running' ? 'is-running' : nodeState === 'error' ? 'is-error' : 'is-pending');
+        let badge = node.querySelector('.node-status');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'node-status';
+          node.appendChild(badge);
+        }
+        badge.textContent = label;
+      }
+      function flowTargetSelector(step) {
+        if (step === 'sources') return state().run_id ? '#showSources' : '#intakeForm';
+        if (step === 'screening') return '#buildRecommendations';
+        if (step === 'confirm') return '#confirmInlinePanel';
+        if (step === 'apply') return '#applyPackage';
+        return '#actionSummary';
+      }
+      function linkFlowStep(step) {
+        if (!step) return;
+        document.querySelectorAll('.is-linked').forEach((item) => item.classList.remove('is-linked'));
+        const targets = Array.from(document.querySelectorAll('[data-flow-step="' + step + '"], [data-flow-target="' + step + '"]'));
+        const target = document.querySelector(flowTargetSelector(step));
+        if (target && !targets.includes(target)) targets.push(target);
+        targets.forEach((item) => item.classList.add('is-linked'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.clearTimeout(linkFlowStep._timer);
+        linkFlowStep._timer = window.setTimeout(() => {
+          targets.forEach((item) => item.classList.remove('is-linked'));
+        }, 2200);
+      }
       function compactPath(value) {
         const text = String(value || '').replaceAll('\\', '/');
         if (!text) return '等待生成';
@@ -1590,7 +1810,37 @@ package.artifacts:
           syncButton.title = !applied ? '先完成写入 KB 并验证' : (!pwaRootReady ? 'PWA 根目录不存在' : '复制 latest.json 并运行 PWA kbAdapter 测试');
         }
       }
-      function setNodeStates(s) { const order = ['start','scene','action','shot','prompt','snapshot']; const support = ['writing','camera','guard','source','rules','rw','confirm']; document.querySelectorAll('.graph-node').forEach((node) => { node.classList.remove('is-complete','is-running','is-pending','is-error'); node.classList.add('is-pending'); }); const status = s.status || 'idle'; const active = status === 'sources_collected' ? 'source' : status === 'screened' ? 'rules' : status === 'recommendations_ready' ? 'rw' : status === 'confirmed_package' ? 'confirm' : status === 'applied_to_kb' ? 'snapshot' : status === 'failed' ? 'confirm' : 'start'; order.concat(support).forEach((id) => { const node = document.querySelector('[data-node="' + id + '"]'); if (!node) return; node.classList.remove('is-pending'); if (id === active) node.classList.add(status === 'failed' ? 'is-error' : 'is-running'); else if (status === 'applied_to_kb' || ['start','scene','action','shot','prompt'].includes(id)) node.classList.add('is-complete'); else node.classList.add('is-pending'); }); }
+      function setNodeStates(s) {
+        const flow = flowSnapshot(s);
+        renderGraphRunRail(s, flow);
+        document.querySelectorAll('.graph-node').forEach((node) => setGraphNodeState(node, 'pending', '待执行'));
+
+        setGraphNodeState(document.querySelector('[data-node="start"]'), s.run_id ? 'done' : 'running', s.run_id ? '已记录' : '待输入');
+        ['scene', 'action', 'shot', 'prompt'].forEach((id) => {
+          const done = !!s.run_id;
+          setGraphNodeState(document.querySelector('[data-node="' + id + '"]'), done ? 'done' : 'pending', done ? '已关联' : '待执行');
+        });
+        ['writing', 'camera', 'guard'].forEach((id) => {
+          const done = flow.recommendationsDone || flow.applied;
+          setGraphNodeState(document.querySelector('[data-node="' + id + '"]'), done ? 'done' : 'pending', done ? '已参与' : '待执行');
+        });
+
+        setGraphNodeState(document.querySelector('[data-node="source"]'),
+          flow.failed && !flow.sourcesDone ? 'error' : (flow.sourcesDone ? 'done' : (s.run_id ? 'running' : 'pending')),
+          flow.failed && !flow.sourcesDone ? '异常' : (flow.sourcesDone ? '已完成' : (s.run_id ? '运行中' : '待执行')));
+        setGraphNodeState(document.querySelector('[data-node="rules"]'),
+          flow.failed && !flow.screeningDone ? 'error' : (flow.screeningDone ? 'done' : (flow.sourcesDone ? 'running' : 'pending')),
+          flow.failed && !flow.screeningDone ? '异常' : (flow.screeningDone ? '已完成' : (flow.sourcesDone ? '运行中' : '待执行')));
+        setGraphNodeState(document.querySelector('[data-node="rw"]'),
+          flow.failed && !flow.recommendationsDone ? 'error' : (flow.recommendationsDone ? 'done' : (flow.screeningDone ? 'running' : 'pending')),
+          flow.failed && !flow.recommendationsDone ? '异常' : (flow.recommendationsDone ? '已完成' : (flow.screeningDone ? '运行中' : '待执行')));
+        setGraphNodeState(document.querySelector('[data-node="confirm"]'),
+          flow.emptyConfirmedPackage || (flow.failed && !flow.confirmed) ? 'error' : (flow.confirmed || flow.applied ? 'done' : (flow.recommendationsDone ? 'running' : 'pending')),
+          flow.emptyConfirmedPackage ? '缺 accepted' : (flow.confirmed || flow.applied ? '已确认' : (flow.recommendationsDone ? '待确认' : '待执行')));
+        setGraphNodeState(document.querySelector('[data-node="snapshot"]'),
+          flow.pwaFailed || flow.failed ? 'error' : (flow.applied ? 'done' : (flow.confirmed ? 'running' : 'pending')),
+          flow.pwaFailed || flow.failed ? '异常' : (flow.applied ? '已同步' : (flow.confirmed ? '待写入' : '待执行')));
+      }
       async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} await loadProviderStatus(); await loadPwaStatus(); }
       function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); const artifact = s.artifacts?.draft_package || ''; if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；草稿已落盘：' + artifact + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
       function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
@@ -1609,7 +1859,7 @@ package.artifacts:
             : s.confirmation?.confirmed
               ? ('已确认 ' + acceptedCount + '，等待写入')
               : s.run_id
-                ? ((s.recommendations || []).length + ' 条建议，待勾选确认')
+                ? ((s.recommendations || []).length + ' 条建议，可查看详情')
                 : '等待确认';
         }
         if (!s.run_id) {
@@ -1619,13 +1869,12 @@ package.artifacts:
         const readyIds = new Set(confirmableRecommendationIds(s));
         const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
         const help = readyIds.size
-          ? '<div class="confirm-help">' + (s.confirmation?.confirmed && !acceptedCount ? '当前确认包缺少 accepted 记录，请重新勾选要入库的建议，再点击第 3 步“生成确认包”修正确认凭据。' : '在这里勾选要进入确认包的建议，再点击上方第 3 步“生成确认包”。确认包只记录用户确认，不会直接写 runtime。') + '</div>'
+          ? '<div class="confirm-help">' + (s.confirmation?.confirmed && !acceptedCount ? '当前确认包缺少 accepted 记录，请在页面主区域“待确认入库建议”重新选择，再点击第 3 步“生成确认包”。' : '这里仅展示建议详情；入库确认只在页面主区域“待确认入库建议”操作，避免重复勾选。') + '</div>'
           : '';
         feed.innerHTML = help + recs.map((item) => {
           const canConfirm = readyIds.has(item.reviewed_wiki_id);
-          const checked = selectedConfirmIds.has(item.reviewed_wiki_id);
-          const checkbox = canConfirm ? '<input class="recommendation-checkbox" type="checkbox" data-id="' + escapeHtml(item.reviewed_wiki_id) + '"' + (checked ? ' checked' : '') + ' />' : '';
-          return '<div class="feed-card"><label class="recommendation-confirm">' + (checkbox || '<span></span>') + '<span><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p></span></label><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span></div></div>';
+          const stateText = canConfirm ? '可在主区域确认' : '仅查看';
+          return '<div class="feed-card"><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span><span>' + escapeHtml(stateText) + '</span></div></div>';
         }).join('');
       }
       function statusClass(value) { if (value === '待审') return 'waiting'; if (value === '待确认') return 'confirming'; return ''; }
@@ -1812,6 +2061,15 @@ package.artifacts:
           alert(error.message || String(error));
         }
       }
+      document.querySelectorAll('[data-flow-step]').forEach((item) => {
+        item.addEventListener('click', () => linkFlowStep(item.dataset.flowStep));
+        item.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            linkFlowStep(item.dataset.flowStep);
+          }
+        });
+      });
       document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); try { await startSources(); } catch (error) { alert(error.message || String(error)); } });
       document.getElementById('showSources')?.addEventListener('click', () => mutate('sources'));
       document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
@@ -1829,7 +2087,6 @@ package.artifacts:
         confirmSelectionTouched = true;
         render();
       }
-      document.getElementById('recommendationFeed')?.addEventListener('change', handleRecommendationCheckboxChange);
       document.getElementById('confirmInlineList')?.addEventListener('change', handleRecommendationCheckboxChange);
       document.getElementById('selectAllConfirmable')?.addEventListener('click', () => {
         selectedConfirmIds = new Set(confirmableRecommendationIds(state()));
