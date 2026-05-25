@@ -278,6 +278,102 @@
         gap: 8px;
       }
 
+      .confirm-inline-panel {
+        display: grid;
+        gap: 10px;
+        border: 1px solid #d9e8f6;
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #ffffff;
+      }
+
+      .confirm-inline-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .confirm-inline-head strong {
+        color: #17335f;
+        font-size: 13px;
+      }
+
+      .confirm-inline-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      .confirm-inline-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 8px;
+        max-height: 226px;
+        overflow: auto;
+      }
+
+      .confirm-inline-item {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 8px;
+        align-items: start;
+        min-width: 0;
+        border: 1px solid #dfe9f6;
+        border-radius: 8px;
+        padding: 9px 10px;
+        background: #fbfdff;
+        color: #17335f;
+      }
+
+      .confirm-inline-item input {
+        width: 16px;
+        height: 16px;
+        margin: 2px 0 0;
+      }
+
+      .confirm-inline-item strong {
+        display: block;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .confirm-inline-item p {
+        margin: 3px 0 0;
+        color: #405b7f;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .confirm-inline-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 6px;
+      }
+
+      .confirm-inline-meta span {
+        min-height: 20px;
+        border: 1px solid #dfebf8;
+        border-radius: 999px;
+        padding: 2px 7px;
+        background: #fff;
+        color: #5b708f;
+        font-size: 10px;
+      }
+
+      .confirm-inline-empty {
+        border: 1px dashed #ccd9ea;
+        border-radius: 8px;
+        padding: 10px;
+        color: #5b708f;
+        font-size: 12px;
+      }
+
       .mini-primary {
         min-height: 32px;
         border-color: #1f9e92;
@@ -1009,6 +1105,17 @@
             <button class="mini-primary" type="button" id="confirmSelectedDock">确认所选入库建议</button>
           </div>
         </div>
+        <div class="confirm-inline-panel" id="confirmInlinePanel">
+          <div class="confirm-inline-head">
+            <strong>待确认入库建议</strong>
+            <div class="confirm-inline-actions">
+              <span class="pill" id="confirmInlineHint" data-tone="warn">等待建议</span>
+              <button class="mini-ghost" type="button" id="selectAllConfirmable">全选可入库建议</button>
+              <button class="mini-ghost" type="button" id="clearConfirmSelection">清空选择</button>
+            </div>
+          </div>
+          <div class="confirm-inline-list" id="confirmInlineList"></div>
+        </div>
         <div class="handoff-board" aria-label="图谱 KB PWA 落地链路">
           <article class="handoff-card" id="graphLinkCard" data-state="running">
             <div class="sync-row">
@@ -1243,16 +1350,58 @@ package.artifacts:
           confirmText.textContent = applied
             ? '确认包已写入 KB；落盘结果已进入 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。'
             : confirmableCount
-              ? '候选里的“保留”只是规则筛选结论。请在“入库建议队列”勾选要入库的 reviewed_wiki 条目，然后点击这里或第 3 步生成确认包。'
+              ? '候选里的“保留”只是规则筛选结论。请直接在下方勾选要入库的 reviewed_wiki 条目，然后点击这里或第 3 步生成确认包。'
               : '还没有可确认的入库建议。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';
         }
+      }
+      function renderInlineConfirmQueue(s) {
+        const list = document.getElementById('confirmInlineList');
+        const hint = document.getElementById('confirmInlineHint');
+        const selectAll = document.getElementById('selectAllConfirmable');
+        const clear = document.getElementById('clearConfirmSelection');
+        if (!list) return;
+        const applied = s.status === 'applied_to_kb' || s.kb_application?.applied;
+        const accepted = s.confirmation?.accepted_reviewed_wiki_ids || [];
+        const ready = confirmableRecommendations(s);
+        const selectedCount = selectedConfirmableIds().length;
+        if (hint) {
+          hint.dataset.tone = applied || accepted.length || selectedCount ? 'ok' : (ready.length ? 'warn' : 'warn');
+          hint.textContent = applied
+            ? ('已写入 ' + accepted.length)
+            : accepted.length
+              ? ('确认包已含 ' + accepted.length)
+              : ('已选 ' + selectedCount + ' / 可确认 ' + ready.length);
+        }
+        if (selectAll) selectAll.disabled = applied || !ready.length;
+        if (clear) clear.disabled = applied || !selectedCount;
+        if (!s.run_id) {
+          list.innerHTML = '<div class="confirm-inline-empty">完成第 2 步后，这里会显示可勾选的入库建议。</div>';
+          return;
+        }
+        if (applied) {
+          list.innerHTML = '<div class="confirm-inline-empty">确认包已写入 KB：' + escapeHtml(shortList(accepted, '无')) + '</div>';
+          return;
+        }
+        if (!ready.length) {
+          list.innerHTML = '<div class="confirm-inline-empty">' + (accepted.length ? ('确认包已生成：' + escapeHtml(shortList(accepted, '无')) + '。下一步可以写入 KB 并验证。') : '当前没有可确认建议。先完成规则筛选 / 入库建议。') + '</div>';
+          return;
+        }
+        list.innerHTML = ready.map((item) => {
+          const checked = selectedConfirmIds.has(item.reviewed_wiki_id);
+          const fields = (item.serves_pwa_fields || []).map(fieldLabel).join('、') || '字段待补';
+          const targets = (item.runtime_targets || []).slice(0, 3).join(', ') || 'runtime target 待补';
+          return '<label class="confirm-inline-item"><input class="recommendation-checkbox" type="checkbox" data-id="' + escapeHtml(item.reviewed_wiki_id) + '"' + (checked ? ' checked' : '') + ' /><span><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '待确认入库建议') + '</p><div class="confirm-inline-meta"><span>' + escapeHtml(fields) + '</span><span>' + escapeHtml(targets) + '</span><span>' + escapeHtml(item.status || 'ready_for_confirmation') + '</span></div></span></label>';
+        }).join('');
       }
       function state() { return currentPackage || { status: 'idle', source_candidates: [], screening_results: [], recommendations: [], confirmation: { confirmed: false }, kb_application: { applied: false } }; }
       function phaseLabel(s) { if (!s || s.status === 'idle') return '等待用户发起'; if (s.status === 'request_recorded') return '需求已记录'; if (s.status === 'sources_collected') return '候选已采集'; if (s.status === 'screened') return '筛选已完成'; if (s.status === 'recommendations_ready') return '入库建议已生成'; if (s.status === 'confirmed_package') return '确认包已生成'; if (s.status === 'applied_to_kb') return '已写入 KB 并验证'; if (s.status === 'failed') return '执行失败'; return s.status || '等待用户发起'; }
       function tone(decision) { if (decision === 'keep' || decision === '保留' || decision === 'ready_for_confirmation' || decision === 'confirmed') return 'ok'; if (decision === 'reject' || decision === '拒绝') return 'reject'; return 'warn'; }
-      function confirmableRecommendationIds(s) {
+      function confirmableRecommendations(s) {
         if (s.kb_application?.applied) return [];
-        return (s.recommendations || []).filter((item) => item.status === 'ready_for_confirmation' || (item.status === 'confirmed' && item.write_state !== 'written' && item.runtime_state !== 'runtime')).map((item) => item.reviewed_wiki_id);
+        return (s.recommendations || []).filter((item) => item.status === 'ready_for_confirmation' || (item.status === 'confirmed' && item.write_state !== 'written' && item.runtime_state !== 'runtime'));
+      }
+      function confirmableRecommendationIds(s) {
+        return confirmableRecommendations(s).map((item) => item.reviewed_wiki_id);
       }
       function syncConfirmSelection(s) {
         const confirmable = new Set(confirmableRecommendationIds(s));
@@ -1535,7 +1684,7 @@ package.artifacts:
         }
       }
 
-      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); renderHandoffBoard(s); requestAnimationFrame(updateGraphConnections); }
+      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); renderInlineConfirmQueue(s); renderHandoffBoard(s); requestAnimationFrame(updateGraphConnections); }
       async function refreshProviderAndRender() { await Promise.all([loadProviderStatus(), loadPwaStatus()]); render(); }
       async function startSources() {
         const title = document.getElementById('intakeTitle').value.trim();
@@ -1594,13 +1743,25 @@ package.artifacts:
       document.getElementById('confirmSelectedDock')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
       document.getElementById('syncPwaNow')?.addEventListener('click', syncPwaNow);
-      document.getElementById('recommendationFeed')?.addEventListener('change', (event) => {
+      function handleRecommendationCheckboxChange(event) {
         const target = event.target;
         if (!target || !target.classList || !target.classList.contains('recommendation-checkbox')) return;
         const id = target.dataset.id;
         if (!id) return;
         if (target.checked) selectedConfirmIds.add(id);
         else selectedConfirmIds.delete(id);
+        confirmSelectionTouched = true;
+        render();
+      }
+      document.getElementById('recommendationFeed')?.addEventListener('change', handleRecommendationCheckboxChange);
+      document.getElementById('confirmInlineList')?.addEventListener('change', handleRecommendationCheckboxChange);
+      document.getElementById('selectAllConfirmable')?.addEventListener('click', () => {
+        selectedConfirmIds = new Set(confirmableRecommendationIds(state()));
+        confirmSelectionTouched = true;
+        render();
+      });
+      document.getElementById('clearConfirmSelection')?.addEventListener('click', () => {
+        selectedConfirmIds = new Set();
         confirmSelectionTouched = true;
         render();
       });
