@@ -32,10 +32,10 @@ character_action
 dialogue_or_narration
 prompt_text
 duration_seconds
-status / note
+status / note (internal only; not final field output)
 ```
 
-This work is a knowledge-quality upgrade. It must not add new PWA columns, new generation stages, new provider logic, new export shape, or a separate product.
+The final user-visible storyboard output is the current table surface: order, person, camera, shot size, visual description, character action, dialogue/narration, prompt text, duration, and the UI operation column. `status` and `note` may support internal validation or repair, but KB must not treat them as final output fields. This work is a knowledge-quality upgrade. It must not add new PWA columns, new generation stages, new provider logic, new export shape, or a separate product.
 
 ## Existing Field Mapping
 
@@ -106,10 +106,9 @@ character_action
 dialogue_or_narration
 duration_seconds
 prompt_text
-note
 ```
 
-If a knowledge item cannot map to one of these fields, it stays as background research and must not enter `runtime-kb-snapshot` or PWA output.
+If a knowledge item cannot map to one of these final output fields, it stays as background research and must not enter `runtime-kb-snapshot` or PWA output. `status`, `note`, and UI `operation` are not KB enrichment targets.
 
 ## Fast Safety Gate
 
