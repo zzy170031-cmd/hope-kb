@@ -2,6 +2,7 @@
   "schema_version": "hope-kb-source-candidates.sample/v0.2",
   "generated_for": "manual Seedance/anime PWA storyboard intake visualization",
   "dashboard_only": true,
+  "no_runtime_effect": true,
   "no_runtime_effect_without_confirmation": true,
   "source_candidates": [
     {

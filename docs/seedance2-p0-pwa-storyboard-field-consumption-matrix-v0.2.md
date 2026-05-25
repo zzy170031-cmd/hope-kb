@@ -138,3 +138,33 @@ The first production-oriented KB batch should stay small and prove consumption:
 | Prompt rules | 8-12 | `prompt_text` stays field-derived and export-safe. |
 
 This batch proves the chain before expanding toward a larger vocabulary.
+
+## 2026-05-25 P1 Runtime Projection
+
+Status: promoted through confirmed manual intake package
+`intake-20260525-seedance2-field-discipline`.
+
+Reviewed wiki target:
+
+```text
+rw-seedance2-storyboard-field-discipline
+```
+
+Runtime rule pack target:
+
+```text
+dg-seedance2-storyboard-field-discipline
+```
+
+The projection stays inside the current adapter and PWA field surface.
+
+| guidance family | Existing PWA field | Adapter surface | Positive directive | Negative constraint |
+| --- | --- | --- | --- | --- |
+| Camera movement and viewpoint | `camera` | `directorRulePacks[].directives`, `sceneMappings.*.directorRulePackIds` | Choose one primary camera movement and one compatible viewpoint for the current beat before compiling `prompt_text`. | Do not stack conflicting movements or use anime-only camera vocabulary in non-anime-compatible scenes. |
+| Shot-size-aware expression | `shot_size`, `character_action` | `directorRulePacks[].directives`, `sceneMappings.*.negativeConstraints` | Bind `shot_size` before expression detail; close shots may carry eye, lip, breath, and hand tension, while wide shots carry silhouette, spacing, route, and group motion. | Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots. |
+| Scene space, light, color, and composition | `visual_description` | `directorRulePacks[].directives`; KB runtime snapshot `scene_mappings.*.kb_context_summary` only | Build `visual_description` from scene-supported space, subject placement, material, light direction, color temperature, air medium, composition, and depth cues. | Do not use light, color, atmosphere, or composition as disconnected decoration or unsupported world facts. |
+| Visible performance | `character_action` | `directorRulePacks[].directives` | Translate emotion into visible action such as gaze, breath, posture, hand motion, step, recoil, pause, or blocking relation. | Do not output abstract emotion only or move psychology into `person`. |
+| Prompt packaging | `prompt_text` | KB runtime snapshot `selected_kb_rules`, `kb_context_summary`, and `negative_constraints`; PWA adapter receives only sanitized summary surfaces | Compile `prompt_text` from the confirmed row fields plus safe negative constraints only. | Do not expose source or governance metadata in PWA output. |
+
+No new PWA field, generation stage, provider path, export shape, dashboard
+runtime role, or raw source disclosure is authorized by this projection.

@@ -204,7 +204,98 @@
       }
 
       .primary::before { content: "⌕"; margin-right: 6px; font-weight: 700; }
-      .quick-actions { display: none; }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.52;
+        box-shadow: none;
+      }
+
+      .action-panel {
+        display: grid;
+        gap: 12px;
+        padding: 14px 18px 16px;
+      }
+
+      .action-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .action-head h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .action-head p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .confirmation-dock {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        border: 1px solid #d9e8f6;
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #fbfdff;
+      }
+
+      .confirm-copy {
+        display: grid;
+        gap: 4px;
+      }
+
+      .confirm-copy strong {
+        color: #17335f;
+        font-size: 13px;
+      }
+
+      .confirm-copy p {
+        margin: 0;
+        color: #4b6384;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .confirmation-status {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .mini-primary {
+        min-height: 32px;
+        border-color: #1f9e92;
+        background: #1f9e92;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .ghost {
+        min-height: 42px;
+        padding: 8px 12px;
+        border-color: #bed0e8;
+        background: #f9fbff;
+        color: #173b72;
+        font-size: 12px;
+        font-weight: 700;
+      }
 
       .graph-panel {
         overflow: hidden;
@@ -406,7 +497,7 @@
       .legend-line.candidate { border-top: 2px dashed var(--teal); }
       .legend-line.confirm { border-top-color: var(--orange); }
 
-      .metrics, .evidence-row { display: none; }
+      .metrics { display: none; }
 
       .tables {
         display: grid;
@@ -437,7 +528,162 @@
       .status-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 22px; border-radius: 6px; padding: 3px 8px; border: 1px solid #a9d6b5; background: #ebf8f0; color: #17824e; font-weight: 700; }
       .status-badge.waiting { border-color: #e5bf7d; background: #fff7eb; color: #a86612; }
       .status-badge.confirming { border-color: #9dccf2; background: #ecf7ff; color: #1774b8; }
-      .feed, .feed-card, .meta, .scene-cloud { display: none; }
+      .feed {
+        display: grid;
+        gap: 8px;
+        padding: 0 12px 12px;
+      }
+
+      .feed-card {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+        border: 1px solid #dfe9f6;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fbfdff;
+      }
+
+      .feed-card strong {
+        color: #17335f;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .feed-card p {
+        margin: 0;
+        color: #405b7f;
+        font-size: 11px;
+        line-height: 1.55;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .meta span:not(.tag) {
+        min-height: 22px;
+        border: 1px solid #dfebf8;
+        border-radius: 7px;
+        padding: 3px 7px;
+        background: #fff;
+      }
+
+      .recommendation-confirm {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+
+      .recommendation-confirm input {
+        width: 16px;
+        height: 16px;
+        margin-top: 1px;
+      }
+
+      .confirm-help {
+        border: 1px solid #e5bf7d;
+        border-radius: 8px;
+        padding: 8px 10px;
+        background: #fffaf1;
+        color: #8a5c13;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .decision-primer {
+        border-color: #c7ddf4;
+        background: #f8fbff;
+      }
+
+      .scene-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .evidence-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        align-items: start;
+      }
+
+      .evidence-detail {
+        overflow: hidden;
+        border-color: #cfdeef;
+        background: #ffffff;
+      }
+
+      .evidence-detail summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 18px;
+        gap: 12px;
+        align-items: center;
+        min-height: 66px;
+        padding: 12px 14px;
+        cursor: pointer;
+        list-style: none;
+        border-bottom: 1px solid transparent;
+        background:
+          linear-gradient(180deg, rgba(249, 252, 255, 0.98), rgba(255, 255, 255, 0.98));
+      }
+
+      .evidence-detail summary::-webkit-details-marker { display: none; }
+
+      .evidence-detail summary::after {
+        content: "";
+        width: 9px;
+        height: 9px;
+        justify-self: center;
+        border-right: 2px solid #6f85a6;
+        border-bottom: 2px solid #6f85a6;
+        transform: rotate(45deg);
+        transition: transform 0.18s ease;
+      }
+
+      .evidence-detail[open] summary {
+        border-bottom-color: var(--line);
+        background: #fbfdff;
+      }
+
+      .evidence-detail[open] summary::after {
+        transform: rotate(225deg);
+      }
+
+      .evidence-detail summary h2 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .evidence-detail summary small {
+        display: block;
+        overflow: hidden;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .evidence-detail .feed {
+        max-height: 320px;
+        overflow: auto;
+        padding: 10px 12px 12px;
+      }
+
+      .evidence-detail:not([open]) {
+        min-height: 0;
+      }
 
       .dialog-backdrop[hidden] { display: none; }
       .dialog-backdrop {
@@ -498,6 +744,9 @@
 
       @media (max-width: 1180px) {
         .topbar, .intake-form, .tables, .api-doc-grid { grid-template-columns: 1fr; }
+        .action-head, .quick-actions, .confirmation-dock { grid-template-columns: 1fr; }
+        .evidence-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .confirmation-status { justify-content: flex-start; }
         .status-strip { justify-content: flex-start; }
         .api-doc-actions { justify-content: flex-start; flex-wrap: wrap; }
         .api-doc-note { white-space: normal; }
@@ -512,6 +761,8 @@
         .shell { padding: 8px; }
         .brand h1 { font-size: 20px; }
         .panel-title { display: grid; }
+        .evidence-row { grid-template-columns: 1fr; }
+        .evidence-detail summary { min-height: 68px; padding: 12px 14px; }
       }
     </style>
   </head>
@@ -528,7 +779,8 @@
         </div>
         <div class="status-strip">
           <span class="pill" data-tone="ok">验证已通过</span>
-          <span class="pill" data-tone="warn">快照候选</span>
+          <span class="pill" id="providerPill" data-tone="warn">Provider 检查中</span>
+          <span class="pill" id="pwaPill" data-tone="warn">PWA 待同步</span>
           <span class="pill" data-tone="warn">仅手动发起入库</span>
           <span class="pill" id="clock">--:--:--</span>
         </div>
@@ -550,12 +802,6 @@
           </div>
           <button class="primary" type="submit">开始搜索</button>
         </form>
-        <div class="quick-actions" aria-hidden="true">
-          <button class="ghost" type="button" id="showSources">重新展示搜索候选</button>
-          <button class="ghost" type="button" id="buildRecommendations">第 2 步：生成入库建议</button>
-          <button class="ghost" type="button" id="markWaiting">第 3 步：生成确认包</button>
-          <button class="ghost" type="button" id="applyPackage">第 4 步：写入 KB 并验证</button>
-        </div>
       </section>
 
       <section class="panel graph-panel">
@@ -651,10 +897,36 @@
         </div>
       </section>
 
+      <section class="panel action-panel" aria-label="执行链路">
+        <div class="action-head">
+          <div>
+            <h2>执行链路</h2>
+            <p id="actionSummary">先在上方录入手动需求，再按候选、筛选、确认、写入的顺序推进。</p>
+          </div>
+          <span class="pill" id="actionRunId" data-tone="warn">未开始</span>
+        </div>
+        <div class="quick-actions">
+          <button class="ghost" type="button" id="showSources">第 1 步：搜索候选</button>
+          <button class="ghost" type="button" id="buildRecommendations">第 2 步：规则筛选 / 入库建议</button>
+          <button class="ghost" type="button" id="markWaiting">第 3 步：生成确认包</button>
+          <button class="ghost" type="button" id="applyPackage">第 4 步：写入 KB 并验证</button>
+        </div>
+        <div class="confirmation-dock" id="confirmationDock">
+          <div class="confirm-copy">
+            <strong>用户确认入口</strong>
+            <p id="confirmDockText">候选里的“保留”只是规则筛选结论，不会写入 KB。只有在入库建议队列勾选条目并生成确认包后，才允许进入写入与验证。</p>
+          </div>
+          <div class="confirmation-status">
+            <span class="pill" id="confirmCount" data-tone="warn">已选 0 / 可确认 0</span>
+            <button class="mini-primary" type="button" id="confirmSelectedDock">确认所选入库建议</button>
+          </div>
+        </div>
+      </section>
+
       <section class="metrics" aria-label="KB 覆盖指标">
         <div class="metric"><span>已审知识</span><strong id="metricWiki">13</strong></div><div class="metric"><span>映射条目</span><strong id="metricMappings">13</strong></div><div class="metric"><span>规则包</span><strong id="metricRules">15</strong></div><div class="metric"><span>时长档位</span><strong id="metricDurations">6</strong></div><div class="metric"><span>场景覆盖</span><strong id="metricScenes">21</strong></div>
       </section>
-      <section class="evidence-row"><details class="panel evidence-detail"><summary><span><h2>当前状态</h2><small id="phaseSummary">等待用户发起</small></span></summary><div class="feed"><div class="feed-card"><strong>关联规则</strong><p>实线是应用产出路径；虚线是手动搜索入库路径；用户确认只允许写入已审知识。</p></div><div class="feed-card"><strong>运行边界</strong><p id="draftSummary">本地需求 0，等待用户手动发起。</p></div><div class="feed-card"><strong>21 个应用场景</strong><div class="scene-cloud" id="sceneCloud"></div></div></div></details><details class="panel evidence-detail"><summary><span><h2>互联网搜索候选</h2><small id="searchStatus">等待用户发起</small></span></summary><div class="feed" id="sourceFeed"></div></details><details class="panel evidence-detail"><summary><span><h2>规则筛选与 KB 对照</h2><small>规则与映射</small></span></summary><div class="feed" id="screeningBoard"></div></details><details class="panel evidence-detail"><summary><span><h2>入库建议队列</h2><small>等待确认</small></span></summary><div class="feed" id="recommendationFeed"></div></details></section>
+      <section class="evidence-row"><details class="panel evidence-detail"><summary><span><h2>当前状态</h2><small id="phaseSummary">等待用户发起</small></span></summary><div class="feed"><div class="feed-card"><strong>关联规则</strong><p>实线是应用产出路径；虚线是手动搜索入库路径；用户确认只允许写入已审知识。</p></div><div class="feed-card"><strong>运行边界</strong><p id="draftSummary">本地需求 0，等待用户手动发起。</p></div><div class="feed-card"><strong>21 个应用场景</strong><div class="scene-cloud" id="sceneCloud"></div></div></div></details><details class="panel evidence-detail"><summary><span><h2>互联网搜索候选</h2><small id="searchStatus">等待用户发起</small></span></summary><div class="feed" id="sourceFeed"></div></details><details class="panel evidence-detail"><summary><span><h2>规则筛选与 KB 对照</h2><small id="screeningStatus">规则与映射</small></span></summary><div class="feed" id="screeningBoard"></div></details><details class="panel evidence-detail"><summary><span><h2>入库建议队列</h2><small id="recommendationStatus">等待确认</small></span></summary><div class="feed" id="recommendationFeed"></div></details></section>
 
       <section class="tables">
         <section class="panel table-panel"><div class="table-head"><h2>知识条目</h2><small>第 2 批已审知识</small></div><div class="table-wrap"><table><thead><tr><th>知识 ID</th><th>类型</th><th>支持动作</th><th>状态</th><th>来源</th><th>更新时间</th></tr></thead><tbody id="wikiRows"></tbody></table></div></section>
@@ -695,6 +967,8 @@
           <section class="api-doc-card">
             <h3>接口顺序</h3>
             <code class="api-doc-code">GET  /api/intake/latest
+GET  /api/provider/status
+POST /api/provider/test
 POST /api/intake/start
 POST /api/intake/:run_id/sources
 POST /api/intake/:run_id/screen
@@ -713,14 +987,26 @@ Content-Type: application/json
 }</code>
           </section>
           <section class="api-doc-card">
+            <h3>确认包请求体</h3>
+            <code class="api-doc-code">POST /api/intake/:run_id/confirm
+Content-Type: application/json
+
+{
+  "accepted_reviewed_wiki_ids": [
+    "rw-seedance2-storyboard-field-discipline"
+  ]
+}</code>
+          </section>
+          <section class="api-doc-card">
             <h3>关键返回字段</h3>
             <code class="api-doc-code">package.status:
   request_recorded | sources_collected | screened |
   recommendations_ready | confirmed_package | applied_to_kb | failed
 
 package.search_plan.search_provider_status:
-  status: live_search | fixture_fallback
-  reason: ok | missing_credential | live_search_timeout | live_search_failed
+  status: live_search | model_search | model_fallback | fixture_fallback
+  reason: ok | missing_credential | live_search_timeout |
+          live_search_failed | live_search_timeout_model_ok
 
 package.artifacts:
   draft_package
@@ -744,21 +1030,134 @@ package.artifacts:
       let sampleSources = fallbackSources;
       let sampleRecommendations = fallbackRecommendations;
       let currentPackage = null;
+      let providerState = null;
+      let selectedConfirmIds = new Set();
+      let confirmSelectionTouched = false;
       function escapeHtml(value) { return String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;').replaceAll("'",'&#39;'); }
       function fieldLabel(value) { return ({ visual_description: '视觉描述', character_action: '角色动作', camera: '镜头', shot_size: '景别', prompt_text: '提示词文本', duration_seconds: '时长', negative_constraints: '负面约束' })[value] || String(value || '').replaceAll('_', ' '); }
       function now() { return new Date().toLocaleTimeString('zh-CN', { hour12: false }); }
       async function api(path, body) { const response = await fetch(path, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); const payload = await response.json(); if (!response.ok) throw new Error(payload.error || '请求失败'); return payload.package; }
+      async function loadProviderStatus() {
+        try {
+          providerState = await fetch('/api/provider/status', { cache: 'no-store' }).then((response) => response.json());
+        } catch {
+          providerState = null;
+        }
+      }
+      function renderProviderStatus() {
+        const provider = document.getElementById('providerPill');
+        const pwa = document.getElementById('pwaPill');
+        if (provider) {
+          const ready = providerState && providerState.credential_state === 'configured';
+          const mode = providerState ? (providerState.enable_search ? 'search on' : 'search off') : 'unknown';
+          provider.dataset.tone = ready ? 'ok' : 'warn';
+          provider.textContent = providerState ? ('Provider ' + providerState.provider + ' / ' + providerState.model + ' / ' + mode) : 'Provider unknown';
+          provider.title = providerState ? ('env=' + (providerState.env_loaded ? 'loaded' : 'missing') + '; credential=' + providerState.credential_state + '; latest=' + providerState.effective_search_mode + '/' + (providerState.latest_search_reason || '')) : '';
+        }
+        if (pwa) {
+          const synced = state().status === 'applied_to_kb' && state().kb_application?.validation_status === 'passed';
+          pwa.dataset.tone = synced ? 'ok' : 'warn';
+          pwa.textContent = synced ? 'PWA adapter ready' : 'PWA adapter pending';
+        }
+      }
+      function renderActionRail(s) {
+        const summary = document.getElementById('actionSummary');
+        const runId = document.getElementById('actionRunId');
+        const sourceButton = document.getElementById('showSources');
+        const buildButton = document.getElementById('buildRecommendations');
+        const confirmButton = document.getElementById('markWaiting');
+        const applyButton = document.getElementById('applyPackage');
+        const dockButton = document.getElementById('confirmSelectedDock');
+        const confirmCount = document.getElementById('confirmCount');
+        const confirmText = document.getElementById('confirmDockText');
+        const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
+        const confirmableCount = confirmableRecommendationIds(s).length;
+        const selectedCount = selectedConfirmableIds().length;
+        const applied = s.status === 'applied_to_kb' || s.kb_application?.applied;
+        if (summary) {
+          summary.textContent = s.run_id
+            ? ('当前状态：' + phaseLabel(s) + '；候选 ' + (s.source_candidates || []).length + '；建议 ' + (s.recommendations || []).length + '；已确认 ' + acceptedCount + '。')
+            : '先在上方录入手动需求，再按候选、筛选、确认、写入的顺序推进。';
+        }
+        if (runId) {
+          runId.dataset.tone = applied ? 'ok' : (s.run_id ? 'warn' : 'warn');
+          runId.textContent = s.run_id ? (s.run_id + (applied ? ' / 已写入' : ' / 进行中')) : '未开始';
+        }
+        if (sourceButton) sourceButton.disabled = !s.run_id || applied;
+        if (buildButton) buildButton.disabled = !s.run_id || applied;
+        if (confirmButton) confirmButton.disabled = !selectedCount || applied;
+        if (applyButton) applyButton.disabled = !s.run_id || applied || !s.confirmation?.confirmed || !acceptedCount;
+        if (dockButton) {
+          dockButton.disabled = !selectedCount || applied;
+          dockButton.textContent = applied ? '确认已完成' : (selectedCount ? '确认所选入库建议' : '先勾选入库建议');
+        }
+        if (confirmCount) {
+          confirmCount.dataset.tone = acceptedCount || selectedCount ? 'ok' : (confirmableCount ? 'warn' : 'warn');
+          confirmCount.textContent = applied
+            ? ('已写入 ' + acceptedCount)
+            : ('已选 ' + selectedCount + ' / 可确认 ' + confirmableCount);
+        }
+        if (confirmText) {
+          confirmText.textContent = applied
+            ? '确认包已写入 KB；落盘结果已进入 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。'
+            : confirmableCount
+              ? '候选里的“保留”只是规则筛选结论。请在“入库建议队列”勾选要入库的 reviewed_wiki 条目，然后点击这里或第 3 步生成确认包。'
+              : '还没有可确认的入库建议。先完成搜索候选和规则筛选，系统只会把可映射且 summary-only 的建议放进确认队列。';
+        }
+      }
       function state() { return currentPackage || { status: 'idle', source_candidates: [], screening_results: [], recommendations: [], confirmation: { confirmed: false }, kb_application: { applied: false } }; }
       function phaseLabel(s) { if (!s || s.status === 'idle') return '等待用户发起'; if (s.status === 'request_recorded') return '需求已记录'; if (s.status === 'sources_collected') return '候选已采集'; if (s.status === 'screened') return '筛选已完成'; if (s.status === 'recommendations_ready') return '入库建议已生成'; if (s.status === 'confirmed_package') return '确认包已生成'; if (s.status === 'applied_to_kb') return '已写入 KB 并验证'; if (s.status === 'failed') return '执行失败'; return s.status || '等待用户发起'; }
       function tone(decision) { if (decision === 'keep' || decision === '保留' || decision === 'ready_for_confirmation' || decision === 'confirmed') return 'ok'; if (decision === 'reject' || decision === '拒绝') return 'reject'; return 'warn'; }
+      function confirmableRecommendationIds(s) {
+        if (s.kb_application?.applied) return [];
+        return (s.recommendations || []).filter((item) => item.status === 'ready_for_confirmation' || (item.status === 'confirmed' && item.write_state !== 'written' && item.runtime_state !== 'runtime')).map((item) => item.reviewed_wiki_id);
+      }
+      function syncConfirmSelection(s) {
+        const confirmable = new Set(confirmableRecommendationIds(s));
+        selectedConfirmIds = new Set(Array.from(selectedConfirmIds).filter((id) => confirmable.has(id)));
+        if (!confirmSelectionTouched) {
+          const accepted = (s.confirmation?.accepted_reviewed_wiki_ids || []).filter((id) => confirmable.has(id));
+          if (accepted.length) selectedConfirmIds = new Set(accepted);
+        }
+      }
       function setNodeStates(s) { const order = ['start','scene','action','shot','prompt','snapshot']; const support = ['writing','camera','guard','source','rules','rw','confirm']; document.querySelectorAll('.graph-node').forEach((node) => { node.classList.remove('is-complete','is-running','is-pending','is-error'); node.classList.add('is-pending'); }); const status = s.status || 'idle'; const active = status === 'sources_collected' ? 'source' : status === 'screened' ? 'rules' : status === 'recommendations_ready' ? 'rw' : status === 'confirmed_package' ? 'confirm' : status === 'applied_to_kb' ? 'snapshot' : status === 'failed' ? 'confirm' : 'start'; order.concat(support).forEach((id) => { const node = document.querySelector('[data-node="' + id + '"]'); if (!node) return; node.classList.remove('is-pending'); if (id === active) node.classList.add(status === 'failed' ? 'is-error' : 'is-running'); else if (status === 'applied_to_kb' || ['start','scene','action','shot','prompt'].includes(id)) node.classList.add('is-complete'); else node.classList.add('is-pending'); }); }
-      async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} }
+      async function loadSamples() { try { const sources = await fetch('source-candidates.sample.json').then((r) => r.json()); sampleSources = Array.isArray(sources.source_candidates) ? sources.source_candidates : sampleSources; } catch {} try { const recommendations = await fetch('intake-recommendations.sample.json').then((r) => r.json()); sampleRecommendations = Array.isArray(recommendations.recommendations) ? recommendations.recommendations : sampleRecommendations; } catch {} try { currentPackage = await api('/api/intake/latest'); } catch {} await loadProviderStatus(); }
       function renderGraph(s) { document.getElementById('knowledgeGraph').dataset.phase = s.status || 'idle'; setNodeStates(s); const draft = document.getElementById('draftSummary'); const phase = document.getElementById('phaseSummary'); const artifact = s.artifacts?.draft_package || ''; if (draft) draft.textContent = s.run_id ? ('运行 ' + s.run_id + '；状态：' + phaseLabel(s) + '；草稿已落盘：' + artifact + '；确认前不写运行快照。') : '本地需求 0，等待用户手动发起。'; if (phase) phase.textContent = phaseLabel(s); }
       function renderSceneCloud() { const cloud = document.getElementById('sceneCloud'); if (cloud) cloud.innerHTML = sceneTypes.map((item) => '<span class="chip">' + escapeHtml(item[1]) + '</span>').join(''); }
-      function searchModeLabel(s) { const status = s.search_plan?.search_provider_status; if (!status) return phaseLabel(s); const mode = status.status === 'live_search' ? 'Hope 搜索' : '登记候选'; const detail = status.reason === 'missing_credential' ? '未配置密钥' : status.reason === 'live_search_timeout' ? '联网搜索超时回退' : status.reason === 'live_search_failed' ? '搜索失败回退' : status.reason === 'no_url_bound_candidates' ? '无可用来源回退' : status.reason === 'ok' ? '已返回来源' : status.reason || ''; return phaseLabel(s) + ' · ' + mode + (detail ? ' · ' + detail : ''); }
-      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = searchModeLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } sourceFeed.innerHTML = sources.map((item) => { const decision = item.decision || item.decision_label; const sourceLink = item.source_url ? '<a href="' + escapeHtml(item.source_url) + '" target="_blank" rel="noreferrer">查看来源</a>' : '来源待补'; return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>来源：' + sourceLink + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
-      function renderScreening(s) { const board = document.getElementById('screeningBoard'); if (!board) return; if (!s.run_id) { board.innerHTML = '<div class="feed-card"><strong>未开始</strong><p>筛选必须从应用分镜和提示词文本问题出发。</p></div>'; return; } const rows = s.screening_results?.length ? s.screening_results : screeningChecks.map((row) => ({ title: row[0], summary: row[1], result: row[2] === 'ok' ? '通过' : '需确认' })); board.innerHTML = rows.map((row) => '<div class="feed-card"><strong>' + escapeHtml(row.source_id || row.title || '筛选项') + '</strong><p>' + escapeHtml(row.summary || ('字段=' + row.serves_pwa_fields + '；即梦适配=' + row.serves_seedance_prompt + '；运行目标=' + row.runtime_target_possible + '；泄漏=' + row.leakage_risk_ok)) + '</p><span class="tag" data-tone="' + tone(row.result) + '">' + escapeHtml(row.result || '需确认') + '</span></div>').join(''); }
-      function renderRecommendations(s) { const feed = document.getElementById('recommendationFeed'); if (!feed) return; const recs = s.recommendations?.length ? s.recommendations : sampleRecommendations; if (!s.run_id) { feed.innerHTML = '<div class="feed-card"><strong>未生成入库建议</strong><p>生成建议后显示规则候选；确认包生成前不写仓库。</p></div>'; return; } feed.innerHTML = recs.map((item) => '<div class="feed-card"><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span></div></div>').join(''); }
+      function searchModeLabel(s) { const status = s.search_plan?.search_provider_status; if (!status) return phaseLabel(s); const mode = status.status === 'live_search' ? 'Hope 搜索' : status.status === 'model_search' ? '模型候选' : status.status === 'model_fallback' ? '模型回退候选' : '登记候选'; const detail = status.reason === 'missing_credential' ? '未配置密钥' : status.reason === 'live_search_timeout' ? '联网搜索超时回退' : status.reason === 'live_search_failed' ? '搜索失败回退' : status.reason === 'live_search_timeout_model_ok' ? '联网搜索超时，普通模型已返回' : status.reason === 'live_search_failed_model_ok' ? '联网搜索失败，普通模型已返回' : status.reason === 'live_search_timeout_model_failed' ? '联网和模型回退均失败' : status.reason === 'live_search_failed_model_failed' ? '搜索和模型回退均失败' : status.reason === 'no_url_bound_candidates' ? '无可用来源回退' : status.reason === 'ok' ? '已返回来源' : status.reason || ''; return phaseLabel(s) + ' · ' + mode + (detail ? ' · ' + detail : ''); }
+      function renderSources(s) { const sourceFeed = document.getElementById('sourceFeed'); const searchStatus = document.getElementById('searchStatus'); if (!sourceFeed) return; if (searchStatus) searchStatus.textContent = searchModeLabel(s); const sources = s.source_candidates?.length ? s.source_candidates : sampleSources; if (!s.run_id) { sourceFeed.innerHTML = '<div class="feed-card"><strong>等待手动需求</strong><p>点击开始搜索后才记录需求；候选来源不会自动写 KB。</p></div>'; return; } const sourcePrimer = '<div class="feed-card decision-primer"><strong>筛选说明</strong><p>“保留”表示该来源通过字段、映射和泄漏风险筛选，只能进入建议生成；最终是否入库必须在“入库建议队列”勾选并生成确认包。</p></div>'; sourceFeed.innerHTML = sourcePrimer + sources.map((item) => { const decision = item.decision || item.decision_label; const url = String(item.source_url || ''); const sourceLink = /^https?:\/\//i.test(url) ? '<a href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">查看来源</a>' : escapeHtml(url || '来源待补'); return '<div class="feed-card"><strong>' + escapeHtml(item.title) + '</strong><p>' + escapeHtml(item.pwa_relevance || item.kb_gap || '') + '</p><div class="meta"><span>类型：' + escapeHtml(item.source_type_label || item.source_type || '') + ' / 语种：' + escapeHtml(item.language || '') + '</span><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、') || '无') + '</span><span>来源：' + sourceLink + '</span><span>风险：' + escapeHtml((item.risk_flags || []).join(', ') || '无') + '</span><span>筛选结论：</span><span class="tag" data-tone="' + tone(decision) + '">' + escapeHtml(item.decision_label || decision || '后续复核') + '</span></div></div>'; }).join(''); }
+      function renderScreening(s) { const board = document.getElementById('screeningBoard'); const screeningStatus = document.getElementById('screeningStatus'); if (!board) return; if (screeningStatus) screeningStatus.textContent = s.run_id ? ((s.screening_results || []).length + ' 条筛选记录') : '规则与映射'; if (!s.run_id) { board.innerHTML = '<div class="feed-card"><strong>未开始</strong><p>筛选必须从应用分镜和提示词文本问题出发。</p></div>'; return; } const rows = s.screening_results?.length ? s.screening_results : screeningChecks.map((row) => ({ title: row[0], summary: row[1], result: row[2] === 'ok' ? '通过' : '需确认' })); board.innerHTML = rows.map((row) => '<div class="feed-card"><strong>' + escapeHtml(row.source_id || row.title || '筛选项') + '</strong><p>' + escapeHtml(row.summary || ('字段=' + row.serves_pwa_fields + '；即梦适配=' + row.serves_seedance_prompt + '；运行目标=' + row.runtime_target_possible + '；泄漏=' + row.leakage_risk_ok)) + '</p><span class="tag" data-tone="' + tone(row.result) + '">' + escapeHtml(row.result || '需确认') + '</span></div>').join(''); }
+      function renderRecommendations(s) {
+        const feed = document.getElementById('recommendationFeed');
+        const recommendationStatus = document.getElementById('recommendationStatus');
+        if (!feed) return;
+        const recs = s.recommendations?.length ? s.recommendations : sampleRecommendations;
+        if (recommendationStatus) {
+          const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
+          recommendationStatus.textContent = s.kb_application?.applied
+            ? ('已写入 ' + acceptedCount)
+            : s.confirmation?.confirmed
+              ? ('已确认 ' + acceptedCount + '，等待写入')
+              : s.run_id
+                ? ((s.recommendations || []).length + ' 条建议，待勾选确认')
+                : '等待确认';
+        }
+        if (!s.run_id) {
+          feed.innerHTML = '<div class="feed-card"><strong>未生成入库建议</strong><p>生成建议后显示规则候选；确认包生成前不写仓库。</p></div>';
+          return;
+        }
+        const readyIds = new Set(confirmableRecommendationIds(s));
+        const acceptedCount = (s.confirmation?.accepted_reviewed_wiki_ids || []).length;
+        const help = readyIds.size
+          ? '<div class="confirm-help">' + (s.confirmation?.confirmed && !acceptedCount ? '当前确认包缺少 accepted 记录，请重新勾选要入库的建议，再点击第 3 步“生成确认包”修正确认凭据。' : '在这里勾选要进入确认包的建议，再点击上方第 3 步“生成确认包”。确认包只记录用户确认，不会直接写 runtime。') + '</div>'
+          : '';
+        feed.innerHTML = help + recs.map((item) => {
+          const canConfirm = readyIds.has(item.reviewed_wiki_id);
+          const checked = selectedConfirmIds.has(item.reviewed_wiki_id);
+          const checkbox = canConfirm ? '<input class="recommendation-checkbox" type="checkbox" data-id="' + escapeHtml(item.reviewed_wiki_id) + '"' + (checked ? ' checked' : '') + ' />' : '';
+          return '<div class="feed-card"><label class="recommendation-confirm">' + (checkbox || '<span></span>') + '<span><strong>' + escapeHtml(item.reviewed_wiki_id) + '</strong><p>' + escapeHtml(item.chinese_title || '') + '</p></span></label><div class="meta"><span>字段：' + escapeHtml((item.serves_pwa_fields || []).map(fieldLabel).join('、')) + '</span><span>应用动作：' + escapeHtml((item.target_pwa_actions || []).join(', ')) + '</span><span>运行目标：' + escapeHtml((item.runtime_targets || []).join(', ')) + '</span><span class="tag" data-tone="' + tone(item.status) + '">' + escapeHtml(item.status || '仅建议') + '</span></div></div>';
+        }).join('');
+      }
       function statusClass(value) { if (value === '待审') return 'waiting'; if (value === '待确认') return 'confirming'; return ''; }
       function renderTables() { document.getElementById('wikiRows').innerHTML = wikiRows.map((r) => '<tr>' + r.map((cell, index) => '<td>' + (index === 3 ? '<span class="status-badge ' + statusClass(cell) + '">' + escapeHtml(cell) + '</span>' : escapeHtml(cell)) + '</td>').join('') + '</tr>').join(''); document.getElementById('mappingRows').innerHTML = mappingRows.map((r) => '<tr><td>' + r.map(escapeHtml).join('</td><td>') + '</td></tr>').join(''); }
 
@@ -891,13 +1290,57 @@ package.artifacts:
         }
       }
 
-      function render() { const s = state(); document.getElementById('clock').textContent = now(); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); requestAnimationFrame(updateGraphConnections); }
-      async function mutate(action) { try { if (!currentPackage?.run_id) return; currentPackage = await api('/api/intake/' + currentPackage.run_id + '/' + action, {}); render(); } catch (error) { alert(error.message || String(error)); } }
-      document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); const title = document.getElementById('intakeTitle').value.trim(); if (!title) return; try { currentPackage = await api('/api/intake/start', { title, search_focus: document.getElementById('searchFocus').value }); currentPackage = await api('/api/intake/' + currentPackage.run_id + '/sources', {}); render(); } catch (error) { alert(error.message || String(error)); } });
+      function render() { const s = state(); document.getElementById('clock').textContent = now(); syncConfirmSelection(s); renderGraph(s); renderSceneCloud(); renderSources(s); renderScreening(s); renderRecommendations(s); renderTables(); renderProviderStatus(); renderActionRail(s); requestAnimationFrame(updateGraphConnections); }
+      async function refreshProviderAndRender() { await loadProviderStatus(); render(); }
+      async function startSources() {
+        const title = document.getElementById('intakeTitle').value.trim();
+        if (!title) { document.getElementById('intakeTitle').focus(); return; }
+        currentPackage = await api('/api/intake/start', { title, search_focus: document.getElementById('searchFocus').value });
+        selectedConfirmIds = new Set();
+        confirmSelectionTouched = false;
+        render();
+        currentPackage = await api('/api/intake/' + currentPackage.run_id + '/sources', {});
+        await refreshProviderAndRender();
+      }
+      function selectedConfirmableIds() {
+        const confirmable = new Set(confirmableRecommendationIds(state()));
+        return Array.from(selectedConfirmIds).filter((id) => confirmable.has(id));
+      }
+      async function mutate(action) {
+        try {
+          if (!currentPackage?.run_id) return;
+          let body = {};
+          if (action === 'confirm') {
+            const ids = selectedConfirmableIds();
+            if (!ids.length) {
+              alert('请先在“入库建议队列”里勾选要进入确认包的建议。');
+              return;
+            }
+            body = { accepted_reviewed_wiki_ids: ids };
+          }
+          if (action === 'apply' && !window.confirm('确认写入 KB 并运行校验？该操作会更新 reviewed_wiki、mapping、runtime snapshot 和 PWA adapter 输出。')) return;
+          currentPackage = await api('/api/intake/' + currentPackage.run_id + '/' + action, body);
+          await refreshProviderAndRender();
+        } catch (error) {
+          alert(error.message || String(error));
+        }
+      }
+      document.getElementById('intakeForm').addEventListener('submit', async (event) => { event.preventDefault(); try { await startSources(); } catch (error) { alert(error.message || String(error)); } });
       document.getElementById('showSources')?.addEventListener('click', () => mutate('sources'));
       document.getElementById('buildRecommendations')?.addEventListener('click', async () => { await mutate('screen'); await mutate('recommendations'); });
       document.getElementById('markWaiting')?.addEventListener('click', () => mutate('confirm'));
+      document.getElementById('confirmSelectedDock')?.addEventListener('click', () => mutate('confirm'));
       document.getElementById('applyPackage')?.addEventListener('click', () => mutate('apply'));
+      document.getElementById('recommendationFeed')?.addEventListener('change', (event) => {
+        const target = event.target;
+        if (!target || !target.classList || !target.classList.contains('recommendation-checkbox')) return;
+        const id = target.dataset.id;
+        if (!id) return;
+        if (target.checked) selectedConfirmIds.add(id);
+        else selectedConfirmIds.delete(id);
+        confirmSelectionTouched = true;
+        render();
+      });
       const apiDocsModal = document.getElementById('apiDocsModal');
       function toggleApiDocs(open) { if (apiDocsModal) apiDocsModal.hidden = !open; }
       document.getElementById('apiDocsButton')?.addEventListener('click', () => toggleApiDocs(true));
@@ -905,6 +1348,7 @@ package.artifacts:
       apiDocsModal?.addEventListener('click', (event) => { if (event.target === apiDocsModal) toggleApiDocs(false); });
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') toggleApiDocs(false); });
       setInterval(() => { document.getElementById('clock').textContent = now(); }, 1000);
+      setInterval(refreshProviderAndRender, 15000);
       window.addEventListener('resize', () => requestAnimationFrame(updateGraphConnections));
       loadSamples().then(render);
     </script>

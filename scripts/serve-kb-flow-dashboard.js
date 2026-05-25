@@ -17,10 +17,11 @@ function loadSearchEnvFile() {
   const candidates = [
     process.env.HOPE_KB_SEARCH_ENV_FILE,
     process.env.HOPE_KB_DASHBOARD_ENV_FILE,
+    userProfile ? path.join(userProfile, "Desktop", "换机用", "hope-kb-search.env") : "",
     userProfile ? path.join(userProfile, "Desktop", "hope-kb-search.env") : ""
   ].filter(Boolean);
   const file = candidates.find((candidate) => fs.existsSync(candidate));
-  if (!file) return { loaded: false };
+  if (!file) return { loaded: false, checked: candidates };
   const lines = fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "").split(/\r?\n/);
   let count = 0;
   lines.forEach((line) => {
@@ -31,9 +32,10 @@ function loadSearchEnvFile() {
     process.env[key] = parseEnvValue(match[2]);
     count += 1;
   });
-  return { loaded: true, count };
+  return { loaded: true, file, count };
 }
 const envFileStatus = loadSearchEnvFile();
+let lastProviderTestResult = null;
 const port = Number(process.env.HOPE_KB_DASHBOARD_PORT || 5179);
 
 const contentTypes = {
@@ -115,6 +117,8 @@ function searchConfig() {
     model: process.env.HOPE_KB_SEARCH_MODEL || process.env.HOPE_WEB_MODEL || "qwen3.6-plus",
     key: process.env.HOPE_KB_SEARCH_KEY || process.env.HOPE_KB_API_KEY || process.env.HOPE_WEB_API_KEY || process.env.HOPE_TEXT_MODEL_API_KEY || process.env.DASHSCOPE_API_KEY || "",
     enableSearch,
+    searchStrategy: process.env.HOPE_KB_SEARCH_STRATEGY || "turbo",
+    enableThinking: /^(1|true|on)$/i.test(process.env.HOPE_KB_ENABLE_THINKING || "false"),
     timeoutMs: Number.isFinite(requestedTimeoutMs) && requestedTimeoutMs > 0 ? requestedTimeoutMs : 30000
   };
 }
@@ -133,6 +137,67 @@ function providerStatus(config, status, extra) {
     credential_state: config.key ? "configured" : "missing",
     web_search: config.enableSearch ? "enabled" : "disabled"
   }, extra || {});
+}
+function publicProviderStatus(extra) {
+  const config = searchConfig();
+  const latest = latestPackage();
+  const latestSearch = latest && latest.search_plan && latest.search_plan.search_provider_status;
+  return Object.assign({
+    env_loaded: !!envFileStatus.loaded,
+    env_file_name: envFileStatus.loaded ? path.basename(envFileStatus.file) : "",
+    provider: config.provider,
+    model: config.model,
+    base_url_host: hostOf(config.baseUrl),
+    credential_state: config.key ? "configured" : "missing",
+    enable_search: !!config.enableSearch,
+    search_strategy: config.searchStrategy,
+    enable_thinking: !!config.enableThinking,
+    timeout_ms: config.timeoutMs,
+    last_test_result: lastProviderTestResult,
+    latest_run_id: latest ? latest.run_id : "",
+    latest_search_status: latestSearch ? latestSearch.status : "none",
+    latest_search_reason: latestSearch ? latestSearch.reason : "",
+    effective_search_mode: latestSearch ? latestSearch.status : "not_started"
+  }, extra || {});
+}
+async function testProvider() {
+  const config = searchConfig();
+  if (!config.key) return { status: "failed", reason: "missing_credential", tested_at: new Date().toISOString() };
+  if (typeof fetch !== "function") return { status: "failed", reason: "fetch_unavailable", tested_at: new Date().toISOString() };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), Math.min(config.timeoutMs, 15000));
+  try {
+    const response = await fetch(endpointUrl(config), {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "content-type": "application/json", authorization: "Bearer " + config.key },
+      body: JSON.stringify({
+        model: config.model,
+        messages: [
+          { role: "system", content: "Return a short JSON object only." },
+          { role: "user", content: "{\"ping\":\"hope-kb-provider-test\"}" }
+        ],
+        temperature: 0
+      })
+    });
+    const body = await response.text();
+    return {
+      status: response.ok ? "passed" : "failed",
+      reason: response.ok ? "ok" : "http_" + response.status,
+      tested_at: new Date().toISOString(),
+      http_status: response.status,
+      response_bytes: body.length
+    };
+  } catch (error) {
+    return {
+      status: "failed",
+      reason: error && error.name === "AbortError" ? "timeout" : "request_failed",
+      tested_at: new Date().toISOString(),
+      error_summary: String(error && error.message ? error.message : error).slice(0, 180)
+    };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 function jsonFromModelText(text) {
   const trimmed = String(text || "").trim();
@@ -218,6 +283,43 @@ function searchPrompt(pkg) {
     })
   ].join("\n");
 }
+async function requestSourceCandidates(pkg, config, options) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), options.timeoutMs || config.timeoutMs);
+  try {
+    const payload = {
+      model: config.model,
+      messages: [
+        { role: "system", content: searchPrompt(pkg) },
+        { role: "user", content: JSON.stringify({ demand: pkg.demand, generated_queries: pkg.search_plan.generated_queries, required_answers: pkg.search_plan.required_answers }) }
+      ],
+      temperature: 0.2,
+      max_tokens: 1200
+    };
+    if (/^(1|true|on)$/i.test(process.env.HOPE_KB_RESPONSE_FORMAT_JSON || "")) payload.response_format = { type: "json_object" };
+    payload.enable_thinking = !!config.enableThinking;
+    if (options.useSearch) {
+      payload.enable_search = true;
+      payload.search_options = { search_strategy: config.searchStrategy };
+    }
+    const response = await fetch(endpointUrl(config), {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "content-type": "application/json", authorization: "Bearer " + config.key },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status + " " + response.statusText);
+    const json = await response.json();
+    const content = json && json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content;
+    const parsed = jsonFromModelText(content);
+    return asArray(parsed.source_candidates || parsed.candidates)
+      .map((item, index) => normalizeSourceCandidate(item, index, pkg.run_id, options.acquisitionStep))
+      .filter(Boolean)
+      .slice(0, 5);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function fetchLiveSourceCandidates(pkg) {
   const config = searchConfig();
   if (!config.key) {
@@ -232,33 +334,8 @@ async function fetchLiveSourceCandidates(pkg) {
       status: providerStatus(config, "fixture_fallback", { reason: "fetch_unavailable", candidate_count: 0 })
     };
   }
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), config.timeoutMs);
   try {
-    const payload = {
-      model: config.model,
-      messages: [
-        { role: "system", content: searchPrompt(pkg) },
-        { role: "user", content: JSON.stringify({ demand: pkg.demand, generated_queries: pkg.search_plan.generated_queries, required_answers: pkg.search_plan.required_answers }) }
-      ],
-      temperature: 0.2
-    };
-    if (/^(1|true|on)$/i.test(process.env.HOPE_KB_RESPONSE_FORMAT_JSON || "")) payload.response_format = { type: "json_object" };
-    if (config.enableSearch) payload.enable_search = true;
-    const response = await fetch(endpointUrl(config), {
-      method: "POST",
-      signal: controller.signal,
-      headers: { "content-type": "application/json", authorization: "Bearer " + config.key },
-      body: JSON.stringify(payload)
-    });
-    if (!response.ok) throw new Error("HTTP " + response.status + " " + response.statusText);
-    const json = await response.json();
-    const content = json && json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content;
-    const parsed = jsonFromModelText(content);
-    const candidates = asArray(parsed.source_candidates || parsed.candidates)
-      .map((item, index) => normalizeSourceCandidate(item, index, pkg.run_id, "hope_env_web_search"))
-      .filter(Boolean)
-      .slice(0, 5);
+    const candidates = await requestSourceCandidates(pkg, config, { useSearch: config.enableSearch, acquisitionStep: config.enableSearch ? "hope_env_web_search" : "hope_env_model_search" });
     if (!candidates.length) {
       return {
         candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
@@ -267,17 +344,31 @@ async function fetchLiveSourceCandidates(pkg) {
     }
     return {
       candidates,
-      status: providerStatus(config, "live_search", { reason: "ok", candidate_count: candidates.length })
+      status: providerStatus(config, config.enableSearch ? "live_search" : "model_search", { reason: "ok", candidate_count: candidates.length })
     };
   } catch (error) {
     const errorSummary = asText(error && error.message, "unknown error").slice(0, 180);
     const timedOut = /aborted|abort|timeout|timed out/i.test(errorSummary);
+    if (config.enableSearch) {
+      try {
+        const candidates = await requestSourceCandidates(pkg, config, { useSearch: false, acquisitionStep: "hope_env_model_fallback", timeoutMs: config.timeoutMs });
+        if (candidates.length) {
+          return {
+            candidates,
+            status: providerStatus(config, "model_fallback", { reason: timedOut ? "live_search_timeout_model_ok" : "live_search_failed_model_ok", error_summary: errorSummary, candidate_count: candidates.length })
+          };
+        }
+      } catch (fallbackError) {
+        return {
+          candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
+          status: providerStatus(config, "fixture_fallback", { reason: timedOut ? "live_search_timeout_model_failed" : "live_search_failed_model_failed", error_summary: (errorSummary + " / " + asText(fallbackError && fallbackError.message, "model fallback failed")).slice(0, 180), candidate_count: 0 })
+        };
+      }
+    }
     return {
       candidates: fallbackSourceCandidates(pkg, "registered_source_candidate_fallback"),
       status: providerStatus(config, "fixture_fallback", { reason: timedOut ? "live_search_timeout" : "live_search_failed", error_summary: errorSummary, candidate_count: 0 })
     };
-  } finally {
-    clearTimeout(timer);
   }
 }
 function makePackage(body) {
@@ -342,20 +433,42 @@ function recommendationStep(pkg) {
   pkg.status = "recommendations_ready";
   return pkg;
 }
-function confirmStep(pkg) {
+function confirmableRecommendation(rec) {
+  if (!rec || !rec.reviewed_wiki_id) return false;
+  if (rec.status === "ready_for_confirmation") return true;
+  return rec.status === "confirmed" && rec.write_state !== "written" && rec.runtime_state !== "runtime";
+}
+function confirmStep(pkg, body) {
   if (!pkg.recommendations.length) recommendationStep(pkg);
-  const accepted = pkg.recommendations.filter((rec) => rec.status === "ready_for_confirmation").map((rec) => rec.reviewed_wiki_id);
-  pkg.recommendations = pkg.recommendations.map((rec) => accepted.includes(rec.reviewed_wiki_id) ? Object.assign({}, rec, { status: "confirmed" }) : rec);
-  pkg.confirmation = { confirmed: true, confirmed_at: new Date().toISOString(), confirmed_by: "dashboard_manual_button", accepted_reviewed_wiki_ids: accepted };
+  const ready = new Set(pkg.recommendations.filter(confirmableRecommendation).map((rec) => rec.reviewed_wiki_id));
+  const requested = asArray(body && (body.accepted_reviewed_wiki_ids || body.accepted_ids || body.reviewed_wiki_ids)).map((id) => asText(id, "")).filter(Boolean);
+  if (!requested.length) throw new Error("No recommendations selected for confirmation.");
+  const accepted = Array.from(new Set(requested)).filter((id) => ready.has(id));
+  const invalid = requested.filter((id) => !ready.has(id));
+  if (invalid.length) throw new Error("Selected recommendations are not confirmable: " + invalid.join(", "));
+  if (!accepted.length) throw new Error("No confirmable recommendations selected.");
+  pkg.recommendations = pkg.recommendations.map((rec) => {
+    if (!ready.has(rec.reviewed_wiki_id)) return rec;
+    return Object.assign({}, rec, { status: accepted.includes(rec.reviewed_wiki_id) ? "confirmed" : "ready_for_confirmation" });
+  });
+  pkg.confirmation = { confirmed: true, confirmed_at: new Date().toISOString(), confirmed_by: "dashboard_manual_button", accepted_reviewed_wiki_ids: accepted, available_reviewed_wiki_ids: Array.from(ready) };
   pkg.status = "confirmed_package";
   pkg.kb_application.command = "node scripts/apply-confirmed-intake-package.js --package " + path.relative(repoRoot, confirmedPath(pkg.run_id));
   return pkg;
 }
+function sanitizeProcessText(value) {
+  return asText(value, "")
+    .replace(/[A-Za-z]:\\[^\s"',}]+/g, "[local_path]")
+    .replace(/Bearer\s+[A-Za-z0-9._-]{20,}/g, "Bearer [redacted]")
+    .replace(/sk-[A-Za-z0-9]{12,}/g, "sk-[redacted]")
+    .slice(0, 1200);
+}
 function applyStep(pkg) {
   if (!pkg.confirmation || pkg.confirmation.confirmed !== true) throw new Error("Package must be confirmed before apply.");
+  if (!asArray(pkg.confirmation.accepted_reviewed_wiki_ids).length) throw new Error("Package confirmation has no accepted reviewed_wiki ids.");
   writePackage(pkg, true);
   const result = spawnSync(process.execPath, [path.join(repoRoot, "scripts", "apply-confirmed-intake-package.js"), "--package", confirmedPath(pkg.run_id)], { cwd: repoRoot, encoding: "utf8" });
-  pkg.kb_application = { applied: result.status === 0, applied_at: new Date().toISOString(), command: "node scripts/apply-confirmed-intake-package.js --package " + path.relative(repoRoot, confirmedPath(pkg.run_id)), validation_status: result.status === 0 ? "passed" : "failed", output: { stdout: result.stdout.trim(), stderr: result.stderr.trim(), status: result.status } };
+  pkg.kb_application = { applied: result.status === 0, applied_at: new Date().toISOString(), command: "node scripts/apply-confirmed-intake-package.js --package " + path.relative(repoRoot, confirmedPath(pkg.run_id)), validation_status: result.status === 0 ? "passed" : "failed", output: { stdout_summary: sanitizeProcessText(result.stdout), stderr_summary: sanitizeProcessText(result.stderr), status: result.status } };
   pkg.status = result.status === 0 ? "applied_to_kb" : "failed";
   writePackage(pkg, true);
   if (result.status !== 0) throw new Error(result.stderr || result.stdout || "apply failed");
@@ -369,6 +482,11 @@ function resolveRequestPath(urlPath) {
 }
 async function handleApi(request, response, url) {
   try {
+    if (request.method === "GET" && url.pathname === "/api/provider/status") return sendJson(response, 200, publicProviderStatus());
+    if ((request.method === "GET" || request.method === "POST") && url.pathname === "/api/provider/test") {
+      lastProviderTestResult = await testProvider();
+      return sendJson(response, 200, publicProviderStatus({ last_test_result: lastProviderTestResult }));
+    }
     if (request.method === "GET" && url.pathname === "/api/intake/latest") return sendJson(response, 200, { package: latestPackage() });
     if (request.method === "POST" && url.pathname === "/api/intake/start") { const pkg = makePackage(await readBody(request)); writePackage(pkg, false); return sendJson(response, 200, { package: pkg }); }
     const match = url.pathname.match(/^\/api\/intake\/([^/]+)\/(sources|screen|recommendations|confirm|apply)$/);
@@ -377,10 +495,11 @@ async function handleApi(request, response, url) {
     const action = match[2];
     let pkg = readPackage(runId);
     if (!pkg) return sendJson(response, 404, { error: "run not found", run_id: runId });
+    const actionBody = await readBody(request);
     if (action === "sources") pkg = await sourceStep(pkg);
     if (action === "screen") pkg = screenStep(pkg);
     if (action === "recommendations") pkg = recommendationStep(pkg);
-    if (action === "confirm") pkg = confirmStep(pkg);
+    if (action === "confirm") pkg = confirmStep(pkg, actionBody);
     if (action === "apply") pkg = applyStep(pkg);
     writePackage(pkg, action === "confirm" || action === "apply");
     return sendJson(response, 200, { package: pkg });

@@ -1,0 +1,211 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260525-seedance2-field-discipline",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true
+  },
+  "demand": {
+    "title": "Seedance2 storyboard field discipline",
+    "search_focus": "seedance2_camera_expression_scene_description",
+    "target_model": "Seedance2",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text"
+    ],
+    "target_pwa_fields": [
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "prompt_text"
+    ],
+    "created_at": "2026-05-25T11:55:00+08:00"
+  },
+  "search_plan": {
+    "acquisition_mode": "existing_reserve_and_reviewed_wiki_projection",
+    "live_search_connector": "not_used",
+    "generated_queries": [],
+    "allowed_source_types": [
+      "reserve_candidate",
+      "reviewed_wiki",
+      "field_matrix"
+    ],
+    "required_answers": [
+      "which existing PWA field is served",
+      "which current adapter surface carries the guidance",
+      "which positive directive is runtime safe",
+      "which negative constraint prevents leakage or schema drift"
+    ],
+    "search_provider_status": {
+      "status": "not_used",
+      "provider": "none",
+      "model": "none",
+      "base_url_host": "",
+      "credential_state": "not_required",
+      "web_search": "not_used",
+      "reason": "Controller requested continuation from existing reserve candidate and field matrix artifacts.",
+      "error_summary": "",
+      "candidate_count": 2
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-reserve-shot-design-language-card",
+      "title": "Seedance2 shot design reserve candidate",
+      "source_url": "kb-reserve:seedance2-shot-design-language-card",
+      "source_type_label": "reserve candidate",
+      "language": "summary-only",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep as rewritten field discipline",
+      "risk_flags": [
+        "reserve_candidate_not_raw_runtime",
+        "summary_only_projection_required"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Separates shot scale, camera/viewpoint, composition, performance, background, and prompt packaging into existing storyboard fields.",
+      "kb_gap": "Turns the reserve shot-design principles into a reviewed, field-bound rule instead of a raw source artifact.",
+      "leakage_check": "summary_only_no_source_image_no_ocr_no_path_no_hash",
+      "run_id": "intake-20260525-seedance2-field-discipline",
+      "acquisition_step": "reserve_candidate_projection"
+    },
+    {
+      "source_id": "src-existing-field-consumption-matrix",
+      "title": "Existing PWA storyboard field consumption matrix",
+      "source_url": "kb-doc:seedance2-p0-pwa-storyboard-field-consumption-matrix-v0.2",
+      "source_type_label": "field matrix",
+      "language": "summary-only",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep as field boundary",
+      "risk_flags": [
+        "no_schema_drift",
+        "no_new_pwa_fields"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Constrains the new knowledge to current row fields and current adapter surfaces.",
+      "kb_gap": "Provides the promotion boundary for camera movement, micro-expression, scene description, lighting, color, and composition guidance.",
+      "leakage_check": "summary_only_no_internal_ids_in_output",
+      "run_id": "intake-20260525-seedance2-field-discipline",
+      "acquisition_step": "field_matrix_projection"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-reserve-shot-design-language-card",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_as_field_discipline",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-existing-field-consumption-matrix",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "use_as_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-seedance2-storyboard-field-discipline",
+      "chinese_title": "Seedance2 storyboard field discipline",
+      "target_model_context": "Seedance2",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-reserve-shot-design-language-card",
+        "src-existing-field-consumption-matrix"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-expression-physicalization",
+        "rw-material-light-air-physicality",
+        "rw-prompt-text-boundary"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-25T06:50:20.203Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-seedance2-storyboard-field-discipline"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-seedance2-storyboard-field-discipline"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-25T06:50:40.607Z",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260525-seedance2-field-discipline\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "stdout": "{\n  \"status\": \"applied\",\n  \"package\": \"knowledge\\\\intake_runs\\\\intake-20260525-seedance2-field-discipline\\\\intake-package.confirmed.json\",\n  \"applied_reviewed_wiki_ids\": [\n    \"rw-seedance2-storyboard-field-discipline\"\n  ],\n  \"validate\": {\n    \"status\": \"passed\",\n    \"package\": \"intake-package.confirmed.json\",\n    \"run_id\": \"intake-20260525-seedance2-field-discipline\",\n    \"source_candidates\": 2,\n    \"recommendations\": 1,\n    \"confirmed\": true\n  },\n  \"build\": {\n    \"status\": \"written\",\n    \"output\": \"samples\\\\pwa-kb-adapter-output.sample.json\",\n    \"scene_count\": 21,\n    \"rule_pack_count\": 17\n  }\n}",
+      "stderr": "",
+      "status": 0
+    }
+  }
+}

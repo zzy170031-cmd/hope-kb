@@ -161,6 +161,8 @@ HOPE_KB_SEARCH_TIMEOUT_MS=30000</pre>
       <section class="panel card">
         <h2>接口顺序</h2>
         <pre>GET  /api/intake/latest
+GET  /api/provider/status
+POST /api/provider/test
 POST /api/intake/start
 POST /api/intake/:run_id/sources
 POST /api/intake/:run_id/screen
@@ -181,6 +183,17 @@ Content-Type: application/json
 }</pre>
         </section>
         <section class="panel card">
+          <h2>确认包请求体</h2>
+          <pre>POST /api/intake/:run_id/confirm
+Content-Type: application/json
+
+{
+  "accepted_reviewed_wiki_ids": [
+    "rw-seedance2-storyboard-field-discipline"
+  ]
+}</pre>
+        </section>
+        <section class="panel card">
           <h2>状态字段</h2>
           <pre>package.status:
   request_recorded
@@ -197,12 +210,14 @@ Content-Type: application/json
         <section class="panel card">
           <h2>搜索状态</h2>
           <pre>package.search_plan.search_provider_status:
-  status: live_search | fixture_fallback
+  status: live_search | model_search | model_fallback | fixture_fallback
   reason:
     ok
     missing_credential
     live_search_timeout
     live_search_failed
+    live_search_timeout_model_ok
+    live_search_failed_model_ok
     no_url_bound_candidates</pre>
         </section>
         <section class="panel card">

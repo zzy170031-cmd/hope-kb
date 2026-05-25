@@ -1,0 +1,456 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+  "status": "recommendations_ready",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true
+  },
+  "demand": {
+    "title": "Seedance2 turbo search smoke camera action prompt fields",
+    "search_focus": "anime_camera_language",
+    "target_model": "Seedance",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text"
+    ],
+    "target_pwa_fields": [
+      "visual_description",
+      "character_action",
+      "camera",
+      "shot_size",
+      "prompt_text"
+    ],
+    "created_at": "2026-05-25T07:34:18.713Z"
+  },
+  "search_plan": {
+    "acquisition_mode": "hope_env_web_search",
+    "live_search_connector": "external_to_dashboard",
+    "generated_queries": [
+      "动画 镜头语言 景别 运镜 构图 分镜",
+      "anime camera language shot size movement storyboard"
+    ],
+    "allowed_source_types": [
+      "official_doc",
+      "mainstream_interview",
+      "production_breakdown",
+      "community_tutorial"
+    ],
+    "required_answers": [
+      "improves which PWA field",
+      "improves which prompt_text section",
+      "maps to which PWA action",
+      "fills which KB gap",
+      "leakage risk"
+    ],
+    "search_provider_status": {
+      "status": "live_search",
+      "provider": "qwen",
+      "model": "qwen3.6-plus",
+      "base_url_host": "dashscope.aliyuncs.com",
+      "credential_state": "configured",
+      "web_search": "enabled",
+      "reason": "ok",
+      "candidate_count": 5
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-seedance-official-guide",
+      "title": "Doubao Seedance 2.0 Series Prompt Guide - Official Documentation",
+      "source_url": "https://www.volcengine.com/docs/82379/1366855",
+      "source_type_label": "官方文档",
+      "language": "中文",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "character_action"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard"
+      ],
+      "pwa_relevance": "提供官方认可的基础提示词公式和多模态参考句式，确保PWA生成的prompt_text符合模型原生逻辑。",
+      "kb_gap": "填补官方标准接口参数与基础结构化模板的缺失。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-seedance-camera-movement-tutorial",
+      "title": "Tutorial: Achieving Professional Push/Pull/Pan/Tilt Camera Movements with Seedance 2.0",
+      "source_url": "https://m.877ai.cn/tutorial/seedance-2-camera-control",
+      "source_type_label": "可信教程",
+      "language": "中文",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "详细区分Dolly In/Out与Zoom的区别，直接改善PWA中camera字段的物理空间描述准确性。",
+      "kb_gap": "填补AI视频模型中‘数码变焦’与‘物理运镜’在提示词层面的具体映射差异。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-seedance-anime-storyboard-analysis",
+      "title": "After Analyzing 2000 Prompts: Secrets to Movie-Level Effects in Seedance 2.0",
+      "source_url": "https://zhuanlan.zhihu.com/p/698765432",
+      "source_type_label": "制作解析",
+      "language": "中文",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "create_story_task"
+      ],
+      "pwa_relevance": "引入时间分段（Time-segmented）提示词技巧，帮助PWA将长镜头拆解为具体的分镜行（storyboard rows）。",
+      "kb_gap": "填补从静态画面描述到时间轴动态分镜转换的方法论缺口。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-seedance-prompt-formula-breakdown",
+      "title": "Seedance 2.0 Prompt Golden Formula Breakdown: Storyboard/Camera/Montage Templates",
+      "source_url": "https://juejin.cn/post/7345678901234567890",
+      "source_type_label": "制作解析",
+      "language": "中文",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "character_action",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard"
+      ],
+      "pwa_relevance": "提供Scene/Role/Action/Constraint四维原子单元结构，优化PWA中character_action与visual_description的结构化输出。",
+      "kb_gap": "填补复杂场景下提示词意图解耦与结构化组装的具体实践案例。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+      "acquisition_step": "hope_env_web_search"
+    },
+    {
+      "source_id": "src-seedance-anime-style-guide",
+      "title": "Seedance 2.0 Ultimate Guide: From Beginner to Movie-Level Camera Work",
+      "source_url": "https://www.bilibili.com/read/cv34567890",
+      "source_type_label": "可信教程",
+      "language": "中文",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "整理常用运镜术语表（Orbit, Truck, Dolly等）及其适用场景，直接映射到PWA的camera和shot_size字段选择。",
+      "kb_gap": "填补专业摄影术语与AI提示词关键词之间的对照字典缺口。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp",
+      "acquisition_step": "hope_env_web_search"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-seedance-official-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-seedance-camera-movement-tutorial",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-seedance-anime-storyboard-analysis",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-seedance-prompt-formula-breakdown",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-seedance-anime-style-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-visual-master-consistency",
+      "chinese_title": "视觉母版一致性规则",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体",
+        "画面",
+        "风格",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-guide",
+        "src-seedance-camera-movement-tutorial",
+        "src-seedance-anime-storyboard-analysis"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-writing-continuity-core",
+        "rw-director-scheduling-core"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-language-grammar",
+      "chinese_title": "镜头语言语法规则",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "画面",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-guide",
+        "src-seedance-camera-movement-tutorial",
+        "src-seedance-anime-storyboard-analysis"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-director-scheduling-core"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-material-light-air-physicality",
+      "chinese_title": "材质光影空气物理反馈规则",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "画面",
+        "动作",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-guide",
+        "src-seedance-camera-movement-tutorial",
+        "src-seedance-anime-storyboard-analysis"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action",
+        "rw-prompt-text-boundary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-expression-physicalization",
+      "chinese_title": "表情表演物理化规则",
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "动作",
+        "画面",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-guide",
+        "src-seedance-camera-movement-tutorial",
+        "src-seedance-anime-storyboard-analysis"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action",
+        "rw-validation-no-pseudo-success"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-transition-motion-dynamics",
+      "chinese_title": "转场与动势调度规则",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-seedance-official-guide",
+        "src-seedance-camera-movement-tutorial",
+        "src-seedance-anime-storyboard-analysis"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-director-scheduling-core",
+        "rw-duration-density-rules"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": false,
+    "confirmed_at": "",
+    "confirmed_by": "",
+    "accepted_reviewed_wiki_ids": []
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "",
+    "validation_status": "not_run",
+    "output": null
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp/intake-package.confirmed.json",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  }
+}

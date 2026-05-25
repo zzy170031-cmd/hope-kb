@@ -272,6 +272,32 @@
           "Do not expose source images, raw prompt text, local paths, or internal wiki IDs.",
           "Do not expand beyond the selected storyboard task fragment and duration."
         ]
+      },
+      {
+        "id": "dg-seedance2-storyboard-field-discipline",
+        "name": "Seedance2 storyboard field discipline",
+        "intent": "Turn Seedance-oriented camera, expression, scene, light, and composition guidance into existing PWA storyboard fields without schema drift.",
+        "influenceAxes": [
+          "camera_language",
+          "shot_size",
+          "visual_grounding",
+          "performance",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Choose one primary camera movement and one compatible viewpoint for the current beat before compiling prompt_text.",
+          "Bind shot_size before expression detail: close shots may carry eye, lip, breath, and hand tension; wide shots should carry silhouette, spacing, route, and group motion.",
+          "Build visual_description from scene-supported space, subject placement, material, light direction, color temperature, air medium, composition, and depth cues.",
+          "Translate emotion into visible action such as gaze, breath, posture, hand motion, step, recoil, pause, or blocking relation.",
+          "Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints only."
+        ],
+        "negativeConstraints": [
+          "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+          "Do not put camera, style, composition, source, or KB terms into person.",
+          "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+          "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+          "Do not expose source or governance metadata in PWA output."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -368,7 +394,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -421,7 +448,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -469,7 +497,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -517,7 +546,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -565,7 +595,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -613,7 +644,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -661,7 +693,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -709,7 +742,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -757,7 +791,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -805,7 +840,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -853,7 +889,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -901,7 +938,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -949,7 +987,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1002,7 +1041,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1050,7 +1090,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1098,7 +1139,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1146,7 +1188,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1194,7 +1237,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1242,7 +1286,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1290,7 +1335,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1338,7 +1384,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "dg-seedance2-storyboard-field-discipline"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",

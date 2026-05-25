@@ -5,12 +5,117 @@ Update this file for online sync after every 10-20 minute work package.
 ## Current Focus
 
 - current thread state: `codex/contracts-freeze`, `hope-kb` only, no merge with `hope`
-- repo path: `E:\codex-projects\hope-prompt-kb-v0.2-independent\hope-kb`
-- current task: `hope-kb-图谱制作` v0.2 total-control takeover for Prompt knowledge governance and graph QA
-- owner / lane: KB integration owner as total control, coordinating four branch threads and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-04-26 16:38:53 +08:00
+- repo path: `E:\codex\hope-kb-live-20260525`
+- current task: productize the 5179 manual intake loop from live search through user confirmation, KB apply, runtime snapshot, and PWA summary-only handoff
+- owner / lane: KB integration owner as total control, coordinating four verification lanes and keeping `hope` runtime / desktop work out of scope
+- last updated: 2026-05-25 16:52:00 +08:00
 
 ## Latest Completed
+
+- 2026-05-25 16:52 +08: 5179 UI confirmation path was clarified. The
+  execution chain now has a persistent `用户确认入口` that explains
+  `保留` as a screening-only decision, shows selected/confirmable counts,
+  disables confirmation until the user checks a recommendation, and switches
+  to `确认已完成` after apply. The evidence area now uses a two-column layout
+  with compact collapsed cards, and screening/recommendation headers display
+  live counts such as `5 条筛选记录` and `已写入 1`.
+- 2026-05-25 15:54 +08: PWA adapter contract boundary was refreshed after
+  the first real PWA runtime consumer anchor
+  `hope-web-pwa@ee350c7`. `docs/pwa-adapter-contract-v0.2.md` now records the
+  prototype activation opt-ins (`allowPrototype=true`,
+  `allowPartialSceneCatalog=true`), the current effective fallback
+  (`hope-web-pwa` built-in `KB_SNAPSHOT` only), artifact freshness handoff
+  requirements, the unchanged summary-only downstream surface, and QA
+  observability limits. This was docs-only and did not reopen PWA fields,
+  runtime stages, raw KB transport, export shape, or Hope mainline merge.
+- 2026-05-25 15:36 +08: 5179 dashboard reached a live-search-to-KB smoke
+  loop under the current `codex/contracts-freeze` route. The confirmed live
+  run is
+  `knowledge/intake_runs/intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp/`.
+  It used `HOPE_KB_SEARCH_KEY` from local env only, returned
+  `search_status=live_search`, `reason=ok`, and 5 URL-bound summary candidates.
+- The live-search run was screened into 5 KB recommendations. The manual
+  confirmation gate accepted only `rw-camera-language-grammar`; the package
+  then applied successfully with `status=applied_to_kb` and
+  `validation_status=passed`. Empty or missing `accepted_reviewed_wiki_ids`
+  now fail validation and cannot be applied.
+- 5179 product flow now shows the execution chain under the graph: search
+  candidates, rule screening / intake recommendation, confirmation package,
+  and KB write + validation. Buttons are disabled after successful apply to
+  avoid duplicate writes.
+- Provider status/test API is live at `/api/provider/status` and
+  `/api/provider/test`. The dashboard checks the env file under
+  `Desktop\换机用\hope-kb-search.env` first, records only provider/model/host
+  and credential state, and never exposes the key.
+- Search robustness improved: Qwen web search uses explicit `turbo` strategy
+  and disables thinking by default; if live web search fails, the server tries
+  a normal Qwen model fallback before using registered fixture candidates, with
+  distinct status reasons for each path.
+- Verification after live-search apply passed:
+  `node scripts/validate-manual-intake-package.js --package
+  knowledge\intake_runs\intake-20260525073418-seedance2-turbo-search-smoke-camera-action-promp\intake-package.confirmed.json`,
+  `node scripts/build-pwa-kb-adapter-output.js --check`,
+  `powershell.exe -ExecutionPolicy Bypass -File
+  scripts\validate-kb-runtime-prototype.ps1`, and
+  `node scripts\sync-pwa-kb-latest.js --pwa-root
+  "C:\Users\Administrator\Documents\New project\hope-web-pwa-inspect"`.
+  PWA `src/lib/kbAdapter.test.ts` passed 13 tests.
+- Five-lane closeout notes were integrated: provider fallback states are now
+  documented, manual intake validation enforces package/recommendation status
+  enums, `apply` output stored in packages is sanitized and truncated as
+  `stdout_summary` / `stderr_summary`, and the Seedance2 field-consumption
+  matrix now distinguishes KB runtime snapshot fields from PWA adapter
+  `sceneMappings`.
+- PWA handoff closeout now syncs both tracked targets:
+  `public/kb/latest.json` and `dist/kb/latest.json`. Their SHA256 values match
+  `samples/pwa-kb-adapter-output.sample.json`:
+  `2B1B07002F37A5DF8A536BC0F5B24A5A34A97F72AD26C8153A1A7125785A3B41`.
+  Full PWA `npm test` passed with 7 files / 30 tests, and `npm run build`
+  passed.
+
+- 2026-05-25 continuation used fresh remote-aligned worktrees instead of the
+  stale local `E:\codex\hope-kb` checkout: KB HEAD
+  `4ead8078b57c286b71633d198cd1aeafd639aa3e`, PWA HEAD
+  `ae62249978c0970522222ce2bf4b317ab470d10b`.
+- Seedance2 field-discipline knowledge was promoted through a confirmed manual
+  intake package:
+  `knowledge/intake_runs/intake-20260525-seedance2-field-discipline/intake-package.confirmed.json`.
+  It writes only summary-safe guidance for existing PWA fields: `camera`,
+  `shot_size`, `visual_description`, `character_action`, and `prompt_text`.
+- Added reviewed wiki `rw-seedance2-storyboard-field-discipline`, mapping
+  `map-rw-seedance2-storyboard-field-discipline`, and director rule pack
+  `dg-seedance2-storyboard-field-discipline`. The new rule pack is constrained
+  to existing adapter surfaces and does not add PWA fields, stages, provider
+  paths, export shape, or dashboard runtime role.
+- Regenerated `knowledge/runtime_snapshots/latest.candidate.json`,
+  `samples/runtime-kb-snapshot.sample.json`,
+  `knowledge/mappings/wiki-to-runtime-mapping.v0.2.json`,
+  `samples/wiki-to-runtime-mapping.sample.json`, and
+  `samples/pwa-kb-adapter-output.sample.json`. Adapter check passed with 21
+  scene types and 17 rule packs.
+- Synced the regenerated adapter to the PWA latest snapshot files in the fresh
+  PWA worktree: `public/kb/latest.json` and `dist/kb/latest.json`. Their SHA256
+  matched the KB adapter sample exactly after sync.
+- Verification passed: `node scripts/validate-manual-intake-package.js
+  --package knowledge\intake_runs\intake-20260525-seedance2-field-discipline\intake-package.confirmed.json`,
+  `node scripts/apply-confirmed-intake-package.js --package
+  knowledge\intake_runs\intake-20260525-seedance2-field-discipline\intake-package.confirmed.json`,
+  `node scripts/build-pwa-kb-adapter-output.js --check`, and
+  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File
+  scripts\validate-kb-runtime-prototype.ps1`.
+- PWA `npm test` and `npm run build` were attempted without installing
+  dependencies. They are blocked in the fresh clone because `node_modules` is
+  absent: `vitest` and `tsc` are not recognized. This matches the handoff rule
+  to avoid direct `npm install` when `E:\coderely\env\coderely-dev.cmd` is not
+  present.
+- Existing dashboard sample validation blocker was closed in the fresh KB
+  worktree: `web/kb-flow-dashboard/source-candidates.sample.json` now carries
+  `no_runtime_effect=true`, and
+  `rw-seedance-anime-style-and-frame-constraint` now references existing
+  candidate `src-nezha-production-chinanews` instead of the missing
+  `src-wushan-director-interview-bilibili`. `node
+  scripts/validate-manual-intake-samples.js` now passes with 1 run, 6 source
+  candidates, and 10 recommendations.
 
 - live Git anchor checked by control: `52b61c7` (`docs: add v0.2 QA hardening RFC`) on `codex/contracts-freeze`, matching `origin/codex/contracts-freeze`
 - `git diff --stat` was empty at takeover; `git status --short --branch` reported only the branch line plus a `.git/index.lock` unlink warning

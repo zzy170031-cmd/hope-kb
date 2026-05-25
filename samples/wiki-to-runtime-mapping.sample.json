@@ -924,11 +924,90 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-seedance2-storyboard-field-discipline",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-seedance2-storyboard-field-discipline",
+      "reviewed_wiki_hash": "sha256:summary-rw-seedance2-storyboard-field-discipline",
+      "wiki_type": "shot_language_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-seedance2-storyboard-field-discipline"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:seedance2-storyboard-field-discipline"
+      ],
+      "summary_fragment_ids": [
+        "summary:seedance2-storyboard-field-discipline"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-seedance2-storyboard-field-discipline"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-23",
+      "runtime_eligible_reason": "rw-seedance2-storyboard-field-discipline was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 14,
-    "mapped_runtime_eligible_wiki_count": 14,
+    "runtime_eligible_wiki_count": 15,
+    "mapped_runtime_eligible_wiki_count": 15,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,
