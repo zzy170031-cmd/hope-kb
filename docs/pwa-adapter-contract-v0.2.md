@@ -108,10 +108,44 @@ rule ids. The adapter must either:
 The Batch 1 prototype output uses a documented crosswalk status, not a claim
 that product rule-id migration is complete.
 
+## Runtime Activation Boundary
+
+The current `hope-web-pwa` consumer can load the wrapped adapter artifact at
+`/kb/latest.json`, but Batch 1 remains a prototype activation. A product run may
+use this artifact only when the PWA loader explicitly opts in to both:
+
+```text
+allowPrototype=true
+allowPartialSceneCatalog=true
+```
+
+This opt-in is not a permanent product default. It is allowed only for the
+current PWA runtime-consumption gate and only because the artifact still reports:
+
+```text
+adapter_status=prototype
+scene_catalog_status=partial
+rule_pack_crosswalk_status=prototype
+```
+
+The next activation level must either promote the adapter to verified/full
+coverage, or keep the same explicit opt-in and label the run as prototype. A
+partial catalog must never be silently treated as complete product coverage.
+
+As of the first PWA runtime consumer anchor:
+
+```text
+hope-web-pwa main ee350c7 feat: load runtime KB adapter snapshot
+```
+
+the PWA runtime consumes the adapter snapshot for `SanitizedKbSummary`,
+duration options, duration profiles, and prompt rule directives. This does not
+add PWA fields, add generation stages, or change export shape.
+
 ## Fail-Closed Rule
 
-The PWA loader must reject and fall back to last-known-good or built-in safe
-defaults when any of these are true:
+The PWA loader must reject and fall back to a built-in safe default when any of
+these are true:
 
 - adapter output is absent or unparsable;
 - `adapter_status` is not accepted by the loader;
@@ -122,11 +156,98 @@ defaults when any of these are true:
 - any raw KB, raw graph, source register, prompt body, local path, provider
   config, key, token, secret, or internal governance evidence is present.
 
+Current effective fallback target:
+
+```text
+hope-web-pwa built-in KB_SNAPSHOT
+```
+
+`last-known-good adapter output` is a reserved future consumer behavior. It is
+not active in the current PWA runtime gate and must not be claimed as verified
+until the PWA implements local persistence, freshness checks, and tests for that
+fallback path.
+
+If the wrapped artifact still contains a broader textual `fallback_target`, the
+consumer contract must interpret it through this section: current verified
+behavior is built-in fallback only.
+
+## Artifact Freshness And Handoff Rule
+
+The runtime handoff is current only when all of these match the same KB-side
+snapshot generation:
+
+```text
+samples/pwa-kb-adapter-output.sample.json
+hope-web-pwa/public/kb/latest.json
+hope-web-pwa/dist/kb/latest.json
+```
+
+Required freshness evidence:
+
+```text
+node scripts/build-pwa-kb-adapter-output.js --check
+node scripts/sync-pwa-kb-latest.js --pwa-root <hope-web-pwa-root>
+PWA loader/type tests
+PWA build
+```
+
+The PWA loader should fetch `/kb/latest.json` without using a stale browser
+cache. A stale adapter artifact must be treated like any other failed adapter
+load unless freshness has been explicitly re-established by the handoff checks.
+
 ## Summary-Only Rule
 
 The PWA may produce only `SanitizedKbSummary` style data from adapter output.
 It may expose rule-pack ids and selected rule ids internally for control flow,
 but user-facing prompts, UI, traces, and exports must stay summary-only.
+
+The allowed downstream summary surface remains:
+
+```text
+kb_snapshot_hash
+scene_type_count
+scene_type_id
+scene_type_label
+duration_options
+selected_sample_ids
+selected_kb_rules
+writing_group_rule_pack_ids
+director_group_rule_pack_ids
+kb_context_summary
+applied_to
+action_results
+influence_axes
+scene_profile
+negative_constraints
+kb_oracle_affects_structure
+raw_kb_rows_included=0
+raw_sample_text_absent=true
+source_register_absent=true
+overlay_json_absent=true
+prompt_body_absent=true
+```
+
+No raw KB rows, raw source text, source register, overlay JSON, prompt body,
+provider config, local path, key, token, secret, or internal governance evidence
+may enter prompt text, visible UI, QA trace intended for users, or export
+artifacts.
+
+## QA Observability Boundary
+
+The PWA may expose compact non-secret adapter state for QA and support:
+
+```text
+kb_adapter_source
+kb_adapter_reject_reason
+kb_snapshot_hash
+scene_catalog_status
+adapter_status
+```
+
+These are QA/support fields only. They must not expose raw KB rows, raw source
+text, prompt bodies, source registers, local paths, provider configuration, or
+credential values. Adding these QA fields does not open a new PWA product
+contract or a new storyboard output field.
 
 ## Required Release Evidence
 
