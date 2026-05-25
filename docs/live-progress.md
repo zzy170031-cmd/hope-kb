@@ -8,10 +8,28 @@ Update this file for online sync after every 10-20 minute work package.
 - repo path: `E:\codex\hope-kb-live-20260525`
 - current task: productize the 5179 manual intake loop from live search through user confirmation, KB apply, runtime snapshot, and PWA summary-only handoff
 - owner / lane: KB integration owner as total control, coordinating four verification lanes and keeping `hope` runtime / desktop work out of scope
-- last updated: 2026-05-25 16:52:00 +08:00
+- last updated: 2026-05-25 17:30:00 +08:00
 
 ## Latest Completed
 
+- 2026-05-25 17:30 +08: Graph-thread field alignment promoted the P0
+  `person` boundary into a confirmed KB intake package:
+  `knowledge/intake_runs/intake-20260525-person-identity-lock/intake-package.confirmed.json`.
+  It adds reviewed wiki `rw-person-identity-lock`, mapping
+  `map-rw-person-identity-lock`, validation rule pack `vg-field-aware-entity`,
+  and summary-only negative constraints that keep `person` limited to accepted
+  characters or explicit role labels. It does not add PWA fields, stages,
+  provider paths, export format, raw graph/source transport, or prompt body
+  transport.
+- Verification for the `person` boundary passed:
+  `node scripts/validate-manual-intake-package.js --package
+  knowledge\intake_runs\intake-20260525-person-identity-lock\intake-package.confirmed.json`,
+  `node scripts/build-pwa-kb-adapter-output.js --check`,
+  `powershell.exe -ExecutionPolicy Bypass -File
+  scripts\validate-kb-runtime-prototype.ps1`, and
+  `node scripts\sync-pwa-kb-latest.js --pwa-root
+  "C:\Users\Administrator\Documents\New project\hope-web-pwa-inspect"`.
+  PWA `src/lib/kbAdapter.test.ts` passed 13 tests after sync.
 - 2026-05-25 16:52 +08: 5179 UI confirmation path was clarified. The
   execution chain now has a persistent `用户确认入口` that explains
   `保留` as a screening-only decision, shows selected/confirmable counts,

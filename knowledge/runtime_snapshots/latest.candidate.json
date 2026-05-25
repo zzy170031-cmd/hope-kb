@@ -511,6 +511,29 @@
       "source_reviewed_wiki_ids": [
         "rw-duration-density-rules"
       ]
+    },
+    {
+      "id": "vg-field-aware-entity",
+      "name": "Person identity lock",
+      "intent": "Keep the person field limited to accepted story characters or explicit role labels while blocking location, action, scene, camera, style, KB, and placeholder terms.",
+      "influence_axes": [
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
+      ],
+      "directives": [
+        "person must preserve only accepted-body characters or explicit role labels.",
+        "Reject location, action fragment, scene term, camera term, style term, KB term, slash, dash, or empty placeholder in person.",
+        "When the person field is uncertain, leave it empty or repair from accepted facts instead of inventing a new name."
+      ],
+      "negative_constraints": [
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-person-identity-lock"
+      ]
     }
   ],
   "scene_mappings": {
@@ -536,7 +559,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -548,7 +572,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "source_facts",
@@ -565,7 +592,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-hot-blood-battle-summary-A"
@@ -585,9 +615,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -611,7 +642,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -621,7 +653,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -635,7 +670,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-ensemble_performance-summary-A"
@@ -655,9 +693,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "emotional_dialogue": {
       "writing_rule_pack_ids": [
@@ -681,7 +720,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -691,7 +731,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -705,7 +748,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-emotional_dialogue-summary-A"
@@ -725,9 +771,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "encounter_performance": {
       "writing_rule_pack_ids": [
@@ -751,7 +798,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -761,7 +809,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -775,7 +826,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-encounter_performance-summary-A"
@@ -795,9 +849,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "field_chase": {
       "writing_rule_pack_ids": [
@@ -821,7 +876,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -831,7 +887,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -845,7 +904,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-field_chase-summary-A"
@@ -865,9 +927,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "spectacle_showcase": {
       "writing_rule_pack_ids": [
@@ -891,7 +954,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -901,7 +965,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -915,7 +982,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-spectacle_showcase-summary-A"
@@ -935,9 +1005,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "daily_healing": {
       "writing_rule_pack_ids": [
@@ -961,7 +1032,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -971,7 +1043,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -985,7 +1060,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-daily_healing-summary-A"
@@ -1005,9 +1083,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "guoman_hot_blood_combat": {
       "writing_rule_pack_ids": [
@@ -1031,7 +1110,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1041,7 +1121,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1055,7 +1138,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-guoman_hot_blood_combat-summary-A"
@@ -1075,9 +1161,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "guoman_ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -1101,7 +1188,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1111,7 +1199,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1125,7 +1216,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-guoman_ensemble_performance-summary-A"
@@ -1145,9 +1239,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "ink_wuxia_combat": {
       "writing_rule_pack_ids": [
@@ -1171,7 +1266,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1181,7 +1277,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1195,7 +1294,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-ink_wuxia_combat-summary-A"
@@ -1215,9 +1317,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "eastern_spectacle": {
       "writing_rule_pack_ids": [
@@ -1241,7 +1344,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1251,7 +1355,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1265,7 +1372,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-eastern_spectacle-summary-A"
@@ -1285,9 +1395,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "xianxia_action": {
       "writing_rule_pack_ids": [
@@ -1311,7 +1422,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1321,7 +1433,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1335,7 +1450,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-xianxia_action-summary-A"
@@ -1355,9 +1473,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "urban_fantasy": {
       "writing_rule_pack_ids": [
@@ -1381,7 +1500,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1393,7 +1513,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "source_facts",
@@ -1410,7 +1533,9 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity"
       ],
       "selected_sample_ids": [
         "sample-urban-fantasy-summary-A"
@@ -1430,9 +1555,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "chinese_war_formation": {
       "writing_rule_pack_ids": [
@@ -1456,7 +1582,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1466,7 +1593,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1480,7 +1610,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-chinese_war_formation-summary-A"
@@ -1500,9 +1633,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "weapon_highlight": {
       "writing_rule_pack_ids": [
@@ -1526,7 +1660,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1536,7 +1671,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1550,7 +1688,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-weapon_highlight-summary-A"
@@ -1570,9 +1711,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "council_strategy": {
       "writing_rule_pack_ids": [
@@ -1596,7 +1738,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1606,7 +1749,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1620,7 +1766,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-council_strategy-summary-A"
@@ -1640,9 +1789,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "siege_defense": {
       "writing_rule_pack_ids": [
@@ -1666,7 +1816,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1676,7 +1827,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1690,7 +1844,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-siege_defense-summary-A"
@@ -1710,9 +1867,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "slg_sandbox_view": {
       "writing_rule_pack_ids": [
@@ -1736,7 +1894,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1746,7 +1905,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1760,7 +1922,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-slg_sandbox_view-summary-A"
@@ -1780,9 +1945,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "slg_march_encirclement": {
       "writing_rule_pack_ids": [
@@ -1806,7 +1972,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1816,7 +1983,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1830,7 +2000,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-slg_march_encirclement-summary-A"
@@ -1850,9 +2023,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "slg_city_growth": {
       "writing_rule_pack_ids": [
@@ -1876,7 +2050,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1886,7 +2061,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1900,7 +2078,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-slg_city_growth-summary-A"
@@ -1920,9 +2101,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     },
     "slg_battle_report": {
       "writing_rule_pack_ids": [
@@ -1946,7 +2128,8 @@
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
-        "vg-duration-integrity"
+        "vg-duration-integrity",
+        "vg-field-aware-entity"
       ],
       "scene_profile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1956,7 +2139,10 @@
         "Do not reset visual identity between rows.",
         "Do not output visual planning-board layout instructions at runtime.",
         "Do not use unsupported material, light, weather, audio, or post-production details.",
-        "Do not use the full accepted body when the selected storyboard task is local."
+        "Do not use the full accepted body when the selected storyboard task is local.",
+        "Do not invent character names.",
+        "Do not put location, action, camera, visual style, source, or KB terms into person.",
+        "Do not expose governance wording in user exports."
       ],
       "influence_axes": [
         "visual_master",
@@ -1970,7 +2156,10 @@
         "air_medium",
         "transition",
         "audio_tone",
-        "post_style"
+        "post_style",
+        "field_boundary",
+        "entity_integrity",
+        "export_safety"
       ],
       "selected_sample_ids": [
         "sample-slg_battle_report-summary-A"
@@ -1990,9 +2179,10 @@
         "rule:no-pseudo-success",
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
-        "rule:seedance2-storyboard-field-discipline"
+        "rule:seedance2-storyboard-field-discipline",
+        "rule:field-aware-entity"
       ],
-      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only."
+      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
     }
   },
   "duration_profiles": [
@@ -2406,7 +2596,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "vg-field-aware-entity"
         ]
       },
       {
@@ -2420,7 +2611,8 @@
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
-          "dg-preproduction-storyboard-guide"
+          "dg-preproduction-storyboard-guide",
+          "vg-field-aware-entity"
         ]
       },
       {
@@ -2432,7 +2624,8 @@
           "vg-duration-integrity",
           "vg-prompt-text-boundary",
           "dg-material-light-air-physicality",
-          "dg-expression-physicalization"
+          "dg-expression-physicalization",
+          "vg-field-aware-entity"
         ]
       },
       {
@@ -2441,7 +2634,8 @@
         "rule_pack_ids": [
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-prompt-text-boundary"
+          "vg-prompt-text-boundary",
+          "vg-field-aware-entity"
         ]
       },
       {

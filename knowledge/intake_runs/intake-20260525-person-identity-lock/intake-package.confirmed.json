@@ -1,0 +1,201 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260525-person-identity-lock",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true
+  },
+  "demand": {
+    "title": "PWA person identity lock",
+    "search_focus": "storyboard_person_field_identity_lock",
+    "target_model": "PWA storyboard prompt compiler",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text",
+      "export safety"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "prompt_text"
+    ],
+    "created_at": "2026-05-25T12:25:00+08:00"
+  },
+  "search_plan": {
+    "acquisition_mode": "graph_handoff_and_existing_field_matrix",
+    "live_search_connector": "not_used",
+    "generated_queries": [],
+    "allowed_source_types": [
+      "graph_candidate_summary",
+      "field_matrix",
+      "existing_pwa_validation"
+    ],
+    "required_answers": [
+      "which current PWA field is protected",
+      "which runtime validation pack carries the rule",
+      "which negative constraint prevents field pollution",
+      "which export boundary prevents governance leakage"
+    ],
+    "search_provider_status": {
+      "status": "not_used",
+      "provider": "none",
+      "model": "none",
+      "base_url_host": "",
+      "credential_state": "not_required",
+      "web_search": "not_used",
+      "reason": "Controller provided graph-thread P0 candidate summary and asked KB thread to align before testing.",
+      "error_summary": "",
+      "candidate_count": 2
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-graph-p0-person-identity-lock",
+      "title": "Graph P0 candidate: person identity lock",
+      "source_url": "graph-handoff:field-knowledge-candidates-20260525",
+      "source_type_label": "graph candidate summary",
+      "language": "summary-only",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep as validation rule",
+      "risk_flags": [
+        "field_pollution_risk",
+        "summary_only_projection_required",
+        "no_raw_graph_runtime"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Protects storyboard person output from location, action, scene, camera, style, source, KB, slash, dash, or placeholder pollution.",
+      "kb_gap": "The PWA has field-aware entity validation, but KB runtime snapshot lacks an independent validation rule pack for person identity lock.",
+      "leakage_check": "summary_only_no_raw_graph_no_internal_refs",
+      "run_id": "intake-20260525-person-identity-lock",
+      "acquisition_step": "graph_p0_candidate_alignment"
+    },
+    {
+      "source_id": "src-existing-pwa-field-matrix-person-boundary",
+      "title": "Existing PWA field matrix person boundary",
+      "source_url": "kb-doc:seedance2-p0-pwa-storyboard-field-consumption-matrix-v0.2",
+      "source_type_label": "field matrix",
+      "language": "summary-only",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep as field boundary",
+      "risk_flags": [
+        "no_schema_drift",
+        "no_new_pwa_fields",
+        "export_safety_required"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Confirms person is preservation-only and must not be creatively enriched by KB.",
+      "kb_gap": "Provides the contract boundary for mapping the graph candidate into validation_group instead of director or writing content generation.",
+      "leakage_check": "summary_only_no_internal_ids_in_output",
+      "run_id": "intake-20260525-person-identity-lock",
+      "acquisition_step": "field_matrix_projection"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-graph-p0-person-identity-lock",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "promote_as_independent_validation_pack",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    },
+    {
+      "source_id": "src-existing-pwa-field-matrix-person-boundary",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "use_as_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-person-identity-lock",
+      "chinese_title": "Person identity lock",
+      "target_model_context": "PWA storyboard prompt compiler",
+      "serves_pwa_fields": [
+        "person",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "person",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-graph-p0-person-identity-lock",
+        "src-existing-pwa-field-matrix-person-boundary"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage"
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-25T12:25:00+08:00",
+    "confirmed_by": "controller_graph_handoff",
+    "accepted_reviewed_wiki_ids": [
+      "rw-person-identity-lock"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-person-identity-lock"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-25T17:24:07+08:00",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260525-person-identity-lock\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "status": "applied",
+      "applied_reviewed_wiki_ids": [
+        "rw-person-identity-lock"
+      ],
+      "adapter_output": "samples\\pwa-kb-adapter-output.sample.json",
+      "scene_count": 21,
+      "rule_pack_count": 18
+    }
+  }
+}

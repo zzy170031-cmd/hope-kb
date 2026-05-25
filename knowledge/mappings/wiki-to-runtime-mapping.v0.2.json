@@ -1003,11 +1003,88 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-person-identity-lock",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-person-identity-lock",
+      "reviewed_wiki_hash": "sha256:summary-rw-person-identity-lock",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-field-aware-entity"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:field-aware-entity"
+      ],
+      "summary_fragment_ids": [
+        "summary:person-identity-lock"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.validation_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-person-identity-lock"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-25",
+      "runtime_eligible_reason": "rw-person-identity-lock was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 15,
-    "mapped_runtime_eligible_wiki_count": 15,
+    "runtime_eligible_wiki_count": 16,
+    "mapped_runtime_eligible_wiki_count": 16,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,

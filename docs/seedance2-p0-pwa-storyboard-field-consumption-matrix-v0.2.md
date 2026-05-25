@@ -64,6 +64,7 @@ This work is a knowledge-quality upgrade. It must not add new PWA columns, new g
 | Scene visual description | 画面描述 / `visual_description` | 角色动作 / `character_action` | `rw-material-light-air-physicality`, `rw-visual-master-consistency` | `dg-material-light-air-physicality`, `dg-visual-master-consistency` | Add visible scene space, material feedback, air medium, and action-linked environmental response. | Do not expand world facts or add unsupported props/weather/effects. |
 | Lighting and color | 画面描述 / `visual_description` | 分镜提示词 / `prompt_text` | `rw-material-light-air-physicality` | `dg-material-light-air-physicality` | Add light direction, contrast, rim light, reflection, shadow relation, color temperature, or palette only when visible. | Do not use color mood to rewrite story or replace action. |
 | Composition and depth | 画面描述 / `visual_description` | 运镜 / `camera` | `rw-camera-language-grammar`, `rw-material-light-air-physicality` | `dg-camera-language-grammar`, `dg-material-light-air-physicality` | Use foreground, midground, background, blocking, leading line, focus, or depth to improve current-shot readability. | Do not list composition terms unrelated to action or attention. |
+| Person identity lock | `person` | `prompt_text` | `rw-person-identity-lock` | `vg-field-aware-entity` | Preserve only accepted-body characters or explicit role labels. | Do not invent names or put location, action, camera, style, source, KB, slash, dash, or placeholder terms into `person`. |
 | Prompt composition rule | 分镜提示词 / `prompt_text` | None | `rw-prompt-text-boundary` | `dg-prompt-text-boundary`, `vg-prompt-text-boundary` | Compile `prompt_text` from confirmed row fields after row generation. | Do not output raw KB, source material, internal ids, hashes, or governance traces. |
 | Negative constraint | 分镜提示词 / `prompt_text` | `note` only when user-safe | `rw-prompt-text-boundary`, `rw-validation-no-leakage` | `vg-prompt-text-boundary`, `vg-no-leakage` | Prevent leakage, unsupported facts, conflict stacking, abstract emotion, and export drift. | Do not expose governance language in user-facing prompt output. |
 
@@ -97,11 +98,13 @@ leakage_count=0
 Allowed `pwa_storyboard_fields` are limited to:
 
 ```text
+person
 camera
 shot_size
 visual_description
 character_action
 dialogue_or_narration
+duration_seconds
 prompt_text
 note
 ```

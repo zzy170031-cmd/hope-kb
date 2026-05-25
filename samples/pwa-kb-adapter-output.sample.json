@@ -376,6 +376,26 @@
           "No duration mismatch",
           "No zero-duration row"
         ]
+      },
+      {
+        "id": "vg-field-aware-entity",
+        "name": "Person identity lock",
+        "intent": "Keep the person field limited to accepted story characters or explicit role labels while blocking location, action, scene, camera, style, KB, and placeholder terms.",
+        "influenceAxes": [
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
+        ],
+        "directives": [
+          "person must preserve only accepted-body characters or explicit role labels.",
+          "Reject location, action fragment, scene term, camera term, style term, KB term, slash, dash, or empty placeholder in person.",
+          "When the person field is uncertain, leave it empty or repair from accepted facts instead of inventing a new name."
+        ],
+        "negativeConstraints": [
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
+        ]
       }
     ],
     "sceneMappings": {
@@ -401,7 +421,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -413,7 +434,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "source_facts",
@@ -430,7 +454,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "ensemble_performance": {
@@ -455,7 +482,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -465,7 +493,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -479,7 +510,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "emotional_dialogue": {
@@ -504,7 +538,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -514,7 +549,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -528,7 +566,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "encounter_performance": {
@@ -553,7 +594,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -563,7 +605,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -577,7 +622,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "field_chase": {
@@ -602,7 +650,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -612,7 +661,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -626,7 +678,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "spectacle_showcase": {
@@ -651,7 +706,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -661,7 +717,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -675,7 +734,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "daily_healing": {
@@ -700,7 +762,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -710,7 +773,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -724,7 +790,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -749,7 +818,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -759,7 +829,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -773,7 +846,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "guoman_ensemble_performance": {
@@ -798,7 +874,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -808,7 +885,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -822,7 +902,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "ink_wuxia_combat": {
@@ -847,7 +930,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -857,7 +941,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -871,7 +958,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "eastern_spectacle": {
@@ -896,7 +986,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -906,7 +997,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -920,7 +1014,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "xianxia_action": {
@@ -945,7 +1042,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -955,7 +1053,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -969,7 +1070,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "urban_fantasy": {
@@ -994,7 +1098,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1006,7 +1111,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "source_facts",
@@ -1023,7 +1131,9 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity"
         ]
       },
       "chinese_war_formation": {
@@ -1048,7 +1158,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1058,7 +1169,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1072,7 +1186,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "weapon_highlight": {
@@ -1097,7 +1214,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1107,7 +1225,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1121,7 +1242,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "council_strategy": {
@@ -1146,7 +1270,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1156,7 +1281,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1170,7 +1298,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "siege_defense": {
@@ -1195,7 +1326,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1205,7 +1337,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1219,7 +1354,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "slg_sandbox_view": {
@@ -1244,7 +1382,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1254,7 +1393,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1268,7 +1410,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "slg_march_encirclement": {
@@ -1293,7 +1438,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1303,7 +1449,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1317,7 +1466,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "slg_city_growth": {
@@ -1342,7 +1494,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1352,7 +1505,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1366,7 +1522,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       },
       "slg_battle_report": {
@@ -1391,7 +1550,8 @@
           "vg-prompt-text-boundary",
           "vg-no-pseudo-success",
           "vg-no-leakage",
-          "vg-duration-integrity"
+          "vg-duration-integrity",
+          "vg-field-aware-entity"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -1401,7 +1561,10 @@
           "Do not reset visual identity between rows.",
           "Do not output visual planning-board layout instructions at runtime.",
           "Do not use unsupported material, light, weather, audio, or post-production details.",
-          "Do not use the full accepted body when the selected storyboard task is local."
+          "Do not use the full accepted body when the selected storyboard task is local.",
+          "Do not invent character names.",
+          "Do not put location, action, camera, visual style, source, or KB terms into person.",
+          "Do not expose governance wording in user exports."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1415,7 +1578,10 @@
           "air_medium",
           "transition",
           "audio_tone",
-          "post_style"
+          "post_style",
+          "field_boundary",
+          "entity_integrity",
+          "export_safety"
         ]
       }
     },
