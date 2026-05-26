@@ -1,0 +1,1559 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260526-film-anime-ai-translation-candidates",
+  "status": "recommendations_ready",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "Film to anime AI translation candidate dedupe package",
+    "search_focus": "film_language_to_anime_storyboard_to_ai_prompt_field_translation",
+    "target_model": "PWA storyboard prompt compiler",
+    "target_output": [
+      "PWA storyboard rows",
+      "summary-only KB adapter",
+      "Qwen constrained anime storyboard generation"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-26T00:00:00+08:00"
+  },
+  "search_plan": {
+    "acquisition_mode": "sanitized_graph_candidate_handoff",
+    "live_search_connector": "not_used",
+    "generated_queries": [],
+    "allowed_source_types": [
+      "graph_candidate_summary",
+      "existing_reviewed_wiki",
+      "orchestration_group_mapping",
+      "field_boundary_matrix"
+    ],
+    "required_answers": [
+      "which existing reviewed_wiki already covers the candidate",
+      "whether the candidate is merge_existing, new_reviewed_wiki_candidate, future_qa, or reject_runtime",
+      "whether the candidate is runtime eligible after user confirmation",
+      "whether anime_translation_value is high, medium, low, or none",
+      "whether the candidate keeps summary-only downlink and avoids proper-name, IP, fact, dialogue, and field pollution"
+    ],
+    "dedupe_summary": {
+      "received_candidates": 18,
+      "kb_entry_candidates": 14,
+      "future_qa_inputs": 4,
+      "merge_existing": 11,
+      "new_reviewed_wiki_candidate": 3,
+      "new_reviewed_wiki_targets": 2,
+      "reject_runtime": 0,
+      "future_qa": 4,
+      "confirmation_queue_items": 13,
+      "confirmed_package_created": false,
+      "apply_deferred": true,
+      "pwa_sync_deferred": true,
+      "anime_translation_value_distribution": {
+        "high": 14,
+        "medium": 0,
+        "low": 0,
+        "none": 4
+      },
+      "high_value_candidates": [
+        "景别转动漫可读尺度",
+        "运镜转动漫动势层",
+        "剪辑节奏转反应镜头与冲击停顿",
+        "电影表演转动漫姿态动作线",
+        "电影光影转动漫色块与受光关系",
+        "编剧信息转画面承载",
+        "AI 动漫提示词字段编译顺序",
+        "速度线与背景流动表达快速动作",
+        "关键姿态优先于制作工序",
+        "单镜头单主目标防过载",
+        "动漫主体轮廓优先",
+        "动漫动作预备与跟随",
+        "动漫反应镜头承接情绪变化",
+        "动漫化失败防护：真人电影感过强"
+      ],
+      "none_value_candidates": [
+        "真实导演、工作室、电影、游戏、IP 风格开关",
+        "长 prompt 万能模板",
+        "自动对白生成套路",
+        "泛动漫风格词库"
+      ]
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "fa-candidate-01",
+      "title": "景别转动漫可读尺度",
+      "source_url": "kb-candidate://film-anime-ai-translation/shot-size-readable-scale",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "景别转动漫可读尺度",
+      "source_summary": "把电影景别转换为动漫主体大小、轮廓清晰度、层次关系和情绪强调，而不是只保留景别名词。",
+      "core_logic": "景别必须服务主体可读性和动漫化表达强度。",
+      "film_language_input": "close, medium, wide, aerial, insert, establishing scale",
+      "anime_storyboard_translation": "主体轮廓、画面层次、情绪强调和空间距离随景别变化。",
+      "ai_anime_prompt_translation": "在提示词中绑定主体大小、可读轮廓、层次和可见重点。",
+      "target_field": [
+        "景别",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "把景别写成动漫主体尺度和画面阅读关系。",
+      "negative_constraint": "不要把景别当成空镜头术语或真人电影质感标签。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-camera-language-grammar 与 rw-visual-master-consistency 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-camera-language-grammar",
+        "rw-visual-master-consistency"
+      ],
+      "risk_note": "需要阻断空泛电影术语和不受支持的画面尺度扩写。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-02",
+      "title": "运镜转动漫动势层",
+      "source_url": "kb-candidate://film-anime-ai-translation/camera-to-anime-motion-layer",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "运镜转动漫动势层",
+      "source_summary": "把电影运镜转换为动漫主运镜、速度感、背景流动、动作线和主体运动方向。",
+      "core_logic": "运镜不是装饰词，必须说明动漫动作动势和视觉牵引。",
+      "film_language_input": "push, pull, pan, tilt, track, handheld, orbit, chase movement",
+      "anime_storyboard_translation": "主运镜带动主体方向、背景流动、速度层和动作线。",
+      "ai_anime_prompt_translation": "提示词中压缩为主运镜、主体动势、背景流动和速度提示。",
+      "target_field": [
+        "运镜",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "让运镜承担动漫动作方向、速度和背景流动表达。",
+      "negative_constraint": "不要堆叠多个冲突运镜或把运镜写成泛电影感。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-camera-language-grammar 与 rw-transition-motion-dynamics 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-camera-language-grammar",
+        "rw-transition-motion-dynamics",
+        "rw-director-scheduling-core"
+      ],
+      "risk_note": "需要避免冲突运镜和无叙事目的的速度词。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-03",
+      "title": "剪辑节奏转反应镜头与冲击停顿",
+      "source_url": "kb-candidate://film-anime-ai-translation/editing-rhythm-reaction-impact",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "剪辑节奏转反应镜头与冲击停顿",
+      "source_summary": "把剪辑节奏转换为动漫反应镜头、冲击帧、停顿和信息密度控制。",
+      "core_logic": "节奏必须落在镜头目的、情绪承接和时长密度上。",
+      "film_language_input": "reaction cut, impact pause, match rhythm, montage rhythm",
+      "anime_storyboard_translation": "用反应镜头、冲击停顿和动作连续性承接情绪变化。",
+      "ai_anime_prompt_translation": "提示词中只保留必要的反应、停顿、冲击和持续时长约束。",
+      "target_field": [
+        "运镜",
+        "画面描述",
+        "角色动作",
+        "时长(秒)",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "visual_description",
+        "character_action",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "用反应镜头和冲击停顿表达动漫节奏。",
+      "negative_constraint": "不要用剪辑术语替代可见画面或制造无意义短镜头。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-shot-intent-taxonomy、rw-duration-density-rules 与 rw-transition-motion-dynamics 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-shot-intent-taxonomy",
+        "rw-duration-density-rules",
+        "rw-transition-motion-dynamics",
+        "rw-director-scheduling-core"
+      ],
+      "risk_note": "需要避免节奏标签替代镜头内容或造成时长不匹配。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-04",
+      "title": "电影表演转动漫姿态动作线",
+      "source_url": "kb-candidate://film-anime-ai-translation/performance-to-anime-pose-line",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "电影表演转动漫姿态动作线",
+      "source_summary": "把真人表演提示转换为动漫姿态、视线、手部、重心、动作线和可见夸张。",
+      "core_logic": "情绪和表演必须通过动漫可画的身体线索呈现。",
+      "film_language_input": "actor performance, facial cue, gesture, blocking, eye line",
+      "anime_storyboard_translation": "转成姿态重心、动作线、手部动作、视线方向和可见表演幅度。",
+      "ai_anime_prompt_translation": "提示词约束为姿态、重心、视线、手部和动作线，不输出抽象情绪。",
+      "target_field": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "把表演写成动漫姿态、动作线和可见身体反应。",
+      "negative_constraint": "不要把抽象情绪或真人微表情强塞进不合适景别。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-expression-physicalization 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-expression-physicalization"
+      ],
+      "risk_note": "需要防止远景微距和抽象情绪直写。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-05",
+      "title": "电影光影转动漫色块与受光关系",
+      "source_url": "kb-candidate://film-anime-ai-translation/light-to-anime-color-blocking",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "电影光影转动漫色块与受光关系",
+      "source_summary": "把电影光影转换为动漫色块层次、受光关系、空气介质和材质反馈。",
+      "core_logic": "光影应服务动漫画面层次和动作反馈，而不是堆叠氛围词。",
+      "film_language_input": "key light, back light, rim light, haze, reflective material, shadow contrast",
+      "anime_storyboard_translation": "转成色块层次、光源方向、受光面、空气感和材质反应。",
+      "ai_anime_prompt_translation": "提示词只保留与动作和场景逻辑绑定的光源、色块、材质、空气介质。",
+      "target_field": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "把光影写成动漫色块、受光和材质反馈。",
+      "negative_constraint": "不要添加未被场景支持的天气、材质或氛围事实。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-material-light-air-physicality 与 rw-visual-master-consistency 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-material-light-air-physicality",
+        "rw-visual-master-consistency"
+      ],
+      "risk_note": "需要避免光影词库化和事实发明。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-06",
+      "title": "编剧信息转画面承载",
+      "source_url": "kb-candidate://film-anime-ai-translation/writing-information-to-visual-carrier",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "编剧信息转画面承载",
+      "source_summary": "把场景目标、人物动机、冲突、转折和说明性文字转换为动漫画面与动作承载。",
+      "core_logic": "编剧信息进入分镜前必须动作化、画面化和事实约束化。",
+      "film_language_input": "scene goal, motivation, conflict, exposition, emotional turn",
+      "anime_storyboard_translation": "转成可见行动、构图压力、反应、阻碍和画面后果。",
+      "ai_anime_prompt_translation": "提示词中压缩为主体、动作、冲突后果和可见转折。",
+      "target_field": [
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "writing_group",
+      "positive_directive": "优先让剧情信息由画面、动作和反应承载。",
+      "negative_constraint": "不要把说明性文字直接塞进分镜，也不要编造对白依据。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-scene-expression-visible-action 覆盖，并受 rw-dialogue-evidence-lock 约束，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action"
+      ],
+      "risk_note": "需要阻断事实发明、解释性对白和对白依据编造。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-07",
+      "title": "AI 动漫提示词字段编译顺序",
+      "source_url": "kb-candidate://film-anime-ai-translation/ai-anime-prompt-field-order",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "AI 动漫提示词字段编译顺序",
+      "source_summary": "把动漫分镜字段按人物、镜头、景别、画面、动作、对白旁白、时长和安全约束编译成提示词。",
+      "core_logic": "提示词是 PWA 已有字段的摘要编译，不是长模板或 raw KB 下放。",
+      "film_language_input": "storyboard row fields and generation constraints",
+      "anime_storyboard_translation": "分镜字段先稳定，再编译成动漫生成提示。",
+      "ai_anime_prompt_translation": "按既有字段顺序压缩为主体、动作、场景、镜头、风格边界和负面约束。",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "只从 PWA 最终字段和安全约束编译动漫提示词。",
+      "negative_constraint": "不要下放 raw KB、长万能模板、内部状态或未确认字段。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-prompt-text-boundary 与 rw-seedance2-storyboard-field-discipline 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "risk_note": "需要防止字段混写、长 prompt 过载和 raw 泄漏。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-08",
+      "title": "速度线与背景流动表达快速动作",
+      "source_url": "kb-candidate://film-anime-ai-translation/speed-lines-background-flow",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "速度线与背景流动表达快速动作",
+      "source_summary": "把快速动作从真人运动描述转换为动漫速度线、背景流动、动作方向和主体轮廓保持。",
+      "core_logic": "速度表达必须服务动作可读性，不可遮蔽主体或事实。",
+      "film_language_input": "fast action, chase, dash, swing, recoil, impact movement",
+      "anime_storyboard_translation": "快速动作以动作线、背景流动、主体轮廓和冲击停顿表达。",
+      "ai_anime_prompt_translation": "提示词包含速度线、背景流动、运动方向和清晰主体轮廓。",
+      "target_field": [
+        "运镜",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "用速度线和背景流动表达快速动作。",
+      "negative_constraint": "不要让速度效果吞掉主体、动作目的或场景事实。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-transition-motion-dynamics 与 rw-camera-language-grammar 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-transition-motion-dynamics",
+        "rw-camera-language-grammar"
+      ],
+      "risk_note": "需要避免泛动漫速度词堆叠和动作不可读。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-09",
+      "title": "关键姿态优先于制作工序",
+      "source_url": "kb-candidate://film-anime-ai-translation/key-pose-over-production-process",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "new_reviewed_wiki_candidate",
+      "candidate_name": "关键姿态优先于制作工序",
+      "source_summary": "分镜字段应优先描述可见关键姿态、动作线和轮廓，不把制作工序词当作用户最终字段内容。",
+      "core_logic": "PWA 面向千问生成和用户可见分镜，不是制作流程记录。",
+      "film_language_input": "storyboard to key animation handoff language",
+      "anime_storyboard_translation": "保留关键姿态、主体轮廓、动作线、重心和节奏点。",
+      "ai_anime_prompt_translation": "提示词写可生成的关键姿态与轮廓约束，不写制作工序。",
+      "target_field": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "把动漫动作写成关键姿态、轮廓、重心和动作线。",
+      "negative_constraint": "不要把制作流程、工序名或内部状态写入最终分镜字段。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "现有 rw-expression-physicalization 与 rw-seedance2-storyboard-field-discipline 覆盖一部分，但缺少关键姿态优先于制作工序的独立边界。",
+      "target_reviewed_wiki_ids": [
+        "rw-anime-key-pose-silhouette-priority"
+      ],
+      "risk_note": "需要防止制作术语进入用户最终字段和 prompt_text。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-10",
+      "title": "单镜头单主目标防过载",
+      "source_url": "kb-candidate://film-anime-ai-translation/single-shot-primary-goal",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "单镜头单主目标防过载",
+      "source_summary": "每个分镜行优先服务一个主目标，避免把多个剧情、动作、镜头、情绪和风格约束塞进同一镜头。",
+      "core_logic": "单镜头目标必须可拍、可读、可生成。",
+      "film_language_input": "shot objective, beat load, information density",
+      "anime_storyboard_translation": "每镜头聚焦一个主动作、主情绪或主揭示。",
+      "ai_anime_prompt_translation": "提示词只保留一个主目标及必要上下文，避免过载。",
+      "target_field": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "每个镜头只保留一个主目标和必要支撑信息。",
+      "negative_constraint": "不要把多目标、多运镜、多动作和长提示词塞进一个分镜行。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-duration-density-rules、rw-prompt-text-boundary 与 rw-seedance2-storyboard-field-discipline 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-duration-density-rules",
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "risk_note": "需要阻断 prompt 过载和字段混写。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-11",
+      "title": "动漫主体轮廓优先",
+      "source_url": "kb-candidate://film-anime-ai-translation/anime-subject-silhouette-priority",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "new_reviewed_wiki_candidate",
+      "candidate_name": "动漫主体轮廓优先",
+      "source_summary": "动漫分镜应优先保证主体轮廓、读图中心和动作线清晰，再补充光影、材质和背景。",
+      "core_logic": "主体轮廓是电影语言转动漫画面语言的基础可读性约束。",
+      "film_language_input": "subject emphasis, composition center, contrast and readable frame",
+      "anime_storyboard_translation": "主体轮廓、动作线、读图中心和前中后景层次优先。",
+      "ai_anime_prompt_translation": "提示词先锁定主体轮廓、动作线和读图中心，再写环境细节。",
+      "target_field": [
+        "人物",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "先保障动漫主体轮廓和动作线可读。",
+      "negative_constraint": "不要让背景、光影、风格词或群像噪声压过主体。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "与关键姿态优先于制作工序可归并为 rw-anime-key-pose-silhouette-priority；现有 visual 和 expression 规则只覆盖部分。",
+      "target_reviewed_wiki_ids": [
+        "rw-anime-key-pose-silhouette-priority"
+      ],
+      "risk_note": "需要防止风格词堆叠和主体不可读。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-12",
+      "title": "动漫动作预备与跟随",
+      "source_url": "kb-candidate://film-anime-ai-translation/anime-anticipation-follow-through",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "动漫动作预备与跟随",
+      "source_summary": "把动作拆成预备、主动作、跟随和余势，形成动漫可读的动作节奏。",
+      "core_logic": "动作相位帮助千问生成动漫动作而非普通真人运动描述。",
+      "film_language_input": "anticipation, action, follow-through, recoil, settle",
+      "anime_storyboard_translation": "用预备姿态、主动作、跟随动作和余势表达节奏。",
+      "ai_anime_prompt_translation": "提示词保留动作相位和关键姿态，避免长流程化描述。",
+      "target_field": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "用预备、主动作和跟随动作组织动漫动作。",
+      "negative_constraint": "不要把动作写成无节奏的连续说明或制作工序。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-expression-physicalization 与 rw-transition-motion-dynamics 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-expression-physicalization",
+        "rw-transition-motion-dynamics"
+      ],
+      "risk_note": "需要防止长动作说明挤占字段边界。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-13",
+      "title": "动漫反应镜头承接情绪变化",
+      "source_url": "kb-candidate://film-anime-ai-translation/anime-reaction-shot-emotion-handoff",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "candidate_name": "动漫反应镜头承接情绪变化",
+      "source_summary": "用动漫反应镜头承接情绪转折、关系压力和冲击后果，而不是写抽象情绪。",
+      "core_logic": "反应镜头必须有情绪承接或叙事功能。",
+      "film_language_input": "reaction shot, emotional turn, relational pressure, payoff",
+      "anime_storyboard_translation": "反应镜头表现视线、姿态、停顿、手部或呼吸变化。",
+      "ai_anime_prompt_translation": "提示词限定反应动作、停顿时长和可见情绪变化。",
+      "target_field": [
+        "景别",
+        "画面描述",
+        "角色动作",
+        "时长(秒)",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "用反应镜头承接情绪变化和叙事压力。",
+      "negative_constraint": "不要为了情绪词而无依据增加反应镜头。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "已由 rw-shot-intent-taxonomy、rw-duration-density-rules 与 rw-director-scheduling-core 覆盖，建议归并增强。",
+      "target_reviewed_wiki_ids": [
+        "rw-shot-intent-taxonomy",
+        "rw-duration-density-rules",
+        "rw-director-scheduling-core"
+      ],
+      "risk_note": "需要避免情绪镜头泛化和事实发明。",
+      "priority": "P1",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-candidate-14",
+      "title": "动漫化失败防护：真人电影感过强",
+      "source_url": "kb-candidate://film-anime-ai-translation/live-action-feel-failure-guard",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "new_reviewed_wiki_candidate",
+      "candidate_name": "动漫化失败防护：真人电影感过强",
+      "source_summary": "阻断真人电影术语、写实摄影质感和泛电影感直接进入动漫分镜提示词，要求转成动漫字段语言。",
+      "core_logic": "KB 必须保证电影语言完成动漫化转译后再下放给 PWA adapter。",
+      "film_language_input": "live-action cinematic feel, realistic lens look, director-style wording",
+      "anime_storyboard_translation": "转为动漫主体轮廓、动作线、色块层次、镜头目的和字段边界。",
+      "ai_anime_prompt_translation": "提示词必须是动漫化字段约束，不使用真人电影感作为风格开关。",
+      "target_field": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "把真人电影语言转写为动漫主体、动作、镜头和提示词字段约束。",
+      "negative_constraint": "不要把真人电影感、真实专名、IP、工作室或泛电影术语作为 runtime 风格开关。",
+      "anime_translation_value": "high",
+      "runtime_eligible": true,
+      "duplicate_hint": "现有 rw-prompt-text-boundary 与 rw-validation-no-leakage 阻断泄漏和字段混写，但缺少真人电影感过强的动漫化失败防护。",
+      "target_reviewed_wiki_ids": [
+        "rw-anime-translation-failure-guard"
+      ],
+      "risk_note": "P0 风险：专名污染、IP 污染、泛电影术语直塞、普通真人分镜化。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-futureqa-01",
+      "title": "真实导演、工作室、电影、游戏、IP 风格开关",
+      "source_url": "kb-candidate://film-anime-ai-translation/futureqa/proper-name-style-switch",
+      "source_type_label": "sanitized_graph_futureqa",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "candidate_name": "真实导演、工作室、电影、游戏、IP 风格开关",
+      "source_summary": "真实专名或 IP 不能作为 runtime 风格开关，只能在候选复核层研究去专名化抽象。",
+      "core_logic": "专名污染和 IP 污染不允许进入 runtime 或 PWA adapter。",
+      "film_language_input": "proper-name style reference",
+      "anime_storyboard_translation": "blocked before runtime until abstracted and de-named",
+      "ai_anime_prompt_translation": "not eligible for prompt_text",
+      "target_field": [],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "knowledge_group": "validation_group",
+      "positive_directive": "仅保留为 FutureQA 去专名化研究。",
+      "negative_constraint": "不要进入 runtime，不要下放 PWA。",
+      "anime_translation_value": "none",
+      "runtime_eligible": false,
+      "duplicate_hint": "受 rw-prompt-text-boundary、rw-validation-no-leakage 和新增失败防护候选约束。",
+      "risk_note": "专名污染、IP 污染、风格开关误用。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-futureqa-02",
+      "title": "长 prompt 万能模板",
+      "source_url": "kb-candidate://film-anime-ai-translation/futureqa/universal-long-prompt",
+      "source_type_label": "sanitized_graph_futureqa",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "candidate_name": "长 prompt 万能模板",
+      "source_summary": "长模板会破坏字段边界、信息密度和 summary-only 下放，只能作为反例复核。",
+      "core_logic": "PWA prompt_text 必须由既有字段编译，不接收万能模板。",
+      "film_language_input": "unbounded prompt template",
+      "anime_storyboard_translation": "blocked before runtime",
+      "ai_anime_prompt_translation": "not eligible for prompt_text",
+      "target_field": [],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "knowledge_group": "validation_group",
+      "positive_directive": "仅作为 FutureQA 反例保留。",
+      "negative_constraint": "不要进入 runtime，不要覆盖字段编译顺序。",
+      "anime_translation_value": "none",
+      "runtime_eligible": false,
+      "duplicate_hint": "已被 rw-prompt-text-boundary 与 rw-duration-density-rules 阻断。",
+      "risk_note": "prompt 过载、字段混写、summary-only 失效。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-futureqa-03",
+      "title": "自动对白生成套路",
+      "source_url": "kb-candidate://film-anime-ai-translation/futureqa/automatic-dialogue-routine",
+      "source_type_label": "sanitized_graph_futureqa",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "candidate_name": "自动对白生成套路",
+      "source_summary": "自动套对白会诱导编造对白依据，不进入 runtime。",
+      "core_logic": "对白/旁白只能来自用户提供、已接受事实或明确角色意图，不能模板化编造。",
+      "film_language_input": "dialogue generation routine",
+      "anime_storyboard_translation": "blocked before runtime unless converted into evidence validation",
+      "ai_anime_prompt_translation": "not eligible for prompt_text",
+      "target_field": [],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "knowledge_group": "validation_group",
+      "positive_directive": "仅保留为 FutureQA 验证反例。",
+      "negative_constraint": "不要进入 runtime，不要让千问自动编造对白。",
+      "anime_translation_value": "none",
+      "runtime_eligible": false,
+      "duplicate_hint": "已被 rw-dialogue-evidence-lock 阻断。",
+      "risk_note": "对白编造、事实发明、角色意图污染。",
+      "priority": "P0",
+      "summary_only": true
+    },
+    {
+      "source_id": "fa-futureqa-04",
+      "title": "泛动漫风格词库",
+      "source_url": "kb-candidate://film-anime-ai-translation/futureqa/generic-anime-style-lexicon",
+      "source_type_label": "sanitized_graph_futureqa",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "candidate_name": "泛动漫风格词库",
+      "source_summary": "泛动漫风格词库不直接服务字段转译，可能诱导风格词堆叠。",
+      "core_logic": "只有能映射到主体、镜头、画面、动作、提示词边界的抽象约束才可复核。",
+      "film_language_input": "generic anime style vocabulary",
+      "anime_storyboard_translation": "blocked until converted into field-bound visual rules",
+      "ai_anime_prompt_translation": "not eligible for prompt_text",
+      "target_field": [],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "knowledge_group": "validation_group",
+      "positive_directive": "仅保留为 FutureQA，等待字段化和去泛化。",
+      "negative_constraint": "不要进入 runtime，不要作为风格开关或词库下放。",
+      "anime_translation_value": "none",
+      "runtime_eligible": false,
+      "duplicate_hint": "受 rw-prompt-text-boundary 与新增失败防护候选约束。",
+      "risk_note": "泛动漫词堆叠、字段不可映射、风格污染。",
+      "priority": "P1",
+      "summary_only": true
+    }
+  ],
+  "screening_results": [
+    {
+      "screening_id": "screen-film-anime-ai-translation-20260526",
+      "scope": "third_round_graph_candidates",
+      "candidate_count": 18,
+      "runtime_eligible_count": 14,
+      "future_qa_count": 4,
+      "merge_existing_count": 11,
+      "new_reviewed_wiki_candidate_count": 3,
+      "new_reviewed_wiki_target_count": 2,
+      "reject_runtime_count": 0,
+      "anime_translation_value_distribution": {
+        "high": 14,
+        "medium": 0,
+        "low": 0,
+        "none": 4
+      },
+      "summary_only": true,
+      "no_confirmed_package": true,
+      "no_apply": true,
+      "no_pwa_sync": true
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-camera-language-grammar",
+      "chinese_title": "镜头语言语法规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-01",
+        "fa-candidate-02",
+        "fa-candidate-08"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-transition-motion-dynamics",
+        "rw-visual-master-consistency"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-director-scheduling-core",
+      "chinese_title": "导演调度核心规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "画面描述",
+        "角色动作",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-01",
+        "fa-candidate-02",
+        "fa-candidate-03",
+        "fa-candidate-10",
+        "fa-candidate-13"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-duration-density-rules"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "writing_group",
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-transition-motion-dynamics",
+      "chinese_title": "转场与动作动势规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "动作线",
+        "背景流动",
+        "动作连续性"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-02",
+        "fa-candidate-03",
+        "fa-candidate-08",
+        "fa-candidate-12"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-expression-physicalization"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-shot-intent-taxonomy",
+      "chinese_title": "镜头意图分类规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "镜头目的",
+        "反应镜头",
+        "冲击停顿",
+        "情绪承接"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-03",
+        "fa-candidate-13"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-duration-density-rules",
+        "rw-director-scheduling-core"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-duration-density-rules",
+      "chinese_title": "时长与信息密度规则增强",
+      "serves_pwa_fields": [
+        "duration_seconds",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "时长(秒)",
+        "信息密度",
+        "单镜头主目标",
+        "冲击停顿"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "duration_profiles",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-03",
+        "fa-candidate-10",
+        "fa-candidate-13"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-shot-intent-taxonomy"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-expression-physicalization",
+      "chinese_title": "表演物理化规则增强",
+      "serves_pwa_fields": [
+        "person",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "角色动作",
+        "姿态",
+        "动作线",
+        "情绪可见化"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-04",
+        "fa-candidate-12"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-transition-motion-dynamics",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-material-light-air-physicality",
+      "chinese_title": "材质光影空气物理反馈规则增强",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "画面描述",
+        "光源关系",
+        "色块层次",
+        "材质反馈"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-05"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-visual-master-consistency"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-scene-expression-visible-action",
+      "chinese_title": "场景表达与可见行动规则增强",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "场景目标",
+        "人物动机",
+        "冲突推进",
+        "画面承载"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-06"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-dialogue-evidence-lock",
+        "rw-validation-no-leakage"
+      ],
+      "orchestration_group": "writing_group",
+      "supporting_groups": [
+        "director_group",
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-prompt-text-boundary",
+      "chinese_title": "分镜提示词边界规则增强",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "serves_prompt_sections": [
+        "分镜提示词",
+        "字段编译顺序",
+        "单镜头主目标",
+        "负面约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-07",
+        "fa-candidate-10",
+        "fa-candidate-14"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-validation-no-leakage"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "director_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance2-storyboard-field-discipline",
+      "chinese_title": "分镜字段纪律规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "字段边界",
+        "提示词编译",
+        "关键姿态",
+        "单镜头主目标"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-07",
+        "fa-candidate-09",
+        "fa-candidate-10"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-expression-physicalization"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "director_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-visual-master-consistency",
+      "chinese_title": "视觉母版一致性规则增强",
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体轮廓",
+        "画面层次",
+        "光影关系",
+        "视觉连续性"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-01",
+        "fa-candidate-05",
+        "fa-candidate-11"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-material-light-air-physicality"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-key-pose-silhouette-priority",
+      "chinese_title": "动漫关键姿态与主体轮廓优先候选",
+      "serves_pwa_fields": [
+        "person",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "主体轮廓",
+        "关键姿态",
+        "动作线",
+        "制作工序边界"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-09",
+        "fa-candidate-11"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-expression-physicalization",
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-visual-master-consistency"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-translation-failure-guard",
+      "chinese_title": "动漫化失败防护候选",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "动漫化转译",
+        "字段边界",
+        "负面约束",
+        "导出安全"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "fa-candidate-14"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "director_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    }
+  ],
+  "confirmation": {
+    "confirmed": false,
+    "confirmed_at": "",
+    "confirmed_by": "",
+    "accepted_reviewed_wiki_ids": [],
+    "available_reviewed_wiki_ids": [
+      "rw-camera-language-grammar",
+      "rw-director-scheduling-core",
+      "rw-transition-motion-dynamics",
+      "rw-shot-intent-taxonomy",
+      "rw-duration-density-rules",
+      "rw-expression-physicalization",
+      "rw-material-light-air-physicality",
+      "rw-scene-expression-visible-action",
+      "rw-prompt-text-boundary",
+      "rw-seedance2-storyboard-field-discipline",
+      "rw-visual-master-consistency",
+      "rw-anime-key-pose-silhouette-priority",
+      "rw-anime-translation-failure-guard"
+    ]
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "blocked until controller opens apply gate",
+    "validation_status": "not_run",
+    "output": null
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260526-film-anime-ai-translation-candidates/intake-package.draft.json",
+    "confirmed_package": "",
+    "dedupe_report": "knowledge/intake_runs/intake-20260526-film-anime-ai-translation-candidates/dedupe-report.md",
+    "reviewed_wiki": "blocked until confirmation and apply gate",
+    "wiki_to_runtime_mapping": "blocked until confirmation and apply gate",
+    "runtime_snapshot": "blocked until confirmation and apply gate",
+    "pwa_adapter_output": "blocked until apply and sync gates"
+  }
+}

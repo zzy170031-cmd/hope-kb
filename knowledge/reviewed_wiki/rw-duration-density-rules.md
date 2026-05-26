@@ -36,6 +36,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - duration_seconds
 - visual_description
+- character_action
 - prompt_text
 
 ## Negative Constraints

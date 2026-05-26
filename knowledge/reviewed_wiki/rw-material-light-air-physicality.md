@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-材质光影空气物理反馈规则: Add scene-bound material feedback, light direction, and air medium cues to visible frame and prompt text.
+材质光影空气物理反馈规则增强: Add scene-bound material feedback, light direction, and air medium cues to visible frame and prompt text.
 
 ## Source Basis
 

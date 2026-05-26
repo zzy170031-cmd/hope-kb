@@ -1345,11 +1345,169 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-anime-key-pose-silhouette-priority",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-anime-key-pose-silhouette-priority",
+      "reviewed_wiki_hash": "sha256:summary-rw-anime-key-pose-silhouette-priority",
+      "wiki_type": "director_scheduling_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-anime-key-pose-silhouette-priority",
+        "vg-anime-key-pose-field-boundary"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:anime-key-pose-silhouette-priority"
+      ],
+      "summary_fragment_ids": [
+        "summary:anime-key-pose-silhouette-priority"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-anime-key-pose-silhouette-priority"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-26",
+      "runtime_eligible_reason": "rw-anime-key-pose-silhouette-priority was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-anime-translation-failure-guard",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-anime-translation-failure-guard",
+      "reviewed_wiki_hash": "sha256:summary-rw-anime-translation-failure-guard",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-anime-translation-failure-guard"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:anime-translation-failure-guard"
+      ],
+      "summary_fragment_ids": [
+        "summary:anime-translation-failure-guard"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-anime-translation-failure-guard"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-26",
+      "runtime_eligible_reason": "rw-anime-translation-failure-guard was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 18,
-    "mapped_runtime_eligible_wiki_count": 18,
+    "runtime_eligible_wiki_count": 20,
+    "mapped_runtime_eligible_wiki_count": 20,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,

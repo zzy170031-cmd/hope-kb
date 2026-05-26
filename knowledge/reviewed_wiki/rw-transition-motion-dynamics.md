@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-转场与动势规则增强: Use transitions and motion dynamics to express rhythm, continuity, action pressure, and emotional direction.
+转场与动作动势规则增强: Use transitions and motion dynamics to express rhythm, continuity, action pressure, and emotional direction.
 
 ## Source Basis
 
@@ -35,6 +35,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 ## PWA Fields Served
 
 - camera
+- visual_description
 - character_action
 - prompt_text
 

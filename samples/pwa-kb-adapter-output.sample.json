@@ -83,23 +83,19 @@
     "directorRulePacks": [
       {
         "id": "dg-director-scheduling-core",
-        "name": "Director scheduling core",
-        "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.",
+        "name": "Director scheduling support",
+        "intent": "Support visible scene expression through blocking, rhythm, and attention handoff.",
         "influenceAxes": [
           "blocking",
-          "visual_attention",
           "rhythm",
-          "scene_handoff"
+          "visual_attention"
         ],
         "directives": [
-          "Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.",
-          "Use director scheduling to turn accepted story material into visible anime shot guidance.",
-          "Keep task, duration, source boundary, and scene purpose aligned before storyboard generation."
+          "Use staging and attention to make the accepted scene purpose readable.",
+          "Keep director hints subordinate to accepted facts and scene objective."
         ],
         "negativeConstraints": [
-          "Do not let director hints overwrite story facts.",
-          "Do not introduce new people, places, or world rules.",
-          "Do not expose internal KB evidence in storyboard rows."
+          "Do not introduce new people, places, or world rules."
         ]
       },
       {
@@ -321,6 +317,27 @@
           "Do not place new entities into the person field.",
           "Do not use group action layering as a generic spectacle filler."
         ]
+      },
+      {
+        "id": "dg-anime-key-pose-silhouette-priority",
+        "name": "Anime key pose silhouette priority",
+        "intent": "Prioritize visible anime key pose, subject silhouette, action line, and readable frame language over production-process wording.",
+        "influenceAxes": [
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "field_boundary"
+        ],
+        "directives": [
+          "Describe anime action through key pose, subject silhouette, center of gravity, action line, and readable frame priority.",
+          "Keep the subject silhouette and main action readable before adding light, background, material, or style detail.",
+          "Translate production handoff ideas into visible storyboard and prompt fields instead of exposing production-process terms."
+        ],
+        "negativeConstraints": [
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -439,6 +456,44 @@
           "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
           "Do not leak source evidence or internal governance text into dialogue or prompt_text."
         ]
+      },
+      {
+        "id": "vg-anime-key-pose-field-boundary",
+        "name": "Anime key pose field boundary",
+        "intent": "Block production-process wording and internal state from final PWA fields while preserving visible key pose constraints.",
+        "influenceAxes": [
+          "field_boundary",
+          "export_safety",
+          "anime_key_pose"
+        ],
+        "directives": [
+          "Keep final fields focused on visible pose, silhouette, action line, and frame readability.",
+          "Reject production-process wording when it appears as user-visible storyboard text."
+        ],
+        "negativeConstraints": [
+          "Do not expose internal production steps or workflow state as final prompt_text."
+        ]
+      },
+      {
+        "id": "vg-anime-translation-failure-guard",
+        "name": "Anime translation failure guard",
+        "intent": "Prevent live-action film feel, proper-name style switches, IP references, and generic cinematic wording from bypassing anime storyboard field translation.",
+        "influenceAxes": [
+          "anime_translation",
+          "proper_name_safety",
+          "prompt_boundary",
+          "export_safety"
+        ],
+        "directives": [
+          "Translate film-language input into anime subject, camera, shot size, visible frame, character action, and field-bound prompt constraints before runtime use.",
+          "Block live-action film feel, real director or studio references, IP references, and generic cinematic quality words as runtime style switches.",
+          "When a candidate cannot map to fixed PWA final fields, keep it in FutureQA or reject it before adapter downlink."
+        ],
+        "negativeConstraints": [
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        ]
       }
     ],
     "sceneMappings": {
@@ -459,7 +514,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -467,7 +523,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -520,7 +578,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "source_facts",
@@ -564,7 +628,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "ensemble_performance": {
@@ -584,7 +653,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -592,7 +662,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -643,7 +715,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -685,7 +763,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "emotional_dialogue": {
@@ -705,7 +788,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -713,7 +797,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -764,7 +850,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -806,7 +898,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "encounter_performance": {
@@ -826,7 +923,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -834,7 +932,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -885,7 +985,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -927,7 +1033,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "field_chase": {
@@ -947,7 +1058,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -955,7 +1067,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1006,7 +1120,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1048,7 +1168,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "spectacle_showcase": {
@@ -1068,7 +1193,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1076,7 +1202,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1127,7 +1255,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1169,7 +1303,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "daily_healing": {
@@ -1189,7 +1328,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1197,7 +1337,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1248,7 +1390,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1290,7 +1438,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -1310,7 +1463,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1318,7 +1472,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1369,7 +1525,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1411,7 +1573,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "guoman_ensemble_performance": {
@@ -1431,7 +1598,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1439,7 +1607,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1490,7 +1660,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1532,7 +1708,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "ink_wuxia_combat": {
@@ -1552,7 +1733,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1560,7 +1742,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1611,7 +1795,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1653,7 +1843,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "eastern_spectacle": {
@@ -1673,7 +1868,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1681,7 +1877,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1732,7 +1930,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1774,7 +1978,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "xianxia_action": {
@@ -1794,7 +2003,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1802,7 +2012,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1853,7 +2065,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1895,7 +2113,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "urban_fantasy": {
@@ -1915,7 +2138,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1923,7 +2147,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1976,7 +2202,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "source_facts",
@@ -2019,7 +2251,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "chinese_war_formation": {
@@ -2039,7 +2276,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2047,7 +2285,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2098,7 +2338,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2140,7 +2386,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "weapon_highlight": {
@@ -2160,7 +2411,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2168,7 +2420,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2219,7 +2473,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2261,7 +2521,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "council_strategy": {
@@ -2281,7 +2546,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2289,7 +2555,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2340,7 +2608,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2382,7 +2656,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "siege_defense": {
@@ -2402,7 +2681,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2410,7 +2690,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2461,7 +2743,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2503,7 +2791,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "slg_sandbox_view": {
@@ -2523,7 +2816,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2531,7 +2825,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2582,7 +2878,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2624,7 +2926,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "slg_march_encirclement": {
@@ -2644,7 +2951,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2652,7 +2960,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2703,7 +3013,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2745,7 +3061,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "slg_city_growth": {
@@ -2765,7 +3086,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2773,7 +3095,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2824,7 +3148,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2866,7 +3196,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       },
       "slg_battle_report": {
@@ -2886,7 +3221,8 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
-          "dg-ensemble-action-layering"
+          "dg-ensemble-action-layering",
+          "dg-anime-key-pose-silhouette-priority"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2894,7 +3230,9 @@
           "vg-no-leakage",
           "vg-duration-integrity",
           "vg-field-aware-entity",
-          "vg-dialogue-evidence-lock"
+          "vg-dialogue-evidence-lock",
+          "vg-anime-key-pose-field-boundary",
+          "vg-anime-translation-failure-guard"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2945,7 +3283,13 @@
           "Do not mix note, status, governance evidence, or repair traces into final fields.",
           "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
           "Do not expose internal evidence in exported files.",
-          "Do not move FutureQA items into runtime."
+          "Do not move FutureQA items into runtime.",
+          "Do not put production process, workflow labels, internal status, or note text into final storyboard fields.",
+          "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
+          "Do not invent characters, props, or animation steps to justify a pose.",
+          "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
+          "Do not let generic film terms replace anime storyboard language.",
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2987,7 +3331,12 @@
           "ensemble_blocking",
           "group_motion",
           "summary_only",
-          "anime_prompt"
+          "anime_prompt",
+          "anime_key_pose",
+          "subject_silhouette",
+          "action_line",
+          "anime_translation",
+          "proper_name_safety"
         ]
       }
     },
