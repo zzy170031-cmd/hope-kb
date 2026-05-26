@@ -8,8 +8,11 @@ leakage_count: 0
 
 ## Purpose
 
-Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot
-handoff while preserving accepted story facts.
+导演调度核心规则增强: Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.
+
+## Source Basis
+
+This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
 
 ## Applies To
 
@@ -19,22 +22,23 @@ handoff while preserving accepted story facts.
 
 ## Claims Summary
 
-- Director scheduling inherits accepted story facts and scene expression.
-- Storyboard task creation must bind task name, task hash, duration target,
-  source fragment, and task queue state to the current accepted body boundary.
-- Blocking should clarify objective, conflict, relation, or reveal.
-- Rhythm may adjust emphasis, but it must not delete cause and effect.
-- Viewer attention should be directed to visible story function, not internal
-  rule names or trace evidence.
+- Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.
+- Use director scheduling to turn accepted story material into visible anime shot guidance.
+- Keep task, duration, source boundary, and scene purpose aligned before storyboard generation.
 
 ## Runtime Mapping
 
-- director_rule_packs: `dg-director-scheduling-core`
-- scene_mappings: all supported scene types
-- selected_kb_rules: `rule:director-scheduling-core`
-- summary_fragment: `summary:director-handoff`
-- product boundary: `StoryboardTask`, task hash, task queue item, duration
-  allocation plan
+- director_rule_packs: dg-director-scheduling-core
+- selected_kb_rules: rule:director-scheduling-core
+- runtime_targets: director_rule_packs, scene_mappings, selected_kb_rules, kb_context_summary
+
+## PWA Fields Served
+
+- camera
+- shot_size
+- visual_description
+- character_action
+- prompt_text
 
 ## Negative Constraints
 

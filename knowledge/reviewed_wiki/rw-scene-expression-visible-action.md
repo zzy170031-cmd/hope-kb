@@ -8,9 +8,11 @@ leakage_count: 0
 
 ## Purpose
 
-Convert accepted story material into filmable, visible, and
-storyboard-ready scene expression without losing facts, motivation, or causal
-purpose.
+场景表达与可见行动规则增强: Convert accepted story material into filmable, visible, and storyboard-ready anime scene expression without losing facts, motivation, or causal purpose.
+
+## Source Basis
+
+This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
 
 ## Applies To
 
@@ -18,26 +20,29 @@ purpose.
 - rewrite_story
 - create_story_task
 - generate_storyboard
+- repair_storyboard
+- validate_result
 
 ## Claims Summary
 
-- A scene should expose objective, obstacle, action, reaction, and turning
-  point.
-- Exposition should become visible behavior or dialogue action only when the
-  original intent is preserved.
-- Decorative scenes with no causal purpose should be blocked or downgraded.
-- Scene expression may compress prose, but it must keep accepted facts and
-  scene purpose intact.
+- Expose the scene objective, obstacle, action, reaction, and turning point as visible storyboard material.
+- Convert explanation into visible behavior, frame relation, dialogue action, or environmental consequence only when accepted intent is preserved.
+- Keep conflict escalation tied to cause, consequence, and an action or emotion transition.
 
 ## Runtime Mapping
 
-- writing_rule_packs: `wg-scene-expression-visible-action`
-- director_rule_packs: `dg-director-scheduling-core`
-- selected_kb_rules: `rule:scene-expression-visible-action`
-- summary_fragment: `summary:visible-action-scene-expression`
+- writing_rule_packs: wg-scene-expression-visible-action
+- selected_kb_rules: rule:scene-expression-visible-action
+- runtime_targets: writing_rule_packs, director_rule_packs, scene_mappings, selected_kb_rules, kb_context_summary
+
+## PWA Fields Served
+
+- visual_description
+- character_action
+- prompt_text
 
 ## Negative Constraints
 
-- Do not let style overwrite story facts.
+- Do not let style overwrite accepted story facts.
 - Do not replace visible action with abstract mood labels.
-- Do not include raw source or internal graph evidence.
+- Do not use dialogue to invent missing motives, relationships, or facts.

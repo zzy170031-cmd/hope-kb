@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-镜头语言语法规则: Bind shot function, scale, angle, movement, composition, and adjacent-shot relation to PWA storyboard fields.
+镜头语言语法规则增强: Bind shot function, scale, angle, movement, composition, and adjacent-shot relation to PWA storyboard fields.
 
 ## Source Basis
 

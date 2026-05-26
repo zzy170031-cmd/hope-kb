@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Person identity lock: Keep the person field limited to accepted story characters or explicit role labels while blocking location, action, scene, camera, style, KB, and placeholder terms.
+人物身份锁规则增强: Keep the person field limited to accepted story characters or explicit role labels while blocking location, action, scene, camera, style, KB, and placeholder terms.
 
 ## Source Basis
 
@@ -37,6 +37,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - person
 - prompt_text
+- visual_description
 
 ## Negative Constraints
 

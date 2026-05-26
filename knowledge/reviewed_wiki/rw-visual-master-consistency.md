@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-视觉母版一致性规则: Carry a compact visual master into storyboard rows while preserving accepted facts.
+视觉母版一致性规则增强: Carry a compact visual master into storyboard rows while preserving accepted facts.
 
 ## Source Basis
 
@@ -35,7 +35,6 @@ This entry was created from a confirmed manual intake package. Source candidates
 ## PWA Fields Served
 
 - visual_description
-- character_action
 - camera
 - prompt_text
 

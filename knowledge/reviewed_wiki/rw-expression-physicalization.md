@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-表情表演物理化规则: Convert abstract emotion into visible face, posture, breath, and blocking cues that fit shot scale.
+表演物理化规则增强: Convert abstract emotion into visible face, posture, breath, and blocking cues that fit shot scale.
 
 ## Source Basis
 
@@ -37,6 +37,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - character_action
 - visual_description
+- shot_size
 - prompt_text
 
 ## Negative Constraints

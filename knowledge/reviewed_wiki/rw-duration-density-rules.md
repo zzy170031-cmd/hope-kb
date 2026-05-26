@@ -8,8 +8,11 @@ leakage_count: 0
 
 ## Purpose
 
-Connect target durations to shot count, beat density, row duration, and
-validation rules.
+时长与信息密度规则增强: Connect target durations to shot count, beat density, row duration, and validation rules.
+
+## Source Basis
+
+This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
 
 ## Applies To
 
@@ -19,22 +22,24 @@ validation rules.
 
 ## Claims Summary
 
-- Duration planning should preserve semantic beats while matching target
-  duration exactly.
-- First-pass shot counts are 5s -> 3, 10s -> 4, 15s -> 5, 30s -> 7,
-  45s -> 9, and 60s -> 12.
-- No row may have zero duration.
-- Repeated full-budget rows indicate invalid duration allocation.
+- Preserve semantic beats while matching target duration exactly.
+- Use duration to control reaction-shot density, action phases, impact pauses, and row information load.
+- Keep every row duration positive and aligned with the selected duration profile.
 
 ## Runtime Mapping
 
-- duration_profiles: all supported durations
-- director_rule_packs: `dg-duration-density`
-- validation_rule_packs: `vg-duration-integrity`
-- selected_kb_rules: `rule:duration-density`
+- director_rule_packs: dg-duration-density
+- selected_kb_rules: rule:duration-density
+- runtime_targets: duration_profiles, director_rule_packs, validation_rule_packs, selected_kb_rules, negative_constraints
+
+## PWA Fields Served
+
+- duration_seconds
+- visual_description
+- prompt_text
 
 ## Negative Constraints
 
 - Do not accept duration sum mismatch.
 - Do not treat empty or zero-duration rows as success.
-
+- Do not overload a short row with multiple unrelated story objectives.

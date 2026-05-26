@@ -8,34 +8,40 @@ leakage_count: 0
 
 ## Purpose
 
-Prevent raw KB, source registers, prompt bodies, internal refs, local paths,
-provider config, API keys, tokens, and secrets from leaking into PWA prompts,
-UI, traces, or exports.
+无泄漏验证规则增强: Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking into PWA prompts, UI, traces, or exports.
+
+## Source Basis
+
+This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
 
 ## Applies To
 
 - import_source
+- generate_storyboard
+- repair_storyboard
 - validate_result
 - export_result
-- golden_sample_review
 
 ## Claims Summary
 
-- Runtime snapshots and PWA output must remain summary-only.
-- `raw_kb_rows_included` must be `0`.
-- Raw sample text, source registers, overlay JSON, prompt bodies, raw graphs,
-  local paths, provider config, keys, tokens, and secrets must be absent.
-- User exports must not include internal hashes, refs, or governance evidence.
+- Keep runtime snapshots and PWA output summary-only.
+- Reject raw source material, source registers, prompt bodies, raw graphs, local paths, provider config, credentials, and internal evidence in user-visible fields.
+- Keep FutureQA and rejected material out of runtime and adapter downlink.
 
 ## Runtime Mapping
 
-- validation_rule_packs: `vg-no-leakage`
-- selected_kb_rules: `rule:no-leakage`
-- summary_fragment: `summary:summary-only-boundary`
-- negative_constraints: `negative:no-raw-kb-or-internal-refs`
+- validation_rule_packs: vg-no-leakage
+- selected_kb_rules: rule:no-leakage
+- runtime_targets: validation_rule_packs, selected_kb_rules, negative_constraints, kb_context_summary
+
+## PWA Fields Served
+
+- prompt_text
+- negative_constraints
+- kb_context_summary
 
 ## Negative Constraints
 
-- Do not expose raw KB rows, prompt bodies, source registers, local paths, or
-  secrets.
+- Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.
 - Do not expose internal evidence in exported files.
+- Do not move FutureQA items into runtime.

@@ -147,21 +147,23 @@
     },
     {
       "id": "wg-scene-expression-visible-action",
-      "name": "Visible action scene expression",
-      "intent": "Convert accepted story material into scene objective, obstacle, visible action, reaction, and turning point.",
+      "name": "Scene expression visible action",
+      "intent": "Convert accepted story material into filmable, visible, and storyboard-ready anime scene expression without losing facts, motivation, or causal purpose.",
       "influence_axes": [
-        "scene_expression",
-        "event_order",
-        "visual_grounding"
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard"
       ],
       "directives": [
-        "Expose objective, obstacle, action, reaction, and turning point.",
-        "Convert exposition into visible behavior only when original intent is preserved.",
-        "Block decorative scenes that have no causal purpose."
+        "Expose the scene objective, obstacle, action, reaction, and turning point as visible storyboard material.",
+        "Convert explanation into visible behavior, frame relation, dialogue action, or environmental consequence only when accepted intent is preserved.",
+        "Keep conflict escalation tied to cause, consequence, and an action or emotion transition."
       ],
       "negative_constraints": [
-        "Do not replace visible action with abstract mood.",
-        "Do not let style overwrite story facts."
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts."
       ],
       "source_reviewed_wiki_ids": [
         "rw-scene-expression-visible-action"
@@ -172,20 +174,22 @@
     {
       "id": "dg-director-scheduling-core",
       "name": "Director scheduling core",
-      "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff.",
+      "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.",
       "influence_axes": [
-        "structure",
-        "visual_grounding",
-        "continuity"
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff"
       ],
       "directives": [
-        "Blocking must clarify objective, conflict, relation, or reveal.",
-        "Rhythm may adjust emphasis but must not delete cause and effect.",
-        "Viewer attention should serve visible story function."
+        "Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.",
+        "Use director scheduling to turn accepted story material into visible anime shot guidance.",
+        "Keep task, duration, source boundary, and scene purpose aligned before storyboard generation."
       ],
       "negative_constraints": [
-        "Do not let director hints overwrite accepted story facts.",
-        "Do not expose internal evidence in storyboard rows."
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows."
       ],
       "source_reviewed_wiki_ids": [
         "rw-director-scheduling-core"
@@ -194,20 +198,20 @@
     {
       "id": "dg-shot-intent-taxonomy",
       "name": "Shot intent taxonomy",
-      "intent": "Select shot intent from scene purpose and director scheduling.",
+      "intent": "Define shot-level intent so storyboard rows carry visible anime production work instead of generic descriptions.",
       "influence_axes": [
         "shot_intent",
-        "structure",
-        "visual_grounding"
+        "visual_function",
+        "anime_storyboard"
       ],
       "directives": [
-        "Use establish, reveal, pursue, clash, reaction, transition, payoff, spectacle, or detail_insert as first-pass shot intents.",
-        "Every shot intent must correspond to visible row behavior.",
-        "Shot intent must not require runtime graph traversal."
+        "Select shot intent from scene purpose and director scheduling before choosing camera or shot size.",
+        "Map intents such as establish, reveal, pursue, clash, reaction, transition, payoff, spectacle, and detail insert to visible row behavior.",
+        "Use reaction and detail shots only when they clarify story pressure, emotion, continuity, or payoff."
       ],
       "negative_constraints": [
-        "Do not use intent labels alone as prompt text.",
-        "Do not create rows with no visible function."
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function."
       ],
       "source_reviewed_wiki_ids": [
         "rw-shot-intent-taxonomy"
@@ -215,21 +219,22 @@
     },
     {
       "id": "dg-duration-density",
-      "name": "Duration density",
-      "intent": "Bind target duration to shot count, beat density, row duration, and validation checks.",
+      "name": "Duration density rules",
+      "intent": "Connect target durations to shot count, beat density, row duration, and validation rules.",
       "influence_axes": [
         "duration_density",
-        "structure",
-        "validation_gate"
+        "beat_integrity",
+        "anime_pacing"
       ],
       "directives": [
-        "Match the target duration exactly.",
-        "Use duration-specific shot count guidance.",
-        "Reject zero-duration rows and repeated full-budget rows."
+        "Preserve semantic beats while matching target duration exactly.",
+        "Use duration to control reaction-shot density, action phases, impact pauses, and row information load.",
+        "Keep every row duration positive and aligned with the selected duration profile."
       ],
       "negative_constraints": [
         "Do not accept duration sum mismatch.",
-        "Do not treat zero-duration rows as success."
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives."
       ],
       "source_reviewed_wiki_ids": [
         "rw-duration-density-rules"
@@ -237,21 +242,18 @@
     },
     {
       "id": "dg-prompt-text-boundary",
-      "name": "Prompt text boundary",
-      "intent": "Compile clean generation-facing prompt text from accepted facts and confirmed storyboard rows.",
+      "name": "Prompt text director boundary",
+      "intent": "Keep camera, shot size, visible frame, and action cues aligned before prompt compilation.",
       "influence_axes": [
-        "prompt_boundary",
-        "visual_grounding",
-        "export_safety"
+        "camera_language",
+        "prompt_boundary"
       ],
       "directives": [
-        "Prompt text must include subject, action, frame, camera, duration, and negative constraints.",
-        "Prompt text must align with visual_description.",
-        "Prompt text must be compiled after the confirmed row."
+        "Compile camera, shot size, frame, and action cues after the row fields are coherent.",
+        "Keep visual prompt details tied to the current shot."
       ],
       "negative_constraints": [
-        "Do not expose trace refs, schema IDs, source registers, or internal hashes.",
-        "Do not emit empty prompt text."
+        "Do not use director jargon as disconnected prompt decoration."
       ],
       "source_reviewed_wiki_ids": [
         "rw-prompt-text-boundary"
@@ -421,26 +423,52 @@
       "source_reviewed_wiki_ids": [
         "rw-seedance2-storyboard-field-discipline"
       ]
+    },
+    {
+      "id": "dg-ensemble-action-layering",
+      "name": "Ensemble action layering",
+      "intent": "Layer anime group shots into primary action, secondary reaction, background motion, and spatial depth without inventing entities.",
+      "influence_axes": [
+        "ensemble_blocking",
+        "group_motion",
+        "field_boundary",
+        "anime_storyboard"
+      ],
+      "directives": [
+        "Use only accepted characters, explicit role labels, or authorized group labels when describing ensemble action.",
+        "Separate primary action, secondary reaction, background group motion, and spatial layer when a group shot needs readability.",
+        "Bind group motion to shot size, camera purpose, and scene objective."
+      ],
+      "negative_constraints": [
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-ensemble-action-layering"
+      ]
     }
   ],
   "validation_rule_packs": [
     {
       "id": "vg-prompt-text-boundary",
-      "name": "Prompt text validation",
-      "intent": "Validate that prompt_text is present, aligned, and summary-only.",
+      "name": "Prompt text boundary",
+      "intent": "Ensure prompt_text is a clean AI anime generation-facing field compiled from accepted facts and confirmed storyboard rows.",
       "influence_axes": [
         "prompt_boundary",
-        "validation_gate"
+        "field_boundary",
+        "summary_only",
+        "anime_prompt"
       ],
       "directives": [
-        "prompt_text must be non-empty.",
-        "prompt_text must align with visual_description.",
-        "prompt_text must not include internal refs."
+        "Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints.",
+        "Keep prompt_text aligned with accepted story facts and confirmed row fields.",
+        "Use compact field-bound anime prompt wording rather than long universal templates."
       ],
       "negative_constraints": [
-        "No raw KB",
-        "No source register",
-        "No internal hashes"
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields."
       ],
       "source_reviewed_wiki_ids": [
         "rw-prompt-text-boundary"
@@ -469,23 +497,22 @@
     },
     {
       "id": "vg-no-leakage",
-      "name": "No leakage",
-      "intent": "Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking.",
+      "name": "Validation no leakage",
+      "intent": "Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking into PWA prompts, UI, traces, or exports.",
       "influence_axes": [
-        "validation_gate",
+        "summary_only",
         "export_safety",
-        "source_lineage"
+        "prompt_boundary"
       ],
       "directives": [
-        "raw_kb_rows_included must be 0.",
-        "source_register, overlay_json, prompt_body, raw_graph, local paths, provider config, keys, tokens, and secrets must be absent.",
-        "User exports must not include internal hashes or refs."
+        "Keep runtime snapshots and PWA output summary-only.",
+        "Reject raw source material, source registers, prompt bodies, raw graphs, local paths, provider config, credentials, and internal evidence in user-visible fields.",
+        "Keep FutureQA and rejected material out of runtime and adapter downlink."
       ],
       "negative_constraints": [
-        "No raw KB",
-        "No prompt body",
-        "No local paths",
-        "No secrets"
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "source_reviewed_wiki_ids": [
         "rw-validation-no-leakage"
@@ -494,19 +521,17 @@
     {
       "id": "vg-duration-integrity",
       "name": "Duration integrity",
-      "intent": "Validate duration sum, row duration, and duration-density boundaries.",
+      "intent": "Validate row duration sums, zero-duration rows, and repeated full-budget rows.",
       "influence_axes": [
-        "duration_density",
-        "validation_gate"
+        "duration_integrity",
+        "export_safety"
       ],
       "directives": [
-        "Row durations must sum to the target duration.",
-        "No row may have zero duration.",
-        "Repeated full-budget rows are invalid."
+        "Reject zero-duration rows and duration sum mismatches.",
+        "Flag repeated full-budget rows as invalid allocation."
       ],
       "negative_constraints": [
-        "No duration mismatch",
-        "No zero-duration row"
+        "Do not export invalid duration allocation as success."
       ],
       "source_reviewed_wiki_ids": [
         "rw-duration-density-rules"
@@ -534,6 +559,30 @@
       "source_reviewed_wiki_ids": [
         "rw-person-identity-lock"
       ]
+    },
+    {
+      "id": "vg-dialogue-evidence-lock",
+      "name": "Dialogue evidence lock",
+      "intent": "Keep dialogue and narration grounded in user-provided text, accepted facts, explicit character intent, or the current scene goal.",
+      "influence_axes": [
+        "dialogue_grounding",
+        "fact_integrity",
+        "anime_storyboard",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Use dialogue or narration only when it is supported by accepted facts, user text, clear character intent, or current scene purpose.",
+        "When evidence is weak, prefer visible action, reaction, silence, or a repair request instead of invented dialogue.",
+        "Keep dialogue and narration aligned with person identity, scene causality, and final-field boundaries."
+      ],
+      "negative_constraints": [
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-dialogue-evidence-lock"
+      ]
     }
   ],
   "scene_mappings": {
@@ -553,14 +602,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -585,7 +636,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "source_facts",
@@ -610,7 +689,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-hot-blood-battle-summary-A"
@@ -631,9 +729,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -651,14 +751,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -681,7 +783,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -704,7 +834,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-ensemble_performance-summary-A"
@@ -725,9 +874,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "emotional_dialogue": {
       "writing_rule_pack_ids": [
@@ -745,14 +896,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -775,7 +928,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -798,7 +979,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-emotional_dialogue-summary-A"
@@ -819,9 +1019,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "encounter_performance": {
       "writing_rule_pack_ids": [
@@ -839,14 +1041,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -869,7 +1073,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -892,7 +1124,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-encounter_performance-summary-A"
@@ -913,9 +1164,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "field_chase": {
       "writing_rule_pack_ids": [
@@ -933,14 +1186,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -963,7 +1218,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -986,7 +1269,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-field_chase-summary-A"
@@ -1007,9 +1309,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "spectacle_showcase": {
       "writing_rule_pack_ids": [
@@ -1027,14 +1331,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1057,7 +1363,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1080,7 +1414,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-spectacle_showcase-summary-A"
@@ -1101,9 +1454,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "daily_healing": {
       "writing_rule_pack_ids": [
@@ -1121,14 +1476,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1151,7 +1508,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1174,7 +1559,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-daily_healing-summary-A"
@@ -1195,9 +1599,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "guoman_hot_blood_combat": {
       "writing_rule_pack_ids": [
@@ -1215,14 +1621,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1245,7 +1653,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1268,7 +1704,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-guoman_hot_blood_combat-summary-A"
@@ -1289,9 +1744,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "guoman_ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -1309,14 +1766,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1339,7 +1798,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1362,7 +1849,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-guoman_ensemble_performance-summary-A"
@@ -1383,9 +1889,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "ink_wuxia_combat": {
       "writing_rule_pack_ids": [
@@ -1403,14 +1911,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1433,7 +1943,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1456,7 +1994,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-ink_wuxia_combat-summary-A"
@@ -1477,9 +2034,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "eastern_spectacle": {
       "writing_rule_pack_ids": [
@@ -1497,14 +2056,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1527,7 +2088,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1550,7 +2139,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-eastern_spectacle-summary-A"
@@ -1571,9 +2179,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "xianxia_action": {
       "writing_rule_pack_ids": [
@@ -1591,14 +2201,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1621,7 +2233,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1644,7 +2284,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-xianxia_action-summary-A"
@@ -1665,9 +2324,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "urban_fantasy": {
       "writing_rule_pack_ids": [
@@ -1685,14 +2346,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1717,7 +2380,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "source_facts",
@@ -1741,7 +2432,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-urban-fantasy-summary-A"
@@ -1762,9 +2472,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "chinese_war_formation": {
       "writing_rule_pack_ids": [
@@ -1782,14 +2494,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -1812,7 +2526,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1835,7 +2577,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-chinese_war_formation-summary-A"
@@ -1856,9 +2617,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "weapon_highlight": {
       "writing_rule_pack_ids": [
@@ -1876,14 +2639,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1906,7 +2671,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -1929,7 +2722,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-weapon_highlight-summary-A"
@@ -1950,9 +2762,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "council_strategy": {
       "writing_rule_pack_ids": [
@@ -1970,14 +2784,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2000,7 +2816,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2023,7 +2867,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-council_strategy-summary-A"
@@ -2044,9 +2907,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "siege_defense": {
       "writing_rule_pack_ids": [
@@ -2064,14 +2929,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2094,7 +2961,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2117,7 +3012,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-siege_defense-summary-A"
@@ -2138,9 +3052,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "slg_sandbox_view": {
       "writing_rule_pack_ids": [
@@ -2158,14 +3074,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2188,7 +3106,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2211,7 +3157,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-slg_sandbox_view-summary-A"
@@ -2232,9 +3197,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "slg_march_encirclement": {
       "writing_rule_pack_ids": [
@@ -2252,14 +3219,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2282,7 +3251,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2305,7 +3302,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-slg_march_encirclement-summary-A"
@@ -2326,9 +3342,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "slg_city_growth": {
       "writing_rule_pack_ids": [
@@ -2346,14 +3364,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2376,7 +3396,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2399,7 +3447,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-slg_city_growth-summary-A"
@@ -2420,9 +3487,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     },
     "slg_battle_report": {
       "writing_rule_pack_ids": [
@@ -2440,14 +3509,16 @@
         "dg-expression-physicalization",
         "dg-transition-motion-dynamics",
         "dg-preproduction-storyboard-guide",
-        "dg-seedance2-storyboard-field-discipline"
+        "dg-seedance2-storyboard-field-discipline",
+        "dg-ensemble-action-layering"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
         "vg-no-pseudo-success",
         "vg-no-leakage",
         "vg-duration-integrity",
-        "vg-field-aware-entity"
+        "vg-field-aware-entity",
+        "vg-dialogue-evidence-lock"
       ],
       "scene_profile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2470,7 +3541,35 @@
         "Do not output abstract mood without visible action.",
         "Do not force invisible micro-expression cues into wide shots.",
         "Do not add decorative transitions unrelated to scene function.",
-        "Do not break action continuity or accepted event order."
+        "Do not break action continuity or accepted event order.",
+        "Do not add anime-only camera vocabulary when the scene style is grounded, documentary, or otherwise not anime-compatible.",
+        "Do not put camera, style, composition, source, or KB terms into person.",
+        "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
+        "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+        "Do not expose source or governance metadata in PWA output.",
+        "Do not let style overwrite accepted story facts.",
+        "Do not replace visible action with abstract mood labels.",
+        "Do not use dialogue to invent missing motives, relationships, or facts.",
+        "Do not treat this rule as an automatic dialogue template.",
+        "Do not invent promises, relationships, motives, exposition, or facts to justify a line.",
+        "Do not leak source evidence or internal governance text into dialogue or prompt_text.",
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows.",
+        "Do not use intent labels as user-visible prompt text by themselves.",
+        "Do not create rows with no visible action or visual function.",
+        "Do not accept duration sum mismatch.",
+        "Do not treat empty or zero-duration rows as success.",
+        "Do not overload a short row with multiple unrelated story objectives.",
+        "Do not invent headcount, faction, named characters, teams, or unsupported crowd facts.",
+        "Do not place new entities into the person field.",
+        "Do not use group action layering as a generic spectacle filler.",
+        "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+        "Do not emit empty prompt_text.",
+        "Do not mix note, status, governance evidence, or repair traces into final fields.",
+        "Do not expose raw KB rows, prompt bodies, source registers, local paths, or secrets.",
+        "Do not expose internal evidence in exported files.",
+        "Do not move FutureQA items into runtime."
       ],
       "influence_axes": [
         "visual_master",
@@ -2493,7 +3592,26 @@
         "shot_intent",
         "structure",
         "character_action",
-        "continuity"
+        "continuity",
+        "shot_size",
+        "visible_action",
+        "scene_goal",
+        "causality",
+        "anime_storyboard",
+        "dialogue_grounding",
+        "fact_integrity",
+        "blocking",
+        "visual_attention",
+        "rhythm",
+        "scene_handoff",
+        "visual_function",
+        "duration_density",
+        "beat_integrity",
+        "anime_pacing",
+        "ensemble_blocking",
+        "group_motion",
+        "summary_only",
+        "anime_prompt"
       ],
       "selected_sample_ids": [
         "sample-slg_battle_report-summary-A"
@@ -2514,9 +3632,11 @@
         "rule:no-leakage",
         "rule:preproduction-storyboard-guide",
         "rule:seedance2-storyboard-field-discipline",
-        "rule:field-aware-entity"
+        "rule:field-aware-entity",
+        "rule:dialogue-evidence-lock",
+        "rule:ensemble-action-layering"
       ],
-      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person."
+      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked."
     }
   },
   "duration_profiles": [
@@ -2878,7 +3998,9 @@
         "kb_action": "import_source",
         "covered": true,
         "rule_pack_ids": [
-          "vg-no-leakage"
+          "vg-no-leakage",
+          "vg-field-aware-entity",
+          "vg-prompt-text-boundary"
         ]
       },
       {
@@ -2886,7 +4008,8 @@
         "covered": true,
         "rule_pack_ids": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "dg-expression-physicalization"
         ]
       },
       {
@@ -2894,7 +4017,10 @@
         "covered": true,
         "rule_pack_ids": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "dg-expression-physicalization",
+          "dg-seedance2-storyboard-field-discipline",
+          "vg-dialogue-evidence-lock"
         ]
       },
       {
@@ -2916,7 +4042,11 @@
           "dg-camera-language-grammar",
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
-          "dg-expression-physicalization"
+          "dg-expression-physicalization",
+          "dg-seedance2-storyboard-field-discipline",
+          "wg-scene-expression-visible-action",
+          "vg-dialogue-evidence-lock",
+          "dg-ensemble-action-layering"
         ]
       },
       {
@@ -2932,7 +4062,14 @@
           "dg-expression-physicalization",
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
-          "vg-field-aware-entity"
+          "vg-field-aware-entity",
+          "dg-seedance2-storyboard-field-discipline",
+          "wg-scene-expression-visible-action",
+          "vg-dialogue-evidence-lock",
+          "dg-director-scheduling-core",
+          "dg-duration-density",
+          "dg-ensemble-action-layering",
+          "vg-no-leakage"
         ]
       },
       {
@@ -2948,7 +4085,13 @@
           "dg-transition-motion-dynamics",
           "dg-preproduction-storyboard-guide",
           "vg-field-aware-entity",
-          "dg-visual-master-consistency"
+          "dg-visual-master-consistency",
+          "dg-seedance2-storyboard-field-discipline",
+          "wg-scene-expression-visible-action",
+          "vg-dialogue-evidence-lock",
+          "dg-director-scheduling-core",
+          "dg-ensemble-action-layering",
+          "vg-no-leakage"
         ]
       },
       {
@@ -2961,7 +4104,12 @@
           "vg-prompt-text-boundary",
           "dg-material-light-air-physicality",
           "dg-expression-physicalization",
-          "vg-field-aware-entity"
+          "vg-field-aware-entity",
+          "dg-seedance2-storyboard-field-discipline",
+          "wg-scene-expression-visible-action",
+          "vg-dialogue-evidence-lock",
+          "dg-duration-density",
+          "dg-ensemble-action-layering"
         ]
       },
       {

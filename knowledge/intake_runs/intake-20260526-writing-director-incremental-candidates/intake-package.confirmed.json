@@ -1,0 +1,2379 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260526-writing-director-incremental-candidates",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "Writing and director incremental candidate dedupe package",
+    "search_focus": "writing_director_incremental_candidate_dedupe",
+    "target_model": "PWA storyboard prompt compiler",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text",
+      "summary-only KB adapter"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-26T00:00:00+08:00"
+  },
+  "search_plan": {
+    "acquisition_mode": "sanitized_graph_candidate_handoff",
+    "live_search_connector": "not_used",
+    "generated_queries": [],
+    "allowed_source_types": [
+      "graph_candidate_summary",
+      "existing_reviewed_wiki",
+      "orchestration_group_mapping",
+      "field_boundary_matrix"
+    ],
+    "required_answers": [
+      "which existing reviewed_wiki already covers the candidate",
+      "which KB orchestration group owns the candidate",
+      "whether the candidate is merge_existing, new_reviewed_wiki_candidate, reject_runtime, future_qa, or report_only",
+      "whether the candidate remains summary-only before runtime use"
+    ],
+    "dedupe_summary": {
+      "received_candidates": 22,
+      "kb_entry_candidates": 18,
+      "future_qa_inputs": 4,
+      "merge_existing": 16,
+      "new_reviewed_wiki_candidate": 2,
+      "reject_runtime": 0,
+      "future_qa": 4,
+      "report_only": 0,
+      "confirmation_queue_items": 14,
+      "confirmed_package_created": false,
+      "apply_deferred": true,
+      "pwa_sync_deferred": true,
+      "anime_translation_value_distribution": {
+        "high": 14,
+        "medium": 4,
+        "low": 0,
+        "none": 4
+      },
+      "high_value_candidates": [
+        "场景目标与冲突推进",
+        "对白依据锁",
+        "行动替代说明",
+        "人物动机到动作链",
+        "blocking 站位关系",
+        "前中后景层次",
+        "视线关系与轴线稳定",
+        "主运镜叙事目的",
+        "反应镜头密度",
+        "动作剪辑匹配",
+        "预备动作-主动作-跟随动作",
+        "关键姿势与动作轮廓",
+        "群像动作分层",
+        "文生视频字段顺序"
+      ],
+      "medium_value_candidates": [
+        "时长与信息密度",
+        "负面约束简化",
+        "字段混写修复",
+        "事实优先修复"
+      ],
+      "low_value_candidates": [],
+      "none_value_candidates": [
+        "真实导演/IP 风格开关",
+        "自动对白生成模板",
+        "长 prompt 万能模板",
+        "未去源的失败案例库"
+      ]
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "wd-candidate-01",
+      "title": "场景目标与冲突推进",
+      "source_url": "kb-candidate://writing-director-incremental/scene-goal-conflict",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "把故事目标、阻碍、推进关系压缩为可见分镜任务约束。",
+      "kb_gap": "现有 scene expression 与 continuity 规则已覆盖，建议归并增强。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "scene objective and conflict",
+      "anime_storyboard_language": "anime beat objective, obstacle, visible turn",
+      "ai_anime_prompt_language": "subject action plus conflict beat plus visual consequence",
+      "pwa_final_fields": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-02",
+      "title": "对白依据锁",
+      "source_url": "kb-candidate://writing-director-incremental/dialogue-evidence-lock",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "new_reviewed_wiki_candidate",
+      "risk_flags": [
+        "summary_only",
+        "requires_validation_group"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "character_action",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "限制对白/旁白只能来自已接受事实、明确角色意图或用户提供文本，不允许自动编造依据。",
+      "kb_gap": "现有 prompt boundary 与 leakage 规则覆盖输出边界，但缺少对白依据的独立验证锁。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "dialogue/narration motivation and evidence",
+      "anime_storyboard_language": "anime dialogue bubble or narration is allowed only when grounded",
+      "ai_anime_prompt_language": "grounded dialogue/narration or no-dialogue visible action",
+      "pwa_final_fields": [
+        "对白/旁白",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "dialogue_fabrication"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-03",
+      "title": "行动替代说明",
+      "source_url": "kb-candidate://writing-director-incremental/action-replaces-exposition",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "把说明性文字转换为可见动作、反应或可拍摄关系。",
+      "kb_gap": "现有 visible-action scene expression 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "exposition converted to behavior",
+      "anime_storyboard_language": "anime action pose or reaction carries explanation",
+      "ai_anime_prompt_language": "visible action instead of explanatory prose",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "over_explanation"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-04",
+      "title": "人物动机到动作链",
+      "source_url": "kb-candidate://writing-director-incremental/motivation-to-action-chain",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "将角色意图、动作选择、反应后果绑定到当前分镜。",
+      "kb_gap": "现有 scene expression 与 continuity 规则已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "motivation and causal action",
+      "anime_storyboard_language": "anime intention becomes posture, route, reaction, or payoff",
+      "ai_anime_prompt_language": "character intent to action chain",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-05",
+      "title": "blocking 站位关系",
+      "source_url": "kb-candidate://writing-director-incremental/blocking-spatial-relationship",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "让人物距离、方向、遮挡、压迫或协作关系服务镜头调度。",
+      "kb_gap": "现有 director scheduling core 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "blocking and spatial relation",
+      "anime_storyboard_language": "anime subject spacing, silhouette, pressure, eyeline",
+      "ai_anime_prompt_language": "foreground subject relation and staging cue",
+      "pwa_final_fields": [
+        "画面描述",
+        "角色动作",
+        "运镜"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "new_character_invention"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-06",
+      "title": "前中后景层次",
+      "source_url": "kb-candidate://writing-director-incremental/foreground-midground-background-depth",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "用空间层次改善当前镜头可读性，而不是堆砌构图术语。",
+      "kb_gap": "现有 visual master、camera grammar 和 field discipline 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "composition depth layers",
+      "anime_storyboard_language": "anime foreground midground background hierarchy and subject silhouette",
+      "ai_anime_prompt_language": "layered scene composition with supported details",
+      "pwa_final_fields": [
+        "画面描述",
+        "运镜",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "unsupported_props"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-07",
+      "title": "视线关系与轴线稳定",
+      "source_url": "kb-candidate://writing-director-incremental/eyeline-axis-stability",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "保持对话、追逐、对峙等镜头中的视线方向和空间连续性。",
+      "kb_gap": "现有 camera language 与 director scheduling 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "eyeline and axis continuity",
+      "anime_storyboard_language": "anime gaze direction and screen direction stability",
+      "ai_anime_prompt_language": "camera and framing preserve readable relation",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "画面描述"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "field_mixing"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-08",
+      "title": "主运镜叙事目的",
+      "source_url": "kb-candidate://writing-director-incremental/primary-camera-purpose",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "要求运镜服务揭示、追随、压迫、反应或转折，不作为空洞质感词。",
+      "kb_gap": "现有 camera language 与 shot intent 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "camera movement with story purpose",
+      "anime_storyboard_language": "anime primary camera move, speed feeling, background flow",
+      "ai_anime_prompt_language": "one primary camera move tied to beat purpose",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "camera_jargon_stack"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-09",
+      "title": "反应镜头密度",
+      "source_url": "kb-candidate://writing-director-incremental/reaction-shot-density",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "character_action",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "按节奏和信息密度分配反应镜头，避免无意义重复或漏掉转折反应。",
+      "kb_gap": "现有 shot intent、director scheduling 和 duration density 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "reaction shot rhythm",
+      "anime_storyboard_language": "anime reaction cut, pause, impact emphasis",
+      "ai_anime_prompt_language": "reaction density and duration-aware pacing",
+      "pwa_final_fields": [
+        "景别",
+        "角色动作",
+        "时长(秒)"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "overcutting"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-10",
+      "title": "动作剪辑匹配",
+      "source_url": "kb-candidate://writing-director-incremental/action-edit-match",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "让相邻镜头在动作方向、速度、落点和节奏上保持可剪辑连续。",
+      "kb_gap": "现有 transition motion dynamics 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "match cut and action continuity",
+      "anime_storyboard_language": "anime impact frame, motion line, cut-on-action",
+      "ai_anime_prompt_language": "action direction and cut continuity cue",
+      "pwa_final_fields": [
+        "运镜",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "continuity_break"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-11",
+      "title": "时长与信息密度",
+      "source_url": "kb-candidate://writing-director-incremental/duration-information-density",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "duration_seconds",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "把镜头数量、单镜信息量和总时长一致性放入生成前约束。",
+      "kb_gap": "现有 duration density 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "medium",
+      "film_language_input": "duration and information density",
+      "anime_storyboard_language": "anime timing, held beat, fast cut density",
+      "ai_anime_prompt_language": "duration-aware row density constraint",
+      "pwa_final_fields": [
+        "时长(秒)",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "duration_overfit"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-12",
+      "title": "预备动作-主动作-跟随动作",
+      "source_url": "kb-candidate://writing-director-incremental/anticipation-main-follow-through",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "让动作具备起势、执行、惯性或反应，避免静态动作名。",
+      "kb_gap": "现有 expression physicalization 与 transition motion 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "anticipation action follow-through",
+      "anime_storyboard_language": "anime anticipation, key motion, follow-through exaggeration",
+      "ai_anime_prompt_language": "action phase phrasing for prompt",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "unsupported_exaggeration"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-13",
+      "title": "关键姿势与动作轮廓",
+      "source_url": "kb-candidate://writing-director-incremental/key-pose-action-silhouette",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "shot_size"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用清晰姿态、轮廓、重心和动作方向支撑角色动作字段。",
+      "kb_gap": "现有 expression physicalization 与 field discipline 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "key pose and silhouette",
+      "anime_storyboard_language": "anime key pose, readable silhouette, center of gravity",
+      "ai_anime_prompt_language": "pose silhouette and action direction",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "景别"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "wide_shot_micro_detail"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-14",
+      "title": "群像动作分层",
+      "source_url": "kb-candidate://writing-director-incremental/ensemble-action-layering",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "new_reviewed_wiki_candidate",
+      "risk_flags": [
+        "summary_only",
+        "requires_no_entity_invention_guard"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "把群像镜头分为主行动、次级反应、背景群体运动和空间层次。",
+      "kb_gap": "现有 field discipline 覆盖 wide shot/group motion，但缺少群像动作层级与实体不发明的组合规则。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "ensemble blocking and action layers",
+      "anime_storyboard_language": "anime main action, secondary reaction, background group motion",
+      "ai_anime_prompt_language": "layered crowd/group action within accepted facts",
+      "pwa_final_fields": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "景别",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "new_count_or_faction_invention"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-15",
+      "title": "文生视频字段顺序",
+      "source_url": "kb-candidate://writing-director-incremental/text-to-video-field-order",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "把分镜提示词编译顺序限定在既有字段，不新增 PWA 最终字段。",
+      "kb_gap": "现有 prompt boundary 与 Seedance2 field discipline 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "high",
+      "film_language_input": "shot prompt field ordering",
+      "anime_storyboard_language": "anime prompt order from subject, action, scene, camera, style, constraints",
+      "ai_anime_prompt_language": "field-bound anime prompt compilation",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "field_mixing",
+        "long_prompt_overload"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-16",
+      "title": "负面约束简化",
+      "source_url": "kb-candidate://writing-director-incremental/negative-constraint-simplification",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "把内部禁令压缩为用户不可见或安全可读的简洁约束，避免把治理语言写进提示词。",
+      "kb_gap": "现有 prompt boundary 与 no leakage 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "medium",
+      "film_language_input": "negative constraints",
+      "anime_storyboard_language": "anime-safe concise constraints without governance leakage",
+      "ai_anime_prompt_language": "compact negative constraints outside final prose when possible",
+      "pwa_final_fields": [
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "governance_leakage"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-17",
+      "title": "字段混写修复",
+      "source_url": "kb-candidate://writing-director-incremental/field-pollution-repair",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "修复人物、运镜、景别、画面、动作和提示词之间的串字段污染。",
+      "kb_gap": "现有 field discipline、person identity lock 与 prompt boundary 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "medium",
+      "film_language_input": "field boundary repair",
+      "anime_storyboard_language": "anime field repair prevents live-action jargon or style piles entering wrong field",
+      "ai_anime_prompt_language": "repair person/camera/shot/action/prompt boundaries",
+      "pwa_final_fields": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "field_mixing"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-candidate-18",
+      "title": "事实优先修复",
+      "source_url": "kb-candidate://writing-director-incremental/fact-first-repair",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "merge_existing",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "修复时先保护已接受事实、人物和事件顺序，再处理镜头或风格问题。",
+      "kb_gap": "现有 scene expression、person identity lock 与 no leakage 已覆盖。",
+      "leakage_check": "summary_only_no_raw_source",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "medium",
+      "film_language_input": "fact-first repair",
+      "anime_storyboard_language": "anime repair preserves accepted facts before visual flourish",
+      "ai_anime_prompt_language": "fact-first correction before style or camera refinement",
+      "pwa_final_fields": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-futureqa-01",
+      "title": "真实导演/IP 风格开关",
+      "source_url": "kb-candidate://writing-director-incremental/futureqa/real-name-style-switch",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "risk_flags": [
+        "proper_name_pollution",
+        "runtime_blocked"
+      ],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "pwa_relevance": "仅可作为去专名化后的复核素材，不得成为 runtime 风格开关。",
+      "kb_gap": "需要去专名化和安全复核后再判断是否有抽象风格价值。",
+      "leakage_check": "blocked_before_runtime",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "none",
+      "film_language_input": "proper-name style reference",
+      "anime_storyboard_language": "blocked before anime storyboard conversion",
+      "ai_anime_prompt_language": "not allowed as prompt style switch",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "translation_risk_flags": [
+        "proper_name_pollution",
+        "ip_pollution"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-futureqa-02",
+      "title": "自动对白生成模板",
+      "source_url": "kb-candidate://writing-director-incremental/futureqa/automatic-dialogue-template",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "risk_flags": [
+        "fact_invention_risk",
+        "runtime_blocked"
+      ],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "pwa_relevance": "只能复核为对白依据边界案例，不能下放为自动编造对白模板。",
+      "kb_gap": "需要与对白依据锁分开处理。",
+      "leakage_check": "blocked_before_runtime",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "none",
+      "film_language_input": "generic dialogue template",
+      "anime_storyboard_language": "blocked because it encourages invented dialogue",
+      "ai_anime_prompt_language": "not allowed as automatic dialogue source",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "translation_risk_flags": [
+        "dialogue_fabrication"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-futureqa-03",
+      "title": "长 prompt 万能模板",
+      "source_url": "kb-candidate://writing-director-incremental/futureqa/universal-long-prompt-template",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "risk_flags": [
+        "field_boundary_risk",
+        "runtime_blocked"
+      ],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "pwa_relevance": "只能作为提示词长度和字段污染风险的复核材料。",
+      "kb_gap": "现有 prompt boundary 倾向短摘要和字段编译，不支持万能模板下放。",
+      "leakage_check": "blocked_before_runtime",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "none",
+      "film_language_input": "generic long prompt template",
+      "anime_storyboard_language": "blocked because it overloads field-bound anime prompt compilation",
+      "ai_anime_prompt_language": "not allowed as universal prompt",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "translation_risk_flags": [
+        "long_prompt_overload",
+        "field_mixing"
+      ],
+      "summary_only": true
+    },
+    {
+      "source_id": "wd-futureqa-04",
+      "title": "未去源的失败案例库",
+      "source_url": "kb-candidate://writing-director-incremental/futureqa/non-sanitized-failure-cases",
+      "source_type_label": "sanitized_graph_candidate",
+      "language": "zh",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "risk_flags": [
+        "source_leakage_risk",
+        "runtime_blocked"
+      ],
+      "serves_pwa_fields": [],
+      "target_pwa_actions": [],
+      "pwa_relevance": "只能留在复核层，完成去源、去标识、摘要化后才可重新评估。",
+      "kb_gap": "当前不具备下放条件。",
+      "leakage_check": "blocked_before_runtime",
+      "run_id": "intake-20260526-writing-director-incremental-candidates",
+      "anime_translation_value": "none",
+      "film_language_input": "non-sanitized failure material",
+      "anime_storyboard_language": "blocked until sanitized and summarized",
+      "ai_anime_prompt_language": "not allowed before source cleanup",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "translation_risk_flags": [
+        "raw_source_leakage"
+      ],
+      "summary_only": true
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "wd-candidate-01",
+      "candidate_title": "场景目标与冲突推进",
+      "conclusion": "merge_existing",
+      "primary_group": "writing_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "objective, obstacle, action, reaction, and turning point are already covered by scene expression rules.",
+      "anime_translation_value": "high",
+      "film_language_input": "scene objective and conflict",
+      "anime_storyboard_language": "anime beat objective, obstacle, visible turn",
+      "ai_anime_prompt_language": "subject action plus conflict beat plus visual consequence",
+      "pwa_final_fields": [
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-02",
+      "candidate_title": "对白依据锁",
+      "conclusion": "new_reviewed_wiki_candidate",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "writing_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-dialogue-evidence-lock"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_only_after_confirmation",
+      "reason": "dialogue and narration need an explicit evidence lock so the system does not invent supporting reasons.",
+      "anime_translation_value": "high",
+      "film_language_input": "dialogue/narration motivation and evidence",
+      "anime_storyboard_language": "anime dialogue bubble or narration is allowed only when grounded",
+      "ai_anime_prompt_language": "grounded dialogue/narration or no-dialogue visible action",
+      "pwa_final_fields": [
+        "对白/旁白",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "dialogue_fabrication"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-03",
+      "candidate_title": "行动替代说明",
+      "conclusion": "merge_existing",
+      "primary_group": "writing_group",
+      "supporting_groups": [
+        "director_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "visible action conversion is already covered.",
+      "anime_translation_value": "high",
+      "film_language_input": "exposition converted to behavior",
+      "anime_storyboard_language": "anime action pose or reaction carries explanation",
+      "ai_anime_prompt_language": "visible action instead of explanatory prose",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "over_explanation"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-04",
+      "candidate_title": "人物动机到动作链",
+      "conclusion": "merge_existing",
+      "primary_group": "writing_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "motivation-to-action continuity is already covered by visible scene expression and fact preservation boundaries.",
+      "anime_translation_value": "high",
+      "film_language_input": "motivation and causal action",
+      "anime_storyboard_language": "anime intention becomes posture, route, reaction, or payoff",
+      "ai_anime_prompt_language": "character intent to action chain",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-05",
+      "candidate_title": "blocking 站位关系",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-director-scheduling-core"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "blocking is already in director scheduling.",
+      "anime_translation_value": "high",
+      "film_language_input": "blocking and spatial relation",
+      "anime_storyboard_language": "anime subject spacing, silhouette, pressure, eyeline",
+      "ai_anime_prompt_language": "foreground subject relation and staging cue",
+      "pwa_final_fields": [
+        "画面描述",
+        "角色动作",
+        "运镜"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "new_character_invention"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-06",
+      "candidate_title": "前中后景层次",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-visual-master-consistency",
+        "rw-camera-language-grammar"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "depth layering is covered by visual continuity and composition logic.",
+      "anime_translation_value": "high",
+      "film_language_input": "composition depth layers",
+      "anime_storyboard_language": "anime foreground midground background hierarchy and subject silhouette",
+      "ai_anime_prompt_language": "layered scene composition with supported details",
+      "pwa_final_fields": [
+        "画面描述",
+        "运镜",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "unsupported_props"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-07",
+      "candidate_title": "视线关系与轴线稳定",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-camera-language-grammar",
+        "rw-director-scheduling-core"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "eyeline and axis continuity fit camera grammar and director scheduling.",
+      "anime_translation_value": "high",
+      "film_language_input": "eyeline and axis continuity",
+      "anime_storyboard_language": "anime gaze direction and screen direction stability",
+      "ai_anime_prompt_language": "camera and framing preserve readable relation",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "画面描述"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "field_mixing"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-08",
+      "candidate_title": "主运镜叙事目的",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-camera-language-grammar",
+        "rw-shot-intent-taxonomy"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "primary camera movement must be selected by shot purpose, already covered by camera grammar and shot intent.",
+      "anime_translation_value": "high",
+      "film_language_input": "camera movement with story purpose",
+      "anime_storyboard_language": "anime primary camera move, speed feeling, background flow",
+      "ai_anime_prompt_language": "one primary camera move tied to beat purpose",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "camera_jargon_stack"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-09",
+      "candidate_title": "反应镜头密度",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "writing_group",
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-shot-intent-taxonomy",
+        "rw-duration-density-rules",
+        "rw-director-scheduling-core"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "reaction shots are a shot intent and density problem.",
+      "anime_translation_value": "high",
+      "film_language_input": "reaction shot rhythm",
+      "anime_storyboard_language": "anime reaction cut, pause, impact emphasis",
+      "ai_anime_prompt_language": "reaction density and duration-aware pacing",
+      "pwa_final_fields": [
+        "景别",
+        "角色动作",
+        "时长(秒)"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "overcutting"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-10",
+      "candidate_title": "动作剪辑匹配",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-transition-motion-dynamics"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "action continuity and match-cut rhythm are covered by transition and motion dynamics.",
+      "anime_translation_value": "high",
+      "film_language_input": "match cut and action continuity",
+      "anime_storyboard_language": "anime impact frame, motion line, cut-on-action",
+      "ai_anime_prompt_language": "action direction and cut continuity cue",
+      "pwa_final_fields": [
+        "运镜",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "continuity_break"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-11",
+      "candidate_title": "时长与信息密度",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-duration-density-rules"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "duration, beat count, and information density are already covered.",
+      "anime_translation_value": "medium",
+      "film_language_input": "duration and information density",
+      "anime_storyboard_language": "anime timing, held beat, fast cut density",
+      "ai_anime_prompt_language": "duration-aware row density constraint",
+      "pwa_final_fields": [
+        "时长(秒)",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "duration_overfit"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-12",
+      "candidate_title": "预备动作-主动作-跟随动作",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "writing_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-expression-physicalization",
+        "rw-transition-motion-dynamics"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "visible action shape and follow-through are already covered by performance physicalization and motion continuity.",
+      "anime_translation_value": "high",
+      "film_language_input": "anticipation action follow-through",
+      "anime_storyboard_language": "anime anticipation, key motion, follow-through exaggeration",
+      "ai_anime_prompt_language": "action phase phrasing for prompt",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "unsupported_exaggeration"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-13",
+      "candidate_title": "关键姿势与动作轮廓",
+      "conclusion": "merge_existing",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-expression-physicalization",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "pose, silhouette, and shot-scale action visibility are already covered.",
+      "anime_translation_value": "high",
+      "film_language_input": "key pose and silhouette",
+      "anime_storyboard_language": "anime key pose, readable silhouette, center of gravity",
+      "ai_anime_prompt_language": "pose silhouette and action direction",
+      "pwa_final_fields": [
+        "角色动作",
+        "画面描述",
+        "景别"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "wide_shot_micro_detail"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-14",
+      "candidate_title": "群像动作分层",
+      "conclusion": "new_reviewed_wiki_candidate",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group",
+        "writing_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-ensemble-action-layering"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_only_after_confirmation",
+      "reason": "group action layering is useful but needs a specific guard against inventing count, faction, or new characters.",
+      "anime_translation_value": "high",
+      "film_language_input": "ensemble blocking and action layers",
+      "anime_storyboard_language": "anime main action, secondary reaction, background group motion",
+      "ai_anime_prompt_language": "layered crowd/group action within accepted facts",
+      "pwa_final_fields": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "景别",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "new_count_or_faction_invention"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-15",
+      "candidate_title": "文生视频字段顺序",
+      "conclusion": "merge_existing",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "director_group",
+        "pwa_adapter_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-prompt-text-boundary"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "field order and prompt compilation already exist as field discipline and prompt boundary rules.",
+      "anime_translation_value": "high",
+      "film_language_input": "shot prompt field ordering",
+      "anime_storyboard_language": "anime prompt order from subject, action, scene, camera, style, constraints",
+      "ai_anime_prompt_language": "field-bound anime prompt compilation",
+      "pwa_final_fields": [
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "field_mixing",
+        "long_prompt_overload"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-16",
+      "candidate_title": "负面约束简化",
+      "conclusion": "merge_existing",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "pwa_adapter_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "negative constraints must remain compact, summary-only, and non-leaking.",
+      "anime_translation_value": "medium",
+      "film_language_input": "negative constraints",
+      "anime_storyboard_language": "anime-safe concise constraints without governance leakage",
+      "ai_anime_prompt_language": "compact negative constraints outside final prose when possible",
+      "pwa_final_fields": [
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "governance_leakage"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-17",
+      "candidate_title": "字段混写修复",
+      "conclusion": "merge_existing",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "director_group",
+        "pwa_adapter_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-person-identity-lock",
+        "rw-prompt-text-boundary"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "field pollution repair is already covered across field discipline, person lock, and prompt boundary.",
+      "anime_translation_value": "medium",
+      "film_language_input": "field boundary repair",
+      "anime_storyboard_language": "anime field repair prevents live-action jargon or style piles entering wrong field",
+      "ai_anime_prompt_language": "repair person/camera/shot/action/prompt boundaries",
+      "pwa_final_fields": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "field_mixing"
+      ]
+    },
+    {
+      "source_id": "wd-candidate-18",
+      "candidate_title": "事实优先修复",
+      "conclusion": "merge_existing",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "writing_group"
+      ],
+      "target_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action",
+        "rw-person-identity-lock",
+        "rw-validation-no-leakage"
+      ],
+      "runtime_target_possible": true,
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "reason": "repair must preserve accepted facts before style, camera, or prompt improvements.",
+      "anime_translation_value": "medium",
+      "film_language_input": "fact-first repair",
+      "anime_storyboard_language": "anime repair preserves accepted facts before visual flourish",
+      "ai_anime_prompt_language": "fact-first correction before style or camera refinement",
+      "pwa_final_fields": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "qwen_anime_generation_help": true,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "fact_invention"
+      ]
+    },
+    {
+      "source_id": "wd-futureqa-01",
+      "candidate_title": "真实导演/IP 风格开关",
+      "conclusion": "future_qa",
+      "primary_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [],
+      "runtime_target_possible": false,
+      "adapter_downlink_status": "blocked",
+      "reason": "proper names cannot become runtime style switches.",
+      "anime_translation_value": "none",
+      "film_language_input": "proper-name style reference",
+      "anime_storyboard_language": "blocked before anime storyboard conversion",
+      "ai_anime_prompt_language": "not allowed as prompt style switch",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "proper_name_pollution",
+        "ip_pollution"
+      ]
+    },
+    {
+      "source_id": "wd-futureqa-02",
+      "candidate_title": "自动对白生成模板",
+      "conclusion": "future_qa",
+      "primary_group": "writing_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "target_reviewed_wiki_ids": [],
+      "runtime_target_possible": false,
+      "adapter_downlink_status": "blocked",
+      "reason": "automatic dialogue templates risk inventing unsupported dialogue basis.",
+      "anime_translation_value": "none",
+      "film_language_input": "generic dialogue template",
+      "anime_storyboard_language": "blocked because it encourages invented dialogue",
+      "ai_anime_prompt_language": "not allowed as automatic dialogue source",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "dialogue_fabrication"
+      ]
+    },
+    {
+      "source_id": "wd-futureqa-03",
+      "candidate_title": "长 prompt 万能模板",
+      "conclusion": "future_qa",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "pwa_adapter_group"
+      ],
+      "target_reviewed_wiki_ids": [],
+      "runtime_target_possible": false,
+      "adapter_downlink_status": "blocked",
+      "reason": "universal long prompts conflict with field-bound summary-only prompt compilation.",
+      "anime_translation_value": "none",
+      "film_language_input": "generic long prompt template",
+      "anime_storyboard_language": "blocked because it overloads field-bound anime prompt compilation",
+      "ai_anime_prompt_language": "not allowed as universal prompt",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "long_prompt_overload",
+        "field_mixing"
+      ]
+    },
+    {
+      "source_id": "wd-futureqa-04",
+      "candidate_title": "未去源的失败案例库",
+      "conclusion": "future_qa",
+      "primary_group": "validation_group",
+      "supporting_groups": [
+        "pwa_adapter_group"
+      ],
+      "target_reviewed_wiki_ids": [],
+      "runtime_target_possible": false,
+      "adapter_downlink_status": "blocked",
+      "reason": "non-sanitized failure cases must not enter runtime or adapter.",
+      "anime_translation_value": "none",
+      "film_language_input": "non-sanitized failure material",
+      "anime_storyboard_language": "blocked until sanitized and summarized",
+      "ai_anime_prompt_language": "not allowed before source cleanup",
+      "pwa_final_fields": [],
+      "qwen_anime_generation_help": false,
+      "summary_only": true,
+      "translation_risk_flags": [
+        "raw_source_leakage"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-scene-expression-visible-action",
+      "chinese_title": "场景表达与可见行动规则增强",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "场景目标",
+        "行动",
+        "冲突",
+        "转折"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-01",
+        "wd-candidate-03",
+        "wd-candidate-04",
+        "wd-candidate-18"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-person-identity-lock",
+        "rw-validation-no-leakage"
+      ],
+      "orchestration_group": "writing_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-dialogue-evidence-lock",
+      "chinese_title": "对白旁白依据锁候选",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "character_action",
+        "visual_description"
+      ],
+      "serves_prompt_sections": [
+        "对白/旁白",
+        "事实依据",
+        "角色意图",
+        "约束"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "writing_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-02"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-expression-visible-action",
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage",
+        "rw-person-identity-lock"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "writing_group"
+      ],
+      "adapter_downlink_status": "eligible_only_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "proposed_summary": {
+        "directive": "对白/旁白只能来自用户提供文本、已接受事实、明确角色意图或当前场景目标；缺乏依据时应留空、弱化为可见动作，或请求修复，而不是编造依据。",
+        "negative_constraint": "不得把对白依据锁解释为自动生成台词模板，不得为角色发明未给出的事实、动机、关系或承诺。"
+      },
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-director-scheduling-core",
+      "chinese_title": "导演调度核心规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "站位",
+        "视线",
+        "反应",
+        "节奏"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-05",
+        "wd-candidate-07",
+        "wd-candidate-09"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-camera-language-grammar",
+        "rw-duration-density-rules"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-language-grammar",
+      "chinese_title": "镜头语言语法规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "运镜",
+        "景别",
+        "构图",
+        "空间连续"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-06",
+        "wd-candidate-07",
+        "wd-candidate-08"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-director-scheduling-core",
+        "rw-shot-intent-taxonomy",
+        "rw-visual-master-consistency"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-shot-intent-taxonomy",
+      "chinese_title": "镜头意图分类规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "镜头目的",
+        "反应",
+        "转折"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-08",
+        "wd-candidate-09"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-duration-density-rules"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-transition-motion-dynamics",
+      "chinese_title": "转场与动势规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "动势",
+        "动作连续",
+        "剪辑匹配"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-10",
+        "wd-candidate-12"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-expression-physicalization",
+        "rw-camera-language-grammar"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-duration-density-rules",
+      "chinese_title": "时长与信息密度规则增强",
+      "serves_pwa_fields": [
+        "duration_seconds",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "时长",
+        "节奏",
+        "信息密度"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "duration_profiles",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-09",
+        "wd-candidate-11"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-expression-physicalization",
+      "chinese_title": "表演物理化规则增强",
+      "serves_pwa_fields": [
+        "character_action",
+        "visual_description",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "表演",
+        "姿势",
+        "动作轮廓"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-12",
+        "wd-candidate-13"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-transition-motion-dynamics"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-ensemble-action-layering",
+      "chinese_title": "群像动作分层候选",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "shot_size",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "群像",
+        "站位",
+        "主次动作",
+        "验证约束"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-14"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-director-scheduling-core",
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-person-identity-lock"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group",
+        "writing_group"
+      ],
+      "adapter_downlink_status": "eligible_only_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "proposed_summary": {
+        "directive": "群像镜头只能在已接受事实给出的角色、群体或明确角色标签范围内分层，区分主行动、次级反应、背景运动和空间层次。",
+        "negative_constraint": "不得发明人数、阵营、新角色、未给出的队伍关系或 unsupported crowd facts；不确定时用已给角色或泛化的已授权群体标签。"
+      },
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-visual-master-consistency",
+      "chinese_title": "视觉母版一致性规则增强",
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "空间层次",
+        "连续性",
+        "画面"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-06"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar"
+      ],
+      "orchestration_group": "director_group",
+      "supporting_groups": [
+        "validation_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-seedance2-storyboard-field-discipline",
+      "chinese_title": "分镜字段纪律规则增强",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "字段顺序",
+        "动作可见性",
+        "字段边界"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-13",
+        "wd-candidate-15",
+        "wd-candidate-17"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-person-identity-lock"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "director_group",
+        "pwa_adapter_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-prompt-text-boundary",
+      "chinese_title": "分镜提示词边界规则增强",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "serves_prompt_sections": [
+        "字段编译",
+        "负面约束",
+        "导出安全"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-15",
+        "wd-candidate-16",
+        "wd-candidate-17"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-leakage",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "pwa_adapter_group",
+        "director_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "high",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-validation-no-leakage",
+      "chinese_title": "无泄漏验证规则增强",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "serves_prompt_sections": [
+        "泄漏阻断",
+        "导出安全",
+        "负面约束"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-16",
+        "wd-candidate-18"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "pwa_adapter_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "medium",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-person-identity-lock",
+      "chinese_title": "人物身份锁规则增强",
+      "serves_pwa_fields": [
+        "person",
+        "prompt_text",
+        "visual_description"
+      ],
+      "serves_prompt_sections": [
+        "人物",
+        "实体修复",
+        "字段边界"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "wd-candidate-17",
+        "wd-candidate-18"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-validation-no-leakage",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "orchestration_group": "validation_group",
+      "supporting_groups": [
+        "writing_group"
+      ],
+      "adapter_downlink_status": "eligible_after_confirmation",
+      "qwen_generation_role": "constraint_only",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "anime_translation_value": "medium",
+      "translation_chain": "电影语言 -> 动漫分镜语言 -> AI 动漫化提示词语言 -> PWA 最终字段 -> 千问约束生成",
+      "summary_only": true
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-26T02:30:43.108Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-scene-expression-visible-action",
+      "rw-dialogue-evidence-lock",
+      "rw-director-scheduling-core",
+      "rw-camera-language-grammar",
+      "rw-shot-intent-taxonomy",
+      "rw-transition-motion-dynamics",
+      "rw-duration-density-rules",
+      "rw-expression-physicalization",
+      "rw-ensemble-action-layering",
+      "rw-visual-master-consistency",
+      "rw-seedance2-storyboard-field-discipline",
+      "rw-prompt-text-boundary",
+      "rw-validation-no-leakage",
+      "rw-person-identity-lock"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-scene-expression-visible-action",
+      "rw-dialogue-evidence-lock",
+      "rw-director-scheduling-core",
+      "rw-camera-language-grammar",
+      "rw-shot-intent-taxonomy",
+      "rw-transition-motion-dynamics",
+      "rw-duration-density-rules",
+      "rw-expression-physicalization",
+      "rw-ensemble-action-layering",
+      "rw-visual-master-consistency",
+      "rw-seedance2-storyboard-field-discipline",
+      "rw-prompt-text-boundary",
+      "rw-validation-no-leakage",
+      "rw-person-identity-lock"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-26T03:05:48.897Z",
+    "command": "node scripts\\apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260526-writing-director-incremental-candidates\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "status": "applied",
+      "package": "knowledge\\intake_runs\\intake-20260526-writing-director-incremental-candidates\\intake-package.confirmed.json",
+      "applied_reviewed_wiki_ids": [
+        "rw-scene-expression-visible-action",
+        "rw-dialogue-evidence-lock",
+        "rw-director-scheduling-core",
+        "rw-camera-language-grammar",
+        "rw-shot-intent-taxonomy",
+        "rw-transition-motion-dynamics",
+        "rw-duration-density-rules",
+        "rw-expression-physicalization",
+        "rw-ensemble-action-layering",
+        "rw-visual-master-consistency",
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage",
+        "rw-person-identity-lock"
+      ],
+      "validate": {
+        "status": "passed",
+        "package": "intake-package.confirmed.json",
+        "run_id": "intake-20260526-writing-director-incremental-candidates",
+        "source_candidates": 22,
+        "recommendations": 14,
+        "confirmed": true
+      },
+      "build": {
+        "status": "written",
+        "output": "samples\\pwa-kb-adapter-output.sample.json",
+        "scene_count": 21,
+        "rule_pack_count": 20
+      }
+    }
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260526-writing-director-incremental-candidates/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260526-writing-director-incremental-candidates/intake-package.confirmed.json",
+    "dedupe_report": "knowledge/intake_runs/intake-20260526-writing-director-incremental-candidates/dedupe-report.md",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  }
+}
