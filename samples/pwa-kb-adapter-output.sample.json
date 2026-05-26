@@ -83,19 +83,23 @@
     "directorRulePacks": [
       {
         "id": "dg-director-scheduling-core",
-        "name": "Director scheduling support",
-        "intent": "Support visible scene expression through blocking, rhythm, and attention handoff.",
+        "name": "Director scheduling core",
+        "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.",
         "influenceAxes": [
           "blocking",
+          "visual_attention",
           "rhythm",
-          "visual_attention"
+          "scene_handoff"
         ],
         "directives": [
-          "Use staging and attention to make the accepted scene purpose readable.",
-          "Keep director hints subordinate to accepted facts and scene objective."
+          "Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.",
+          "Use director scheduling to turn accepted story material into visible anime shot guidance.",
+          "Keep task, duration, source boundary, and scene purpose aligned before storyboard generation."
         ],
         "negativeConstraints": [
-          "Do not introduce new people, places, or world rules."
+          "Do not let director hints overwrite story facts.",
+          "Do not introduce new people, places, or world rules.",
+          "Do not expose internal KB evidence in storyboard rows."
         ]
       },
       {
@@ -338,6 +342,60 @@
           "Do not let background, lighting, style words, or ensemble noise obscure the main subject silhouette.",
           "Do not invent characters, props, or animation steps to justify a pose."
         ]
+      },
+      {
+        "id": "dg-storyboard-splitting-by-content-beat",
+        "name": "Storyboard splitting director support",
+        "intent": "Keep storyboard row splitting aligned with shot purpose, action phase, reaction need, and spatial continuity.",
+        "influenceAxes": [
+          "shot_intent",
+          "action_phase",
+          "continuity",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Use shot purpose, action phase, reaction need, or spatial change to justify a new row.",
+          "Keep row breaks readable for anime storyboard and AI prompt compilation."
+        ],
+        "negativeConstraints": [
+          "Do not use table shape as a director reason for row splitting."
+        ]
+      },
+      {
+        "id": "dg-single-shot-preservation-for-existing-fields",
+        "name": "Single shot preservation director support",
+        "intent": "Keep coherent camera movement, blocking, and action continuity inside one row when that is the most readable storyboard expression.",
+        "influenceAxes": [
+          "continuity",
+          "blocking",
+          "shot_intent",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Preserve camera and action continuity when the shot is naturally complete.",
+          "Use a new row only when the audience-facing information or action readability changes."
+        ],
+        "negativeConstraints": [
+          "Do not break continuity to satisfy a mechanical row plan."
+        ]
+      },
+      {
+        "id": "dg-prompt-load-and-shot-plan-boundary",
+        "name": "Prompt load director support",
+        "intent": "Keep current-row shot purpose, camera, action, and visible frame aligned before prompt_text compilation.",
+        "influenceAxes": [
+          "shot_intent",
+          "camera_language",
+          "prompt_boundary",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Choose the current row's shot purpose before adding camera, action, and frame details.",
+          "Keep shot planning subordinate to final-field readability."
+        ],
+        "negativeConstraints": [
+          "Do not convert shot planning notes into final prompt_text."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -494,6 +552,69 @@
           "Do not let generic film terms replace anime storyboard language.",
           "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
         ]
+      },
+      {
+        "id": "vg-storyboard-splitting-by-content-beat",
+        "name": "Storyboard splitting by content beat",
+        "intent": "Split storyboard rows by semantic content beat, shot purpose, readable action phase, information change, or spatial scheduling change instead of fixed row count or fixed seconds.",
+        "influenceAxes": [
+          "content_beat",
+          "shot_split_boundary",
+          "duration_density",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Treat rows_seed as semantic storyboard candidates, not as a fixed row-count table or duration averaging plan.",
+          "Split only when the content beat, shot purpose, visible action phase, emotional or information change, or spatial scheduling changes enough to need a separate readable row.",
+          "Allow a complete shot to remain one row when content, action, rhythm, and prompt_text readability are coherent."
+        ],
+        "negativeConstraints": [
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change."
+        ]
+      },
+      {
+        "id": "vg-single-shot-preservation-for-existing-fields",
+        "name": "Single shot preservation for existing fields",
+        "intent": "Allow one complete, coherent shot to remain one storyboard row using existing final fields when splitting would reduce readability or invent structure.",
+        "influenceAxes": [
+          "single_shot_preservation",
+          "field_boundary",
+          "shot_split_boundary",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Preserve a complete shot as one row when the camera, shot size, visual description, action, dialogue or narration, prompt_text, and duration remain readable together.",
+          "Use existing final fields only; a preservation decision must not introduce new PWA columns or internal note fields.",
+          "Split a preserved shot only when a real content beat, shot purpose, action phase, reaction, or spatial relation requires a separate row."
+        ],
+        "negativeConstraints": [
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output."
+        ]
+      },
+      {
+        "id": "vg-prompt-load-and-shot-plan-boundary",
+        "name": "Prompt load and shot plan boundary",
+        "intent": "Keep prompt_text compact, row-bound, and single-shot focused while blocking long prompt overload, multi-shot mixing, and empty prompt rows.",
+        "influenceAxes": [
+          "prompt_load",
+          "shot_plan_boundary",
+          "field_boundary",
+          "export_safety"
+        ],
+        "directives": [
+          "Compile prompt_text from the current row fields and one main shot objective.",
+          "Use shot plan only as internal row planning support; final prompt_text must stay readable, compact, and bound to the current row.",
+          "Reduce prompt load by choosing the current subject, action, camera, shot size, visible frame, and safe constraints instead of stacking unrelated instructions."
+        ],
+        "negativeConstraints": [
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+        ]
       }
     ],
     "sceneMappings": {
@@ -515,7 +636,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -525,7 +649,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -584,7 +711,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "source_facts",
@@ -633,7 +769,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "ensemble_performance": {
@@ -654,7 +795,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -664,7 +808,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -721,7 +868,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -768,7 +924,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "emotional_dialogue": {
@@ -789,7 +950,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -799,7 +963,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -856,7 +1023,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -903,7 +1079,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "encounter_performance": {
@@ -924,7 +1105,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -934,7 +1118,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -991,7 +1178,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1038,7 +1234,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "field_chase": {
@@ -1059,7 +1260,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1069,7 +1273,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1126,7 +1333,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1173,7 +1389,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "spectacle_showcase": {
@@ -1194,7 +1415,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1204,7 +1428,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1261,7 +1488,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1308,7 +1544,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "daily_healing": {
@@ -1329,7 +1570,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1339,7 +1583,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1396,7 +1643,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1443,7 +1699,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -1464,7 +1725,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1474,7 +1738,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1531,7 +1798,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1578,7 +1854,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "guoman_ensemble_performance": {
@@ -1599,7 +1880,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1609,7 +1893,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1666,7 +1953,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1713,7 +2009,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "ink_wuxia_combat": {
@@ -1734,7 +2035,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1744,7 +2048,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1801,7 +2108,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1848,7 +2164,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "eastern_spectacle": {
@@ -1869,7 +2190,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1879,7 +2203,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1936,7 +2263,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1983,7 +2319,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "xianxia_action": {
@@ -2004,7 +2345,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2014,7 +2358,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2071,7 +2418,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2118,7 +2474,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "urban_fantasy": {
@@ -2139,7 +2500,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2149,7 +2513,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2208,7 +2575,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "source_facts",
@@ -2256,7 +2632,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "chinese_war_formation": {
@@ -2277,7 +2658,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2287,7 +2671,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2344,7 +2731,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2391,7 +2787,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "weapon_highlight": {
@@ -2412,7 +2813,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2422,7 +2826,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2479,7 +2886,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2526,7 +2942,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "council_strategy": {
@@ -2547,7 +2968,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2557,7 +2981,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2614,7 +3041,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2661,7 +3097,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "siege_defense": {
@@ -2682,7 +3123,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2692,7 +3136,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2749,7 +3196,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2796,7 +3252,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "slg_sandbox_view": {
@@ -2817,7 +3278,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2827,7 +3291,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2884,7 +3351,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2931,7 +3407,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "slg_march_encirclement": {
@@ -2952,7 +3433,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2962,7 +3446,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3019,7 +3506,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3066,7 +3562,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "slg_city_growth": {
@@ -3087,7 +3588,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3097,7 +3601,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3154,7 +3661,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3201,7 +3717,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       },
       "slg_battle_report": {
@@ -3222,7 +3743,10 @@
           "dg-preproduction-storyboard-guide",
           "dg-seedance2-storyboard-field-discipline",
           "dg-ensemble-action-layering",
-          "dg-anime-key-pose-silhouette-priority"
+          "dg-anime-key-pose-silhouette-priority",
+          "dg-storyboard-splitting-by-content-beat",
+          "dg-single-shot-preservation-for-existing-fields",
+          "dg-prompt-load-and-shot-plan-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3232,7 +3756,10 @@
           "vg-field-aware-entity",
           "vg-dialogue-evidence-lock",
           "vg-anime-key-pose-field-boundary",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3289,7 +3816,16 @@
           "Do not invent characters, props, or animation steps to justify a pose.",
           "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
           "Do not let generic film terms replace anime storyboard language.",
-          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+          "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+          "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+          "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+          "Do not create rows with meaningless prompt_text or no visible content change.",
+          "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+          "Do not duplicate the same action across rows to manufacture row count.",
+          "Do not hide split rationale in note, status, or internal fields as final output.",
+          "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+          "Do not create empty or meaningless prompt_text rows.",
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3336,7 +3872,12 @@
           "subject_silhouette",
           "action_line",
           "anime_translation",
-          "proper_name_safety"
+          "proper_name_safety",
+          "content_beat",
+          "shot_split_boundary",
+          "single_shot_preservation",
+          "prompt_load",
+          "shot_plan_boundary"
         ]
       }
     },

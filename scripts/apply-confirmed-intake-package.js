@@ -434,6 +434,141 @@ const catalog = {
     actions: ["import_source", "generate_storyboard", "repair_storyboard", "validate_result", "export_result"],
     contextSummary: "Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked.",
   },
+  "rw-storyboard-splitting-by-content-beat": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-storyboard-splitting-by-content-beat",
+    ruleId: "rule:storyboard-splitting-by-content-beat",
+    title: "Storyboard splitting by content beat",
+    purpose: "Split storyboard rows by semantic content beat, shot purpose, readable action phase, information change, or spatial scheduling change instead of fixed row count or fixed seconds.",
+    axes: ["content_beat", "shot_split_boundary", "duration_density", "prompt_boundary"],
+    directives: [
+      "Treat rows_seed as semantic storyboard candidates, not as a fixed row-count table or duration averaging plan.",
+      "Split only when the content beat, shot purpose, visible action phase, emotional or information change, or spatial scheduling changes enough to need a separate readable row.",
+      "Allow a complete shot to remain one row when content, action, rhythm, and prompt_text readability are coherent.",
+    ],
+    negatives: [
+      "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+      "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+      "Do not create rows with meaningless prompt_text or no visible content change.",
+    ],
+    targets: ["validation_rule_packs", "director_rule_packs", "scene_mappings", "selected_kb_rules", "negative_constraints", "kb_context_summary"],
+    actions: ["generate_storyboard", "repair_storyboard", "validate_result"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-storyboard-splitting-by-content-beat",
+        title: "Storyboard splitting director support",
+        purpose: "Keep storyboard row splitting aligned with shot purpose, action phase, reaction need, and spatial continuity.",
+        axes: ["shot_intent", "action_phase", "continuity", "anime_storyboard"],
+        directives: [
+          "Use shot purpose, action phase, reaction need, or spatial change to justify a new row.",
+          "Keep row breaks readable for anime storyboard and AI prompt compilation.",
+        ],
+        negatives: ["Do not use table shape as a director reason for row splitting."],
+      },
+    ],
+    contextSummary: "Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked.",
+    reviewedAtBucket: "2026-05-26",
+  },
+  "rw-single-shot-preservation-for-existing-fields": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-single-shot-preservation-for-existing-fields",
+    ruleId: "rule:single-shot-preservation-for-existing-fields",
+    title: "Single shot preservation for existing fields",
+    purpose: "Allow one complete, coherent shot to remain one storyboard row using existing final fields when splitting would reduce readability or invent structure.",
+    axes: ["single_shot_preservation", "field_boundary", "shot_split_boundary", "anime_storyboard"],
+    directives: [
+      "Preserve a complete shot as one row when the camera, shot size, visual description, action, dialogue or narration, prompt_text, and duration remain readable together.",
+      "Use existing final fields only; a preservation decision must not introduce new PWA columns or internal note fields.",
+      "Split a preserved shot only when a real content beat, shot purpose, action phase, reaction, or spatial relation requires a separate row.",
+    ],
+    negatives: [
+      "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+      "Do not duplicate the same action across rows to manufacture row count.",
+      "Do not hide split rationale in note, status, or internal fields as final output.",
+    ],
+    targets: ["validation_rule_packs", "director_rule_packs", "selected_kb_rules", "negative_constraints", "kb_context_summary"],
+    actions: ["generate_storyboard", "repair_storyboard", "validate_result"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-single-shot-preservation-for-existing-fields",
+        title: "Single shot preservation director support",
+        purpose: "Keep coherent camera movement, blocking, and action continuity inside one row when that is the most readable storyboard expression.",
+        axes: ["continuity", "blocking", "shot_intent", "prompt_boundary"],
+        directives: [
+          "Preserve camera and action continuity when the shot is naturally complete.",
+          "Use a new row only when the audience-facing information or action readability changes.",
+        ],
+        negatives: ["Do not break continuity to satisfy a mechanical row plan."],
+      },
+    ],
+    contextSummary: "A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes.",
+    reviewedAtBucket: "2026-05-26",
+  },
+  "rw-prompt-load-and-shot-plan-boundary": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-prompt-load-and-shot-plan-boundary",
+    ruleId: "rule:prompt-load-and-shot-plan-boundary",
+    title: "Prompt load and shot plan boundary",
+    purpose: "Keep prompt_text compact, row-bound, and single-shot focused while blocking long prompt overload, multi-shot mixing, and empty prompt rows.",
+    axes: ["prompt_load", "shot_plan_boundary", "field_boundary", "export_safety"],
+    directives: [
+      "Compile prompt_text from the current row fields and one main shot objective.",
+      "Use shot plan only as internal row planning support; final prompt_text must stay readable, compact, and bound to the current row.",
+      "Reduce prompt load by choosing the current subject, action, camera, shot size, visible frame, and safe constraints instead of stacking unrelated instructions.",
+    ],
+    negatives: [
+      "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+      "Do not create empty or meaningless prompt_text rows.",
+      "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+    ],
+    targets: ["validation_rule_packs", "director_rule_packs", "selected_kb_rules", "negative_constraints", "kb_context_summary"],
+    actions: ["generate_storyboard", "repair_storyboard", "validate_result", "export_result"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-prompt-load-and-shot-plan-boundary",
+        title: "Prompt load director support",
+        purpose: "Keep current-row shot purpose, camera, action, and visible frame aligned before prompt_text compilation.",
+        axes: ["shot_intent", "camera_language", "prompt_boundary", "anime_storyboard"],
+        directives: [
+          "Choose the current row's shot purpose before adding camera, action, and frame details.",
+          "Keep shot planning subordinate to final-field readability.",
+        ],
+        negatives: ["Do not convert shot planning notes into final prompt_text."],
+      },
+    ],
+    contextSummary: "Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked.",
+    reviewedAtBucket: "2026-05-26",
+  },
+  "rw-storyboard-row-field-fusion-for-prompt-text": {
+    mergeTargets: ["rw-prompt-text-boundary", "rw-seedance2-storyboard-field-discipline"],
+  },
+  "rw-duration-allocation-by-field-readability": {
+    mergeTargets: ["rw-duration-density-rules"],
+  },
+  "rw-action-key-pose-staging-for-fields": {
+    mergeTargets: ["rw-expression-physicalization", "rw-anime-key-pose-silhouette-priority"],
+  },
+  "rw-continuity-eyeline-blocking-for-fields": {
+    mergeTargets: ["rw-camera-language-grammar", "rw-director-scheduling-core", "rw-transition-motion-dynamics"],
+  },
+  "rw-dialogue-narration-beat-field-gate": {
+    mergeTargets: ["rw-dialogue-evidence-lock", "rw-prompt-text-boundary"],
+  },
+  "rw-reaction-shot-field-necessity-gate": {
+    mergeTargets: ["rw-shot-intent-taxonomy", "rw-duration-density-rules"],
+  },
+  "rw-camera-shot-size-purpose-for-prompt-text": {
+    mergeTargets: ["rw-camera-language-grammar", "rw-shot-intent-taxonomy", "rw-prompt-text-boundary"],
+  },
 };
 
 function parseArgs(argv) {
@@ -584,6 +719,45 @@ function mappingFor(rec, def, sceneIds) {
   };
 }
 
+function addTargetEntry(targetMap, targetId, sourceRec, sourceAcceptedId) {
+  const targetDef = catalog[targetId];
+  if (!targetDef || targetDef.mergeTargets) {
+    throw new Error(`Merge target is missing concrete apply catalog support: ${targetId}`);
+  }
+  const existing = targetMap.get(targetId);
+  const targetRec = existing
+    ? existing.rec
+    : {
+        ...sourceRec,
+        reviewed_wiki_id: targetId,
+        chinese_title: targetDef.title,
+        status: "confirmed",
+      };
+  targetRec.serves_pwa_fields = unique((targetRec.serves_pwa_fields || []).concat(sourceRec.serves_pwa_fields || []));
+  targetMap.set(targetId, {
+    rec: targetRec,
+    def: targetDef,
+    sourceAcceptedIds: unique(((existing && existing.sourceAcceptedIds) || []).concat(sourceAcceptedId)),
+  });
+}
+
+function expandAcceptedTargets(accepted) {
+  const targetMap = new Map();
+  const acceptedTargetStatus = [];
+  accepted.forEach((rec) => {
+    const def = catalog[rec.reviewed_wiki_id];
+    if (!def) return;
+    const targetIds = def.mergeTargets || [rec.reviewed_wiki_id];
+    targetIds.forEach((targetId) => addTargetEntry(targetMap, targetId, rec, rec.reviewed_wiki_id));
+    acceptedTargetStatus.push({
+      accepted_id: rec.reviewed_wiki_id,
+      action: def.mergeTargets ? "merge_existing" : "apply_reviewed_wiki",
+      target_reviewed_wiki_ids: targetIds,
+    });
+  });
+  return { targetEntries: Array.from(targetMap.values()), acceptedTargetStatus };
+}
+
 function runNode(args) {
   const result = spawnSync(process.execPath, args, { cwd: repoRoot, encoding: "utf8" });
   if (result.error) {
@@ -629,6 +803,13 @@ function main() {
   if (!accepted.length) throw new Error("No confirmed recommendations to apply.");
   const unsupported = accepted.filter((rec) => !catalog[rec.reviewed_wiki_id]).map((rec) => rec.reviewed_wiki_id);
   if (unsupported.length) throw new Error(`Accepted ids are missing apply catalog support: ${unsupported.join(", ")}`);
+  const unsupportedMergeTargets = accepted.flatMap((rec) => {
+    const def = catalog[rec.reviewed_wiki_id];
+    return (def.mergeTargets || []).filter((targetId) => !catalog[targetId] || catalog[targetId].mergeTargets);
+  });
+  if (unsupportedMergeTargets.length) {
+    throw new Error(`Accepted ids reference merge targets without concrete apply catalog support: ${unique(unsupportedMergeTargets).join(", ")}`);
+  }
 
   fs.mkdirSync(reviewedDir, { recursive: true });
 
@@ -644,9 +825,9 @@ function main() {
 
   const applied = [];
   const appliedDefs = [];
+  const { targetEntries, acceptedTargetStatus } = expandAcceptedTargets(accepted);
 
-  accepted.forEach((rec) => {
-    const def = catalog[rec.reviewed_wiki_id];
+  targetEntries.forEach(({ rec, def }) => {
     if (!def) return;
 
     fs.writeFileSync(path.join(reviewedDir, `${rec.reviewed_wiki_id}.md`), mdFor(rec, def), "utf8");
@@ -695,7 +876,15 @@ function main() {
   writeJson(sampleSnapshotPath, snapshot);
 
   const build = runNode([path.join("scripts", "build-pwa-kb-adapter-output.js")]);
-  const result = { status: "applied", package: path.relative(repoRoot, options.packagePath), applied_reviewed_wiki_ids: applied, validate, build };
+  const result = {
+    status: "applied",
+    package: path.relative(repoRoot, options.packagePath),
+    processed_accepted_ids: acceptedIds,
+    accepted_target_status: acceptedTargetStatus,
+    applied_reviewed_wiki_ids: applied,
+    validate,
+    build,
+  };
   pkg.status = "applied_to_kb";
   pkg.kb_application = {
     applied: true,

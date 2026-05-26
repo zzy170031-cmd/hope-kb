@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-镜头语言语法规则增强: Bind shot function, scale, angle, movement, composition, and adjacent-shot relation to PWA storyboard fields.
+Camera language grammar: Bind shot function, scale, angle, movement, composition, and adjacent-shot relation to PWA storyboard fields.
 
 ## Source Basis
 
@@ -34,9 +34,11 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- person
 - camera
 - shot_size
 - visual_description
+- character_action
 - prompt_text
 
 ## Negative Constraints

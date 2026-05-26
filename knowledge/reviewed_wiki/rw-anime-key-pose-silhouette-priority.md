@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-动漫关键姿态与主体轮廓优先候选: Prioritize visible anime key pose, subject silhouette, action line, and readable frame language over production-process wording.
+Anime key pose silhouette priority: Prioritize visible anime key pose, subject silhouette, action line, and readable frame language over production-process wording.
 
 ## Source Basis
 
@@ -34,10 +34,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- shot_size
 - visual_description
 - character_action
+- shot_size
 - prompt_text
 
 ## Negative Constraints

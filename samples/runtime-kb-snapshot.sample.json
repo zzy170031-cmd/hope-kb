@@ -173,22 +173,26 @@
   "director_rule_packs": [
     {
       "id": "dg-director-scheduling-core",
-      "name": "Director scheduling support",
-      "intent": "Support visible scene expression through blocking, rhythm, and attention handoff.",
+      "name": "Director scheduling core",
+      "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.",
       "influence_axes": [
         "blocking",
+        "visual_attention",
         "rhythm",
-        "visual_attention"
+        "scene_handoff"
       ],
       "directives": [
-        "Use staging and attention to make the accepted scene purpose readable.",
-        "Keep director hints subordinate to accepted facts and scene objective."
+        "Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.",
+        "Use director scheduling to turn accepted story material into visible anime shot guidance.",
+        "Keep task, duration, source boundary, and scene purpose aligned before storyboard generation."
       ],
       "negative_constraints": [
-        "Do not introduce new people, places, or world rules."
+        "Do not let director hints overwrite story facts.",
+        "Do not introduce new people, places, or world rules.",
+        "Do not expose internal KB evidence in storyboard rows."
       ],
       "source_reviewed_wiki_ids": [
-        "rw-scene-expression-visible-action"
+        "rw-director-scheduling-core"
       ]
     },
     {
@@ -467,6 +471,69 @@
       "source_reviewed_wiki_ids": [
         "rw-anime-key-pose-silhouette-priority"
       ]
+    },
+    {
+      "id": "dg-storyboard-splitting-by-content-beat",
+      "name": "Storyboard splitting director support",
+      "intent": "Keep storyboard row splitting aligned with shot purpose, action phase, reaction need, and spatial continuity.",
+      "influence_axes": [
+        "shot_intent",
+        "action_phase",
+        "continuity",
+        "anime_storyboard"
+      ],
+      "directives": [
+        "Use shot purpose, action phase, reaction need, or spatial change to justify a new row.",
+        "Keep row breaks readable for anime storyboard and AI prompt compilation."
+      ],
+      "negative_constraints": [
+        "Do not use table shape as a director reason for row splitting."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-storyboard-splitting-by-content-beat"
+      ]
+    },
+    {
+      "id": "dg-single-shot-preservation-for-existing-fields",
+      "name": "Single shot preservation director support",
+      "intent": "Keep coherent camera movement, blocking, and action continuity inside one row when that is the most readable storyboard expression.",
+      "influence_axes": [
+        "continuity",
+        "blocking",
+        "shot_intent",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Preserve camera and action continuity when the shot is naturally complete.",
+        "Use a new row only when the audience-facing information or action readability changes."
+      ],
+      "negative_constraints": [
+        "Do not break continuity to satisfy a mechanical row plan."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-single-shot-preservation-for-existing-fields"
+      ]
+    },
+    {
+      "id": "dg-prompt-load-and-shot-plan-boundary",
+      "name": "Prompt load director support",
+      "intent": "Keep current-row shot purpose, camera, action, and visible frame aligned before prompt_text compilation.",
+      "influence_axes": [
+        "shot_intent",
+        "camera_language",
+        "prompt_boundary",
+        "anime_storyboard"
+      ],
+      "directives": [
+        "Choose the current row's shot purpose before adding camera, action, and frame details.",
+        "Keep shot planning subordinate to final-field readability."
+      ],
+      "negative_constraints": [
+        "Do not convert shot planning notes into final prompt_text."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-prompt-load-and-shot-plan-boundary"
+      ]
     }
   ],
   "validation_rule_packs": [
@@ -647,6 +714,78 @@
       "source_reviewed_wiki_ids": [
         "rw-anime-translation-failure-guard"
       ]
+    },
+    {
+      "id": "vg-storyboard-splitting-by-content-beat",
+      "name": "Storyboard splitting by content beat",
+      "intent": "Split storyboard rows by semantic content beat, shot purpose, readable action phase, information change, or spatial scheduling change instead of fixed row count or fixed seconds.",
+      "influence_axes": [
+        "content_beat",
+        "shot_split_boundary",
+        "duration_density",
+        "prompt_boundary"
+      ],
+      "directives": [
+        "Treat rows_seed as semantic storyboard candidates, not as a fixed row-count table or duration averaging plan.",
+        "Split only when the content beat, shot purpose, visible action phase, emotional or information change, or spatial scheduling changes enough to need a separate readable row.",
+        "Allow a complete shot to remain one row when content, action, rhythm, and prompt_text readability are coherent."
+      ],
+      "negative_constraints": [
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-storyboard-splitting-by-content-beat"
+      ]
+    },
+    {
+      "id": "vg-single-shot-preservation-for-existing-fields",
+      "name": "Single shot preservation for existing fields",
+      "intent": "Allow one complete, coherent shot to remain one storyboard row using existing final fields when splitting would reduce readability or invent structure.",
+      "influence_axes": [
+        "single_shot_preservation",
+        "field_boundary",
+        "shot_split_boundary",
+        "anime_storyboard"
+      ],
+      "directives": [
+        "Preserve a complete shot as one row when the camera, shot size, visual description, action, dialogue or narration, prompt_text, and duration remain readable together.",
+        "Use existing final fields only; a preservation decision must not introduce new PWA columns or internal note fields.",
+        "Split a preserved shot only when a real content beat, shot purpose, action phase, reaction, or spatial relation requires a separate row."
+      ],
+      "negative_constraints": [
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-single-shot-preservation-for-existing-fields"
+      ]
+    },
+    {
+      "id": "vg-prompt-load-and-shot-plan-boundary",
+      "name": "Prompt load and shot plan boundary",
+      "intent": "Keep prompt_text compact, row-bound, and single-shot focused while blocking long prompt overload, multi-shot mixing, and empty prompt rows.",
+      "influence_axes": [
+        "prompt_load",
+        "shot_plan_boundary",
+        "field_boundary",
+        "export_safety"
+      ],
+      "directives": [
+        "Compile prompt_text from the current row fields and one main shot objective.",
+        "Use shot plan only as internal row planning support; final prompt_text must stay readable, compact, and bound to the current row.",
+        "Reduce prompt load by choosing the current subject, action, camera, shot size, visible frame, and safe constraints instead of stacking unrelated instructions."
+      ],
+      "negative_constraints": [
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+      ],
+      "source_reviewed_wiki_ids": [
+        "rw-prompt-load-and-shot-plan-boundary"
+      ]
     }
   ],
   "scene_mappings": {
@@ -668,7 +807,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -678,7 +820,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -737,7 +882,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "source_facts",
@@ -786,7 +940,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-hot-blood-battle-summary-A"
@@ -811,9 +970,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For hot blood battle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -833,7 +995,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -843,7 +1008,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -900,7 +1068,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -947,7 +1124,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-ensemble_performance-summary-A"
@@ -972,9 +1154,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "emotional_dialogue": {
       "writing_rule_pack_ids": [
@@ -994,7 +1179,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1004,7 +1192,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1061,7 +1252,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1108,7 +1308,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-emotional_dialogue-summary-A"
@@ -1133,9 +1338,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For emotional dialogue, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "encounter_performance": {
       "writing_rule_pack_ids": [
@@ -1155,7 +1363,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1165,7 +1376,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1222,7 +1436,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1269,7 +1492,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-encounter_performance-summary-A"
@@ -1294,9 +1522,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For encounter performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "field_chase": {
       "writing_rule_pack_ids": [
@@ -1316,7 +1547,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1326,7 +1560,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1383,7 +1620,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1430,7 +1676,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-field_chase-summary-A"
@@ -1455,9 +1706,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For field chase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "spectacle_showcase": {
       "writing_rule_pack_ids": [
@@ -1477,7 +1731,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1487,7 +1744,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -1544,7 +1804,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1591,7 +1860,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-spectacle_showcase-summary-A"
@@ -1616,9 +1890,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For spectacle showcase, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "daily_healing": {
       "writing_rule_pack_ids": [
@@ -1638,7 +1915,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1648,7 +1928,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -1705,7 +1988,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1752,7 +2044,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-daily_healing-summary-A"
@@ -1777,9 +2074,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For daily healing, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "guoman_hot_blood_combat": {
       "writing_rule_pack_ids": [
@@ -1799,7 +2099,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1809,7 +2112,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -1866,7 +2172,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -1913,7 +2228,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-guoman_hot_blood_combat-summary-A"
@@ -1938,9 +2258,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For guoman hot blood combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "guoman_ensemble_performance": {
       "writing_rule_pack_ids": [
@@ -1960,7 +2283,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -1970,7 +2296,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
       "negative_constraints": [
@@ -2027,7 +2356,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -2074,7 +2412,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-guoman_ensemble_performance-summary-A"
@@ -2099,9 +2442,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For guoman ensemble performance, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "ink_wuxia_combat": {
       "writing_rule_pack_ids": [
@@ -2121,7 +2467,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2131,7 +2480,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -2188,7 +2540,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -2235,7 +2596,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-ink_wuxia_combat-summary-A"
@@ -2260,9 +2626,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For ink wuxia combat, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "eastern_spectacle": {
       "writing_rule_pack_ids": [
@@ -2282,7 +2651,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2292,7 +2664,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -2349,7 +2724,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -2396,7 +2780,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-eastern_spectacle-summary-A"
@@ -2421,9 +2810,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For eastern spectacle, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "xianxia_action": {
       "writing_rule_pack_ids": [
@@ -2443,7 +2835,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2453,7 +2848,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -2510,7 +2908,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -2557,7 +2964,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-xianxia_action-summary-A"
@@ -2582,9 +2994,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For xianxia action, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "urban_fantasy": {
       "writing_rule_pack_ids": [
@@ -2604,7 +3019,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2614,7 +3032,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
       "negative_constraints": [
@@ -2673,7 +3094,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "source_facts",
@@ -2721,7 +3151,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-urban-fantasy-summary-A"
@@ -2746,9 +3181,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For urban fantasy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "chinese_war_formation": {
       "writing_rule_pack_ids": [
@@ -2768,7 +3206,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2778,7 +3219,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -2835,7 +3279,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -2882,7 +3335,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-chinese_war_formation-summary-A"
@@ -2907,9 +3365,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For chinese war formation, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "weapon_highlight": {
       "writing_rule_pack_ids": [
@@ -2929,7 +3390,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -2939,7 +3403,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
       "negative_constraints": [
@@ -2996,7 +3463,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3043,7 +3519,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-weapon_highlight-summary-A"
@@ -3068,9 +3549,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For weapon highlight, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "council_strategy": {
       "writing_rule_pack_ids": [
@@ -3090,7 +3574,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3100,7 +3587,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3157,7 +3647,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3204,7 +3703,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-council_strategy-summary-A"
@@ -3229,9 +3733,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For council strategy, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "siege_defense": {
       "writing_rule_pack_ids": [
@@ -3251,7 +3758,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3261,7 +3771,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3318,7 +3831,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3365,7 +3887,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-siege_defense-summary-A"
@@ -3390,9 +3917,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For siege defense, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "slg_sandbox_view": {
       "writing_rule_pack_ids": [
@@ -3412,7 +3942,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3422,7 +3955,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3479,7 +4015,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3526,7 +4071,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-slg_sandbox_view-summary-A"
@@ -3551,9 +4101,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For slg sandbox view, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "slg_march_encirclement": {
       "writing_rule_pack_ids": [
@@ -3573,7 +4126,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3583,7 +4139,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3640,7 +4199,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3687,7 +4255,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-slg_march_encirclement-summary-A"
@@ -3712,9 +4285,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For slg march encirclement, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "slg_city_growth": {
       "writing_rule_pack_ids": [
@@ -3734,7 +4310,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3744,7 +4323,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3801,7 +4383,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -3848,7 +4439,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-slg_city_growth-summary-A"
@@ -3873,9 +4469,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For slg city growth, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     },
     "slg_battle_report": {
       "writing_rule_pack_ids": [
@@ -3895,7 +4494,10 @@
         "dg-preproduction-storyboard-guide",
         "dg-seedance2-storyboard-field-discipline",
         "dg-ensemble-action-layering",
-        "dg-anime-key-pose-silhouette-priority"
+        "dg-anime-key-pose-silhouette-priority",
+        "dg-storyboard-splitting-by-content-beat",
+        "dg-single-shot-preservation-for-existing-fields",
+        "dg-prompt-load-and-shot-plan-boundary"
       ],
       "validation_rule_pack_ids": [
         "vg-prompt-text-boundary",
@@ -3905,7 +4507,10 @@
         "vg-field-aware-entity",
         "vg-dialogue-evidence-lock",
         "vg-anime-key-pose-field-boundary",
-        "vg-anime-translation-failure-guard"
+        "vg-anime-translation-failure-guard",
+        "vg-storyboard-splitting-by-content-beat",
+        "vg-single-shot-preservation-for-existing-fields",
+        "vg-prompt-load-and-shot-plan-boundary"
       ],
       "scene_profile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
       "negative_constraints": [
@@ -3962,7 +4567,16 @@
         "Do not invent characters, props, or animation steps to justify a pose.",
         "Do not use real directors, studios, films, games, IP names, or proper-name style references as runtime style switches.",
         "Do not let generic film terms replace anime storyboard language.",
-        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime."
+        "Do not move FutureQA items, long universal templates, automatic dialogue routines, or generic anime lexicons into runtime.",
+        "Do not split by fixed row count, fixed seconds, table slots, or rows_seed averaging.",
+        "Do not hard-split a complete shot just to fill a table or satisfy a target row count.",
+        "Do not create rows with meaningless prompt_text or no visible content change.",
+        "Do not force a coherent shot into multiple rows because of table shape, fixed duration slicing, or rows_seed count.",
+        "Do not duplicate the same action across rows to manufacture row count.",
+        "Do not hide split rationale in note, status, or internal fields as final output.",
+        "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
+        "Do not create empty or meaningless prompt_text rows.",
+        "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
       ],
       "influence_axes": [
         "visual_master",
@@ -4009,7 +4623,12 @@
         "subject_silhouette",
         "action_line",
         "anime_translation",
-        "proper_name_safety"
+        "proper_name_safety",
+        "content_beat",
+        "shot_split_boundary",
+        "single_shot_preservation",
+        "prompt_load",
+        "shot_plan_boundary"
       ],
       "selected_sample_ids": [
         "sample-slg_battle_report-summary-A"
@@ -4034,9 +4653,12 @@
         "rule:dialogue-evidence-lock",
         "rule:ensemble-action-layering",
         "rule:anime-key-pose-silhouette-priority",
-        "rule:anime-translation-failure-guard"
+        "rule:anime-translation-failure-guard",
+        "rule:storyboard-splitting-by-content-beat",
+        "rule:single-shot-preservation-for-existing-fields",
+        "rule:prompt-load-and-shot-plan-boundary"
       ],
-      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked."
+      "kb_context_summary": "For slg battle report, preserve accepted facts, inherit compact visual master, choose scene-driven action, apply camera grammar, physical material/light/air cues, shot-scale expression physicalization, transition motion dynamics, duration allocation, clean prompt compilation, and summary-only validation. Apply visual master consistency, preproduction storyboard structure, precise camera language, physical material/light/air cues, visible performance cues, sound/post guidance, and controlled transition/motion dynamics to strengthen prompt_text for the selected task fragment only. Person identity is locked to accepted characters or explicit role labels; locations, actions, scene terms, camera terms, style terms, KB terms, and placeholders must not enter person. Dialogue and narration require accepted textual or factual grounding; unsupported dialogue should be replaced by visible anime action, silence, or repair. Ensemble anime shots may layer action only within accepted characters, role labels, or authorized groups; unsupported counts, factions, and new characters are blocked. Runtime and adapter output stay summary-only; raw source, graph, prompt body, local path, internal evidence, and secrets are blocked. Anime key pose and subject silhouette must stay readable before style, lighting, background, or production-process wording; final fields describe visible pose and action line only. Film language must be translated into anime storyboard and field-bound prompt constraints before runtime; live-action feel, proper-name style switches, IP references, and generic cinematic wording are blocked. Storyboard rows split by semantic beat and readable shot purpose; fixed row count, fixed seconds, table-driven splitting, rows_seed averaging, and meaningless prompt_text rows are blocked. A complete coherent shot may remain one final-field row; row splitting is allowed only for meaningful content, action, reaction, spatial, or shot-purpose changes. Prompt_text must stay compact, single-shot focused, and row-bound; long prompt overload, multi-shot objectives, empty rows, and workflow labels are blocked."
     }
   },
   "duration_profiles": [
@@ -4471,7 +5093,10 @@
           "dg-ensemble-action-layering",
           "vg-no-leakage",
           "dg-anime-key-pose-silhouette-priority",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ]
       },
       {
@@ -4495,7 +5120,10 @@
           "dg-ensemble-action-layering",
           "vg-no-leakage",
           "dg-anime-key-pose-silhouette-priority",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ]
       },
       {
@@ -4515,7 +5143,10 @@
           "dg-duration-density",
           "dg-ensemble-action-layering",
           "dg-anime-key-pose-silhouette-priority",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-storyboard-splitting-by-content-beat",
+          "vg-single-shot-preservation-for-existing-fields",
+          "vg-prompt-load-and-shot-plan-boundary"
         ]
       },
       {
@@ -4526,7 +5157,8 @@
           "vg-no-leakage",
           "vg-prompt-text-boundary",
           "vg-field-aware-entity",
-          "vg-anime-translation-failure-guard"
+          "vg-anime-translation-failure-guard",
+          "vg-prompt-load-and-shot-plan-boundary"
         ]
       },
       {

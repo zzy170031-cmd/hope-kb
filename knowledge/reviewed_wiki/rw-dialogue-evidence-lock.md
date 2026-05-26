@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-对白旁白依据锁候选: Keep dialogue and narration grounded in user-provided text, accepted facts, explicit character intent, or the current scene goal.
+Dialogue evidence lock: Keep dialogue and narration grounded in user-provided text, accepted facts, explicit character intent, or the current scene goal.
 
 ## Source Basis
 
@@ -36,9 +36,11 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- prompt_text
+- person
+- dialogue_or_narration
 - character_action
-- visual_description
+- prompt_text
+- duration_seconds
 
 ## Negative Constraints
 

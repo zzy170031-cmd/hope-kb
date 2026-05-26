@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-表演物理化规则增强: Convert abstract emotion into visible face, posture, breath, and blocking cues that fit shot scale.
+Expression physicalization: Convert abstract emotion into visible face, posture, breath, and blocking cues that fit shot scale.
 
 ## Source Basis
 
@@ -35,10 +35,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- shot_size
 - visual_description
 - character_action
+- shot_size
 - prompt_text
 
 ## Negative Constraints

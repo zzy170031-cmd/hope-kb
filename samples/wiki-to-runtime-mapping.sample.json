@@ -1503,11 +1503,251 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-storyboard-splitting-by-content-beat",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-storyboard-splitting-by-content-beat",
+      "reviewed_wiki_hash": "sha256:summary-rw-storyboard-splitting-by-content-beat",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-storyboard-splitting-by-content-beat",
+        "dg-storyboard-splitting-by-content-beat"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:storyboard-splitting-by-content-beat"
+      ],
+      "summary_fragment_ids": [
+        "summary:storyboard-splitting-by-content-beat"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "director_rule_packs[].directives",
+        "scene_mappings.*.validation_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-storyboard-splitting-by-content-beat"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-26",
+      "runtime_eligible_reason": "rw-storyboard-splitting-by-content-beat was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-single-shot-preservation-for-existing-fields",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-single-shot-preservation-for-existing-fields",
+      "reviewed_wiki_hash": "sha256:summary-rw-single-shot-preservation-for-existing-fields",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-single-shot-preservation-for-existing-fields",
+        "dg-single-shot-preservation-for-existing-fields"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:single-shot-preservation-for-existing-fields"
+      ],
+      "summary_fragment_ids": [
+        "summary:single-shot-preservation-for-existing-fields"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "director_rule_packs[].directives",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-single-shot-preservation-for-existing-fields"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-26",
+      "runtime_eligible_reason": "rw-single-shot-preservation-for-existing-fields was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-prompt-load-and-shot-plan-boundary",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-prompt-load-and-shot-plan-boundary",
+      "reviewed_wiki_hash": "sha256:summary-rw-prompt-load-and-shot-plan-boundary",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-prompt-load-and-shot-plan-boundary",
+        "dg-prompt-load-and-shot-plan-boundary"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:prompt-load-and-shot-plan-boundary"
+      ],
+      "summary_fragment_ids": [
+        "summary:prompt-load-and-shot-plan-boundary"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "director_rule_packs[].directives",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-prompt-load-and-shot-plan-boundary"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-26",
+      "runtime_eligible_reason": "rw-prompt-load-and-shot-plan-boundary was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 20,
-    "mapped_runtime_eligible_wiki_count": 20,
+    "runtime_eligible_wiki_count": 23,
+    "mapped_runtime_eligible_wiki_count": 23,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,

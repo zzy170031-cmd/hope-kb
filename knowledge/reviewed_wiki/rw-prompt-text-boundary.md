@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-分镜提示词边界规则增强: Ensure prompt_text is a clean AI anime generation-facing field compiled from accepted facts and confirmed storyboard rows.
+Prompt text boundary: Ensure prompt_text is a clean AI anime generation-facing field compiled from accepted facts and confirmed storyboard rows.
 
 ## Source Basis
 
@@ -41,6 +41,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 - shot_size
 - visual_description
 - character_action
+- dialogue_or_narration
 - prompt_text
 - duration_seconds
 

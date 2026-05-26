@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-导演调度核心规则增强: Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.
+Director scheduling core: Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.
 
 ## Source Basis
 
@@ -34,6 +34,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- person
 - camera
 - shot_size
 - visual_description

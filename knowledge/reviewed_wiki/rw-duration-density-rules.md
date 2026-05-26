@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-时长与信息密度规则增强: Connect target durations to shot count, beat density, row duration, and validation rules.
+Duration density rules: Connect target durations to shot count, beat density, row duration, and validation rules.
 
 ## Source Basis
 
@@ -34,10 +34,13 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- duration_seconds
-- visual_description
 - character_action
+- dialogue_or_narration
 - prompt_text
+- duration_seconds
+- person
+- shot_size
+- visual_description
 
 ## Negative Constraints
 

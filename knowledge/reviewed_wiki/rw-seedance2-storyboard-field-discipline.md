@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-分镜字段纪律规则增强: Turn Seedance-oriented camera, expression, scene, light, and composition guidance into existing PWA storyboard fields without schema drift.
+Seedance2 storyboard field discipline: Turn Seedance-oriented camera, expression, scene, light, and composition guidance into existing PWA storyboard fields without schema drift.
 
 ## Source Basis
 
@@ -37,11 +37,14 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- person
 - camera
 - shot_size
 - visual_description
 - character_action
+- dialogue_or_narration
 - prompt_text
+- duration_seconds
 
 ## Negative Constraints
 

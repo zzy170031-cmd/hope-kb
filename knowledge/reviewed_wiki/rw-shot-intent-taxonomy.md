@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-镜头意图分类规则增强: Define shot-level intent so storyboard rows carry visible anime production work instead of generic descriptions.
+Shot intent taxonomy: Define shot-level intent so storyboard rows carry visible anime production work instead of generic descriptions.
 
 ## Source Basis
 
@@ -34,11 +34,14 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- camera
+- person
 - shot_size
 - visual_description
 - character_action
+- dialogue_or_narration
 - prompt_text
+- duration_seconds
+- camera
 
 ## Negative Constraints
 

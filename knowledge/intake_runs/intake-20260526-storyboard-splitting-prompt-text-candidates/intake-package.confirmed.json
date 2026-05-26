@@ -1,0 +1,1262 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260526-storyboard-splitting-prompt-text-candidates",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "Storyboard splitting rules for PWA prompt_text",
+    "search_focus": "storyboard_splitting_by_content_beat_for_prompt_text",
+    "target_model": "PWA storyboard prompt compiler",
+    "target_output": [
+      "PWA storyboard rows",
+      "prompt_text",
+      "summary-only KB candidate list"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-26T20:04:00+08:00",
+    "target_field_allowed_values": [
+      "运镜",
+      "景别",
+      "画面描述",
+      "角色动作",
+      "分镜提示词",
+      "时长(秒)",
+      "validation/export safety"
+    ],
+    "field_boundary_note": "人物、对白/旁白是现有 PWA 分镜行字段，可参与字段融合和约束；候选 target_field 仍必须落在允许的 7 类之一，不新增 PWA 字段。"
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_web_search_summary_only",
+    "live_search_connector": "external_to_dashboard",
+    "generated_queries": [
+      "storyboard shot planning action beat reaction shot storyboard pacing guide",
+      "animatic timing storyboard duration pacing guide animation",
+      "cut on action reaction shot editing when to cut action reaction guide",
+      "AI video prompt shot plan avoid overloading long prompt single shot multi shot prompt guide"
+    ],
+    "allowed_source_types": [
+      "storyboard_guide",
+      "animatic_timing_guide",
+      "film_editing_guide",
+      "ai_video_documentation",
+      "paper"
+    ],
+    "required_answers": [
+      "how each candidate serves existing PWA storyboard fields only",
+      "when to split a storyboard row by content beat instead of row count",
+      "when to preserve a complete shot as one prompt_text",
+      "how person, camera, shot_size, visual_description, character_action, dialogue_or_narration, prompt_text, and duration_seconds should fuse",
+      "how duration supports readability without mechanical averaging",
+      "how to prevent long prompt overload and cross-row field pollution",
+      "when action phase, key pose, cut on action, eyeline, blocking, dialogue, or reaction changes justify a new row"
+    ],
+    "search_provider_status": {
+      "status": "manual_summary",
+      "reason": "candidate list created from summary-only internet research",
+      "candidate_count": 10,
+      "merged_evidence_count": 5
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-storyboard-shot-planning-guides",
+      "title": "Storyboard panel and shot planning guides",
+      "source_url": "https://pixflow.net/blog/how-to-storyboard/",
+      "source_type": "guide",
+      "source_type_label": "storyboard guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_template_panel_count"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把分镜提示词从固定行数改为按内容 beat、动作阶段、镜头目的和可读性生成。",
+      "kb_gap": "补充分镜拆分前置判断：一条 prompt_text 应对应一个可读镜头目的，而不是表格格子。",
+      "leakage_check": "summary_only_no_raw_source_text"
+    },
+    {
+      "source_id": "src-animatic-timing-guides",
+      "title": "Animatic timing and pacing guides",
+      "source_url": "https://boords.com/animatic/how-to-make-an-animatic",
+      "source_type": "guide",
+      "source_type_label": "animatic timing guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_tool_workflow_terms"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于约束分镜提示词的时长分配：时长服务动作可读性和节奏，不服务机械均分。",
+      "kb_gap": "补充 prompt_text 信息密度与 duration_seconds 的协同判断。",
+      "leakage_check": "summary_only_no_tool_process_copy"
+    },
+    {
+      "source_id": "src-animation-action-phase-key-pose",
+      "title": "Animation action phase, key pose, anticipation, and follow-through guides",
+      "source_url": "https://www.animationexploration.org/2020/01/19/anticipation-etc/",
+      "source_type": "tutorial",
+      "source_type_label": "animation action tutorial",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_mechanical_three_phase_template"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把动作预备、关键姿态、主动作、跟随动作、次要动作转成 prompt_text 的可读动作阶段，而不是固定三段模板。",
+      "kb_gap": "补充动作阶段与关键姿态是否需要独立分镜提示词的判断。",
+      "leakage_check": "summary_only_no_animation_process_copy"
+    },
+    {
+      "source_id": "src-cut-on-action-reaction-shot",
+      "title": "Cut on action and reaction shot editing guides",
+      "source_url": "https://www.filmsupply.com/articles/cutting-on-action-editing/",
+      "source_type": "article",
+      "source_type_label": "film editing guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_film_ip_examples"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "用于判断何时因动作延续、情绪反应、信息揭示或剪辑目的生成独立分镜提示词。",
+      "kb_gap": "补充 reaction row 与 action cut row 的必要性门禁。",
+      "leakage_check": "summary_only_no_film_or_ip_names_in_runtime"
+    },
+    {
+      "source_id": "src-ai-video-prompt-boundary",
+      "title": "AI video prompt simplicity and multi-shot planning documentation",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+      "source_type": "documentation",
+      "source_type_label": "AI video documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_platform_limit_as_global_rule"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于防止单条分镜提示词过载、跨镜头混写，保留单镜头 prompt 的清晰边界。",
+      "kb_gap": "补充 single-shot preservation 与 long prompt overload 的 runtime 安全约束。",
+      "leakage_check": "summary_only_no_platform_prompt_template_copy"
+    },
+    {
+      "source_id": "src-multi-shot-fragmentation-paper",
+      "title": "Multi-shot video generation narrative fragmentation paper",
+      "source_url": "https://arxiv.org/abs/2412.02259",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于说明多镜头 prompt_text 需要结构化 shot plan，避免叙事碎片化和跨镜头不连续。",
+      "kb_gap": "补充多分镜提示词之间的人物、空间、动作和情绪连续性检查。",
+      "leakage_check": "summary_only_no_paper_text_copy"
+    },
+    {
+      "source_id": "src-storyboard-continuity-screen-direction",
+      "title": "Storyboard continuity, screen direction, eyeline, and 180-degree planning guide",
+      "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+      "source_type": "guide",
+      "source_type_label": "storyboard continuity guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_mechanical_180_rule_template"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把视线方向、角色站位、屏幕方向和空间连续性转成现有分镜字段，最后进入 prompt_text。",
+      "kb_gap": "补充分镜行之间的 screen direction、eyeline、blocking 连续性检查。",
+      "leakage_check": "summary_only_no_raw_source_text"
+    },
+    {
+      "source_id": "src-animation-staging-silhouette-composition",
+      "title": "Animation staging, silhouette, subject focus, and readable composition guides",
+      "source_url": "https://www.animationmentor.com/blog/staging-the-12-basic-principles-of-animation/",
+      "source_type": "guide",
+      "source_type_label": "animation staging guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_style_word_dump"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把主体可读性、关键姿态、轮廓、构图焦点转成画面描述、角色动作、景别和 prompt_text。",
+      "kb_gap": "补充最终画面是否能一眼读懂主体动作和情绪的生成规则。",
+      "leakage_check": "summary_only_no_animation_source_copy"
+    },
+    {
+      "source_id": "src-ai-video-shot-structure-current-fields",
+      "title": "AI video shot prompt structure with subject, action, camera, composition, light, and duration",
+      "source_url": "https://cookbook.openai.com/examples/sora/sora2_prompting_guide",
+      "source_type": "documentation",
+      "source_type_label": "AI video prompt guide",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_platform_template_copy",
+        "avoid_new_pwa_fields"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把主体动作、镜头、构图、光线、时长等现有字段按顺序编译成最终 prompt_text。",
+      "kb_gap": "补充当前字段如何协同服务最终分镜提示词，避免新增字段或跨行混写。",
+      "leakage_check": "summary_only_no_platform_prompt_template_copy"
+    },
+    {
+      "source_id": "src-storyboard-dialogue-caption",
+      "title": "Storyboard captions, dialogue, action notes, and timing notes guides",
+      "source_url": "https://learn.toonboom.com/modules/intro-to-storyboarding/topic/what-are-captions",
+      "source_type": "documentation",
+      "source_type_label": "storyboard caption documentation",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "保留",
+      "risk_flags": [
+        "summary_only",
+        "avoid_auto_dialogue_template"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "用于把对白/旁白、动作说明和时长提示绑定到当前分镜行，而不是自动编造对白或跨行搬运台词。",
+      "kb_gap": "补充 dialogue_or_narration 如何服务当前行 prompt_text，以及何时因对白/旁白 beat 变化拆行。",
+      "leakage_check": "summary_only_no_dialogue_template_copy"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-storyboard-shot-planning-guides",
+      "summary": "通过：能直接支持 prompt_text 的内容 beat 拆分原则，禁止固定表格行数反推分镜。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-animatic-timing-guides",
+      "summary": "通过：能支持 prompt_text 的时长与信息密度校验，但不得把工具流程词下放 runtime。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-animation-action-phase-key-pose",
+      "summary": "通过：作为合并证据进入 prompt_text 拆分候选；动作阶段、关键姿态和跟随动作只有影响可读性时才拆。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cut-on-action-reaction-shot",
+      "summary": "通过：能支持动作连续切点、reaction row 必要性和镜头目的判断。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-ai-video-prompt-boundary",
+      "summary": "通过：能支持单镜头完整保留、长 prompt 过载防护和多镜头边界。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-multi-shot-fragmentation-paper",
+      "summary": "通过：能支持多分镜 prompt_text 的结构化连续性检查，作为研究摘要使用。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-storyboard-continuity-screen-direction",
+      "summary": "通过：可融合进现有 PWA 分镜字段，最终服务分镜提示词；仅作为 summary-only 候选证据。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-animation-staging-silhouette-composition",
+      "summary": "通过：可融合进现有 PWA 分镜字段，最终服务分镜提示词；仅作为 summary-only 候选证据。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-ai-video-shot-structure-current-fields",
+      "summary": "通过：可融合进现有 PWA 分镜字段，最终服务分镜提示词；仅作为 summary-only 候选证据。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-storyboard-dialogue-caption",
+      "summary": "通过：可融合进现有 PWA 分镜字段，最终服务分镜提示词；仅作为 summary-only 候选证据。",
+      "result": "keep"
+    }
+  ],
+  "recommendations": [
+    {
+      "target_field": "分镜提示词",
+      "target_fields_zh": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-storyboard-row-field-fusion-for-prompt-text",
+      "candidate_name": "storyboard-row-field-fusion-for-prompt-text",
+      "chinese_title": "现有分镜字段融合为分镜提示词",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "AI video prompt structure and storyboard caption sources show that a useful shot prompt is assembled from person, action, camera, shot scale, visual context, dialogue or narration, and timing, while each piece remains field-bound.",
+      "core_logic": "当前 PWA 行字段先各自成立，再汇总为 prompt_text；prompt_text 不新增字段、不跨行偷拿信息。",
+      "source_type": "documentation / guide",
+      "storyboard_splitting_rule": "拆行前先判断人物、动作、镜头、景别、画面、对白/旁白、时长是否仍服务同一个镜头目的；若目的一致则保留一行。",
+      "pwa_generation_implication": "PWA 生成区每一列都服务最终分镜提示词，但不能把字段外的风格词、模板词或专名塞进 prompt_text。",
+      "positive_directive": "用人物、运镜、景别、画面描述、角色动作、对白/旁白、时长共同编译当前行分镜提示词。",
+      "negative_constraint": "不要新增 PWA 字段，不要把来源、模板、风格开关、导演/IP 专名写入 prompt_text。",
+      "duplicate_hint": "对照 rw-prompt-text-boundary、rw-seedance2-storyboard-field-discipline；可作为字段融合总规则。",
+      "risk_note": "最高风险是把字段融合误写成新增 schema 或长 prompt 模板。",
+      "priority": "P0",
+      "source_candidate_refs": [
+        "src-ai-video-shot-structure-current-fields",
+        "src-storyboard-dialogue-caption"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "knowledge_group": "validation_group",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "validation/export safety",
+      "target_fields_zh": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-storyboard-splitting-by-content-beat",
+      "candidate_name": "storyboard-splitting-by-content-beat",
+      "chinese_title": "按内容 beat 拆分现有分镜字段",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "Storyboard planning、动作阶段、cut on action 与 blocking 来源共同指向：panel/shot 是承载动作、镜头、情绪、空间关系、切点和时长意图的可读单元，不是表格格子。",
+      "core_logic": "一条分镜行对应一个可读内容 beat；只有 beat、动作阶段、镜头目的、视线/空间调度、对白/旁白或剪辑目的变化时才拆。",
+      "source_type": "guide / article / tutorial",
+      "storyboard_splitting_rule": "动作阶段、关键姿态、情绪反应、视线变化、空间调度、对白/旁白 beat、信息揭示、冲击点、cut on action 或剪辑目的变化时才拆分。",
+      "pwa_generation_implication": "rows_seed 只能作为内容 beat 估算，不得作为固定输出行数；拆出的每行必须能填入现有字段。",
+      "positive_directive": "先识别内容 beat 和镜头目的，再填人物、运镜、景别、画面描述、角色动作、对白/旁白、时长，并编译 prompt_text。",
+      "negative_constraint": "不要按固定秒数、固定表格行数或平均切片拆镜头。",
+      "duplicate_hint": "已合并 action phase / cut on action / eyeline blocking / dialogue beat 证据；重点对照 rw-duration-density-rules、rw-shot-intent-taxonomy、rw-transition-motion-dynamics。",
+      "risk_note": "不能变成所有动作三段拆、所有对白单独拆、所有视线变化都切镜头的模板。",
+      "priority": "P0",
+      "merged_knowledge": [
+        "action phase / key pose split",
+        "cut on action continuity split",
+        "spatial / eyeline / blocking split",
+        "dialogue_or_narration beat split"
+      ],
+      "source_candidate_refs": [
+        "src-storyboard-shot-planning-guides",
+        "src-animation-action-phase-key-pose",
+        "src-cut-on-action-reaction-shot",
+        "src-storyboard-continuity-screen-direction",
+        "src-storyboard-dialogue-caption"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-duration-density-rules",
+        "rw-shot-intent-taxonomy",
+        "rw-transition-motion-dynamics",
+        "rw-anime-key-pose-silhouette-priority"
+      ],
+      "knowledge_group": "director_group",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "validation/export safety",
+      "target_fields_zh": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-single-shot-preservation-for-existing-fields",
+      "candidate_name": "single-shot-preservation-for-existing-fields",
+      "chinese_title": "完整镜头保留为一行现有字段",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "AI video prompt guidance favors clear single-shot descriptions when one subject action, one camera setup, and one visual goal are enough.",
+      "core_logic": "如果人物、动作、运镜、景别、画面、对白/旁白和时长仍服务同一个完整镜头，就保留为一行。",
+      "source_type": "documentation",
+      "storyboard_splitting_rule": "无明确内容切点时不拆；连续主体动作、单一运镜、单一镜头目的保持一行。",
+      "pwa_generation_implication": "PWA 可以少行输出；字段完整比行数多更重要。",
+      "positive_directive": "为完整镜头生成一组一致字段，并编译为一个清晰 prompt_text。",
+      "negative_constraint": "不要为了补 rows_seed 把一个完整镜头硬拆成多个短行。",
+      "duplicate_hint": "可并入 rw-prompt-text-boundary 或 rw-seedance2-storyboard-field-discipline。",
+      "risk_note": "不要把平台 clip 秒数限制写成 Hope 全局限制。",
+      "priority": "P0",
+      "source_candidate_refs": [
+        "src-ai-video-prompt-boundary",
+        "src-ai-video-shot-structure-current-fields"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "knowledge_group": "validation_group",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "时长(秒)",
+      "target_fields_zh": [
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-duration-allocation-by-field-readability",
+      "candidate_name": "duration-allocation-by-field-readability",
+      "chinese_title": "按字段可读性分配时长",
+      "serves_pwa_fields": [
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "Animatic timing sources use timing to test pacing, cut points, action readability, pauses, and dialogue/action timing.",
+      "core_logic": "时长服务角色动作、对白/旁白和 prompt_text 的可读性，不服务机械均分。",
+      "source_type": "guide",
+      "storyboard_splitting_rule": "先确定当前行动作/对白/旁白 beat，再分配 duration；短行不塞多目标，长行可保留停顿和反应。",
+      "pwa_generation_implication": "duration_seconds 应校验 prompt_text 信息密度和动作完成度。",
+      "positive_directive": "按动作读懂所需时间、对白/旁白停顿、反应节奏分配时长。",
+      "negative_constraint": "不要固定 2 秒、3 秒、5 秒机械切分。",
+      "duplicate_hint": "强重叠 rw-duration-density-rules；建议作为该规则增强。",
+      "risk_note": "不要把 animatic 工具流程词写进 prompt_text。",
+      "priority": "P0",
+      "source_candidate_refs": [
+        "src-animatic-timing-guides",
+        "src-storyboard-dialogue-caption"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-duration-density-rules"
+      ],
+      "knowledge_group": "validation_group",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "角色动作",
+      "target_fields_zh": [
+        "画面描述",
+        "角色动作",
+        "景别",
+        "分镜提示词"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-action-key-pose-staging-for-fields",
+      "candidate_name": "action-key-pose-staging-for-fields",
+      "chinese_title": "动作阶段与关键姿态服务画面和动作字段",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "shot_size",
+        "prompt_text"
+      ],
+      "source_summary": "Animation staging and key-pose sources emphasize readable action, silhouette, subject focus, and pose clarity before detail.",
+      "core_logic": "动作阶段和关键姿态只有在提升可读性时才进入独立字段表达。",
+      "source_type": "tutorial / guide",
+      "storyboard_splitting_rule": "预备、主动作、跟随动作若各自有独立可读姿态或节奏意义，可拆；否则融合为一行。",
+      "pwa_generation_implication": "画面描述和角色动作应写清主体轮廓、重心、动作线、关键姿态和可见结果。",
+      "positive_directive": "用可见姿态和主体轮廓保证 prompt_text 读得懂动作。",
+      "negative_constraint": "不要把每个动作机械拆成 anticipation/action/follow-through 三行。",
+      "duplicate_hint": "可合并 rw-anime-key-pose-silhouette-priority、rw-expression-physicalization。",
+      "risk_note": "不要输出制作流程术语替代画面描述。",
+      "priority": "P1",
+      "source_candidate_refs": [
+        "src-animation-action-phase-key-pose",
+        "src-animation-staging-silhouette-composition"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-anime-key-pose-silhouette-priority",
+        "rw-expression-physicalization"
+      ],
+      "knowledge_group": "director_group",
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "运镜",
+      "target_fields_zh": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-continuity-eyeline-blocking-for-fields",
+      "candidate_name": "continuity-eyeline-blocking-for-fields",
+      "chinese_title": "视线与空间连续性服务现有分镜字段",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "source_summary": "Storyboard continuity sources emphasize screen direction, line of action, eyeline, character position, and shot-to-shot orientation.",
+      "core_logic": "视线、站位和空间方向变化只有影响理解时才成为拆行依据；否则作为同一行字段细化。",
+      "source_type": "guide",
+      "storyboard_splitting_rule": "视线对象、角色站位、空间方向、主客观视角或阻挡关系发生理解性变化时可拆。",
+      "pwa_generation_implication": "人物、运镜、景别、画面描述和角色动作应保持空间方向一致，prompt_text 不制造方向跳变。",
+      "positive_directive": "在字段中说明人物相对位置、视线对象、镜头方向和可见动作关系。",
+      "negative_constraint": "不要切出无空间目的的随机角度，不要让 prompt_text 破坏已建立方向。",
+      "duplicate_hint": "可合并 rw-shot-intent-taxonomy、rw-transition-motion-dynamics、rw-seedance2-storyboard-field-discipline。",
+      "risk_note": "不要把 180 度规则机械化为所有场景固定模板。",
+      "priority": "P1",
+      "source_candidate_refs": [
+        "src-storyboard-continuity-screen-direction"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-transition-motion-dynamics",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "knowledge_group": "director_group",
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "分镜提示词",
+      "target_fields_zh": [
+        "人物",
+        "对白/旁白",
+        "角色动作",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-dialogue-narration-beat-field-gate",
+      "candidate_name": "dialogue-narration-beat-field-gate",
+      "chinese_title": "对白/旁白 beat 只服务当前分镜行",
+      "serves_pwa_fields": [
+        "person",
+        "dialogue_or_narration",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "Storyboard caption documentation separates dialogue, action notes, and timing notes per panel, showing that speech belongs to the current panel only when it clarifies that beat.",
+      "core_logic": "对白/旁白字段只承载当前行需要的说话、旁白或静默信息，不自动编造台词，不跨行搬运。",
+      "source_type": "documentation / guide",
+      "storyboard_splitting_rule": "对白/旁白改变说话者、信息揭示、情绪反应或节奏停顿时可拆；否则与当前动作行融合。",
+      "pwa_generation_implication": "prompt_text 编译时应把对白/旁白作为当前行语义约束，而不是替代画面动作。",
+      "positive_directive": "绑定说话者、可见反应、停顿和当前行动作，再决定是否写入 prompt_text。",
+      "negative_constraint": "不要自动编造对白模板，不要让对白/旁白污染 person 或 visual_description。",
+      "duplicate_hint": "可合并 rw-dialogue-evidence-lock、rw-prompt-text-boundary、rw-expression-physicalization。",
+      "risk_note": "高风险是虚构对白或把旁白当成画面事实。",
+      "priority": "P1",
+      "source_candidate_refs": [
+        "src-storyboard-dialogue-caption"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-dialogue-evidence-lock",
+        "rw-prompt-text-boundary",
+        "rw-expression-physicalization"
+      ],
+      "knowledge_group": "validation_group",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "角色动作",
+      "target_fields_zh": [
+        "人物",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-reaction-shot-field-necessity-gate",
+      "candidate_name": "reaction-shot-field-necessity-gate",
+      "chinese_title": "反应镜头必须服务人物动作与提示词理解",
+      "serves_pwa_fields": [
+        "person",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "Reaction shot sources emphasize that a reaction should provide emotion, suspense, relationship, or new information rather than fill editing space.",
+      "core_logic": "reaction row 只有在改变理解、揭示情绪或承接冲击后果时才独立生成。",
+      "source_type": "guide",
+      "storyboard_splitting_rule": "反应改变观众理解、揭示情绪/关系/冲击后果时可拆；否则并入原镜头。",
+      "pwa_generation_implication": "反应行必须在人物、景别、画面描述、角色动作、对白/旁白和 prompt_text 中说明对什么反应以及如何可见。",
+      "positive_directive": "生成可见表情、身体反应、视线变化、停顿或短对白/旁白约束。",
+      "negative_constraint": "不要插入无信息量的空泛表情特写。",
+      "duplicate_hint": "可合并 rw-shot-intent-taxonomy、rw-expression-physicalization、rw-dialogue-evidence-lock。",
+      "risk_note": "不要变成自动对白或表情模板。",
+      "priority": "P1",
+      "source_candidate_refs": [
+        "src-cut-on-action-reaction-shot",
+        "src-storyboard-dialogue-caption"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-expression-physicalization",
+        "rw-dialogue-evidence-lock"
+      ],
+      "knowledge_group": "director_group",
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "target_field": "分镜提示词",
+      "target_fields_zh": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "reviewed_wiki_id": "rw-prompt-load-and-shot-plan-boundary",
+      "candidate_name": "prompt-load-and-shot-plan-boundary",
+      "chinese_title": "分镜提示词负载与 shot plan 边界",
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "AI video documentation and multi-shot research point to structured shot planning: each shot should keep a clear camera setup, subject action, composition, timing, and continuity target.",
+      "core_logic": "每条 prompt_text 只编译当前行的现有字段，不让多个镜头目标塞进同一行。",
+      "source_type": "documentation / paper",
+      "storyboard_splitting_rule": "多镜头必须显式 shot plan；单镜头必须避免过载；不能用长段落让模型猜切点。",
+      "pwa_generation_implication": "防止 long prompt overload、跨行目标混杂、rows_seed flattening 和字段污染。",
+      "positive_directive": "每条分镜提示词保持一个主镜头目的、一个主动作节奏和一组一致字段。",
+      "negative_constraint": "不要输出长 prompt 万能模板，不要把多个镜头目标塞进一条 prompt_text。",
+      "duplicate_hint": "可并入 rw-prompt-text-boundary、rw-seedance2-storyboard-field-discipline。",
+      "risk_note": "不要引用平台专属 prompt 模板进入 runtime。",
+      "priority": "P0",
+      "source_candidate_refs": [
+        "src-ai-video-prompt-boundary",
+        "src-multi-shot-fragmentation-paper",
+        "src-ai-video-shot-structure-current-fields"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "knowledge_group": "validation_group",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_field_allowed_by_instruction": true
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-shot-size-purpose-for-prompt-text",
+      "candidate_name": "camera-shot-size-purpose-for-prompt-text",
+      "chinese_title": "运镜与景别必须服务镜头目的",
+      "target_field": "景别",
+      "target_field_allowed_by_instruction": true,
+      "target_fields_zh": [
+        "运镜",
+        "景别",
+        "画面描述",
+        "分镜提示词"
+      ],
+      "target_model_context": "PWA storyboard generation area current fields -> prompt_text",
+      "current_pwa_field_scope": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "source_summary": "Storyboard continuity, shot planning, and AI video prompt sources all indicate that camera setup and shot scale should clarify subject action, spatial relation, emphasis, or transition purpose.",
+      "core_logic": "运镜和景别不是装饰词；它们必须服务当前分镜行的动作、空间、信息或情绪目的，并最终进入 prompt_text。",
+      "source_type": "guide / documentation",
+      "storyboard_splitting_rule": "当运镜或景别变化代表新的空间关系、动作阶段、信息揭示、冲击点或反应重点时可拆；否则保持一行内字段细化。",
+      "pwa_generation_implication": "PWA 应先确定镜头目的，再选择运镜和景别；prompt_text 只编译当前行需要的一组镜头语言。",
+      "positive_directive": "为当前行选择一个主要运镜和一个匹配景别，用来支撑人物、画面描述和角色动作。",
+      "negative_constraint": "不要堆砌多个运镜/景别术语，不要随机切换角度，不要让景别与动作可读性冲突。",
+      "duplicate_hint": "可合并 rw-shot-intent-taxonomy、rw-transition-motion-dynamics、rw-seedance2-storyboard-field-discipline。",
+      "risk_note": "风险是把泛电影术语当成风格词堆入 prompt_text，或把景别变化机械化为拆行规则。",
+      "priority": "P1",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-storyboard-continuity-screen-direction",
+        "src-ai-video-shot-structure-current-fields"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-transition-motion-dynamics",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "knowledge_group": "director_group",
+      "runtime_eligible": true,
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-26T12:20:49.946Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-storyboard-row-field-fusion-for-prompt-text",
+      "rw-storyboard-splitting-by-content-beat",
+      "rw-single-shot-preservation-for-existing-fields",
+      "rw-duration-allocation-by-field-readability",
+      "rw-action-key-pose-staging-for-fields",
+      "rw-continuity-eyeline-blocking-for-fields",
+      "rw-dialogue-narration-beat-field-gate",
+      "rw-reaction-shot-field-necessity-gate",
+      "rw-prompt-load-and-shot-plan-boundary",
+      "rw-camera-shot-size-purpose-for-prompt-text"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-storyboard-row-field-fusion-for-prompt-text",
+      "rw-storyboard-splitting-by-content-beat",
+      "rw-single-shot-preservation-for-existing-fields",
+      "rw-duration-allocation-by-field-readability",
+      "rw-action-key-pose-staging-for-fields",
+      "rw-continuity-eyeline-blocking-for-fields",
+      "rw-dialogue-narration-beat-field-gate",
+      "rw-reaction-shot-field-necessity-gate",
+      "rw-prompt-load-and-shot-plan-boundary",
+      "rw-camera-shot-size-purpose-for-prompt-text"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-26T12:30:10.216Z",
+    "command": "node scripts\\apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260526-storyboard-splitting-prompt-text-candidates\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "status": "applied",
+      "package": "knowledge\\intake_runs\\intake-20260526-storyboard-splitting-prompt-text-candidates\\intake-package.confirmed.json",
+      "processed_accepted_ids": [
+        "rw-storyboard-row-field-fusion-for-prompt-text",
+        "rw-storyboard-splitting-by-content-beat",
+        "rw-single-shot-preservation-for-existing-fields",
+        "rw-duration-allocation-by-field-readability",
+        "rw-action-key-pose-staging-for-fields",
+        "rw-continuity-eyeline-blocking-for-fields",
+        "rw-dialogue-narration-beat-field-gate",
+        "rw-reaction-shot-field-necessity-gate",
+        "rw-prompt-load-and-shot-plan-boundary",
+        "rw-camera-shot-size-purpose-for-prompt-text"
+      ],
+      "accepted_target_status": [
+        {
+          "accepted_id": "rw-storyboard-row-field-fusion-for-prompt-text",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-prompt-text-boundary",
+            "rw-seedance2-storyboard-field-discipline"
+          ]
+        },
+        {
+          "accepted_id": "rw-storyboard-splitting-by-content-beat",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-storyboard-splitting-by-content-beat"
+          ]
+        },
+        {
+          "accepted_id": "rw-single-shot-preservation-for-existing-fields",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-single-shot-preservation-for-existing-fields"
+          ]
+        },
+        {
+          "accepted_id": "rw-duration-allocation-by-field-readability",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-duration-density-rules"
+          ]
+        },
+        {
+          "accepted_id": "rw-action-key-pose-staging-for-fields",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-expression-physicalization",
+            "rw-anime-key-pose-silhouette-priority"
+          ]
+        },
+        {
+          "accepted_id": "rw-continuity-eyeline-blocking-for-fields",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-camera-language-grammar",
+            "rw-director-scheduling-core",
+            "rw-transition-motion-dynamics"
+          ]
+        },
+        {
+          "accepted_id": "rw-dialogue-narration-beat-field-gate",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-dialogue-evidence-lock",
+            "rw-prompt-text-boundary"
+          ]
+        },
+        {
+          "accepted_id": "rw-reaction-shot-field-necessity-gate",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-shot-intent-taxonomy",
+            "rw-duration-density-rules"
+          ]
+        },
+        {
+          "accepted_id": "rw-prompt-load-and-shot-plan-boundary",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-prompt-load-and-shot-plan-boundary"
+          ]
+        },
+        {
+          "accepted_id": "rw-camera-shot-size-purpose-for-prompt-text",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-camera-language-grammar",
+            "rw-shot-intent-taxonomy",
+            "rw-prompt-text-boundary"
+          ]
+        }
+      ],
+      "applied_reviewed_wiki_ids": [
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline",
+        "rw-storyboard-splitting-by-content-beat",
+        "rw-single-shot-preservation-for-existing-fields",
+        "rw-duration-density-rules",
+        "rw-expression-physicalization",
+        "rw-anime-key-pose-silhouette-priority",
+        "rw-camera-language-grammar",
+        "rw-director-scheduling-core",
+        "rw-transition-motion-dynamics",
+        "rw-dialogue-evidence-lock",
+        "rw-shot-intent-taxonomy",
+        "rw-prompt-load-and-shot-plan-boundary"
+      ],
+      "validate": {
+        "status": "passed",
+        "package": "intake-package.confirmed.json",
+        "run_id": "intake-20260526-storyboard-splitting-prompt-text-candidates",
+        "source_candidates": 10,
+        "recommendations": 10,
+        "confirmed": true
+      },
+      "build": {
+        "status": "written",
+        "output": "samples\\pwa-kb-adapter-output.sample.json",
+        "scene_count": 21,
+        "rule_pack_count": 29
+      }
+    }
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260526-storyboard-splitting-prompt-text-candidates/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260526-storyboard-splitting-prompt-text-candidates/intake-package.confirmed.json",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  }
+}
