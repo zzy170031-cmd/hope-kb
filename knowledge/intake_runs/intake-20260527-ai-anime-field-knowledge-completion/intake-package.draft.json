@@ -1,0 +1,2568 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260527-ai-anime-field-knowledge-completion",
+  "status": "recommendations_ready",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "AI anime field knowledge completion for Hope PWA final fields",
+    "search_focus": "short_text_to_story_expansion_script_rewrite_to_anime_storyboard_fields_and_prompt_text",
+    "target_model": "Hope PWA storyboard prompt compiler and Qwen constrained text generation",
+    "target_output": [
+      "PWA storyboard rows",
+      "story expansion or script rewrite task plan",
+      "field-bound anime storyboard prompts",
+      "validation and export safety"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-27T00:00:00+08:00",
+    "field_boundary_note": "Sequence number stays PWA-controlled. Operation stays UI-controlled. note/status remain internal state and are not final generated fields."
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_live_web_search_summary_only",
+    "live_search_connector": "external_web_search",
+    "generated_queries": [
+      "story expansion script rewriting screenplay adaptation story beat scene beat dramatic structure",
+      "AI video prompting official documentation subject action camera lighting duration",
+      "storyboard planning shot planning camera movement shot size guide",
+      "animation acting key pose anticipation follow through staging silhouette",
+      "character model sheet visual consistency animation production",
+      "eyeline screen direction continuity storyboard 180 degree rule",
+      "color script mood color continuity animation",
+      "AI video identity drift multi shot inconsistency long prompt overload paper",
+      "国内 动画 分镜头脚本 景别 运镜 对白 动作 时间",
+      "国内 AI 视频生成 提示词 镜头语言 景别 光影 主体运动 官方文档",
+      "阿里云 百炼 文生视频 图生视频 提示词 景别 运镜 角色一致性",
+      "智谱 AI 视频生成 提示词 镜头语言 景别 光影 主体运动",
+      "国内 动画 色彩节奏 情绪叙事 连续性 期刊",
+      "知网 动画分镜 镜头语言 影视动画 分镜头 论文",
+      "电影学院 动画分镜 视听语言 故事板 课程 公开",
+      "中国传媒大学 动画 帧 时间材料 知网 当代电影",
+      "动画角色 微表情 AIGC 认知行为 知网",
+      "北京电影学院 动画视听语言 动画分镜绘制 课程"
+    ],
+    "allowed_source_types": [
+      "official_doc",
+      "guide",
+      "article",
+      "paper",
+      "tutorial",
+      "industry_reference"
+    ],
+    "required_answers": [
+      "which current PWA fields each candidate serves",
+      "whether the candidate improves story expansion, script rewrite, storyboard planning, prompt_text compilation, validation, or export safety",
+      "whether the source supports product rules directly or only generic knowledge",
+      "whether the candidate should merge existing reviewed_wiki, create a possible new reviewed_wiki, or stay FutureQA",
+      "whether runtime use must remain summary-only and field-bound"
+    ],
+    "search_provider_status": {
+      "status": "manual_live_search",
+      "reason": "one-time web search performed outside dashboard provider and summarized into source_refs",
+        "candidate_count": 10,
+        "source_ref_count": 44,
+      "accessed_at": "2026-05-27",
+      "domestic_source_ref_count": 26,
+      "academic_or_film_school_source_count": 10
+    },
+    "domestic_chinese_sources_included": true,
+    "academic_film_school_sources_included": true
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-openai-sora-video-generation",
+      "title": "Video generation with Sora",
+      "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+      "source_type": "official_doc",
+      "source_type_label": "official AI video documentation",
+      "publisher_or_site": "OpenAI Developers",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_platform_template_copy"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports compiling shot type, subject, action, setting, lighting, motion, and duration into one field-bound prompt_text.",
+      "kb_gap": "Adds official AI-video evidence for current PWA field fusion and single-shot prompt boundaries.",
+      "leakage_check": "summary_only_no_prompt_template_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide ties video prompts to subjects, camera, lighting, motion, shot type, and seconds, and supports using image references to preserve characters or environments.",
+      "relevance_to_product": "Maps directly to PWA camera, shot_size, visual_description, character_action, prompt_text, and duration_seconds."
+    },
+    {
+      "source_id": "src-runway-gen4-video-prompting",
+      "title": "Gen-4 Video Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+      "source_type": "official_doc",
+      "source_type_label": "official AI video documentation",
+      "publisher_or_site": "Runway Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_negative_prompt_as_runtime_rule",
+        "avoid_platform_specific_limits_as_global_limits"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports simple single-scene motion prompts and warns against overloaded multi-change prompts.",
+      "kb_gap": "Adds evidence for prompt overload repair routing and motion-first prompt_text compilation.",
+      "leakage_check": "summary_only_no_prompt_template_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide recommends simple prompts, one added element at a time, clear subject motion, camera motion, and avoiding overly complex multi-scene instructions.",
+      "relevance_to_product": "Directly supports prompt_text safety, camera, character_action, visual_description, and duration_seconds boundaries."
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "title": "Veo on Vertex AI video generation prompt guide",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide?hl=en",
+      "source_type": "official_doc",
+      "source_type_label": "official AI video documentation",
+      "publisher_or_site": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_platform_term_dump"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports subject/action/context/camera/light vocabulary as field-bound prompt ingredients.",
+      "kb_gap": "Adds official AI-video evidence for subject specificity, camera effects, light, depth, and focus as final-field inputs.",
+      "leakage_check": "summary_only_no_prompt_template_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide defines the subject as the who or what around which action revolves and documents camera/focus/lighting effects for video prompts.",
+      "relevance_to_product": "Serves person, camera, shot_size, visual_description, character_action, and prompt_text."
+    },
+    {
+      "source_id": "src-screenburn-story-beats",
+      "title": "Story Beats in Screenwriting",
+      "source_url": "https://screenburn.app/learn/story-beats",
+      "source_type": "guide",
+      "source_type_label": "screenwriting guide",
+      "publisher_or_site": "Screenburn",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_fixed_beat_template"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "Supports interpreting short user text as change-bearing story beats rather than isolated events.",
+      "kb_gap": "Adds story-task routing evidence before storyboard field generation.",
+      "leakage_check": "summary_only_no_writing_template_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide distinguishes beats as story changes and scenes as sequences of beats with a unified dramatic purpose.",
+      "relevance_to_product": "Helps PWA choose expand_story, rewrite_script, or create_story_task before filling existing fields."
+    },
+    {
+      "source_id": "src-pixar-story-visual-language",
+      "title": "Pixar in a Box: The art of storytelling",
+      "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+      "source_type": "industry_reference",
+      "source_type_label": "storytelling education",
+      "publisher_or_site": "Khan Academy / Pixar in a Box",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_studio_name_as_runtime_style"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "Supports visual language as story support through perspective, color, shape, line, space, and motion.",
+      "kb_gap": "Adds product-safe evidence for turning written story beats into visual fields without using studio names as style switches.",
+      "leakage_check": "summary_only_no_ip_or_studio_style_switch",
+      "source_evidence_status": "verified_search_result",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The source frames visual language as imagery that supports story meaning through perspective, color, shape, space, and motion.",
+      "relevance_to_product": "Useful for visual_description, camera, shot_size, character_action, and prompt_text grounding."
+    },
+    {
+      "source_id": "src-cgwire-character-sheets",
+      "title": "Character Sheets: The Blueprint for Consistent Animation",
+      "source_url": "https://blog.cg-wire.com/character-sheet-animation/",
+      "source_type": "guide",
+      "source_type_label": "animation production guide",
+      "publisher_or_site": "CGWire",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_visual_reference_filename"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports character visual consistency with turnaround, expression, pose, color, and distinctive feature anchors.",
+      "kb_gap": "Adds animation-specific visual continuity evidence beyond generic person identity.",
+      "leakage_check": "summary_only_no_image_filename_or_source_path",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide explains character sheets as production references for design, movement, personality, proportions, expressions, poses, and consistency across teams.",
+      "relevance_to_product": "Supports person, visual_description, character_action, and prompt_text continuity across storyboard rows."
+    },
+    {
+      "source_id": "src-storyboardart-continuity",
+      "title": "Film Continuity for Storyboard Artists",
+      "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+      "source_type": "guide",
+      "source_type_label": "storyboard continuity guide",
+      "publisher_or_site": "StoryboardArt",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_mechanical_180_rule_template"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports screen direction, axis, eyeline, character grouping, and continuity checks between storyboard rows.",
+      "kb_gap": "Adds explicit shot-to-shot continuity and axis evidence for PWA field repair.",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The guide links storyboard information to continuity needs and explains screen direction, the 180-degree line, grouping, and motivated exceptions.",
+      "relevance_to_product": "Serves camera, shot_size, visual_description, character_action, person, and prompt_text validation."
+    },
+    {
+      "source_id": "src-toonboom-captions",
+      "title": "What are Captions?",
+      "source_url": "https://learn.toonboom.com/modules/intro-to-storyboarding/topic/what-are-captions",
+      "source_type": "official_doc",
+      "source_type_label": "storyboard software documentation",
+      "publisher_or_site": "Toon Boom Learn Portal",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_auto_dialogue_template"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports separating action notes, dialogue, notes, and timing against storyboard panels.",
+      "kb_gap": "Adds evidence for dialogue_or_narration allocation and timing without inventing dialogue.",
+      "leakage_check": "summary_only_no_dialogue_template_copy",
+      "source_evidence_status": "verified_search_result",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The documentation describes captions as panel notes for action clarity, dialogue, timing against the storyboard, and relevant scene notes.",
+      "relevance_to_product": "Maps to character_action, dialogue_or_narration, duration_seconds, prompt_text, and person."
+    },
+    {
+      "source_id": "src-toonboom-timing",
+      "title": "Storyboard Pro: About Timing",
+      "source_url": "https://docs.toonboom.com/help/storyboard-pro-25/storyboard/timing/about-timing.html",
+      "source_type": "official_doc",
+      "source_type_label": "storyboard software documentation",
+      "publisher_or_site": "Toon Boom Documentation",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_tool_workflow_terms_in_runtime"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports tying panel/scene timing to intended action pace and audio context.",
+      "kb_gap": "Adds production timing evidence for duration_seconds and information-density checks.",
+      "leakage_check": "summary_only_no_tool_process_copy",
+      "source_evidence_status": "verified_search_result",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The documentation describes timing panels and scenes to match intended action pace and soundtrack when making animatics.",
+      "relevance_to_product": "Serves duration_seconds, character_action, dialogue_or_narration, and prompt_text."
+    },
+    {
+      "source_id": "src-britannica-camera-movement",
+      "title": "Film: Shooting angle and point of view",
+      "source_url": "https://www.britannica.com/art/film/Shooting-angle-and-point-of-view",
+      "source_type": "industry_reference",
+      "source_type_label": "film reference",
+      "publisher_or_site": "Encyclopaedia Britannica",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_generic_film_term_dump"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports camera movement as story context, reveal, emotional emphasis, and relationship framing rather than decoration.",
+      "kb_gap": "Adds authoritative film-language evidence for camera purpose and shot progression.",
+      "leakage_check": "summary_only_no_director_or_film_name_style_switch",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The reference explains how camera movement modifies framing, scale, and angle, and can reveal details, connect characters, or express emotion depending on context and pace.",
+      "relevance_to_product": "Serves camera, shot_size, visual_description, and prompt_text."
+    },
+    {
+      "source_id": "src-clipstudio-animation-principles",
+      "title": "Tips for Mastering the 12 Principles of Animation",
+      "source_url": "https://www.clipstudio.net/en/animation/12-principles/",
+      "source_type": "tutorial",
+      "source_type_label": "animation tutorial",
+      "publisher_or_site": "Clip Studio Paint",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_mechanical_principle_template"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports anticipation, staging, pose-to-pose, follow-through, silhouette, focus, and readable action.",
+      "kb_gap": "Adds animation performance evidence for current fields without adding a new animation-process field.",
+      "leakage_check": "summary_only_no_animation_process_dump",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The tutorial explains animation principles including anticipation, staging, pose-to-pose control, follow-through, and using motion/light/placement to guide attention.",
+      "relevance_to_product": "Serves character_action, visual_description, camera, shot_size, and prompt_text."
+    },
+    {
+      "source_id": "src-moma-colorscript",
+      "title": "Colorscript. The Incredibles, 2004",
+      "source_url": "https://www.moma.org/audio/playlist/192/2575",
+      "source_type": "industry_reference",
+      "source_type_label": "museum production reference",
+      "publisher_or_site": "The Museum of Modern Art",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "avoid_studio_or_ip_style_switch"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports color and light as emotional continuity across scenes rather than a one-off style word list.",
+      "kb_gap": "Adds color-script evidence for emotional color continuity in visual_description and prompt_text.",
+      "leakage_check": "summary_only_no_ip_or_studio_name_runtime_style",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The source describes color scripts as emotional-tone planning across scenes and as a continuity reference for what comes before and after a shot.",
+      "relevance_to_product": "Serves visual_description, prompt_text, and duration/emotional pacing."
+    },
+    {
+      "source_id": "src-canvas-continuity-paper",
+      "title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+      "source_url": "https://arxiv.org/abs/2604.13452",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "publisher_or_site": "arXiv",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports planning character continuity, background anchors, location-aware scenes, and prop consistency for multi-shot narratives.",
+      "kb_gap": "Adds research evidence for identity drift, background drift, and prop drift as repair categories.",
+      "leakage_check": "summary_only_no_paper_text_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The paper frames long-form visual storytelling as requiring consistent characters, stable environments, smooth transitions, persistent background anchors, and prop consistency.",
+      "relevance_to_product": "Supports person, visual_description, character_action, prompt_text, and validation repair routing."
+    },
+    {
+      "source_id": "src-animationbench-paper",
+      "title": "AnimationBench: Are Video Models Good at Character-Centric Animation?",
+      "source_url": "https://arxiv.org/abs/2604.15299",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "publisher_or_site": "arXiv",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports animation-specific validation dimensions such as character-centric consistency, exaggerated motion, semantic consistency, motion rationality, and camera motion consistency.",
+      "kb_gap": "Adds evidence for field-level failure routing specific to anime/animation video output.",
+      "leakage_check": "summary_only_no_paper_text_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The paper argues that animation-style generation needs evaluation beyond realistic-video benchmarks, including character-centric consistency, motion rationality, and camera-motion consistency.",
+      "relevance_to_product": "Supports validation_result and repair_storyboard across person, camera, visual_description, character_action, and prompt_text."
+    },
+    {
+      "source_id": "src-visual-attention-editing-paper",
+      "title": "Where to look at the movies: Analyzing visual attention to understand movie editing",
+      "source_url": "https://arxiv.org/abs/2102.13378",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "publisher_or_site": "arXiv",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports layout and staging as attention routing through composition, framing, camera movement, and editing.",
+      "kb_gap": "Adds evidence for visual focus hierarchy and attention-path checks.",
+      "leakage_check": "summary_only_no_paper_text_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The paper connects shot composition, framing, camera movement, and editing with where spectators look on screen.",
+      "relevance_to_product": "Serves camera, shot_size, visual_description, character_action, and prompt_text."
+    },
+    {
+      "source_id": "src-character-dialogue-paper",
+      "title": "Character-Centered Dialogue Generation from Scene-Level Prompts",
+      "source_url": "https://arxiv.org/abs/2505.16819",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "publisher_or_site": "arXiv",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only",
+        "avoid_auto_dialogue_template"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports dialogue as character-grounded, scene-grounded, and temporally contextual rather than automatic filler.",
+      "kb_gap": "Adds research evidence for dialogue/narration allocation and character-consistent utterance repair.",
+      "leakage_check": "summary_only_no_dialogue_template_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The paper describes dialogue generation from setting and character behavior prompts, grounded by scene image semantics and speaker-aware narrative memory.",
+      "relevance_to_product": "Supports person, character_action, dialogue_or_narration, prompt_text, and validation."
+    },
+    {
+      "source_id": "src-piet-color-authoring-paper",
+      "title": "Piet: Facilitating Color Authoring for Motion Graphics Video",
+      "source_url": "https://arxiv.org/abs/2403.02199",
+      "source_type": "paper",
+      "source_type_label": "paper",
+      "publisher_or_site": "arXiv",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only",
+        "research_context_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports color as emotion, visual continuity, and narrative transition signal.",
+      "kb_gap": "Adds research support for color continuity as a field-level visual rule.",
+      "leakage_check": "summary_only_no_paper_text_copy",
+      "source_evidence_status": "verified_opened",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "The paper frames color in motion graphics as conveying emotion, maintaining visual continuity, and signaling narrative transitions.",
+      "relevance_to_product": "Serves visual_description and prompt_text."
+    },
+    {
+      "source_id": "src-cn-zhipu-video-prompt",
+      "title": "视频生成",
+      "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+      "source_type": "official_doc",
+      "source_type_label": "国内 AI 视频官方文档",
+      "publisher_or_site": "智谱AI开放文档",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持用镜头语言、景别角度、光影、主体、主体运动、场景和氛围构建视频提示词。",
+      "kb_gap": "补充国内官方 AI 视频提示词结构证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文档把结构化提示词拆为镜头语言、景别角度、光影、主体、主体运动、场景和氛围，并提示运动不宜过于复杂。",
+      "relevance_to_product": "直接服务 PWA 运镜、景别、画面描述、角色动作和分镜提示词。"
+    },
+    {
+      "source_id": "src-cn-aliyun-vidu-prompt-guide",
+      "title": "Vidu视频生成Prompt指南",
+      "source_url": "https://help.aliyun.com/zh/model-studio/vidu-video-generation-prompt-guide",
+      "source_type": "official_doc",
+      "source_type_label": "国内 AI 视频官方文档",
+      "publisher_or_site": "阿里云帮助中心",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持主体/场景/动作/光影/色调/质感/镜头感的字段化组织，并列出景别、机位、构图、运镜。",
+      "kb_gap": "补充国内模型文档对镜头语言、景别、运镜和画面描述的证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文档强调先定主体、场景和动作，再叠光影、色调、质感与镜头感，并列出景别、机位、构图、运镜维度。",
+      "relevance_to_product": "服务 camera、shot_size、visual_description、character_action 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-aliyun-text-video-prompt",
+      "title": "文生视频或图生视频提示词Prompt使用指南",
+      "source_url": "https://help.aliyun.com/zh/model-studio/text-to-video-prompt?scm=20140722.H_2865313._.ID_2865313-OR_rec-PAR1_0b87b7f117509918376321534edd6c-V_1",
+      "source_type": "official_doc",
+      "source_type_label": "国内 AI 视频官方文档",
+      "publisher_or_site": "阿里云帮助中心",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持主体、场景、运动、美学控制、光源、景别、视角、镜头和运镜的提示词结构。",
+      "kb_gap": "补充国内官方文档对美学控制和运动描述的字段边界证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文档将提示词公式拆为主体、场景、运动、美学控制和风格化，其中美学控制包含光源、景别、视角、镜头和运镜。",
+      "relevance_to_product": "服务 person、camera、shot_size、visual_description、character_action 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-aliyun-video-generate-edit",
+      "title": "视频生成与编辑",
+      "source_url": "https://help.aliyun.com/zh/model-studio/video-generate-edit-model/",
+      "source_type": "official_doc",
+      "source_type_label": "国内 AI 视频官方文档",
+      "publisher_or_site": "阿里云帮助中心",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持参考图像保持角色一致性、首尾帧串联多片段和 2-15 秒级片段边界。",
+      "kb_gap": "补充国内官方文档对角色一致性、长视频片段串联和时长边界的证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文档说明可用参考图像在不同场景中保持角色一致性，首尾帧可串联多个片段形成无缝过渡，并列出片段规格。",
+      "relevance_to_product": "服务 person、visual_description、character_action、prompt_text 和 duration_seconds。"
+    },
+    {
+      "source_id": "src-cn-sina-storyboard-script",
+      "title": "深度阅读影视动画分镜头台本脚本创作",
+      "source_url": "https://k.sina.cn/article_5617215412_14ecfe7b4001008owd.html",
+      "source_type": "article",
+      "source_type_label": "国内动画分镜文章",
+      "publisher_or_site": "新浪新闻",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持分镜台本中画面、构图、景别、动作、摄影机运动、对白/旁白和时长的字段化拆分。",
+      "kb_gap": "补充国内中文分镜表字段与 PWA 最终字段的对应证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文章说明分镜台本包含镜号、画面、构图、景别、视角、动作、摄影机运动、对白/旁白、时长和镜头衔接等信息。",
+      "relevance_to_product": "直接对齐 PWA 运镜、景别、画面描述、角色动作、对白/旁白、提示词和时长。"
+    },
+    {
+      "source_id": "src-cn-animiz-storyboard-language",
+      "title": "如何设计动画分镜头？一篇文章详解动画分镜艺术和镜头语言！",
+      "source_url": "https://www.animiz.cn/blog-1691.html",
+      "source_type": "guide",
+      "source_type_label": "国内动画分镜指南",
+      "publisher_or_site": "万彩动画大师 / Animiz",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持动画分镜围绕画面、动作、对话、时间和镜头语言组织。",
+      "kb_gap": "补充国内动画分镜入门指南对 PWA 字段的映射证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "文章说明动画分镜需要图表化呈现角色运动、背景变化、景别、镜头调度、光影、文字说明、时间、动作、对白和镜头转换。",
+      "relevance_to_product": "服务 camera、shot_size、visual_description、character_action、dialogue_or_narration、duration_seconds 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-cnki-color-rhythm",
+      "title": "色彩节奏在数字动画作品中的应用",
+      "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2025&filename=LXSE202509018",
+      "source_type": "paper",
+      "source_type_label": "中文期刊摘要",
+      "publisher_or_site": "中国期刊全文数据库",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持色彩节奏连接视觉语言与情感叙事，并通过动态变化影响观众情绪节律。",
+      "kb_gap": "补充国内中文期刊对色彩节奏和情绪叙事连续性的证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "摘要指出色彩节奏连接视觉语言与情感叙事，动态变化可引导观众情绪节律与剧情共振。",
+      "relevance_to_product": "服务 visual_description、prompt_text 和 duration_seconds 的情绪色彩连续性。"
+    },
+    {
+      "source_id": "src-cn-tongji-storyboard-course",
+      "title": "动画分镜与设计稿",
+      "source_url": "https://amlab.tongji.edu.cn/info/1071/1615.htm",
+      "source_type": "industry_reference",
+      "source_type_label": "院校课程大纲",
+      "publisher_or_site": "同济大学媒体实验与实践教学中心",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持动画分镜课程要求对镜头变化、连接关系、画面、声音、时间、构图、透视、色彩和光线做准确设定。",
+      "kb_gap": "补充国内高校课程对完整分镜台本和设计稿字段的专业边界证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "课程大纲要求掌握动画镜头语言一般规律，能设计镜头变化与连接，并准确设定每个镜头的画面、声音、时间等构成要素。",
+      "relevance_to_product": "服务全部 PWA 分镜字段，尤其是运镜、景别、画面描述、对白/旁白和时长。"
+    },
+    {
+      "source_id": "src-cn-bift-storyboard-course",
+      "title": "故事板设计",
+      "source_url": "https://ys.bift.edu.cn/jx/kc/bkskc/szmtyzzykc/xxsjfx/4xqxxsj/73497.htm",
+      "source_type": "industry_reference",
+      "source_type_label": "院校课程说明",
+      "publisher_or_site": "北京服装学院艺术设计学院",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持故事板能力决定镜头语言、动作和场景变化表现力，并强调取景构图、人物布局、摄影机角度、空间透视和明暗关系。",
+      "kb_gap": "补充国内院校对故事板、镜头语言和视觉焦点路径的课程证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "课程说明强调故事板是动画制作的灵魂，训练取景构图、人物布局、摄影机角度、空间透视、明暗关系等关键要素。",
+      "relevance_to_product": "服务 camera、shot_size、visual_description、character_action 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-bfa-animation-curriculum",
+      "title": "北京电影学院2025年普通类本科招生简章",
+      "source_url": "https://zs.bfa.edu.cn/tgpdf/bfa2025ptlzsjz.pdf",
+      "source_type": "industry_reference",
+      "source_type_label": "电影学院公开招生/课程材料",
+      "publisher_or_site": "北京电影学院",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持北京电影学院动画学院课程群覆盖动画编剧、世界观、人物塑造、故事结构、动画视听语言、影片剪辑和动画分镜绘制。",
+      "kb_gap": "补充专业电影级院校对故事任务、人物、视听语言、节奏和分镜绘制的公开证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "招生简章说明动画编剧课程涵盖世界观、人物塑造、故事结构，动画视听传达课程群包括动画视听语言、影片剪辑、动画分镜绘制，用于控制情绪和节奏。",
+      "relevance_to_product": "服务短文本扩写/改写到分镜字段的全链路。"
+    },
+    {
+      "source_id": "src-cn-cnki-frame-time-material",
+      "title": "帧作为动画的时间材料——兼论对中国动画“美术性”的再思考",
+      "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2018&filename=DDDY201808022",
+      "source_type": "paper",
+      "source_type_label": "中文期刊摘要",
+      "publisher_or_site": "中国期刊全文数据库 / 当代电影",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持把帧作为动画建构时间性的基本材料，补充分镜时长和动作节奏不是纯电影镜头复制。",
+      "kb_gap": "补充中国传媒大学作者在当代电影发表的动画时间性证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "摘要指出帧的时间性对动画媒介重要，讨论动画中帧作为建构时间性的基本材料及其时间表意可能性。",
+      "relevance_to_product": "服务 duration_seconds、character_action 和 prompt_text 的动画节奏控制。"
+    },
+    {
+      "source_id": "src-cn-bjut-action-storyboard",
+      "title": "动画分镜在中华武术动画中的研究及设计",
+      "source_url": "https://ir.bjut.edu.cn/item/ir/407114",
+      "source_type": "paper",
+      "source_type_label": "院校机构库论文记录",
+      "publisher_or_site": "北京工业大学机构库",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持动作动画中分镜体现整体构思和设计蓝图，用变化动作视角和有张力镜头语言提升动作表现。",
+      "kb_gap": "补充动作类动画分镜、镜头张力和动作可读性的院校论文证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "机构库摘要说明动画分镜是动作动画关键部分，体现整体构思与设计蓝图，并用变化的动作视角和镜头语言增强表现。",
+      "relevance_to_product": "服务 character_action、camera、shot_size、visual_description 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-cnki-aigc-microexpression",
+      "title": "AIGC动画角色微表情生成与认知行为表现研究——以津派文化叙事为语境",
+      "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2025&filename=YSLL202512006",
+      "source_type": "paper",
+      "source_type_label": "中文期刊摘要",
+      "publisher_or_site": "中国学术期刊网络出版总库",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持 AIGC 动画中面部微表情链、情绪递进、认知行为和非语言叙事。",
+      "kb_gap": "补充角色动作/表情可读性与对白不足时的非语言叙事证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "摘要提出表情递进、认知行为、文化语义的非语言叙事模型，关注多阶段表情过渡在镜头中的心理节奏。",
+      "relevance_to_product": "服务 person、visual_description、character_action、dialogue_or_narration 和 prompt_text。"
+    },
+    {
+      "source_id": "src-cn-cnki-character-scenario-adaptation",
+      "title": "效果导向与场景适配：动画角色设计的范式创新与策略研究",
+      "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2025&filename=TOYZ202511021",
+      "source_type": "paper",
+      "source_type_label": "中文期刊摘要",
+      "publisher_or_site": "中国学术期刊网络出版总库",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "支持角色设计需要场景适配、受众需求和叙事/互动/衍生场景特性。",
+      "kb_gap": "补充角色视觉连续性与产品场景适配的国内论文证据。",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_evidence_status": "verified",
+      "accessed_at": "2026-05-27",
+      "evidence_summary": "摘要提出动画角色设计需从效果导向与场景适配出发，结合叙事等多元场景特性协调艺术表达、文化传承和商业价值。",
+      "relevance_to_product": "服务 person、visual_description、character_action 和 prompt_text。"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-openai-sora-video-generation",
+      "summary": "Keep: official AI-video source directly maps subject, action, camera, lighting, motion, and duration to existing PWA fields.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-runway-gen4-video-prompting",
+      "summary": "Keep: official AI-video source supports simple single-scene motion prompts and prompt-overload repair routing.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "summary": "Keep: official AI-video source supports subject specificity, camera effects, light, depth, and focus.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-screenburn-story-beats",
+      "summary": "Keep: story beat source supports task routing from short text to expansion, rewrite, or storyboard planning.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-pixar-story-visual-language",
+      "summary": "Keep with caution: useful for visual language and story support, but studio names must not become runtime style switches.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cgwire-character-sheets",
+      "summary": "Keep: character sheet source supports visual consistency anchors and character action/person continuity.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-storyboardart-continuity",
+      "summary": "Keep: continuity source supports screen direction, axis, eyeline, grouping, and motivated exceptions.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-toonboom-captions",
+      "summary": "Keep: storyboard caption source supports dialogue/action/timing allocation without automatic dialogue invention.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-toonboom-timing",
+      "summary": "Keep: timing source supports duration_seconds as action pace and animatic readability.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-britannica-camera-movement",
+      "summary": "Keep: camera movement source supports motivated camera purpose rather than generic film-term dumping.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-clipstudio-animation-principles",
+      "summary": "Keep: animation-principles source supports staging, anticipation, pose clarity, and follow-through for existing fields.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-moma-colorscript",
+      "summary": "Keep with caution: color script evidence is useful for emotional continuity, but studio/IP names must be excluded from runtime.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-canvas-continuity-paper",
+      "summary": "Keep: research source supports continuity-aware character, background, location, and prop planning.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-animationbench-paper",
+      "summary": "Keep: research source supports animation-specific validation dimensions and failure routing.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-visual-attention-editing-paper",
+      "summary": "Keep: research source supports attention-path and focus hierarchy checks.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-character-dialogue-paper",
+      "summary": "Keep with caution: research source supports character-grounded dialogue, but cannot become automatic dialogue generation.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-piet-color-authoring-paper",
+      "summary": "Keep: research source supports color continuity and narrative transition signals.",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-zhipu-video-prompt",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-aliyun-vidu-prompt-guide",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-aliyun-text-video-prompt",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-aliyun-video-generate-edit",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-sina-storyboard-script",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-animiz-storyboard-language",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-cnki-color-rhythm",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-tongji-storyboard-course",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-bift-storyboard-course",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-bfa-animation-curriculum",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-cnki-frame-time-material",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-bjut-action-storyboard",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-cnki-aigc-microexpression",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    },
+    {
+      "source_id": "src-cn-cnki-character-scenario-adaptation",
+      "summary": "Keep: 国内/院校/学术来源补强字段知识证据，summary-only 使用，不输出原文。",
+      "result": "keep"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-intent-to-story-task-routing",
+      "candidate_name": "短文本意图到故事任务路由",
+      "chinese_title": "短文本意图到故事扩写/剧本改写/分镜任务路由",
+      "source_summary": "Story-beat and visual-storytelling sources support treating the user's short text as a task to identify dramatic change, character intent, and visualizable scene purpose before generating storyboard fields.",
+      "core_logic": "先判断用户文本是在要求扩写故事、改写剧本还是创建分镜任务；再提取变化点、人物目标、冲突、场景目的和可视化动作，最后进入现有 PWA 字段。",
+      "source_type": "guide / industry_reference",
+      "target_field": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "writing_group",
+      "positive_directive": "把用户短文本先归类为故事扩写、剧本改写或分镜创建任务，并把每个输出行绑定到明确变化、人物意图和场景目的。",
+      "negative_constraint": "不要把短文本当作泛问题回答；不要直接套固定三幕/十五拍模板；不要为了补剧情而发明人物关系或对白。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-scene-expression-visible-action、rw-dialogue-evidence-lock、rw-director-scheduling-core；更像新增前置路由规则。",
+      "risk_note": "风险是把故事结构模板误下放为固定输出格式，或在用户事实不足时扩写出未确认关系。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 在生成字段前先确定任务类型和故事 beat，减少字段空转、剧情跑偏和自动编造对白。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-screenburn-story-beats",
+        "src-pixar-story-visual-language",
+        "src-cn-bfa-animation-curriculum",
+        "src-cn-sina-storyboard-script"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Story Beats in Screenwriting",
+          "source_url": "https://screenburn.app/learn/story-beats",
+          "source_type": "guide",
+          "publisher_or_site": "Screenburn",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持把 beat 理解为故事变化而非单纯事件，并把 scene 视为服务统一戏剧目的的 beat 序列。",
+          "relevance_to_product": "帮助 PWA 在扩写/改写/分镜前识别变化点、场景目的和信息密度。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Pixar in a Box: The art of storytelling",
+          "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Khan Academy / Pixar in a Box",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持故事结构与视觉语言协同，视觉线索应服务故事意义和观众感受。",
+          "relevance_to_product": "把短文本先转成可视化故事任务，再服务画面描述、动作、镜头和提示词。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "北京电影学院2025年普通类本科招生简章",
+          "source_url": "https://zs.bfa.edu.cn/tgpdf/bfa2025ptlzsjz.pdf",
+          "source_type": "industry_reference",
+          "publisher_or_site": "北京电影学院",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "动画编剧课程覆盖题材策划、世界观构架、人物塑造和故事结构，动画视听传达课程覆盖动画视听语言、剪辑和分镜绘制。",
+          "relevance_to_product": "支持 Hope PWA 从短文本先进入故事任务、人物关系、故事结构和视听分镜计划。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "深度阅读影视动画分镜头台本脚本创作",
+          "source_url": "https://k.sina.cn/article_5617215412_14ecfe7b4001008owd.html",
+          "source_type": "article",
+          "publisher_or_site": "新浪新闻",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持文字剧本调整为画面与提示内容，并强调非具象心理描写需要转为可见语言、表情、动作和事件。",
+          "relevance_to_product": "服务短文本到故事扩写、剧本改写和分镜任务的可视化路由。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-character-visual-continuity-anchor",
+      "candidate_name": "人物身份与角色视觉连续性锚点",
+      "chinese_title": "人物身份、关系与角色视觉连续性锚点",
+      "source_summary": "Animation character-sheet guidance and AI-video reference guidance support keeping identity, role relation, visible traits, expression range, pose logic, and environment references stable across rows.",
+      "core_logic": "person 字段保留用户文本中的人物或明确角色标签；visual_description/prompt_text 只携带可见外观锚点、姿态和表情范围，不把来源名、图片名或 IP 风格写进 runtime。",
+      "source_type": "guide / official_doc / paper",
+      "target_field": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "保留人物身份、角色关系、显著外观、姿态和表情锚点，并让每行 prompt_text 继承这些已确认锚点。",
+      "negative_constraint": "不要发明人物名；不要把图片文件名、来源路径、真实 IP 或工作室风格当作角色一致性开关。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-person-identity-lock、rw-visual-master-consistency；新增重点是角色视觉连续性锚点。",
+      "risk_note": "风险是为追求一致性而泄漏来源图片/路径，或把人物外观锚点误写成不可验证的风格标签。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可在字段生成前建立角色锚点，修复 person 为空、身份漂移、外观漂移和跨镜头角色错配。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-cgwire-character-sheets",
+        "src-openai-sora-video-generation",
+        "src-canvas-continuity-paper",
+        "src-cn-aliyun-video-generate-edit",
+        "src-cn-cnki-character-scenario-adaptation"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Character Sheets: The Blueprint for Consistent Animation",
+          "source_url": "https://blog.cg-wire.com/character-sheet-animation/",
+          "source_type": "guide",
+          "publisher_or_site": "CGWire",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持用转面、表情、姿态、比例、颜色和显著特征作为角色跨生产流程的一致性参考。",
+          "relevance_to_product": "直接服务 person、visual_description、character_action 和 prompt_text 的角色连续性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Video generation with Sora",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持用输入参考保持角色、品牌资产或环境外观，但不要求把引用细节泄漏到最终字段。",
+          "relevance_to_product": "为角色视觉锚点和环境锚点提供 AI-video 官方依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+          "source_url": "https://arxiv.org/abs/2604.13452",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持多镜头叙事需要角色连续性、背景锚点、地点规划和道具一致性。",
+          "relevance_to_product": "用于识别身份漂移、环境漂移和跨行连续性修复。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "视频生成与编辑",
+          "source_url": "https://help.aliyun.com/zh/model-studio/video-generate-edit-model/",
+          "source_type": "official_doc",
+          "publisher_or_site": "阿里云帮助中心",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持参考图像在不同场景中保持角色一致性，并支持首尾帧串联多片段。",
+          "relevance_to_product": "为人物视觉连续性、环境锚点和多镜头衔接提供国内官方依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "效果导向与场景适配：动画角色设计的范式创新与策略研究",
+          "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2025&filename=TOYZ202511021",
+          "source_type": "paper",
+          "publisher_or_site": "中国学术期刊网络出版总库",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持角色设计要结合叙事、互动、衍生等多场景特性并协调艺术表达与传播效果。",
+          "relevance_to_product": "帮助 PWA 将角色视觉锚点与当前叙事场景适配，而不是孤立风格词。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-scene-spatial-prop-continuity-anchor",
+      "candidate_name": "场景空间与道具连续性锚点",
+      "chinese_title": "场景空间、道具与事件顺序连续性锚点",
+      "source_summary": "Storyboard continuity and continuity-aware storyboarding research support keeping screen positions, axis, background anchors, props, locations, and scene transitions coherent across rows.",
+      "core_logic": "场景拆分必须保持事件顺序和空间关系；换镜头时明确屏幕方向、人物左右关系、关键道具位置和背景锚点是否延续或被有意改变。",
+      "source_type": "guide / paper",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "在拆场景和拆镜头时保留人物位置、视线方向、道具锚点、背景锚点和事件顺序。",
+      "negative_constraint": "不要在相邻镜头无因跳轴、交换左右位置、丢失关键道具或突然改变地点。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-camera-language-grammar、rw-director-scheduling-core、rw-visual-master-consistency；新增重点是空间/道具连续性。",
+      "risk_note": "风险是把 180 度规则机械化，导致故事有意的情绪跳轴也被错误修复；应允许有明确视觉过渡的例外。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可在生成/修复时检查相邻行的空间关系、道具继承和事件顺序，减少多镜头不连贯。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-storyboardart-continuity",
+        "src-canvas-continuity-paper",
+        "src-cn-tongji-storyboard-course",
+        "src-cn-aliyun-video-generate-edit"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Film Continuity for Storyboard Artists",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "guide",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 storyboard 需要记录连续性需求、屏幕方向、人物左右位置、180 度线和有动机的例外。",
+          "relevance_to_product": "直接服务运镜、景别、画面描述、角色动作和 prompt_text 的跨行连续性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+          "source_url": "https://arxiv.org/abs/2604.13452",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持长叙事视觉生成中角色、背景、地点和道具一致性是核心问题。",
+          "relevance_to_product": "为场景/道具连续性修复和 validation/export safety 提供研究依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "动画分镜与设计稿",
+          "source_url": "https://amlab.tongji.edu.cn/info/1071/1615.htm",
+          "source_type": "industry_reference",
+          "publisher_or_site": "同济大学媒体实验与实践教学中心",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "课程要求能设计所有镜头的变化与连接关系，并准确设定每个镜头的画面、声音、时间等构成要素。",
+          "relevance_to_product": "为场景顺序、镜头连接、画面/声音/时间的跨行连续性提供高校课程证据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "视频生成与编辑",
+          "source_url": "https://help.aliyun.com/zh/model-studio/video-generate-edit-model/",
+          "source_type": "official_doc",
+          "publisher_or_site": "阿里云帮助中心",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持首尾帧串联多个片段实现无缝过渡，适用于叙事、产品演示或教程场景。",
+          "relevance_to_product": "为场景顺序、背景锚点和跨镜头连续性提供国内官方依据。",
+          "source_confidence": "high"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-storyboard-splitting-by-content-beat",
+      "candidate_name": "分镜拆分与单镜头保留",
+      "chinese_title": "按内容 beat 拆分并保留完整单镜头",
+      "source_summary": "Story beat, storyboard continuity, timing, and AI-video prompt sources support splitting only when story change, action phase, camera purpose, dialogue/timing, or continuity changes require a new row.",
+      "core_logic": "每行对应一个可读镜头目的；如果人物、动作、运镜、景别、画面、对白/旁白和时长仍服务同一镜头，就保留一行；如果 beat、动作阶段、视线/空间、对白或信息密度变化，则拆分。",
+      "source_type": "guide / official_doc",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "按内容变化、镜头目的、动作阶段、对话/旁白 beat、空间连续性和时长信息密度决定拆行。",
+      "negative_constraint": "不要按固定行数、固定秒数或平均切片拆镜头；不要把一个完整单镜头硬拆成多行。",
+      "runtime_eligible": true,
+      "duplicate_hint": "已有 rw-storyboard-splitting-by-content-beat 与 rw-single-shot-preservation-for-existing-fields，可作为本轮证据增强而非新建。",
+      "risk_note": "风险是把每个动作小阶段都拆成独立行，导致提示词碎片化和导出不可读。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可减少 rows_seed 机械化，优先输出完整可读的字段组和单镜头 prompt_text。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-screenburn-story-beats",
+        "src-storyboardart-continuity",
+        "src-runway-gen4-video-prompting",
+        "src-toonboom-timing",
+        "src-cn-tongji-storyboard-course",
+        "src-cn-cnki-frame-time-material"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Story Beats in Screenwriting",
+          "source_url": "https://screenburn.app/learn/story-beats",
+          "source_type": "guide",
+          "publisher_or_site": "Screenburn",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 beat 是变化，scene 是服务统一戏剧目的的 beat 序列。",
+          "relevance_to_product": "帮助分镜拆分围绕变化点而非表格行数。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Film Continuity for Storyboard Artists",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "guide",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持相邻镜头顺序、屏幕方向和连续性对剪辑/animatic 可读性的重要性。",
+          "relevance_to_product": "为拆分或保留单镜头提供跨行连续性依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持把生成视作单场景运动表达，并避免复杂多场景、多动作和风格变化堆叠。",
+          "relevance_to_product": "约束 prompt_text 单镜头边界和长提示过载修复。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "动画分镜与设计稿",
+          "source_url": "https://amlab.tongji.edu.cn/info/1071/1615.htm",
+          "source_type": "industry_reference",
+          "publisher_or_site": "同济大学媒体实验与实践教学中心",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "课程把分镜头、动画电影语言、设计稿画面处理和电子分镜作为训练内容。",
+          "relevance_to_product": "支持按镜头语言、画面处理和动态分镜可读性拆分，而非固定行数。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "帧作为动画的时间材料——兼论对中国动画“美术性”的再思考",
+          "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2018&filename=DDDY201808022",
+          "source_type": "paper",
+          "publisher_or_site": "中国期刊全文数据库 / 当代电影",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持帧是动画建构时间性的基本材料，动画时间不能只按实拍镜头范式理解。",
+          "relevance_to_product": "为 duration_seconds 和动画动作阶段的节奏控制提供学术证据。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "duration_profiles",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-shot-size-camera-purpose-progression",
+      "candidate_name": "景别与运镜目的递进",
+      "chinese_title": "景别选择、运镜目的与镜头递进",
+      "source_summary": "Film reference and official AI-video docs support choosing shot size and camera movement by story context, subject/action clarity, reveal, focus, emotion, and duration rather than term accumulation.",
+      "core_logic": "先确定镜头目的，再选择景别和主运镜；景别承担信息距离、主体大小和情绪距离，运镜承担揭示、跟随、压近、离开、转场或视线引导。",
+      "source_type": "industry_reference / official_doc",
+      "target_field": [
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "让景别和运镜服务镜头目的、主体可读性、情绪距离、揭示信息和动作方向。",
+      "negative_constraint": "不要堆多个冲突运镜；不要把镜头术语当装饰；不要用真实导演或影片专名作为 runtime 风格开关。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-camera-language-grammar、rw-shot-intent-taxonomy、rw-director-scheduling-core；可作为合并增强或新增目的递进规则。",
+      "risk_note": "风险是泛电影术语堆砌，导致 camera 和 shot_size 互相冲突或不服务动作。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可先生成镜头目的，再生成运镜和景别，减少空镜头词和提示词冲突。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-britannica-camera-movement",
+        "src-openai-sora-video-generation",
+        "src-google-veo-prompt-guide",
+        "src-cn-zhipu-video-prompt",
+        "src-cn-bift-storyboard-course"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Film: Shooting angle and point of view",
+          "source_url": "https://www.britannica.com/art/film/Shooting-angle-and-point-of-view",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Encyclopaedia Britannica",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 camera movement 会改变 framing、scale、angle，并根据 context 和 pace 揭示细节、连接人物或表达情绪。",
+          "relevance_to_product": "直接服务运镜、景别、画面描述和 prompt_text 的目的性选择。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Video generation with Sora",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持有效视频提示应描述 shot type、subject、action、setting 和 lighting，并用 seconds 控制时长。",
+          "relevance_to_product": "把运镜、景别、动作、画面和时长合成 prompt_text 的官方依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide?hl=en",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud Documentation",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 subject、camera/focus/light 等视频提示元素需要具体而可视化。",
+          "relevance_to_product": "帮助 PWA 把人物、动作、运镜、景别和画面描述转成字段化提示词。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "视频生成",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱AI开放文档",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持提示词由镜头语言、景别角度、光影、主体、主体运动、场景和氛围组成。",
+          "relevance_to_product": "为运镜、景别、光影和主体动作的字段编排提供国内官方依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "北京服装学院故事板设计",
+          "source_url": "https://ys.bift.edu.cn/jx/kc/bkskc/szmtyzzykc/xxsjfx/4xqxxsj/73497.htm",
+          "source_type": "industry_reference",
+          "publisher_or_site": "北京服装学院艺术设计学院",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "课程强调故事板创作关键要素包括取景构图、人物布局、摄影机角度、空间透视和明暗关系。",
+          "relevance_to_product": "支持镜头目的、景别、构图和运镜服务视觉叙事。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-layout-staging-attention-path",
+      "candidate_name": "布局调度与视觉焦点路径",
+      "chinese_title": "布局调度、视觉焦点层级与注意力路径",
+      "source_summary": "Animation staging and visual-attention research support arranging elements so the viewer sees the important subject, action, emotion, and story information in the intended order.",
+      "core_logic": "画面描述先确定主体、前中后景、动作方向、视线/焦点和干扰源；prompt_text 只保留服务当前镜头目的的焦点路径。",
+      "source_type": "tutorial / paper",
+      "target_field": [
+        "景别",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "安排主体、动作、背景、光影和构图，让观众先看到当前镜头最重要的信息。",
+      "negative_constraint": "不要让多个主体、背景细节、风格词和动作词争夺同一画面焦点。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-visual-master-consistency、rw-expression-physicalization、rw-anime-key-pose-silhouette-priority；新增重点是 attention path。",
+      "risk_note": "风险是把构图原则写成泛审美描述而不是字段修复规则。",
+      "priority": "P1",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可在 visual_description 和 prompt_text 中压缩背景噪声，突出主体动作和情绪焦点。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-clipstudio-animation-principles",
+        "src-visual-attention-editing-paper",
+        "src-pixar-story-visual-language",
+        "src-cn-bift-storyboard-course",
+        "src-cn-aliyun-vidu-prompt-guide"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Tips for Mastering the 12 Principles of Animation",
+          "source_url": "https://www.clipstudio.net/en/animation/12-principles/",
+          "source_type": "tutorial",
+          "publisher_or_site": "Clip Studio Paint",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 staging 通过 framing、composition、motion、light/shadow、主体位置和 camera angle 引导注意力。",
+          "relevance_to_product": "服务画面描述、角色动作、景别和 prompt_text 的焦点层级。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Where to look at the movies: Analyzing visual attention to understand movie editing",
+          "source_url": "https://arxiv.org/abs/2102.13378",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持构图、framing、camera movement 和 editing 是导演控制观众视线的工具。",
+          "relevance_to_product": "为视觉焦点路径和布局调度校验提供研究依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "故事板设计",
+          "source_url": "https://ys.bift.edu.cn/jx/kc/bkskc/szmtyzzykc/xxsjfx/4xqxxsj/73497.htm",
+          "source_type": "industry_reference",
+          "publisher_or_site": "北京服装学院艺术设计学院",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "课程说明故事板掌握程度决定镜头语言能力及动作和场景变化表现力，并训练取景构图、人物布局、摄影机角度、空间透视、明暗关系。",
+          "relevance_to_product": "服务画面描述、景别、运镜和视觉焦点路径。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Vidu视频生成Prompt指南",
+          "source_url": "https://help.aliyun.com/zh/model-studio/vidu-video-generation-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "阿里云帮助中心",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持主体/场景/动作先行，再叠加光影、色调、质感与镜头感。",
+          "relevance_to_product": "帮助 PWA 先突出主体动作，再加入环境和美学控制。",
+          "source_confidence": "high"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-color-script-emotional-continuity",
+      "candidate_name": "色彩脚本与情绪色彩连续性",
+      "chinese_title": "光影、材质空气感与情绪色彩连续性",
+      "source_summary": "Color-script and motion-graphics color research support using color and light as emotional continuity, narrative transition, and visual-tone planning rather than isolated style adjectives.",
+      "core_logic": "光影、材质、空气感和色彩必须服务当前故事情绪和相邻镜头连续性；prompt_text 只保留可见的光源、色温、材质反应和情绪色彩线索。",
+      "source_type": "industry_reference / paper / official_doc",
+      "target_field": [
+        "画面描述",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "用可见光源、色温、材质反应、空气感和情绪色彩递进服务当前 beat 与相邻镜头。",
+      "negative_constraint": "不要堆泛动漫色彩词；不要把真实工作室、IP 或影片色彩风格作为 runtime 风格开关。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-material-light-air-physicality、rw-visual-master-consistency；新增重点是 color script continuity。",
+      "risk_note": "风险是把色彩脚本误写为品牌/IP 模仿，或和人物/动作事实脱节。",
+      "priority": "P1",
+      "product_value": "medium",
+      "pwa_generation_implication": "PWA 可让 visual_description 与 prompt_text 继承情绪色彩和光影连续性，减少每行随机换色。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-moma-colorscript",
+        "src-piet-color-authoring-paper",
+        "src-google-veo-prompt-guide",
+        "src-cn-cnki-color-rhythm",
+        "src-cn-zhipu-video-prompt"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Colorscript. The Incredibles, 2004",
+          "source_url": "https://www.moma.org/audio/playlist/192/2575",
+          "source_type": "industry_reference",
+          "publisher_or_site": "The Museum of Modern Art",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 color script 用纯色彩和形状规划场景情绪，并作为前后场景连续性的参考。",
+          "relevance_to_product": "服务画面描述和 prompt_text 的情绪色彩连续性，不作为 IP 风格开关。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Piet: Facilitating Color Authoring for Motion Graphics Video",
+          "source_url": "https://arxiv.org/abs/2403.02199",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持色彩在动态图形中传达情绪、保持视觉连续性并提示叙事转场。",
+          "relevance_to_product": "为色彩连续性和 transition/beat 情绪调度提供研究依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "色彩节奏在数字动画作品中的应用",
+          "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2025&filename=LXSE202509018",
+          "source_type": "paper",
+          "publisher_or_site": "中国期刊全文数据库",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持色彩节奏连接视觉语言与情感叙事，并通过动态变化引导观众情绪节律与剧情共振。",
+          "relevance_to_product": "为 visual_description 和 prompt_text 的情绪色彩连续性提供中文期刊依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "视频生成",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱AI开放文档",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持光影作为有层次感和情感表达力的提示词组成部分。",
+          "relevance_to_product": "服务光影、画面描述和分镜提示词。",
+          "source_confidence": "high"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-dialogue-narration-allocation-rules",
+      "candidate_name": "对白旁白分配与证据约束",
+      "chinese_title": "对白/旁白分配规则与证据约束",
+      "source_summary": "Storyboard caption docs and character-centered dialogue research support separating action notes, dialogue, timing, and scene notes while keeping utterances grounded in character behavior and scene context.",
+      "core_logic": "dialogue_or_narration 只在用户文本、已确认事实、人物意图或当前场景目的支持时生成；否则优先使用可见动作、反应、沉默或修复请求。",
+      "source_type": "official_doc / paper",
+      "target_field": [
+        "人物",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "把对白、旁白、动作说明和时长绑定到当前分镜行，并让每句台词有文本、事实、人物意图或场景目的依据。",
+      "negative_constraint": "不要把该规则变成自动编造对白模板；不要用旁白替代可见动作；不要跨行挪用台词。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-dialogue-evidence-lock、rw-shot-intent-taxonomy、rw-duration-density-rules；新增重点是分配到当前行。",
+      "risk_note": "风险是为了填满 dialogue_or_narration 自动生成解释性台词或旁白。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可在生成对白/旁白时绑定当前行人物、动作和时长，并在证据不足时留空或转 visible action。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-toonboom-captions",
+        "src-character-dialogue-paper",
+        "src-toonboom-timing",
+        "src-cn-sina-storyboard-script",
+        "src-cn-bfa-animation-curriculum"
+      ],
+      "source_refs": [
+        {
+          "source_title": "What are Captions?",
+          "source_url": "https://learn.toonboom.com/modules/intro-to-storyboarding/topic/what-are-captions",
+          "source_type": "official_doc",
+          "publisher_or_site": "Toon Boom Learn Portal",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 storyboard panel captions 分离 action notes、dialogue、slugging/timing 和 notes。",
+          "relevance_to_product": "直接服务 character_action、dialogue_or_narration、duration_seconds 和 prompt_text 分配。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Character-Centered Dialogue Generation from Scene-Level Prompts",
+          "source_url": "https://arxiv.org/abs/2505.16819",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持从场景设定与角色行为生成角色一致、场景接地的对话，并保留跨场景语境。",
+          "relevance_to_product": "为对白/旁白必须绑定人物、动作、场景和上下文提供研究依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "深度阅读影视动画分镜头台本脚本创作",
+          "source_url": "https://k.sina.cn/article_5617215412_14ecfe7b4001008owd.html",
+          "source_type": "article",
+          "publisher_or_site": "新浪新闻",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持分镜台本中内容栏写动作提示，对白栏写对白、独白、旁白，时间栏写镜头长度。",
+          "relevance_to_product": "直接服务 character_action、dialogue_or_narration 和 duration_seconds 分配。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "北京电影学院2025年普通类本科招生简章",
+          "source_url": "https://zs.bfa.edu.cn/tgpdf/bfa2025ptlzsjz.pdf",
+          "source_type": "industry_reference",
+          "publisher_or_site": "北京电影学院",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "动画编剧与动画视听传达课程群共同覆盖剧本、人物、故事结构、剪辑、视听语言和分镜绘制。",
+          "relevance_to_product": "支持对白/旁白必须回到人物、故事结构和镜头节奏，而非自动填充。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "validation_rule_packs",
+        "duration_profiles",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-animation-acting-readability-for-fields",
+      "candidate_name": "动画表演可读性与动作阶段",
+      "chinese_title": "角色动作、关键姿态与动画表演可读性",
+      "source_summary": "Animation-principles and character-centric animation evaluation sources support planning readable anticipation, key pose, follow-through, silhouette, semantic consistency, and motion rationality.",
+      "core_logic": "角色动作字段先写当前可见动作阶段和关键姿态；画面描述/prompt_text 只补充服务该动作的轮廓、重心、表情、跟随动作和焦点，不展开制作流程。",
+      "source_type": "tutorial / paper",
+      "target_field": [
+        "人物",
+        "画面描述",
+        "角色动作",
+        "分镜提示词"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "knowledge_group": "director_group",
+      "positive_directive": "把角色动作写成可见的预备、关键姿态、主动作、反应或跟随动作，并保持轮廓和重心可读。",
+      "negative_constraint": "不要把动画制作术语、动作流程或泛风格词塞进最终字段；不要为了动画感夸大未被故事支持的动作。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-expression-physicalization、rw-anime-key-pose-silhouette-priority、rw-transition-motion-dynamics；可合并增强。",
+      "risk_note": "风险是动作阶段模板化，导致所有镜头都被拆成预备/主动作/跟随三段。",
+      "priority": "P1",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA 可修复 character_action 空泛、人物动作不可读、prompt_text 只有风格没有动作的问题。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-clipstudio-animation-principles",
+        "src-animationbench-paper",
+        "src-cn-bjut-action-storyboard",
+        "src-cn-cnki-aigc-microexpression"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Tips for Mastering the 12 Principles of Animation",
+          "source_url": "https://www.clipstudio.net/en/animation/12-principles/",
+          "source_type": "tutorial",
+          "publisher_or_site": "Clip Studio Paint",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 anticipation、staging、pose-to-pose 和 follow-through 用于提升动作自然性、可控性和注意力引导。",
+          "relevance_to_product": "直接服务 character_action、visual_description 和 prompt_text 的动作可读性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "AnimationBench: Are Video Models Good at Character-Centric Animation?",
+          "source_url": "https://arxiv.org/abs/2604.15299",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持动画视频评估应关注角色中心一致性、夸张动作、语义一致性、动作合理性和镜头运动一致性。",
+          "relevance_to_product": "为动画动作字段和失败修复提供验证维度。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "动画分镜在中华武术动画中的研究及设计",
+          "source_url": "https://ir.bjut.edu.cn/item/ir/407114",
+          "source_type": "paper",
+          "publisher_or_site": "北京工业大学机构库",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持动作动画中分镜体现整体构思和设计蓝图，用变化动作视角和有张力镜头语言增强表现。",
+          "relevance_to_product": "服务角色动作、运镜、景别、画面描述和 prompt_text 的动作可读性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "AIGC动画角色微表情生成与认知行为表现研究——以津派文化叙事为语境",
+          "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2025&filename=YSLL202512006",
+          "source_type": "paper",
+          "publisher_or_site": "中国学术期刊网络出版总库",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持微表情链、情绪递进、认知行为和非语言叙事在 AI 动画镜头中的表达。",
+          "relevance_to_product": "帮助 PWA 在对白不足时用可见表情、动作和心理节奏表达角色。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-field-level-failure-repair-routing",
+      "candidate_name": "字段级失败修复路由",
+      "chinese_title": "分镜字段级失败修复路由",
+      "source_summary": "Official AI-video prompting docs and continuity/animation evaluation papers support routing failures by field: identity drift, multi-shot inconsistency, prompt overload, style overriding facts, field mixing, timing density, and camera/action conflict.",
+      "core_logic": "校验失败先判定是哪一列失真：person 身份漂移、visual_description 场景/色彩漂移、character_action 不可读、camera/shot_size 冲突、dialogue_or_narration 无依据、prompt_text 过载或混入内部信息、duration_seconds 信息密度不合理。",
+      "source_type": "official_doc / paper",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "knowledge_group": "validation_group",
+      "positive_directive": "按字段定位失败并只修复受影响字段，同时保持当前行事实、镜头目的和 summary-only 边界。",
+      "negative_constraint": "不要用长 prompt 万能模板重写全部字段；不要用风格词覆盖事实；不要把 status/note/evidence 混入最终字段。",
+      "runtime_eligible": true,
+      "duplicate_hint": "对照 rw-validation-no-leakage、rw-prompt-text-boundary、rw-seedance2-storyboard-field-discipline、rw-prompt-load-and-shot-plan-boundary；新增重点是 field-level routing。",
+      "risk_note": "风险是把失败修复变成全量重写，造成已正确字段被污染或导出泄漏。",
+      "priority": "P0",
+      "product_value": "high",
+      "pwa_generation_implication": "PWA validation/export 可以返回字段级修复建议，避免一处失败引发整行重写和 prompt_text 过载。",
+      "source_evidence_status": "verified",
+      "source_candidate_refs": [
+        "src-runway-gen4-video-prompting",
+        "src-openai-sora-video-generation",
+        "src-canvas-continuity-paper",
+        "src-animationbench-paper",
+        "src-cn-zhipu-video-prompt",
+        "src-cn-cnki-frame-time-material"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持简单、正向、单场景、运动清晰的提示；复杂多变化提示会让模型调和过多元素。",
+          "relevance_to_product": "为 prompt_text 过载、相互冲突动作和复杂场景失败提供修复依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+          "source_url": "https://arxiv.org/abs/2604.13452",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持 appearance change、inconsistent background 和 abrupt scene shift 是多镜头生成中的核心连续性失败。",
+          "relevance_to_product": "为 person、visual_description 和 prompt_text 连续性失败路由提供依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "AnimationBench: Are Video Models Good at Character-Centric Animation?",
+          "source_url": "https://arxiv.org/abs/2604.15299",
+          "source_type": "paper",
+          "publisher_or_site": "arXiv",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持动画生成需要按角色一致性、动作合理性、语义一致性和 camera motion consistency 等维度评估。",
+          "relevance_to_product": "为字段级 validator 和 repair_storyboard 维度提供研究依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "视频生成",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱AI开放文档",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持提示词精确度和细节水平影响视频质量，结构化提示词提升符合度和专业性，并建议聚焦应有内容。",
+          "relevance_to_product": "为字段级 prompt_text 过载、动作过复杂和镜头语言缺失修复提供国内官方依据。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "帧作为动画的时间材料——兼论对中国动画“美术性”的再思考",
+          "source_url": "https://cnki.istiz.org.cn/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2018&filename=DDDY201808022",
+          "source_type": "paper",
+          "publisher_or_site": "中国期刊全文数据库 / 当代电影",
+          "accessed_at": "2026-05-27",
+          "evidence_summary": "支持动画时间性与帧材料有关，不能只按实拍或泛镜头语言处理。",
+          "relevance_to_product": "为 duration_seconds、动作节奏和 prompt_text 的动画化失败修复提供学术依据。",
+          "source_confidence": "medium"
+        }
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "negative_constraints",
+        "duration_profiles",
+        "kb_context_summary"
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "matrix_id": 1,
+      "title": "输入文本意图与故事任务识别",
+      "covered_by": [
+        "rw-intent-to-story-task-routing"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 2,
+      "title": "人物身份与角色关系保真",
+      "covered_by": [
+        "rw-character-visual-continuity-anchor",
+        "rw-dialogue-narration-allocation-rules"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 3,
+      "title": "角色视觉一致性",
+      "covered_by": [
+        "rw-character-visual-continuity-anchor",
+        "rw-animation-acting-readability-for-fields"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 4,
+      "title": "场景拆分与事件顺序",
+      "covered_by": [
+        "rw-intent-to-story-task-routing",
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-storyboard-splitting-by-content-beat"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 5,
+      "title": "分镜拆分与单镜头保留",
+      "covered_by": [
+        "rw-storyboard-splitting-by-content-beat"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 6,
+      "title": "景别选择与景别递进",
+      "covered_by": [
+        "rw-shot-size-camera-purpose-progression",
+        "rw-layout-staging-attention-path"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 7,
+      "title": "运镜选择与镜头目的",
+      "covered_by": [
+        "rw-shot-size-camera-purpose-progression",
+        "rw-scene-spatial-prop-continuity-anchor"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 8,
+      "title": "布局调度与视觉焦点层级",
+      "covered_by": [
+        "rw-layout-staging-attention-path"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 9,
+      "title": "镜头连续性 / 轴线 / 视线方向",
+      "covered_by": [
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-storyboard-splitting-by-content-beat"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 10,
+      "title": "光影与材质空气感",
+      "covered_by": [
+        "rw-color-script-emotional-continuity"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 11,
+      "title": "色彩脚本与情绪色彩连续性",
+      "covered_by": [
+        "rw-color-script-emotional-continuity"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 12,
+      "title": "角色动作与动画表演可读性",
+      "covered_by": [
+        "rw-animation-acting-readability-for-fields",
+        "rw-layout-staging-attention-path"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 13,
+      "title": "对白 / 旁白分配规则",
+      "covered_by": [
+        "rw-dialogue-narration-allocation-rules",
+        "rw-intent-to-story-task-routing"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 14,
+      "title": "时长、节奏与信息密度",
+      "covered_by": [
+        "rw-storyboard-splitting-by-content-beat",
+        "rw-dialogue-narration-allocation-rules",
+        "rw-field-level-failure-repair-routing"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "matrix_id": 15,
+      "title": "分镜提示词编译与失败修复路由",
+      "covered_by": [
+        "rw-field-level-failure-repair-routing",
+        "rw-shot-size-camera-purpose-progression",
+        "rw-character-visual-continuity-anchor"
+      ],
+      "coverage_status": "covered"
+    }
+  ],
+  "future_qa_candidates": [
+    {
+      "candidate_name": "真实导演/工作室/电影/游戏/IP 专名风格开关",
+      "product_value": "none",
+      "runtime_eligible": false,
+      "source_evidence_status": "generic_or_risky",
+      "risk_note": "即便来源能证明这些名称存在，也不能把专名作为 Hope runtime 风格开关；应 FutureQA 或 reject_runtime。"
+    },
+    {
+      "candidate_name": "泛动漫风格词库",
+      "product_value": "low",
+      "runtime_eligible": false,
+      "source_evidence_status": "generic_only",
+      "risk_note": "只提供风格词堆砌，不能提升 PWA 现有字段生成或校验安全。"
+    },
+    {
+      "candidate_name": "长 prompt 万能模板",
+      "product_value": "none",
+      "runtime_eligible": false,
+      "source_evidence_status": "contraindicated_by_sources",
+      "risk_note": "与官方 AI-video prompt 简洁、单场景和字段边界证据冲突，应保留为反例。"
+    },
+    {
+      "candidate_name": "自动编造对白模板",
+      "product_value": "none",
+      "runtime_eligible": false,
+      "source_evidence_status": "contraindicated_by_sources",
+      "risk_note": "与对白证据锁和角色/场景接地要求冲突，不进入 runtime。"
+    }
+  ],
+  "summary": {
+    "source_candidates_count": 31,
+      "recommendations_count": 10,
+    "future_qa_count": 4,
+      "runtime_eligible_recommendations": 10,
+    "coverage_matrix_items": 15,
+    "coverage_status": "all_15_covered",
+    "source_confidence_distribution": {
+      "high": 7,
+      "medium": 16,
+      "medium_high": 8
+    },
+    "priority_distribution": {
+        "P0": 7,
+      "P1": 3
+    },
+    "product_value_distribution": {
+        "high": 9,
+      "medium": 1,
+      "low": 0,
+      "none": 0
+    },
+    "confirmation_state": "waiting_user_confirmation",
+    "confirmed_package_created": false,
+    "apply_deferred": true,
+    "pwa_sync_deferred": true,
+    "source_refs_total_estimate": 44,
+    "domestic_chinese_sources_count": 14,
+    "academic_or_film_school_sources_count": 8
+  },
+  "confirmation": {
+    "confirmed": false,
+    "confirmed_at": "",
+    "confirmed_by": "",
+    "accepted_reviewed_wiki_ids": [],
+    "available_reviewed_wiki_ids": [
+      "rw-intent-to-story-task-routing",
+      "rw-character-visual-continuity-anchor",
+      "rw-scene-spatial-prop-continuity-anchor",
+      "rw-storyboard-splitting-by-content-beat",
+      "rw-shot-size-camera-purpose-progression",
+      "rw-layout-staging-attention-path",
+      "rw-color-script-emotional-continuity",
+      "rw-dialogue-narration-allocation-rules",
+      "rw-animation-acting-readability-for-fields",
+      "rw-field-level-failure-repair-routing"
+    ]
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "",
+    "validation_status": "not_run",
+    "output": null
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260527-ai-anime-field-knowledge-completion/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260527-ai-anime-field-knowledge-completion/intake-package.confirmed.json",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  }
+}

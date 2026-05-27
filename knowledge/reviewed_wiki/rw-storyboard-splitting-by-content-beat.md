@@ -24,6 +24,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - Treat rows_seed as semantic storyboard candidates, not as a fixed row-count table or duration averaging plan.
 - Split only when the content beat, shot purpose, visible action phase, emotional or information change, or spatial scheduling changes enough to need a separate readable row.
+- Consider dialogue or narration beats, prop handoff, attention change, and duration density only when they change what the current row must show.
 - Allow a complete shot to remain one row when content, action, rhythm, and prompt_text readability are coherent.
 
 ## Runtime Mapping

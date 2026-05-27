@@ -34,14 +34,11 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
+- camera
 - shot_size
 - visual_description
 - character_action
-- dialogue_or_narration
 - prompt_text
-- duration_seconds
-- camera
 
 ## Negative Constraints
 

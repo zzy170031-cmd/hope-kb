@@ -78,6 +78,44 @@
           "Do not replace visible action with abstract mood labels.",
           "Do not use dialogue to invent missing motives, relationships, or facts."
         ]
+      },
+      {
+        "id": "wg-intent-to-story-task-routing",
+        "name": "Intent to story task routing",
+        "intent": "Route short user input into story expansion, script rewrite, or storyboard creation before filling existing final storyboard fields.",
+        "influenceAxes": [
+          "task_routing",
+          "scene_goal",
+          "fact_integrity",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Classify short input as story expansion, script rewrite, or storyboard creation before planning rows.",
+          "Bind each row to an explicit change, character intent, scene purpose, and field-level output need.",
+          "Use routing to decide whether the next step needs visible action, dialogue or narration, camera planning, duration allocation, or repair."
+        ],
+        "negativeConstraints": [
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete."
+        ]
+      },
+      {
+        "id": "wg-dialogue-narration-allocation-rules",
+        "name": "Dialogue narration writing support",
+        "intent": "Keep dialogue and narration grounded in accepted text, character intent, and current-row function.",
+        "influenceAxes": [
+          "dialogue_grounding",
+          "scene_goal",
+          "duration_density"
+        ],
+        "directives": [
+          "Choose dialogue, narration, visible action, or silence by row function.",
+          "Keep line length and information load compatible with row duration."
+        ],
+        "negativeConstraints": [
+          "Do not invent motives, relationships, or exposition to justify a line."
+        ]
       }
     ],
     "directorRulePacks": [
@@ -396,6 +434,86 @@
         "negativeConstraints": [
           "Do not convert shot planning notes into final prompt_text."
         ]
+      },
+      {
+        "id": "dg-intent-to-story-task-routing",
+        "name": "Intent routing director support",
+        "intent": "Carry task route, scene purpose, and row objective into camera, action, and duration planning.",
+        "influenceAxes": [
+          "task_routing",
+          "shot_intent",
+          "scene_handoff"
+        ],
+        "directives": [
+          "Choose camera and action planning from the confirmed task route.",
+          "Keep scene handoff tied to the current row objective."
+        ],
+        "negativeConstraints": [
+          "Do not let routing labels appear as final storyboard text."
+        ]
+      },
+      {
+        "id": "dg-scene-spatial-prop-continuity-anchor",
+        "name": "Scene spatial prop continuity anchor",
+        "intent": "Keep location, left-right relation, eyeline, prop anchors, background anchors, and event order continuous across adjacent storyboard rows.",
+        "influenceAxes": [
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "camera_language"
+        ],
+        "directives": [
+          "Preserve character position, eyeline direction, prop state, background anchor, and event order when splitting rows.",
+          "Use camera movement and shot size to clarify spatial relation instead of resetting location or screen direction.",
+          "Treat a prop handoff, position change, or event-order change as a row-level continuity requirement."
+        ],
+        "negativeConstraints": [
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap."
+        ]
+      },
+      {
+        "id": "dg-layout-staging-attention-path",
+        "name": "Layout staging attention path",
+        "intent": "Arrange subject, action, background, light, composition, and depth so the viewer reads the current row's most important information first.",
+        "influenceAxes": [
+          "composition",
+          "staging",
+          "visual_attention",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Set a primary visual focus before adding secondary action, background detail, light, or style wording.",
+          "Use staging, depth, silhouette, contrast, and motion direction to guide attention through the row.",
+          "Keep composition subordinate to the current character action, scene objective, and shot size."
+        ],
+        "negativeConstraints": [
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description."
+        ]
+      },
+      {
+        "id": "dg-color-script-emotional-continuity",
+        "name": "Color script emotional continuity",
+        "intent": "Use visible light source, color temperature, material response, air medium, and emotional color progression to support the current beat and adjacent rows.",
+        "influenceAxes": [
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression"
+        ],
+        "directives": [
+          "Bind light direction, color temperature, material response, and air medium to the current beat and scene logic.",
+          "Use color progression to clarify emotional or information change across adjacent rows.",
+          "Keep visual_description and prompt_text consistent with the established visual world."
+        ],
+        "negativeConstraints": [
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -566,6 +684,7 @@
         "directives": [
           "Treat rows_seed as semantic storyboard candidates, not as a fixed row-count table or duration averaging plan.",
           "Split only when the content beat, shot purpose, visible action phase, emotional or information change, or spatial scheduling changes enough to need a separate readable row.",
+          "Consider dialogue or narration beats, prop handoff, attention change, and duration density only when they change what the current row must show.",
           "Allow a complete shot to remain one row when content, action, rhythm, and prompt_text readability are coherent."
         ],
         "negativeConstraints": [
@@ -615,13 +734,129 @@
           "Do not create empty or meaningless prompt_text rows.",
           "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
         ]
+      },
+      {
+        "id": "vg-intent-to-story-task-routing",
+        "name": "Intent routing validation",
+        "intent": "Block route drift that turns product tasks into generic writing advice or unsupported invention.",
+        "influenceAxes": [
+          "task_routing",
+          "field_boundary",
+          "fact_integrity"
+        ],
+        "directives": [
+          "Reject output that does not match the selected product task.",
+          "Require route evidence before accepting invented dialogue or field content."
+        ],
+        "negativeConstraints": [
+          "Do not expose route labels, internal status, or evidence notes in final fields."
+        ]
+      },
+      {
+        "id": "vg-character-visual-continuity-anchor",
+        "name": "Character visual continuity anchor",
+        "intent": "Preserve character identity, relationship, appearance, posture, and expression anchors across storyboard rows and prompt_text.",
+        "influenceAxes": [
+          "character_continuity",
+          "visual_grounding",
+          "field_boundary",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Carry confirmed identity, relationship, appearance, posture, and expression anchors into every row that uses the character.",
+          "Let prompt_text inherit confirmed character anchors without adding new names, IP references, or source handles.",
+          "Repair drift by restoring the accepted character anchor before changing camera, action, or style wording."
+        ],
+        "negativeConstraints": [
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists."
+        ]
+      },
+      {
+        "id": "vg-scene-spatial-prop-continuity-anchor",
+        "name": "Scene spatial prop continuity validation",
+        "intent": "Reject row transitions that lose accepted props, locations, eyelines, or event order.",
+        "influenceAxes": [
+          "spatial_continuity",
+          "prop_continuity",
+          "export_safety"
+        ],
+        "directives": [
+          "Validate that adjacent rows preserve accepted space, prop state, and event order.",
+          "Repair only the field that caused the continuity break."
+        ],
+        "negativeConstraints": [
+          "Do not introduce unsupported props, locations, or continuity explanations."
+        ]
+      },
+      {
+        "id": "vg-layout-staging-attention-path",
+        "name": "Layout staging attention validation",
+        "intent": "Reject rows where visual focus is ambiguous or the main action is obscured by competing detail.",
+        "influenceAxes": [
+          "visual_attention",
+          "field_boundary",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Validate that prompt_text keeps one primary focus for the row.",
+          "Repair visual_description or character_action before adding more style terms."
+        ],
+        "negativeConstraints": [
+          "Do not add attention-path notes as user-visible final text."
+        ]
+      },
+      {
+        "id": "vg-dialogue-narration-allocation-rules",
+        "name": "Dialogue narration allocation rules",
+        "intent": "Allocate dialogue, narration, action explanation, and duration to the current storyboard row only when supported by text, fact, character intent, or scene purpose.",
+        "influenceAxes": [
+          "dialogue_grounding",
+          "narration_allocation",
+          "duration_density",
+          "field_boundary"
+        ],
+        "directives": [
+          "Bind each dialogue or narration line to the current row's person, action, scene purpose, and duration.",
+          "Use visible action or silence when dialogue evidence is weak.",
+          "Keep narration short and row-bound when it clarifies information that cannot be shown visibly."
+        ],
+        "negativeConstraints": [
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration."
+        ]
+      },
+      {
+        "id": "vg-field-level-failure-repair-routing",
+        "name": "Field level failure repair routing",
+        "intent": "Route storyboard failures to the specific affected field while preserving row facts, shot purpose, duration, and summary-only boundaries.",
+        "influenceAxes": [
+          "field_boundary",
+          "repair_routing",
+          "validation",
+          "export_safety"
+        ],
+        "directives": [
+          "Locate failure by final field before repairing person, camera, shot_size, visual_description, character_action, dialogue_or_narration, prompt_text, or duration_seconds.",
+          "Repair only the affected field unless adjacent fields must change to preserve row coherence.",
+          "Keep repair output aligned with accepted facts, shot purpose, duration, and summary-only runtime constraints."
+        ],
+        "negativeConstraints": [
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+        ]
       }
     ],
     "sceneMappings": {
       "hot_blood_battle": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -639,7 +874,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -652,7 +891,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -720,7 +965,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "source_facts",
@@ -774,13 +1040,27 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "ensemble_performance": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -798,7 +1078,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -811,7 +1095,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -877,7 +1167,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -929,13 +1240,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "emotional_dialogue": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -953,7 +1279,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -966,7 +1296,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1032,7 +1368,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1084,13 +1441,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "encounter_performance": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1108,7 +1480,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1121,7 +1497,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1187,7 +1569,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1239,13 +1642,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "field_chase": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1263,7 +1681,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1276,7 +1698,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1342,7 +1770,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1394,13 +1843,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "spectacle_showcase": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1418,7 +1882,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1431,7 +1899,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1497,7 +1971,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1549,13 +2044,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "daily_healing": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1573,7 +2083,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1586,7 +2100,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1652,7 +2172,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1704,13 +2245,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "guoman_hot_blood_combat": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1728,7 +2284,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1741,7 +2301,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1807,7 +2373,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1859,13 +2446,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "guoman_ensemble_performance": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1883,7 +2485,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1896,7 +2502,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1962,7 +2574,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2014,13 +2647,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "ink_wuxia_combat": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2038,7 +2686,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2051,7 +2703,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2117,7 +2775,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2169,13 +2848,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "eastern_spectacle": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2193,7 +2887,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2206,7 +2904,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2272,7 +2976,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2324,13 +3049,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "xianxia_action": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2348,7 +3088,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2361,7 +3105,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2427,7 +3177,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2479,13 +3250,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "urban_fantasy": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2503,7 +3289,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2516,7 +3306,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2584,7 +3380,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "source_facts",
@@ -2637,13 +3454,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "chinese_war_formation": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2661,7 +3493,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2674,7 +3510,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -2740,7 +3582,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2792,13 +3655,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "weapon_highlight": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2816,7 +3694,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2829,7 +3711,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2895,7 +3783,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2947,13 +3856,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "council_strategy": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2971,7 +3895,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2984,7 +3912,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3050,7 +3984,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3102,13 +4057,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "siege_defense": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3126,7 +4096,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3139,7 +4113,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3205,7 +4185,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3257,13 +4258,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "slg_sandbox_view": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3281,7 +4297,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3294,7 +4314,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3360,7 +4386,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3412,13 +4459,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "slg_march_encirclement": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3436,7 +4498,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3449,7 +4515,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3515,7 +4587,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3567,13 +4660,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "slg_city_growth": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3591,7 +4699,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3604,7 +4716,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3670,7 +4788,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3722,13 +4861,28 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       },
       "slg_battle_report": {
         "writingRulePackIds": [
           "wg-continuity-core",
-          "wg-scene-expression-visible-action"
+          "wg-scene-expression-visible-action",
+          "wg-intent-to-story-task-routing",
+          "wg-dialogue-narration-allocation-rules"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3746,7 +4900,11 @@
           "dg-anime-key-pose-silhouette-priority",
           "dg-storyboard-splitting-by-content-beat",
           "dg-single-shot-preservation-for-existing-fields",
-          "dg-prompt-load-and-shot-plan-boundary"
+          "dg-prompt-load-and-shot-plan-boundary",
+          "dg-intent-to-story-task-routing",
+          "dg-scene-spatial-prop-continuity-anchor",
+          "dg-layout-staging-attention-path",
+          "dg-color-script-emotional-continuity"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3759,7 +4917,13 @@
           "vg-anime-translation-failure-guard",
           "vg-storyboard-splitting-by-content-beat",
           "vg-single-shot-preservation-for-existing-fields",
-          "vg-prompt-load-and-shot-plan-boundary"
+          "vg-prompt-load-and-shot-plan-boundary",
+          "vg-intent-to-story-task-routing",
+          "vg-character-visual-continuity-anchor",
+          "vg-scene-spatial-prop-continuity-anchor",
+          "vg-layout-staging-attention-path",
+          "vg-dialogue-narration-allocation-rules",
+          "vg-field-level-failure-repair-routing"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3825,7 +4989,28 @@
           "Do not hide split rationale in note, status, or internal fields as final output.",
           "Do not pack multiple shot objectives, unrelated beats, or full scene plans into one prompt_text row.",
           "Do not create empty or meaningless prompt_text rows.",
-          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text."
+          "Do not use long universal prompt templates, raw source text, internal notes, or workflow labels as final prompt_text.",
+          "Do not answer short input as a generic question when a product task is required.",
+          "Do not apply fixed three-act, fifteen-beat, or row-count templates without field evidence.",
+          "Do not invent character relationships, dialogue, or backstory to make the route look complete.",
+          "Do not invent character names, relationships, costumes, or visual signatures.",
+          "Do not use file names, source paths, real IP, studio names, or source metadata as continuity switches.",
+          "Do not replace accepted person values with generic role labels when a confirmed character anchor exists.",
+          "Do not jump screen direction, swap left-right placement, lose key props, or change location without accepted cause.",
+          "Do not hide spatial continuity repair in final prompt_text as an internal note.",
+          "Do not create new props or locations to solve a continuity gap.",
+          "Do not let multiple subjects, background details, style terms, and action words compete for the same focus.",
+          "Do not use composition language as decorative filler disconnected from the row objective.",
+          "Do not bury the main action behind atmosphere or background description.",
+          "Do not stack generic anime color words without a visible source or story function.",
+          "Do not use real studio, IP, film, or director style names as runtime style switches.",
+          "Do not add unsupported weather, light, or atmosphere to manufacture mood.",
+          "Do not turn this rule into an automatic dialogue-generation template.",
+          "Do not use narration to replace visible action that the row can show.",
+          "Do not move dialogue across rows or invent exposition to fill duration.",
+          "Do not rewrite every field with a long universal prompt template.",
+          "Do not use style words to overwrite facts or field responsibilities.",
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3877,7 +5062,20 @@
           "shot_split_boundary",
           "single_shot_preservation",
           "prompt_load",
-          "shot_plan_boundary"
+          "shot_plan_boundary",
+          "task_routing",
+          "spatial_continuity",
+          "prop_continuity",
+          "event_order",
+          "composition",
+          "staging",
+          "color_script",
+          "lighting_continuity",
+          "material_response",
+          "emotional_progression",
+          "narration_allocation",
+          "repair_routing",
+          "validation"
         ]
       }
     },
