@@ -25,6 +25,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - Bind light direction, color temperature, material response, and air medium to the current beat and scene logic.
 - Use color progression to clarify emotional or information change across adjacent rows.
+- Route emotional tone through visible light, color temperature, material response, air medium, and rhythm only when accepted body and scene type support it.
 - Keep visual_description and prompt_text consistent with the established visual world.
 
 ## Runtime Mapping
@@ -35,12 +36,19 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- scene_profile
 - visual_description
+- character_action
+- camera
+- shot_size
 - prompt_text
 - duration_seconds
+- negative_constraints
+- kb_context_summary
 
 ## Negative Constraints
 
 - Do not stack generic anime color words without a visible source or story function.
+- Do not turn emotional tone into an unrelated style switch.
 - Do not use real studio, IP, film, or director style names as runtime style switches.
 - Do not add unsupported weather, light, or atmosphere to manufacture mood.

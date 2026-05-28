@@ -1,0 +1,2662 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260528-scene-style-profile-routing-candidates",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "apply_gate_open": false,
+    "controller_required_before_apply": true
+  },
+  "demand": {
+    "title": "Scene type and accepted body to anime style_profile routing candidates",
+    "search_focus": "scene_type_plus_accepted_body_to_style_profile_to_pwa_field_projection",
+    "target_model": "Hope PWA storyboard prompt compiler and graph intake confirmation workflow",
+    "target_output": [
+      "style_alias_catalog candidate governance",
+      "style_family_catalog candidate routing",
+      "scene-driven style_profile rules",
+      "PWA field projection and contamination guards"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-28T00:00:00+08:00",
+    "field_boundary_note": "Sequence number stays PWA-controlled. Operation stays UI-controlled. note/status remain internal state and are not final generated fields. No new PWA final fields are introduced."
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_live_web_search_summary_only",
+    "live_search_connector": "external_web_search_with_wikipedia_and_github_expansion",
+    "generated_queries": [
+      "storyboard scene planning visual storytelling scene mood",
+      "animatic pacing shot design emotional scene",
+      "animation visual development style guide color script animation",
+      "character consistency animation layout staging shape language",
+      "Chinese shadow puppets visual style UNESCO",
+      "Dunhuang murals color line composition Digital Dunhuang",
+      "Sumi-e ink painting visual language museum education",
+      "paper cutout illustration style museum",
+      "cyberpunk steampunk dieselpunk retrofuturism visual style Tate Wikipedia",
+      "OpenAI Runway Google Veo video prompting camera style lighting motion",
+      "智谱 CogVideoX 视频生成 提示词 镜头 景别 光影",
+      "GitHub video generation prompt consistency storyboard style"
+    ],
+    "allowed_source_types": [
+      "official_doc",
+      "guide",
+      "article",
+      "paper",
+      "tutorial",
+      "industry_reference",
+      "museum_reference",
+      "education_reference"
+    ],
+    "required_answers": [
+      "scene_type as prior not final style",
+      "accepted body as style routing fact source",
+      "style_alias_catalog dedupe and risk marking",
+      "style_family_catalog visual evidence",
+      "PWA field projection rules",
+      "style contamination guard and prompt boundary"
+    ],
+    "search_provider_status": {
+      "status": "manual_live_search_expanded",
+      "reason": "expanded beyond authority sites into Wikipedia and GitHub auxiliary references as requested; no raw source text retained",
+      "candidate_count": 10,
+      "source_ref_count": 30,
+      "domestic_source_ref_count": 5,
+      "wikipedia_or_encyclopedia_source_count": 6,
+      "github_aux_source_count": 4,
+      "accessed_at": "2026-05-28"
+    }
+  },
+  "style_alias_processing_summary": {
+    "raw_alias_count_from_user_paste": 120,
+    "source_of_aliases": "user_pasted_candidate_material_for_this_run",
+    "handling_boundary": "alias candidates only; not runtime rules and not 120 reviewed_wiki rows",
+    "duplicate_or_synonym_groups": [
+      [
+        "Cyberpunk",
+        "cyberpunk style"
+      ],
+      [
+        "Steampunk",
+        "蒸汽朋克 duplicate"
+      ],
+      [
+        "Dieselpunk",
+        "柴油朋克 duplicate"
+      ],
+      [
+        "PopArt",
+        "pop art",
+        "波普艺术"
+      ],
+      [
+        "Neoclassicism",
+        "Neo-classicism"
+      ],
+      [
+        "Science-Fiction",
+        "Science Fiction"
+      ],
+      [
+        "Minimalism",
+        "Minimalist design",
+        "极简主义 Minimalism"
+      ],
+      [
+        "Impressionism",
+        "印象派 duplicate"
+      ],
+      [
+        "Surrealism",
+        "超现实主义 duplicate"
+      ],
+      [
+        "Anime style",
+        "Anime"
+      ],
+      [
+        "Manga",
+        "漫画"
+      ]
+    ],
+    "spelling_or_translation_corrections": [
+      "Serpunk -> Solarpunk candidate, spelling abnormal; verify before use",
+      "azzAge -> Jazz Age",
+      "ArtNoveau -> Art Nouveau",
+      "Post-impressionism / Neo-impressionism 修正“E象派”错字",
+      "Sienese Art 修正“耶纳艺术”译名疑似错误",
+      "Rococo 修正“可可”误译",
+      "Paper cutout illustratior -> Paper cutout illustration",
+      "watercolor paint 修正“K彩画”疑似错字",
+      "Emerald, incomplete item stays blocked pending source clarification"
+    ],
+    "risk_buckets": {
+      "ip_or_brand_risk": [
+        "Disney style",
+        "真实 IP / 电影 / 游戏 / 品牌名若出现则 blocked"
+      ],
+      "real_director_or_studio_risk": [
+        "任何真实导演、工作室、电影作者名不得作为 runtime 风格开关"
+      ],
+      "religious_ethnic_cultural_context_risk": [
+        "Religious icon",
+        "Aboriginal Art",
+        "Olmec",
+        "Qajar",
+        "Byzantine Art",
+        "Ancient Egyptian Art",
+        "Dunhuang art",
+        "Chinese heritage styles require context"
+      ],
+      "political_propaganda_risk": [
+        "Propaganda Art"
+      ],
+      "generic_low_value": [
+        "General Styles",
+        "Genre Styles",
+        "Digital Art without visual constraints",
+        "film still without field definition"
+      ],
+      "non_visual_low_value": [
+        "Metalcore",
+        "Deathcore",
+        "Synesthesia unless converted to visual language"
+      ],
+      "spelling_abnormal_or_incomplete": [
+        "Serpunk",
+        "azzAge",
+        "ArtNoveau",
+        "Emerald,",
+        "Paper cutout illustratior"
+      ]
+    }
+  },
+  "style_family_catalog": [
+    {
+      "family_id": "chinese_heritage_visual_styles",
+      "family_name": "Chinese heritage visual styles",
+      "aliases": [
+        "Chinese Shadow Puppets",
+        "Dunhuang art",
+        "Ink / Sumi-e adjacent visual language",
+        "Paper cutout illustration",
+        "Folk Art",
+        "Chinese style with context guard"
+      ],
+      "runtime_posture": "eligible only as summary visual family with cultural guard"
+    },
+    {
+      "family_id": "anime_manga_illustration_styles",
+      "family_name": "Anime / manga / illustration styles",
+      "aliases": [
+        "Anime style",
+        "Manga",
+        "Chibi",
+        "Kawaii",
+        "2D Illustration",
+        "Pixel art",
+        "Watercolor",
+        "Coloring Book"
+      ],
+      "runtime_posture": "eligible as high-level animation / illustration language, no studio or IP names"
+    },
+    {
+      "family_id": "retrofuture_punk_scifi_styles",
+      "family_name": "Retrofuture / punk / sci-fi styles",
+      "aliases": [
+        "Cyberpunk",
+        "Steampunk",
+        "Dieselpunk",
+        "Retrofuturism",
+        "Synthwave",
+        "Vaporwave",
+        "Science Fiction",
+        "Atompunk",
+        "Biopunk",
+        "Solarpunk pending correction"
+      ],
+      "runtime_posture": "eligible with era and prop facts anchored to accepted body"
+    },
+    {
+      "family_id": "classical_historical_art_movements",
+      "family_name": "Classical / historical art movement styles",
+      "aliases": [
+        "Renaissance",
+        "Baroque",
+        "Rococo",
+        "Art Deco",
+        "Bauhaus",
+        "Impressionism",
+        "Surrealism",
+        "Expressionism",
+        "Cubism",
+        "Pop Art",
+        "Fauvism",
+        "De Stijl"
+      ],
+      "runtime_posture": "mostly audit/family-level; only visual traits may enter runtime after source support"
+    },
+    {
+      "family_id": "fantasy_dark_magic_styles",
+      "family_name": "Fantasy / dark / magic styles",
+      "aliases": [
+        "Fantasy",
+        "Dark Fantasy",
+        "Magic Realism",
+        "Macabre",
+        "Gothic",
+        "Dreamcore",
+        "Weirdcore"
+      ],
+      "runtime_posture": "eligible for tone and visual atmosphere, guard against horror/gore or unsupported facts"
+    },
+    {
+      "family_id": "minimal_graphic_commercial_styles",
+      "family_name": "Minimal / graphic / commercial styles",
+      "aliases": [
+        "Minimalism",
+        "Normcore pending semantic review",
+        "Constructivism",
+        "Propaganda Art risk",
+        "90s commercial",
+        "Holographic",
+        "Collage",
+        "Knolling style"
+      ],
+      "runtime_posture": "mixed; commercial/graphic traits can route, propaganda and generic aliases require guard"
+    },
+    {
+      "family_id": "futureqa_blocked_aliases",
+      "family_name": "FutureQA / blocked style aliases",
+      "aliases": [
+        "Disney style",
+        "Emerald incomplete",
+        "General Styles",
+        "Genre Styles",
+        "real IP",
+        "real director or studio names",
+        "unsupported ethnic or religious labels"
+      ],
+      "runtime_posture": "not runtime eligible"
+    }
+  ],
+  "source_candidates": [
+    {
+      "source_id": "src-scene-type-as-style-prior",
+      "title": "场景类型作为风格先验",
+      "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "Khan Academy / Pixar in a Box",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "低风险；主要风险是把入口类型误当最终风格。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "scene_type 可影响扩写方向、镜头密度、时长分配和候选风格族，但最终字段以 accepted body 为事实源。",
+      "kb_gap": "与 rw-intent-to-story-task-routing、rw-shot-intent-taxonomy 去重，新增点是 style prior 而非任务路由本身。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-scene-type-as-style-prior",
+      "source_summary": "分镜和叙事资料共同支持：场景类型先影响任务、节奏和初始镜头计划，但不能直接等同最终视觉风格。",
+      "core_logic": "scene_type 是扩写 / 改写 / 分镜的入口先验；accepted body 锁定后，最终 style_profile 必须由场景类型与文本事实共同决定。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "scene_type_as_style_prior",
+      "positive_directive": "先用 scene_type 设定任务倾向、默认节奏和可选风格族范围，再读取 accepted body 校准。",
+      "negative_constraint": "不要把用户选择的场景类型直接写成最终风格，不要让场景类型覆盖剧情事实。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-intent-to-story-task-routing、rw-shot-intent-taxonomy 去重，新增点是 style prior 而非任务路由本身。",
+      "risk_note": "低风险；主要风险是把入口类型误当最终风格。",
+      "priority": "P0",
+      "product_value": "减少“悬疑=暗黑风”“爱情=粉色滤镜”等机械映射。",
+      "pwa_generation_implication": "scene_type 可影响扩写方向、镜头密度、时长分配和候选风格族，但最终字段以 accepted body 为事实源。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Khan Academy Pixar in a Box Storytelling",
+          "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+          "source_type": "education_reference",
+          "publisher_or_site": "Khan Academy / Pixar in a Box",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程围绕故事、角色、世界和视觉选择如何服务叙事展开。",
+          "relevance_to_product": "支撑场景类型作为叙事先验，最终风格仍需服务 accepted body 的剧情表达。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Adobe animation storyboarding guide",
+          "source_url": "https://www.adobe.com/uk/creativecloud/animation/discover/animation-storyboarding.html",
+          "source_type": "guide",
+          "publisher_or_site": "Adobe",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "分镜用于把脚本或概念转成镜头、画面、动作和时序规划。",
+          "relevance_to_product": "支撑 scene_type 先影响任务和节奏，再由 accepted body 落到 PWA 分镜字段。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Continuity for Storyboards",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "tutorial",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教程讨论分镜连续性、银幕方向、视线和动作连接。",
+          "relevance_to_product": "支撑 style_profile 不得破坏空间、道具、角色关系和镜头连续性。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "source_id": "src-accepted-body-to-style-profile",
+      "title": "accepted body 到 style_profile",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "Google Cloud",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "中风险；错误抽取会造成风格污染或事实替换。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "锁定 body 后，字段生成只能引用 style_profile 的摘要约束，并保留人物、对白和事实原意。",
+      "kb_gap": "与 rw-writing-continuity-core、rw-scene-expression-visible-action 去重；新增点是 style_profile 抽取层。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-accepted-body-to-style-profile",
+      "source_summary": "AI 视频提示词文档均把主体、动作、场景、光影、相机、氛围拆成结构维度，支持从锁定文本中抽取事实后再生成视觉画像。",
+      "core_logic": "accepted body 是唯一事实源；style_profile 从情绪、空间、时代、道具、动作强度、人物关系和冲突状态中抽取。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "accepted_body_to_style_profile",
+      "positive_directive": "把文本事实转成色彩、光影、线条、材质、构图、动作节奏和动画表现。",
+      "negative_constraint": "不要从 raw draft、source evidence 或 style alias 直接改写人物身份、地点、道具和对白。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-writing-continuity-core、rw-scene-expression-visible-action 去重；新增点是 style_profile 抽取层。",
+      "risk_note": "中风险；错误抽取会造成风格污染或事实替换。",
+      "priority": "P0",
+      "product_value": "把风格决策从词库装饰转为可验证的文本事实推理。",
+      "pwa_generation_implication": "锁定 body 后，字段生成只能引用 style_profile 的摘要约束，并保留人物、对白和事实原意。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "source_id": "src-scene-driven-style-routing",
+      "title": "scene_type + accepted body 风格族路由",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "Google Cloud",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "中风险；多风格堆叠会造成 prompt overload 和视觉漂移。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "为画面描述、运镜、景别、角色动作、分镜提示词和时长提供一致的风格约束。",
+      "kb_gap": "与 rw-color-script-emotional-continuity、rw-duration-density-rules 有交叉；本条聚焦风格族路由。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-scene-driven-style-routing",
+      "source_summary": "视频生成和开源多镜头项目都把场景、动作、镜头、风格和氛围拆开处理，支持“场景先验 + 文本事实”共同路由。",
+      "core_logic": "scene_type 给候选范围，accepted body 给事实约束；路由输出是 style_family + intensity + visual_constraints，而不是单一风格词。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "scene_driven_style_routing",
+      "positive_directive": "为每段剧情选择 1 个主风格族和必要的辅助视觉约束，保持跨镜头一致。",
+      "negative_constraint": "不要堆叠多个互斥风格族，不要在短片段内频繁切换风格。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-color-script-emotional-continuity、rw-duration-density-rules 有交叉；本条聚焦风格族路由。",
+      "risk_note": "中风险；多风格堆叠会造成 prompt overload 和视觉漂移。",
+      "priority": "P0",
+      "product_value": "让 120 alias 被归类后服务场景，而不是作为菜单词直接下发。",
+      "pwa_generation_implication": "为画面描述、运镜、景别、角色动作、分镜提示词和时长提供一致的风格约束。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "HKUDS ViMax multi-shot video generation framework",
+          "source_url": "https://github.com/HKUDS/ViMax",
+          "source_type": "industry_reference",
+          "publisher_or_site": "GitHub HKUDS",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "项目说明包含长脚本拆分、多镜头分镜设计、叙事节奏、角色与场景一致性等组件。",
+          "relevance_to_product": "辅助说明 style_profile 应服务多镜头分镜和一致性，不应替代角色事实或剧情事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "source_id": "src-style-alias-family-catalog",
+      "title": "style_alias_catalog 去重归类与风险标记",
+      "source_url": "https://www.moma.org/collection/terms/pop-art",
+      "source_type": "alias_catalog",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "MoMA",
+      "language": "mixed",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": "高风险；Disney style、Chinoiserie、Aboriginal Art、Religious icon、Propaganda Art、泛类别和拼写异常需 FutureQA 或 blocked。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "kb_context_summary",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "PWA 只能接收风格族摘要，不能接收 120 alias 堆叠或长模板。",
+      "kb_gap": "与所有具体风格族候选去重；本条只保存目录治理，不定义每个风格的 runtime 用法。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-style-alias-family-catalog",
+      "source_summary": "博物馆、百科和 GitHub 教育资料支持把风格词标准化、归族和风险标记，但低价值 alias 不应直接进入 runtime。",
+      "core_logic": "120 个用户词仅作为 alias 候选素材：标准化中英文、修正拼写、合并重复/同义、标记 IP/文化/政治/泛类别/非视觉风险。",
+      "style_layer": "alias_catalog",
+      "target_field": [
+        "内部审核层",
+        "kb_context_summary",
+        "selected_kb_rules"
+      ],
+      "knowledge_group": "style_alias_to_style_family_catalog",
+      "positive_directive": "在审核层保留 alias 到 style_family 的映射和风险标签，runtime 只接收经过确认的 summary-only 风格族规则。",
+      "negative_constraint": "不要机械生成 120 条 reviewed_wiki 或 runtime 规则，不要把 Disney style、真实 IP、导演、工作室名下发。",
+      "runtime_eligible": false,
+      "duplicate_hint": "与所有具体风格族候选去重；本条只保存目录治理，不定义每个风格的 runtime 用法。",
+      "risk_note": "高风险；Disney style、Chinoiserie、Aboriginal Art、Religious icon、Propaganda Art、泛类别和拼写异常需 FutureQA 或 blocked。",
+      "priority": "P1",
+      "product_value": "把用户素材变成可审核、可去重、可阻断的候选目录。",
+      "pwa_generation_implication": "PWA 只能接收风格族摘要，不能接收 120 alias 堆叠或长模板。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Pop art",
+          "source_url": "https://www.moma.org/collection/terms/pop-art",
+          "source_type": "museum_reference",
+          "publisher_or_site": "MoMA",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "MoMA 说明波普艺术借用电视、漫画、广告、消费品和大众文化图像。",
+          "relevance_to_product": "支撑 pop/commercial 族视觉特征：高识别图形、商业图像、平面化构成，需避免政治宣传污染。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Cyberpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Cyberpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目概括赛博朋克与高科技、低生活、都市反乌托邦等语境相关。",
+          "relevance_to_product": "作为百科辅助来源，支持赛博朋克族风险标记和场景适配，不能成为 runtime 品牌风格开关。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Surrealism",
+          "source_url": "https://en.wikipedia.org/wiki/Surrealism",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科说明超现实主义常呈现梦境、潜意识、非逻辑场景和意象并置。",
+          "relevance_to_product": "支撑 fantasy/dark/magic 族与梦境/怪异类 alias 的归并和风险边界。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "DAIR.AI Prompt Engineering Guide",
+          "source_url": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+          "source_type": "education_reference",
+          "publisher_or_site": "GitHub DAIR.AI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源提示词教育资料强调明确上下文、任务和输出约束。",
+          "relevance_to_product": "作为提示词边界辅助来源，支持 runtime 只接收摘要规则和字段约束。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "source_id": "src-style-to-field-projection",
+      "title": "style_profile 到 PWA 字段投射",
+      "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+      "source_type": "field_projection",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "OpenAI Developers",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "低到中风险；需防止字段越界。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "字段生成器可按目标字段选择不同 style_profile 子集，validator 可拦截越界写入。",
+      "kb_gap": "与 rw-seedance2-storyboard-field-discipline、rw-prompt-text-boundary、rw-camera-language-grammar 去重；新增点是 style_profile 投射表。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-style-to-field-projection",
+      "source_summary": "多方视频/图像提示词资料都把相机、构图、光影、动作、风格、氛围作为独立控制维度。",
+      "core_logic": "style_profile 只能投射到 PWA 允许字段：运镜、景别、画面描述、角色动作、分镜提示词和时长；人物与对白只可保事实。",
+      "style_layer": "field_projection",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_to_field_projection",
+      "positive_directive": "将风格族转译成色彩、光影、线条、材质、构图、动作节奏、动画表现和负向约束。",
+      "negative_constraint": "不得新增 PWA 最终字段，不得把风格写入人物身份或对白/旁白内容。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-seedance2-storyboard-field-discipline、rw-prompt-text-boundary、rw-camera-language-grammar 去重；新增点是 style_profile 投射表。",
+      "risk_note": "低到中风险；需防止字段越界。",
+      "priority": "P0",
+      "product_value": "把风格从抽象词转成 Hope PWA 已有字段可消费的结构。",
+      "pwa_generation_implication": "字段生成器可按目标字段选择不同 style_profile 子集，validator 可拦截越界写入。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Image Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "图像提示词指南把风格、构图、材质、色彩等作为可组合视觉描述，而不是独立剧情事实。",
+          "relevance_to_product": "支撑 style_alias 需要转译成视觉语言后再进入画面描述或 prompt_text。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "source_id": "src-chinese-heritage-style-scene-routing",
+      "title": "中国传统视觉风格场景路由",
+      "source_url": "https://ich.unesco.org/en/RL/chinese-shadow-puppetry-00421",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "UNESCO Intangible Cultural Heritage",
+      "language": "mixed",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": "文化语境风险中高；宗教图像、民族艺术和原住民艺术需审核层处理。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "传统视觉只进入画面描述、构图、光影、动作节奏和分镜提示词摘要，不改人物事实和对白。",
+      "kb_gap": "与 rw-material-light-air-physicality、rw-layout-staging-attention-path 去重；新增点是传统风格族与场景适配。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-chinese-heritage-style-scene-routing",
+      "source_summary": "UNESCO、数字敦煌、博物馆和亚洲艺术教育资料支持皮影、敦煌、剪纸、水墨等视觉特征的可核验转译。",
+      "core_logic": "传统风格族适配神话、民俗、仪式、历史、寓言、传承、回忆和象征性强的场景；必须附文化语境和事实保护。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "chinese_heritage_style_scene_routing",
+      "positive_directive": "皮影落剪影/背光/透幕/关节动作；敦煌落矿物色感/壁画线条/飞天构图；水墨落留白/墨色层次/笔触；剪纸落平面镂空和民间纹样。",
+      "negative_constraint": "不要把民族、宗教、地域符号当装饰乱用，不要把 Chinoiserie 误等同中国风。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-material-light-air-physicality、rw-layout-staging-attention-path 去重；新增点是传统风格族与场景适配。",
+      "risk_note": "文化语境风险中高；宗教图像、民族艺术和原住民艺术需审核层处理。",
+      "priority": "P1",
+      "product_value": "为国风、民俗、历史、神话类场景提供可落字段的视觉路由。",
+      "pwa_generation_implication": "传统视觉只进入画面描述、构图、光影、动作节奏和分镜提示词摘要，不改人物事实和对白。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Chinese shadow puppetry",
+          "source_url": "https://ich.unesco.org/en/RL/chinese-shadow-puppetry-00421",
+          "source_type": "official_doc",
+          "publisher_or_site": "UNESCO Intangible Cultural Heritage",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "UNESCO 条目说明中国皮影以皮革或纸制彩色剪影、背光透幕和操纵杆形成运动影像。",
+          "relevance_to_product": "支撑皮影族落字段时使用剪影、透幕、背光、关节化动作等视觉语言，并附文化语境守卫。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "The Traditional Art Form of Chinese Shadow Puppetry",
+          "source_url": "https://artsandculture.google.com/story/yAXRvop6wTndJw?hl=en",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Google Arts & Culture",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "资料强调北川皮影等传统皮影的色彩选择、视觉冲击和民间表演属性。",
+          "relevance_to_product": "补充皮影在画面描述、角色动作和构图中的可视化约束。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Digital Dunhuang",
+          "source_url": "https://www.e-dunhuang.com/",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Digital Dunhuang / Dunhuang Academy ecosystem",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "数字敦煌提供敦煌石窟与壁画的公开数字化浏览入口。",
+          "relevance_to_product": "支撑敦煌艺术只作为文化视觉语境和色彩线条参考进入审核层，runtime 需 summary-only。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Chinese Paper Cutting",
+          "source_url": "https://paper.gatech.edu/artifact/chinese-paper-cutting",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Robert C. Williams Museum of Papermaking",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "博物馆资料说明中国剪纸通过剪刀或刻刀在纸上形成图案，并常含视觉符号。",
+          "relevance_to_product": "支撑剪纸插画族落到平面剪影、镂空、边缘和民间符号，不进入人物对白事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "The Magic of Water, Sumi Ink, and Brush",
+          "source_url": "https://investigatingedo.asia.si.edu/lesson-plans/artistic-techniques/the-magic-of-water-sumi-and-brush/",
+          "source_type": "education_reference",
+          "publisher_or_site": "Smithsonian National Museum of Asian Art",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教育资料说明墨、水、笔和纸形成从黑到白的层次及多样笔触。",
+          "relevance_to_product": "支撑水墨 / Sumi-e 族投射到线条、留白、墨色层次和动作节制。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "source_id": "src-retrofuture-punk-style-scene-routing",
+      "title": "复古未来与朋克风格族路由",
+      "source_url": "https://www.tate.org.uk/whats-on/tate-britain/cyberpunk-and-steampunk",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "Tate",
+      "language": "mixed",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": "中风险；biopunk/necrokpunk/gothpunk/astropunk 等低证据 alias 需 FutureQA。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "按场景事实投射到材质、光源、环境密度、镜头节奏和动作速度。",
+      "kb_gap": "与 rw-material-light-air-physicality、rw-shot-intent-taxonomy 去重；新增点是 punk family 场景路由。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-retrofuture-punk-style-scene-routing",
+      "source_summary": "Tate 与 Wikipedia 支持 cyberpunk、steampunk、dieselpunk、retrofuturism 等风格族的高层视觉语境。",
+      "core_logic": "朋克/复古未来族适配都市科技、工业机械、地下秩序、发明、追逐、反乌托邦和时代错位场景；具体道具必须由 accepted body 支撑。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "retrofuture_punk_style_scene_routing",
+      "positive_directive": "赛博朋克落霓虹/高密城市/屏幕光/雨夜反射；蒸汽朋克落黄铜/齿轮/蒸汽/机械；柴油朋克落工业金属/烟尘/复古机械；复古未来落旧时代未来想象。",
+      "negative_constraint": "不要默认给所有科幻都加霓虹，不要把不存在的机械、武器或时代道具写入事实。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-material-light-air-physicality、rw-shot-intent-taxonomy 去重；新增点是 punk family 场景路由。",
+      "risk_note": "中风险；biopunk/necrokpunk/gothpunk/astropunk 等低证据 alias 需 FutureQA。",
+      "priority": "P1",
+      "product_value": "把赛博/蒸汽/柴油/复古未来从重复 alias 合并成可控风格族。",
+      "pwa_generation_implication": "按场景事实投射到材质、光源、环境密度、镜头节奏和动作速度。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Cyberpunk and Steampunk",
+          "source_url": "https://www.tate.org.uk/whats-on/tate-britain/cyberpunk-and-steampunk",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Tate",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Tate 展览页把 cyberpunk 与 steampunk 作为视觉文化和想象技术语境处理。",
+          "relevance_to_product": "补充博物馆来源，支撑朋克族只做视觉语境，不直接下放 IP 或导演风格。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Cyberpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Cyberpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目概括赛博朋克与高科技、低生活、都市反乌托邦等语境相关。",
+          "relevance_to_product": "作为百科辅助来源，支持赛博朋克族风险标记和场景适配，不能成为 runtime 品牌风格开关。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Steampunk",
+          "source_url": "https://en.wikipedia.org/wiki/Steampunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明蒸汽朋克与蒸汽动力、复古未来和工业机械想象相关。",
+          "relevance_to_product": "支撑蒸汽朋克族落到材质、道具和时代氛围，但不能覆盖 accepted body 的时代事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Dieselpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Dieselpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明柴油朋克围绕柴油时代和复古未来审美展开。",
+          "relevance_to_product": "支撑柴油朋克作为 retrofuture 子族处理，并标记时代道具误配风险。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Retrofuturism",
+          "source_url": "https://en.wikipedia.org/wiki/Retrofuturism",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明复古未来主义与过去时代对未来的想象有关。",
+          "relevance_to_product": "支撑 retrofuture 路由时强调时代线索必须来自 accepted body。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "source_id": "src-emotional-tone-style-routing",
+      "title": "情绪调性到视觉节奏路由",
+      "source_url": "https://scad.lunaimaging.com/luna/servlet/detail/SCAD~3~3~1788~14765%3AA-Well-Developed-Colorscript-Info",
+      "source_type": "routing_rule",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "SCAD Graduate Thesis Collection",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "低风险；主要防止情绪标签空泛。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "运镜、景别、画面描述、角色动作和时长可按 tone_profile 调整，不污染人物/对白。",
+      "kb_gap": "与 rw-color-script-emotional-continuity、rw-expression-physicalization 去重；新增点是 emotion-to-style routing。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-emotional-tone-style-routing",
+      "source_summary": "colorscript、动画色彩和关键姿势资料支持用色彩、光影、动作和时序表达情绪。",
+      "core_logic": "情绪对白、悲伤、悬疑、热血、治愈等先抽为 tone_profile，再转成色彩温度、对比度、运动密度、镜头节奏和关键姿态。",
+      "style_layer": "routing_rule",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "emotional_tone_style_routing",
+      "positive_directive": "悲伤可降低饱和度和动作密度；悬疑可增加阴影遮挡和慢推镜；热血可提高动作密度和切换节奏；治愈可柔化光线与运动。",
+      "negative_constraint": "不要改写对白内容来制造情绪，不要用抽象情绪词替代可见动作和画面。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-color-script-emotional-continuity、rw-expression-physicalization 去重；新增点是 emotion-to-style routing。",
+      "risk_note": "低风险；主要防止情绪标签空泛。",
+      "priority": "P0",
+      "product_value": "让情绪场景生成更稳定，减少“只写氛围不写画面”的失败。",
+      "pwa_generation_implication": "运镜、景别、画面描述、角色动作和时长可按 tone_profile 调整，不污染人物/对白。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "A Well-Developed Colorscript Informs the Audience’s Emotional Response",
+          "source_url": "https://scad.lunaimaging.com/luna/servlet/detail/SCAD~3~3~1788~14765%3AA-Well-Developed-Colorscript-Info",
+          "source_type": "paper",
+          "publisher_or_site": "SCAD Graduate Thesis Collection",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "摘要讨论 colorscript、色彩编码、光影、预制作、叙事弧线和动画视觉语言。",
+          "relevance_to_product": "支撑 emotional_tone_style_routing，把情绪映射到色彩、光影和画面连续性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Color in animation",
+          "source_url": "https://people.wku.edu/joon.sung/edu/anim/3d/theory/color_anim.html",
+          "source_type": "education_reference",
+          "publisher_or_site": "Western Kentucky University course page",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程页说明动画可用色彩理论和色彩脚本传达情绪与叙事信息。",
+          "relevance_to_product": "支撑情绪调性不是抽象标签，应落到色彩、亮度、饱和度和场景节奏。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Adobe animation key poses guide",
+          "source_url": "https://www.adobe.com/creativecloud/animation/discover/animation-key-poses.html",
+          "source_type": "guide",
+          "publisher_or_site": "Adobe",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "关键姿势用于表达动作阶段和角色状态，是动画表演与节奏规划的核心。",
+          "relevance_to_product": "支撑情绪风格必须转成角色动作密度、关键姿态和节奏，而不是污染对白。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Khan Academy Pixar in a Box Storytelling",
+          "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+          "source_type": "education_reference",
+          "publisher_or_site": "Khan Academy / Pixar in a Box",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程围绕故事、角色、世界和视觉选择如何服务叙事展开。",
+          "relevance_to_product": "支撑场景类型作为叙事先验，最终风格仍需服务 accepted body 的剧情表达。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "source_id": "src-style-contamination-guard",
+      "title": "风格污染阻断规则",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+      "source_type": "safety_guard",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "Runway Help Center",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "高风险；IP/品牌、真实导演/工作室、宗教民族文化、政治宣传和泛类别均需拦截或 FutureQA。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "生成后校验人物字段、对白/旁白、画面事实和 prompt_text，发现风格泄漏即修复或阻断。",
+      "kb_gap": "与 rw-anime-translation-failure-guard、rw-validation-no-leakage、rw-field-level-failure-repair-routing 去重；新增点是 style_profile 专用污染守卫。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-style-contamination-guard",
+      "source_summary": "视频提示词文档和多镜头开源项目都显示过载、漂移和连续性破坏会影响生成稳定。",
+      "core_logic": "validator 必须阻断风格改写人物、对白、事实、道具、地点、source evidence 和 PWA 字段边界。",
+      "style_layer": "safety_guard",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_contamination_guard",
+      "positive_directive": "把 style_profile 限制为视觉摘要，保留 accepted body 的人物、地点、道具、关系和对白事实。",
+      "negative_constraint": "禁止真实导演、工作室、电影、游戏、IP、品牌风格作为 runtime 风格开关；禁止 Disney style 等品牌目标。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-anime-translation-failure-guard、rw-validation-no-leakage、rw-field-level-failure-repair-routing 去重；新增点是 style_profile 专用污染守卫。",
+      "risk_note": "高风险；IP/品牌、真实导演/工作室、宗教民族文化、政治宣传和泛类别均需拦截或 FutureQA。",
+      "priority": "P0",
+      "product_value": "防止风格路由破坏 Hope PWA 的事实一致性和安全边界。",
+      "pwa_generation_implication": "生成后校验人物字段、对白/旁白、画面事实和 prompt_text，发现风格泄漏即修复或阻断。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "TTV Pipeline text-to-video generation pipeline",
+          "source_url": "https://github.com/trilogy-group/ttv-pipeline",
+          "source_type": "industry_reference",
+          "publisher_or_site": "GitHub trilogy-group",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "项目指出长视频生成常见漂移、角色一致性困难和短片段分段问题。",
+          "relevance_to_product": "辅助支撑风格污染守卫和多镜头风格稳定策略；不作为权威视觉风格定义。",
+          "source_confidence": "low"
+        },
+        {
+          "source_title": "Continuity for Storyboards",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "tutorial",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教程讨论分镜连续性、银幕方向、视线和动作连接。",
+          "relevance_to_product": "支撑 style_profile 不得破坏空间、道具、角色关系和镜头连续性。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "source_id": "src-style-profile-prompt-boundary",
+      "title": "style_profile 的 prompt 边界",
+      "source_url": "https://platform.openai.com/docs/guides/images/image-generation",
+      "source_type": "safety_guard",
+      "source_type_label": "evidence_synthesis",
+      "publisher_or_site": "OpenAI",
+      "language": "mixed",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": "高风险；长模板和 IP 风格词会造成污染、版权/IP 风险和字段泄漏。",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "prompt_text 只合成当前镜头需要的视觉摘要；source_refs 只留在图谱候选页和审核层。",
+      "kb_gap": "与 rw-prompt-text-boundary、rw-prompt-load-and-shot-plan-boundary 去重；新增点是 style_profile 输入边界。",
+      "leakage_check": "summary-only; no raw source, source register, prompt template, local path, sample id, hash, or secret retained",
+      "candidate_name": "rw-style-profile-prompt-boundary",
+      "source_summary": "官方和教育提示词资料支持使用清晰、结构化、可控的视觉约束；不支持把长模板或不受控风格包直接注入 runtime。",
+      "core_logic": "分镜提示词只接收 summary-only 风格约束：主视觉族、色彩/光影/线条/材质/构图/节奏摘要、负向边界。",
+      "style_layer": "safety_guard",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_profile_prompt_boundary",
+      "positive_directive": "把 style_profile 编译为短、字段绑定、事实保真的 prompt_text 片段。",
+      "negative_constraint": "不要下放 raw source、source_refs、长 prompt 模板、120 alias 列表、真实导演/工作室/IP 名称。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-prompt-text-boundary、rw-prompt-load-and-shot-plan-boundary 去重；新增点是 style_profile 输入边界。",
+      "risk_note": "高风险；长模板和 IP 风格词会造成污染、版权/IP 风险和字段泄漏。",
+      "priority": "P0",
+      "product_value": "让 style_profile 对 PWA 有用，同时保持 runtime 轻量、可审计。",
+      "pwa_generation_implication": "prompt_text 只合成当前镜头需要的视觉摘要；source_refs 只留在图谱候选页和审核层。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "OpenAI Images and Vision guide",
+          "source_url": "https://platform.openai.com/docs/guides/images/image-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "支持把视觉生成提示词拆成主体、动作、环境、视觉约束等可控信息，并强调清晰描述生成目标。",
+          "relevance_to_product": "支撑 style_profile 只能作为画面、光影、构图等 summary-only 约束进入分镜提示词，不能变成长模板或覆盖事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "DAIR.AI Prompt Engineering Guide",
+          "source_url": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+          "source_type": "education_reference",
+          "publisher_or_site": "GitHub DAIR.AI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源提示词教育资料强调明确上下文、任务和输出约束。",
+          "relevance_to_product": "作为提示词边界辅助来源，支持 runtime 只接收摘要规则和字段约束。",
+          "source_confidence": "medium"
+        }
+      ]
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-scene-type-as-style-prior",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-intent-to-story-task-routing、rw-shot-intent-taxonomy 去重，新增点是 style prior 而非任务路由本身。",
+      "risk_review_required": false,
+      "summary": "减少“悬疑=暗黑风”“爱情=粉色滤镜”等机械映射。"
+    },
+    {
+      "source_id": "src-accepted-body-to-style-profile",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-writing-continuity-core、rw-scene-expression-visible-action 去重；新增点是 style_profile 抽取层。",
+      "risk_review_required": false,
+      "summary": "把风格决策从词库装饰转为可验证的文本事实推理。"
+    },
+    {
+      "source_id": "src-scene-driven-style-routing",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-color-script-emotional-continuity、rw-duration-density-rules 有交叉；本条聚焦风格族路由。",
+      "risk_review_required": false,
+      "summary": "让 120 alias 被归类后服务场景，而不是作为菜单词直接下发。"
+    },
+    {
+      "source_id": "src-style-alias-family-catalog",
+      "result": "keep",
+      "runtime_target_possible": false,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与所有具体风格族候选去重；本条只保存目录治理，不定义每个风格的 runtime 用法。",
+      "risk_review_required": true,
+      "summary": "把用户素材变成可审核、可去重、可阻断的候选目录。"
+    },
+    {
+      "source_id": "src-style-to-field-projection",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-seedance2-storyboard-field-discipline、rw-prompt-text-boundary、rw-camera-language-grammar 去重；新增点是 style_profile 投射表。",
+      "risk_review_required": false,
+      "summary": "把风格从抽象词转成 Hope PWA 已有字段可消费的结构。"
+    },
+    {
+      "source_id": "src-chinese-heritage-style-scene-routing",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-material-light-air-physicality、rw-layout-staging-attention-path 去重；新增点是传统风格族与场景适配。",
+      "risk_review_required": true,
+      "summary": "为国风、民俗、历史、神话类场景提供可落字段的视觉路由。"
+    },
+    {
+      "source_id": "src-retrofuture-punk-style-scene-routing",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-material-light-air-physicality、rw-shot-intent-taxonomy 去重；新增点是 punk family 场景路由。",
+      "risk_review_required": false,
+      "summary": "把赛博/蒸汽/柴油/复古未来从重复 alias 合并成可控风格族。"
+    },
+    {
+      "source_id": "src-emotional-tone-style-routing",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-color-script-emotional-continuity、rw-expression-physicalization 去重；新增点是 emotion-to-style routing。",
+      "risk_review_required": false,
+      "summary": "让情绪场景生成更稳定，减少“只写氛围不写画面”的失败。"
+    },
+    {
+      "source_id": "src-style-contamination-guard",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-anime-translation-failure-guard、rw-validation-no-leakage、rw-field-level-failure-repair-routing 去重；新增点是 style_profile 专用污染守卫。",
+      "risk_review_required": true,
+      "summary": "防止风格路由破坏 Hope PWA 的事实一致性和安全边界。"
+    },
+    {
+      "source_id": "src-style-profile-prompt-boundary",
+      "result": "keep",
+      "runtime_target_possible": true,
+      "source_summary_only": true,
+      "has_required_source_refs": true,
+      "serves_pwa_fields": true,
+      "duplicate_strategy": "与 rw-prompt-text-boundary、rw-prompt-load-and-shot-plan-boundary 去重；新增点是 style_profile 输入边界。",
+      "risk_review_required": true,
+      "summary": "让 style_profile 对 PWA 有用，同时保持 runtime 轻量、可审计。"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-scene-type-as-style-prior",
+      "chinese_title": "场景类型作为风格先验",
+      "recommendation": "scene_type 是扩写 / 改写 / 分镜的入口先验；accepted body 锁定后，最终 style_profile 必须由场景类型与文本事实共同决定。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-scene-type-as-style-prior"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-scene-type-as-style-prior",
+      "source_summary": "分镜和叙事资料共同支持：场景类型先影响任务、节奏和初始镜头计划，但不能直接等同最终视觉风格。",
+      "core_logic": "scene_type 是扩写 / 改写 / 分镜的入口先验；accepted body 锁定后，最终 style_profile 必须由场景类型与文本事实共同决定。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "scene_type_as_style_prior",
+      "positive_directive": "先用 scene_type 设定任务倾向、默认节奏和可选风格族范围，再读取 accepted body 校准。",
+      "negative_constraint": "不要把用户选择的场景类型直接写成最终风格，不要让场景类型覆盖剧情事实。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-intent-to-story-task-routing、rw-shot-intent-taxonomy 去重，新增点是 style prior 而非任务路由本身。",
+      "risk_note": "低风险；主要风险是把入口类型误当最终风格。",
+      "priority": "P0",
+      "product_value": "减少“悬疑=暗黑风”“爱情=粉色滤镜”等机械映射。",
+      "pwa_generation_implication": "scene_type 可影响扩写方向、镜头密度、时长分配和候选风格族，但最终字段以 accepted body 为事实源。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Khan Academy Pixar in a Box Storytelling",
+          "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+          "source_type": "education_reference",
+          "publisher_or_site": "Khan Academy / Pixar in a Box",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程围绕故事、角色、世界和视觉选择如何服务叙事展开。",
+          "relevance_to_product": "支撑场景类型作为叙事先验，最终风格仍需服务 accepted body 的剧情表达。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Adobe animation storyboarding guide",
+          "source_url": "https://www.adobe.com/uk/creativecloud/animation/discover/animation-storyboarding.html",
+          "source_type": "guide",
+          "publisher_or_site": "Adobe",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "分镜用于把脚本或概念转成镜头、画面、动作和时序规划。",
+          "relevance_to_product": "支撑 scene_type 先影响任务和节奏，再由 accepted body 落到 PWA 分镜字段。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Continuity for Storyboards",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "tutorial",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教程讨论分镜连续性、银幕方向、视线和动作连接。",
+          "relevance_to_product": "支撑 style_profile 不得破坏空间、道具、角色关系和镜头连续性。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-accepted-body-to-style-profile",
+      "chinese_title": "accepted body 到 style_profile",
+      "recommendation": "accepted body 是唯一事实源；style_profile 从情绪、空间、时代、道具、动作强度、人物关系和冲突状态中抽取。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-accepted-body-to-style-profile"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-accepted-body-to-style-profile",
+      "source_summary": "AI 视频提示词文档均把主体、动作、场景、光影、相机、氛围拆成结构维度，支持从锁定文本中抽取事实后再生成视觉画像。",
+      "core_logic": "accepted body 是唯一事实源；style_profile 从情绪、空间、时代、道具、动作强度、人物关系和冲突状态中抽取。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "accepted_body_to_style_profile",
+      "positive_directive": "把文本事实转成色彩、光影、线条、材质、构图、动作节奏和动画表现。",
+      "negative_constraint": "不要从 raw draft、source evidence 或 style alias 直接改写人物身份、地点、道具和对白。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-writing-continuity-core、rw-scene-expression-visible-action 去重；新增点是 style_profile 抽取层。",
+      "risk_note": "中风险；错误抽取会造成风格污染或事实替换。",
+      "priority": "P0",
+      "product_value": "把风格决策从词库装饰转为可验证的文本事实推理。",
+      "pwa_generation_implication": "锁定 body 后，字段生成只能引用 style_profile 的摘要约束，并保留人物、对白和事实原意。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-scene-driven-style-routing",
+      "chinese_title": "scene_type + accepted body 风格族路由",
+      "recommendation": "scene_type 给候选范围，accepted body 给事实约束；路由输出是 style_family + intensity + visual_constraints，而不是单一风格词。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-scene-driven-style-routing"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-scene-driven-style-routing",
+      "source_summary": "视频生成和开源多镜头项目都把场景、动作、镜头、风格和氛围拆开处理，支持“场景先验 + 文本事实”共同路由。",
+      "core_logic": "scene_type 给候选范围，accepted body 给事实约束；路由输出是 style_family + intensity + visual_constraints，而不是单一风格词。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "scene_driven_style_routing",
+      "positive_directive": "为每段剧情选择 1 个主风格族和必要的辅助视觉约束，保持跨镜头一致。",
+      "negative_constraint": "不要堆叠多个互斥风格族，不要在短片段内频繁切换风格。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-color-script-emotional-continuity、rw-duration-density-rules 有交叉；本条聚焦风格族路由。",
+      "risk_note": "中风险；多风格堆叠会造成 prompt overload 和视觉漂移。",
+      "priority": "P0",
+      "product_value": "让 120 alias 被归类后服务场景，而不是作为菜单词直接下发。",
+      "pwa_generation_implication": "为画面描述、运镜、景别、角色动作、分镜提示词和时长提供一致的风格约束。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "HKUDS ViMax multi-shot video generation framework",
+          "source_url": "https://github.com/HKUDS/ViMax",
+          "source_type": "industry_reference",
+          "publisher_or_site": "GitHub HKUDS",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "项目说明包含长脚本拆分、多镜头分镜设计、叙事节奏、角色与场景一致性等组件。",
+          "relevance_to_product": "辅助说明 style_profile 应服务多镜头分镜和一致性，不应替代角色事实或剧情事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-style-alias-family-catalog",
+      "chinese_title": "style_alias_catalog 去重归类与风险标记",
+      "recommendation": "120 个用户词仅作为 alias 候选素材：标准化中英文、修正拼写、合并重复/同义、标记 IP/文化/政治/泛类别/非视觉风险。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "audit_layer_only_not_runtime",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "kb_context_summary",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-style-alias-family-catalog"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-style-alias-family-catalog",
+      "source_summary": "博物馆、百科和 GitHub 教育资料支持把风格词标准化、归族和风险标记，但低价值 alias 不应直接进入 runtime。",
+      "core_logic": "120 个用户词仅作为 alias 候选素材：标准化中英文、修正拼写、合并重复/同义、标记 IP/文化/政治/泛类别/非视觉风险。",
+      "style_layer": "alias_catalog",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "内部审核层",
+        "kb_context_summary",
+        "selected_kb_rules"
+      ],
+      "knowledge_group": "style_alias_to_style_family_catalog",
+      "positive_directive": "在审核层保留 alias 到 style_family 的映射和风险标签，runtime 只接收经过确认的 summary-only 风格族规则。",
+      "negative_constraint": "不要机械生成 120 条 reviewed_wiki 或 runtime 规则，不要把 Disney style、真实 IP、导演、工作室名下发。",
+      "runtime_eligible": false,
+      "duplicate_hint": "与所有具体风格族候选去重；本条只保存目录治理，不定义每个风格的 runtime 用法。",
+      "risk_note": "高风险；Disney style、Chinoiserie、Aboriginal Art、Religious icon、Propaganda Art、泛类别和拼写异常需 FutureQA 或 blocked。",
+      "priority": "P1",
+      "product_value": "把用户素材变成可审核、可去重、可阻断的候选目录。",
+      "pwa_generation_implication": "PWA 只能接收风格族摘要，不能接收 120 alias 堆叠或长模板。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Pop art",
+          "source_url": "https://www.moma.org/collection/terms/pop-art",
+          "source_type": "museum_reference",
+          "publisher_or_site": "MoMA",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "MoMA 说明波普艺术借用电视、漫画、广告、消费品和大众文化图像。",
+          "relevance_to_product": "支撑 pop/commercial 族视觉特征：高识别图形、商业图像、平面化构成，需避免政治宣传污染。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Cyberpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Cyberpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目概括赛博朋克与高科技、低生活、都市反乌托邦等语境相关。",
+          "relevance_to_product": "作为百科辅助来源，支持赛博朋克族风险标记和场景适配，不能成为 runtime 品牌风格开关。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Surrealism",
+          "source_url": "https://en.wikipedia.org/wiki/Surrealism",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科说明超现实主义常呈现梦境、潜意识、非逻辑场景和意象并置。",
+          "relevance_to_product": "支撑 fantasy/dark/magic 族与梦境/怪异类 alias 的归并和风险边界。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "DAIR.AI Prompt Engineering Guide",
+          "source_url": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+          "source_type": "education_reference",
+          "publisher_or_site": "GitHub DAIR.AI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源提示词教育资料强调明确上下文、任务和输出约束。",
+          "relevance_to_product": "作为提示词边界辅助来源，支持 runtime 只接收摘要规则和字段约束。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-style-to-field-projection",
+      "chinese_title": "style_profile 到 PWA 字段投射",
+      "recommendation": "style_profile 只能投射到 PWA 允许字段：运镜、景别、画面描述、角色动作、分镜提示词和时长；人物与对白只可保事实。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-style-to-field-projection"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-style-to-field-projection",
+      "source_summary": "多方视频/图像提示词资料都把相机、构图、光影、动作、风格、氛围作为独立控制维度。",
+      "core_logic": "style_profile 只能投射到 PWA 允许字段：运镜、景别、画面描述、角色动作、分镜提示词和时长；人物与对白只可保事实。",
+      "style_layer": "field_projection",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_to_field_projection",
+      "positive_directive": "将风格族转译成色彩、光影、线条、材质、构图、动作节奏、动画表现和负向约束。",
+      "negative_constraint": "不得新增 PWA 最终字段，不得把风格写入人物身份或对白/旁白内容。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-seedance2-storyboard-field-discipline、rw-prompt-text-boundary、rw-camera-language-grammar 去重；新增点是 style_profile 投射表。",
+      "risk_note": "低到中风险；需防止字段越界。",
+      "priority": "P0",
+      "product_value": "把风格从抽象词转成 Hope PWA 已有字段可消费的结构。",
+      "pwa_generation_implication": "字段生成器可按目标字段选择不同 style_profile 子集，validator 可拦截越界写入。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Image Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "图像提示词指南把风格、构图、材质、色彩等作为可组合视觉描述，而不是独立剧情事实。",
+          "relevance_to_product": "支撑 style_alias 需要转译成视觉语言后再进入画面描述或 prompt_text。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "智谱 CogVideoX 视频生成提示词最佳实践",
+          "source_url": "https://docs.bigmodel.cn/cn/best-practice/prompt/video-prompt",
+          "source_type": "official_doc",
+          "publisher_or_site": "智谱 AI 开放文档",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "文档把视频提示词拆成镜头语言、景别角度、光影、主体、主体运动、场景和氛围等结构。",
+          "relevance_to_product": "国内来源直接支持 Hope PWA 字段分层，尤其是运镜、景别、画面描述、角色动作和分镜提示词。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "HunyuanVideo-1.5 Prompt Handbook on GitHub",
+          "source_url": "https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5/blob/main/assets/HunyuanVideo_1_5_Prompt_Handbook_EN.md",
+          "source_type": "industry_reference",
+          "publisher_or_site": "Tencent-Hunyuan GitHub",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源手册给出 Subject、Motion、Scene、Shot Type、Camera Movement、Lighting、Style、Atmosphere 的结构化公式。",
+          "relevance_to_product": "GitHub 辅助证据支持结构化提示词元素，但不作为 P0 唯一依据。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-chinese-heritage-style-scene-routing",
+      "chinese_title": "中国传统视觉风格场景路由",
+      "recommendation": "传统风格族适配神话、民俗、仪式、历史、寓言、传承、回忆和象征性强的场景；必须附文化语境和事实保护。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-chinese-heritage-style-scene-routing"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-chinese-heritage-style-scene-routing",
+      "source_summary": "UNESCO、数字敦煌、博物馆和亚洲艺术教育资料支持皮影、敦煌、剪纸、水墨等视觉特征的可核验转译。",
+      "core_logic": "传统风格族适配神话、民俗、仪式、历史、寓言、传承、回忆和象征性强的场景；必须附文化语境和事实保护。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "chinese_heritage_style_scene_routing",
+      "positive_directive": "皮影落剪影/背光/透幕/关节动作；敦煌落矿物色感/壁画线条/飞天构图；水墨落留白/墨色层次/笔触；剪纸落平面镂空和民间纹样。",
+      "negative_constraint": "不要把民族、宗教、地域符号当装饰乱用，不要把 Chinoiserie 误等同中国风。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-material-light-air-physicality、rw-layout-staging-attention-path 去重；新增点是传统风格族与场景适配。",
+      "risk_note": "文化语境风险中高；宗教图像、民族艺术和原住民艺术需审核层处理。",
+      "priority": "P1",
+      "product_value": "为国风、民俗、历史、神话类场景提供可落字段的视觉路由。",
+      "pwa_generation_implication": "传统视觉只进入画面描述、构图、光影、动作节奏和分镜提示词摘要，不改人物事实和对白。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Chinese shadow puppetry",
+          "source_url": "https://ich.unesco.org/en/RL/chinese-shadow-puppetry-00421",
+          "source_type": "official_doc",
+          "publisher_or_site": "UNESCO Intangible Cultural Heritage",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "UNESCO 条目说明中国皮影以皮革或纸制彩色剪影、背光透幕和操纵杆形成运动影像。",
+          "relevance_to_product": "支撑皮影族落字段时使用剪影、透幕、背光、关节化动作等视觉语言，并附文化语境守卫。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "The Traditional Art Form of Chinese Shadow Puppetry",
+          "source_url": "https://artsandculture.google.com/story/yAXRvop6wTndJw?hl=en",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Google Arts & Culture",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "资料强调北川皮影等传统皮影的色彩选择、视觉冲击和民间表演属性。",
+          "relevance_to_product": "补充皮影在画面描述、角色动作和构图中的可视化约束。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Digital Dunhuang",
+          "source_url": "https://www.e-dunhuang.com/",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Digital Dunhuang / Dunhuang Academy ecosystem",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "数字敦煌提供敦煌石窟与壁画的公开数字化浏览入口。",
+          "relevance_to_product": "支撑敦煌艺术只作为文化视觉语境和色彩线条参考进入审核层，runtime 需 summary-only。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Chinese Paper Cutting",
+          "source_url": "https://paper.gatech.edu/artifact/chinese-paper-cutting",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Robert C. Williams Museum of Papermaking",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "博物馆资料说明中国剪纸通过剪刀或刻刀在纸上形成图案，并常含视觉符号。",
+          "relevance_to_product": "支撑剪纸插画族落到平面剪影、镂空、边缘和民间符号，不进入人物对白事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "The Magic of Water, Sumi Ink, and Brush",
+          "source_url": "https://investigatingedo.asia.si.edu/lesson-plans/artistic-techniques/the-magic-of-water-sumi-and-brush/",
+          "source_type": "education_reference",
+          "publisher_or_site": "Smithsonian National Museum of Asian Art",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教育资料说明墨、水、笔和纸形成从黑到白的层次及多样笔触。",
+          "relevance_to_product": "支撑水墨 / Sumi-e 族投射到线条、留白、墨色层次和动作节制。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-retrofuture-punk-style-scene-routing",
+      "chinese_title": "复古未来与朋克风格族路由",
+      "recommendation": "朋克/复古未来族适配都市科技、工业机械、地下秩序、发明、追逐、反乌托邦和时代错位场景；具体道具必须由 accepted body 支撑。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-retrofuture-punk-style-scene-routing"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-retrofuture-punk-style-scene-routing",
+      "source_summary": "Tate 与 Wikipedia 支持 cyberpunk、steampunk、dieselpunk、retrofuturism 等风格族的高层视觉语境。",
+      "core_logic": "朋克/复古未来族适配都市科技、工业机械、地下秩序、发明、追逐、反乌托邦和时代错位场景；具体道具必须由 accepted body 支撑。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "retrofuture_punk_style_scene_routing",
+      "positive_directive": "赛博朋克落霓虹/高密城市/屏幕光/雨夜反射；蒸汽朋克落黄铜/齿轮/蒸汽/机械；柴油朋克落工业金属/烟尘/复古机械；复古未来落旧时代未来想象。",
+      "negative_constraint": "不要默认给所有科幻都加霓虹，不要把不存在的机械、武器或时代道具写入事实。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-material-light-air-physicality、rw-shot-intent-taxonomy 去重；新增点是 punk family 场景路由。",
+      "risk_note": "中风险；biopunk/necrokpunk/gothpunk/astropunk 等低证据 alias 需 FutureQA。",
+      "priority": "P1",
+      "product_value": "把赛博/蒸汽/柴油/复古未来从重复 alias 合并成可控风格族。",
+      "pwa_generation_implication": "按场景事实投射到材质、光源、环境密度、镜头节奏和动作速度。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Cyberpunk and Steampunk",
+          "source_url": "https://www.tate.org.uk/whats-on/tate-britain/cyberpunk-and-steampunk",
+          "source_type": "museum_reference",
+          "publisher_or_site": "Tate",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Tate 展览页把 cyberpunk 与 steampunk 作为视觉文化和想象技术语境处理。",
+          "relevance_to_product": "补充博物馆来源，支撑朋克族只做视觉语境，不直接下放 IP 或导演风格。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Cyberpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Cyberpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目概括赛博朋克与高科技、低生活、都市反乌托邦等语境相关。",
+          "relevance_to_product": "作为百科辅助来源，支持赛博朋克族风险标记和场景适配，不能成为 runtime 品牌风格开关。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Steampunk",
+          "source_url": "https://en.wikipedia.org/wiki/Steampunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明蒸汽朋克与蒸汽动力、复古未来和工业机械想象相关。",
+          "relevance_to_product": "支撑蒸汽朋克族落到材质、道具和时代氛围，但不能覆盖 accepted body 的时代事实。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Dieselpunk",
+          "source_url": "https://en.wikipedia.org/wiki/Dieselpunk",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明柴油朋克围绕柴油时代和复古未来审美展开。",
+          "relevance_to_product": "支撑柴油朋克作为 retrofuture 子族处理，并标记时代道具误配风险。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Retrofuturism",
+          "source_url": "https://en.wikipedia.org/wiki/Retrofuturism",
+          "source_type": "article",
+          "publisher_or_site": "Wikipedia",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "维基百科条目说明复古未来主义与过去时代对未来的想象有关。",
+          "relevance_to_product": "支撑 retrofuture 路由时强调时代线索必须来自 accepted body。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-emotional-tone-style-routing",
+      "chinese_title": "情绪调性到视觉节奏路由",
+      "recommendation": "情绪对白、悲伤、悬疑、热血、治愈等先抽为 tone_profile，再转成色彩温度、对比度、运动密度、镜头节奏和关键姿态。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-emotional-tone-style-routing"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-emotional-tone-style-routing",
+      "source_summary": "colorscript、动画色彩和关键姿势资料支持用色彩、光影、动作和时序表达情绪。",
+      "core_logic": "情绪对白、悲伤、悬疑、热血、治愈等先抽为 tone_profile，再转成色彩温度、对比度、运动密度、镜头节奏和关键姿态。",
+      "style_layer": "routing_rule",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "emotional_tone_style_routing",
+      "positive_directive": "悲伤可降低饱和度和动作密度；悬疑可增加阴影遮挡和慢推镜；热血可提高动作密度和切换节奏；治愈可柔化光线与运动。",
+      "negative_constraint": "不要改写对白内容来制造情绪，不要用抽象情绪词替代可见动作和画面。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-color-script-emotional-continuity、rw-expression-physicalization 去重；新增点是 emotion-to-style routing。",
+      "risk_note": "低风险；主要防止情绪标签空泛。",
+      "priority": "P0",
+      "product_value": "让情绪场景生成更稳定，减少“只写氛围不写画面”的失败。",
+      "pwa_generation_implication": "运镜、景别、画面描述、角色动作和时长可按 tone_profile 调整，不污染人物/对白。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "A Well-Developed Colorscript Informs the Audience’s Emotional Response",
+          "source_url": "https://scad.lunaimaging.com/luna/servlet/detail/SCAD~3~3~1788~14765%3AA-Well-Developed-Colorscript-Info",
+          "source_type": "paper",
+          "publisher_or_site": "SCAD Graduate Thesis Collection",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "摘要讨论 colorscript、色彩编码、光影、预制作、叙事弧线和动画视觉语言。",
+          "relevance_to_product": "支撑 emotional_tone_style_routing，把情绪映射到色彩、光影和画面连续性。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Color in animation",
+          "source_url": "https://people.wku.edu/joon.sung/edu/anim/3d/theory/color_anim.html",
+          "source_type": "education_reference",
+          "publisher_or_site": "Western Kentucky University course page",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程页说明动画可用色彩理论和色彩脚本传达情绪与叙事信息。",
+          "relevance_to_product": "支撑情绪调性不是抽象标签，应落到色彩、亮度、饱和度和场景节奏。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Adobe animation key poses guide",
+          "source_url": "https://www.adobe.com/creativecloud/animation/discover/animation-key-poses.html",
+          "source_type": "guide",
+          "publisher_or_site": "Adobe",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "关键姿势用于表达动作阶段和角色状态，是动画表演与节奏规划的核心。",
+          "relevance_to_product": "支撑情绪风格必须转成角色动作密度、关键姿态和节奏，而不是污染对白。",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Khan Academy Pixar in a Box Storytelling",
+          "source_url": "https://www.khanacademy.org/computing/pixar/storytelling",
+          "source_type": "education_reference",
+          "publisher_or_site": "Khan Academy / Pixar in a Box",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "课程围绕故事、角色、世界和视觉选择如何服务叙事展开。",
+          "relevance_to_product": "支撑场景类型作为叙事先验，最终风格仍需服务 accepted body 的剧情表达。",
+          "source_confidence": "high"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-style-contamination-guard",
+      "chinese_title": "风格污染阻断规则",
+      "recommendation": "validator 必须阻断风格改写人物、对白、事实、道具、地点、source evidence 和 PWA 字段边界。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-style-contamination-guard"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-style-contamination-guard",
+      "source_summary": "视频提示词文档和多镜头开源项目都显示过载、漂移和连续性破坏会影响生成稳定。",
+      "core_logic": "validator 必须阻断风格改写人物、对白、事实、道具、地点、source evidence 和 PWA 字段边界。",
+      "style_layer": "safety_guard",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_contamination_guard",
+      "positive_directive": "把 style_profile 限制为视觉摘要，保留 accepted body 的人物、地点、道具、关系和对白事实。",
+      "negative_constraint": "禁止真实导演、工作室、电影、游戏、IP、品牌风格作为 runtime 风格开关；禁止 Disney style 等品牌目标。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-anime-translation-failure-guard、rw-validation-no-leakage、rw-field-level-failure-repair-routing 去重；新增点是 style_profile 专用污染守卫。",
+      "risk_note": "高风险；IP/品牌、真实导演/工作室、宗教民族文化、政治宣传和泛类别均需拦截或 FutureQA。",
+      "priority": "P0",
+      "product_value": "防止风格路由破坏 Hope PWA 的事实一致性和安全边界。",
+      "pwa_generation_implication": "生成后校验人物字段、对白/旁白、画面事实和 prompt_text，发现风格泄漏即修复或阻断。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "TTV Pipeline text-to-video generation pipeline",
+          "source_url": "https://github.com/trilogy-group/ttv-pipeline",
+          "source_type": "industry_reference",
+          "publisher_or_site": "GitHub trilogy-group",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "项目指出长视频生成常见漂移、角色一致性困难和短片段分段问题。",
+          "relevance_to_product": "辅助支撑风格污染守卫和多镜头风格稳定策略；不作为权威视觉风格定义。",
+          "source_confidence": "low"
+        },
+        {
+          "source_title": "Continuity for Storyboards",
+          "source_url": "https://storyboardart.org/storyboard-tutorials/continuity-for-storyboards/",
+          "source_type": "tutorial",
+          "publisher_or_site": "StoryboardArt",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "教程讨论分镜连续性、银幕方向、视线和动作连接。",
+          "relevance_to_product": "支撑 style_profile 不得破坏空间、道具、角色关系和镜头连续性。",
+          "source_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "reviewed_wiki_id": "rw-style-profile-prompt-boundary",
+      "chinese_title": "style_profile 的 prompt 边界",
+      "recommendation": "分镜提示词只接收 summary-only 风格约束：主视觉族、色彩/光影/线条/材质/构图/节奏摘要、负向边界。",
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "candidate_summary_only_not_applied",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-style-profile-prompt-boundary"
+      ],
+      "existing_kb_alignment_refs": [],
+      "candidate_name": "rw-style-profile-prompt-boundary",
+      "source_summary": "官方和教育提示词资料支持使用清晰、结构化、可控的视觉约束；不支持把长模板或不受控风格包直接注入 runtime。",
+      "core_logic": "分镜提示词只接收 summary-only 风格约束：主视觉族、色彩/光影/线条/材质/构图/节奏摘要、负向边界。",
+      "style_layer": "safety_guard",
+      "source_type": "evidence_synthesis",
+      "target_field": [
+        "人物",
+        "运镜",
+        "景别",
+        "画面描述",
+        "角色动作",
+        "对白/旁白",
+        "分镜提示词",
+        "时长(秒)"
+      ],
+      "knowledge_group": "style_profile_prompt_boundary",
+      "positive_directive": "把 style_profile 编译为短、字段绑定、事实保真的 prompt_text 片段。",
+      "negative_constraint": "不要下放 raw source、source_refs、长 prompt 模板、120 alias 列表、真实导演/工作室/IP 名称。",
+      "runtime_eligible": true,
+      "duplicate_hint": "与 rw-prompt-text-boundary、rw-prompt-load-and-shot-plan-boundary 去重；新增点是 style_profile 输入边界。",
+      "risk_note": "高风险；长模板和 IP 风格词会造成污染、版权/IP 风险和字段泄漏。",
+      "priority": "P0",
+      "product_value": "让 style_profile 对 PWA 有用，同时保持 runtime 轻量、可审计。",
+      "pwa_generation_implication": "prompt_text 只合成当前镜头需要的视觉摘要；source_refs 只留在图谱候选页和审核层。",
+      "source_evidence_status": "verified_summary_only",
+      "source_refs": [
+        {
+          "source_title": "OpenAI Images and Vision guide",
+          "source_url": "https://platform.openai.com/docs/guides/images/image-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "支持把视觉生成提示词拆成主体、动作、环境、视觉约束等可控信息，并强调清晰描述生成目标。",
+          "relevance_to_product": "支撑 style_profile 只能作为画面、光影、构图等 summary-only 约束进入分镜提示词，不能变成长模板或覆盖事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "OpenAI Video generation guide",
+          "source_url": "https://developers.openai.com/api/docs/guides/video-generation",
+          "source_type": "official_doc",
+          "publisher_or_site": "OpenAI Developers",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "公开视频生成文档围绕画面内容、运动、镜头和时长等控制维度组织输入。",
+          "relevance_to_product": "支撑把 style_profile 投射到运镜、景别、画面描述、角色动作、分镜提示词和时长，而不是新增 PWA 字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Runway Gen-4 Video Prompting Guide",
+          "source_url": "https://help.runwayml.com/hc/en-us/articles/39789879462419-Gen-4-Video-Prompting-Guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Runway Help Center",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Gen-4 提示词强调视觉细节、主体运动、镜头运动和避免一次塞入过多场景或风格切换。",
+          "relevance_to_product": "支撑 prompt 边界、风格不过载、动作与镜头分开落字段。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "source_type": "official_doc",
+          "publisher_or_site": "Google Cloud",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "Veo 提示词指南把主体、动作、场景、风格、相机、构图、氛围和光影作为独立维度。",
+          "relevance_to_product": "支撑 PWA 字段级投射和风格污染隔离：风格属于视觉维度，不应写进人物或对白事实。",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "DAIR.AI Prompt Engineering Guide",
+          "source_url": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+          "source_type": "education_reference",
+          "publisher_or_site": "GitHub DAIR.AI",
+          "accessed_at": "2026-05-28",
+          "evidence_summary": "开源提示词教育资料强调明确上下文、任务和输出约束。",
+          "relevance_to_product": "作为提示词边界辅助来源，支持 runtime 只接收摘要规则和字段约束。",
+          "source_confidence": "medium"
+        }
+      ]
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-28T05:43:39.199Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-scene-type-as-style-prior",
+      "rw-accepted-body-to-style-profile",
+      "rw-scene-driven-style-routing",
+      "rw-style-alias-family-catalog",
+      "rw-style-to-field-projection",
+      "rw-chinese-heritage-style-scene-routing",
+      "rw-retrofuture-punk-style-scene-routing",
+      "rw-emotional-tone-style-routing",
+      "rw-style-contamination-guard",
+      "rw-style-profile-prompt-boundary"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-scene-type-as-style-prior",
+      "rw-accepted-body-to-style-profile",
+      "rw-scene-driven-style-routing",
+      "rw-style-alias-family-catalog",
+      "rw-style-to-field-projection",
+      "rw-chinese-heritage-style-scene-routing",
+      "rw-retrofuture-punk-style-scene-routing",
+      "rw-emotional-tone-style-routing",
+      "rw-style-contamination-guard",
+      "rw-style-profile-prompt-boundary"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-28T05:52:31.402Z",
+    "command": "node scripts\\apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260528-scene-style-profile-routing-candidates\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "status": "applied",
+      "package": "knowledge\\intake_runs\\intake-20260528-scene-style-profile-routing-candidates\\intake-package.confirmed.json",
+      "processed_accepted_ids": [
+        "rw-scene-type-as-style-prior",
+        "rw-accepted-body-to-style-profile",
+        "rw-scene-driven-style-routing",
+        "rw-style-alias-family-catalog",
+        "rw-style-to-field-projection",
+        "rw-chinese-heritage-style-scene-routing",
+        "rw-retrofuture-punk-style-scene-routing",
+        "rw-emotional-tone-style-routing",
+        "rw-style-contamination-guard",
+        "rw-style-profile-prompt-boundary"
+      ],
+      "accepted_target_status": [
+        {
+          "accepted_id": "rw-scene-type-as-style-prior",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-scene-driven-style-routing"
+          ]
+        },
+        {
+          "accepted_id": "rw-accepted-body-to-style-profile",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-accepted-body-to-style-profile"
+          ]
+        },
+        {
+          "accepted_id": "rw-scene-driven-style-routing",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-scene-driven-style-routing"
+          ]
+        },
+        {
+          "accepted_id": "rw-style-alias-family-catalog",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-style-contamination-guard"
+          ]
+        },
+        {
+          "accepted_id": "rw-style-to-field-projection",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-style-to-field-projection"
+          ]
+        },
+        {
+          "accepted_id": "rw-chinese-heritage-style-scene-routing",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-chinese-heritage-style-scene-routing"
+          ]
+        },
+        {
+          "accepted_id": "rw-retrofuture-punk-style-scene-routing",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-retrofuture-punk-style-scene-routing"
+          ]
+        },
+        {
+          "accepted_id": "rw-emotional-tone-style-routing",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-color-script-emotional-continuity"
+          ]
+        },
+        {
+          "accepted_id": "rw-style-contamination-guard",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-style-contamination-guard"
+          ]
+        },
+        {
+          "accepted_id": "rw-style-profile-prompt-boundary",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-prompt-text-boundary",
+            "rw-seedance2-storyboard-field-discipline"
+          ]
+        }
+      ],
+      "applied_reviewed_wiki_ids": [
+        "rw-scene-driven-style-routing",
+        "rw-accepted-body-to-style-profile",
+        "rw-style-contamination-guard",
+        "rw-style-to-field-projection",
+        "rw-chinese-heritage-style-scene-routing",
+        "rw-retrofuture-punk-style-scene-routing",
+        "rw-color-script-emotional-continuity",
+        "rw-prompt-text-boundary",
+        "rw-seedance2-storyboard-field-discipline"
+      ],
+      "validate": {
+        "status": "passed",
+        "package": "intake-package.confirmed.json",
+        "run_id": "intake-20260528-scene-style-profile-routing-candidates",
+        "source_candidates": 10,
+        "recommendations": 10,
+        "confirmed": true
+      },
+      "build": {
+        "status": "written",
+        "output": "samples\\pwa-kb-adapter-output.sample.json",
+        "scene_count": 21,
+        "rule_pack_count": 53
+      }
+    }
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260528-scene-style-profile-routing-candidates/intake-package.draft.json",
+    "dedupe_report": "knowledge/intake_runs/intake-20260528-scene-style-profile-routing-candidates/dedupe-report.md"
+  }
+}

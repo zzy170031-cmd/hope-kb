@@ -116,6 +116,27 @@
         "negativeConstraints": [
           "Do not invent motives, relationships, or exposition to justify a line."
         ]
+      },
+      {
+        "id": "wg-accepted-body-to-style-profile",
+        "name": "Accepted body to style profile",
+        "intent": "Derive a compact style_profile from accepted body facts, scene type, tone, time period, world logic, and visible production need before any storyboard field receives style guidance.",
+        "influenceAxes": [
+          "style_profile",
+          "fact_integrity",
+          "scene_goal",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Derive style_profile only from accepted body facts, scene type, tone, time period, world logic, and visible production need.",
+          "Keep style_profile as a compact routing summary that guides downstream fields without adding unaccepted plot, person, IP, studio, creator, or audit facts.",
+          "When accepted body does not support a style direction, keep style_profile neutral and let scene action, camera, continuity, and duration rules carry the row."
+        ],
+        "negativeConstraints": [
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches."
+        ]
       }
     ],
     "directorRulePacks": [
@@ -329,6 +350,7 @@
           "Bind shot_size before expression detail: close shots may carry eye, lip, breath, and hand tension; wide shots should carry silhouette, spacing, route, and group motion.",
           "Build visual_description from scene-supported space, subject placement, material, light direction, color temperature, air medium, composition, and depth cues.",
           "Translate emotion into visible action such as gaze, breath, posture, hand motion, step, recoil, pause, or blocking relation.",
+          "Use style_profile only after scene type, accepted facts, shot_size, and visible row purpose are already coherent.",
           "Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints only."
         ],
         "negativeConstraints": [
@@ -336,6 +358,7 @@
           "Do not put camera, style, composition, source, or KB terms into person.",
           "Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.",
           "Do not use light, color, atmosphere, or composition as disconnected decoration.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
           "Do not expose source or governance metadata in PWA output."
         ]
       },
@@ -507,12 +530,115 @@
         "directives": [
           "Bind light direction, color temperature, material response, and air medium to the current beat and scene logic.",
           "Use color progression to clarify emotional or information change across adjacent rows.",
+          "Route emotional tone through visible light, color temperature, material response, air medium, and rhythm only when accepted body and scene type support it.",
           "Keep visual_description and prompt_text consistent with the established visual world."
         ],
         "negativeConstraints": [
           "Do not stack generic anime color words without a visible source or story function.",
+          "Do not turn emotional tone into an unrelated style switch.",
           "Do not use real studio, IP, film, or director style names as runtime style switches.",
           "Do not add unsupported weather, light, or atmosphere to manufacture mood."
+        ]
+      },
+      {
+        "id": "dg-scene-driven-style-routing",
+        "name": "Scene driven style routing",
+        "intent": "Use scene type as the first style prior, then refine with accepted body content and style_profile before projecting style into storyboard fields.",
+        "influenceAxes": [
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "anime_storyboard"
+        ],
+        "directives": [
+          "Treat scene type as the first style prior, then narrow style guidance with accepted body content, scene goal, emotional tone, and visual continuity.",
+          "Select only a small style family or production cue set that serves the current scene function.",
+          "Keep scene-driven style routing in summary form so runtime receives field guidance, not an alias table."
+        ],
+        "negativeConstraints": [
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints."
+        ]
+      },
+      {
+        "id": "dg-accepted-body-to-style-profile",
+        "name": "Accepted body style profile director support",
+        "intent": "Carry the compact style_profile into camera, shot size, visible frame, and prompt planning only after accepted facts are locked.",
+        "influenceAxes": [
+          "style_profile",
+          "shot_intent",
+          "visual_grounding"
+        ],
+        "directives": [
+          "Use the style_profile to choose visible production cues, not to create new story facts.",
+          "Keep style guidance subordinate to row purpose, shot size, action readability, and continuity."
+        ],
+        "negativeConstraints": [
+          "Do not convert style_profile into a full prompt template or alias list."
+        ]
+      },
+      {
+        "id": "dg-style-to-field-projection",
+        "name": "Style to field projection",
+        "intent": "Project a confirmed style_profile into existing PWA fields through visible frame, action, camera, shot size, duration, prompt text, and safe negative constraints.",
+        "influenceAxes": [
+          "style_projection",
+          "field_boundary",
+          "visual_grounding",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Project style_profile into visual_description through palette, material, lighting, texture, composition, and space only when visible in the row.",
+          "Project style_profile into character_action, camera, shot_size, and duration only when it improves action readability, rhythm, or attention path.",
+          "Compile prompt_text from the already-set row fields and one compact style modifier, then place unsafe or unsupported style material into negative_constraints."
+        ],
+        "negativeConstraints": [
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack."
+        ]
+      },
+      {
+        "id": "dg-chinese-heritage-style-scene-routing",
+        "name": "Chinese heritage style scene routing",
+        "intent": "Allow Chinese heritage visual cues only when the accepted scene, era, object logic, environment, or user intent supports them.",
+        "influenceAxes": [
+          "heritage_style",
+          "scene_style_routing",
+          "visual_grounding",
+          "cultural_safety"
+        ],
+        "directives": [
+          "Use Chinese heritage visual cues only when accepted scene facts, era, location, object logic, or user intent support them.",
+          "Bind heritage cues to visible material, line rhythm, spatial composition, prop logic, costume logic, environment, or light rather than treating them as a global style switch.",
+          "Keep cultural cues subordinate to scene objective, character action, continuity, camera, shot size, and prompt boundary."
+        ],
+        "negativeConstraints": [
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family."
+        ]
+      },
+      {
+        "id": "dg-retrofuture-punk-style-scene-routing",
+        "name": "Retrofuture punk style scene routing",
+        "intent": "Route retrofuture or punk-family cues only when accepted world logic, technology level, material culture, conflict, or environment supports them.",
+        "influenceAxes": [
+          "retrofuture_style",
+          "scene_style_routing",
+          "world_logic",
+          "visual_grounding"
+        ],
+        "directives": [
+          "Use retrofuture or punk-family cues only when accepted world logic, technology level, material culture, conflict, or environment supports them.",
+          "Translate the style family into visible machinery, material wear, signage logic, lighting, silhouette, motion pressure, or camera rhythm.",
+          "Keep one coherent style family per row unless accepted body explicitly requires a contrast."
+        ],
+        "negativeConstraints": [
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration."
         ]
       }
     ],
@@ -530,11 +656,13 @@
         "directives": [
           "Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints.",
           "Keep prompt_text aligned with accepted story facts and confirmed row fields.",
+          "Use style_profile as a compact field-bound modifier after the row's subject, action, camera, shot size, and visible frame are settled.",
           "Use compact field-bound anime prompt wording rather than long universal templates."
         ],
         "negativeConstraints": [
-          "Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not emit empty prompt_text.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
           "Do not mix note, status, governance evidence, or repair traces into final fields."
         ]
       },
@@ -848,6 +976,112 @@
           "Do not use style words to overwrite facts or field responsibilities.",
           "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
         ]
+      },
+      {
+        "id": "vg-scene-driven-style-routing",
+        "name": "Scene driven style routing validation",
+        "intent": "Reject style routing that contradicts scene type, accepted body, or final-field boundaries.",
+        "influenceAxes": [
+          "scene_type",
+          "style_profile",
+          "field_boundary"
+        ],
+        "directives": [
+          "Validate that style routing supports the scene type and accepted facts.",
+          "Repair by reducing style guidance before changing story facts or final-field structure."
+        ],
+        "negativeConstraints": [
+          "Do not accept unrelated style switches as valid scene routing."
+        ]
+      },
+      {
+        "id": "vg-accepted-body-to-style-profile",
+        "name": "Accepted body style profile validation",
+        "intent": "Reject style_profile output that is unsupported by accepted body facts or leaks audit-only material.",
+        "influenceAxes": [
+          "fact_integrity",
+          "field_boundary",
+          "export_safety"
+        ],
+        "directives": [
+          "Validate that style_profile can be traced to accepted body facts, scene type, or explicit tone.",
+          "Reject unsupported style labels before adapter downlink."
+        ],
+        "negativeConstraints": [
+          "Do not expose audit-only material in final PWA fields."
+        ]
+      },
+      {
+        "id": "vg-style-contamination-guard",
+        "name": "Style contamination guard",
+        "intent": "Block unsupported style switches, raw alias catalog material, blocked categories, and proper-name style references from runtime fields, prompt text, adapter output, and exports.",
+        "influenceAxes": [
+          "style_safety",
+          "prompt_boundary",
+          "export_safety",
+          "summary_only"
+        ],
+        "directives": [
+          "Keep style alias normalization and blocked-category review in the audit layer; runtime receives only compact, accepted, field-bound style guidance.",
+          "Reject proper-name style references, real IP, real creators, real studios, incomplete labels, unsupported cultural or religious labels, generalized category labels, and unconstrained media-format labels.",
+          "When style evidence is weak, repair by dropping the style cue or returning to neutral scene-driven guidance."
+        ],
+        "negativeConstraints": [
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports."
+        ]
+      },
+      {
+        "id": "vg-style-to-field-projection",
+        "name": "Style to field projection validation",
+        "intent": "Validate that style_profile affects only existing final fields and remains summary-only.",
+        "influenceAxes": [
+          "field_boundary",
+          "prompt_boundary",
+          "export_safety"
+        ],
+        "directives": [
+          "Reject style output that introduces a new field, rewrites person, or replaces accepted action.",
+          "Require unsupported style material to remain out of runtime output."
+        ],
+        "negativeConstraints": [
+          "Do not expose audit-only style catalog entries in final fields."
+        ]
+      },
+      {
+        "id": "vg-chinese-heritage-style-scene-routing",
+        "name": "Chinese heritage style routing validation",
+        "intent": "Reject unsupported or stereotyped heritage cues before final fields or adapter output.",
+        "influenceAxes": [
+          "cultural_safety",
+          "fact_integrity",
+          "field_boundary"
+        ],
+        "directives": [
+          "Require accepted scene support before applying heritage visual cues.",
+          "Repair unsupported heritage cues by returning to neutral scene-grounded style_profile guidance."
+        ],
+        "negativeConstraints": [
+          "Do not turn heritage routing into a universal style preset."
+        ]
+      },
+      {
+        "id": "vg-retrofuture-punk-style-scene-routing",
+        "name": "Retrofuture punk style routing validation",
+        "intent": "Reject subgenre label stacking and unsupported technology or world changes.",
+        "influenceAxes": [
+          "world_logic",
+          "field_boundary",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Validate that retrofuture or punk-family cues have accepted world support.",
+          "Repair by reducing the style cue set before changing world facts."
+        ],
+        "negativeConstraints": [
+          "Do not accept subgenre label stacks as visual grounding."
+        ]
       }
     ],
     "sceneMappings": {
@@ -856,7 +1090,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -878,7 +1113,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -897,7 +1137,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -986,7 +1232,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "source_facts",
@@ -1052,7 +1320,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "ensemble_performance": {
@@ -1060,7 +1337,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1082,7 +1360,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1101,7 +1384,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1188,7 +1477,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1253,7 +1564,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "emotional_dialogue": {
@@ -1261,7 +1581,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1283,7 +1604,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1302,7 +1628,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1389,7 +1721,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1454,7 +1808,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "encounter_performance": {
@@ -1462,7 +1825,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1484,7 +1848,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1503,7 +1872,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1590,7 +1965,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1655,7 +2052,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "field_chase": {
@@ -1663,7 +2069,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1685,7 +2092,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1704,7 +2116,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1791,7 +2209,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1856,7 +2296,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "spectacle_showcase": {
@@ -1864,7 +2313,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1886,7 +2336,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1905,7 +2360,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -1992,7 +2453,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2057,7 +2540,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "daily_healing": {
@@ -2065,7 +2557,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2087,7 +2580,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2106,7 +2604,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -2193,7 +2697,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2258,7 +2784,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -2266,7 +2801,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2288,7 +2824,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2307,7 +2848,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2394,7 +2941,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2459,7 +3028,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "guoman_ensemble_performance": {
@@ -2467,7 +3045,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2489,7 +3068,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2508,7 +3092,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -2595,7 +3185,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2660,7 +3272,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "ink_wuxia_combat": {
@@ -2668,7 +3289,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2690,7 +3312,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2709,7 +3336,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2796,7 +3429,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2861,7 +3516,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "eastern_spectacle": {
@@ -2869,7 +3533,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2891,7 +3556,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2910,7 +3580,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2997,7 +3673,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3062,7 +3760,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "xianxia_action": {
@@ -3070,7 +3777,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3092,7 +3800,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3111,7 +3824,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3198,7 +3917,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3263,7 +4004,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "urban_fantasy": {
@@ -3271,7 +4021,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3293,7 +4044,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3312,7 +4068,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -3401,7 +4163,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "source_facts",
@@ -3467,7 +4251,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "chinese_war_formation": {
@@ -3475,7 +4268,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3497,7 +4291,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3516,7 +4315,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -3603,7 +4408,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3668,7 +4495,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "weapon_highlight": {
@@ -3676,7 +4512,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3698,7 +4535,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3717,7 +4559,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3804,7 +4652,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3869,7 +4739,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "council_strategy": {
@@ -3877,7 +4756,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3899,7 +4779,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3918,7 +4803,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4005,7 +4896,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4070,7 +4983,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "siege_defense": {
@@ -4078,7 +5000,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4100,7 +5023,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4119,7 +5047,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4206,7 +5140,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4271,7 +5227,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "slg_sandbox_view": {
@@ -4279,7 +5244,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4301,7 +5267,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4320,7 +5291,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4407,7 +5384,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4472,7 +5471,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "slg_march_encirclement": {
@@ -4480,7 +5488,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4502,7 +5511,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4521,7 +5535,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4608,7 +5628,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4673,7 +5715,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "slg_city_growth": {
@@ -4681,7 +5732,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4703,7 +5755,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4722,7 +5779,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4809,7 +5872,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4874,7 +5959,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       },
       "slg_battle_report": {
@@ -4882,7 +5976,8 @@
           "wg-continuity-core",
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
-          "wg-dialogue-narration-allocation-rules"
+          "wg-dialogue-narration-allocation-rules",
+          "wg-accepted-body-to-style-profile"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4904,7 +5999,12 @@
           "dg-intent-to-story-task-routing",
           "dg-scene-spatial-prop-continuity-anchor",
           "dg-layout-staging-attention-path",
-          "dg-color-script-emotional-continuity"
+          "dg-color-script-emotional-continuity",
+          "dg-scene-driven-style-routing",
+          "dg-accepted-body-to-style-profile",
+          "dg-style-to-field-projection",
+          "dg-chinese-heritage-style-scene-routing",
+          "dg-retrofuture-punk-style-scene-routing"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4923,7 +6023,13 @@
           "vg-scene-spatial-prop-continuity-anchor",
           "vg-layout-staging-attention-path",
           "vg-dialogue-narration-allocation-rules",
-          "vg-field-level-failure-repair-routing"
+          "vg-field-level-failure-repair-routing",
+          "vg-scene-driven-style-routing",
+          "vg-accepted-body-to-style-profile",
+          "vg-style-contamination-guard",
+          "vg-style-to-field-projection",
+          "vg-chinese-heritage-style-scene-routing",
+          "vg-retrofuture-punk-style-scene-routing"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5010,7 +6116,29 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
+          "Do not stack multiple style families to make a row look richer.",
+          "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
+          "Do not paste style alias catalogs or audit-only provenance into runtime fields.",
+          "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
+          "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches.",
+          "Do not expose raw alias lists, audit-only provenance, or rejected labels in runtime output.",
+          "Do not use proper names, protected works, studios, creators, or unsupported cultural labels as style switches.",
+          "Do not let a blocked style item survive inside prompt_text, selected_kb_rules, kb_context_summary, or exports.",
+          "Do not create new PWA fields for style output.",
+          "Do not place style terms in person or use style to replace accepted action.",
+          "Do not let prompt_text carry a second scene plan, alias list, or unsupported style stack.",
+          "Do not add heritage motifs as generic decoration or stereotype.",
+          "Do not use cultural or religious labels without accepted scene support.",
+          "Do not replace accepted setting, props, costume, or character facts with a style family.",
+          "Do not pile up subgenre labels as prompt decoration.",
+          "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
+          "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration.",
+          "Do not turn emotional tone into an unrelated style switch.",
+          "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
+          "Do not paste style alias catalogs or blocked style labels into prompt_text.",
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5075,7 +6203,16 @@
           "emotional_progression",
           "narration_allocation",
           "repair_routing",
-          "validation"
+          "validation",
+          "scene_style_routing",
+          "scene_type",
+          "style_profile",
+          "style_safety",
+          "style_projection",
+          "heritage_style",
+          "cultural_safety",
+          "retrofuture_style",
+          "world_logic"
         ]
       }
     },

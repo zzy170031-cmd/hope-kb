@@ -2285,11 +2285,502 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-scene-driven-style-routing",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-scene-driven-style-routing",
+      "reviewed_wiki_hash": "sha256:summary-rw-scene-driven-style-routing",
+      "wiki_type": "director_scheduling_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-scene-driven-style-routing",
+        "vg-scene-driven-style-routing"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:scene-driven-style-routing"
+      ],
+      "summary_fragment_ids": [
+        "summary:scene-driven-style-routing"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-scene-driven-style-routing"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-scene-driven-style-routing was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-accepted-body-to-style-profile",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-accepted-body-to-style-profile",
+      "reviewed_wiki_hash": "sha256:summary-rw-accepted-body-to-style-profile",
+      "wiki_type": "writing_continuity_rule",
+      "runtime_targets": [
+        "writing_rule_packs",
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "writing_group",
+      "runtime_rule_pack_ids": [
+        "wg-accepted-body-to-style-profile",
+        "dg-accepted-body-to-style-profile",
+        "vg-accepted-body-to-style-profile"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:accepted-body-to-style-profile"
+      ],
+      "summary_fragment_ids": [
+        "summary:accepted-body-to-style-profile"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "writing_rule_packs[].directives",
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.writing_rule_pack_ids",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-accepted-body-to-style-profile"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-accepted-body-to-style-profile was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-style-contamination-guard",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-style-contamination-guard",
+      "reviewed_wiki_hash": "sha256:summary-rw-style-contamination-guard",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-style-contamination-guard"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:style-contamination-guard"
+      ],
+      "summary_fragment_ids": [
+        "summary:style-contamination-guard"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.validation_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.negative_constraints",
+        "scene_mappings.*.kb_context_summary"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-style-contamination-guard"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-style-contamination-guard was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-style-to-field-projection",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-style-to-field-projection",
+      "reviewed_wiki_hash": "sha256:summary-rw-style-to-field-projection",
+      "wiki_type": "director_scheduling_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-style-to-field-projection",
+        "vg-style-to-field-projection"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:style-to-field-projection"
+      ],
+      "summary_fragment_ids": [
+        "summary:style-to-field-projection"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-style-to-field-projection"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-style-to-field-projection was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-chinese-heritage-style-scene-routing",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-chinese-heritage-style-scene-routing",
+      "reviewed_wiki_hash": "sha256:summary-rw-chinese-heritage-style-scene-routing",
+      "wiki_type": "director_scheduling_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-chinese-heritage-style-scene-routing",
+        "vg-chinese-heritage-style-scene-routing"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:chinese-heritage-style-scene-routing"
+      ],
+      "summary_fragment_ids": [
+        "summary:chinese-heritage-style-scene-routing"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-chinese-heritage-style-scene-routing"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-chinese-heritage-style-scene-routing was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-retrofuture-punk-style-scene-routing",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-retrofuture-punk-style-scene-routing",
+      "reviewed_wiki_hash": "sha256:summary-rw-retrofuture-punk-style-scene-routing",
+      "wiki_type": "director_scheduling_rule",
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "director_group",
+      "runtime_rule_pack_ids": [
+        "dg-retrofuture-punk-style-scene-routing",
+        "vg-retrofuture-punk-style-scene-routing"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:retrofuture-punk-style-scene-routing"
+      ],
+      "summary_fragment_ids": [
+        "summary:retrofuture-punk-style-scene-routing"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "director_rule_packs[].directives",
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.director_rule_pack_ids",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-retrofuture-punk-style-scene-routing"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-28",
+      "runtime_eligible_reason": "rw-retrofuture-punk-style-scene-routing was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 30,
-    "mapped_runtime_eligible_wiki_count": 30,
+    "runtime_eligible_wiki_count": 36,
+    "mapped_runtime_eligible_wiki_count": 36,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,

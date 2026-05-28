@@ -26,6 +26,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints.
 - Keep prompt_text aligned with accepted story facts and confirmed row fields.
+- Use style_profile as a compact field-bound modifier after the row's subject, action, camera, shot size, and visible frame are settled.
 - Use compact field-bound anime prompt wording rather than long universal templates.
 
 ## Runtime Mapping
@@ -36,17 +37,19 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- camera
-- shot_size
+- scene_profile
 - visual_description
 - character_action
-- dialogue_or_narration
+- camera
+- shot_size
 - prompt_text
 - duration_seconds
+- negative_constraints
+- kb_context_summary
 
 ## Negative Constraints
 
-- Do not expose trace refs, schema IDs, source registers, raw KB, prompt bodies, local paths, or internal hashes.
+- Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.
 - Do not emit empty prompt_text.
+- Do not paste style alias catalogs or blocked style labels into prompt_text.
 - Do not mix note, status, governance evidence, or repair traces into final fields.

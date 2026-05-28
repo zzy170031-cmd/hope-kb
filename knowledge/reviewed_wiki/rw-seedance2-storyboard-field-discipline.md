@@ -27,6 +27,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 - Bind shot_size before expression detail: close shots may carry eye, lip, breath, and hand tension; wide shots should carry silhouette, spacing, route, and group motion.
 - Build visual_description from scene-supported space, subject placement, material, light direction, color temperature, air medium, composition, and depth cues.
 - Translate emotion into visible action such as gaze, breath, posture, hand motion, step, recoil, pause, or blocking relation.
+- Use style_profile only after scene type, accepted facts, shot_size, and visible row purpose are already coherent.
 - Compile prompt_text from person, camera, shot_size, visual_description, character_action, dialogue_or_narration, duration_seconds, and safe negative constraints only.
 
 ## Runtime Mapping
@@ -37,14 +38,15 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- camera
-- shot_size
+- scene_profile
 - visual_description
 - character_action
-- dialogue_or_narration
+- camera
+- shot_size
 - prompt_text
 - duration_seconds
+- negative_constraints
+- kb_context_summary
 
 ## Negative Constraints
 
@@ -52,4 +54,5 @@ This entry was created from a confirmed manual intake package. Source candidates
 - Do not put camera, style, composition, source, or KB terms into person.
 - Do not force tiny facial muscle detail into wide, aerial, group, or battlefield-scale shots.
 - Do not use light, color, atmosphere, or composition as disconnected decoration.
+- Do not let style_profile become a second prompt template or override existing final-field responsibilities.
 - Do not expose source or governance metadata in PWA output.
