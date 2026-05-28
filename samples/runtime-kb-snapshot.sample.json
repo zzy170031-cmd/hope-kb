@@ -7554,14 +7554,14 @@
     }
   ],
   "runtime_safety": {
-    "raw_kb_rows_included": 0,
-    "raw_sample_text_absent": true,
-    "source_register_absent": true,
-    "overlay_json_absent": true,
-    "prompt_body_absent": true,
-    "raw_graph_absent": true,
-    "local_paths_absent": true,
-    "secrets_absent": true,
+    "internal_kb_content_included": 0,
+    "source_material_absent": true,
+    "audit_metadata_absent": true,
+    "overlay_payload_absent": true,
+    "prompt_middleware_absent": true,
+    "internal_graph_absent": true,
+    "local_environment_paths_absent": true,
+    "credentials_absent": true,
     "runtime_graph_lookup_used": false,
     "runtime_auto_ingest_used": false,
     "runtime_llm_summarize_used": false

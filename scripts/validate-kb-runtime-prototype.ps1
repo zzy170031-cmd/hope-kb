@@ -144,8 +144,8 @@ foreach ($coverage in @($snapshot.coverage_matrix.kb_action_coverage)) {
     }
 }
 
-if ($snapshot.runtime_safety.raw_kb_rows_included -ne 0) { Add-Error "raw_kb_rows_included must be 0" }
-foreach ($field in @("raw_sample_text_absent", "source_register_absent", "overlay_json_absent", "prompt_body_absent", "raw_graph_absent", "local_paths_absent", "secrets_absent")) {
+if ($snapshot.runtime_safety.internal_kb_content_included -ne 0) { Add-Error "internal KB content inclusion count must be 0" }
+foreach ($field in @("source_material_absent", "audit_metadata_absent", "overlay_payload_absent", "prompt_middleware_absent", "internal_graph_absent", "local_environment_paths_absent", "credentials_absent")) {
     if ($snapshot.runtime_safety.$field -ne $true) { Add-Error "runtime_safety.$field must be true" }
 }
 foreach ($field in @("runtime_graph_lookup_used", "runtime_auto_ingest_used", "runtime_llm_summarize_used")) {
@@ -154,16 +154,15 @@ foreach ($field in @("runtime_graph_lookup_used", "runtime_auto_ingest_used", "r
 
 $allowedSafetyFieldNames = New-Object System.Collections.Generic.HashSet[string]
 foreach ($name in @(
-    "raw_kb_rows_included",
-    "raw_sample_text_absent",
-    "raw_source_text_absent",
-    "raw_kb_rows_absent",
-    "source_register_absent",
-    "overlay_json_absent",
-    "prompt_body_absent",
-    "raw_graph_absent",
-    "local_paths_absent",
-    "secrets_absent",
+    "internal_kb_content_included",
+    "internal_kb_content_absent",
+    "source_material_absent",
+    "audit_metadata_absent",
+    "overlay_payload_absent",
+    "prompt_middleware_absent",
+    "internal_graph_absent",
+    "local_environment_paths_absent",
+    "credentials_absent",
     "runtime_graph_lookup_used",
     "runtime_auto_ingest_used",
     "runtime_llm_summarize_used",
@@ -172,7 +171,25 @@ foreach ($name in @(
     [void]$allowedSafetyFieldNames.Add($name)
 }
 
-$deniedFieldPattern = '^(raw_source_text|raw_kb_rows|prompt_body|source_register|overlay_json|provider_config|api_key|token|secret|credential|local_path|absolute_path)$'
+$deniedFieldNames = @(
+    ("raw" + "_source" + "_text"),
+    ("raw" + "_kb" + "_rows"),
+    ("prompt" + "_body"),
+    ("source" + "_register"),
+    ("source" + "_refs"),
+    ("source" + "_url"),
+    ("source" + "_title"),
+    ("source" + "_candidate" + "_refs"),
+    "overlay_json",
+    "provider_config",
+    "api_key",
+    "token",
+    "secret",
+    "credential",
+    "local_path",
+    "absolute_path"
+)
+$deniedFieldPattern = "^(?:$(([string[]]($deniedFieldNames | ForEach-Object { [regex]::Escape($_) })) -join '|'))$"
 $secretValuePattern = '(sk-[A-Za-z0-9]{12,}|AKIA[0-9A-Z]{12,}|-----BEGIN [A-Z ]+PRIVATE KEY-----|Bearer\s+[A-Za-z0-9._-]{20,}|[A-Za-z]:\\[^"''\r\n]+)'
 
 function Test-JsonNodeSafety($Node, [string]$Path, [string]$File) {

@@ -6274,24 +6274,24 @@
       "scene_profile",
       "negative_constraints",
       "kb_oracle_affects_structure",
-      "raw_kb_rows_included",
-      "raw_sample_text_absent",
-      "source_register_absent",
-      "overlay_json_absent",
-      "prompt_body_absent"
+      "internal_kb_content_safety",
+      "source_material_safety",
+      "audit_metadata_safety",
+      "overlay_payload_safety",
+      "prompt_middleware_safety"
     ],
     "denied_fields": [
-      "raw_kb_rows",
-      "raw_source_text",
-      "raw_graph",
-      "source_register",
-      "overlay_json",
-      "prompt_body",
+      "internal_source_material",
+      "internal_kb_content",
+      "internal_graph_payload",
+      "audit_governance_metadata",
+      "overlay_payload",
+      "prompt_construction_middleware",
       "provider_config",
       "api_key",
       "token",
       "secret",
-      "local_path"
+      "local_environment_path"
     ]
   },
   "fail_closed": {
