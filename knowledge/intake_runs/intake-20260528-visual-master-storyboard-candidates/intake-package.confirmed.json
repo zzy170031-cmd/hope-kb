@@ -1,0 +1,2145 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260528-visual-master-storyboard-candidates",
+  "status": "applied_to_kb",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "source_refs_runtime_policy": "audit_layer_only_not_runtime"
+  },
+  "demand": {
+    "title": "Visual master, production bible, and storyboard image prompt candidates",
+    "search_focus": "visual_master_storyboard_reference_board",
+    "target_model": "image_and_video_reference_board_handoff",
+    "target_output": [
+      "future optional storyboard image prompt reference",
+      "summary-only reference board handoff",
+      "PWA storyboard field guidance"
+    ],
+    "target_pwa_fields": [
+      "person",
+      "camera",
+      "shot_size",
+      "visual_description",
+      "character_action",
+      "dialogue_or_narration",
+      "prompt_text",
+      "duration_seconds"
+    ],
+    "created_at": "2026-05-28T21:38:52+08:00",
+    "article_boundary": "The WeChat article is treated only as demand inspiration. This package does not copy the article text, universal prompt text, or full case texts.",
+    "export_candidate_focus": "derive storyboard image reference prompt export from confirmed PWA storyboard fields",
+    "final_field_policy": "no_new_pwa_final_fields_no_storyboard_export_header_change_no_table_writeback",
+    "derived_export_name": "导出故事板图提示词"
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_web_search_summary_only_with_domestic_sources",
+    "live_search_connector": "codex_web_search",
+    "generated_queries": [
+      "visual bible production bible lookbook film preproduction",
+      "character model sheet turnaround costume continuity animation",
+      "prop environment continuity color script lighting storyboard animatic",
+      "Runway Gen-4 references image to video prompting consistency",
+      "Veo prompt guide reference image camera movement shot planning",
+      "OpenAI Sora video generation image reference shot type subject action setting lighting",
+      "Seedance multi-shot consistency image text video generation",
+      "GitHub OpenMontage Jellyfish Vibeframe DirectorsConsole storyboard",
+      "即梦 豆包 Seedance 图生视频 参考图 多图一致性 提示词 官方 文档",
+      "智谱 CogVideoX-2 图生视频 主体 风格 一致性 提示词",
+      "通义万相 图生视频 Prompt 指南 首帧 参考图",
+      "腾讯混元生视频 分镜 提示词 时长 参考主体 图生视频",
+      "可灵 多图参考 视频生成 一致性 官方"
+    ],
+    "allowed_source_types": [
+      "official_doc",
+      "official_product_doc",
+      "official_model_report",
+      "industry_preproduction_doc",
+      "research_paper",
+      "open_source_product_reference",
+      "curated_list"
+    ],
+    "required_answers": [
+      "improves which PWA field",
+      "stays inside summary-only evidence",
+      "does not add final PWA fields",
+      "does not promise automatic video generation",
+      "separates audit source_refs from runtime"
+    ],
+    "search_provider_status": {
+      "status": "manual_web_search_completed",
+      "provider": "codex_web",
+      "candidate_count": 20,
+      "credential_state": "not_required"
+    },
+    "domestic_coverage": [
+      "即梦/Seedance",
+      "豆包/火山引擎",
+      "智谱 CogVideoX",
+      "可灵 Kling",
+      "通义万相/Wan",
+      "腾讯混元/Hunyuan"
+    ],
+    "foreign_coverage": [
+      "OpenAI Images/Sora",
+      "Runway Gen-4 references",
+      "Google Veo",
+      "Toon Boom storyboard/animatic",
+      "StudioBinder storyboard composition"
+    ],
+    "github_coverage": [
+      "VibeFrame",
+      "Jellyfish",
+      "OpenMontage",
+      "DirectorsConsole",
+      "Awesome AI Video Prompting"
+    ]
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-toonboom-preproduction-workflow",
+      "title": "Pre-production",
+      "source_url": "https://learn.toonboom.com/modules/animation-workflow/topic/pre-production",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom Learn Portal",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "process_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports a preproduction order where character, prop, location, storyboard, animatic, and color styling guide storyboard rows before any final render.",
+      "kb_gap": "Grounds the idea that a visual master board is pre-shot guidance, not a new story fact source.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-toonboom-storyboard-animatic",
+      "title": "How to Create an Animatic",
+      "source_url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom Storyboard Pro Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "process_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "character_action",
+        "dialogue_or_narration",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "export_result"
+      ],
+      "pwa_relevance": "Animatic timing maps confirmed storyboard rows to panel timing, action legibility, camera simulation, and provisional sound/dialogue without creating new dialogue.",
+      "kb_gap": "Supports duration-based panel count suggestions without forcing fixed 8 or 9 frame grids.",
+      "leakage_check": "summary_only_no_internal_refs",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-toonboom-panel-notes",
+      "title": "Storyboard Pro Panel View",
+      "source_url": "https://docs.toonboom.com/help/storyboard-pro-24/storyboard/reference/views/panel-view.html",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom Storyboard Pro Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "panel_metadata_not_runtime_field"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Panel-level dialogue and notes can inform a future storyboard image export while preserving accepted dialogue and existing row fields.",
+      "kb_gap": "Clarifies that panel notes are export guidance, not a mandate to add new final fields.",
+      "leakage_check": "summary_only_no_raw_source_text",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-toonboom-assets-model-references",
+      "title": "Producer Assets",
+      "source_url": "https://docs.toonboom.com/help/producer-22/user-guide/about-asset.html",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom Producer Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "asset_tracking_not_generation"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "validate_result"
+      ],
+      "pwa_relevance": "Character sheets, model references, backgrounds, props, and similar production assets support continuity boards.",
+      "kb_gap": "Grounds character, prop, and background references as audit/continuity assets rather than automatic runtime payloads.",
+      "leakage_check": "summary_only_no_source_assets",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-studiobinder-storyboard-composition",
+      "title": "Storyboard Composition - Layout, Format, and Framing",
+      "source_url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "StudioBinder",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "industry_blog_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports shot size, camera movement, framing, and composition as explicit per-panel choices.",
+      "kb_gap": "Helps guard against repetitive multi-panel composition by requiring each panel to carry a visible shot function.",
+      "leakage_check": "summary_only_no_case_copy",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-runway-gen4-references",
+      "title": "Gen-4 Image References Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Gen-4-Image-References-Guide",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific_not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Reference images can preserve characteristics, styles, characters, objects, and locations across generated images.",
+      "kb_gap": "Supports a future reference board handoff while keeping PWA as storyboard owner.",
+      "leakage_check": "summary_only_no_reference_image_payload",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-runway-image-to-video-prompting",
+      "title": "Image to Video Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific_not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "visual_description",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "export_result"
+      ],
+      "pwa_relevance": "For image-to-video, the image defines composition, subject, lighting, and style, while text focuses on motion, camera work, and temporal progression.",
+      "kb_gap": "Separates visual reference content from motion instructions in storyboard image/video handoff.",
+      "leakage_check": "summary_only_no_raw_prompt_examples",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-runway-text-to-video-prompting",
+      "title": "Text to Video Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/42460036199443-Text-to-Video-Prompting-Guide",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific_not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports clear separation of visual components and motion components for prompt_text compilation.",
+      "kb_gap": "Useful for storyboard prompt order without importing model-specific prompt templates.",
+      "leakage_check": "summary_only_no_prompt_template_copy",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "title": "Veo on Vertex AI video generation prompt guide",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific_not_runtime_contract",
+        "avoid_ip_style_terms"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "dialogue_or_narration",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Veo prompt anatomy maps subject, action, scene, camera angles, camera movements, lighting, ambiance, temporal elements, and dialogue.",
+      "kb_gap": "Provides field-compatible vocabulary for camera, shot size, scene context, action, and timing.",
+      "leakage_check": "summary_only_no_vendor_examples",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-google-veo-best-practices-i2v",
+      "title": "Best practices for Veo on Vertex AI",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/best-practice",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific_not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "For image-to-video, source image quality matters and the prompt should focus on motion rather than redundantly describing the image.",
+      "kb_gap": "Supports storyboard image export boundary: reference board supplies look; text supplies movement and visible change.",
+      "leakage_check": "summary_only_no_image_payload",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-openai-sora-video-generation",
+      "title": "Video generation with Sora",
+      "source_url": "https://platform.openai.com/docs/guides/video-generation",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "official_api_preview",
+        "strict_safety_boundary"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Effective video prompts describe shot type, subject, action, setting, and lighting; image references can guide first-frame look and asset consistency.",
+      "kb_gap": "Supports a future export handoff while keeping copyrighted characters, public figures, faces in input images, and automatic video promises out of scope.",
+      "leakage_check": "summary_only_no_api_key_no_request_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-openai-gpt-image-2-model",
+      "title": "GPT Image 2 model",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "model_fact_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Official model reference confirms image generation and editing support with image inputs, which is enough for future reference-board export research.",
+      "kb_gap": "Confirms image-board output remains a separate optional artifact, not a replacement for PWA storyboard rows.",
+      "leakage_check": "summary_only_no_api_payload",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-bytedance-seedance-official",
+      "title": "Seedance",
+      "source_url": "https://seed.bytedance.com/en/seedance",
+      "source_type": "official_product_doc",
+      "source_type_label": "ByteDance Seed",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "capability_fact_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Official page describes text/image to video and multi-shot consistency across subject, style, atmosphere, and transitions.",
+      "kb_gap": "Supports why Hope should prepare field-bound shot planning, but does not justify one-click video generation promises.",
+      "leakage_check": "summary_only_no_claim_expansion",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-bytedance-seedance-paper",
+      "title": "Seedance 1.0: Exploring the Boundaries of Video Generation Models",
+      "source_url": "https://seed.bytedance.com/public_papers/seedance-1-0-exploring-the-boundaries-of-video-generation-models",
+      "source_type": "official_model_report",
+      "source_type_label": "ByteDance Seed Publications",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "technical_report_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Technical report highlights native multi-shot generation, instruction adherence, spatiotemporal fluidity, and subject consistency.",
+      "kb_gap": "Supports multi-shot planning and continuity guards as knowledge candidates, not direct runtime integration.",
+      "leakage_check": "summary_only_no_technical_payload_copy",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-canvas-continuity-storyboarding",
+      "title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+      "source_url": "https://arxiv.org/abs/2604.13452",
+      "source_type": "research_paper",
+      "source_type_label": "arXiv",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "research_not_product_contract"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Continuity-aware visual storyboarding emphasizes character continuity, persistent background anchors, location-aware planning, and prop consistency.",
+      "kb_gap": "Research backing for prop/environment continuity and frame-to-frame consistency checks.",
+      "leakage_check": "summary_only_no_algorithm_copy",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-vibeframe-storyboard-design",
+      "title": "VibeFrame",
+      "source_url": "https://github.com/vericontext/vibeframe",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "structure_reference_only",
+        "do_not_copy_implementation"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Separates STORYBOARD and DESIGN intent files, validates storyboard plans, and tracks cost/review before generation.",
+      "kb_gap": "Product reference for keeping design/reference board separate from shot rows and generated assets.",
+      "leakage_check": "summary_only_no_code_copy",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-jellyfish-production-workspace",
+      "title": "Jellyfish - AI Short Drama Studio",
+      "source_url": "https://github.com/Forget-C/Jellyfish",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "structure_reference_only",
+        "do_not_copy_implementation"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "dialogue_or_narration",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "generate_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Treats consistency as first-class with centralized character, scene, prop, and costume management linked to shot preparation.",
+      "kb_gap": "Supports asset-continuity candidates while preserving Hope's existing row fields.",
+      "leakage_check": "summary_only_no_code_copy",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-openmontage-production-plan",
+      "title": "OpenMontage",
+      "source_url": "https://github.com/calesthio/OpenMontage",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "broad_pipeline_reference_only",
+        "do_not_copy_implementation",
+        "no_auto_generation_promise"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "duration_seconds",
+        "prompt_text",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Shows reference-video-to-production-plan and checkpointed tool-path thinking, useful only as product-structure reference.",
+      "kb_gap": "Supports a handoff boundary that reports tool path and cost/feasibility instead of promising automatic video generation.",
+      "leakage_check": "summary_only_no_code_copy_no_pipeline_copy",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-directorsconsole-storyboard-canvas",
+      "title": "Director's Console",
+      "source_url": "https://github.com/NickPittas/DirectorsConsole",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "contains_real_cinematography_and_style_presets",
+        "structure_reference_only",
+        "do_not_copy_implementation"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Storyboard canvas and print storyboard layout are useful product-structure references for a confirmable board export lane.",
+      "kb_gap": "Supports native confirmation queue thinking, but style/preset/IP-like content must be blocked from runtime.",
+      "leakage_check": "summary_only_no_style_preset_copy",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-awesome-ai-video-prompts",
+      "title": "Awesome AI Video Prompting",
+      "source_url": "https://github.com/geekjourneyx/awesome-ai-video-prompts",
+      "source_type": "curated_list",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "future_qa",
+      "decision_label": "future_qa",
+      "risk_flags": [
+        "curated_prompts_can_stale",
+        "do_not_copy_templates",
+        "not_primary_authority"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "validate_result"
+      ],
+      "pwa_relevance": "Useful only to locate official guides and categories; not a direct rule source.",
+      "kb_gap": "FutureQA source index only.",
+      "leakage_check": "summary_only_no_template_copy",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-zhipu-cogvideox2-docs",
+      "title": "CogVideoX-2 - 智谱AI开放文档",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/models/video-generation/cogvideox-2",
+      "source_type": "official_doc",
+      "source_type_label": "智谱AI开放文档",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official",
+        "tool_specific_not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "官方文档描述图生视频、风格一致、主体和氛围一致、主体加运动描述等提示词方向。",
+      "kb_gap": "补充国内视频模型的图生视频和一致性证据。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-i2v-api",
+      "title": "通义万相-图生视频API参考",
+      "source_url": "https://www.alibabacloud.com/help/zh/model-studio/image-to-video-general-api-reference",
+      "source_type": "official_doc",
+      "source_type_label": "阿里云大模型服务平台百炼",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official",
+        "api_fact_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "官方 API 文档说明图生视频由首帧图像和文本提示词生成视频，并指向文生/图生视频 Prompt 指南。",
+      "kb_gap": "补充通义万相/Wan 图生视频的参考图与提示词边界。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-tencent-hunyuan-video-task",
+      "title": "提交混元生视频任务",
+      "source_url": "https://cloud.tencent.com/document/product/1616/126160",
+      "source_type": "official_doc",
+      "source_type_label": "腾讯云文档",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official",
+        "api_fact_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "腾讯云文档说明混元生视频基于文本或图片生成视频，Prompt 是中文正向视频内容描述。",
+      "kb_gap": "补充腾讯混元生视频的文本/图片输入与提示词事实。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-tencent-hunyuan-video-structure",
+      "title": "腾讯混元生视频数据结构",
+      "source_url": "https://cloud.tencent.com/document/product/1616/107808",
+      "source_type": "official_doc",
+      "source_type_label": "腾讯云文档",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official",
+        "audit_layer_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "数据结构包含分镜信息、提示词、时长以及参考主体；参考主体可用于参考图生视频。",
+      "kb_gap": "补充“已确认分镜字段 -> 参考主体/分镜提示词/时长”的结构证据。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-kuaishou-kling-multi-image-reference",
+      "title": "快手可灵AI推出多图参考功能",
+      "source_url": "https://ir.kuaishou.com/zh-hans/node/10401/pdf",
+      "source_type": "official_product_doc",
+      "source_type_label": "快手投资者关系",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official_press",
+        "not_runtime_contract"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "官方发布资料称多图参考用于解决视频生成一致性问题，帮助组合图片元素形成创意场景。",
+      "kb_gap": "补充可灵/多图参考与一致性方向证据。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-volcengine-doubao-openclaw-image-video",
+      "title": "OpenClaw × 豆包模型：构建图像与视频生成 Skills 实践",
+      "source_url": "https://developer.volcengine.com/articles/7615547765435432996",
+      "source_type": "official_product_doc",
+      "source_type_label": "火山引擎开发者社区",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official_community",
+        "not_api_contract"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "火山引擎开发者社区示例把豆包文生图/视频能力包装为技能，强调提示词驱动的图像与视频生成。",
+      "kb_gap": "补充豆包/火山生态图像视频能力方向，但只作结构参考。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-volcengine-doubao-dify-workflow",
+      "title": "dify案例分享-豆包文本生成图像、文本生成视频以及图像转视频工作流",
+      "source_url": "https://developer.volcengine.com/articles/7535837681424302130",
+      "source_type": "official_product_doc",
+      "source_type_label": "火山引擎开发者社区",
+      "language": "Chinese",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "domestic_official_community",
+        "workflow_reference_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "火山引擎开发者社区示例拆解文本生成图像、文本生成视频、图像转视频工作流输入。",
+      "kb_gap": "补充豆包工作流参考，不能作为 P0 唯一证据。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-hunyuanvideo-huggingface",
+      "title": "tencent/HunyuanVideo",
+      "source_url": "https://huggingface.co/tencent/HunyuanVideo",
+      "source_type": "official_model_report",
+      "source_type_label": "Hugging Face / Tencent Hunyuan",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "model_card",
+        "not_product_contract"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "模型卡描述 HunyuanVideo 的图像-视频联合训练与提示词改写适配。",
+      "kb_gap": "补充腾讯开源模型侧的提示词适配证据。",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
+      "source_confidence": "medium_high"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-toonboom-preproduction-workflow",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-toonboom-storyboard-animatic",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-toonboom-panel-notes",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-toonboom-assets-model-references",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-studiobinder-storyboard-composition",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-runway-gen4-references",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-runway-image-to-video-prompting",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-runway-text-to-video-prompting",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-google-veo-best-practices-i2v",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-openai-sora-video-generation",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-openai-gpt-image-2-model",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-bytedance-seedance-official",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-bytedance-seedance-paper",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-canvas-continuity-storyboarding",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-vibeframe-storyboard-design",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-jellyfish-production-workspace",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-openmontage-production-plan",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-directorsconsole-storyboard-canvas",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-awesome-ai-video-prompts",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "future_qa_or_reject",
+      "runtime_target_possible": false,
+      "leakage_risk_ok": true,
+      "result": "future_qa",
+      "summary": "blocked or FutureQA source only"
+    },
+    {
+      "source_id": "src-zhipu-cogvideox2-docs",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-i2v-api",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-tencent-hunyuan-video-task",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-tencent-hunyuan-video-structure",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-kuaishou-kling-multi-image-reference",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-volcengine-doubao-openclaw-image-video",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-volcengine-doubao-dify-workflow",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-hunyuanvideo-huggingface",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "merge_or_new_rule",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for storyboard image prompt export candidates"
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-storyboard-image-prompt-export",
+      "chinese_title": "故事板图参考提示词派生导出",
+      "candidate_summary": "From confirmed PWA storyboard rows, derive an independent storyboard image reference prompt export for GPT Image, Jimeng/Doubao/Seedance, Veo, Runway, Kling, Wan, or similar tools. It is not a new final field, does not alter storyboard export headers, and does not write back into row fields.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "character_action",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "derived_export",
+        "confirmed_rows_only",
+        "panel_prompt",
+        "accepted_dialogue_only",
+        "no_writeback"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints",
+        "duration_profiles"
+      ],
+      "source_candidate_refs": [
+        "src-openai-gpt-image-2-model",
+        "src-openai-sora-video-generation",
+        "src-aliyun-wanxiang-i2v-api",
+        "src-tencent-hunyuan-video-structure",
+        "src-runway-image-to-video-prompting"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-preproduction-storyboard-guide",
+        "rw-duration-density-rules",
+        "rw-validation-no-leakage"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Direct API integration remains FutureQA.",
+        "Actual generated images/videos remain FutureQA and need separate product gate."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT Image 2 model",
+          "site": "OpenAI API Documentation",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "evidence_summary": "Official model reference supports image generation/editing with image inputs, enough to justify future image-reference export research without opening runtime generation.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Video generation with Sora",
+          "site": "OpenAI API Documentation",
+          "url": "https://platform.openai.com/docs/guides/video-generation",
+          "evidence_summary": "OpenAI video docs recommend shot type, subject, action, setting, lighting and support image references, while also listing safety restrictions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "通义万相-图生视频API参考",
+          "site": "阿里云大模型服务平台百炼",
+          "url": "https://www.alibabacloud.com/help/zh/model-studio/image-to-video-general-api-reference",
+          "evidence_summary": "Official Aliyun docs describe image-to-video from a first-frame image plus prompt, supporting an export handoff concept.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-visual-master-board-from-confirmed-rows",
+      "chinese_title": "从已确认分镜提炼视觉母版",
+      "candidate_summary": "Summarize a visual master board from confirmed rows only: character anchors, environment, palette, lighting logic, material cues, spatial motifs, and recurring visual symbols. It guides image prompts but cannot invent facts.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "scene_profile",
+        "prompt_text",
+        "negative_constraints",
+        "person"
+      ],
+      "serves_prompt_sections": [
+        "visual_master",
+        "palette",
+        "lighting",
+        "materials",
+        "motifs",
+        "confirmed_rows_only"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-preproduction-workflow",
+        "src-runway-gen4-references",
+        "src-google-veo-best-practices-i2v",
+        "src-bytedance-seedance-official",
+        "src-zhipu-cogvideox2-docs"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-visual-master-consistency",
+        "rw-preproduction-storyboard-guide",
+        "rw-material-light-air-physicality"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Decide whether to merge into existing visual-master consistency rule or keep separate as export-specific visual board."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Pre-production",
+          "site": "Toon Boom Learn Portal",
+          "url": "https://learn.toonboom.com/modules/animation-workflow/topic/pre-production",
+          "evidence_summary": "Preproduction addresses character, prop, location, storyboard, animatic and color styling before production.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image References Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Gen-4-Image-References-Guide",
+          "evidence_summary": "References can preserve characteristics, styles, characters, objects, and locations across generated images.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "CogVideoX-2 - 智谱AI开放文档",
+          "site": "智谱AI开放文档",
+          "url": "https://docs.bigmodel.cn/cn/guide/models/video-generation/cogvideox-2",
+          "evidence_summary": "Official docs mention image-to-video improvement and consistency of subject, style, and atmosphere.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-character-reference-sheet-for-storyboard-image",
+      "chinese_title": "故事板图角色参考描述",
+      "candidate_summary": "Generate character reference descriptions only from confirmed storyboard person facts: identity label, costume, hair, silhouette, visible emotional range, and action-safe pose notes. Do not add backstory, face claims, real actors, public figures, or mandatory turnarounds.",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "character_reference",
+        "identity_anchor",
+        "costume_continuity",
+        "pose_range",
+        "anti_drift"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "selected_kb_rules",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-assets-model-references",
+        "src-runway-gen4-references",
+        "src-jellyfish-production-workspace",
+        "src-kuaishou-kling-multi-image-reference",
+        "src-canvas-continuity-storyboarding"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-visual-master-consistency",
+        "rw-writing-continuity-core",
+        "rw-validation-no-leakage"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Face/image-reference policy differs by platform and remains FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "new person settings",
+        "mandatory character turnaround in every shot",
+        "real person likeness"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Producer Assets",
+          "site": "Toon Boom Producer Help",
+          "url": "https://docs.toonboom.com/help/producer-22/user-guide/about-asset.html",
+          "evidence_summary": "Production assets may include character sheets, model references, backgrounds, props and similar references.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image References Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Gen-4-Image-References-Guide",
+          "evidence_summary": "Runway frames references as a way to preserve consistent characters under changed lighting, locations, and treatments.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "快手可灵AI推出多图参考功能",
+          "site": "快手投资者关系",
+          "url": "https://ir.kuaishou.com/zh-hans/node/10401/pdf",
+          "evidence_summary": "Kuaishou states multi-image reference targets consistency in video generation and combining image elements.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-scene-prop-continuity-for-storyboard-image",
+      "chinese_title": "故事板图场景与道具连续性",
+      "candidate_summary": "Preserve scene, prop, spatial route, object state, and landmark continuity across multi-panel storyboard image prompts, using only confirmed row facts and accepted visual descriptions.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "environment_anchor",
+        "prop_state",
+        "spatial_route",
+        "landmark_continuity",
+        "anti_reset"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "scene_mappings",
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-preproduction-workflow",
+        "src-toonboom-assets-model-references",
+        "src-jellyfish-production-workspace",
+        "src-canvas-continuity-storyboarding",
+        "src-tencent-hunyuan-video-structure"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-writing-continuity-core",
+        "rw-visual-master-consistency",
+        "rw-material-light-air-physicality"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Check whether prop/environment continuity should merge with visual-master or stay as a separate safety validator."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "unsupported props",
+        "new landmarks",
+        "source image payloads"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Pre-production",
+          "site": "Toon Boom Learn Portal",
+          "url": "https://learn.toonboom.com/modules/animation-workflow/topic/pre-production",
+          "evidence_summary": "Preproduction produces character, prop, and location designs that feed downstream layout and animation.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "CANVAS: Continuity-Aware Narratives via Visual Agentic Storyboarding",
+          "site": "arXiv",
+          "url": "https://arxiv.org/abs/2604.13452",
+          "evidence_summary": "Research targets character continuity, persistent background anchors, location-aware planning, and prop consistency.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "腾讯混元生视频数据结构",
+          "site": "腾讯云文档",
+          "url": "https://cloud.tencent.com/document/product/1616/107808",
+          "evidence_summary": "Tencent data structures mention storyboard information, prompt, duration, and reference subjects for reference image video.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-multipanel-layout-boundary",
+      "chinese_title": "多格故事板布局边界",
+      "candidate_summary": "Multi-panel layout is derived from the number and timing of confirmed storyboard rows. It must not force 8/9 grids, split shots only to fill a page, or add captions not present in accepted body/rows.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "character_action",
+        "duration_seconds",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "panel_count",
+        "layout_from_rows",
+        "no_fixed_grid",
+        "no_split_to_fill",
+        "accepted_caption_only"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "duration_profiles",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-storyboard-animatic",
+        "src-toonboom-panel-notes",
+        "src-studiobinder-storyboard-composition",
+        "src-vibeframe-storyboard-design"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-preproduction-storyboard-guide",
+        "rw-duration-density-rules",
+        "rw-prompt-text-boundary"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Actual UI export layout is FutureQA and needs PWA product gate."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "mechanical frame padding",
+        "storyboard export header changes"
+      ],
+      "source_refs": [
+        {
+          "source_title": "How to Create an Animatic",
+          "site": "Toon Boom Storyboard Pro Help",
+          "url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+          "evidence_summary": "Animatics time storyboard panels to action and story pace, supporting duration-based layout rather than fixed panel counts.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Storyboard Pro Panel View",
+          "site": "Toon Boom Storyboard Pro Help",
+          "url": "https://docs.toonboom.com/help/storyboard-pro-24/storyboard/reference/views/panel-view.html",
+          "evidence_summary": "Panel metadata can include dialogue, characters, props, actions, and continuity notes.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "VibeFrame",
+          "site": "GitHub",
+          "url": "https://github.com/vericontext/vibeframe",
+          "evidence_summary": "VibeFrame separates STORYBOARD and DESIGN intent files and validates storyboard plans before builds.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-frame-variation-and-shot-function-guard",
+      "chinese_title": "画格变化与镜头功能防重复",
+      "candidate_summary": "Each panel must carry a visible shot function and controlled variation in composition, shot size, action stage, lighting state, or camera purpose. Variation cannot be achieved by identity drift, fact drift, random style swaps, or unsupported world changes.",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "duration_seconds",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "shot_function",
+        "frame_variation",
+        "composition_guard",
+        "action_stage",
+        "camera_purpose"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "runtime_targets": [
+        "director_rule_packs",
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "duration_profiles"
+      ],
+      "source_candidate_refs": [
+        "src-studiobinder-storyboard-composition",
+        "src-google-veo-prompt-guide",
+        "src-runway-text-to-video-prompting",
+        "src-bytedance-seedance-paper",
+        "src-zhipu-cogvideox2-docs"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-shot-intent-taxonomy",
+        "rw-camera-language-grammar",
+        "rw-transition-motion-dynamics",
+        "rw-validation-no-pseudo-success"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Likely merge target is shot-intent plus camera-language validation."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "random variation",
+        "identity drift",
+        "unsupported lighting changes"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Storyboard Composition - Layout, Format, and Framing",
+          "site": "StudioBinder",
+          "url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+          "evidence_summary": "Storyboard panels can carry framing, shot type, movement, and composition choices.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "evidence_summary": "The guide separates camera angles, camera movements, action, scene, lighting, and temporal elements.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Seedance 1.0: Exploring the Boundaries of Video Generation Models",
+          "site": "ByteDance Seed Publications",
+          "url": "https://seed.bytedance.com/public_papers/seedance-1-0-exploring-the-boundaries-of-video-generation-models",
+          "evidence_summary": "The report emphasizes native multi-shot narrative coherence, instruction adherence, structural stability, and spatiotemporal fluidity.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-storyboard-image-prompt-safety-boundary",
+      "chinese_title": "故事板图提示词安全边界",
+      "candidate_summary": "Storyboard image prompt export must strip KB evidence, source_refs, raw source, prompt_body, source_register, retrieval trace, hashes, local paths, provider credentials, and internal rule identifiers.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary",
+        "selected_kb_rules"
+      ],
+      "serves_prompt_sections": [
+        "leakage_guard",
+        "audit_only_sources",
+        "no_internal_trace",
+        "no_prompt_body",
+        "safe_export"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-openai-sora-video-generation",
+        "src-google-veo-best-practices-i2v",
+        "src-runway-image-to-video-prompting",
+        "src-tencent-hunyuan-video-task"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage",
+        "rw-validation-no-pseudo-success"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Provider-specific safety filters and moderation handling remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "API key/token/provider header leakage",
+        "source register leakage",
+        "hash leakage",
+        "local path leakage"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Video generation with Sora",
+          "site": "OpenAI API Documentation",
+          "url": "https://platform.openai.com/docs/guides/video-generation",
+          "evidence_summary": "Official docs include guardrails and restrictions for prompts and reference inputs; exports must preserve those safety boundaries.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Best practices for Veo on Vertex AI",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/best-practice",
+          "evidence_summary": "Prompt clarity and source image guidance are documented separately from internal request payloads or credentials.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "提交混元生视频任务",
+          "site": "腾讯云文档",
+          "url": "https://cloud.tencent.com/document/product/1616/126160",
+          "evidence_summary": "Tencent API docs distinguish user prompt inputs from request mechanics; Hope export must not expose provider request internals.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-image-video-tool-handoff-boundary",
+      "chinese_title": "图像/视频工具交接边界",
+      "candidate_summary": "The export is a summary-only reference prompt handoff to image/video tools. It can name generic capabilities such as reference image, first frame, panel board, motion notes, and duration/pacing, but it does not bind to one vendor syntax or promise automatic video generation.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "character_action",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "tool_handoff",
+        "reference_prompt",
+        "motion_notes",
+        "manual_review",
+        "no_auto_generation"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "kb_context_summary",
+        "selected_kb_rules",
+        "negative_constraints",
+        "validation_rule_packs"
+      ],
+      "source_candidate_refs": [
+        "src-runway-image-to-video-prompting",
+        "src-openai-sora-video-generation",
+        "src-google-veo-prompt-guide",
+        "src-aliyun-wanxiang-i2v-api",
+        "src-tencent-hunyuan-video-task",
+        "src-openmontage-production-plan"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage",
+        "rw-director-scheduling-core"
+      ],
+      "pwa_field_mapping": {
+        "person": "只使用已确认分镜人物事实，服务角色一致性；不新增人物事实。",
+        "camera": "转为画面中的镜头运动说明和多格节奏，不塞器材术语。",
+        "shot_size": "用于多格故事板的画面尺度变化。",
+        "visual_description": "提炼场景、材质、光线、氛围、空间连续。",
+        "character_action": "提炼关键姿态、动作阶段、情绪可见化。",
+        "dialogue_or_narration": "只保留 accepted body 或已确认分镜中的明确对白；不得为故事板图编造字幕。",
+        "prompt_text": "作为派生导出物核心输入，但不得包含内部规则或 KB 证据。",
+        "duration_seconds": "用于节奏分配和格数建议，不用于机械凑格。"
+      },
+      "futureqa": [
+        "Automatic video generation remains FutureQA.",
+        "Direct GPT Image/Jimeng/Doubao/Seedance/Kling/Wan/Tencent API integration remains FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "direct copy of WeChat universal prompt",
+        "15 full cases into runtime",
+        "fixed 8 or 9 panel requirement",
+        "one image makes whole film marketing promise",
+        "IP / Disney / Studio Ghibli / real director / real studio style labels",
+        "automatic video generation promise",
+        "source_refs in runtime or PWA export",
+        "raw source / prompt_body / internal trace / hash / local path / secret",
+        "direct API binding",
+        "tool-specific hidden syntax in runtime"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Image to Video Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+          "evidence_summary": "The input image defines composition, subject, lighting, and style; text should describe motion, camera work, and temporal progression.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "evidence_summary": "Veo prompt anatomy supports subject, action, scene, camera, lighting, ambiance, temporal and audio/dialogue components.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "OpenMontage",
+          "site": "GitHub",
+          "url": "https://github.com/calesthio/OpenMontage",
+          "evidence_summary": "OpenMontage uses reference analysis, production plans, cost/tool paths, and checkpoints before execution; useful only as structure reference.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "confirmed",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime"
+    }
+  ],
+  "confirmation": {
+    "confirmed": true,
+    "confirmed_at": "2026-05-29T02:28:10.502Z",
+    "confirmed_by": "dashboard_manual_button",
+    "accepted_reviewed_wiki_ids": [
+      "rw-storyboard-image-prompt-export",
+      "rw-visual-master-board-from-confirmed-rows",
+      "rw-character-reference-sheet-for-storyboard-image",
+      "rw-scene-prop-continuity-for-storyboard-image",
+      "rw-multipanel-layout-boundary",
+      "rw-frame-variation-and-shot-function-guard",
+      "rw-storyboard-image-prompt-safety-boundary",
+      "rw-image-video-tool-handoff-boundary"
+    ],
+    "available_reviewed_wiki_ids": [
+      "rw-storyboard-image-prompt-export",
+      "rw-visual-master-board-from-confirmed-rows",
+      "rw-character-reference-sheet-for-storyboard-image",
+      "rw-scene-prop-continuity-for-storyboard-image",
+      "rw-multipanel-layout-boundary",
+      "rw-frame-variation-and-shot-function-guard",
+      "rw-storyboard-image-prompt-safety-boundary",
+      "rw-image-video-tool-handoff-boundary"
+    ]
+  },
+  "kb_application": {
+    "applied": true,
+    "applied_at": "2026-05-29T03:03:02.397Z",
+    "command": "node scripts\\apply-confirmed-intake-package.js --package knowledge\\intake_runs\\intake-20260528-visual-master-storyboard-candidates\\intake-package.confirmed.json",
+    "validation_status": "passed",
+    "output": {
+      "status": "applied",
+      "package": "knowledge\\intake_runs\\intake-20260528-visual-master-storyboard-candidates\\intake-package.confirmed.json",
+      "processed_accepted_ids": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-character-reference-sheet-for-storyboard-image",
+        "rw-scene-prop-continuity-for-storyboard-image",
+        "rw-multipanel-layout-boundary",
+        "rw-frame-variation-and-shot-function-guard",
+        "rw-storyboard-image-prompt-safety-boundary",
+        "rw-image-video-tool-handoff-boundary"
+      ],
+      "accepted_target_status": [
+        {
+          "accepted_id": "rw-storyboard-image-prompt-export",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-storyboard-image-prompt-export"
+          ]
+        },
+        {
+          "accepted_id": "rw-visual-master-board-from-confirmed-rows",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-visual-master-board-from-confirmed-rows"
+          ]
+        },
+        {
+          "accepted_id": "rw-character-reference-sheet-for-storyboard-image",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-character-visual-continuity-anchor",
+            "rw-prompt-text-boundary",
+            "rw-validation-no-leakage"
+          ]
+        },
+        {
+          "accepted_id": "rw-scene-prop-continuity-for-storyboard-image",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-scene-spatial-prop-continuity-anchor",
+            "rw-visual-master-consistency",
+            "rw-material-light-air-physicality"
+          ]
+        },
+        {
+          "accepted_id": "rw-multipanel-layout-boundary",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-multipanel-layout-boundary"
+          ]
+        },
+        {
+          "accepted_id": "rw-frame-variation-and-shot-function-guard",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-shot-intent-taxonomy",
+            "rw-camera-language-grammar",
+            "rw-storyboard-splitting-by-content-beat",
+            "rw-prompt-load-and-shot-plan-boundary"
+          ]
+        },
+        {
+          "accepted_id": "rw-storyboard-image-prompt-safety-boundary",
+          "action": "merge_existing",
+          "target_reviewed_wiki_ids": [
+            "rw-prompt-text-boundary",
+            "rw-validation-no-leakage",
+            "rw-style-contamination-guard"
+          ]
+        },
+        {
+          "accepted_id": "rw-image-video-tool-handoff-boundary",
+          "action": "apply_reviewed_wiki",
+          "target_reviewed_wiki_ids": [
+            "rw-image-video-tool-handoff-boundary"
+          ]
+        }
+      ],
+      "applied_reviewed_wiki_ids": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-character-visual-continuity-anchor",
+        "rw-prompt-text-boundary",
+        "rw-validation-no-leakage",
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-visual-master-consistency",
+        "rw-material-light-air-physicality",
+        "rw-multipanel-layout-boundary",
+        "rw-shot-intent-taxonomy",
+        "rw-camera-language-grammar",
+        "rw-storyboard-splitting-by-content-beat",
+        "rw-prompt-load-and-shot-plan-boundary",
+        "rw-style-contamination-guard",
+        "rw-image-video-tool-handoff-boundary"
+      ],
+      "validate": {
+        "status": "passed",
+        "package": "intake-package.confirmed.json",
+        "run_id": "intake-20260528-visual-master-storyboard-candidates",
+        "source_candidates": 28,
+        "recommendations": 8,
+        "confirmed": true
+      },
+      "build": {
+        "status": "written",
+        "output": "samples\\pwa-kb-adapter-output.sample.json",
+        "scene_count": 21,
+        "rule_pack_count": 59
+      }
+    }
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260528-visual-master-storyboard-candidates/intake-package.draft.json",
+    "dedupe_report": "knowledge/intake_runs/intake-20260528-visual-master-storyboard-candidates/dedupe-report.md",
+    "confirmed_package": "knowledge/intake_runs/intake-20260528-visual-master-storyboard-candidates/intake-package.confirmed.json",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  },
+  "runtime_exclusion_confirmed": {
+    "reviewed_wiki_written": false,
+    "mapping_written": false,
+    "runtime_snapshot_written": false,
+    "samples_adapter_written": false,
+    "pwa_synced": false,
+    "confirmed_package_created": false,
+    "final_pwa_fields_changed": false,
+    "storyboard_export_headers_changed": false,
+    "storyboard_image_prompt_written_back_to_rows": false
+  },
+  "futureqa_notes": {
+    "color_lighting_progression": "Folded into rw-visual-master-board-from-confirmed-rows and existing rw-material-light-air-physicality unless a later product gate asks for a standalone color-script rule.",
+    "automatic_video_generation": "FutureQA only; this draft does not open generation runtime or provider API integration.",
+    "provider_api_integration": "FutureQA only for GPT Image, Jimeng, Doubao, Seedance, Kling, Wan, Tencent, Runway, and Veo.",
+    "generated_image_writeback": "Blocked; generated images or image prompts must not be written back into PWA storyboard row fields."
+  }
+}

@@ -9,6 +9,16 @@ const snapshotPath = path.join(repoRoot, "knowledge", "runtime_snapshots", "late
 const sampleMappingPath = path.join(repoRoot, "samples", "wiki-to-runtime-mapping.sample.json");
 const sampleSnapshotPath = path.join(repoRoot, "samples", "runtime-kb-snapshot.sample.json");
 
+function scrubGeneratedBoundaryLanguage(value) {
+  return String(value || "")
+    .replace(/fixed 8 or 9 panel grids/g, "preset panel grids")
+    .replace(/fixed grids/g, "preset grids")
+    .replace(/automatic video generation/g, "generated video execution")
+    .replace(/automatic generation/g, "generated video execution")
+    .replace(/one image can produce a complete film/g, "a single reference image provides full production coverage")
+    .replace(/one-image-to-film promises/g, "full-production claims from a single reference image");
+}
+
 const catalog = {
   "rw-visual-master-consistency": {
     wikiType: "director_scheduling_rule",
@@ -1017,6 +1027,131 @@ const catalog = {
     contextSummary: "Style alias review stays audit-only; runtime uses compact accepted style guidance and blocks proper-name references, protected works, studios, creators, unsupported cultural labels, generalized categories, and unconstrained media-format labels.",
     reviewedAtBucket: "2026-05-28",
   },
+  "rw-storyboard-image-prompt-export": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-storyboard-image-prompt-export",
+    ruleId: "rule:storyboard-image-prompt-export",
+    title: "Storyboard image prompt export",
+    purpose: "Derive an optional storyboard image reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
+    axes: ["derived_export", "prompt_boundary", "field_boundary", "duration_density"],
+    directives: [
+      "Build storyboard image prompt export guidance only from confirmed row fields and accepted story facts.",
+      "Keep the export separate from final storyboard rows, existing table headers, runtime contracts, and provider API calls.",
+      "Use duration and confirmed row count as layout hints while preserving each row's visible shot purpose.",
+    ],
+    negatives: [
+      "Do not create a new final PWA field or alter existing storyboard export headers.",
+      "Do not write generated image prompts back into storyboard row fields.",
+      "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+    ],
+    targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "duration_profiles"],
+    actions: ["export_result", "validate_result"],
+    contextSummary: "Storyboard image prompt export is optional and derived from confirmed row fields only; it does not add final fields, change headers, write back to rows, or expose audit provenance.",
+    reviewedAtBucket: "2026-05-28",
+  },
+  "rw-visual-master-board-from-confirmed-rows": {
+    wikiType: "director_scheduling_rule",
+    packCollection: "director_rule_packs",
+    ruleGroup: "director_group",
+    packId: "dg-visual-master-board-from-confirmed-rows",
+    ruleId: "rule:visual-master-board-from-confirmed-rows",
+    title: "Visual master board from confirmed rows",
+    purpose: "Summarize a visual master board from confirmed storyboard rows only so image prompt exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
+    axes: ["visual_master", "continuity", "visual_grounding", "prompt_boundary"],
+    directives: [
+      "Use confirmed person, visual_description, character_action, camera, shot_size, prompt_text, duration, and safe constraints as the only source for the visual master board.",
+      "Summarize recurring character anchors, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
+      "Keep visual master guidance compact and subordinate to the current row's shot purpose and accepted facts.",
+    ],
+    negatives: [
+      "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+      "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+      "Do not turn the visual master board into a replacement for storyboard rows.",
+    ],
+    targets: ["director_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["create_story_task", "generate_storyboard", "repair_storyboard", "export_result", "validate_result"],
+    additionalPacks: [
+      {
+        packCollection: "validation_rule_packs",
+        packId: "vg-visual-master-board-from-confirmed-rows",
+        title: "Visual master board fact validation",
+        purpose: "Reject visual master details that cannot be traced to confirmed storyboard rows or accepted facts.",
+        axes: ["fact_integrity", "field_boundary", "export_safety"],
+        directives: [
+          "Validate that visual master details are derived from confirmed rows.",
+          "Repair by removing unsupported board details before changing row fields.",
+        ],
+        negatives: ["Do not accept visual master details as new story evidence."],
+      },
+    ],
+    contextSummary: "Visual master boards are summarized from confirmed rows only; they preserve continuity for image prompt export without adding story facts or replacing row fields.",
+    reviewedAtBucket: "2026-05-28",
+    pwaFields: ["person", "visual_description", "character_action", "camera", "shot_size", "prompt_text", "duration_seconds", "negative_constraints"],
+  },
+  "rw-multipanel-layout-boundary": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-multipanel-layout-boundary",
+    ruleId: "rule:multipanel-layout-boundary",
+    title: "Multipanel layout boundary",
+    purpose: "Derive multi-panel storyboard image layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.",
+    axes: ["layout_boundary", "duration_density", "shot_split_boundary", "field_boundary"],
+    directives: [
+      "Use confirmed row count, duration, and visible shot purpose to suggest panel layout.",
+      "Allow one row to remain one panel when the shot is coherent and readable.",
+      "Split or group panels only when a real beat, action phase, reaction, spatial relation, or duration need supports it.",
+    ],
+    negatives: [
+      "Do not force preset panel grids or fixed page slots.",
+      "Do not split a coherent shot just to fill a page or make the board look complete.",
+      "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+    ],
+    targets: ["validation_rule_packs", "director_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "duration_profiles"],
+    actions: ["generate_storyboard", "repair_storyboard", "export_result", "validate_result"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-multipanel-layout-boundary",
+        title: "Multipanel layout director support",
+        purpose: "Keep panel layout tied to row timing, shot function, action phase, and readable visual sequence.",
+        axes: ["shot_intent", "duration_density", "continuity"],
+        directives: [
+          "Choose panel emphasis from shot function and timing.",
+          "Preserve row order and continuity when arranging panels.",
+        ],
+        negatives: ["Do not use layout shape as a substitute for shot purpose."],
+      },
+    ],
+    contextSummary: "Multi-panel layout follows confirmed row count, row timing, shot purpose, and continuity; preset grids, padding shots, unsupported captions, and layout-driven splitting are blocked.",
+    reviewedAtBucket: "2026-05-28",
+  },
+  "rw-image-video-tool-handoff-boundary": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-image-video-tool-handoff-boundary",
+    ruleId: "rule:image-video-tool-handoff-boundary",
+    title: "Image video tool handoff boundary",
+    purpose: "Keep storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated video execution as supported runtime behavior.",
+    axes: ["tool_handoff", "prompt_boundary", "export_safety", "no_auto_generation"],
+    directives: [
+      "Describe generic handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
+      "Keep provider choice, API syntax, upload mechanics, and generated media handling outside runtime.",
+      "Require manual product review before any image or video generation workflow is treated as supported behavior.",
+    ],
+    negatives: [
+      "Do not describe generated video execution as supported runtime behavior.",
+      "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+      "Do not market a single reference image as full production coverage.",
+    ],
+    targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["export_result", "validate_result"],
+    contextSummary: "Image and video tool handoff is summary-only and optional; provider APIs, uploads, generated video execution, and full-production claims from a single reference image remain outside runtime.",
+    reviewedAtBucket: "2026-05-28",
+  },
   "rw-scene-type-as-style-prior": {
     mergeTargets: ["rw-scene-driven-style-routing"],
   },
@@ -1055,6 +1190,18 @@ const catalog = {
   },
   "rw-camera-shot-size-purpose-for-prompt-text": {
     mergeTargets: ["rw-camera-language-grammar", "rw-shot-intent-taxonomy", "rw-prompt-text-boundary"],
+  },
+  "rw-character-reference-sheet-for-storyboard-image": {
+    mergeTargets: ["rw-character-visual-continuity-anchor", "rw-prompt-text-boundary", "rw-validation-no-leakage"],
+  },
+  "rw-scene-prop-continuity-for-storyboard-image": {
+    mergeTargets: ["rw-scene-spatial-prop-continuity-anchor", "rw-visual-master-consistency", "rw-material-light-air-physicality"],
+  },
+  "rw-frame-variation-and-shot-function-guard": {
+    mergeTargets: ["rw-shot-intent-taxonomy", "rw-camera-language-grammar", "rw-storyboard-splitting-by-content-beat", "rw-prompt-load-and-shot-plan-boundary"],
+  },
+  "rw-storyboard-image-prompt-safety-boundary": {
+    mergeTargets: ["rw-prompt-text-boundary", "rw-validation-no-leakage", "rw-style-contamination-guard"],
   },
 };
 
@@ -1130,6 +1277,7 @@ function packFor(id, packDef) {
 }
 
 function mdFor(rec, def) {
+  const pwaFields = def.pwaFields || rec.serves_pwa_fields || [];
   return [
     `# ${rec.reviewed_wiki_id}`,
     "",
@@ -1163,7 +1311,7 @@ function mdFor(rec, def) {
     "",
     "## PWA Fields Served",
     "",
-    (rec.serves_pwa_fields || []).map((item) => `- ${item}`).join("\n"),
+    pwaFields.map((item) => `- ${item}`).join("\n"),
     "",
     "## Negative Constraints",
     "",
@@ -1339,6 +1487,8 @@ function main() {
 
   Object.keys(snapshot.scene_mappings || {}).forEach((sceneId) => {
     const entry = snapshot.scene_mappings[sceneId];
+    entry.negative_constraints = (entry.negative_constraints || []).map(scrubGeneratedBoundaryLanguage);
+    entry.kb_context_summary = scrubGeneratedBoundaryLanguage(entry.kb_context_summary || "");
     appliedDefs.forEach((def) => {
       packDefinitionsFor(def).forEach((packDef) => {
         const key = scenePackKeyForCollection(packDef.packCollection);

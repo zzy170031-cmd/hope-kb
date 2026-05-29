@@ -36,16 +36,10 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- scene_profile
+- prompt_text
+- negative_constraints
 - kb_context_summary
 - selected_kb_rules
-- negative_constraints
-- visual_description
-- character_action
-- camera
-- shot_size
-- prompt_text
-- duration_seconds
 
 ## Negative Constraints
 

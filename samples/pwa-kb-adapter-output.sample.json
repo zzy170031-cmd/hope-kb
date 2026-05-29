@@ -640,6 +640,44 @@
           "Do not add unsupported machines, cities, costumes, factions, or technology to justify the style.",
           "Do not let retrofuture or punk-family routing override scene type, accepted facts, action readability, or duration."
         ]
+      },
+      {
+        "id": "dg-visual-master-board-from-confirmed-rows",
+        "name": "Visual master board from confirmed rows",
+        "intent": "Summarize a visual master board from confirmed storyboard rows only so image prompt exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
+        "influenceAxes": [
+          "visual_master",
+          "continuity",
+          "visual_grounding",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Use confirmed person, visual_description, character_action, camera, shot_size, prompt_text, duration, and safe constraints as the only source for the visual master board.",
+          "Summarize recurring character anchors, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
+          "Keep visual master guidance compact and subordinate to the current row's shot purpose and accepted facts."
+        ],
+        "negativeConstraints": [
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows."
+        ]
+      },
+      {
+        "id": "dg-multipanel-layout-boundary",
+        "name": "Multipanel layout director support",
+        "intent": "Keep panel layout tied to row timing, shot function, action phase, and readable visual sequence.",
+        "influenceAxes": [
+          "shot_intent",
+          "duration_density",
+          "continuity"
+        ],
+        "directives": [
+          "Choose panel emphasis from shot function and timing.",
+          "Preserve row order and continuity when arranging panels."
+        ],
+        "negativeConstraints": [
+          "Do not use layout shape as a substitute for shot purpose."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -1082,6 +1120,86 @@
         "negativeConstraints": [
           "Do not accept subgenre label stacks as visual grounding."
         ]
+      },
+      {
+        "id": "vg-storyboard-image-prompt-export",
+        "name": "Storyboard image prompt export",
+        "intent": "Derive an optional storyboard image reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
+        "influenceAxes": [
+          "derived_export",
+          "prompt_boundary",
+          "field_boundary",
+          "duration_density"
+        ],
+        "directives": [
+          "Build storyboard image prompt export guidance only from confirmed row fields and accepted story facts.",
+          "Keep the export separate from final storyboard rows, existing table headers, runtime contracts, and provider API calls.",
+          "Use duration and confirmed row count as layout hints while preserving each row's visible shot purpose."
+        ],
+        "negativeConstraints": [
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output."
+        ]
+      },
+      {
+        "id": "vg-visual-master-board-from-confirmed-rows",
+        "name": "Visual master board fact validation",
+        "intent": "Reject visual master details that cannot be traced to confirmed storyboard rows or accepted facts.",
+        "influenceAxes": [
+          "fact_integrity",
+          "field_boundary",
+          "export_safety"
+        ],
+        "directives": [
+          "Validate that visual master details are derived from confirmed rows.",
+          "Repair by removing unsupported board details before changing row fields."
+        ],
+        "negativeConstraints": [
+          "Do not accept visual master details as new story evidence."
+        ]
+      },
+      {
+        "id": "vg-multipanel-layout-boundary",
+        "name": "Multipanel layout boundary",
+        "intent": "Derive multi-panel storyboard image layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.",
+        "influenceAxes": [
+          "layout_boundary",
+          "duration_density",
+          "shot_split_boundary",
+          "field_boundary"
+        ],
+        "directives": [
+          "Use confirmed row count, duration, and visible shot purpose to suggest panel layout.",
+          "Allow one row to remain one panel when the shot is coherent and readable.",
+          "Split or group panels only when a real beat, action phase, reaction, spatial relation, or duration need supports it."
+        ],
+        "negativeConstraints": [
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout."
+        ]
+      },
+      {
+        "id": "vg-image-video-tool-handoff-boundary",
+        "name": "Image video tool handoff boundary",
+        "intent": "Keep storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated video execution as supported runtime behavior.",
+        "influenceAxes": [
+          "tool_handoff",
+          "prompt_boundary",
+          "export_safety",
+          "no_auto_generation"
+        ],
+        "directives": [
+          "Describe generic handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
+          "Keep provider choice, API syntax, upload mechanics, and generated media handling outside runtime.",
+          "Require manual product review before any image or video generation workflow is treated as supported behavior."
+        ],
+        "negativeConstraints": [
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not market a single reference image as full production coverage."
+        ]
       }
     ],
     "sceneMappings": {
@@ -1118,7 +1236,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1143,7 +1263,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1254,7 +1378,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "source_facts",
@@ -1329,7 +1468,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "ensemble_performance": {
@@ -1365,7 +1508,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1390,7 +1535,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1499,7 +1648,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1573,7 +1737,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "emotional_dialogue": {
@@ -1609,7 +1777,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1634,7 +1804,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1743,7 +1917,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1817,7 +2006,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "encounter_performance": {
@@ -1853,7 +2046,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1878,7 +2073,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1987,7 +2186,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2061,7 +2275,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "field_chase": {
@@ -2097,7 +2315,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2122,7 +2342,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2231,7 +2455,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2305,7 +2544,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "spectacle_showcase": {
@@ -2341,7 +2584,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2366,7 +2611,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2475,7 +2724,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2549,7 +2813,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "daily_healing": {
@@ -2585,7 +2853,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2610,7 +2880,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -2719,7 +2993,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2793,7 +3082,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -2829,7 +3122,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2854,7 +3149,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2963,7 +3262,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3037,7 +3351,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "guoman_ensemble_performance": {
@@ -3073,7 +3391,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3098,7 +3418,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -3207,7 +3531,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3281,7 +3620,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "ink_wuxia_combat": {
@@ -3317,7 +3660,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3342,7 +3687,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3451,7 +3800,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3525,7 +3889,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "eastern_spectacle": {
@@ -3561,7 +3929,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3586,7 +3956,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -3695,7 +4069,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3769,7 +4158,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "xianxia_action": {
@@ -3805,7 +4198,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3830,7 +4225,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3939,7 +4338,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4013,7 +4427,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "urban_fantasy": {
@@ -4049,7 +4467,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4074,7 +4494,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -4185,7 +4609,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "source_facts",
@@ -4260,7 +4699,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "chinese_war_formation": {
@@ -4296,7 +4739,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4321,7 +4766,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4430,7 +4879,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4504,7 +4968,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "weapon_highlight": {
@@ -4540,7 +5008,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4565,7 +5035,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -4674,7 +5148,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4748,7 +5237,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "council_strategy": {
@@ -4784,7 +5277,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4809,7 +5304,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -4918,7 +5417,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4992,7 +5506,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "siege_defense": {
@@ -5028,7 +5546,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5053,7 +5573,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5162,7 +5686,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5236,7 +5775,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "slg_sandbox_view": {
@@ -5272,7 +5815,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5297,7 +5842,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5406,7 +5955,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5480,7 +6044,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "slg_march_encirclement": {
@@ -5516,7 +6084,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5541,7 +6111,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5650,7 +6224,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5724,7 +6313,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "slg_city_growth": {
@@ -5760,7 +6353,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5785,7 +6380,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5894,7 +6493,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5968,7 +6582,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       },
       "slg_battle_report": {
@@ -6004,7 +6622,9 @@
           "dg-accepted-body-to-style-profile",
           "dg-style-to-field-projection",
           "dg-chinese-heritage-style-scene-routing",
-          "dg-retrofuture-punk-style-scene-routing"
+          "dg-retrofuture-punk-style-scene-routing",
+          "dg-visual-master-board-from-confirmed-rows",
+          "dg-multipanel-layout-boundary"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -6029,7 +6649,11 @@
           "vg-style-contamination-guard",
           "vg-style-to-field-projection",
           "vg-chinese-heritage-style-scene-routing",
-          "vg-retrofuture-punk-style-scene-routing"
+          "vg-retrofuture-punk-style-scene-routing",
+          "vg-storyboard-image-prompt-export",
+          "vg-visual-master-board-from-confirmed-rows",
+          "vg-multipanel-layout-boundary",
+          "vg-image-video-tool-handoff-boundary"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -6138,7 +6762,22 @@
           "Do not turn emotional tone into an unrelated style switch.",
           "Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.",
           "Do not paste style alias catalogs or blocked style labels into prompt_text.",
-          "Do not let style_profile become a second prompt template or override existing final-field responsibilities."
+          "Do not let style_profile become a second prompt template or override existing final-field responsibilities.",
+          "Do not create a new final PWA field or alter existing storyboard export headers.",
+          "Do not write generated image prompts back into storyboard row fields.",
+          "Do not copy universal prompt templates, complete case text, audit provenance, local paths, provider credentials, or internal rule identifiers into runtime output.",
+          "Do not add characters, costumes, props, locations, palette rules, or symbols that are not supported by confirmed rows.",
+          "Do not expose source article wording, complete case text, audit provenance, local paths, provider credentials, or hidden prompt templates.",
+          "Do not turn the visual master board into a replacement for storyboard rows.",
+          "Do not force preset panel grids.",
+          "Do not split a coherent shot just to fill a page or make the board look complete.",
+          "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
+          "Do not promise generated video execution.",
+          "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
+          "Do not claim that a single reference image provides full production coverage.",
+          "Do not force preset panel grids or fixed page slots.",
+          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not market a single reference image as full production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6212,7 +6851,11 @@
           "heritage_style",
           "cultural_safety",
           "retrofuture_style",
-          "world_logic"
+          "world_logic",
+          "derived_export",
+          "layout_boundary",
+          "tool_handoff",
+          "no_auto_generation"
         ]
       }
     },

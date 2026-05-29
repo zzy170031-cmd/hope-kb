@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-无泄漏验证规则增强: Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking into PWA prompts, UI, traces, or exports.
+Validation no leakage: Prevent raw KB, source registers, prompt bodies, internal refs, local paths, provider config, keys, tokens, and secrets from leaking into PWA prompts, UI, traces, or exports.
 
 ## Source Basis
 
@@ -36,9 +36,13 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- person
+- visual_description
+- character_action
 - prompt_text
 - negative_constraints
 - kb_context_summary
+- selected_kb_rules
 
 ## Negative Constraints
 

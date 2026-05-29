@@ -39,6 +39,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 - visual_description
 - character_action
 - prompt_text
+- negative_constraints
 
 ## Negative Constraints
 

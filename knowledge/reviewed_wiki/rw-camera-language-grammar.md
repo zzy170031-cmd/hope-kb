@@ -38,7 +38,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 - shot_size
 - visual_description
 - character_action
+- duration_seconds
 - prompt_text
+- negative_constraints
 
 ## Negative Constraints
 
