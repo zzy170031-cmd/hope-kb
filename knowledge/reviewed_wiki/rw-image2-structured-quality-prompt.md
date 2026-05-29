@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Image2 structured quality prompt: Keep derived Image2 prompt guidance structured by visible purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.
+Image2 structured quality prompt: Keep derived Image2 anime and manga storyboard prompt guidance structured by visible shot purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.
 
 ## Source Basis
 
@@ -22,8 +22,8 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## Claims Summary
 
-- Use Image2 quality guidance only as summary-only export or repair support after the storyboard row fields are confirmed.
-- Structure quality prompts around subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.
+- Use Image2 quality guidance only as summary-only anime storyboard export or repair support after the storyboard row fields are confirmed.
+- Structure quality prompts around character or subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.
 - Prefer compact visible controls over long universal templates, raw user experience text, or quality adjective stacks.
 
 ## Runtime Mapping

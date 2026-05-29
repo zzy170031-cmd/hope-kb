@@ -35,7 +35,6 @@ This entry was created from a confirmed manual intake package. Source candidates
 ## PWA Fields Served
 
 - visual_description
-- character_action
 - camera
 - prompt_text
 - negative_constraints

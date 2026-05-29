@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Image video tool handoff boundary: Keep storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated video execution as supported runtime behavior.
+Image video tool handoff boundary: Keep anime storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated media execution as supported runtime behavior.
 
 ## Source Basis
 
@@ -21,9 +21,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## Claims Summary
 
-- Describe generic handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.
+- Describe storyboard handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.
 - Keep provider choice, API syntax, upload mechanics, and generated media handling outside runtime.
-- Require manual product review before any image or video generation workflow is treated as supported behavior.
+- Require manual storyboard review before any image or video generation workflow is treated as supported behavior.
 
 ## Runtime Mapping
 
@@ -34,15 +34,16 @@ This entry was created from a confirmed manual intake package. Source candidates
 ## PWA Fields Served
 
 - visual_description
-- camera
-- shot_size
 - character_action
-- prompt_text
+- camera
 - duration_seconds
+- prompt_text
+- person
+- shot_size
 - negative_constraints
 
 ## Negative Constraints
 
-- Do not describe generated video execution as supported runtime behavior.
+- Do not describe generated media execution as supported runtime behavior.
 - Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.
-- Do not market a single reference image as full production coverage.
+- Do not treat a single storyboard reference image as complete film production coverage.

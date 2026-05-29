@@ -1,0 +1,1589 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260529-anime-image2-evidence-candidates",
+  "status": "recommendations_ready",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "source_refs_runtime_policy": "audit_layer_only_not_runtime",
+    "pwa_write_policy": "no_pwa_change_no_sheet_change_no_provider_api"
+  },
+  "demand": {
+    "title": "Anime Image2 storyboard evidence candidates",
+    "search_focus": "anime_manga_comic_storyboard_image2_prompt_graph_candidates",
+    "target_output": [
+      "intake draft package",
+      "5179 manual confirmation queue",
+      "summary-only anime storyboard Image2 candidates"
+    ],
+    "target_export_scope": "PWA Sheet Image2故事板提示词",
+    "target_pwa_fields": [
+      "person",
+      "visual_description",
+      "character_action",
+      "camera",
+      "shot_size",
+      "prompt_text",
+      "duration_seconds",
+      "negative_constraints"
+    ],
+    "created_at": "2026-05-29T17:28:03+08:00",
+    "scope_boundary": "Graph candidate only; no apply, no reviewed_wiki write, no mapping write, no runtime snapshot write, no PWA sync.",
+    "source_boundary": "GitHub and web sources are retained as audit evidence. Prompt bodies, full prompt libraries, source text, provider request payloads, hashes, local paths, and credentials are not runtime material.",
+    "derived_export_name": "Image2故事板提示词"
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_github_and_web_research_summary_only",
+    "live_search_connector": "codex_web",
+    "covered_directions": [
+      "anime storyboard prompt",
+      "manga storyboard prompt",
+      "comic panel prompt",
+      "animatic storyboard workflow",
+      "anime character consistency",
+      "anime key pose and silhouette",
+      "cel shading prompt",
+      "anime background layout",
+      "anime camera movement and shot language",
+      "multi-panel storyboard image generation",
+      "reference sheet for anime character",
+      "image prompt variable slot pattern",
+      "anime prompt negative constraints",
+      "image-to-video storyboard handoff",
+      "scene continuity and prop continuity"
+    ],
+    "github_source_coverage": [
+      "YouMind-OpenLab/awesome-gpt-image-2",
+      "YouMind-OpenLab/gpt-image-2-prompts-search",
+      "NickPittas/DirectorsConsole",
+      "RishiDesai/CharForge",
+      "lisaks/comfyui-panelforge",
+      "OSideMedia/higgsfield-ai-prompt-skill"
+    ],
+    "web_source_coverage": [
+      "OpenAI image generation docs",
+      "Runway Gen-4 image references",
+      "Runway Gen-4 image prompting",
+      "Runway image-to-video prompting",
+      "Google Veo prompt guide",
+      "Google Imagen negative prompt docs",
+      "Toon Boom Storyboard Pro",
+      "StudioBinder storyboard composition"
+    ],
+    "duplicate_check_targets": [
+      "rw-storyboard-image-prompt-export",
+      "rw-visual-master-board-from-confirmed-rows",
+      "rw-multipanel-layout-boundary",
+      "rw-image-video-tool-handoff-boundary",
+      "rw-image2-structured-quality-prompt",
+      "rw-image2-quality-preset-boundary",
+      "rw-camera-language-grammar",
+      "rw-shot-intent-taxonomy",
+      "rw-style-contamination-guard",
+      "rw-material-light-air-physicality",
+      "rw-field-level-failure-repair-routing",
+      "rw-prompt-text-boundary",
+      "rw-anime-key-pose-silhouette-priority",
+      "rw-layout-staging-attention-path",
+      "rw-ensemble-action-layering",
+      "rw-scene-spatial-prop-continuity-anchor"
+    ],
+    "blocked_boundaries": [
+      "no apply",
+      "no reviewed_wiki write",
+      "no mapping write",
+      "no runtime snapshot write",
+      "no PWA sync",
+      "no desktop package change",
+      "no commit",
+      "no push",
+      "no prompt verbatim copy",
+      "no full prompt library import",
+      "no Sheet1 Sheet2 Sheet3 edit"
+    ],
+    "search_provider_status": {
+      "status": "manual_web_research_completed",
+      "provider": "codex_web",
+      "credential_state": "not_required",
+      "source_candidates": 15,
+      "recommendations": 10
+    }
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-github-youmind-awesome-gpt-image2",
+      "title": "YouMind-OpenLab awesome-gpt-image-2",
+      "source_url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+      "source_type": "github_prompt_library",
+      "source_type_label": "GitHub prompt library",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "do_not_copy_prompt_text",
+        "category_taxonomy_only",
+        "anime_manga_comic_storyboard_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Provides category signals such as Comic / Storyboard and Anime / Manga plus argument-slot patterns that can inform Image2故事板提示词 routing without importing prompt bodies.",
+      "kb_gap": "Supports candidate taxonomy and variable-slot abstraction for anime storyboard prompt export.",
+      "leakage_check": "summary_only_no_prompt_copy"
+    },
+    {
+      "source_id": "src-github-youmind-prompts-search",
+      "title": "YouMind-OpenLab gpt-image-2-prompts-search",
+      "source_url": "https://github.com/YouMind-OpenLab/gpt-image-2-prompts-search",
+      "source_type": "github_prompt_search_tool",
+      "source_type_label": "GitHub prompt search workflow",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "search_structure_only",
+        "do_not_return_exact_prompt"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Shows a search and remix workflow with category matching; only the routing pattern is relevant to Sheet Image2故事板提示词.",
+      "kb_gap": "Helps separate template discovery from safe summary-only product export.",
+      "leakage_check": "summary_only_no_prompt_body"
+    },
+    {
+      "source_id": "src-github-directors-console",
+      "title": "NickPittas DirectorsConsole",
+      "source_url": "https://github.com/NickPittas/DirectorsConsole",
+      "source_type": "github_storyboard_workflow_tool",
+      "source_type_label": "GitHub storyboard workflow",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "no_runtime_workflow_import"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "camera",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result"
+      ],
+      "pwa_relevance": "Storyboard canvas panels carry independent workflow parameters, prompt, image/video history, rating, and notes; this supports per-panel audit separation for storyboard image prompts.",
+      "kb_gap": "Useful as a workflow-shape reference for storyboard sheet export assembly, not as an implementation dependency.",
+      "leakage_check": "summary_only_no_tool_import"
+    },
+    {
+      "source_id": "src-github-charforge-character-sheet",
+      "title": "RishiDesai CharForge",
+      "source_url": "https://github.com/RishiDesai/CharForge",
+      "source_type": "github_character_consistency_tool",
+      "source_type_label": "GitHub character reference workflow",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "no_training_pipeline_import"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Character sheet generation from a reference image supports the boundary that identity anchors belong in reference evidence and should not become invented row facts.",
+      "kb_gap": "Supports anime character reference sheet boundaries and continuity checks.",
+      "leakage_check": "summary_only_no_training_payload"
+    },
+    {
+      "source_id": "src-github-comfyui-panelforge",
+      "title": "lisaks comfyui-panelforge",
+      "source_url": "https://github.com/lisaks/comfyui-panelforge",
+      "source_type": "github_comic_panel_tool",
+      "source_type_label": "GitHub comic panel workflow",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "layout_structure_only",
+        "no_comfyui_dependency"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Its page, row, and frame node hierarchy is useful for multi-panel storyboard layout boundaries.",
+      "kb_gap": "Supports manga/comic panel assembly as export structure, not runtime generation.",
+      "leakage_check": "summary_only_no_workflow_import"
+    },
+    {
+      "source_id": "src-github-higgsfield-prompt-skill",
+      "title": "OSideMedia higgsfield-ai-prompt-skill",
+      "source_url": "https://github.com/OSideMedia/higgsfield-ai-prompt-skill",
+      "source_type": "github_prompt_workflow_library",
+      "source_type_label": "GitHub prompt workflow library",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "no_provider_binding",
+        "no_template_copy"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Provides workflow vocabulary around camera controls, reference sheets, character consistency, and failure diagnosis that can be abstracted for anime storyboard export rules.",
+      "kb_gap": "Useful only as meta-structure for identity-versus-motion and negative hygiene.",
+      "leakage_check": "summary_only_no_template_copy"
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "title": "OpenAI image generation guide",
+      "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "official_doc",
+        "no_api_integration"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Officially grounds GPT Image generation and editing from prompts, image inputs, quality and size settings, and limitations. It only supports export prompt boundaries here.",
+      "kb_gap": "Anchors Image2 as prompt export target while forbidding direct provider calls in this gate.",
+      "leakage_check": "summary_only_no_request_payload"
+    },
+    {
+      "source_id": "src-runway-gen4-image-references",
+      "title": "Runway Gen-4 image references",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "reference_boundary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Runway reference guidance supports consistent character, object, and location handling from reference images while keeping row facts separate.",
+      "kb_gap": "Supports anime character reference sheet boundaries and background continuity anchors.",
+      "leakage_check": "summary_only_no_reference_image_payload"
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting",
+      "title": "Runway Gen-4 image prompting guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "negative_prompt_model_variance"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Its subject, scene, composition, lighting, color, style, focus, angle, text, and mood categories map cleanly to Image2 storyboard prompt modules.",
+      "kb_gap": "Supports cel-shading quality guard and negative hygiene as concise, model-aware prompt guidance.",
+      "leakage_check": "summary_only_no_prompt_example_copy"
+    },
+    {
+      "source_id": "src-runway-image-to-video-prompting",
+      "title": "Runway image-to-video prompting guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+      "source_type": "official_product_doc",
+      "source_type_label": "Runway help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "tool_specific",
+        "no_video_generation_promise"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports the boundary that the image carries composition and look while text should focus on motion, camera work, and temporal progression.",
+      "kb_gap": "Grounds image-to-video storyboard handoff without opening provider integration.",
+      "leakage_check": "summary_only_no_video_payload"
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "title": "Google Veo prompt guide",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "official_doc",
+        "video_tool_specific"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Veo prompt anatomy covers subject, action, camera angles, camera movements, lens effects, and temporal elements that map to storyboard prompt slots.",
+      "kb_gap": "Supports key pose, camera, and emotion mapping with official camera movement vocabulary.",
+      "leakage_check": "summary_only_no_vendor_prompt_copy"
+    },
+    {
+      "source_id": "src-google-imagen-negative-prompt",
+      "title": "Google Imagen negative prompt documentation",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/omit-content-using-a-negative-prompt",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "model_specific",
+        "negative_prompt_optional"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "pwa_relevance": "Documents negative prompts as optional omitted-content guidance, useful for an audit-only hygiene rule rather than a universal long negative dictionary.",
+      "kb_gap": "Supports compact negative constraint hygiene and model-specific caveats.",
+      "leakage_check": "summary_only_no_negative_dictionary"
+    },
+    {
+      "source_id": "src-toonboom-storyboard-pro",
+      "title": "Toon Boom Storyboard Pro",
+      "source_url": "https://www.toonboom.com/products/storyboard-pro",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom product documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "workflow_reference_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Supports storyboarding, layout, visual storytelling, pitch boards, and camera timing in animatics as preproduction concepts.",
+      "kb_gap": "Grounds storyboard sheet export assembly as preproduction guidance, not image generation runtime.",
+      "leakage_check": "summary_only_no_tool_dependency"
+    },
+    {
+      "source_id": "src-toonboom-animatic-workflow",
+      "title": "Toon Boom animatic workflow",
+      "source_url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom documentation",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "workflow_reference_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "duration_seconds",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Animatic timing links storyboard panels, duration, camera movement, and action readability.",
+      "kb_gap": "Supports sheet assembly and image-to-video handoff timing without adding new PWA fields.",
+      "leakage_check": "summary_only_no_tool_dependency"
+    },
+    {
+      "source_id": "src-studiobinder-storyboard-composition",
+      "title": "StudioBinder storyboard composition",
+      "source_url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+      "source_type": "industry_storyboard_reference",
+      "source_type_label": "StudioBinder",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "industry_blog_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Defines storyboard composition through shot size, shot type, camera movement, framing, and panel-level communication.",
+      "kb_gap": "Supports multi-panel composition and camera-emotion mapping.",
+      "leakage_check": "summary_only_no_case_copy"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-github-youmind-awesome-gpt-image2",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "taxonomy_only_dedupe_required",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep only category taxonomy, argument-slot idea, and review metadata. Do not copy prompt text."
+    },
+    {
+      "source_id": "src-github-youmind-prompts-search",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "routing_pattern_only",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep search and category routing pattern only."
+    },
+    {
+      "source_id": "src-github-directors-console",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "workflow_shape_only",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep per-panel workflow and review metadata abstraction only."
+    },
+    {
+      "source_id": "src-github-charforge-character-sheet",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "reference_sheet_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep character-sheet boundary and consistency concept; no model training import."
+    },
+    {
+      "source_id": "src-github-comfyui-panelforge",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "panel_layout_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep page-row-frame layout abstraction only."
+    },
+    {
+      "source_id": "src-github-higgsfield-prompt-skill",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "workflow_vocabulary_only",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep only workflow and diagnostic categories; no template or provider binding."
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "official_model_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep official generation/editing capability and limitation summary only."
+    },
+    {
+      "source_id": "src-runway-gen4-image-references",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "reference_identity_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep reference-image consistency boundary only."
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "prompt_module_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep subject, scene, composition, light, style, focus, angle, text, mood categories only."
+    },
+    {
+      "source_id": "src-runway-image-to-video-prompting",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "handoff_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep image-to-video handoff boundary: image carries look, text carries motion."
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "camera_language_merge",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep official shot, camera movement, and temporal element vocabulary as abstract mapping."
+    },
+    {
+      "source_id": "src-google-imagen-negative-prompt",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "negative_hygiene_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep optional omitted-content guidance; avoid long negative dictionaries."
+    },
+    {
+      "source_id": "src-toonboom-storyboard-pro",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "preproduction_workflow_merge",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep storyboarding, layout, and animatic camera timing as preproduction reference."
+    },
+    {
+      "source_id": "src-toonboom-animatic-workflow",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "timing_handoff_boundary",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep panel timing and animatic handoff concept only."
+    },
+    {
+      "source_id": "src-studiobinder-storyboard-composition",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": true,
+      "duplicate_strategy": "shot_language_merge",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "Keep shot size, camera angle, framing, and movement as storyboard composition signals."
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-anime-image2-storyboard-prompt-routing",
+      "chinese_title": "动漫 Image2 故事板提示词路由",
+      "candidate_summary": "Sheet Image2故事板提示词 should route anime storyboard rows by purpose: single panel, multi-panel strip, character sheet, background plate, key pose, image-to-video handoff, or repair note. Routing must use confirmed row facts and selected export purpose, not source prompt examples.",
+      "relationship_to_pwa_sheet": "Defines how the PWA export chooses the correct Image2 storyboard prompt module for each confirmed storyboard row or sheet-level assembly.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-storyboard-image-prompt-export",
+        "rw-image2-structured-quality-prompt",
+        "rw-prompt-text-boundary"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "camera",
+        "shot_size",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet_image2_storyboard_prompt",
+        "purpose_router",
+        "confirmed_rows_only",
+        "audit_source_refs_only"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-github-youmind-awesome-gpt-image2",
+        "src-github-youmind-prompts-search",
+        "src-openai-image-generation-guide",
+        "src-runway-gen4-image-prompting"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-storyboard-image-prompt-export",
+        "rw-image2-structured-quality-prompt",
+        "rw-prompt-text-boundary"
+      ],
+      "duplicate_check_suggestion": "Prefer merge into existing storyboard image prompt export and Image2 structured quality prompt rules unless KB owner wants anime-specific routing split.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "select one export module from confirmed row facts and requested storyboard reference use",
+        "blocked": "no copied GitHub prompt, no source refs in export, no provider request payload"
+      },
+      "futureqa": [
+        "Provider API routing remains FutureQA.",
+        "Automatic image generation remains blocked."
+      ],
+      "blocked_runtime_payloads": [
+        "GitHub prompt bodies",
+        "full prompt libraries",
+        "source refs or source links in runtime export",
+        "provider request payloads",
+        "IP style switches"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-github-youmind-awesome-gpt-image2",
+          "source_title": "YouMind-OpenLab awesome-gpt-image-2",
+          "site": "GitHub",
+          "url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+          "evidence_summary": "Category taxonomy includes Comic / Storyboard and Anime / Manga; use taxonomy and slot abstraction only.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_id": "src-github-youmind-prompts-search",
+          "source_title": "gpt-image-2-prompts-search",
+          "site": "GitHub",
+          "url": "https://github.com/YouMind-OpenLab/gpt-image-2-prompts-search",
+          "evidence_summary": "Search workflow separates category routing and remixing; do not copy exact prompts.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_id": "src-openai-image-generation-guide",
+          "source_title": "Image generation guide",
+          "site": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/image-generation",
+          "evidence_summary": "OpenAI documents GPT Image generation and editing from prompts; this gate uses only export prompt boundaries.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-character-reference-sheet-boundary",
+      "chinese_title": "动漫角色设定表边界",
+      "candidate_summary": "Character reference sheets can preserve anime identity, costume, expression range, and turnarounds, but they must stay as reference evidence. PWA rows may use only confirmed person and visual facts, not invented biography or training metadata.",
+      "relationship_to_pwa_sheet": "Lets Image2故事板提示词 cite a character-sheet role such as front view, side view, expression set, or costume anchor as a prompt module while keeping source_refs audit-only.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-character-visual-continuity-anchor",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-scene-spatial-prop-continuity-anchor"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "character_reference_sheet",
+        "identity_anchor",
+        "costume_continuity",
+        "no_new_story_facts"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-github-charforge-character-sheet",
+        "src-runway-gen4-image-references",
+        "src-github-higgsfield-prompt-skill"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-character-visual-continuity-anchor",
+        "rw-visual-master-board-from-confirmed-rows"
+      ],
+      "duplicate_check_suggestion": "Merge into character continuity or visual-master candidates if they already cover reference sheet boundary.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "include only confirmed character identity anchors and sheet role; never include source image payload or training notes",
+        "blocked": "no identity invention, no LoRA/training workflow, no reference image writeback"
+      },
+      "futureqa": [
+        "Reference image upload pipeline remains FutureQA.",
+        "Character LoRA or training workflow is blocked for this KB gate."
+      ],
+      "blocked_runtime_payloads": [
+        "training data",
+        "reference image payloads",
+        "face or identity metadata beyond confirmed row facts",
+        "tool workflow files"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-github-charforge-character-sheet",
+          "source_title": "CharForge",
+          "site": "GitHub",
+          "url": "https://github.com/RishiDesai/CharForge",
+          "evidence_summary": "Character sheet generation and varied views support the concept of identity anchors, but the training pipeline stays excluded.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_id": "src-runway-gen4-image-references",
+          "source_title": "Creating with Gen-4 Image References",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+          "evidence_summary": "Reference images can preserve character identity across scenes; PWA uses that as a boundary concept only.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-multipanel-storyboard-layout",
+      "chinese_title": "动漫多格故事板布局",
+      "candidate_summary": "Multi-panel anime storyboard prompts should describe panel count, row/frame grouping, reading order, per-panel shot size, and continuity anchors. They must avoid forced fixed grids when duration or beat count suggests another layout.",
+      "relationship_to_pwa_sheet": "Controls how multiple confirmed storyboard rows can be assembled into one Image2故事板提示词 for manga panels, manhua strips, or storyboard sheets.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-multipanel-layout-boundary",
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "visual_description",
+        "camera",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "panel_count",
+        "reading_order",
+        "panel_function",
+        "continuity_anchor"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-github-comfyui-panelforge",
+        "src-studiobinder-storyboard-composition",
+        "src-toonboom-storyboard-pro",
+        "src-github-directors-console"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-multipanel-layout-boundary",
+        "rw-storyboard-image-prompt-export",
+        "rw-duration-density-rules"
+      ],
+      "duplicate_check_suggestion": "Prefer merge with rw-multipanel-layout-boundary if it already covers panel count, reading order, and duration-sensitive layout.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "group confirmed rows into panel layout with reading order and per-panel shot purpose",
+        "blocked": "no forced 8-panel or 9-panel grid, no generated images written back to rows"
+      },
+      "futureqa": [
+        "Actual panel image generation remains FutureQA.",
+        "Speech bubble rendering and lettering are blocked unless a later sheet gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "ComfyUI workflow",
+        "panel preview images",
+        "raw prompt templates",
+        "automatic page rendering"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-github-comfyui-panelforge",
+          "source_title": "comfyui-panelforge",
+          "site": "GitHub",
+          "url": "https://github.com/lisaks/comfyui-panelforge",
+          "evidence_summary": "Page, row, and frame hierarchy supports multi-panel layout abstraction only.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_id": "src-studiobinder-storyboard-composition",
+          "source_title": "Storyboard Composition",
+          "site": "StudioBinder",
+          "url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+          "evidence_summary": "Storyboard composition combines shot size, type, framing, and camera movement at panel level.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-key-pose-camera-emotion-map",
+      "chinese_title": "动漫关键姿势 / 镜头 / 情绪映射",
+      "candidate_summary": "Anime storyboard image prompts should connect key pose clarity, silhouette readability, shot size, camera angle, and emotion. Camera terms are only valid when they explain story pressure or audience perception.",
+      "relationship_to_pwa_sheet": "Turns each confirmed row's character_action, camera, and shot_size into an Image2 prompt section that preserves action clarity and emotional intent.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-anime-key-pose-silhouette-priority",
+        "rw-camera-language-grammar",
+        "rw-shot-intent-taxonomy"
+      ],
+      "serves_pwa_fields": [
+        "character_action",
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "key_pose",
+        "silhouette",
+        "camera_emotion",
+        "shot_intent"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-google-veo-prompt-guide",
+        "src-studiobinder-storyboard-composition",
+        "src-toonboom-storyboard-pro"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-shot-intent-taxonomy",
+        "rw-anime-key-pose-silhouette-priority"
+      ],
+      "duplicate_check_suggestion": "Merge with camera-language or shot-intent taxonomy unless anime key-pose silhouette is absent.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "map visible action and emotion to pose clarity, shot scale, viewpoint, and camera movement",
+        "blocked": "no decorative camera jargon, no action invention"
+      },
+      "futureqa": [
+        "Pose-control images or skeleton inputs remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "full camera vocabulary tables",
+        "real director style switches",
+        "unconfirmed action beats",
+        "pose-control asset payloads"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-google-veo-prompt-guide",
+          "source_title": "Veo prompt guide",
+          "site": "Google Cloud",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "evidence_summary": "Official camera angle and movement taxonomy supports purpose-bearing shot language.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-studiobinder-storyboard-composition",
+          "source_title": "Storyboard Composition",
+          "site": "StudioBinder",
+          "url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+          "evidence_summary": "Composition, shot size, camera angle, framing, and movement communicate storyboard intent.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-background-continuity-anchor",
+      "chinese_title": "动漫背景连续性锚点",
+      "candidate_summary": "Anime storyboard prompts should carry stable background anchors: location, time of day, dominant light, key prop positions, foreground/background depth, and environmental motion. Background anchors cannot override confirmed scene facts.",
+      "relationship_to_pwa_sheet": "Adds a background and prop continuity module to Image2故事板提示词 so panels share the same story space without leaking audit refs.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-material-light-air-physicality"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "background_anchor",
+        "prop_continuity",
+        "lighting_continuity",
+        "depth_layering"
+      ],
+      "target_pwa_actions": [
+        "create_story_task",
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "scene_mappings",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-runway-gen4-image-references",
+        "src-toonboom-storyboard-pro",
+        "src-runway-gen4-image-prompting"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-material-light-air-physicality",
+        "rw-visual-master-consistency"
+      ],
+      "duplicate_check_suggestion": "Prefer merge into scene spatial prop continuity or visual master board if already covering background anchors.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "summarize confirmed scene space, key props, depth layers, and light continuity",
+        "blocked": "no background invention, no external reference image payload"
+      },
+      "futureqa": [
+        "Background reference-board upload remains FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "source images",
+        "unconfirmed prop lists",
+        "location reference files",
+        "external asset links in export"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-runway-gen4-image-references",
+          "source_title": "Creating with Gen-4 Image References",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+          "evidence_summary": "Reference workflow can preserve objects and locations; use as continuity concept only.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-toonboom-storyboard-pro",
+          "source_title": "Storyboard Pro",
+          "site": "Toon Boom",
+          "url": "https://www.toonboom.com/products/storyboard-pro",
+          "evidence_summary": "Storyboard and layout workflow supports preproduction control of scene space and camera timing.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-cel-shading-quality-guard",
+      "chinese_title": "动漫赛璐璐质感质量守卫",
+      "candidate_summary": "Cel-shaded anime prompts should control line clarity, flat color regions, restrained highlights, simple shadow shapes, material readability, and clean background separation. Quality words cannot replace structured subject, pose, light, and style controls.",
+      "relationship_to_pwa_sheet": "Provides a compact quality module for Image2故事板提示词 when the row target is anime / manga / manhua reference art.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-image2-structured-quality-prompt",
+        "rw-image2-quality-preset-boundary",
+        "rw-material-light-air-physicality",
+        "rw-style-contamination-guard"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "cel_shading",
+        "line_quality",
+        "lighting_shape",
+        "quality_guard"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-runway-gen4-image-prompting",
+        "src-openai-image-generation-guide",
+        "src-github-youmind-awesome-gpt-image2"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-image2-structured-quality-prompt",
+        "rw-image2-quality-preset-boundary",
+        "rw-material-light-air-physicality"
+      ],
+      "duplicate_check_suggestion": "Merge into Image2 structured quality prompt or material-light-air physicality unless cel-shading needs separate anime packaging.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "append concise anime visual quality constraints after subject, pose, background, and camera modules",
+        "blocked": "no protected studio names, no quality word stacking, no dirty texture defaults"
+      },
+      "futureqa": [
+        "Style preset UI remains blocked.",
+        "Real studio or IP style switches remain blocked."
+      ],
+      "blocked_runtime_payloads": [
+        "protected studio names",
+        "artist names",
+        "IP style labels",
+        "large style prompt lists",
+        "quality adjective pileups"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-runway-gen4-image-prompting",
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Prompt elements include subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-openai-image-generation-guide",
+          "source_title": "Image generation guide",
+          "site": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/image-generation",
+          "evidence_summary": "Official image guide supports quality and size settings as model controls, not substitutes for structured content.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-negative-constraint-hygiene",
+      "chinese_title": "动漫负面约束卫生",
+      "candidate_summary": "Anime Image2 negative constraints should be compact, model-aware, and tied to the row: no watermark/logo, no gibberish text, no random skin speckles, no dirty texture, no excessive glow, no motion blur, no IP/studio/person style switches. Prefer positive phrasing when the target model discourages negative prompts.",
+      "relationship_to_pwa_sheet": "Controls the negative_constraints portion of Image2故事板提示词 while preventing source evidence, huge negative dictionaries, and protected style labels from reaching runtime.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-style-contamination-guard",
+        "rw-validation-no-leakage",
+        "rw-image2-quality-preset-boundary"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "negative_hygiene",
+        "positive_rewrite",
+        "leakage_guard",
+        "style_guard"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-google-imagen-negative-prompt",
+        "src-runway-gen4-image-prompting",
+        "src-github-higgsfield-prompt-skill"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-style-contamination-guard",
+        "rw-validation-no-leakage",
+        "rw-image2-quality-preset-boundary"
+      ],
+      "duplicate_check_suggestion": "Merge with style contamination guard and validation no-leakage unless a dedicated Image2 negative hygiene rule is missing.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "append only short row-relevant negative or positive-rewrite constraints",
+        "blocked": "no giant negative dictionary, no source refs, no protected style names"
+      },
+      "futureqa": [
+        "Model-specific negative-prompt toggles remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "large negative prompt dictionaries",
+        "source links",
+        "IP labels",
+        "studio names",
+        "real person style switches"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-google-imagen-negative-prompt",
+          "source_title": "Omit content using a negative prompt",
+          "site": "Google Cloud",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/omit-content-using-a-negative-prompt",
+          "evidence_summary": "Negative prompt can describe what should not be generated in models that support it.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-runway-gen4-image-prompting",
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway advises positive phrasing for Gen-4 Image, so negative hygiene must be model-aware.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-image2-variable-slot-template",
+      "chinese_title": "动漫 Image2 变量槽模板",
+      "candidate_summary": "Image2 storyboard prompts can use variable slots for purpose, character, pose, emotion, camera, shot size, background, continuity anchor, style guard, ratio, and negative constraints. Slots are filled only from confirmed PWA fields or explicit export settings.",
+      "relationship_to_pwa_sheet": "Defines a Sheet Image2故事板提示词 assembly skeleton without shipping fixed prompt text or importing GitHub prompt bodies.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-image2-structured-quality-prompt",
+        "rw-prompt-text-boundary",
+        "rw-storyboard-image-prompt-export"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "variable_slots",
+        "confirmed_field_binding",
+        "slot_fallback",
+        "no_prompt_body"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-github-youmind-awesome-gpt-image2",
+        "src-github-youmind-prompts-search",
+        "src-openai-image-generation-guide",
+        "src-runway-gen4-image-prompting"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-image2-structured-quality-prompt",
+        "rw-prompt-text-boundary",
+        "rw-storyboard-image-prompt-export"
+      ],
+      "duplicate_check_suggestion": "Prefer merge if existing Image2 structured prompt candidate already owns slot assembly.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "fill safe slots from confirmed row fields and sheet-level export options",
+        "blocked": "no unfilled placeholders in export, no prompt body from external source"
+      },
+      "futureqa": [
+        "UI controls for slot editing remain blocked."
+      ],
+      "blocked_runtime_payloads": [
+        "Raycast snippet syntax copied verbatim",
+        "external prompt templates",
+        "unfilled variables",
+        "local file paths"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-github-youmind-awesome-gpt-image2",
+          "source_title": "awesome-gpt-image-2",
+          "site": "GitHub",
+          "url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+          "evidence_summary": "Dynamic argument slot pattern can be abstracted, but prompt examples are excluded.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_id": "src-runway-gen4-image-prompting",
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Prompt element categories map to safe slot groups for storyboard image export.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-image-video-handoff-boundary",
+      "chinese_title": "动漫图像到视频交接边界",
+      "candidate_summary": "Storyboard image prompts and image-to-video prompts must stay separated. The image prompt defines stable composition, subject, style, lighting, and reference-sheet look; the video handoff prompt describes motion, camera work, timing, and temporal change.",
+      "relationship_to_pwa_sheet": "Lets Image2故事板提示词 produce a still-frame or reference-board prompt that can later be handed off, without promising video generation or writing video fields.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-image-video-tool-handoff-boundary",
+        "rw-storyboard-image-prompt-export",
+        "rw-prompt-text-boundary"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "camera",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "image_prompt_boundary",
+        "video_motion_boundary",
+        "camera_motion",
+        "temporal_change"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-runway-image-to-video-prompting",
+        "src-google-veo-prompt-guide",
+        "src-toonboom-animatic-workflow"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-image-video-tool-handoff-boundary",
+        "rw-storyboard-image-prompt-export",
+        "rw-prompt-text-boundary"
+      ],
+      "duplicate_check_suggestion": "Prefer merge into image-video handoff boundary unless anime-specific reference sheet handoff is missing.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "export still-frame prompt plus optional handoff note; video motion remains separate and non-executing",
+        "blocked": "no video generation promise, no provider API, no image result writeback"
+      },
+      "futureqa": [
+        "Seedance, Runway, Veo, Kling, Wan, Jimeng, or Doubao API handoff remains FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "provider API payloads",
+        "video generation commitments",
+        "first-frame image data",
+        "source links in handoff"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-runway-image-to-video-prompting",
+          "source_title": "Image to Video Prompting Guide",
+          "site": "Runway",
+          "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+          "evidence_summary": "Image provides composition, subject matter, lighting, and style; text should describe motion, camera work, and temporal progression.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-google-veo-prompt-guide",
+          "source_title": "Veo prompt guide",
+          "site": "Google Cloud",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "evidence_summary": "Camera movement and temporal elements support a distinct video handoff vocabulary.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-anime-storyboard-sheet-export-assembly",
+      "chinese_title": "动漫故事板 Sheet 导出装配",
+      "candidate_summary": "The final Sheet Image2故事板提示词 should assemble from confirmed rows only: row order, panel purpose, character identity, key pose, background anchor, camera/shot, cel-shading guard, negative hygiene, and optional image-video handoff note. Audit evidence remains outside the sheet.",
+      "relationship_to_pwa_sheet": "Defines the top-level assembly rule for exporting anime storyboard reference-image prompts from PWA storyboard rows.",
+      "merge_existing": true,
+      "merge_existing_target_ids": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-multipanel-layout-boundary",
+        "rw-image-video-tool-handoff-boundary"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "duration_seconds",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet_export",
+        "row_order",
+        "panel_summary",
+        "continuity",
+        "audit_exclusion"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints",
+        "scene_mappings"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-storyboard-pro",
+        "src-toonboom-animatic-workflow",
+        "src-github-directors-console",
+        "src-studiobinder-storyboard-composition",
+        "src-openai-image-generation-guide"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-multipanel-layout-boundary",
+        "rw-image-video-tool-handoff-boundary"
+      ],
+      "duplicate_check_suggestion": "Likely merge umbrella. Check existing storyboard image export and visual-master board candidates before creating a new reviewed_wiki.",
+      "pwa_sheet_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "compile confirmed row facts into one image prompt per row or one sheet-level prompt group, depending on export mode",
+        "blocked": "no Sheet1/Sheet2/Sheet3 schema edit, no source refs, no raw KB, no image writeback"
+      },
+      "futureqa": [
+        "Any actual export schema change remains blocked until product gate opens.",
+        "Image asset generation and scoring remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "source refs",
+        "source URLs",
+        "full KB rows",
+        "prompt bodies from GitHub",
+        "provider credentials",
+        "local paths",
+        "generated images"
+      ],
+      "source_refs": [
+        {
+          "source_id": "src-toonboom-storyboard-pro",
+          "source_title": "Storyboard Pro",
+          "site": "Toon Boom",
+          "url": "https://www.toonboom.com/products/storyboard-pro",
+          "evidence_summary": "Storyboard Pro frames storyboard and camera timing as preproduction workflow.",
+          "source_confidence": "high"
+        },
+        {
+          "source_id": "src-github-directors-console",
+          "source_title": "DirectorsConsole",
+          "site": "GitHub",
+          "url": "https://github.com/NickPittas/DirectorsConsole",
+          "evidence_summary": "Storyboard canvas panels store prompt parameters, notes, and review state, supporting audit separation.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_id": "src-studiobinder-storyboard-composition",
+          "source_title": "Storyboard Composition",
+          "site": "StudioBinder",
+          "url": "https://www.studiobinder.com/blog/storyboard-composition-techniques/",
+          "evidence_summary": "Storyboard panel composition depends on shot size, framing, camera angle, and camera movement.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true
+    }
+  ],
+  "confirmation": {
+    "confirmed": false,
+    "confirmed_at": "",
+    "confirmed_by": "",
+    "accepted_reviewed_wiki_ids": [],
+    "manual_confirmation_required": true,
+    "expected_next_gate": "user_manual_confirmation_on_5179"
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge/intake_runs/intake-20260529-anime-image2-evidence-candidates/intake-package.confirmed.json",
+    "validation_status": "not_run",
+    "output": null
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260529-anime-image2-evidence-candidates/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260529-anime-image2-evidence-candidates/intake-package.confirmed.json",
+    "reviewed_wiki": "knowledge/reviewed_wiki",
+    "wiki_to_runtime_mapping": "knowledge/mappings/wiki-to-runtime-mapping.v0.2.json",
+    "runtime_snapshot": "knowledge/runtime_snapshots/latest.candidate.json",
+    "pwa_adapter_output": "samples/pwa-kb-adapter-output.sample.json"
+  },
+  "runtime_exclusion_confirmed": {
+    "reviewed_wiki_written": false,
+    "mapping_written": false,
+    "runtime_snapshot_written": false,
+    "samples_adapter_written": false,
+    "pwa_synced": false,
+    "confirmed_package_created": false,
+    "final_pwa_fields_changed": false,
+    "storyboard_export_headers_changed": false,
+    "sheet_written": false,
+    "image_api_integration_written": false,
+    "generated_image_written": false
+  },
+  "futureqa_notes": {
+    "provider_api_integration": "FutureQA only for Image2, Jimeng, Doubao, Seedance, Runway, Veo, Kling, Wan, Tencent, or other image/video providers.",
+    "generated_image_writeback": "Blocked unless a later product gate explicitly opens a separate asset pipeline.",
+    "sheet_schema_change": "Blocked in this graph-candidate run.",
+    "large_prompt_library_ingest": "Blocked. This draft abstracts categories and slots only."
+  }
+}

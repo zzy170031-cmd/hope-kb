@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Storyboard image prompt export: Derive an optional storyboard image reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.
+Storyboard image prompt export: Derive an optional anime or manga storyboard reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.
 
 ## Source Basis
 
@@ -21,9 +21,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## Claims Summary
 
-- Build storyboard image prompt export guidance only from confirmed row fields and accepted story facts.
+- Build anime, manga, comic, or storyboard reference prompt export guidance only from confirmed row fields and accepted story facts.
 - Keep the export separate from final storyboard rows, existing table headers, runtime contracts, and provider API calls.
-- Use duration and confirmed row count as layout hints while preserving each row's visible shot purpose.
+- Use duration and confirmed row count as layout hints while preserving each row's anime storyboard shot purpose.
 
 ## Runtime Mapping
 
@@ -33,13 +33,14 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- prompt_text
 - visual_description
 - camera
 - shot_size
-- character_action
-- prompt_text
-- duration_seconds
 - negative_constraints
+- duration_seconds
+- person
+- character_action
 
 ## Negative Constraints
 

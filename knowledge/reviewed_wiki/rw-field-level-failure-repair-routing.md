@@ -34,12 +34,10 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- character_action
-- visual_description
 - prompt_text
 - negative_constraints
-- kb_context_summary
+- visual_description
+- person
 
 ## Negative Constraints
 

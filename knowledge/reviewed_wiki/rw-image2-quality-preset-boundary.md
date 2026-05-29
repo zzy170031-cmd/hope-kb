@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Image2 quality preset boundary: Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded subject, composition, material, lighting, or forbidden-item structure.
+Image2 quality preset boundary: Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded anime storyboard subject, composition, material, lighting, or forbidden-item structure.
 
 ## Source Basis
 
@@ -22,7 +22,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## Claims Summary
 
-- Use quality presets only as optional export guidance after row-grounded prompt structure is present.
+- Use quality presets only as optional anime storyboard reference export guidance after row-grounded prompt structure is present.
 - Keep provider or model preset choices outside current PWA final fields, storyboard headers, and runtime provider binding.
 - Repair quality-preset overuse by restoring subject, composition, material, lighting, and negative constraints first.
 

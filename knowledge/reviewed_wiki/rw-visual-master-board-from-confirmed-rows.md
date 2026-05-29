@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Visual master board from confirmed rows: Summarize a visual master board from confirmed storyboard rows only so image prompt exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.
+Visual master board from confirmed rows: Summarize a visual master board from confirmed storyboard rows only so anime, manga, and motion-comic reference exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.
 
 ## Source Basis
 
@@ -25,7 +25,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 ## Claims Summary
 
 - Use confirmed person, visual_description, character_action, camera, shot_size, prompt_text, duration, and safe constraints as the only source for the visual master board.
-- Summarize recurring character anchors, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.
+- Summarize recurring character anchors, group consistency, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.
 - Keep visual master guidance compact and subordinate to the current row's shot purpose and accepted facts.
 
 ## Runtime Mapping

@@ -35,12 +35,11 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- person
 - visual_description
-- character_action
-- camera
 - prompt_text
 - negative_constraints
-- person
+- camera
 
 ## Negative Constraints
 

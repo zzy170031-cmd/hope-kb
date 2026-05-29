@@ -1,0 +1,1976 @@
+{
+  "schema_version": "hope-kb-manual-intake-package/v0.2",
+  "run_id": "intake-20260529-image2-storyboard-sheet3-candidates",
+  "status": "recommendations_ready",
+  "write_policy": {
+    "manual_intake_only": true,
+    "requires_user_confirmation": true,
+    "dashboard_may_write_reviewed_wiki": false,
+    "dashboard_may_write_runtime": false,
+    "apply_script_required": true,
+    "source_refs_runtime_policy": "audit_layer_only_not_runtime",
+    "pwa_write_policy": "no_pwa_change_no_ui_field_addition_no_sheet1_change"
+  },
+  "demand": {
+    "title": "Image2 storyboard prompt candidates for Sheet3 export",
+    "search_focus": "image2_storyboard_prompt_camera_language_local_repair_batch_consistency",
+    "target_output": [
+      "intake draft package",
+      "summary-only recommendations",
+      "manual 5179 confirmation queue"
+    ],
+    "target_export_scope": "Sheet3 Image2 storyboarding prompt only",
+    "target_pwa_fields": [
+      "person",
+      "visual_description",
+      "character_action",
+      "camera",
+      "shot_size",
+      "prompt_text",
+      "duration_seconds",
+      "negative_constraints"
+    ],
+    "created_at": "2026-05-29T15:30:00+08:00",
+    "article_boundary": "User-provided WeChat articles are demand inspiration only; no article prompt text, 240-plus prompts, 38-shot table, or user-experience wording is copied.",
+    "final_field_policy": "no_new_pwa_page_fields_no_sheet1_writeback_no_provider_api_integration_no_image_generation",
+    "derived_export_name": "Sheet3: Image2故事板提示词"
+  },
+  "search_plan": {
+    "acquisition_mode": "manual_web_research_summary_only_with_official_external_evidence",
+    "live_search_connector": "codex_web_and_openai_docs_mcp_search",
+    "covered_directions": [
+      "Image2 prompt variables",
+      "purpose-based image prompt routing",
+      "text rendering constraints",
+      "style transfer without fact drift",
+      "camera motion and emotion mapping",
+      "local repair boundaries",
+      "batch visual consistency anchors",
+      "ratio/platform fit",
+      "negative constraint hygiene",
+      "Sheet3 export prompt assembly"
+    ],
+    "official_source_coverage": [
+      "OpenAI",
+      "Runway",
+      "Google Cloud Veo/Imagen",
+      "Volcengine Ark Seedance",
+      "Adobe Firefly"
+    ],
+    "industry_source_coverage": [
+      "StudioBinder",
+      "Toon Boom"
+    ],
+    "github_source_coverage": [
+      "cliprise/awesome-ai-image-generator-prompts",
+      "NickPittas/DirectorsConsole",
+      "YouMind-OpenLab/awesome-gpt-image-2"
+    ],
+    "duplicate_check_targets": [
+      "rw-storyboard-image-prompt-export",
+      "rw-visual-master-board-from-confirmed-rows",
+      "rw-multipanel-layout-boundary",
+      "rw-image-video-tool-handoff-boundary",
+      "rw-image2-structured-quality-prompt",
+      "rw-image2-quality-preset-boundary",
+      "rw-camera-language-grammar",
+      "rw-shot-intent-taxonomy",
+      "rw-style-contamination-guard",
+      "rw-material-light-air-physicality",
+      "rw-field-level-failure-repair-routing",
+      "rw-prompt-text-boundary"
+    ],
+    "blocked_boundaries": [
+      "no apply",
+      "no reviewed_wiki write",
+      "no mapping write",
+      "no runtime snapshot write",
+      "no PWA change",
+      "no latest.json sync",
+      "no commit or push",
+      "no generated image",
+      "no provider API binding"
+    ]
+  },
+  "source_candidates": [
+    {
+      "source_id": "src-wechat-gpt-image2-handbook-part1",
+      "title": "GPT-Image-2 full-scene creation handbook, part 1",
+      "source_url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+      "source_type": "user_provided_article",
+      "source_type_label": "WeChat public account article",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "risk_flags": [
+        "user_provided_summary_only",
+        "no_prompt_verbatim_copy"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "User-provided summary points to prompt basics, text rendering, aspect ratio, style, light, lens, anime, manga, comic, and storyboard reference use cases for Sheet3 image prompt export.",
+      "kb_gap": "Demand inspiration only; do not copy prompt examples or article wording.",
+      "leakage_check": "summary_only_no_template_copy",
+      "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls."
+    },
+    {
+      "source_id": "src-wechat-gpt-image2-handbook-part2",
+      "title": "GPT-Image-2 full-scene creation handbook, part 2",
+      "source_url": "https://mp.weixin.qq.com/s/S4_zTaP9JNuufKXk4uVmHg",
+      "source_type": "user_provided_article",
+      "source_type_label": "WeChat public account article",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "risk_flags": [
+        "user_provided_summary_only",
+        "no_prompt_verbatim_copy"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "User-provided summary points to variable replacement, style transfer, scene grafting, element add/remove, batch workflow, brand consistency, and platform adaptation.",
+      "kb_gap": "Supports consistency and repair boundaries without importing full templates.",
+      "leakage_check": "summary_only_no_case_copy",
+      "evidence_summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors."
+    },
+    {
+      "source_id": "src-wechat-38-camera-passwords",
+      "title": "38 camera-language passwords",
+      "source_url": "https://mp.weixin.qq.com/s/01zoO22HuQ5PJHDG6T4vcg",
+      "source_type": "user_provided_article",
+      "source_type_label": "WeChat public account article",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "risk_flags": [
+        "user_provided_summary_only",
+        "no_full_shot_list_copy"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "User-provided summary lists push-in, fast push, pullback, truck, rise/fall, orbit, OTS, POV, high angle, and low angle as narrative/emotional camera functions.",
+      "kb_gap": "Supports functional camera mapping, not a memorized vocabulary table.",
+      "leakage_check": "summary_only_no_complete_table_copy",
+      "evidence_summary": "Used only as demand evidence that camera movement should serve emotion and story purpose."
+    },
+    {
+      "source_id": "src-openai-gpt-image2-model",
+      "title": "GPT Image 2 model",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "official_current_model_doc"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "export_result"
+      ],
+      "pwa_relevance": "Official model page identifies GPT Image 2 as an image generation/editing model with text and image inputs and image output.",
+      "kb_gap": "Grounds Image2 as an export prompt target while preserving the no-API-integration boundary.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "title": "Image generation guide",
+      "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "official_current_guide"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Official guide supports generated and edited images from text prompts and image references.",
+      "kb_gap": "Supports structured export prompts without opening provider request payloads.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-openai-academy-image-generation",
+      "title": "Creating images with ChatGPT",
+      "source_url": "https://openai.com/academy/image-generation/",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI Academy",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "official_prompt_guidance"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+      "kb_gap": "Supports text rendering and local edit boundaries as summary-only prompt guidance.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-openai-chatgpt-images-editor",
+      "title": "Images in ChatGPT",
+      "source_url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt",
+      "source_type": "official_help_doc",
+      "source_type_label": "OpenAI Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "editor_selection_not_exact"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "export_result"
+      ],
+      "pwa_relevance": "Official help describes selected-area edits, direct edit instructions, aspect-ratio choice, and the caveat that selected highlights may not be exact.",
+      "kb_gap": "Supports local repair prompts that specify changed area and preserved context.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting",
+      "title": "Gen-4 Image Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "provider_specific_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+      "kb_gap": "Supports modular prompt assembly without forcing one rigid template.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-runway-gen4-references",
+      "title": "Creating with Gen-4 Image References",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "reference_images_audit_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Runway references support consistent characters, objects, locations, and style from image references and sketches for composition/object placement.",
+      "kb_gap": "Supports consistency anchors for Sheet3 prompt export, not direct image generation.",
+      "leakage_check": "summary_only_reference_guidance"
+    },
+    {
+      "source_id": "src-runway-i2v-prompting",
+      "title": "Image to Video Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "video_handoff_not_generation_commitment"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Runway separates source-image visual facts from prompt instructions for motion, camera work, temporal progression, direction, and speed.",
+      "kb_gap": "Supports camera and motion wording while blocking one-image-complete-video claims.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-runway-camera-terms",
+      "title": "Camera Terms, Prompts, and Examples",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/47313504791059-Camera-Terms-Prompts-Examples",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "camera_terms_not_word_bank"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Runway camera guide distinguishes tilt, dolly, push in, pull back, truck, tracking, crane, orbit, arc, zoom, crash zoom, and whip pan as motion functions.",
+      "kb_gap": "Supports functional camera mapping rather than vocabulary stuffing.",
+      "leakage_check": "summary_only_no_full_table_copy"
+    },
+    {
+      "source_id": "src-google-veo-best-practices",
+      "title": "Best practices for Veo on Vertex AI",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/best-practice",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "video_handoff_not_generation_commitment"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Google says image-to-video source image quality controls character detail, lighting, and style; prompts should focus on camera movement, subject animation, and environmental changes.",
+      "kb_gap": "Supports prompt partitioning between image facts and motion instructions.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "title": "Veo on Vertex AI video generation prompt guide",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "camera_terms_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Google prompt guide includes over-the-shoulder, POV, bird-eye, extreme close-up, whip pan, arc shot, depth of field, lens flare, and rack focus as promptable shot controls.",
+      "kb_gap": "Supports camera language as functional grammar tied to purpose.",
+      "leakage_check": "summary_only_no_complete_term_table"
+    },
+    {
+      "source_id": "src-google-imagen-editing",
+      "title": "Edit images with Imagen on Vertex AI",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/edit-images-overview",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "mask_editing_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Google documents mask-based editing for targeted regions including insert/remove/expand/replace tasks.",
+      "kb_gap": "Supports local repair boundary as selected-region change plus preserve remainder.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-volc-seedance-prompt-guide",
+      "title": "Doubao Seedance 2.0 prompt guide",
+      "source_url": "https://www.volcengine.com/docs/82379/2222480",
+      "source_type": "official_doc",
+      "source_type_label": "Volcengine Ark documentation",
+      "language": "Chinese",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "domestic_official_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "character_action",
+        "prompt_text",
+        "duration_seconds"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Official Seedance prompt-guide page anchors the domestic provider coverage requirement and remains audit-only for Sheet3 export.",
+      "kb_gap": "Supports domestic-provider prompt guidance without API integration.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-volc-seedance2-launch",
+      "title": "Seedance 2.0 launched in Volcengine Ark experience center",
+      "source_url": "https://developer.volcengine.com/articles/7606009619928449070",
+      "source_type": "official_provider_article",
+      "source_type_label": "Volcengine developer community",
+      "language": "Chinese",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "risk_flags": [
+        "provider_article_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Volcengine describes multi-modal reference inputs, subject/element/scene locking, composition/character detail restoration, and camera-language reference from video inputs.",
+      "kb_gap": "Supports batch consistency and handoff boundaries while staying provider-neutral.",
+      "leakage_check": "summary_only_official_article"
+    },
+    {
+      "source_id": "src-adobe-firefly-generative-fill",
+      "title": "Use Generative Fill",
+      "source_url": "https://helpx.adobe.com/firefly/web/edit-images/prompt-to-edit/generative-fill.html",
+      "source_type": "official_help_doc",
+      "source_type_label": "Adobe Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "selection_edit_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "pwa_relevance": "Adobe describes selecting an area with a brush, adding/replacing content, using references, and prompting what should fill the selected area.",
+      "kb_gap": "Supports local repair prompt boundaries and reference preservation.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-adobe-firefly-aspect-ratio",
+      "title": "Set aspect ratio of images",
+      "source_url": "https://helpx.adobe.com/uk/firefly/web/generate-images-with-text-to-image/customize-generated-images/set-aspect-ratio-of-images.html",
+      "source_type": "official_help_doc",
+      "source_type_label": "Adobe Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "aspect_ratio_provider_setting"
+      ],
+      "serves_pwa_fields": [
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Adobe describes aspect-ratio choices as generation settings that change how images look and feel.",
+      "kb_gap": "Supports using ratio as delivery-purpose routing, not a global fixed rule.",
+      "leakage_check": "summary_only_official_doc"
+    },
+    {
+      "source_id": "src-studiobinder-camera-movements",
+      "title": "Camera Movements in Film",
+      "source_url": "https://www.studiobinder.com/camera-shots/camera-movements/",
+      "source_type": "film_education_reference",
+      "source_type_label": "StudioBinder",
+      "language": "English",
+      "confidence": "medium_high",
+      "decision": "keep",
+      "risk_flags": [
+        "education_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "StudioBinder frames movement as cinema language and separates static, pan, tilt, whip pan, dolly, zoom, push-in, tracking, arc, crane, drone, and related functions.",
+      "kb_gap": "Supports camera-motion-to-emotion mapping outside AI-provider docs.",
+      "leakage_check": "summary_only_no_full_table_copy"
+    },
+    {
+      "source_id": "src-toonboom-animatic",
+      "title": "How to Create an Animatic",
+      "source_url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+      "source_type": "industry_preproduction_doc",
+      "source_type_label": "Toon Boom Storyboard Pro Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "risk_flags": [
+        "storyboard_process_summary_only"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "character_action",
+        "duration_seconds",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Animatic workflow ties storyboard panels to action timing, story pace, camera movement, sound/dialogue cues, and transitions.",
+      "kb_gap": "Supports Sheet3 assembly from confirmed rows and duration-aware prompt grouping.",
+      "leakage_check": "summary_only_industry_doc"
+    },
+    {
+      "source_id": "src-github-cliprise-ai-image-prompts",
+      "title": "awesome-ai-image-generator-prompts",
+      "source_url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+      "source_type": "open_source_reference",
+      "source_type_label": "GitHub repository",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": [
+        "github_auxiliary_only",
+        "do_not_copy_prompt_examples"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Repository is used only for anime, manga, and storyboard-adjacent prompt patterns, text rendering guardrails, character/group consistency, negative prompts, and prompt review metadata.",
+      "kb_gap": "Auxiliary evidence for packaging prompt modules and checklist hygiene only.",
+      "leakage_check": "summary_only_no_repo_prompt_copy"
+    },
+    {
+      "source_id": "src-github-directors-console",
+      "title": "DirectorsConsole",
+      "source_url": "https://github.com/NickPittas/DirectorsConsole",
+      "source_type": "open_source_reference",
+      "source_type_label": "GitHub repository",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": [
+        "github_auxiliary_only",
+        "no_tool_integration"
+      ],
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Repository describes a storyboard canvas and cinema prompt-engineering rules engine for image/video generation planning.",
+      "kb_gap": "Auxiliary evidence for storyboard prompt planning, not a tool adoption or runtime dependency.",
+      "leakage_check": "summary_only_no_tool_payload"
+    },
+    {
+      "source_id": "src-github-awesome-gpt-image2",
+      "title": "awesome-gpt-image-2",
+      "source_url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+      "source_type": "open_source_reference",
+      "source_type_label": "GitHub repository",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "risk_flags": [
+        "github_auxiliary_only",
+        "do_not_copy_prompt_library"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "pwa_relevance": "Repository is used only for multilingual text rendering, cross-image character/group consistency, comic/storyboard topics, and prompt review metadata.",
+      "kb_gap": "Auxiliary evidence that public prompt-library structure exists; do not import prompt text.",
+      "leakage_check": "summary_only_no_prompt_copy"
+    }
+  ],
+  "screening_results": [
+    {
+      "source_id": "src-wechat-gpt-image2-handbook-part1",
+      "decision": "keep",
+      "confidence": "medium_high",
+      "summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+      "leakage_check": "summary_only_no_template_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-wechat-gpt-image2-handbook-part2",
+      "decision": "keep",
+      "confidence": "medium_high",
+      "summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors.",
+      "leakage_check": "summary_only_no_case_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-wechat-38-camera-passwords",
+      "decision": "keep",
+      "confidence": "medium_high",
+      "summary": "Used only as demand evidence that camera movement should serve emotion and story purpose.",
+      "leakage_check": "summary_only_no_complete_table_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-openai-gpt-image2-model",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Official model page identifies GPT Image 2 as an image generation/editing model with text and image inputs and image output.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Official guide supports generated and edited images from text prompts and image references.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-openai-academy-image-generation",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-openai-chatgpt-images-editor",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Official help describes selected-area edits, direct edit instructions, aspect-ratio choice, and the caveat that selected highlights may not be exact.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-runway-gen4-references",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Runway references support consistent characters, objects, locations, and style from image references and sketches for composition/object placement.",
+      "leakage_check": "summary_only_reference_guidance",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-runway-i2v-prompting",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Runway separates source-image visual facts from prompt instructions for motion, camera work, temporal progression, direction, and speed.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-runway-camera-terms",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Runway camera guide distinguishes tilt, dolly, push in, pull back, truck, tracking, crane, orbit, arc, zoom, crash zoom, and whip pan as motion functions.",
+      "leakage_check": "summary_only_no_full_table_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-google-veo-best-practices",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Google says image-to-video source image quality controls character detail, lighting, and style; prompts should focus on camera movement, subject animation, and environmental changes.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-google-veo-prompt-guide",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Google prompt guide includes over-the-shoulder, POV, bird-eye, extreme close-up, whip pan, arc shot, depth of field, lens flare, and rack focus as promptable shot controls.",
+      "leakage_check": "summary_only_no_complete_term_table",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-google-imagen-editing",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Google documents mask-based editing for targeted regions including insert/remove/expand/replace tasks.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-volc-seedance-prompt-guide",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Official Seedance prompt-guide page anchors the domestic provider coverage requirement and remains audit-only for Sheet3 export.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-volc-seedance2-launch",
+      "decision": "keep",
+      "confidence": "medium_high",
+      "summary": "Volcengine describes multi-modal reference inputs, subject/element/scene locking, composition/character detail restoration, and camera-language reference from video inputs.",
+      "leakage_check": "summary_only_official_article",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-adobe-firefly-generative-fill",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Adobe describes selecting an area with a brush, adding/replacing content, using references, and prompting what should fill the selected area.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-adobe-firefly-aspect-ratio",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Adobe describes aspect-ratio choices as generation settings that change how images look and feel.",
+      "leakage_check": "summary_only_official_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-studiobinder-camera-movements",
+      "decision": "keep",
+      "confidence": "medium_high",
+      "summary": "StudioBinder frames movement as cinema language and separates static, pan, tilt, whip pan, dolly, zoom, push-in, tracking, arc, crane, drone, and related functions.",
+      "leakage_check": "summary_only_no_full_table_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-toonboom-animatic",
+      "decision": "keep",
+      "confidence": "high",
+      "summary": "Animatic workflow ties storyboard panels to action timing, story pace, camera movement, sound/dialogue cues, and transitions.",
+      "leakage_check": "summary_only_industry_doc",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-github-cliprise-ai-image-prompts",
+      "decision": "keep",
+      "confidence": "medium",
+      "summary": "Repository is used only for anime, manga, and storyboard-adjacent prompt patterns, text rendering guardrails, character/group consistency, negative prompts, and prompt review metadata.",
+      "leakage_check": "summary_only_no_repo_prompt_copy",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-github-directors-console",
+      "decision": "keep",
+      "confidence": "medium",
+      "summary": "Repository describes a storyboard canvas and cinema prompt-engineering rules engine for image/video generation planning.",
+      "leakage_check": "summary_only_no_tool_payload",
+      "audit_layer_only": true
+    },
+    {
+      "source_id": "src-github-awesome-gpt-image2",
+      "decision": "keep",
+      "confidence": "medium",
+      "summary": "Repository is used only for multilingual text rendering, cross-image character/group consistency, comic/storyboard topics, and prompt review metadata.",
+      "leakage_check": "summary_only_no_prompt_copy",
+      "audit_layer_only": true
+    }
+  ],
+  "recommendations": [
+    {
+      "reviewed_wiki_id": "rw-image2-prompt-variable-system",
+      "chinese_title": "Image2 prompt variable system",
+      "candidate_summary": "Sheet3 can assemble Image2 prompts from replaceable variables for purpose, subject, clothing, background, camera, ratio, style, quality, and focused negative constraints without copying fixed templates.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "camera",
+        "shot_size",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part1",
+        "src-wechat-gpt-image2-handbook-part2",
+        "src-openai-academy-image-generation",
+        "src-runway-gen4-image-prompting",
+        "src-volc-seedance-prompt-guide",
+        "src-github-cliprise-ai-image-prompts"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-image2-structured-quality-prompt",
+        "rw-image2-quality-preset-boundary",
+        "rw-prompt-text-boundary"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-image2-structured-quality-prompt, rw-image2-quality-preset-boundary, rw-prompt-text-boundary before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "compile modules from confirmed storyboard row facts plus purpose-specific options",
+        "blocked": "no fixed universal template, no copied examples, no source refs in export"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 1",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+          "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 2",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/S4_zTaP9JNuufKXk4uVmHg",
+          "evidence_summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Creating images with ChatGPT",
+          "site": "OpenAI Academy",
+          "url": "https://openai.com/academy/image-generation/",
+          "evidence_summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Doubao Seedance 2.0 prompt guide",
+          "site": "Volcengine Ark documentation",
+          "url": "https://www.volcengine.com/docs/82379/2222480",
+          "evidence_summary": "Official Seedance prompt-guide page anchors the domestic provider coverage requirement and remains audit-only for Sheet3 export.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "awesome-ai-image-generator-prompts",
+          "site": "GitHub repository",
+          "url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+          "evidence_summary": "Repository is used only for anime, manga, and storyboard-adjacent prompt patterns, text rendering guardrails, character/group consistency, negative prompts, and prompt review metadata.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-image-prompt-scene-format-routing",
+      "chinese_title": "Image prompt scene-format routing",
+      "candidate_summary": "Prompt structure should stay within anime, manga, comic, and storyboard reference deliverables: storyboard reference panel, character sheet, scene plate, multi-panel reference board, or first-frame planning each needs different visual modules and quality checks.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "shot_size",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "scene_mappings"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part1",
+        "src-runway-gen4-image-prompting",
+        "src-adobe-firefly-aspect-ratio",
+        "src-github-cliprise-ai-image-prompts"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-multipanel-layout-boundary",
+        "rw-image2-prompt-module-routing"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-storyboard-image-prompt-export, rw-visual-master-board-from-confirmed-rows, rw-multipanel-layout-boundary, rw-image2-prompt-module-routing before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "select a purpose route before adding style, ratio, text, or quality controls",
+        "blocked": "do not force non-storyboard image modules onto every storyboard row"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 1",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+          "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Set aspect ratio of images",
+          "site": "Adobe Help Center",
+          "url": "https://helpx.adobe.com/uk/firefly/web/generate-images-with-text-to-image/customize-generated-images/set-aspect-ratio-of-images.html",
+          "evidence_summary": "Adobe describes aspect-ratio choices as generation settings that change how images look and feel.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "awesome-ai-image-generator-prompts",
+          "site": "GitHub repository",
+          "url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+          "evidence_summary": "Repository is used only for anime, manga, and storyboard-adjacent prompt patterns, text rendering guardrails, character/group consistency, negative prompts, and prompt review metadata.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-image-text-rendering-constraint",
+      "chinese_title": "Image text rendering constraint",
+      "candidate_summary": "When an anime, manga, comic, or storyboard reference image actually needs visible text, Sheet3 prompt assembly should specify the exact text, language, location, count, and typography role, and should also block extra random text, extra marks, and gibberish; images without text should not be forced to contain text.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "visual_description",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part1",
+        "src-openai-academy-image-generation",
+        "src-runway-gen4-image-prompting",
+        "src-github-awesome-gpt-image2"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-image2-structured-quality-prompt",
+        "rw-image2-quality-preset-boundary"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-prompt-text-boundary, rw-image2-structured-quality-prompt, rw-image2-quality-preset-boundary before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "include text module only when confirmed row or export purpose requires text",
+        "blocked": "no random captions, no extra marks, no default text overlay"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 1",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+          "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Creating images with ChatGPT",
+          "site": "OpenAI Academy",
+          "url": "https://openai.com/academy/image-generation/",
+          "evidence_summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "awesome-gpt-image-2",
+          "site": "GitHub repository",
+          "url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+          "evidence_summary": "Repository is used only for multilingual text rendering, cross-image character/group consistency, comic/storyboard topics, and prompt review metadata.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-style-transfer-without-fact-drift",
+      "chinese_title": "Style transfer without fact drift",
+      "candidate_summary": "Style transfer may alter rendering style, color handling, line quality, and texture, but must preserve character identity, action, scene facts, dialogue meaning, prop relationships, and composition commitments from confirmed rows.",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part2",
+        "src-openai-academy-image-generation",
+        "src-runway-gen4-references",
+        "src-volc-seedance2-launch"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-style-contamination-guard",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-visual-master-consistency",
+        "rw-writing-continuity-core"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-style-contamination-guard, rw-visual-master-board-from-confirmed-rows, rw-visual-master-consistency, rw-writing-continuity-core before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "separate immutable facts from visual style descriptors before export",
+        "blocked": "no identity/action/scene/dialogue/prop drift caused by style transfer"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 2",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/S4_zTaP9JNuufKXk4uVmHg",
+          "evidence_summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Creating images with ChatGPT",
+          "site": "OpenAI Academy",
+          "url": "https://openai.com/academy/image-generation/",
+          "evidence_summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Creating with Gen-4 Image References",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+          "evidence_summary": "Runway references support consistent characters, objects, locations, and style from image references and sketches for composition/object placement.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Seedance 2.0 launched in Volcengine Ark experience center",
+          "site": "Volcengine developer community",
+          "url": "https://developer.volcengine.com/articles/7606009619928449070",
+          "evidence_summary": "Volcengine describes multi-modal reference inputs, subject/element/scene locking, composition/character detail restoration, and camera-language reference from video inputs.",
+          "source_confidence": "medium_high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-camera-motion-emotion-mapping",
+      "chinese_title": "Camera motion emotion mapping",
+      "candidate_summary": "Camera movement should be chosen for narrative and emotional function: slow push, crash push, pullback, truck, pedestal, orbit, OTS, POV, high angle, and low angle are mappings to purpose, not a vocabulary pile.",
+      "serves_pwa_fields": [
+        "camera",
+        "shot_size",
+        "visual_description",
+        "character_action",
+        "prompt_text"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "scene_mappings"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-38-camera-passwords",
+        "src-runway-camera-terms",
+        "src-google-veo-prompt-guide",
+        "src-studiobinder-camera-movements",
+        "src-toonboom-animatic"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-camera-language-grammar",
+        "rw-shot-intent-taxonomy",
+        "rw-transition-motion-dynamics"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-camera-language-grammar, rw-shot-intent-taxonomy, rw-transition-motion-dynamics before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "camera phrase must include story purpose or visible reveal/emotion target",
+        "blocked": "no empty cinematic jargon, no full copied 38-shot table"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "38 camera-language passwords",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/01zoO22HuQ5PJHDG6T4vcg",
+          "evidence_summary": "Used only as demand evidence that camera movement should serve emotion and story purpose.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Camera Terms, Prompts, and Examples",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/47313504791059-Camera-Terms-Prompts-Examples",
+          "evidence_summary": "Runway camera guide distinguishes tilt, dolly, push in, pull back, truck, tracking, crane, orbit, arc, zoom, crash zoom, and whip pan as motion functions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Veo on Vertex AI video generation prompt guide",
+          "site": "Google Cloud documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide",
+          "evidence_summary": "Google prompt guide includes over-the-shoulder, POV, bird-eye, extreme close-up, whip pan, arc shot, depth of field, lens flare, and rack focus as promptable shot controls.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Camera Movements in Film",
+          "site": "StudioBinder",
+          "url": "https://www.studiobinder.com/camera-shots/camera-movements/",
+          "evidence_summary": "StudioBinder frames movement as cinema language and separates static, pan, tilt, whip pan, dolly, zoom, push-in, tracking, arc, crane, drone, and related functions.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "How to Create an Animatic",
+          "site": "Toon Boom Storyboard Pro Help",
+          "url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+          "evidence_summary": "Animatic workflow ties storyboard panels to action timing, story pace, camera movement, sound/dialogue cues, and transitions.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-image-local-repair-boundary",
+      "chinese_title": "Image local repair boundary",
+      "candidate_summary": "Local repair prompts must name only the region to change, what must remain unchanged, and what must not be newly introduced, while preserving identity, composition, light, material, and proportion consistency.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "visual_description",
+        "person"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part2",
+        "src-openai-chatgpt-images-editor",
+        "src-openai-academy-image-generation",
+        "src-google-imagen-editing",
+        "src-adobe-firefly-generative-fill"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-field-level-failure-repair-routing",
+        "rw-image2-local-repair-prompt-boundary",
+        "rw-prompt-text-boundary"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-field-level-failure-repair-routing, rw-image2-local-repair-prompt-boundary, rw-prompt-text-boundary before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "emit repair subprompt only for a known failed area; keep all untouched regions stable",
+        "blocked": "no full-frame rewrite when task is local correction"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 2",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/S4_zTaP9JNuufKXk4uVmHg",
+          "evidence_summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Images in ChatGPT",
+          "site": "OpenAI Help Center",
+          "url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt",
+          "evidence_summary": "Official help describes selected-area edits, direct edit instructions, aspect-ratio choice, and the caveat that selected highlights may not be exact.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Creating images with ChatGPT",
+          "site": "OpenAI Academy",
+          "url": "https://openai.com/academy/image-generation/",
+          "evidence_summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Edit images with Imagen on Vertex AI",
+          "site": "Google Cloud documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/edit-images-overview",
+          "evidence_summary": "Google documents mask-based editing for targeted regions including insert/remove/expand/replace tasks.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Use Generative Fill",
+          "site": "Adobe Help Center",
+          "url": "https://helpx.adobe.com/firefly/web/edit-images/prompt-to-edit/generative-fill.html",
+          "evidence_summary": "Adobe describes selecting an area with a brush, adding/replacing content, using references, and prompting what should fill the selected area.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-batch-visual-consistency-anchor",
+      "chinese_title": "Batch visual consistency anchor",
+      "candidate_summary": "For batch images, multi-panel storyboard boards, and multi-character references, Sheet3 should lock character identity, clothing, props, color palette, scene anchors, and composition hierarchy to reduce face, wardrobe, prop, and location drift across outputs.",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part2",
+        "src-runway-gen4-references",
+        "src-runway-gen4-image-prompting",
+        "src-volc-seedance2-launch",
+        "src-github-directors-console"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-visual-master-consistency",
+        "rw-multipanel-layout-boundary",
+        "rw-style-contamination-guard"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-visual-master-board-from-confirmed-rows, rw-visual-master-consistency, rw-multipanel-layout-boundary, rw-style-contamination-guard before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "prepend stable anchors before panel-specific variation modules",
+        "blocked": "no cross-panel face swap, outfit drift, prop drift, or scene-anchor loss"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 2",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/S4_zTaP9JNuufKXk4uVmHg",
+          "evidence_summary": "Used only as directional evidence for variable systems, style-transfer guardrails, local repair, and batch consistency anchors.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Creating with Gen-4 Image References",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+          "evidence_summary": "Runway references support consistent characters, objects, locations, and style from image references and sketches for composition/object placement.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Seedance 2.0 launched in Volcengine Ark experience center",
+          "site": "Volcengine developer community",
+          "url": "https://developer.volcengine.com/articles/7606009619928449070",
+          "evidence_summary": "Volcengine describes multi-modal reference inputs, subject/element/scene locking, composition/character detail restoration, and camera-language reference from video inputs.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "DirectorsConsole",
+          "site": "GitHub repository",
+          "url": "https://github.com/NickPittas/DirectorsConsole",
+          "evidence_summary": "Repository describes a storyboard canvas and cinema prompt-engineering rules engine for image/video generation planning.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-image-prompt-ratio-platform-fit",
+      "chinese_title": "Image prompt ratio platform fit",
+      "candidate_summary": "Aspect ratio should be selected for anime, manga, comic, or storyboard reference purpose: storyboard board, multi-panel page, first-frame reference, character/group consistency sheet, or motion-comic vertical panel. It should not be a fixed global rule.",
+      "serves_pwa_fields": [
+        "shot_size",
+        "prompt_text",
+        "visual_description"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "duration_profiles"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part1",
+        "src-openai-chatgpt-images-editor",
+        "src-runway-gen4-image-prompting",
+        "src-adobe-firefly-aspect-ratio"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-multipanel-layout-boundary",
+        "rw-storyboard-image-prompt-export",
+        "rw-image2-quality-preset-boundary"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-multipanel-layout-boundary, rw-storyboard-image-prompt-export, rw-image2-quality-preset-boundary before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "choose 16:9, 9:16, 1:1, 4:5, 2:3, or other allowed target ratio by export use case",
+        "blocked": "no global forced ratio across all storyboard prompts"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 1",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+          "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Images in ChatGPT",
+          "site": "OpenAI Help Center",
+          "url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt",
+          "evidence_summary": "Official help describes selected-area edits, direct edit instructions, aspect-ratio choice, and the caveat that selected highlights may not be exact.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Set aspect ratio of images",
+          "site": "Adobe Help Center",
+          "url": "https://helpx.adobe.com/uk/firefly/web/generate-images-with-text-to-image/customize-generated-images/set-aspect-ratio-of-images.html",
+          "evidence_summary": "Adobe describes aspect-ratio choices as generation settings that change how images look and feel.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-image-negative-constraint-hygiene",
+      "chinese_title": "Image negative constraint hygiene",
+      "candidate_summary": "Negative constraints should be compact and tied to likely anime storyboard reference failure modes: gibberish text, extra marks, random light particles, dirty speckles, over-reflection, broken hands, prop intersections, or background stealing focus; no large unrelated negative-word dictionary.",
+      "serves_pwa_fields": [
+        "negative_constraints",
+        "prompt_text",
+        "visual_description"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "negative_constraints",
+        "selected_kb_rules"
+      ],
+      "source_candidate_refs": [
+        "src-wechat-gpt-image2-handbook-part1",
+        "src-runway-i2v-prompting",
+        "src-runway-gen4-image-prompting",
+        "src-openai-academy-image-generation",
+        "src-github-cliprise-ai-image-prompts"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-image2-structured-quality-prompt",
+        "rw-image2-quality-preset-boundary",
+        "rw-material-light-air-physicality"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-prompt-text-boundary, rw-image2-structured-quality-prompt, rw-image2-quality-preset-boundary, rw-material-light-air-physicality before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "attach only concise failure-mode constraints relevant to the current row and delivery type",
+        "blocked": "no negative-prompt mega-list, no contradictory bans against desired content"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "GPT-Image-2 full-scene creation handbook, part 1",
+          "site": "WeChat public account article",
+          "url": "https://mp.weixin.qq.com/s/CCMOFvLatBwTha-39Cs8fA",
+          "evidence_summary": "Used only as user-provided directional evidence for Image2 prompt structure, scene formats, text constraints, and visual-quality controls.",
+          "source_confidence": "medium_high"
+        },
+        {
+          "source_title": "Image to Video Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+          "evidence_summary": "Runway separates source-image visual facts from prompt instructions for motion, camera work, temporal progression, direction, and speed.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Gen-4-Image-Prompting-Guide",
+          "evidence_summary": "Runway frames promptable image elements as subject, scene, composition, lighting, color, style, focus, angle, text, and mood.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Creating images with ChatGPT",
+          "site": "OpenAI Academy",
+          "url": "https://openai.com/academy/image-generation/",
+          "evidence_summary": "OpenAI recommends clear purpose, subject, action, setting, visual style, framing/light constraints, explicit text instructions, and targeted edit instructions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "awesome-ai-image-generator-prompts",
+          "site": "GitHub repository",
+          "url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+          "evidence_summary": "Repository is used only for anime, manga, and storyboard-adjacent prompt patterns, text rendering guardrails, character/group consistency, negative prompts, and prompt review metadata.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    },
+    {
+      "reviewed_wiki_id": "rw-storyboard-image-export-prompt-assembly",
+      "chinese_title": "Storyboard image export prompt assembly",
+      "candidate_summary": "Sheet3 Image2 prompt assembly should derive from confirmed storyboard rows and combine visual master, character consistency, scene/prop continuity, multi-panel reference layout, quality constraints, and local repair notes without affecting Sheet1 fields.",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "character_action",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "duration_seconds",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "sheet3_image2_storyboard_prompt",
+        "confirmed_rows_only",
+        "audit_source_refs_only",
+        "no_ui_field_addition"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "duration_profiles",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-toonboom-animatic",
+        "src-runway-i2v-prompting",
+        "src-google-veo-best-practices",
+        "src-runway-gen4-references",
+        "src-openai-gpt-image2-model",
+        "src-github-directors-console"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-storyboard-image-prompt-export",
+        "rw-visual-master-board-from-confirmed-rows",
+        "rw-multipanel-layout-boundary",
+        "rw-image-video-tool-handoff-boundary",
+        "rw-prompt-text-boundary"
+      ],
+      "duplicate_check_suggestion": "Compare with rw-storyboard-image-prompt-export, rw-visual-master-board-from-confirmed-rows, rw-multipanel-layout-boundary, rw-image-video-tool-handoff-boundary, rw-prompt-text-boundary before KB gate; prefer merge when this is only a narrower Sheet3 export rule.",
+      "sheet3_export_mapping": {
+        "output_column": "Image2故事板提示词",
+        "assembly_rule": "assemble only in derived Sheet3 export from confirmed rows; keep Sheet1 and UI fields unchanged",
+        "blocked": "no reviewed_wiki/mapping/runtime/PWA changes during this graph-thread draft gate"
+      },
+      "pwa_field_mapping": {
+        "prompt_text": "Only feeds the derived Sheet3 Image2 storyboard prompt export; no Sheet1 row rewrite and no raw evidence exposure.",
+        "visual_description": "Uses confirmed scene facts, composition, material, light, atmosphere, and continuity only.",
+        "camera": "Uses confirmed camera language as purpose-bearing shot direction, not decorative jargon.",
+        "shot_size": "Uses confirmed shot scale and delivery format to route composition and ratio.",
+        "character_action": "Uses visible action and emotion from confirmed rows; no invented story beats.",
+        "negative_constraints": "Uses compact artifact-prevention and boundary constraints only when relevant."
+      },
+      "futureqa": [
+        "Direct provider API integration remains FutureQA.",
+        "Generated image/video assets and writeback remain FutureQA."
+      ],
+      "blocked_runtime_payloads": [
+        "raw article text or copied prompt templates",
+        "full prompt libraries or complete camera-word tables",
+        "audit source links inside runtime/PWA export",
+        "provider request payloads, local file paths, hashes, keys, or credentials",
+        "IP, real director, real studio, real actor, or protected-style switches",
+        "one image creates a complete video claim"
+      ],
+      "source_refs": [
+        {
+          "source_title": "How to Create an Animatic",
+          "site": "Toon Boom Storyboard Pro Help",
+          "url": "https://docs.toonboom.com/help/storyboard-pro-20/storyboard/getting-started/animatic.html",
+          "evidence_summary": "Animatic workflow ties storyboard panels to action timing, story pace, camera movement, sound/dialogue cues, and transitions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Image to Video Prompting Guide",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+          "evidence_summary": "Runway separates source-image visual facts from prompt instructions for motion, camera work, temporal progression, direction, and speed.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Best practices for Veo on Vertex AI",
+          "site": "Google Cloud documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/best-practice",
+          "evidence_summary": "Google says image-to-video source image quality controls character detail, lighting, and style; prompts should focus on camera movement, subject animation, and environmental changes.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Creating with Gen-4 Image References",
+          "site": "Runway Help Center",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Creating-with-Gen-4-Image-References",
+          "evidence_summary": "Runway references support consistent characters, objects, locations, and style from image references and sketches for composition/object placement.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "GPT Image 2 model",
+          "site": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "evidence_summary": "Official model page identifies GPT Image 2 as an image generation/editing model with text and image inputs and image output.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "DirectorsConsole",
+          "site": "GitHub repository",
+          "url": "https://github.com/NickPittas/DirectorsConsole",
+          "evidence_summary": "Repository describes a storyboard canvas and cinema prompt-engineering rules engine for image/video generation planning.",
+          "source_confidence": "medium"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "not_runtime",
+      "source_refs_audit_layer_only": true,
+      "sheet3_only": true
+    }
+  ],
+  "confirmation": {
+    "confirmed": false,
+    "confirmed_at": "",
+    "confirmed_by": "",
+    "accepted_reviewed_wiki_ids": [],
+    "available_reviewed_wiki_ids": [
+      "rw-image2-prompt-variable-system",
+      "rw-image-prompt-scene-format-routing",
+      "rw-image-text-rendering-constraint",
+      "rw-style-transfer-without-fact-drift",
+      "rw-camera-motion-emotion-mapping",
+      "rw-image-local-repair-boundary",
+      "rw-batch-visual-consistency-anchor",
+      "rw-image-prompt-ratio-platform-fit",
+      "rw-image-negative-constraint-hygiene",
+      "rw-storyboard-image-export-prompt-assembly"
+    ],
+    "manual_confirmation_required": true,
+    "dashboard_expected_state": "recommendations_ready_waiting_user_confirmation"
+  },
+  "kb_application": {
+    "applied": false,
+    "applied_at": "",
+    "command": "node scripts/apply-confirmed-intake-package.js --package knowledge/intake_runs/intake-20260529-image2-storyboard-sheet3-candidates/intake-package.confirmed.json",
+    "validation_status": "not_run",
+    "output": null
+  },
+  "artifacts": {
+    "draft_package": "knowledge/intake_runs/intake-20260529-image2-storyboard-sheet3-candidates/intake-package.draft.json",
+    "confirmed_package": "knowledge/intake_runs/intake-20260529-image2-storyboard-sheet3-candidates/intake-package.confirmed.json",
+    "dedupe_note": "duplicate check should run before any KB gate; this run intentionally creates no confirmed package"
+  },
+  "runtime_exclusion_confirmed": {
+    "reviewed_wiki_written": false,
+    "mapping_written": false,
+    "runtime_snapshot_written": false,
+    "pwa_written": false,
+    "latest_json_synced": false,
+    "source_refs_runtime_included": false,
+    "full_kb_rows_included": 0
+  },
+  "futureqa_notes": [
+    "Provider-specific API calls and parameters remain FutureQA.",
+    "Actual image generation, inpainting, automatic scoring, and PWA UI placement remain FutureQA.",
+    "User manual confirmation on the native 5179 candidate-confirmation page is required before KB gate."
+  ]
+}

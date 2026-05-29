@@ -36,13 +36,8 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
-- visual_description
-- character_action
 - prompt_text
 - negative_constraints
-- kb_context_summary
-- selected_kb_rules
 
 ## Negative Constraints
 

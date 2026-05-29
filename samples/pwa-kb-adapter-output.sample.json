@@ -644,16 +644,17 @@
       {
         "id": "dg-visual-master-board-from-confirmed-rows",
         "name": "Visual master board from confirmed rows",
-        "intent": "Summarize a visual master board from confirmed storyboard rows only so image prompt exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
+        "intent": "Summarize a visual master board from confirmed storyboard rows only so anime, manga, and motion-comic reference exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
         "influenceAxes": [
           "visual_master",
           "continuity",
           "visual_grounding",
-          "prompt_boundary"
+          "prompt_boundary",
+          "character_consistency"
         ],
         "directives": [
           "Use confirmed person, visual_description, character_action, camera, shot_size, prompt_text, duration, and safe constraints as the only source for the visual master board.",
-          "Summarize recurring character anchors, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
+          "Summarize recurring character anchors, group consistency, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
           "Keep visual master guidance compact and subordinate to the current row's shot purpose and accepted facts."
         ],
         "negativeConstraints": [
@@ -665,11 +666,12 @@
       {
         "id": "dg-multipanel-layout-boundary",
         "name": "Multipanel layout director support",
-        "intent": "Keep panel layout tied to row timing, shot function, action phase, and readable visual sequence.",
+        "intent": "Keep panel layout tied to row timing, shot function, action phase, and readable anime or manga visual sequence.",
         "influenceAxes": [
           "shot_intent",
           "duration_density",
-          "continuity"
+          "continuity",
+          "comic_storyboard"
         ],
         "directives": [
           "Choose panel emphasis from shot function and timing.",
@@ -1124,17 +1126,18 @@
       {
         "id": "vg-storyboard-image-prompt-export",
         "name": "Storyboard image prompt export",
-        "intent": "Derive an optional storyboard image reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
+        "intent": "Derive an optional anime or manga storyboard reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
         "influenceAxes": [
           "derived_export",
           "prompt_boundary",
           "field_boundary",
-          "duration_density"
+          "duration_density",
+          "anime_storyboard"
         ],
         "directives": [
-          "Build storyboard image prompt export guidance only from confirmed row fields and accepted story facts.",
+          "Build anime, manga, comic, or storyboard reference prompt export guidance only from confirmed row fields and accepted story facts.",
           "Keep the export separate from final storyboard rows, existing table headers, runtime contracts, and provider API calls.",
-          "Use duration and confirmed row count as layout hints while preserving each row's visible shot purpose."
+          "Use duration and confirmed row count as layout hints while preserving each row's anime storyboard shot purpose."
         ],
         "negativeConstraints": [
           "Do not create a new final PWA field or alter existing storyboard export headers.",
@@ -1162,15 +1165,16 @@
       {
         "id": "vg-multipanel-layout-boundary",
         "name": "Multipanel layout boundary",
-        "intent": "Derive multi-panel storyboard image layout from confirmed row count, row timing, and shot purpose without forcing preset grids, padding shots, or captions.",
+        "intent": "Derive multi-panel anime, manga, or motion-comic storyboard reference layout from confirmed row count, row timing, and shot purpose without forcing preset grids, padding shots, or captions.",
         "influenceAxes": [
           "layout_boundary",
           "duration_density",
           "shot_split_boundary",
-          "field_boundary"
+          "field_boundary",
+          "comic_storyboard"
         ],
         "directives": [
-          "Use confirmed row count, duration, and visible shot purpose to suggest panel layout.",
+          "Use confirmed row count, duration, and visible anime storyboard shot purpose to suggest panel layout.",
           "Allow one row to remain one panel when the shot is coherent and readable.",
           "Split or group panels only when a real beat, action phase, reaction, spatial relation, or duration need supports it."
         ],
@@ -1183,37 +1187,39 @@
       {
         "id": "vg-image-video-tool-handoff-boundary",
         "name": "Image video tool handoff boundary",
-        "intent": "Keep storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated video execution as supported runtime behavior.",
+        "intent": "Keep anime storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated media execution as supported runtime behavior.",
         "influenceAxes": [
           "tool_handoff",
           "prompt_boundary",
           "export_safety",
-          "no_auto_generation"
+          "no_auto_generation",
+          "anime_storyboard"
         ],
         "directives": [
-          "Describe generic handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
+          "Describe storyboard handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
           "Keep provider choice, API syntax, upload mechanics, and generated media handling outside runtime.",
-          "Require manual product review before any image or video generation workflow is treated as supported behavior."
+          "Require manual storyboard review before any image or video generation workflow is treated as supported behavior."
         ],
         "negativeConstraints": [
-          "Do not describe generated video execution as supported runtime behavior.",
+          "Do not describe generated media execution as supported runtime behavior.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not market a single reference image as full production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ]
       },
       {
         "id": "vg-image2-structured-quality-prompt",
         "name": "Image2 structured quality prompt",
-        "intent": "Keep derived Image2 prompt guidance structured by visible purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.",
+        "intent": "Keep derived Image2 anime and manga storyboard prompt guidance structured by visible shot purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.",
         "influenceAxes": [
           "image2_quality",
           "prompt_boundary",
           "visual_hierarchy",
-          "summary_only"
+          "summary_only",
+          "anime_storyboard"
         ],
         "directives": [
-          "Use Image2 quality guidance only as summary-only export or repair support after the storyboard row fields are confirmed.",
-          "Structure quality prompts around subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.",
+          "Use Image2 quality guidance only as summary-only anime storyboard export or repair support after the storyboard row fields are confirmed.",
+          "Structure quality prompts around character or subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.",
           "Prefer compact visible controls over long universal templates, raw audit notes, or quality adjective stacks."
         ],
         "negativeConstraints": [
@@ -1225,15 +1231,16 @@
       {
         "id": "vg-image2-quality-preset-boundary",
         "name": "Image2 quality preset boundary",
-        "intent": "Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded subject, composition, material, lighting, or forbidden-item structure.",
+        "intent": "Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded anime storyboard subject, composition, material, lighting, or forbidden-item structure.",
         "influenceAxes": [
           "image2_quality",
           "preset_boundary",
           "prompt_boundary",
-          "summary_only"
+          "summary_only",
+          "anime_storyboard"
         ],
         "directives": [
-          "Use quality presets only as optional export guidance after row-grounded prompt structure is present.",
+          "Use quality presets only as optional anime storyboard reference export guidance after row-grounded prompt structure is present.",
           "Keep provider or model preset choices outside current PWA final fields, storyboard headers, and runtime provider binding.",
           "Repair quality-preset overuse by restoring subject, composition, material, lighting, and negative constraints first."
         ],
@@ -1434,16 +1441,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "source_facts",
@@ -1525,7 +1534,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "ensemble_performance": {
@@ -1715,16 +1726,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1805,7 +1818,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "emotional_dialogue": {
@@ -1995,16 +2010,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2085,7 +2102,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "encounter_performance": {
@@ -2275,16 +2294,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2365,7 +2386,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "field_chase": {
@@ -2555,16 +2578,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2645,7 +2670,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "spectacle_showcase": {
@@ -2835,16 +2862,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2925,7 +2954,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "daily_healing": {
@@ -3115,16 +3146,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3205,7 +3238,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -3395,16 +3430,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3485,7 +3522,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "guoman_ensemble_performance": {
@@ -3675,16 +3714,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3765,7 +3806,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "ink_wuxia_combat": {
@@ -3955,16 +3998,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4045,7 +4090,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "eastern_spectacle": {
@@ -4235,16 +4282,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4325,7 +4374,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "xianxia_action": {
@@ -4515,16 +4566,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4605,7 +4658,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "urban_fantasy": {
@@ -4797,16 +4852,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "source_facts",
@@ -4888,7 +4945,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "chinese_war_formation": {
@@ -5078,16 +5137,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5168,7 +5229,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "weapon_highlight": {
@@ -5358,16 +5421,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5448,7 +5513,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "council_strategy": {
@@ -5638,16 +5705,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5728,7 +5797,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "siege_defense": {
@@ -5918,16 +5989,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6008,7 +6081,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "slg_sandbox_view": {
@@ -6198,16 +6273,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6288,7 +6365,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "slg_march_encirclement": {
@@ -6478,16 +6557,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6568,7 +6649,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "slg_city_growth": {
@@ -6758,16 +6841,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6848,7 +6933,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       },
       "slg_battle_report": {
@@ -7038,16 +7125,18 @@
           "Do not add unsupported captions, dialogue, or row text to satisfy a layout.",
           "Do not promise generated video execution.",
           "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-          "Do not claim that a single reference image provides full production coverage.",
+          "Do not treat one storyboard reference image as a complete anime production plan.",
           "Do not force preset panel grids or fixed page slots.",
           "Do not describe generated video execution as supported runtime behavior.",
-          "Do not market a single reference image as full production coverage.",
+          "Do not treat one storyboard reference image as complete anime production coverage.",
           "Do not copy fixed prompt templates, audit notes, audit evidence, local-only identifiers, provider syntax, or raw negative-prompt dictionaries.",
           "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
           "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
           "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
           "Do not bind runtime output to one provider quality parameter or API.",
-          "Do not let quality presets override accepted facts, row purpose, or field boundaries."
+          "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+          "Do not describe generated media execution as supported runtime behavior.",
+          "Do not treat a single storyboard reference image as complete film production coverage."
         ],
         "influenceAxes": [
           "visual_master",
@@ -7128,7 +7217,9 @@
           "no_auto_generation",
           "image2_quality",
           "visual_hierarchy",
-          "preset_boundary"
+          "preset_boundary",
+          "character_consistency",
+          "comic_storyboard"
         ]
       }
     },

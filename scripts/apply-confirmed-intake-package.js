@@ -15,8 +15,12 @@ function scrubGeneratedBoundaryLanguage(value) {
     .replace(/fixed grids/g, "preset grids")
     .replace(/automatic video generation/g, "generated video execution")
     .replace(/automatic generation/g, "generated video execution")
-    .replace(/one image can produce a complete film/g, "a single reference image provides full production coverage")
-    .replace(/one-image-to-film promises/g, "full-production claims from a single reference image")
+    .replace(/one image can produce a complete film/g, "a single storyboard reference image cannot replace anime storyboard planning")
+    .replace(/one-image-to-film promises/g, "single-reference storyboard overclaims")
+    .replace(/Do not claim that a single reference image provides [^.]+ coverage\./g, "Do not treat one storyboard reference image as a complete anime production plan.")
+    .replace(/Do not (?:market) a single reference image as [^.]+ coverage\./g, "Do not treat one storyboard reference image as complete anime production coverage.")
+    .replace(/single reference image provides [^.]+ coverage/g, "one storyboard reference image cannot replace anime storyboard planning")
+    .replace(/(?:market) a single reference image as [^.]+ coverage/g, "treat one storyboard reference image as complete anime production coverage")
     .replace(/source_refs/g, "audit provenance")
     .replace(/source_candidate_refs/g, "audit provenance")
     .replace(/source_url/g, "audit provenance")
@@ -1068,12 +1072,12 @@ const catalog = {
     packId: "vg-storyboard-image-prompt-export",
     ruleId: "rule:storyboard-image-prompt-export",
     title: "Storyboard image prompt export",
-    purpose: "Derive an optional storyboard image reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
-    axes: ["derived_export", "prompt_boundary", "field_boundary", "duration_density"],
+    purpose: "Derive an optional anime or manga storyboard reference prompt export from confirmed storyboard rows without adding final PWA fields, changing export headers, or writing the result back into row fields.",
+    axes: ["derived_export", "prompt_boundary", "field_boundary", "duration_density", "anime_storyboard"],
     directives: [
-      "Build storyboard image prompt export guidance only from confirmed row fields and accepted story facts.",
+      "Build anime, manga, comic, or storyboard reference prompt export guidance only from confirmed row fields and accepted story facts.",
       "Keep the export separate from final storyboard rows, existing table headers, runtime contracts, and provider API calls.",
-      "Use duration and confirmed row count as layout hints while preserving each row's visible shot purpose.",
+      "Use duration and confirmed row count as layout hints while preserving each row's anime storyboard shot purpose.",
     ],
     negatives: [
       "Do not create a new final PWA field or alter existing storyboard export headers.",
@@ -1082,7 +1086,7 @@ const catalog = {
     ],
     targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "duration_profiles"],
     actions: ["export_result", "validate_result"],
-    contextSummary: "Storyboard image prompt export is optional and derived from confirmed row fields only; it does not add final fields, change headers, write back to rows, or expose audit provenance.",
+    contextSummary: "Anime and manga storyboard image prompt export is optional and derived from confirmed row fields only; it does not add final fields, change headers, write back to rows, or expose audit provenance.",
     reviewedAtBucket: "2026-05-28",
   },
   "rw-visual-master-board-from-confirmed-rows": {
@@ -1092,11 +1096,11 @@ const catalog = {
     packId: "dg-visual-master-board-from-confirmed-rows",
     ruleId: "rule:visual-master-board-from-confirmed-rows",
     title: "Visual master board from confirmed rows",
-    purpose: "Summarize a visual master board from confirmed storyboard rows only so image prompt exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
-    axes: ["visual_master", "continuity", "visual_grounding", "prompt_boundary"],
+    purpose: "Summarize a visual master board from confirmed storyboard rows only so anime, manga, and motion-comic reference exports inherit character, environment, palette, lighting, material, and symbol continuity without inventing facts.",
+    axes: ["visual_master", "continuity", "visual_grounding", "prompt_boundary", "character_consistency"],
     directives: [
       "Use confirmed person, visual_description, character_action, camera, shot_size, prompt_text, duration, and safe constraints as the only source for the visual master board.",
-      "Summarize recurring character anchors, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
+      "Summarize recurring character anchors, group consistency, environment logic, palette, lighting, material cues, spatial motifs, and visual symbols as guidance, not new facts.",
       "Keep visual master guidance compact and subordinate to the current row's shot purpose and accepted facts.",
     ],
     negatives: [
@@ -1120,7 +1124,7 @@ const catalog = {
         negatives: ["Do not accept visual master details as new story evidence."],
       },
     ],
-    contextSummary: "Visual master boards are summarized from confirmed rows only; they preserve continuity for image prompt export without adding story facts or replacing row fields.",
+    contextSummary: "Visual master boards are summarized from confirmed rows only; they preserve anime storyboard reference continuity without adding story facts or replacing row fields.",
     reviewedAtBucket: "2026-05-28",
     pwaFields: ["person", "visual_description", "character_action", "camera", "shot_size", "prompt_text", "duration_seconds", "negative_constraints"],
   },
@@ -1131,10 +1135,10 @@ const catalog = {
     packId: "vg-multipanel-layout-boundary",
     ruleId: "rule:multipanel-layout-boundary",
     title: "Multipanel layout boundary",
-    purpose: "Derive multi-panel storyboard image layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.",
-    axes: ["layout_boundary", "duration_density", "shot_split_boundary", "field_boundary"],
+    purpose: "Derive multi-panel anime, manga, or motion-comic storyboard reference layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.",
+    axes: ["layout_boundary", "duration_density", "shot_split_boundary", "field_boundary", "comic_storyboard"],
     directives: [
-      "Use confirmed row count, duration, and visible shot purpose to suggest panel layout.",
+      "Use confirmed row count, duration, and visible anime storyboard shot purpose to suggest panel layout.",
       "Allow one row to remain one panel when the shot is coherent and readable.",
       "Split or group panels only when a real beat, action phase, reaction, spatial relation, or duration need supports it.",
     ],
@@ -1150,8 +1154,8 @@ const catalog = {
         packCollection: "director_rule_packs",
         packId: "dg-multipanel-layout-boundary",
         title: "Multipanel layout director support",
-        purpose: "Keep panel layout tied to row timing, shot function, action phase, and readable visual sequence.",
-        axes: ["shot_intent", "duration_density", "continuity"],
+        purpose: "Keep panel layout tied to row timing, shot function, action phase, and readable anime or manga visual sequence.",
+        axes: ["shot_intent", "duration_density", "continuity", "comic_storyboard"],
         directives: [
           "Choose panel emphasis from shot function and timing.",
           "Preserve row order and continuity when arranging panels.",
@@ -1159,7 +1163,7 @@ const catalog = {
         negatives: ["Do not use layout shape as a substitute for shot purpose."],
       },
     ],
-    contextSummary: "Multi-panel layout follows confirmed row count, row timing, shot purpose, and continuity; preset grids, padding shots, unsupported captions, and layout-driven splitting are blocked.",
+    contextSummary: "Multi-panel anime and manga storyboard layout follows confirmed row count, row timing, shot purpose, and continuity; preset grids, padding shots, unsupported captions, and layout-driven splitting are blocked.",
     reviewedAtBucket: "2026-05-28",
   },
   "rw-image-video-tool-handoff-boundary": {
@@ -1169,21 +1173,21 @@ const catalog = {
     packId: "vg-image-video-tool-handoff-boundary",
     ruleId: "rule:image-video-tool-handoff-boundary",
     title: "Image video tool handoff boundary",
-    purpose: "Keep storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated video execution as supported runtime behavior.",
-    axes: ["tool_handoff", "prompt_boundary", "export_safety", "no_auto_generation"],
+    purpose: "Keep anime storyboard image/video tool handoff as a summary-only reference prompt export without binding to one vendor syntax or treating generated media execution as supported runtime behavior.",
+    axes: ["tool_handoff", "prompt_boundary", "export_safety", "no_auto_generation", "anime_storyboard"],
     directives: [
-      "Describe generic handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
+      "Describe storyboard handoff needs such as reference board, first frame, panel board, motion notes, and duration pacing only when derived from confirmed rows.",
       "Keep provider choice, API syntax, upload mechanics, and generated media handling outside runtime.",
-      "Require manual product review before any image or video generation workflow is treated as supported behavior.",
+      "Require manual storyboard review before any image or video generation workflow is treated as supported behavior.",
     ],
     negatives: [
-      "Do not describe generated video execution as supported runtime behavior.",
+      "Do not describe generated media execution as supported runtime behavior.",
       "Do not bind runtime output to a specific vendor API, hidden syntax, credential flow, or upload payload.",
-      "Do not market a single reference image as full production coverage.",
+      "Do not treat a single storyboard reference image as complete film production coverage.",
     ],
     targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
     actions: ["export_result", "validate_result"],
-    contextSummary: "Image and video tool handoff is summary-only and optional; provider APIs, uploads, generated video execution, and full-production claims from a single reference image remain outside runtime.",
+    contextSummary: "Anime storyboard image and video tool handoff is summary-only and optional; provider APIs, uploads, generated media execution, and single-reference overclaims remain outside runtime.",
     reviewedAtBucket: "2026-05-28",
   },
   "rw-image2-structured-quality-prompt": {
@@ -1193,11 +1197,11 @@ const catalog = {
     packId: "vg-image2-structured-quality-prompt",
     ruleId: "rule:image2-structured-quality-prompt",
     title: "Image2 structured quality prompt",
-    purpose: "Keep derived Image2 prompt guidance structured by visible purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.",
-    axes: ["image2_quality", "prompt_boundary", "visual_hierarchy", "summary_only"],
+    purpose: "Keep derived Image2 anime and manga storyboard prompt guidance structured by visible shot purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.",
+    axes: ["image2_quality", "prompt_boundary", "visual_hierarchy", "summary_only", "anime_storyboard"],
     directives: [
-      "Use Image2 quality guidance only as summary-only export or repair support after the storyboard row fields are confirmed.",
-      "Structure quality prompts around subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.",
+      "Use Image2 quality guidance only as summary-only anime storyboard export or repair support after the storyboard row fields are confirmed.",
+      "Structure quality prompts around character or subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.",
       "Prefer compact visible controls over long universal templates, raw user experience text, or quality adjective stacks.",
     ],
     negatives: [
@@ -1207,7 +1211,7 @@ const catalog = {
     ],
     targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
     actions: ["export_result", "repair_storyboard", "validate_result"],
-    contextSummary: "Image2 quality prompts stay summary-only and structured by visible subject, hierarchy, material, lighting, and concise negative constraints; templates, source text, provider syntax, and writeback are blocked.",
+    contextSummary: "Image2 anime storyboard quality prompts stay summary-only and structured by visible subject, hierarchy, material, lighting, and concise negative constraints; templates, source text, provider syntax, and writeback are blocked.",
     reviewedAtBucket: "2026-05-29",
     pwaFields: ["visual_description", "prompt_text", "negative_constraints"],
   },
@@ -1218,10 +1222,10 @@ const catalog = {
     packId: "vg-image2-quality-preset-boundary",
     ruleId: "rule:image2-quality-preset-boundary",
     title: "Image2 quality preset boundary",
-    purpose: "Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded subject, composition, material, lighting, or forbidden-item structure.",
-    axes: ["image2_quality", "preset_boundary", "prompt_boundary", "summary_only"],
+    purpose: "Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded anime storyboard subject, composition, material, lighting, or forbidden-item structure.",
+    axes: ["image2_quality", "preset_boundary", "prompt_boundary", "summary_only", "anime_storyboard"],
     directives: [
-      "Use quality presets only as optional export guidance after row-grounded prompt structure is present.",
+      "Use quality presets only as optional anime storyboard reference export guidance after row-grounded prompt structure is present.",
       "Keep provider or model preset choices outside current PWA final fields, storyboard headers, and runtime provider binding.",
       "Repair quality-preset overuse by restoring subject, composition, material, lighting, and negative constraints first.",
     ],
@@ -1232,9 +1236,69 @@ const catalog = {
     ],
     targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
     actions: ["export_result", "repair_storyboard", "validate_result"],
-    contextSummary: "Image2 quality presets are optional provider-side export hints; they cannot replace row-grounded subject, composition, material, lighting, or concise negative constraints.",
+    contextSummary: "Image2 quality presets are optional provider-side anime storyboard export hints; they cannot replace row-grounded subject, composition, material, lighting, or concise negative constraints.",
     reviewedAtBucket: "2026-05-29",
     pwaFields: ["prompt_text", "negative_constraints"],
+  },
+  "rw-image2-prompt-variable-system": {
+    mergeTargets: ["rw-image2-structured-quality-prompt", "rw-image2-quality-preset-boundary", "rw-prompt-text-boundary"],
+  },
+  "rw-image-prompt-scene-format-routing": {
+    mergeTargets: ["rw-storyboard-image-prompt-export", "rw-visual-master-board-from-confirmed-rows", "rw-multipanel-layout-boundary"],
+  },
+  "rw-image-text-rendering-constraint": {
+    mergeTargets: ["rw-prompt-text-boundary", "rw-image2-structured-quality-prompt", "rw-image2-quality-preset-boundary"],
+  },
+  "rw-style-transfer-without-fact-drift": {
+    mergeTargets: ["rw-style-contamination-guard", "rw-visual-master-board-from-confirmed-rows", "rw-visual-master-consistency"],
+  },
+  "rw-camera-motion-emotion-mapping": {
+    mergeTargets: ["rw-camera-language-grammar", "rw-shot-intent-taxonomy", "rw-transition-motion-dynamics"],
+  },
+  "rw-image-local-repair-boundary": {
+    mergeTargets: ["rw-field-level-failure-repair-routing", "rw-prompt-load-and-shot-plan-boundary", "rw-validation-no-leakage", "rw-prompt-text-boundary"],
+  },
+  "rw-batch-visual-consistency-anchor": {
+    mergeTargets: ["rw-visual-master-board-from-confirmed-rows", "rw-visual-master-consistency", "rw-multipanel-layout-boundary", "rw-style-contamination-guard"],
+  },
+  "rw-image-prompt-ratio-platform-fit": {
+    mergeTargets: ["rw-multipanel-layout-boundary", "rw-storyboard-image-prompt-export", "rw-image2-quality-preset-boundary"],
+  },
+  "rw-image-negative-constraint-hygiene": {
+    mergeTargets: ["rw-prompt-text-boundary", "rw-image2-structured-quality-prompt", "rw-image2-quality-preset-boundary", "rw-material-light-air-physicality"],
+  },
+  "rw-storyboard-image-export-prompt-assembly": {
+    mergeTargets: ["rw-storyboard-image-prompt-export", "rw-visual-master-board-from-confirmed-rows", "rw-multipanel-layout-boundary", "rw-image-video-tool-handoff-boundary", "rw-prompt-text-boundary"],
+  },
+  "rw-anime-image2-storyboard-prompt-routing": {
+    mergeTargets: ["rw-storyboard-image-prompt-export", "rw-image2-structured-quality-prompt", "rw-prompt-text-boundary"],
+  },
+  "rw-anime-character-reference-sheet-boundary": {
+    mergeTargets: ["rw-character-visual-continuity-anchor", "rw-visual-master-board-from-confirmed-rows", "rw-scene-spatial-prop-continuity-anchor"],
+  },
+  "rw-anime-multipanel-storyboard-layout": {
+    mergeTargets: ["rw-multipanel-layout-boundary", "rw-storyboard-image-prompt-export", "rw-visual-master-board-from-confirmed-rows"],
+  },
+  "rw-anime-key-pose-camera-emotion-map": {
+    mergeTargets: ["rw-anime-key-pose-silhouette-priority", "rw-camera-language-grammar", "rw-shot-intent-taxonomy"],
+  },
+  "rw-anime-background-continuity-anchor": {
+    mergeTargets: ["rw-scene-spatial-prop-continuity-anchor", "rw-visual-master-board-from-confirmed-rows", "rw-material-light-air-physicality"],
+  },
+  "rw-anime-cel-shading-quality-guard": {
+    mergeTargets: ["rw-image2-structured-quality-prompt", "rw-image2-quality-preset-boundary", "rw-material-light-air-physicality", "rw-style-contamination-guard"],
+  },
+  "rw-anime-negative-constraint-hygiene": {
+    mergeTargets: ["rw-style-contamination-guard", "rw-validation-no-leakage", "rw-image2-quality-preset-boundary"],
+  },
+  "rw-anime-image2-variable-slot-template": {
+    mergeTargets: ["rw-image2-structured-quality-prompt", "rw-prompt-text-boundary", "rw-storyboard-image-prompt-export"],
+  },
+  "rw-anime-image-video-handoff-boundary": {
+    mergeTargets: ["rw-image-video-tool-handoff-boundary", "rw-storyboard-image-prompt-export", "rw-prompt-text-boundary"],
+  },
+  "rw-anime-storyboard-sheet-export-assembly": {
+    mergeTargets: ["rw-storyboard-image-prompt-export", "rw-visual-master-board-from-confirmed-rows", "rw-multipanel-layout-boundary", "rw-image-video-tool-handoff-boundary"],
   },
   "rw-scene-type-as-style-prior": {
     mergeTargets: ["rw-scene-driven-style-routing"],
@@ -1310,7 +1374,7 @@ const catalog = {
   },
   "rw-image2-prompt-module-routing": {
     futureQa: true,
-    futureQaReason: "Future export-module routing requires a separate PWA product gate and must not add current final storyboard fields.",
+    futureQaReason: "Future export-module routing requires a separate PWA storyboard export gate and must not add current final storyboard fields.",
   },
 };
 

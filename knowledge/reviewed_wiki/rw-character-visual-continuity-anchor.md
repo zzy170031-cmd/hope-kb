@@ -37,7 +37,6 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - person
 - visual_description
-- character_action
 - prompt_text
 - negative_constraints
 

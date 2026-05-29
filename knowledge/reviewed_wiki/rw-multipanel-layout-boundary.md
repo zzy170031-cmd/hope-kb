@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-Multipanel layout boundary: Derive multi-panel storyboard image layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.
+Multipanel layout boundary: Derive multi-panel anime, manga, or motion-comic storyboard reference layout from confirmed row count, row timing, and shot purpose without forcing fixed grids, padding shots, or captions.
 
 ## Source Basis
 
@@ -23,7 +23,7 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## Claims Summary
 
-- Use confirmed row count, duration, and visible shot purpose to suggest panel layout.
+- Use confirmed row count, duration, and visible anime storyboard shot purpose to suggest panel layout.
 - Allow one row to remain one panel when the shot is coherent and readable.
 - Split or group panels only when a real beat, action phase, reaction, spatial relation, or duration need supports it.
 
@@ -35,12 +35,13 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- shot_size
 - visual_description
 - camera
-- shot_size
-- character_action
 - duration_seconds
 - prompt_text
+- person
+- character_action
 - negative_constraints
 
 ## Negative Constraints
