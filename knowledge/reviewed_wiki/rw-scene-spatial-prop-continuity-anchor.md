@@ -12,7 +12,7 @@ Scene spatial prop continuity anchor: Keep location, left-right relation, eyelin
 
 ## Source Basis
 
-This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
+This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.
 
 ## Applies To
 
@@ -35,11 +35,14 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- person
+- scene_profile
 - visual_description
+- character_action
 - prompt_text
 - negative_constraints
+- person
 - camera
+- shot_size
 
 ## Negative Constraints
 

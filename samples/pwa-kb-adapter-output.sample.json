@@ -137,28 +137,176 @@
           "Do not let style_profile override accepted facts, character identity, scene type, duration, or row objective.",
           "Do not use real IP, real creators, studios, or blocked style categories as runtime style switches."
         ]
+      },
+      {
+        "id": "wg-pwa-21-scene-three-layer-routing",
+        "name": "PWA 21 scene three layer routing",
+        "intent": "Route each PWA scene type through scene profile, writing rewrite, and director storyboard planning before final field assembly.",
+        "influenceAxes": [
+          "scene_type",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity"
+        ],
+        "directives": [
+          "Select the scene type before rewriting body text, storyboard rows, or Image2 export guidance.",
+          "Change narrative objective, conflict engine, relationship mode, space, and action chain when the scene type changes.",
+          "Keep the 21 scene matrix as summary-only routing guidance rather than raw examples or execution material."
+        ],
+        "negativeConstraints": [
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output."
+        ]
+      },
+      {
+        "id": "wg-writing-group-scene-rewrite-profile",
+        "name": "Writing group scene rewrite profile",
+        "intent": "Rewrite accepted story material into scene-specific objective, conflict, relationship, visible beats, and filmable action.",
+        "influenceAxes": [
+          "scene_rewrite",
+          "story_objective",
+          "visible_action",
+          "fact_integrity"
+        ],
+        "directives": [
+          "Rewrite body material around the selected scene objective, obstacle, relationship state, and turning point.",
+          "Expose visible behavior, spatial anchors, and action cause-effect so director rules have filmable material.",
+          "Preserve accepted facts while changing the scene skeleton when the scene type changes."
+        ],
+        "negativeConstraints": [
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile."
+        ]
+      },
+      {
+        "id": "wg-scene-type-plot-beat-variation-matrix",
+        "name": "Scene type plot beat variation matrix",
+        "intent": "Vary plot beats by scene type so story rows do not collapse into one reused pressure template.",
+        "influenceAxes": [
+          "scene_type",
+          "plot_beats",
+          "anti_homogeneity"
+        ],
+        "directives": [
+          "Map each scene type to a distinct objective, obstacle, relationship function, spatial logic, and action chain.",
+          "Use scene-specific beat turns before selecting shot or prompt wording.",
+          "Treat repeated beat skeletons across different scene types as a repair signal."
+        ],
+        "negativeConstraints": [
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed."
+        ]
+      },
+      {
+        "id": "wg-slg-scene-visual-narrative-patterns",
+        "name": "SLG scene writing pattern",
+        "intent": "Describe strategic state and outcome logic before storyboard fields are assembled.",
+        "influenceAxes": [
+          "strategic_objective",
+          "force_relation",
+          "terrain"
+        ],
+        "directives": [
+          "Write force relation, route, terrain, phase, or outcome before visualizing the row."
+        ],
+        "negativeConstraints": [
+          "Do not default to personal chase drama for SLG map or report scenes."
+        ]
+      },
+      {
+        "id": "wg-writer-director-bidirectional-routing",
+        "name": "Writer director bidirectional routing",
+        "intent": "Keep writing and director rules coupled: writing supplies filmable beats, and director planning requests repair when visibility, space, or action logic is missing.",
+        "influenceAxes": [
+          "writer_director_loop",
+          "filmability",
+          "repair_request"
+        ],
+        "directives": [
+          "Writing must provide visible subject, action cause, relationship state, space, and beat turn before director planning.",
+          "Director planning may request rewrite only for filmability gaps, not for free style expansion.",
+          "Keep the loop summary-only until a PWA implementation gate opens explicit trace fields."
+        ],
+        "negativeConstraints": [
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material."
+        ]
+      },
+      {
+        "id": "wg-director-intent-feeds-writing-rewrite",
+        "name": "Director intent feeds writing rewrite",
+        "intent": "Use director-side filmability gaps to request targeted body rewrite without opening new PWA fields.",
+        "influenceAxes": [
+          "repair_request",
+          "scene_rewrite",
+          "filmability"
+        ],
+        "directives": [
+          "Request rewrite when subject, action chain, spatial anchor, gaze relation, or emotional externalization is missing.",
+          "Keep repair requests bounded to accepted facts and current scene type.",
+          "Return the repaired writing beat to storyboard planning instead of generating a second raw prompt."
+        ],
+        "negativeConstraints": [
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls."
+        ]
+      },
+      {
+        "id": "wg-scene-type-writer-director-interlock",
+        "name": "Scene type writer director interlock",
+        "intent": "Bind each scene type to the writing information director planning needs and to the director feedback writing must answer.",
+        "influenceAxes": [
+          "scene_type",
+          "writer_director_loop",
+          "storyboard_export"
+        ],
+        "directives": [
+          "For each scene type, define what writing must expose and what director planning must check before row export.",
+          "Use director feedback to request missing route, rank, prop, space, relation, action, or outcome information.",
+          "Keep scene-type interlock compact in KB summaries and selected rules."
+        ],
+        "negativeConstraints": [
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries."
+        ]
+      },
+      {
+        "id": "wg-pwa21-scene-profile-matrix",
+        "name": "PWA21 scene profile matrix",
+        "intent": "Summarize the PWA 21 scene families as compact routing profiles for writing, director planning, validation, and Image2 storyboard export focus.",
+        "influenceAxes": [
+          "scene_profile",
+          "scene_type",
+          "image2_focus",
+          "anti_homogeneity"
+        ],
+        "directives": [
+          "Use the scene matrix to choose narrative goal, conflict engine, relationship mode, spatial engine, and action chain.",
+          "Expose only compact profile summaries in runtime, never audit material tables or full prompt libraries.",
+          "Use the matrix to detect when a generated body belongs to the old scene type."
+        ],
+        "negativeConstraints": [
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply."
+        ]
       }
     ],
     "directorRulePacks": [
       {
         "id": "dg-director-scheduling-core",
-        "name": "Director scheduling core",
-        "intent": "Guide performance focus, blocking, rhythm, visual attention, and scene-to-shot handoff while preserving accepted story facts.",
+        "name": "Director scheduling support",
+        "intent": "Support visible scene expression through blocking, rhythm, and attention handoff.",
         "influenceAxes": [
           "blocking",
-          "visual_attention",
           "rhythm",
-          "scene_handoff"
+          "visual_attention"
         ],
         "directives": [
-          "Bind blocking, gaze, spacing, reaction, and rhythm to scene objective, conflict, relation, or reveal.",
-          "Use director scheduling to turn accepted story material into visible anime shot guidance.",
-          "Keep task, duration, source boundary, and scene purpose aligned before storyboard generation."
+          "Use staging and attention to make the accepted scene purpose readable.",
+          "Keep director hints subordinate to accepted facts and scene objective."
         ],
         "negativeConstraints": [
-          "Do not let director hints overwrite story facts.",
-          "Do not introduce new people, places, or world rules.",
-          "Do not expose internal KB evidence in storyboard rows."
+          "Do not introduce new people, places, or world rules."
         ]
       },
       {
@@ -680,6 +828,147 @@
         "negativeConstraints": [
           "Do not use layout shape as a substitute for shot purpose."
         ]
+      },
+      {
+        "id": "dg-pwa-21-scene-three-layer-routing",
+        "name": "PWA 21 scene director routing",
+        "intent": "Turn scene type into shot scale, blocking, continuity, and storyboard export focus.",
+        "influenceAxes": [
+          "scene_type",
+          "shot_plan",
+          "image2_focus"
+        ],
+        "directives": [
+          "Bind shot scale, camera, blocking, and continuity to the current scene type and accepted story facts.",
+          "Use Image2 export focus as a scene-specific storyboard reference, not as a video generation promise."
+        ],
+        "negativeConstraints": [
+          "Do not treat generic cinematic atmosphere as a valid scene plan."
+        ]
+      },
+      {
+        "id": "dg-director-group-scene-shot-profile",
+        "name": "Director group scene shot profile",
+        "intent": "Convert scene-specific writing beats into shot size, camera, blocking, action readability, and storyboard sheet focus.",
+        "influenceAxes": [
+          "shot_plan",
+          "blocking",
+          "camera_language",
+          "image2_focus"
+        ],
+        "directives": [
+          "Choose shot size, camera, blocking, and transition logic from the scene objective and visible action.",
+          "Ask for writing repair when subject, space, action chain, relationship state, or emotional externalization is missing.",
+          "Keep storyboard and Image2 export focus tied to the current scene type rather than a generic cinematic template."
+        ],
+        "negativeConstraints": [
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches."
+        ]
+      },
+      {
+        "id": "dg-scene-type-image2-sheet-focus-matrix",
+        "name": "Scene type Image2 sheet focus matrix",
+        "intent": "Bind Image2 storyboard sheet export focus to the current scene type, row purpose, and field-bound negative constraints.",
+        "influenceAxes": [
+          "image2_focus",
+          "scene_type",
+          "storyboard_export",
+          "prompt_boundary"
+        ],
+        "directives": [
+          "Choose Image2 focus from scene-specific subject, action, space, composition, material, lighting, and continuity needs.",
+          "Use storyboard sheet export as a still-reference focus layer, not as complete video or provider execution.",
+          "Pair focus guidance with concise negative constraints that block stale body reuse and unsafe provenance."
+        ],
+        "negativeConstraints": [
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields."
+        ]
+      },
+      {
+        "id": "dg-slg-scene-visual-narrative-patterns",
+        "name": "SLG scene visual narrative patterns",
+        "intent": "Route SLG map, march, city-growth, and battle-report scenes through strategic state, force relation, terrain, data hierarchy, and legible outcome.",
+        "influenceAxes": [
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy"
+        ],
+        "directives": [
+          "For SLG scenes, prioritize strategic objective, force relation, route, terrain, resource phase, or outcome hierarchy over character-only drama.",
+          "Use map, formation, city phase, or report interface composition only as summary-level storyboard guidance.",
+          "Keep UI-like report scenes legible without dumping fake text or raw data."
+        ],
+        "negativeConstraints": [
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material."
+        ]
+      },
+      {
+        "id": "dg-writer-director-bidirectional-routing",
+        "name": "Writer director director-side routing",
+        "intent": "Translate filmable writing beats into shot planning and repair feedback.",
+        "influenceAxes": [
+          "shot_plan",
+          "repair_request",
+          "filmability"
+        ],
+        "directives": [
+          "Request rewrite only when scene facts cannot be staged, framed, or made readable."
+        ],
+        "negativeConstraints": [
+          "Do not request cosmetic style changes as director feedback."
+        ]
+      },
+      {
+        "id": "dg-scene-type-writer-director-interlock",
+        "name": "Scene type director interlock",
+        "intent": "Check scene-specific blocking, camera, action, and export focus against writing-provided facts.",
+        "influenceAxes": [
+          "shot_plan",
+          "scene_type",
+          "repair_request"
+        ],
+        "directives": [
+          "Validate that director choices answer the selected scene type and writing beat."
+        ],
+        "negativeConstraints": [
+          "Do not apply the same shot plan across unrelated scene types."
+        ]
+      },
+      {
+        "id": "dg-pwa21-scene-profile-matrix",
+        "name": "PWA21 scene profile director matrix",
+        "intent": "Select storyboard framing, blocking, and Image2 focus from compact scene profiles.",
+        "influenceAxes": [
+          "shot_plan",
+          "image2_focus",
+          "scene_profile"
+        ],
+        "directives": [
+          "Use scene profile to vary shot plan, attention path, and visual focus across scene families."
+        ],
+        "negativeConstraints": [
+          "Do not reuse one generic storyboard composition for all scene families."
+        ]
+      },
+      {
+        "id": "dg-golden-sample-as-quality-expectation",
+        "name": "Golden sample director expectation",
+        "intent": "Translate quality anchors into scene-specific readability, continuity, and composition checks.",
+        "influenceAxes": [
+          "readability",
+          "continuity",
+          "composition"
+        ],
+        "directives": [
+          "Use golden expectations to ask whether the current scene is readable, distinct, and field-bound."
+        ],
+        "negativeConstraints": [
+          "Do not copy source shot tables or prompt text into storyboard output."
+        ]
       }
     ],
     "validationRulePacks": [
@@ -727,7 +1016,7 @@
       {
         "id": "vg-no-leakage",
         "name": "Validation no leakage",
-        "intent": "Prevent unpublished KB detail, audit registries, hidden prompt templates, internal refs, local-only identifiers, provider configurationurationuration, credential material from leaking into PWA prompts, UI, traces, or exports.",
+        "intent": "Prevent unpublished KB detail, audit registries, hidden prompt templates, internal refs, local-only identifiers, provider configurationurationurationurationurationurationurationurationurationurationuration, credential material from leaking into PWA prompts, UI, traces, or exports.",
         "influenceAxes": [
           "summary_only",
           "export_safety",
@@ -735,7 +1024,7 @@
         ],
         "directives": [
           "Keep runtime snapshots and PWA output summary-only.",
-          "Reject audit material, audit registries, hidden prompt templates, audit graphs, local-only identifiers, provider configurationurationuration, credentials, and internal evidence in user-visible fields.",
+          "Reject audit material, audit registries, hidden prompt templates, audit graphs, local-only identifiers, provider configurationurationurationurationurationurationurationurationurationurationuration, credentials, and internal evidence in user-visible fields.",
           "Keep FutureQA and rejected material out of runtime and adapter downlink."
         ],
         "negativeConstraints": [
@@ -1014,7 +1303,7 @@
         "negativeConstraints": [
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields."
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields."
         ]
       },
       {
@@ -1249,6 +1538,114 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries."
         ]
+      },
+      {
+        "id": "vg-pwa-21-scene-three-layer-routing",
+        "name": "PWA 21 scene stale routing guard",
+        "intent": "Reject stale body reuse and unsafe provenance leakage after scene type changes.",
+        "influenceAxes": [
+          "stale_body",
+          "leakage_guard",
+          "anti_homogeneity"
+        ],
+        "directives": [
+          "Flag output when the body, row plan, or prompt keeps the prior scene skeleton after a scene switch.",
+          "Require summary-only KB routing and field-bound negative constraints."
+        ],
+        "negativeConstraints": [
+          "Do not allow audit provenance, raw prompts, golden sample text, or execution material in runtime fields."
+        ]
+      },
+      {
+        "id": "vg-slg-scene-visual-narrative-patterns",
+        "name": "SLG scene boundary guard",
+        "intent": "Reject fake text dumps, raw data leakage, and wrong-scale drama in SLG scenes.",
+        "influenceAxes": [
+          "data_hierarchy",
+          "leakage_guard",
+          "scale_guard"
+        ],
+        "directives": [
+          "Validate that SLG report or map output stays legible, abstract, and field-bound."
+        ],
+        "negativeConstraints": [
+          "Do not generate unreadable fake UI text or audit material tables."
+        ]
+      },
+      {
+        "id": "vg-pwa-generation-bidirectional-trace",
+        "name": "PWA generation bidirectional trace",
+        "intent": "Keep writer-director coupling traceable in summary-only KB rules while leaving explicit PWA trace fields for a future implementation gate.",
+        "influenceAxes": [
+          "trace_boundary",
+          "writer_director_loop",
+          "summary_only"
+        ],
+        "directives": [
+          "Use selected KB rules and context summaries to show why writing or director repair guidance was applied.",
+          "Keep actual trace fields, UI warnings, and stale-body implementation out of this KB apply gate.",
+          "Validate that summary output contains no audit provenance or raw prompt material."
+        ],
+        "negativeConstraints": [
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material."
+        ]
+      },
+      {
+        "id": "vg-pwa21-scene-profile-matrix",
+        "name": "PWA21 scene profile matrix guard",
+        "intent": "Reject stale scene body, raw matrix leakage, and full16 or 403 overreach in runtime summaries.",
+        "influenceAxes": [
+          "stale_body",
+          "leakage_guard",
+          "asset_boundary"
+        ],
+        "directives": [
+          "Validate compact scene-matrix use without raw rows, raw prompts, or asset reruns."
+        ],
+        "negativeConstraints": [
+          "Do not require full16, 403case, provider calls, image generation, or video generation in this KB apply."
+        ]
+      },
+      {
+        "id": "vg-golden-sample-as-quality-expectation",
+        "name": "Golden sample as quality expectation",
+        "intent": "Use golden samples only as abstract quality expectations, negative controls, and anti-homogeneity anchors, never as raw runtime samples.",
+        "influenceAxes": [
+          "quality_expectation",
+          "golden_boundary",
+          "anti_homogeneity",
+          "leakage_guard"
+        ],
+        "directives": [
+          "Convert golden samples into abstract expectations for scene differentiation, density, continuity, and readability.",
+          "Use golden anchors to check whether a scene type changed objective, conflict, relationship, space, and action chain.",
+          "Keep 403 and full16 artifacts as boundary evidence only unless a separate QA gate opens."
+        ],
+        "negativeConstraints": [
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches."
+        ]
+      },
+      {
+        "id": "vg-scene-switch-stale-body-detection",
+        "name": "Scene switch stale body detection",
+        "intent": "Detect when a scene switch keeps the previous body skeleton, narrative objective, space, or action chain.",
+        "influenceAxes": [
+          "stale_body",
+          "scene_switch",
+          "anti_homogeneity",
+          "future_qa"
+        ],
+        "directives": [
+          "Treat unchanged objective, conflict engine, relationship mode, space, or action chain after a scene switch as stale-body risk.",
+          "Use KB summary rules to flag stale body reuse now; leave exact PWA trace fields and UI behavior to a future implementation gate.",
+          "Repair by returning to the selected scene profile and writing/director interlock."
+        ],
+        "negativeConstraints": [
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
+        ]
       }
     ],
     "sceneMappings": {
@@ -1258,7 +1655,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1287,7 +1692,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1318,7 +1731,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "hot blood battle: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -1407,7 +1826,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -1452,7 +1871,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "source_facts",
@@ -1536,7 +1981,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "ensemble_performance": {
@@ -1545,7 +2014,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1574,7 +2051,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1605,7 +2090,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1692,7 +2183,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -1737,7 +2228,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -1820,7 +2337,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "emotional_dialogue": {
@@ -1829,7 +2370,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -1858,7 +2407,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -1889,7 +2446,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "emotional dialogue: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -1976,7 +2539,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -2021,7 +2584,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2104,7 +2693,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "encounter_performance": {
@@ -2113,7 +2726,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2142,7 +2763,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2173,7 +2802,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "encounter performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -2260,7 +2895,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -2305,7 +2940,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2388,7 +3049,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "field_chase": {
@@ -2397,7 +3082,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2426,7 +3119,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2457,7 +3158,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "field chase: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -2544,7 +3251,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -2589,7 +3296,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2672,7 +3405,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "spectacle_showcase": {
@@ -2681,7 +3438,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2710,7 +3475,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -2741,7 +3514,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "spectacle showcase: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -2828,7 +3607,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -2873,7 +3652,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -2956,7 +3761,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "daily_healing": {
@@ -2965,7 +3794,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -2994,7 +3831,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3025,7 +3870,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "daily healing: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -3112,7 +3963,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -3157,7 +4008,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3240,7 +4117,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "guoman_hot_blood_combat": {
@@ -3249,7 +4150,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3278,7 +4187,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3309,7 +4226,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "guoman hot blood combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3396,7 +4319,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -3441,7 +4364,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3524,7 +4473,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "guoman_ensemble_performance": {
@@ -3533,7 +4506,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3562,7 +4543,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3593,7 +4582,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "guoman ensemble performance: Performance scenes require stable identity, visible emotion through action, shot-scale-aware expression cues, camera grammar, and scene-bound light or material detail.",
         "negativeConstraints": [
@@ -3680,7 +4675,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -3725,7 +4720,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -3808,7 +4829,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "ink_wuxia_combat": {
@@ -3817,7 +4862,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -3846,7 +4899,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -3877,7 +4938,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "ink wuxia combat: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -3964,7 +5031,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -4009,7 +5076,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4092,7 +5185,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "eastern_spectacle": {
@@ -4101,7 +5218,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4130,7 +5255,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4161,7 +5294,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "eastern spectacle: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -4248,7 +5387,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -4293,7 +5432,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4376,7 +5541,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "xianxia_action": {
@@ -4385,7 +5574,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4414,7 +5611,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4445,7 +5650,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "xianxia action: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -4532,7 +5743,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -4577,7 +5788,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -4660,7 +5897,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "urban_fantasy": {
@@ -4669,7 +5930,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4698,7 +5967,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -4729,7 +6006,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "urban fantasy: Spectacle scenes require clear spatial stakes, physical atmosphere, visual master continuity, camera readability, and prompt text that stays tied to accepted facts.",
         "negativeConstraints": [
@@ -4818,7 +6101,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -4863,7 +6146,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "source_facts",
@@ -4947,7 +6256,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "chinese_war_formation": {
@@ -4956,7 +6289,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -4985,7 +6326,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5016,7 +6365,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "chinese war formation: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5103,7 +6458,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -5148,7 +6503,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5231,7 +6612,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "weapon_highlight": {
@@ -5240,7 +6645,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -5269,7 +6682,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5300,7 +6721,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "weapon highlight: Conflict scenes require readable pressure, spatial relation, action payoff, visual master continuity, camera grammar, physical feedback, expression physicalization, and motion continuity.",
         "negativeConstraints": [
@@ -5387,7 +6814,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -5432,7 +6859,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5515,7 +6968,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "council_strategy": {
@@ -5524,7 +7001,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -5553,7 +7038,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5584,7 +7077,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "council strategy: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5671,7 +7170,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -5716,7 +7215,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -5799,7 +7324,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "siege_defense": {
@@ -5808,7 +7357,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -5837,7 +7394,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -5868,7 +7433,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "siege defense: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -5955,7 +7526,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -6000,7 +7571,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6083,7 +7680,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "slg_sandbox_view": {
@@ -6092,7 +7713,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -6121,7 +7750,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -6152,7 +7789,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "slg sandbox view: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -6239,7 +7882,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -6284,7 +7927,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6367,7 +8036,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "slg_march_encirclement": {
@@ -6376,7 +8069,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -6405,7 +8106,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -6436,7 +8145,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "slg march encirclement: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -6523,7 +8238,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -6568,7 +8283,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6651,7 +8392,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "slg_city_growth": {
@@ -6660,7 +8425,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -6689,7 +8462,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -6720,7 +8501,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "slg city growth: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -6807,7 +8594,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -6852,7 +8639,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -6935,7 +8748,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       },
       "slg_battle_report": {
@@ -6944,7 +8781,15 @@
           "wg-scene-expression-visible-action",
           "wg-intent-to-story-task-routing",
           "wg-dialogue-narration-allocation-rules",
-          "wg-accepted-body-to-style-profile"
+          "wg-accepted-body-to-style-profile",
+          "wg-pwa-21-scene-three-layer-routing",
+          "wg-writing-group-scene-rewrite-profile",
+          "wg-scene-type-plot-beat-variation-matrix",
+          "wg-slg-scene-visual-narrative-patterns",
+          "wg-writer-director-bidirectional-routing",
+          "wg-director-intent-feeds-writing-rewrite",
+          "wg-scene-type-writer-director-interlock",
+          "wg-pwa21-scene-profile-matrix"
         ],
         "directorRulePackIds": [
           "dg-director-scheduling-core",
@@ -6973,7 +8818,15 @@
           "dg-chinese-heritage-style-scene-routing",
           "dg-retrofuture-punk-style-scene-routing",
           "dg-visual-master-board-from-confirmed-rows",
-          "dg-multipanel-layout-boundary"
+          "dg-multipanel-layout-boundary",
+          "dg-pwa-21-scene-three-layer-routing",
+          "dg-director-group-scene-shot-profile",
+          "dg-scene-type-image2-sheet-focus-matrix",
+          "dg-slg-scene-visual-narrative-patterns",
+          "dg-writer-director-bidirectional-routing",
+          "dg-scene-type-writer-director-interlock",
+          "dg-pwa21-scene-profile-matrix",
+          "dg-golden-sample-as-quality-expectation"
         ],
         "validationRulePackIds": [
           "vg-prompt-text-boundary",
@@ -7004,7 +8857,13 @@
           "vg-multipanel-layout-boundary",
           "vg-image-video-tool-handoff-boundary",
           "vg-image2-structured-quality-prompt",
-          "vg-image2-quality-preset-boundary"
+          "vg-image2-quality-preset-boundary",
+          "vg-pwa-21-scene-three-layer-routing",
+          "vg-slg-scene-visual-narrative-patterns",
+          "vg-pwa-generation-bidirectional-trace",
+          "vg-pwa21-scene-profile-matrix",
+          "vg-golden-sample-as-quality-expectation",
+          "vg-scene-switch-stale-body-detection"
         ],
         "sceneProfile": "slg battle report: Epic scenes require readable formation, strategic direction, macro-to-micro camera logic, motion dynamics, and summary-only prompt support.",
         "negativeConstraints": [
@@ -7091,7 +8950,7 @@
           "Do not move dialogue across rows or invent exposition to fill duration.",
           "Do not rewrite every field with a long universal prompt template.",
           "Do not use style words to overwrite facts or field responsibilities.",
-          "Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.",
+          "Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.",
           "Do not route style from a free-floating alias list when scene type and accepted body conflict with it.",
           "Do not stack multiple style families to make a row look richer.",
           "Do not use style routing to bypass person, action, continuity, camera, shot size, or duration constraints.",
@@ -7136,7 +8995,33 @@
           "Do not bind runtime output to one provider quality parameter or API.",
           "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
           "Do not describe generated media execution as supported runtime behavior.",
-          "Do not treat a single storyboard reference image as complete film production coverage."
+          "Do not treat a single storyboard reference image as complete film production coverage.",
+          "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+          "Do not expose audit provenance, audit-only quality anchors, audit prompts, or local-only identifiers in runtime output.",
+          "Do not leave old body structure in place after changing scene type.",
+          "Do not add unaccepted facts or audit material wording to fill a scene profile.",
+          "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+          "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+          "Do not only swap mood, lighting, or genre adjectives.",
+          "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed.",
+          "Do not export a generic quality prompt that ignores scene type.",
+          "Do not write generated images, execution material, or raw prompt libraries back into KB runtime fields.",
+          "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+          "Do not expose raw tables, local assets, audit provenance, or execution material.",
+          "Do not invent new runtime fields or UI controls in this KB apply gate.",
+          "Do not turn director feedback into hidden prompt text or execution material.",
+          "Do not treat director intent as a free style switch.",
+          "Do not add real director, studio, or IP names to runtime style controls.",
+          "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+          "Do not expose raw matrix rows, source text, or prompt libraries.",
+          "Do not add PWA fields, adapter schema, UI state, or execution material in this gate.",
+          "Do not expose audit provenance, unpublished KB detail, local-only identifiers, fingerprints, credential material, or credential material.",
+          "Do not copy complete scene tables, golden rows, provider prompt text, or audit wording.",
+          "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+          "Do not copy audit-only quality anchors text, complete shot tables, hidden prompt templates, audit provenance, or execution material.",
+          "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+          "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+          "Do not expose prior prompt, audit provenance, or unpublished KB detail while checking stale content."
         ],
         "influenceAxes": [
           "visual_master",
@@ -7219,7 +9104,31 @@
           "visual_hierarchy",
           "preset_boundary",
           "character_consistency",
-          "comic_storyboard"
+          "comic_storyboard",
+          "writing_rewrite",
+          "director_plan",
+          "anti_homogeneity",
+          "scene_rewrite",
+          "story_objective",
+          "shot_plan",
+          "image2_focus",
+          "plot_beats",
+          "storyboard_export",
+          "slg_scene",
+          "strategic_state",
+          "map_view",
+          "data_hierarchy",
+          "writer_director_loop",
+          "filmability",
+          "repair_request",
+          "trace_boundary",
+          "scene_profile",
+          "quality_expectation",
+          "golden_boundary",
+          "leakage_guard",
+          "stale_body",
+          "scene_switch",
+          "future_qa"
         ]
       }
     },
@@ -7295,10 +9204,8 @@
       "overlay_payload",
       "prompt_construction_middleware",
       "provider_config",
-      "api_key",
-      "token",
-      "secret",
-      "local_environment_path"
+      "credential_material",
+      "local_only_identifier"
     ]
   },
   "fail_closed": {
@@ -7310,7 +9217,7 @@
       "unsafe_runtime_safety_flag",
       "partial_scene_catalog_used_as_full_product_catalog",
       "unresolved_rule_pack_reference",
-      "raw_or_secret_field_present"
+      "credential_or_raw_field_present"
     ]
   }
 }

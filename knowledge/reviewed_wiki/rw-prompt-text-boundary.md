@@ -12,7 +12,7 @@ Prompt text boundary: Ensure prompt_text is a clean AI anime generation-facing f
 
 ## Source Basis
 
-This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
+This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.
 
 ## Applies To
 
@@ -37,18 +37,17 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- prompt_text
+- scene_profile
 - visual_description
+- character_action
+- prompt_text
+- negative_constraints
 - camera
 - shot_size
-- negative_constraints
-- person
-- character_action
-- duration_seconds
 
 ## Negative Constraints
 
-- Do not expose trace refs, schema IDs, audit-only provenance, raw KB, local paths, or internal hashes.
+- Do not expose trace refs, schema IDs, audit-only provenance, unpublished KB detail, local-only identifiers, or internal fingerprints.
 - Do not emit empty prompt_text.
 - Do not paste style alias catalogs or blocked style labels into prompt_text.
 - Do not mix note, status, governance evidence, or repair traces into final fields.

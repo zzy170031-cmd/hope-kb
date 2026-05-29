@@ -25,7 +25,9 @@ function scrubGeneratedBoundaryLanguage(value) {
     .replace(/source_candidate_refs/g, "audit provenance")
     .replace(/source_url/g, "audit provenance")
     .replace(/source_title/g, "audit provenance")
+    .replace(/source refs?/gi, "audit provenance")
     .replace(/source registers?/gi, "audit registries")
+    .replace(/source prompts?/gi, "audit prompts")
     .replace(/source article wording/gi, "audit wording")
     .replace(/source evidence/gi, "audit evidence")
     .replace(/source images?/gi, "audit images")
@@ -34,6 +36,8 @@ function scrubGeneratedBoundaryLanguage(value) {
     .replace(/raw source text/gi, "audit text")
     .replace(/raw source/gi, "audit material")
     .replace(/raw article text/gi, "audit text")
+    .replace(/raw golden sample rows?/gi, "audit-only quality anchors")
+    .replace(/raw golden samples?/gi, "audit-only quality anchors")
     .replace(/raw prompt text/gi, "hidden prompt text")
     .replace(/raw graphs?/gi, "audit graphs")
     .replace(/raw KB rows?/gi, "unpublished KB detail")
@@ -41,11 +45,14 @@ function scrubGeneratedBoundaryLanguage(value) {
     .replace(/prompt bodies/gi, "hidden prompt templates")
     .replace(/prompt body/gi, "hidden prompt template")
     .replace(/prompt_body/g, "hidden prompt template")
+    .replace(/local files?/gi, "local-only identifiers")
     .replace(/local paths?/gi, "local-only identifiers")
     .replace(/internal hashes/gi, "internal fingerprints")
     .replace(/hashes/gi, "fingerprints")
     .replace(/hash/gi, "fingerprint")
+    .replace(/provider payloads?/gi, "execution material")
     .replace(/API key\/token\/provider header leakage/gi, "credential-surface leakage")
+    .replace(/API keys?/gi, "credential material")
     .replace(/keys, tokens, and secrets/gi, "credential material")
     .replace(/tokens/gi, "credential material")
     .replace(/token/gi, "credential material")
@@ -1372,6 +1379,501 @@ const catalog = {
   "rw-image2-local-repair-prompt-boundary": {
     mergeTargets: ["rw-field-level-failure-repair-routing", "rw-prompt-load-and-shot-plan-boundary", "rw-validation-no-leakage"],
   },
+  "rw-pwa-21-scene-three-layer-routing": {
+    wikiType: "scene_routing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-pwa-21-scene-three-layer-routing",
+    ruleId: "rule:pwa-21-scene-three-layer-routing",
+    title: "PWA 21 scene three layer routing",
+    purpose: "Route each PWA scene type through scene profile, writing rewrite, and director storyboard planning before final field assembly.",
+    axes: ["scene_type", "writing_rewrite", "director_plan", "anti_homogeneity"],
+    directives: [
+      "Select the scene type before rewriting body text, storyboard rows, or Image2 export guidance.",
+      "Change narrative objective, conflict engine, relationship mode, space, and action chain when the scene type changes.",
+      "Keep the 21 scene matrix as summary-only routing guidance rather than raw examples or provider payload.",
+    ],
+    negatives: [
+      "Do not reuse old body, chase, evidence, rain, alley, or pursuit templates after a scene type switch.",
+      "Do not expose audit provenance, raw golden samples, source prompts, or local files in runtime output.",
+    ],
+    targets: ["writing_rule_packs", "director_rule_packs", "validation_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["create_story_task", "generate_storyboard", "export_result", "validate_result"],
+    contextSummary: "PWA scene routing starts from a 21 scene matrix; a scene switch must change story objective, conflict engine, relationship mode, space, and action chain, not only atmosphere words.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "camera", "shot_size", "prompt_text", "negative_constraints"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-pwa-21-scene-three-layer-routing",
+        title: "PWA 21 scene director routing",
+        purpose: "Turn scene type into shot scale, blocking, continuity, and storyboard export focus.",
+        axes: ["scene_type", "shot_plan", "image2_focus"],
+        directives: [
+          "Bind shot scale, camera, blocking, and continuity to the current scene type and accepted story facts.",
+          "Use Image2 export focus as a scene-specific storyboard reference, not as a video generation promise.",
+        ],
+        negatives: ["Do not treat generic cinematic atmosphere as a valid scene plan."],
+      },
+      {
+        packCollection: "validation_rule_packs",
+        packId: "vg-pwa-21-scene-three-layer-routing",
+        title: "PWA 21 scene stale routing guard",
+        purpose: "Reject stale body reuse and unsafe provenance leakage after scene type changes.",
+        axes: ["stale_body", "leakage_guard", "anti_homogeneity"],
+        directives: [
+          "Flag output when the body, row plan, or prompt keeps the prior scene skeleton after a scene switch.",
+          "Require summary-only KB routing and field-bound negative constraints.",
+        ],
+        negatives: ["Do not allow source refs, raw prompts, golden sample text, or provider payload in runtime fields."],
+      },
+    ],
+  },
+  "rw-writing-group-scene-rewrite-profile": {
+    wikiType: "writing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-writing-group-scene-rewrite-profile",
+    ruleId: "rule:writing-group-scene-rewrite-profile",
+    title: "Writing group scene rewrite profile",
+    purpose: "Rewrite accepted story material into scene-specific objective, conflict, relationship, visible beats, and filmable action.",
+    axes: ["scene_rewrite", "story_objective", "visible_action", "fact_integrity"],
+    directives: [
+      "Rewrite body material around the selected scene objective, obstacle, relationship state, and turning point.",
+      "Expose visible behavior, spatial anchors, and action cause-effect so director rules have filmable material.",
+      "Preserve accepted facts while changing the scene skeleton when the scene type changes.",
+    ],
+    negatives: [
+      "Do not leave old body structure in place after changing scene type.",
+      "Do not add unaccepted facts or raw source wording to fill a scene profile.",
+    ],
+    targets: ["writing_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary"],
+    actions: ["create_story_task", "generate_storyboard", "validate_result"],
+    contextSummary: "Writing rewrite must provide scene objective, conflict engine, relationship state, visible beats, space, and action logic for the selected scene type.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "prompt_text"],
+  },
+  "rw-director-group-scene-shot-profile": {
+    wikiType: "director_scheduling_rule",
+    packCollection: "director_rule_packs",
+    ruleGroup: "director_group",
+    packId: "dg-director-group-scene-shot-profile",
+    ruleId: "rule:director-group-scene-shot-profile",
+    title: "Director group scene shot profile",
+    purpose: "Convert scene-specific writing beats into shot size, camera, blocking, action readability, and storyboard sheet focus.",
+    axes: ["shot_plan", "blocking", "camera_language", "image2_focus"],
+    directives: [
+      "Choose shot size, camera, blocking, and transition logic from the scene objective and visible action.",
+      "Ask for writing repair when subject, space, action chain, relationship state, or emotional externalization is missing.",
+      "Keep storyboard and Image2 export focus tied to the current scene type rather than a generic cinematic template.",
+    ],
+    negatives: [
+      "Do not use director vocabulary as decoration when the writing beat is not filmable.",
+      "Do not turn abstract director methods into real-director, studio, IP, or style switches.",
+    ],
+    targets: ["director_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["generate_storyboard", "repair_storyboard", "validate_result"],
+    contextSummary: "Director planning derives camera, shot size, blocking, continuity, and Image2 focus from filmable writing beats and requests repair when the body lacks visible action.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["camera", "shot_size", "visual_description", "character_action", "prompt_text", "negative_constraints"],
+  },
+  "rw-scene-type-plot-beat-variation-matrix": {
+    wikiType: "writing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-scene-type-plot-beat-variation-matrix",
+    ruleId: "rule:scene-type-plot-beat-variation-matrix",
+    title: "Scene type plot beat variation matrix",
+    purpose: "Vary plot beats by scene type so story rows do not collapse into one reused pressure template.",
+    axes: ["scene_type", "plot_beats", "anti_homogeneity"],
+    directives: [
+      "Map each scene type to a distinct objective, obstacle, relationship function, spatial logic, and action chain.",
+      "Use scene-specific beat turns before selecting shot or prompt wording.",
+      "Treat repeated beat skeletons across different scene types as a repair signal.",
+    ],
+    negatives: ["Do not only swap mood, lighting, or genre adjectives.", "Do not preserve a prior scene's chase or evidence skeleton when the scene type has changed."],
+    targets: ["writing_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary"],
+    actions: ["create_story_task", "generate_storyboard", "validate_result"],
+    contextSummary: "Scene types require distinct plot-beat skeletons; changing only atmosphere or label is not enough.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "prompt_text"],
+  },
+  "rw-scene-type-image2-sheet-focus-matrix": {
+    wikiType: "director_scheduling_rule",
+    packCollection: "director_rule_packs",
+    ruleGroup: "director_group",
+    packId: "dg-scene-type-image2-sheet-focus-matrix",
+    ruleId: "rule:scene-type-image2-sheet-focus-matrix",
+    title: "Scene type Image2 sheet focus matrix",
+    purpose: "Bind Image2 storyboard sheet export focus to the current scene type, row purpose, and field-bound negative constraints.",
+    axes: ["image2_focus", "scene_type", "storyboard_export", "prompt_boundary"],
+    directives: [
+      "Choose Image2 focus from scene-specific subject, action, space, composition, material, lighting, and continuity needs.",
+      "Use storyboard sheet export as a still-reference focus layer, not as complete video or provider execution.",
+      "Pair focus guidance with concise negative constraints that block stale body reuse and unsafe provenance.",
+    ],
+    negatives: [
+      "Do not export a generic quality prompt that ignores scene type.",
+      "Do not write generated images, provider payload, or raw prompt libraries back into KB runtime fields.",
+    ],
+    targets: ["director_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "scene_mappings"],
+    actions: ["export_result", "validate_result"],
+    contextSummary: "Image2 storyboard sheet focus is selected by scene type and row purpose; it remains still-reference guidance with no provider payload or raw prompt material.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "prompt_text", "negative_constraints"],
+  },
+  "rw-slg-scene-visual-narrative-patterns": {
+    wikiType: "scene_routing_rule",
+    packCollection: "director_rule_packs",
+    ruleGroup: "director_group",
+    packId: "dg-slg-scene-visual-narrative-patterns",
+    ruleId: "rule:slg-scene-visual-narrative-patterns",
+    title: "SLG scene visual narrative patterns",
+    purpose: "Route SLG map, march, city-growth, and battle-report scenes through strategic state, force relation, terrain, data hierarchy, and legible outcome.",
+    axes: ["slg_scene", "strategic_state", "map_view", "data_hierarchy"],
+    directives: [
+      "For SLG scenes, prioritize strategic objective, force relation, route, terrain, resource phase, or outcome hierarchy over character-only drama.",
+      "Use map, formation, city phase, or report interface composition only as summary-level storyboard guidance.",
+      "Keep UI-like report scenes legible without dumping fake text or raw data.",
+    ],
+    negatives: [
+      "Do not shrink SLG scenes into solo running, alley pursuit, or ordinary dialogue drama.",
+      "Do not expose raw tables, local assets, source refs, or provider payload.",
+    ],
+    targets: ["writing_rule_packs", "director_rule_packs", "validation_rule_packs", "scene_mappings", "selected_kb_rules", "negative_constraints", "kb_context_summary"],
+    actions: ["create_story_task", "generate_storyboard", "export_result", "validate_result"],
+    contextSummary: "SLG scenes use strategic state, map relation, formation, route, resource phase, or report hierarchy instead of ordinary person-scale chase templates.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "camera", "shot_size", "character_action", "prompt_text", "negative_constraints"],
+    additionalPacks: [
+      {
+        packCollection: "writing_rule_packs",
+        packId: "wg-slg-scene-visual-narrative-patterns",
+        title: "SLG scene writing pattern",
+        purpose: "Describe strategic state and outcome logic before storyboard fields are assembled.",
+        axes: ["strategic_objective", "force_relation", "terrain"],
+        directives: ["Write force relation, route, terrain, phase, or outcome before visualizing the row."],
+        negatives: ["Do not default to personal chase drama for SLG map or report scenes."],
+      },
+      {
+        packCollection: "validation_rule_packs",
+        packId: "vg-slg-scene-visual-narrative-patterns",
+        title: "SLG scene boundary guard",
+        purpose: "Reject fake text dumps, raw data leakage, and wrong-scale drama in SLG scenes.",
+        axes: ["data_hierarchy", "leakage_guard", "scale_guard"],
+        directives: ["Validate that SLG report or map output stays legible, abstract, and field-bound."],
+        negatives: ["Do not generate unreadable fake UI text or raw source tables."],
+      },
+    ],
+  },
+  "rw-writer-director-bidirectional-routing": {
+    wikiType: "scene_routing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-writer-director-bidirectional-routing",
+    ruleId: "rule:writer-director-bidirectional-routing",
+    title: "Writer director bidirectional routing",
+    purpose: "Keep writing and director rules coupled: writing supplies filmable beats, and director planning requests repair when visibility, space, or action logic is missing.",
+    axes: ["writer_director_loop", "filmability", "repair_request"],
+    directives: [
+      "Writing must provide visible subject, action cause, relationship state, space, and beat turn before director planning.",
+      "Director planning may request rewrite only for filmability gaps, not for free style expansion.",
+      "Keep the loop summary-only until a PWA implementation gate opens explicit trace fields.",
+    ],
+    negatives: [
+      "Do not invent new runtime fields or UI controls in this KB apply gate.",
+      "Do not turn director feedback into raw prompt text or provider payload.",
+    ],
+    targets: ["writing_rule_packs", "director_rule_packs", "validation_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary"],
+    actions: ["create_story_task", "generate_storyboard", "export_result", "validate_result"],
+    contextSummary: "Writing provides filmable beats and director planning sends bounded repair requests for missing subject, action chain, space, gaze relation, or externalized emotion.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "camera", "shot_size", "prompt_text"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-writer-director-bidirectional-routing",
+        title: "Writer director director-side routing",
+        purpose: "Translate filmable writing beats into shot planning and repair feedback.",
+        axes: ["shot_plan", "repair_request", "filmability"],
+        directives: ["Request rewrite only when scene facts cannot be staged, framed, or made readable."],
+        negatives: ["Do not request cosmetic style changes as director feedback."],
+      },
+    ],
+  },
+  "rw-director-intent-feeds-writing-rewrite": {
+    wikiType: "writing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-director-intent-feeds-writing-rewrite",
+    ruleId: "rule:director-intent-feeds-writing-rewrite",
+    title: "Director intent feeds writing rewrite",
+    purpose: "Use director-side filmability gaps to request targeted body rewrite without opening new PWA fields.",
+    axes: ["repair_request", "scene_rewrite", "filmability"],
+    directives: [
+      "Request rewrite when subject, action chain, spatial anchor, gaze relation, or emotional externalization is missing.",
+      "Keep repair requests bounded to accepted facts and current scene type.",
+      "Return the repaired writing beat to storyboard planning instead of generating a second raw prompt.",
+    ],
+    negatives: ["Do not treat director intent as a free style switch.", "Do not add real director, studio, or IP names to runtime style controls."],
+    targets: ["writing_rule_packs", "director_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary"],
+    actions: ["create_story_task", "generate_storyboard", "validate_result"],
+    contextSummary: "Director feedback may ask writing to repair missing filmable subject, action, space, gaze, or externalized emotion while staying inside accepted facts.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "prompt_text"],
+  },
+  "rw-scene-type-writer-director-interlock": {
+    wikiType: "scene_routing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-scene-type-writer-director-interlock",
+    ruleId: "rule:scene-type-writer-director-interlock",
+    title: "Scene type writer director interlock",
+    purpose: "Bind each scene type to the writing information director planning needs and to the director feedback writing must answer.",
+    axes: ["scene_type", "writer_director_loop", "storyboard_export"],
+    directives: [
+      "For each scene type, define what writing must expose and what director planning must check before row export.",
+      "Use director feedback to request missing route, rank, prop, space, relation, action, or outcome information.",
+      "Keep scene-type interlock compact in KB summaries and selected rules.",
+    ],
+    negatives: [
+      "Do not allow a scene type label to stand in for plot, space, action, or relationship logic.",
+      "Do not expose raw matrix rows, source text, or prompt libraries.",
+    ],
+    targets: ["writing_rule_packs", "director_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["create_story_task", "generate_storyboard", "export_result", "validate_result"],
+    contextSummary: "Scene type interlock tells writing what filmable information to supply and tells director planning what to verify or ask back before storyboard/export.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "camera", "shot_size", "prompt_text", "negative_constraints"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-scene-type-writer-director-interlock",
+        title: "Scene type director interlock",
+        purpose: "Check scene-specific blocking, camera, action, and export focus against writing-provided facts.",
+        axes: ["shot_plan", "scene_type", "repair_request"],
+        directives: ["Validate that director choices answer the selected scene type and writing beat."],
+        negatives: ["Do not apply the same shot plan across unrelated scene types."],
+      },
+    ],
+  },
+  "rw-pwa-generation-bidirectional-trace": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-pwa-generation-bidirectional-trace",
+    ruleId: "rule:pwa-generation-bidirectional-trace",
+    title: "PWA generation bidirectional trace",
+    purpose: "Keep writer-director coupling traceable in summary-only KB rules while leaving explicit PWA trace fields for a future implementation gate.",
+    axes: ["trace_boundary", "writer_director_loop", "summary_only"],
+    directives: [
+      "Use selected KB rules and context summaries to show why writing or director repair guidance was applied.",
+      "Keep actual trace fields, UI warnings, and stale-body implementation out of this KB apply gate.",
+      "Validate that summary output contains no audit provenance or raw prompt material.",
+    ],
+    negatives: [
+      "Do not add PWA fields, adapter schema, UI state, or provider payload in this gate.",
+      "Do not expose source refs, raw KB rows, local paths, hashes, secrets, or API keys.",
+    ],
+    targets: ["validation_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["create_story_task", "generate_storyboard", "export_result", "validate_result"],
+    contextSummary: "Writer-director coupling is traceable through selected KB rules and compact summaries; explicit PWA trace fields remain a future implementation gate.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["negative_constraints", "prompt_text"],
+  },
+  "rw-pwa21-scene-profile-matrix": {
+    wikiType: "scene_routing_rule",
+    packCollection: "writing_rule_packs",
+    ruleGroup: "writing_group",
+    packId: "wg-pwa21-scene-profile-matrix",
+    ruleId: "rule:pwa21-scene-profile-matrix",
+    title: "PWA21 scene profile matrix",
+    purpose: "Summarize the PWA 21 scene families as compact routing profiles for writing, director planning, validation, and Image2 storyboard export focus.",
+    axes: ["scene_profile", "scene_type", "image2_focus", "anti_homogeneity"],
+    directives: [
+      "Use the scene matrix to choose narrative goal, conflict engine, relationship mode, spatial engine, and action chain.",
+      "Expose only compact profile summaries in runtime, never raw source tables or full prompt libraries.",
+      "Use the matrix to detect when a generated body belongs to the old scene type.",
+    ],
+    negatives: [
+      "Do not copy complete scene tables, golden rows, provider prompt text, or source article wording.",
+      "Do not treat 403 or full16 assets as required reruns for this KB apply.",
+    ],
+    targets: ["writing_rule_packs", "director_rule_packs", "validation_rule_packs", "scene_mappings", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["create_story_task", "generate_storyboard", "repair_storyboard", "export_result", "validate_result"],
+    contextSummary: "The 21 scene profile matrix enters KB only as compact routing summaries for scene objective, conflict, relationship, space, action chain, director plan, and Image2 focus.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "character_action", "camera", "shot_size", "prompt_text", "negative_constraints"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-pwa21-scene-profile-matrix",
+        title: "PWA21 scene profile director matrix",
+        purpose: "Select storyboard framing, blocking, and Image2 focus from compact scene profiles.",
+        axes: ["shot_plan", "image2_focus", "scene_profile"],
+        directives: ["Use scene profile to vary shot plan, attention path, and visual focus across scene families."],
+        negatives: ["Do not reuse one generic storyboard composition for all scene families."],
+      },
+      {
+        packCollection: "validation_rule_packs",
+        packId: "vg-pwa21-scene-profile-matrix",
+        title: "PWA21 scene profile matrix guard",
+        purpose: "Reject stale scene body, raw matrix leakage, and full16 or 403 overreach in runtime summaries.",
+        axes: ["stale_body", "leakage_guard", "asset_boundary"],
+        directives: ["Validate compact scene-matrix use without raw rows, raw prompts, or asset reruns."],
+        negatives: ["Do not require full16, 403case, provider calls, image generation, or video generation in this KB apply."],
+      },
+    ],
+  },
+  "rw-golden-sample-as-quality-expectation": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-golden-sample-as-quality-expectation",
+    ruleId: "rule:golden-sample-as-quality-expectation",
+    title: "Golden sample as quality expectation",
+    purpose: "Use golden samples only as abstract quality expectations, negative controls, and anti-homogeneity anchors, never as raw runtime samples.",
+    axes: ["quality_expectation", "golden_boundary", "anti_homogeneity", "leakage_guard"],
+    directives: [
+      "Convert golden samples into abstract expectations for scene differentiation, density, continuity, and readability.",
+      "Use golden anchors to check whether a scene type changed objective, conflict, relationship, space, and action chain.",
+      "Keep 403 and full16 artifacts as boundary evidence only unless a separate QA gate opens.",
+    ],
+    negatives: [
+      "Do not copy raw golden sample text, complete shot tables, prompt bodies, source refs, or provider payload.",
+      "Do not turn real director, real studio, or IP style evidence into runtime style switches.",
+    ],
+    targets: ["validation_rule_packs", "director_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "scene_mappings"],
+    actions: ["validate_result", "export_result", "generate_storyboard"],
+    contextSummary: "Golden samples provide abstract quality expectations and anti-homogeneity anchors only; raw samples, full shot tables, real style labels, and provider payload are blocked.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["negative_constraints", "prompt_text", "visual_description"],
+    additionalPacks: [
+      {
+        packCollection: "director_rule_packs",
+        packId: "dg-golden-sample-as-quality-expectation",
+        title: "Golden sample director expectation",
+        purpose: "Translate quality anchors into scene-specific readability, continuity, and composition checks.",
+        axes: ["readability", "continuity", "composition"],
+        directives: ["Use golden expectations to ask whether the current scene is readable, distinct, and field-bound."],
+        negatives: ["Do not copy source shot tables or prompt text into storyboard output."],
+      },
+    ],
+  },
+  "rw-scene-switch-stale-body-detection": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-scene-switch-stale-body-detection",
+    ruleId: "rule:scene-switch-stale-body-detection",
+    title: "Scene switch stale body detection",
+    purpose: "Detect when a scene switch keeps the previous body skeleton, narrative objective, space, or action chain.",
+    axes: ["stale_body", "scene_switch", "anti_homogeneity", "future_qa"],
+    directives: [
+      "Treat unchanged objective, conflict engine, relationship mode, space, or action chain after a scene switch as stale-body risk.",
+      "Use KB summary rules to flag stale body reuse now; leave exact PWA trace fields and UI behavior to a future implementation gate.",
+      "Repair by returning to the selected scene profile and writing/director interlock.",
+    ],
+    negatives: [
+      "Do not add runtime trace fields, UI warnings, adapter schema, or PWA code in this KB gate.",
+      "Do not expose prior prompt, source refs, or raw KB rows while checking stale content.",
+    ],
+    targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints", "scene_mappings"],
+    actions: ["create_story_task", "validate_result", "repair_storyboard"],
+    contextSummary: "Scene-switch stale-body detection flags unchanged objective, conflict, relationship, space, or action chain after a scene type change; concrete PWA trace fields remain FutureImplementation.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["negative_constraints", "prompt_text"],
+  },
+  "rw-director-treatment-to-storybeat-routing": {
+    mergeTargets: ["rw-director-intent-feeds-writing-rewrite", "rw-writing-group-scene-rewrite-profile", "rw-director-group-scene-shot-profile"],
+  },
+  "rw-animation-script-storyboard-feedback-loop": {
+    mergeTargets: ["rw-writer-director-bidirectional-routing", "rw-pwa-generation-bidirectional-trace", "rw-director-group-scene-shot-profile"],
+  },
+  "rw-scene-type-fact-preservation-boundary": {
+    mergeTargets: ["rw-accepted-body-to-style-profile", "rw-prompt-text-boundary", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-scene-type-dialogue-action-ratio-matrix": {
+    mergeTargets: ["rw-duration-density-rules", "rw-dialogue-narration-allocation-rules", "rw-shot-intent-taxonomy"],
+  },
+  "rw-scene-type-location-prop-diversity-guard": {
+    mergeTargets: ["rw-scene-spatial-prop-continuity-anchor", "rw-layout-staging-attention-path", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-scene-type-body-stale-invalidation": {
+    mergeTargets: ["rw-accepted-body-to-style-profile", "rw-intent-to-story-task-routing", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-scene-type-anti-template-reuse-guard": {
+    mergeTargets: ["rw-anime-translation-failure-guard", "rw-field-level-failure-repair-routing", "rw-prompt-text-boundary"],
+  },
+  "rw-anime-storyboard-character-consistency": {
+    mergeTargets: ["rw-anime-key-pose-silhouette-priority", "rw-ensemble-action-layering", "rw-scene-spatial-prop-continuity-anchor"],
+  },
+  "rw-writing-beat-feeds-director-shot-plan": {
+    mergeTargets: ["rw-storyboard-splitting-by-content-beat", "rw-shot-intent-taxonomy", "rw-dialogue-narration-allocation-rules"],
+  },
+  "rw-storyboard-feedback-to-script-rewrite": {
+    mergeTargets: ["rw-field-level-failure-repair-routing", "rw-storyboard-splitting-by-content-beat", "rw-scene-spatial-prop-continuity-anchor"],
+  },
+  "rw-dialogue-action-camera-coupling": {
+    mergeTargets: ["rw-dialogue-narration-allocation-rules", "rw-camera-language-grammar", "rw-shot-intent-taxonomy"],
+  },
+  "rw-visual-staging-affects-narrative-density": {
+    mergeTargets: ["rw-layout-staging-attention-path", "rw-ensemble-action-layering", "rw-duration-density-rules"],
+  },
+  "rw-scene-type-story-rewrite-divergence-guard": {
+    mergeTargets: ["rw-accepted-body-to-style-profile", "rw-anime-translation-failure-guard", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-writing-scene-type-narrative-objective": {
+    mergeTargets: ["rw-writing-group-scene-rewrite-profile", "rw-scene-type-plot-beat-variation-matrix", "rw-storyboard-splitting-by-content-beat"],
+  },
+  "rw-writing-to-directing-visible-action-contract": {
+    mergeTargets: ["rw-storyboard-splitting-by-content-beat", "rw-scene-expression-visible-action", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-directing-to-writing-repair-request-boundary": {
+    mergeTargets: ["rw-director-intent-feeds-writing-rewrite", "rw-field-level-failure-repair-routing", "rw-storyboard-splitting-by-content-beat"],
+  },
+  "rw-writer-director-feedback-loop": {
+    mergeTargets: ["rw-writer-director-bidirectional-routing", "rw-pwa-generation-bidirectional-trace", "rw-director-group-scene-shot-profile"],
+  },
+  "rw-director-method-abstracted-not-style-switch": {
+    mergeTargets: ["rw-shot-intent-taxonomy", "rw-golden-sample-as-quality-expectation", "rw-prompt-text-boundary"],
+  },
+  "rw-golden-sample-anti-homogeneity-anchor": {
+    mergeTargets: ["rw-golden-sample-as-quality-expectation", "rw-anime-translation-failure-guard", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-403-golden-expectation-preservation": {
+    mergeTargets: ["rw-golden-sample-as-quality-expectation", "rw-pwa-generation-bidirectional-trace", "rw-prompt-text-boundary"],
+  },
+  "rw-scene-type-director-method-routing": {
+    mergeTargets: ["rw-director-group-scene-shot-profile", "rw-scene-type-writer-director-interlock", "rw-shot-intent-taxonomy"],
+  },
+  "rw-anime-storyboard-key-pose-scene-routing": {
+    mergeTargets: ["rw-anime-key-pose-silhouette-priority", "rw-director-group-scene-shot-profile", "rw-shot-intent-taxonomy"],
+  },
+  "rw-anime-scene-space-and-prop-continuity": {
+    mergeTargets: ["rw-scene-spatial-prop-continuity-anchor", "rw-scene-type-image2-sheet-focus-matrix", "rw-visual-master-consistency"],
+  },
+  "rw-dialogue-scene-emotion-externalization": {
+    mergeTargets: ["rw-dialogue-narration-allocation-rules", "rw-expression-physicalization", "rw-writing-group-scene-rewrite-profile"],
+  },
+  "rw-slg-scene-strategy-visualization-boundary": {
+    mergeTargets: ["rw-slg-scene-visual-narrative-patterns", "rw-layout-staging-attention-path", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-xianxia-action-spatial-energy-routing": {
+    mergeTargets: ["rw-scene-type-plot-beat-variation-matrix", "rw-director-group-scene-shot-profile", "rw-transition-motion-dynamics"],
+  },
+  "rw-wuxia-ink-action-rhythm-routing": {
+    mergeTargets: ["rw-director-group-scene-shot-profile", "rw-scene-type-image2-sheet-focus-matrix", "rw-material-light-air-physicality"],
+  },
+  "rw-court-strategy-dialogue-power-routing": {
+    mergeTargets: ["rw-dialogue-narration-allocation-rules", "rw-scene-type-writer-director-interlock", "rw-camera-language-grammar"],
+  },
+  "rw-battle-formation-group-motion-routing": {
+    mergeTargets: ["rw-slg-scene-visual-narrative-patterns", "rw-ensemble-action-layering", "rw-director-group-scene-shot-profile"],
+  },
+  "rw-daily-healing-low-conflict-action-routing": {
+    mergeTargets: ["rw-dialogue-narration-allocation-rules", "rw-duration-density-rules", "rw-expression-physicalization"],
+  },
   "rw-image2-prompt-module-routing": {
     futureQa: true,
     futureQaReason: "Future export-module routing requires a separate PWA storyboard export gate and must not add current final storyboard fields.",
@@ -1480,11 +1982,11 @@ function mdFor(rec, def) {
     "",
     "## Purpose",
     "",
-    `${rec.chinese_title || def.title}: ${def.purpose}`,
+    `${rec.chinese_title || def.title}: ${scrubGeneratedBoundaryLanguage(def.purpose)}`,
     "",
     "## Source Basis",
     "",
-    "This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.",
+    "This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.",
     "",
     "## Applies To",
     "",
@@ -1492,7 +1994,7 @@ function mdFor(rec, def) {
     "",
     "## Claims Summary",
     "",
-    def.directives.map((item) => `- ${item}`).join("\n"),
+    def.directives.map((item) => `- ${scrubGeneratedBoundaryLanguage(item)}`).join("\n"),
     "",
     "## Runtime Mapping",
     "",
@@ -1506,7 +2008,7 @@ function mdFor(rec, def) {
     "",
     "## Negative Constraints",
     "",
-    def.negatives.map((item) => `- ${item}`).join("\n"),
+    def.negatives.map((item) => `- ${scrubGeneratedBoundaryLanguage(item)}`).join("\n"),
     "",
   ].join("\n");
 }

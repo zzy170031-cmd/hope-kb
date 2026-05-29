@@ -12,7 +12,7 @@ Field level failure repair routing: Route storyboard failures to the specific af
 
 ## Source Basis
 
-This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
+This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.
 
 ## Applies To
 
@@ -34,13 +34,16 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- scene_profile
+- visual_description
+- character_action
 - prompt_text
 - negative_constraints
-- visual_description
-- person
+- camera
+- shot_size
 
 ## Negative Constraints
 
 - Do not rewrite every field with a long universal prompt template.
 - Do not use style words to overwrite facts or field responsibilities.
-- Do not mix status, notes, evidence, source refs, or internal repair traces into final fields.
+- Do not mix status, notes, evidence, audit provenance, or internal repair traces into final fields.

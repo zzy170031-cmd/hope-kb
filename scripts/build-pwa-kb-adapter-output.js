@@ -101,10 +101,8 @@ function buildAdapterOutput(snapshot) {
         "overlay_payload",
         "prompt_construction_middleware",
         "provider_config",
-        "api_key",
-        "token",
-        "secret",
-        "local_environment_path",
+        "credential_material",
+        "local_only_identifier",
       ],
     },
     fail_closed: {
@@ -113,10 +111,10 @@ function buildAdapterOutput(snapshot) {
       reject_when: [
         "missing_or_unparseable",
         "missing_required_camel_case_field",
-        "unsafe_runtime_safety_flag",
-        "partial_scene_catalog_used_as_full_product_catalog",
-        "unresolved_rule_pack_reference",
-        "raw_or_secret_field_present",
+      "unsafe_runtime_safety_flag",
+      "partial_scene_catalog_used_as_full_product_catalog",
+      "unresolved_rule_pack_reference",
+      "credential_or_raw_field_present",
       ],
     },
   };

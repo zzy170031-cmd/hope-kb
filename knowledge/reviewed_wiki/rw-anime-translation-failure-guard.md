@@ -8,11 +8,11 @@ leakage_count: 0
 
 ## Purpose
 
-动漫化失败防护候选: Prevent live-action film feel, proper-name style switches, IP references, and generic cinematic wording from bypassing anime storyboard field translation.
+Anime translation failure guard: Prevent live-action film feel, proper-name style switches, IP references, and generic cinematic wording from bypassing anime storyboard field translation.
 
 ## Source Basis
 
-This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
+This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.
 
 ## Applies To
 
@@ -35,10 +35,13 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
+- scene_profile
 - visual_description
 - character_action
 - prompt_text
 - negative_constraints
+- camera
+- shot_size
 
 ## Negative Constraints
 

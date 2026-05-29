@@ -12,7 +12,7 @@ Storyboard splitting by content beat: Split storyboard rows by semantic content 
 
 ## Source Basis
 
-This entry was created from a confirmed manual intake package. Source candidates were used only as summary evidence. Runtime output must not include source images, OCR text, raw article text, local paths, prompt bodies, source registers, or raw KB rows.
+This entry was created from a confirmed manual intake package. Audit candidates were used only as summary evidence. Runtime output must not include audit images, audit text, hidden prompt templates, local-only identifiers, audit registries, or unpublished KB detail.
 
 ## Applies To
 
@@ -35,12 +35,13 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 ## PWA Fields Served
 
-- camera
-- shot_size
+- scene_profile
 - visual_description
 - character_action
-- duration_seconds
+- camera
+- shot_size
 - prompt_text
+- duration_seconds
 - negative_constraints
 
 ## Negative Constraints
