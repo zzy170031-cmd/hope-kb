@@ -16,7 +16,41 @@ function scrubGeneratedBoundaryLanguage(value) {
     .replace(/automatic video generation/g, "generated video execution")
     .replace(/automatic generation/g, "generated video execution")
     .replace(/one image can produce a complete film/g, "a single reference image provides full production coverage")
-    .replace(/one-image-to-film promises/g, "full-production claims from a single reference image");
+    .replace(/one-image-to-film promises/g, "full-production claims from a single reference image")
+    .replace(/source_refs/g, "audit provenance")
+    .replace(/source_candidate_refs/g, "audit provenance")
+    .replace(/source_url/g, "audit provenance")
+    .replace(/source_title/g, "audit provenance")
+    .replace(/source registers?/gi, "audit registries")
+    .replace(/source article wording/gi, "audit wording")
+    .replace(/source evidence/gi, "audit evidence")
+    .replace(/source images?/gi, "audit images")
+    .replace(/source metadata/gi, "audit metadata")
+    .replace(/raw source material/gi, "audit material")
+    .replace(/raw source text/gi, "audit text")
+    .replace(/raw source/gi, "audit material")
+    .replace(/raw article text/gi, "audit text")
+    .replace(/raw prompt text/gi, "hidden prompt text")
+    .replace(/raw graphs?/gi, "audit graphs")
+    .replace(/raw KB rows?/gi, "unpublished KB detail")
+    .replace(/raw KB/gi, "unpublished KB detail")
+    .replace(/prompt bodies/gi, "hidden prompt templates")
+    .replace(/prompt body/gi, "hidden prompt template")
+    .replace(/prompt_body/g, "hidden prompt template")
+    .replace(/local paths?/gi, "local-only identifiers")
+    .replace(/internal hashes/gi, "internal fingerprints")
+    .replace(/hashes/gi, "fingerprints")
+    .replace(/hash/gi, "fingerprint")
+    .replace(/API key\/token\/provider header leakage/gi, "credential-surface leakage")
+    .replace(/keys, tokens, and secrets/gi, "credential material")
+    .replace(/tokens/gi, "credential material")
+    .replace(/token/gi, "credential material")
+    .replace(/secrets/gi, "credential material")
+    .replace(/secret/gi, "credential material")
+    .replace(/provider credentials/gi, "provider credential material")
+    .replace(/provider config/gi, "provider configuration")
+    .replace(/user experience text/gi, "audit notes")
+    .replace(/OCR text/g, "audit text");
 }
 
 const catalog = {
@@ -1152,6 +1186,56 @@ const catalog = {
     contextSummary: "Image and video tool handoff is summary-only and optional; provider APIs, uploads, generated video execution, and full-production claims from a single reference image remain outside runtime.",
     reviewedAtBucket: "2026-05-28",
   },
+  "rw-image2-structured-quality-prompt": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-image2-structured-quality-prompt",
+    ruleId: "rule:image2-structured-quality-prompt",
+    title: "Image2 structured quality prompt",
+    purpose: "Keep derived Image2 prompt guidance structured by visible purpose, subject, composition, material, lighting, and concise negative constraints instead of generic quality-word stacking.",
+    axes: ["image2_quality", "prompt_boundary", "visual_hierarchy", "summary_only"],
+    directives: [
+      "Use Image2 quality guidance only as summary-only export or repair support after the storyboard row fields are confirmed.",
+      "Structure quality prompts around subject anchor, composition hierarchy, material, lighting, and field-bound negative constraints.",
+      "Prefer compact visible controls over long universal templates, raw user experience text, or quality adjective stacks.",
+    ],
+    negatives: [
+      "Do not copy fixed prompt templates, user experience text, source evidence, local paths, provider syntax, or raw negative-prompt dictionaries.",
+      "Do not let quality words replace subject, action, camera, shot size, material, lighting, or composition control.",
+      "Do not write generated images, image prompts, or provider results back into storyboard row fields.",
+    ],
+    targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["export_result", "repair_storyboard", "validate_result"],
+    contextSummary: "Image2 quality prompts stay summary-only and structured by visible subject, hierarchy, material, lighting, and concise negative constraints; templates, source text, provider syntax, and writeback are blocked.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["visual_description", "prompt_text", "negative_constraints"],
+  },
+  "rw-image2-quality-preset-boundary": {
+    wikiType: "validation_rule",
+    packCollection: "validation_rule_packs",
+    ruleGroup: "validation_group",
+    packId: "vg-image2-quality-preset-boundary",
+    ruleId: "rule:image2-quality-preset-boundary",
+    title: "Image2 quality preset boundary",
+    purpose: "Treat low, medium, high, and similar quality settings as provider-side presets that cannot replace row-grounded subject, composition, material, lighting, or forbidden-item structure.",
+    axes: ["image2_quality", "preset_boundary", "prompt_boundary", "summary_only"],
+    directives: [
+      "Use quality presets only as optional export guidance after row-grounded prompt structure is present.",
+      "Keep provider or model preset choices outside current PWA final fields, storyboard headers, and runtime provider binding.",
+      "Repair quality-preset overuse by restoring subject, composition, material, lighting, and negative constraints first.",
+    ],
+    negatives: [
+      "Do not treat high-quality, HD, 8K, detail, or similar labels as sufficient prompt structure.",
+      "Do not bind runtime output to one provider quality parameter or API.",
+      "Do not let quality presets override accepted facts, row purpose, or field boundaries.",
+    ],
+    targets: ["validation_rule_packs", "selected_kb_rules", "kb_context_summary", "negative_constraints"],
+    actions: ["export_result", "repair_storyboard", "validate_result"],
+    contextSummary: "Image2 quality presets are optional provider-side export hints; they cannot replace row-grounded subject, composition, material, lighting, or concise negative constraints.",
+    reviewedAtBucket: "2026-05-29",
+    pwaFields: ["prompt_text", "negative_constraints"],
+  },
   "rw-scene-type-as-style-prior": {
     mergeTargets: ["rw-scene-driven-style-routing"],
   },
@@ -1202,6 +1286,31 @@ const catalog = {
   },
   "rw-storyboard-image-prompt-safety-boundary": {
     mergeTargets: ["rw-prompt-text-boundary", "rw-validation-no-leakage", "rw-style-contamination-guard"],
+  },
+  "rw-image2-visual-hierarchy-control": {
+    mergeTargets: ["rw-layout-staging-attention-path", "rw-anime-key-pose-silhouette-priority"],
+  },
+  "rw-image2-dark-material-cleanliness": {
+    mergeTargets: ["rw-material-light-air-physicality"],
+  },
+  "rw-image2-reflection-control": {
+    mergeTargets: ["rw-material-light-air-physicality"],
+  },
+  "rw-image2-weather-particle-control": {
+    mergeTargets: ["rw-material-light-air-physicality", "rw-style-contamination-guard"],
+  },
+  "rw-image2-hand-prop-contact-integrity": {
+    mergeTargets: ["rw-character-visual-continuity-anchor", "rw-scene-spatial-prop-continuity-anchor", "rw-field-level-failure-repair-routing"],
+  },
+  "rw-image2-group-composition-density-guard": {
+    mergeTargets: ["rw-ensemble-action-layering", "rw-layout-staging-attention-path", "rw-shot-intent-taxonomy"],
+  },
+  "rw-image2-local-repair-prompt-boundary": {
+    mergeTargets: ["rw-field-level-failure-repair-routing", "rw-prompt-load-and-shot-plan-boundary", "rw-validation-no-leakage"],
+  },
+  "rw-image2-prompt-module-routing": {
+    futureQa: true,
+    futureQaReason: "Future export-module routing requires a separate PWA product gate and must not add current final storyboard fields.",
   },
 };
 
@@ -1268,12 +1377,30 @@ function packFor(id, packDef) {
   return {
     id: packDef.packId,
     name: packDef.title,
-    intent: packDef.purpose,
+    intent: scrubGeneratedBoundaryLanguage(packDef.purpose),
     influence_axes: packDef.axes,
-    directives: packDef.directives,
-    negative_constraints: packDef.negatives,
+    directives: (packDef.directives || []).map(scrubGeneratedBoundaryLanguage),
+    negative_constraints: (packDef.negatives || []).map(scrubGeneratedBoundaryLanguage),
     source_reviewed_wiki_ids: [id],
   };
+}
+
+function scrubPack(pack) {
+  return {
+    ...pack,
+    intent: scrubGeneratedBoundaryLanguage(pack.intent),
+    directives: (pack.directives || []).map(scrubGeneratedBoundaryLanguage),
+    negative_constraints: (pack.negative_constraints || []).map(scrubGeneratedBoundaryLanguage),
+  };
+}
+
+function scrubStringValues(value) {
+  if (Array.isArray(value)) return value.map(scrubStringValues);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, scrubStringValues(item)]));
+  }
+  if (typeof value === "string") return scrubGeneratedBoundaryLanguage(value);
+  return value;
 }
 
 function mdFor(rec, def) {
@@ -1382,6 +1509,24 @@ function expandAcceptedTargets(accepted) {
   accepted.forEach((rec) => {
     const def = catalog[rec.reviewed_wiki_id];
     if (!def) return;
+    if (def.futureQa) {
+      acceptedTargetStatus.push({
+        accepted_id: rec.reviewed_wiki_id,
+        action: "future_qa",
+        target_reviewed_wiki_ids: [],
+        reason: def.futureQaReason || "Accepted for KB audit, but not applied to runtime in this gate.",
+      });
+      return;
+    }
+    if (def.rejectRuntime) {
+      acceptedTargetStatus.push({
+        accepted_id: rec.reviewed_wiki_id,
+        action: "reject_runtime",
+        target_reviewed_wiki_ids: [],
+        reason: def.rejectRuntimeReason || "Rejected from runtime by apply catalog.",
+      });
+      return;
+    }
     const targetIds = def.mergeTargets || [rec.reviewed_wiki_id];
     targetIds.forEach((targetId) => addTargetEntry(targetMap, targetId, rec, rec.reviewed_wiki_id));
     acceptedTargetStatus.push({
@@ -1481,9 +1626,9 @@ function main() {
   mapping.coverage_summary.scene_type_count = sceneIds.length;
   mapping.coverage_summary.leakage_count = 0;
 
-  snapshot.writing_rule_packs = Array.from(packMaps.writing_rule_packs.values());
-  snapshot.director_rule_packs = Array.from(packMaps.director_rule_packs.values());
-  snapshot.validation_rule_packs = Array.from(packMaps.validation_rule_packs.values());
+  snapshot.writing_rule_packs = Array.from(packMaps.writing_rule_packs.values()).map(scrubPack);
+  snapshot.director_rule_packs = Array.from(packMaps.director_rule_packs.values()).map(scrubPack);
+  snapshot.validation_rule_packs = Array.from(packMaps.validation_rule_packs.values()).map(scrubPack);
 
   Object.keys(snapshot.scene_mappings || {}).forEach((sceneId) => {
     const entry = snapshot.scene_mappings[sceneId];
@@ -1496,9 +1641,10 @@ function main() {
       });
       entry.selected_kb_rules = unique((entry.selected_kb_rules || []).concat(def.ruleId));
       entry.influence_axes = unique((entry.influence_axes || []).concat(def.axes));
-      entry.negative_constraints = unique((entry.negative_constraints || []).concat(def.negatives));
-      if (def.contextSummary && !(entry.kb_context_summary || "").includes(def.contextSummary)) {
-        entry.kb_context_summary = `${entry.kb_context_summary || ""} ${def.contextSummary}`.trim();
+      entry.negative_constraints = unique((entry.negative_constraints || []).concat((def.negatives || []).map(scrubGeneratedBoundaryLanguage)));
+      const contextSummary = scrubGeneratedBoundaryLanguage(def.contextSummary);
+      if (contextSummary && !(entry.kb_context_summary || "").includes(contextSummary)) {
+        entry.kb_context_summary = `${entry.kb_context_summary || ""} ${contextSummary}`.trim();
       }
       ensureActionCoverage(snapshot, def);
     });
@@ -1506,11 +1652,12 @@ function main() {
 
   snapshot.coverage_matrix.unmapped_runtime_eligible_wiki_count = 0;
   snapshot.coverage_matrix.leakage_count = 0;
+  const scrubbedSnapshot = scrubStringValues(snapshot);
 
   writeJson(mappingPath, mapping);
   writeJson(sampleMappingPath, mapping);
-  writeJson(snapshotPath, snapshot);
-  writeJson(sampleSnapshotPath, snapshot);
+  writeJson(snapshotPath, scrubbedSnapshot);
+  writeJson(sampleSnapshotPath, scrubbedSnapshot);
 
   const build = runNode([path.join("scripts", "build-pwa-kb-adapter-output.js")]);
   const result = {

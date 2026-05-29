@@ -117,3 +117,50 @@ This draft does not write:
 ## 5179 Dashboard Note
 
 The package status is `recommendations_ready` and all primary candidates use `ready_for_confirmation`, so the native 5179 evidence-ledger confirmation queue can render them from `/api/intake/latest` as confirmable recommendations. No temporary summary panel was added.
+
+
+## Image2 Quality Control Precise Evidence Supplement
+
+status: draft supplement only; confirmed package intentionally not mutated.
+
+### Scope Boundary
+
+This supplement strengthens the current run with Image2 quality-control candidates. It does not copy user experience text, fixed prompt templates, official document passages, or negative prompt dictionaries into runtime. It does not implement PWA functionality and does not alter the already-created confirmed package.
+
+### Candidate Evidence Coverage
+
+| candidate | new source_refs | coverage | decision |
+| --- | ---: | --- | --- |
+| `rw-image2-structured-quality-prompt` | 3 | official platform + official Adobe + GitHub auxiliary | keep for KB dedupe confirmation |
+| `rw-image2-visual-hierarchy-control` | 3 | industry design + industry composition + official Runway | keep, likely merge with layout/staging rules |
+| `rw-image2-dark-material-cleanliness` | 3 | official Google + material prompt reference + official Stability | keep, merge with material/light/air physicality |
+| `rw-image2-reflection-control` | 3 | material reference + official Runway + official Google | keep, merge with material/light/air physicality |
+| `rw-image2-weather-particle-control` | 3 | official Runway + official Runway resource + official Google | keep, field-bound export guard |
+| `rw-image2-hand-prop-contact-integrity` | 3 | HOI research + HOI research + official Runway references | keep, merge with acting/readability and character continuity |
+| `rw-image2-group-composition-density-guard` | 3 | education poster hierarchy + industry composition + official Runway | keep, merge with layout/staging and shot intent |
+| `rw-image2-local-repair-prompt-boundary` | 3 | official OpenAI + official Google + ComfyUI open-source docs | keep as repair/export boundary, not runtime automation |
+| `rw-image2-quality-preset-boundary` | 3 | official OpenAI + official Midjourney + official Stability | keep as boundary rule |
+| `rw-image2-prompt-module-routing` | 3 | official Runway + official Adobe + GitHub auxiliary | keep as future export-module routing |
+
+### Blocked
+
+- User experience text verbatim.
+- Full fixed Image2 prompt templates.
+- Large negative prompt dictionaries.
+- IP, Disney, Studio Ghibli, real director, or real studio style switches.
+- Fixed output style forced across all scenes.
+- Quality-word stacking as a substitute for structured prompt controls.
+- Image2 quality rules changing current PWA person, dialogue, or duration fields.
+- Full-image rewrite for local repair when the task is local correction.
+
+### FutureQA
+
+- Direct Image2/provider API integration.
+- Generated image writeback into PWA fields or exports.
+- Automatic local inpainting/repair.
+- Multi-model automatic image scoring or ranking.
+- Provider-specific negative prompt semantics and parameter adapters.
+
+### PWA Field Boundary
+
+The Image2 candidates serve future derived export or repair guidance only. They do not add current final storyboard fields, do not alter storyboard export headers, and do not write image prompts or repair results back into storyboard rows.

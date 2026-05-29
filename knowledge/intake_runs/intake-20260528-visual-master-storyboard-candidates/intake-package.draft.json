@@ -51,7 +51,19 @@
       "智谱 CogVideoX-2 图生视频 主体 风格 一致性 提示词",
       "通义万相 图生视频 Prompt 指南 首帧 参考图",
       "腾讯混元生视频 分镜 提示词 时长 参考主体 图生视频",
-      "可灵 多图参考 视频生成 一致性 官方"
+      "可灵 多图参考 视频生成 一致性 官方",
+      "image generation prompt visual hierarchy subject background detail density",
+      "AI image prompt avoid artifacts noise speckles highlights",
+      "image prompt dark areas clean shadows matte material",
+      "AI image prompt rain snow particles avoid clutter",
+      "image prompt hand holding object weapon contact",
+      "poster composition visual hierarchy group characters",
+      "AI image editing prompt keep everything else unchanged",
+      "OpenAI image editing prompt preserve original composition",
+      "Runway reference image consistency prompt",
+      "Midjourney prompt avoid over-detailed background",
+      "Stable Diffusion negative prompt artifacts speckles noise",
+      "ComfyUI workflow prompt artifact reduction"
     ],
     "allowed_source_types": [
       "official_doc",
@@ -60,20 +72,29 @@
       "industry_preproduction_doc",
       "research_paper",
       "open_source_product_reference",
-      "curated_list"
+      "curated_list",
+      "industry_design_reference",
+      "industry_prompt_reference",
+      "education_reference",
+      "open_source_tool_doc"
     ],
     "required_answers": [
       "improves which PWA field",
       "stays inside summary-only evidence",
       "does not add final PWA fields",
       "does not promise automatic video generation",
-      "separates audit source_refs from runtime"
+      "separates audit source_refs from runtime",
+      "quality words cannot replace structured prompt controls",
+      "local repair must preserve unchanged regions",
+      "Image2 candidates do not add current PWA fields"
     ],
     "search_provider_status": {
-      "status": "manual_web_search_completed",
-      "provider": "codex_web",
-      "candidate_count": 20,
-      "credential_state": "not_required"
+      "status": "manual_web_search_precise_evidence_supplement_completed",
+      "provider": "codex_web_and_official_docs",
+      "candidate_count": 55,
+      "credential_state": "not_required",
+      "recommendation_count": 18,
+      "supplement_scope": "image2_quality_control_and_local_repair"
     },
     "domestic_coverage": [
       "即梦/Seedance",
@@ -96,7 +117,46 @@
       "OpenMontage",
       "DirectorsConsole",
       "Awesome AI Video Prompting"
-    ]
+    ],
+    "image2_quality_control_coverage": {
+      "official_platform_sources": [
+        "OpenAI Images",
+        "Runway Gen-4 Image",
+        "Google Imagen",
+        "Adobe Firefly",
+        "Midjourney",
+        "Stability AI",
+        "Alibaba Wanxiang",
+        "Zhipu CogView"
+      ],
+      "industry_design_sources": [
+        "Adobe design basics",
+        "Linearity composition hierarchy",
+        "UTA poster hierarchy",
+        "AI Wiki material prompting"
+      ],
+      "github_or_open_source_sources": [
+        "ComfyUI",
+        "ComfyUI inpainting docs",
+        "ComfyUI-Inpaint-CropAndStitch",
+        "Awesome AI Image Generator Prompts"
+      ],
+      "audit_only": [
+        "source_refs",
+        "source URLs",
+        "evidence summaries",
+        "provider-specific parameters",
+        "GitHub workflow structures"
+      ],
+      "not_runtime": [
+        "raw source text",
+        "fixed prompt templates",
+        "negative prompt dictionaries",
+        "provider request payloads",
+        "local paths",
+        "secrets"
+      ]
+    }
   },
   "source_candidates": [
     {
@@ -934,6 +994,794 @@
       "kb_gap": "补充腾讯开源模型侧的提示词适配证据。",
       "leakage_check": "summary_only_no_raw_source_text_no_prompt_body",
       "source_confidence": "medium_high"
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "title": "Image generation guide",
+      "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+      "source_type": "official_doc",
+      "source_type_label": "OpenAI API Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Supports image generation with prompt, image inputs, reference images, multi-turn editing, masks, and quality/size parameters.",
+      "kb_gap": "Grounds Image2 export as structured visual prompt guidance, not an automatic generation promise.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting-guide",
+      "title": "Gen-4 Image Prompting Guide",
+      "source_url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Help",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "camera",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Runway organizes image prompts by subject, scene, composition, lighting, color, style, focus, angle, text, and mood; it also warns against unsupported negative phrasing.",
+      "kb_gap": "Supports structured prompt modules and a boundary against dumping negative-word lists.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-runway-text-to-image-four-part",
+      "title": "How to make an AI image with a text prompt",
+      "source_url": "https://runwayml.com/resources/how-to-make-an-ai-image-with-text-prompt",
+      "source_type": "official_doc",
+      "source_type_label": "Runway Resources",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "scene_profile",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Runway frames effective text-to-image prompting around subject, context, style, and technical details.",
+      "kb_gap": "Supports modular routing by image use case instead of a single fixed template.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-midjourney-prompt-basics",
+      "title": "Prompt Basics",
+      "source_url": "https://docs.midjourney.com/docs/prompts",
+      "source_type": "official_doc",
+      "source_type_label": "Midjourney Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Midjourney recommends clear, specific prompts, concrete counts, and focusing on what should appear rather than long confusing instructions.",
+      "kb_gap": "Supports rejecting generic quality stacking and ambiguous lists.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-midjourney-quality-parameter",
+      "title": "Quality parameter",
+      "source_url": "https://docs.midjourney.com/hc/en-us/articles/32176522101773-Quality",
+      "source_type": "official_doc",
+      "source_type_label": "Midjourney Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Quality controls processing/detail behavior but is parameter-like and model-specific; it does not replace content, composition, lighting, or material instructions.",
+      "kb_gap": "Supports the quality preset boundary.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-midjourney-no-parameter",
+      "title": "No parameter",
+      "source_url": "https://docs.midjourney.com/docs/no",
+      "source_type": "official_doc",
+      "source_type_label": "Midjourney Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "negative_constraints",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "The no parameter is a concise exclusion mechanism and has parsing/moderation caveats.",
+      "kb_gap": "Supports concise forbidden-item handling rather than a huge negative prompt dictionary.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-google-imagen-prompt-guide",
+      "title": "Prompt and image attribute guide",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Google recommends clear prompts with subject, context/background, style, lighting, and iteration; it also distinguishes negative prompts where supported.",
+      "kb_gap": "Supports structured prompt organization and explicit negative boundaries.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-google-imagen-edit-overview",
+      "title": "Edit images overview",
+      "source_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/image/edit-images-overview",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Imagen editing uses targeted mask-based edits such as inserting objects, removing objects, expanding content, and replacing backgrounds.",
+      "kb_gap": "Supports local repair as a selected-area operation, not a full-scene rewrite.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-google-imagen-negative-prompt",
+      "title": "Omit content using a negative prompt",
+      "source_url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/omit-content-using-a-negative-prompt",
+      "source_type": "official_doc",
+      "source_type_label": "Google Cloud Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "negative_constraints",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Google describes negative prompts as an omission aid, recommends plain terms, and notes model-version support limits.",
+      "kb_gap": "Supports FutureQA for provider-specific negative prompt semantics.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-adobe-firefly-effective-prompts",
+      "title": "Writing effective text prompts",
+      "source_url": "https://helpx.adobe.com/in/firefly/generate-images-with-text-to-image/generate-images-using-text-prompts/writing-effective-text-prompts.html",
+      "source_type": "official_doc",
+      "source_type_label": "Adobe Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "scene_profile"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Adobe recommends direct descriptive prompts with subject, descriptors, and keywords, and rewording prompts iteratively when results miss the target.",
+      "kb_gap": "Supports structured prompt refinement without copying fixed templates.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-adobe-firefly-generative-fill",
+      "title": "Use Generative Fill",
+      "source_url": "https://helpx.adobe.com/firefly/edit-images/transform-images-using-generative-fill/replace-background.html",
+      "source_type": "official_doc",
+      "source_type_label": "Adobe Help Center",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Generative Fill uses a brush-selected area plus text prompt and optional reference image to add or replace local content while maintaining visual consistency.",
+      "kb_gap": "Supports local repair prompt boundaries and reference-based edits.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-adobe-firefly-api-preserve-structure",
+      "title": "Using Generate Image with Image5",
+      "source_url": "https://developer.adobe.com/firefly-services/docs/firefly-api/guides/how-tos/cm-generate-image/feature-guide",
+      "source_type": "official_doc",
+      "source_type_label": "Adobe Firefly Services",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Adobe Firefly Services distinguishes text-to-image from prompt-driven edits to an existing image while preserving structure and composition.",
+      "kb_gap": "Supports FutureQA for API use while keeping current KB candidate summary-only.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-stability-api-parameters",
+      "title": "Stability AI API parameters",
+      "source_url": "https://platform.stability.ai/docs/features/api-parameters",
+      "source_type": "official_doc",
+      "source_type_label": "Stability AI Developer Platform",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "visual_description"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Stability documents prompt, dimensions, safety filtering, CFG scale, and generation parameters as separate controls.",
+      "kb_gap": "Supports keeping quality/settings separate from PWA row facts.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-stability-multi-prompting",
+      "title": "Multi-prompting",
+      "source_url": "https://platform.stability.ai/docs/features/multi-prompting",
+      "source_type": "official_doc",
+      "source_type_label": "Stability AI Developer Platform",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Stability documents prompt weights and negative weights as bounded generation controls.",
+      "kb_gap": "Supports careful negative constraint handling but not runtime negative-word dumping.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-t2i-prompt-guide",
+      "title": "Text-to-image prompt guide",
+      "source_url": "https://www.alibabacloud.com/help/doc-detail/2865312.html",
+      "source_type": "official_doc",
+      "source_type_label": "Alibaba Cloud Model Studio",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Alibaba Cloud documents prompt and negative_prompt as separate image generation controls.",
+      "kb_gap": "Supports domestic official coverage for structured positive/negative controls.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-image-edit-doc",
+      "title": "Wan image editing model",
+      "source_url": "https://www.alibabacloud.com/help/zh/model-studio/wan-image-edit-2-5",
+      "source_type": "official_doc",
+      "source_type_label": "Alibaba Cloud Model Studio",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Wan image editing documentation describes editing prompts and negative prompts for unwanted blur, extra fingers, or other local defects.",
+      "kb_gap": "Supports image repair as a separate future module, not current PWA field mutation.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-zhipu-cogview4-doc",
+      "title": "CogView-4",
+      "source_url": "https://docs.bigmodel.cn/cn/guide/models/image-generation/cogview-4",
+      "source_type": "official_doc",
+      "source_type_label": "Zhipu AI Documentation",
+      "language": "English",
+      "confidence": "high",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "scene_profile"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "CogView-4 official docs emphasize semantic understanding, image quality, bilingual prompts, and complex instruction following benchmarks.",
+      "kb_gap": "Supports domestic official coverage for prompt adherence and quality claims.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "high"
+    },
+    {
+      "source_id": "src-comfyui-inpainting-workflow",
+      "title": "ComfyUI Inpainting Workflow",
+      "source_url": "https://docs.comfy.org/tutorials/basic/inpaint",
+      "source_type": "open_source_tool_doc",
+      "source_type_label": "ComfyUI Documentation",
+      "language": "English",
+      "confidence": "low",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "ComfyUI inpainting examples frame defect repair and detail optimization as masked/local workflows.",
+      "kb_gap": "Supports local repair boundary and open-source workflow reference.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "low"
+    },
+    {
+      "source_id": "src-comfyui-github",
+      "title": "ComfyUI",
+      "source_url": "https://github.com/comfyanonymous/ComfyUI",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "low",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "ComfyUI is a node-based image generation engine with prompt workflows, image editing models, and inpainting workflows.",
+      "kb_gap": "Auxiliary evidence for modular image prompt workflows only.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "low"
+    },
+    {
+      "source_id": "src-comfyui-inpaint-crop-stitch",
+      "title": "ComfyUI-Inpaint-CropAndStitch",
+      "source_url": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
+      "source_type": "open_source_product_reference",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "low",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "The project targets masked-area inpainting by cropping, repairing, and stitching back into the image.",
+      "kb_gap": "Auxiliary support for preserving the rest of the image during local repair.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "low"
+    },
+    {
+      "source_id": "src-cliprise-awesome-ai-image-prompts",
+      "title": "Awesome AI Image Generator Prompts",
+      "source_url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+      "source_type": "curated_list",
+      "source_type_label": "GitHub",
+      "language": "English",
+      "confidence": "low",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Curated prompt resources group image prompt patterns, negative prompt ideas, and workflow examples.",
+      "kb_gap": "Auxiliary only; does not define runtime rules.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "low"
+    },
+    {
+      "source_id": "src-adobe-design-basics-hierarchy",
+      "title": "Understanding the Basic Principles of Graphic Design",
+      "source_url": "https://www.adobe.com/learn/express/web/graphic-design-basics",
+      "source_type": "industry_design_reference",
+      "source_type_label": "Adobe Learn",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Adobe design basics explain emphasis, hierarchy, visual weight, and balance as core composition principles.",
+      "kb_gap": "Supports visual hierarchy candidates for poster/group composition.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-linearity-composition-hierarchy",
+      "title": "Design Composition: Layout, Balance, and Visual Flow",
+      "source_url": "https://www.linearity.io/blog/design-composition-guide/",
+      "source_type": "industry_design_reference",
+      "source_type_label": "Linearity",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "shot_size",
+        "camera",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "The guide explains primary focal point, secondary and tertiary supporting elements, balance, grid, flow, and contrast.",
+      "kb_gap": "Supports first/second/third visual layer prompts and density limits.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-uta-poster-hierarchy",
+      "title": "Visual hierarchy in a research poster",
+      "source_url": "https://libguides.uta.edu/c.php?g=1461234&p=10866892",
+      "source_type": "education_reference",
+      "source_type_label": "University of Texas at Arlington",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "shot_size",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Poster guidance separates primary, secondary, and tertiary importance with focal point, flow, proportion, balance, whitespace, and grid.",
+      "kb_gap": "Supports group poster density and hierarchy guard.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-aiwiki-texture-material-prompts",
+      "title": "Texture and Material Prompts for AI Image Generation",
+      "source_url": "https://artificial-intelligence-wiki.com/prompt-engineering/image-generation-prompts/texture-material-prompts/",
+      "source_type": "industry_prompt_reference",
+      "source_type_label": "AI Wiki",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "Material prompts should specify material type, surface finish, physical properties, color, lighting, and technical constraints.",
+      "kb_gap": "Supports material, reflection, and dark-area cleanliness candidates.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-prompt-propose-verify-hoi",
+      "title": "Prompt-Propose-Verify: Hand-Object Interaction Data Generation",
+      "source_url": "https://huggingface.co/papers/2312.15247",
+      "source_type": "research_paper",
+      "source_type_label": "Hugging Face Papers",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "The paper identifies hands and hand-object interactions as persistent failure points and uses a propose/verify framework for reliable HOI generation.",
+      "kb_gap": "Supports explicit hand-object contact integrity requirements.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
+    },
+    {
+      "source_id": "src-interact-custom-hoi",
+      "title": "Interact-Custom: Customized Human Object Interaction Image Generation",
+      "source_url": "https://huggingface.co/papers/2508.19575",
+      "source_type": "research_paper",
+      "source_type_label": "Hugging Face Papers",
+      "language": "English",
+      "confidence": "medium",
+      "decision": "keep",
+      "decision_label": "keep",
+      "risk_flags": [
+        "summary_only"
+      ],
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "visual_description",
+        "prompt_text"
+      ],
+      "target_pwa_actions": [
+        "generate_storyboard",
+        "repair_storyboard",
+        "validate_result",
+        "export_result"
+      ],
+      "pwa_relevance": "The paper addresses identity preservation and interaction control by modeling spatial configurations between human and object.",
+      "kb_gap": "Supports prompt rules for contact points, grip, occlusion, and object placement.",
+      "leakage_check": "summary_only_no_raw_source_text_no_prompt_body_no_source_refs_runtime",
+      "source_confidence": "medium"
     }
   ],
   "screening_results": [
@@ -1216,6 +2064,276 @@
       "leakage_risk_ok": true,
       "result": "keep",
       "summary": "summary-only source retained for storyboard image prompt export candidates"
+    },
+    {
+      "source_id": "src-openai-image-generation-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-runway-gen4-image-prompting-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-runway-text-to-image-four-part",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-midjourney-prompt-basics",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-midjourney-quality-parameter",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-midjourney-no-parameter",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-google-imagen-prompt-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-google-imagen-edit-overview",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-google-imagen-negative-prompt",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-adobe-firefly-effective-prompts",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-adobe-firefly-generative-fill",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-adobe-firefly-api-preserve-structure",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-stability-api-parameters",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-stability-multi-prompting",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-t2i-prompt-guide",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-aliyun-wanxiang-image-edit-doc",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-zhipu-cogview4-doc",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-comfyui-inpainting-workflow",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-comfyui-github",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-comfyui-inpaint-crop-stitch",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-cliprise-awesome-ai-image-prompts",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-adobe-design-basics-hierarchy",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-linearity-composition-hierarchy",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-uta-poster-hierarchy",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-aiwiki-texture-material-prompts",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-prompt-propose-verify-hoi",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
+    },
+    {
+      "source_id": "src-interact-custom-hoi",
+      "serves_pwa_fields": true,
+      "serves_seedance_prompt": false,
+      "duplicate_strategy": "supplement_existing_run_image2_quality_control",
+      "runtime_target_possible": true,
+      "leakage_risk_ok": true,
+      "result": "keep",
+      "summary": "summary-only source retained for Image2 quality-control candidates; source_refs stay audit-layer only"
     }
   ],
   "recommendations": [
@@ -1971,6 +3089,906 @@
       "status": "ready_for_confirmation",
       "write_state": "not_written",
       "runtime_state": "not_runtime"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-structured-quality-prompt",
+      "chinese_title": "Image2 结构化质量提示词",
+      "candidate_summary": "High-quality image prompts should be organized by purpose, format, subject anchor, composition hierarchy, material, lighting, quality controls, and concise forbidden items. Generic HD/8K/detail stacking is not enough.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints",
+        "scene_profile"
+      ],
+      "serves_prompt_sections": [
+        "purpose",
+        "subject_anchor",
+        "composition",
+        "material",
+        "lighting",
+        "quality_controls",
+        "forbidden_items"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-runway-gen4-image-prompting-guide",
+        "src-adobe-firefly-effective-prompts",
+        "src-comfyui-github"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-material-light-air-physicality",
+        "rw-validation-no-leakage"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "evidence_summary": "Runway lists subject, scene, composition, lighting, color, style, focus, angle, text, and mood as promptable dimensions, supporting structured prompt modules.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Writing effective text prompts",
+          "site": "Adobe Help Center",
+          "url": "https://helpx.adobe.com/in/firefly/generate-images-with-text-to-image/generate-images-using-text-prompts/writing-effective-text-prompts.html",
+          "evidence_summary": "Adobe recommends direct, specific prompts with subject, descriptors, and keywords, plus iterative rewording when output misses the target.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "ComfyUI",
+          "site": "GitHub",
+          "url": "https://github.com/comfyanonymous/ComfyUI",
+          "evidence_summary": "ComfyUI demonstrates image generation as modular workflows, useful as auxiliary structure evidence for prompt modules.",
+          "source_confidence": "low"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-visual-hierarchy-control",
+      "chinese_title": "Image2 主次视觉层级控制",
+      "candidate_summary": "Image prompts should declare primary subject, secondary support, and low-density background so group/poster/storyboard images do not render every element with equal detail.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "shot_size",
+        "camera",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "primary_visual_layer",
+        "secondary_visual_layer",
+        "background_density",
+        "contrast_control"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-adobe-design-basics-hierarchy",
+        "src-linearity-composition-hierarchy",
+        "src-runway-gen4-image-prompting-guide"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-layout-staging-attention-path",
+        "rw-shot-intent-taxonomy",
+        "rw-prompt-text-boundary"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Understanding the Basic Principles of Graphic Design",
+          "site": "Adobe Learn",
+          "url": "https://www.adobe.com/learn/express/web/graphic-design-basics",
+          "evidence_summary": "Adobe design basics frame emphasis, hierarchy, visual weight, and balance as core composition controls.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Design Composition: Layout, Balance, and Visual Flow",
+          "site": "Linearity",
+          "url": "https://www.linearity.io/blog/design-composition-guide/",
+          "evidence_summary": "The guide explicitly separates primary focal point, secondary support, and tertiary elements that should not compete for the same attention.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "evidence_summary": "Runway composition examples include centered subject, rule of thirds, and symmetrical composition, supporting prompt-level hierarchy control.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-dark-material-cleanliness",
+      "chinese_title": "Image2 暗部材质洁净规则",
+      "candidate_summary": "Dark materials, night scenes, black clothing, armor, and deep props need clean shadow detail, restrained highlights, and low-gloss material anchors to avoid random bright dots, dirty speckles, fake metal detail, and over-sharpened HDR.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "dark_area_cleanliness",
+        "shadow_detail",
+        "matte_material",
+        "artifact_guard"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-google-imagen-prompt-guide",
+        "src-aiwiki-texture-material-prompts",
+        "src-stability-api-parameters"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-material-light-air-physicality",
+        "rw-validation-no-pseudo-success"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Prompt and image attribute guide",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide",
+          "evidence_summary": "Google frames lighting, context, and style as prompt attributes and includes negative prompt guidance for unwanted elements where supported.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Texture and Material Prompts for AI Image Generation",
+          "site": "AI Wiki",
+          "url": "https://artificial-intelligence-wiki.com/prompt-engineering/image-generation-prompts/texture-material-prompts/",
+          "evidence_summary": "Material prompting guidance emphasizes material type, surface finish, physical properties, color, lighting, and technical requirements.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Stability AI API parameters",
+          "site": "Stability AI Developer Platform",
+          "url": "https://platform.stability.ai/docs/features/api-parameters",
+          "evidence_summary": "Stability documents CFG/detail controls as separate generation parameters, supporting a boundary between settings and visual-material content.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-reflection-control",
+      "chinese_title": "Image2 反光与湿面控制",
+      "candidate_summary": "Wet floors, glass, metal, stations, products, and city-night scenes should request local, low-brightness, physically plausible reflections with roughness/texture preserved, avoiding mirror-floor exaggeration and plastic-looking highlights.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "reflection_intensity",
+        "surface_roughness",
+        "specular_highlight",
+        "wet_surface_boundary"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-aiwiki-texture-material-prompts",
+        "src-runway-gen4-image-prompting-guide",
+        "src-google-imagen-prompt-guide"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-material-light-air-physicality"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Texture and Material Prompts for AI Image Generation",
+          "site": "AI Wiki",
+          "url": "https://artificial-intelligence-wiki.com/prompt-engineering/image-generation-prompts/texture-material-prompts/",
+          "evidence_summary": "The material guide separates glossy, matte, brushed, rough, and smooth surface properties, which supports reflection-specific prompt anchors.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "evidence_summary": "Runway supports lighting, color, focus, angle, and composition terms, enough to frame reflections as local material behavior rather than global shine.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Prompt and image attribute guide",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide",
+          "evidence_summary": "Google prompt attributes support describing context, style, and image editing iteration, useful for controlling reflective surfaces in prompt language.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-weather-particle-control",
+      "chinese_title": "Image2 天气与粒子污染控制",
+      "candidate_summary": "Rain, snow, sparks, dust, smoke, and magic particles should stay as environmental atmosphere with scale, density, and placement limits, not cover faces, clothing, dark areas, or key props.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "weather_density",
+        "particle_placement",
+        "subject_visibility",
+        "prop_visibility"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-runway-text-to-image-four-part",
+        "src-runway-gen4-image-prompting-guide",
+        "src-google-imagen-prompt-guide"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-scene-spatial-prop-continuity-anchor",
+        "rw-prompt-text-boundary"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "How to make an AI image with a text prompt",
+          "site": "Runway Resources",
+          "url": "https://runwayml.com/resources/how-to-make-an-ai-image-with-text-prompt",
+          "evidence_summary": "Runway's four-part structure separates subject, context, style, and technical details, supporting weather as context rather than subject replacement.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "evidence_summary": "Runway prompt categories include subject, scene, lighting, color, mood, and composition, supporting controlled atmosphere and visibility boundaries.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Prompt and image attribute guide",
+          "site": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide",
+          "evidence_summary": "Google recommends subject, context/background, and style as separate prompt dimensions, supporting particle effects as background/context rather than subject noise.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-hand-prop-contact-integrity",
+      "chinese_title": "Image2 手部与道具接触完整性",
+      "candidate_summary": "When a person holds a weapon, product, tool, or prop, the prompt should specify grip, contact points, orientation, occlusion, and whether the object is supported, avoiding floating props, wrong grasp, penetration, or detached hands.",
+      "serves_pwa_fields": [
+        "person",
+        "character_action",
+        "visual_description",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "hand_pose",
+        "prop_contact",
+        "object_orientation",
+        "occlusion_logic"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-prompt-propose-verify-hoi",
+        "src-interact-custom-hoi",
+        "src-runway-gen4-references"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-animation-acting-readability-for-fields",
+        "rw-character-visual-continuity-anchor"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Prompt-Propose-Verify: Hand-Object Interaction Data Generation",
+          "site": "Hugging Face Papers",
+          "url": "https://huggingface.co/papers/2312.15247",
+          "evidence_summary": "The paper identifies hands and hand-object interaction as difficult image-generation failure points and uses verification to improve reliability.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Interact-Custom: Customized Human Object Interaction Image Generation",
+          "site": "Hugging Face Papers",
+          "url": "https://huggingface.co/papers/2508.19575",
+          "evidence_summary": "The work emphasizes identity preservation plus spatial configuration between human and object, supporting explicit contact and placement prompts.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Gen-4 Image References Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/40042718905875-Gen-4-Image-References-Guide",
+          "evidence_summary": "Runway references can preserve characters/objects and use sketches to control object placement, gaze, and composition.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-group-composition-density-guard",
+      "chinese_title": "Image2 群像构图密度守门",
+      "candidate_summary": "Group images and posters need main character priority, readable secondary characters, lower-density background, and restrained flags/buildings/effects so supporting elements do not steal the focal hierarchy.",
+      "serves_pwa_fields": [
+        "person",
+        "visual_description",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "group_composition",
+        "density_budget",
+        "primary_subject_priority",
+        "background_deemphasis"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-uta-poster-hierarchy",
+        "src-linearity-composition-hierarchy",
+        "src-runway-gen4-image-prompting-guide"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-layout-staging-attention-path",
+        "rw-shot-intent-taxonomy"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Visual hierarchy in a research poster",
+          "site": "University of Texas at Arlington",
+          "url": "https://libguides.uta.edu/c.php?g=1461234&p=10866892",
+          "evidence_summary": "Poster hierarchy separates focal point, primary/secondary/tertiary importance, visual flow, proportion, whitespace, and grid.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Design Composition: Layout, Balance, and Visual Flow",
+          "site": "Linearity",
+          "url": "https://www.linearity.io/blog/design-composition-guide/",
+          "evidence_summary": "The guide says a composition needs a clear entry point and secondary/tertiary elements should support without competing.",
+          "source_confidence": "medium"
+        },
+        {
+          "source_title": "Gen-4 Image Prompting Guide",
+          "site": "Runway Help",
+          "url": "https://help.runwayml.com/hc/en-us/articles/35694045317139-Frames-Prompting-Guide",
+          "evidence_summary": "Runway's composition and focus controls support explicit framing and subject hierarchy in generated images.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-local-repair-prompt-boundary",
+      "chinese_title": "Image2 局部返修提示词边界",
+      "candidate_summary": "Repair prompts must state the target region, exact change, and preservation requirements for identity, composition, lighting, material, and surrounding pixels; they must not rewrite the whole image or invent new story facts.",
+      "serves_pwa_fields": [
+        "visual_description",
+        "character_action",
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "serves_prompt_sections": [
+        "target_region",
+        "preserve_identity",
+        "preserve_composition",
+        "no_new_facts",
+        "local_only"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-openai-image-generation-guide",
+        "src-google-imagen-edit-overview",
+        "src-comfyui-inpainting-workflow"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-field-level-failure-repair-routing",
+        "rw-validation-no-leakage"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Image generation guide",
+          "site": "OpenAI API Documentation",
+          "url": "https://developers.openai.com/api/docs/guides/image-generation",
+          "evidence_summary": "OpenAI documents multi-turn editing, image references, masks, and quality/size behavior, supporting iterative local repair as a separate workflow.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Edit images overview",
+          "site": "Google Cloud Documentation",
+          "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/image/edit-images-overview",
+          "evidence_summary": "Google Imagen editing supports mask-based edits for inserting, removing, expanding, or replacing selected image regions.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "ComfyUI Inpainting Workflow",
+          "site": "ComfyUI Documentation",
+          "url": "https://docs.comfy.org/tutorials/basic/inpaint",
+          "evidence_summary": "ComfyUI frames inpainting as defect repair or detail optimization on masked regions.",
+          "source_confidence": "low"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-quality-preset-boundary",
+      "chinese_title": "Image2 质量档位边界",
+      "candidate_summary": "Low/medium/high quality settings are provider/model quality presets. Production exports may default to high, but quality presets cannot replace subject, composition, material, lighting, and forbidden-item structure.",
+      "serves_pwa_fields": [
+        "prompt_text",
+        "negative_constraints",
+        "kb_context_summary"
+      ],
+      "serves_prompt_sections": [
+        "quality_preset",
+        "provider_parameter_boundary",
+        "structured_prompt_required"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-openai-image-generation-guide",
+        "src-midjourney-quality-parameter",
+        "src-stability-api-parameters"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-prompt-text-boundary",
+        "rw-validation-no-pseudo-success"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "Image generation guide",
+          "site": "OpenAI API Documentation",
+          "url": "https://developers.openai.com/api/docs/guides/image-generation",
+          "evidence_summary": "OpenAI documents low/medium/high quality token costs, showing quality as a generation setting rather than content structure.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Quality parameter",
+          "site": "Midjourney Documentation",
+          "url": "https://docs.midjourney.com/hc/en-us/articles/32176522101773-Quality",
+          "evidence_summary": "Midjourney defines quality as processing/detail time and notes scope limits, supporting the boundary that it is not a universal prompt substitute.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Stability AI API parameters",
+          "site": "Stability AI Developer Platform",
+          "url": "https://platform.stability.ai/docs/features/api-parameters",
+          "evidence_summary": "Stability separates prompt, dimensions, CFG, safety, and other generation parameters, supporting provider-specific quality handling.",
+          "source_confidence": "high"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
+    },
+    {
+      "reviewed_wiki_id": "rw-image2-prompt-module-routing",
+      "chinese_title": "Image2 提示词模块路由",
+      "candidate_summary": "Future Image2 exports can assemble purpose-specific modules for poster, cover, group image, storyboard panel, scene image, product image, or character image without adding current PWA row fields.",
+      "serves_pwa_fields": [
+        "scene_profile",
+        "visual_description",
+        "person",
+        "shot_size",
+        "prompt_text",
+        "negative_constraints"
+      ],
+      "serves_prompt_sections": [
+        "poster_module",
+        "cover_module",
+        "group_module",
+        "storyboard_module",
+        "scene_module",
+        "product_module",
+        "character_module"
+      ],
+      "target_pwa_actions": [
+        "export_result",
+        "validate_result",
+        "repair_storyboard"
+      ],
+      "runtime_targets": [
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "source_candidate_refs": [
+        "src-runway-text-to-image-four-part",
+        "src-adobe-firefly-effective-prompts",
+        "src-cliprise-awesome-ai-image-prompts"
+      ],
+      "existing_kb_alignment_refs": [
+        "rw-storyboard-image-prompt-export",
+        "rw-prompt-text-boundary"
+      ],
+      "pwa_field_mapping": {
+        "person": "Use only confirmed row character facts; no new identity, costume, or biography facts.",
+        "camera": "Convert to viewpoint/composition language only; avoid equipment keyword stacking.",
+        "shot_size": "Use for subject hierarchy, framing scale, and image density.",
+        "visual_description": "Carries material, lighting, reflection, particles, dark-area cleanliness, and spatial hierarchy.",
+        "character_action": "Carries hand, weapon, product, prop contact and key pose relationships.",
+        "dialogue_or_narration": "Not used for image-quality enhancement; do not invent captions.",
+        "prompt_text": "Core input to future Image2/storyboard-image export; no internal rules or KB evidence.",
+        "duration_seconds": "Used only for storyboard rhythm; not for single-image quality word stacking."
+      },
+      "futureqa": [
+        "Direct Image2 or provider API integration is FutureQA.",
+        "Generated image scoring, auto-repair, and writeback are FutureQA or blocked unless a later product gate opens them."
+      ],
+      "blocked_runtime_payloads": [
+        "user-provided experience text verbatim",
+        "fixed template full text",
+        "large negative prompt dictionary",
+        "IP / Disney / Studio Ghibli / real director / real studio style switches",
+        "quality-word stacking as a substitute for structured prompt controls",
+        "source_refs or raw source evidence in runtime/PWA export"
+      ],
+      "source_refs": [
+        {
+          "source_title": "How to make an AI image with a text prompt",
+          "site": "Runway Resources",
+          "url": "https://runwayml.com/resources/how-to-make-an-ai-image-with-text-prompt",
+          "evidence_summary": "Runway's subject/context/style/technical-detail structure can be specialized by use case.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Writing effective text prompts",
+          "site": "Adobe Help Center",
+          "url": "https://helpx.adobe.com/in/firefly/generate-images-with-text-to-image/generate-images-using-text-prompts/writing-effective-text-prompts.html",
+          "evidence_summary": "Adobe recommends specific descriptive prompts and iteration, supporting module routing without fixed prompt bodies.",
+          "source_confidence": "high"
+        },
+        {
+          "source_title": "Awesome AI Image Generator Prompts",
+          "site": "GitHub",
+          "url": "https://github.com/cliprise/awesome-ai-image-generator-prompts",
+          "evidence_summary": "The repository groups image prompt workflows and prompt resource categories, useful only as auxiliary product-structure reference.",
+          "source_confidence": "low"
+        }
+      ],
+      "status": "ready_for_confirmation",
+      "write_state": "not_written",
+      "runtime_state": "draft_supplement_not_in_confirmed_package",
+      "summary_only": true,
+      "runtime_eligible": false,
+      "source_refs_audit_layer_only": true,
+      "pwa_final_fields_changed": false,
+      "confirmed_package_inclusion": "draft_supplement_only_not_in_confirmed_package"
     }
   ],
   "confirmation": {
@@ -2005,12 +4023,22 @@
     "confirmed_package_created": false,
     "final_pwa_fields_changed": false,
     "storyboard_export_headers_changed": false,
-    "storyboard_image_prompt_written_back_to_rows": false
+    "storyboard_image_prompt_written_back_to_rows": false,
+    "image2_quality_sources_runtime_written": false,
+    "image2_prompt_template_written_to_pwa": false,
+    "negative_prompt_dictionary_written_to_runtime": false,
+    "image_api_integration_written": false,
+    "local_repair_automation_written": false
   },
   "futureqa_notes": {
     "color_lighting_progression": "Folded into rw-visual-master-board-from-confirmed-rows and existing rw-material-light-air-physicality unless a later product gate asks for a standalone color-script rule.",
     "automatic_video_generation": "FutureQA only; this draft does not open generation runtime or provider API integration.",
     "provider_api_integration": "FutureQA only for GPT Image, Jimeng, Doubao, Seedance, Kling, Wan, Tencent, Runway, and Veo.",
-    "generated_image_writeback": "Blocked; generated images or image prompts must not be written back into PWA storyboard row fields."
+    "generated_image_writeback": "Blocked; generated images or image prompts must not be written back into PWA storyboard row fields.",
+    "image2_api_integration": "FutureQA only; this draft does not wire GPT Image, Firefly, Midjourney, Seedream, Wanxiang, Kling, CogView, Hunyuan, or any image API.",
+    "image_writeback_to_pwa": "Blocked unless a later product gate explicitly opens a separate asset pipeline; never write generated images back into current storyboard row fields.",
+    "auto_local_repair": "FutureQA only; current candidates may describe local repair prompt boundaries but do not automate inpainting.",
+    "multi_model_image_scoring": "FutureQA only; no automatic image comparison/scoring loop is introduced.",
+    "prompt_quality_word_stacking": "Blocked; quality presets and quality adjectives cannot replace structured subject/composition/material/lighting controls."
   }
 }

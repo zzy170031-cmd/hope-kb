@@ -3091,11 +3091,163 @@
       "effective_confidence": "medium",
       "runtime_eligible": true,
       "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-image2-structured-quality-prompt",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-image2-structured-quality-prompt",
+      "reviewed_wiki_hash": "sha256:summary-rw-image2-structured-quality-prompt",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-image2-structured-quality-prompt"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:image2-structured-quality-prompt"
+      ],
+      "summary_fragment_ids": [
+        "summary:image2-structured-quality-prompt"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-image2-structured-quality-prompt"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-29",
+      "runtime_eligible_reason": "rw-image2-structured-quality-prompt was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
+    },
+    {
+      "mapping_id": "map-rw-image2-quality-preset-boundary",
+      "mapping_version": "wiki-to-runtime/v0.2",
+      "reviewed_wiki_id": "rw-image2-quality-preset-boundary",
+      "reviewed_wiki_hash": "sha256:summary-rw-image2-quality-preset-boundary",
+      "wiki_type": "validation_rule",
+      "runtime_targets": [
+        "validation_rule_packs",
+        "selected_kb_rules",
+        "kb_context_summary",
+        "negative_constraints"
+      ],
+      "scene_type_ids": [
+        "hot_blood_battle",
+        "ensemble_performance",
+        "emotional_dialogue",
+        "encounter_performance",
+        "field_chase",
+        "spectacle_showcase",
+        "daily_healing",
+        "guoman_hot_blood_combat",
+        "guoman_ensemble_performance",
+        "ink_wuxia_combat",
+        "eastern_spectacle",
+        "xianxia_action",
+        "urban_fantasy",
+        "chinese_war_formation",
+        "weapon_highlight",
+        "council_strategy",
+        "siege_defense",
+        "slg_sandbox_view",
+        "slg_march_encirclement",
+        "slg_city_growth",
+        "slg_battle_report"
+      ],
+      "kb_actions": [
+        "export_result",
+        "repair_storyboard",
+        "validate_result"
+      ],
+      "rule_group": "validation_group",
+      "runtime_rule_pack_ids": [
+        "vg-image2-quality-preset-boundary"
+      ],
+      "selected_kb_rule_ids": [
+        "rule:image2-quality-preset-boundary"
+      ],
+      "summary_fragment_ids": [
+        "summary:image2-quality-preset-boundary"
+      ],
+      "negative_constraint_ids": [
+        "negative:summary-only-confirmed-intake"
+      ],
+      "target_field_paths": [
+        "validation_rule_packs[].directives",
+        "scene_mappings.*.selected_kb_rules",
+        "scene_mappings.*.kb_context_summary",
+        "scene_mappings.*.negative_constraints"
+      ],
+      "duration_targets": [],
+      "failure_pattern_ids": [],
+      "repair_mapping_ids": [],
+      "future_qa_ids": [],
+      "sanitized_fragment_hashes": [
+        "sha256:summary-rw-image2-quality-preset-boundary"
+      ],
+      "fallback_behavior": "supporting_rule",
+      "reviewed_at_bucket": "2026-05-29",
+      "runtime_eligible_reason": "rw-image2-quality-preset-boundary was confirmed to serve PWA storyboard rows and prompt_text through summary-only runtime targets.",
+      "blocked_reason": "",
+      "coverage_status": "covered",
+      "review_status": "reviewed",
+      "effective_confidence": "medium",
+      "runtime_eligible": true,
+      "leakage_count": 0
     }
   ],
   "coverage_summary": {
-    "runtime_eligible_wiki_count": 40,
-    "mapped_runtime_eligible_wiki_count": 40,
+    "runtime_eligible_wiki_count": 42,
+    "mapped_runtime_eligible_wiki_count": 42,
     "unmapped_runtime_eligible_wiki_count": 0,
     "scene_type_count": 21,
     "kb_action_count": 10,

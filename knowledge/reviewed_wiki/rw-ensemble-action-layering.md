@@ -8,7 +8,7 @@ leakage_count: 0
 
 ## Purpose
 
-群像动作分层候选: Layer anime group shots into primary action, secondary reaction, background motion, and spatial depth without inventing entities.
+Ensemble action layering: Layer anime group shots into primary action, secondary reaction, background motion, and spatial depth without inventing entities.
 
 ## Source Basis
 
@@ -37,9 +37,9 @@ This entry was created from a confirmed manual intake package. Source candidates
 
 - person
 - visual_description
-- character_action
 - shot_size
 - prompt_text
+- negative_constraints
 
 ## Negative Constraints
 
